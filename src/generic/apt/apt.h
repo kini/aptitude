@@ -386,29 +386,19 @@ public:
   }
 };
 
+/** Sort dependency types in the order:
+ *    Obsoletes, Replaces, Suggests, Breaks, Conflicts, Recommends,
+ *    Depends, PreDepends.
+ */
+int get_deptype_order(const pkgCache::Dep::DepType t);
+
 struct deptype_lt
 {
-  static int deptype_to_int(const pkgCache::Dep::DepType t)
-  {
-    switch(t)
-      {
-      case pkgCache::Dep::PreDepends: return 7;
-      case pkgCache::Dep::Depends:    return 6;
-      case pkgCache::Dep::Recommends: return 5;
-      case pkgCache::Dep::Conflicts:  return 4;
-      case pkgCache::Dep::DpkgBreaks: return 3;
-      case pkgCache::Dep::Suggests:   return 2;
-      case pkgCache::Dep::Replaces:   return 1;
-      case pkgCache::Dep::Obsoletes:  return 0;
-      default: return -1;
-      }
-  }
-
 public:
   bool operator()(const pkgCache::Dep::DepType t1,
                   const pkgCache::Dep::DepType t2) const
   {
-    return deptype_to_int(t1) < deptype_to_int(t2);
+    return get_deptype_order(t1) < get_deptype_order(t2);
   }
 };
 

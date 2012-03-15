@@ -16,78 +16,17 @@
 
 using namespace std;
 
-// Report dependencies in the order:
-//   PreDepends, Depends, Recommends, Conflicts, Breaks, Suggests, Replaces, Obsoletes
-static int cmp_dep_types(unsigned char A, unsigned char B)
-{
-  if(A==B)
-    return 0;
-
-  switch(A)
-    {
-    case pkgCache::Dep::PreDepends:
-      return -1;
-    case pkgCache::Dep::Depends:
-      if(B==pkgCache::Dep::PreDepends)
-	return 1;
-      else
-	return -1;
-    case pkgCache::Dep::Recommends:
-      switch(B)
-	{
-	case pkgCache::Dep::PreDepends:
-	case pkgCache::Dep::Depends:
-	  return 1;
-	default:
-	  return -1;
-	}
-    case pkgCache::Dep::Conflicts:
-      switch(B)
-	{
-	case pkgCache::Dep::PreDepends:
-	case pkgCache::Dep::Depends:
-	case pkgCache::Dep::Recommends:
-	  return 1;
-	default:
-	  return -1;
-	}
-    case pkgCache::Dep::DpkgBreaks:
-      switch(B)
-	{
-	case pkgCache::Dep::Suggests:
-	case pkgCache::Dep::Replaces:
-	case pkgCache::Dep::Obsoletes:
-	  return -1;
-	default:
-	  return 1;
-	}
-    case pkgCache::Dep::Suggests:
-      switch(B)
-	{
-	case pkgCache::Dep::Replaces:
-	case pkgCache::Dep::Obsoletes:
-	  return -1;
-	default:
-	  return 1;
-	}
-    case pkgCache::Dep::Replaces:
-      if(B==pkgCache::Dep::Obsoletes)
-	return -1;
-      else
-	return 1;
-    case pkgCache::Dep::Obsoletes:
-      return 1;
-
-    default:
-      return 1;
-    }
-}
-
 bool operator<(const reason &a, const reason &b)
 {
-  int d=cmp_dep_types(a.dep->Type, b.dep->Type);
-
-  return d<0 || (d==0 && strcmp(a.pkg.Name(), b.pkg.Name())<0);
+  // This function uses the *reverse* order of get_deptype_order.
+  const int i = get_deptype_order((pkgCache::Dep::DepType) a.dep->Type);
+  const int j = get_deptype_order((pkgCache::Dep::DepType) b.dep->Type);
+  if(i > j)
+    return true;
+  else if(j > i)
+    return false;
+  else
+    return strcmp(a.pkg.Name(), b.pkg.Name()) < 0;
 }
 
 

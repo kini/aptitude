@@ -1284,6 +1284,22 @@ int get_arch_order(const char *a)
   return it - archs.begin();
 }
 
+int get_deptype_order(const pkgCache::Dep::DepType t)
+{
+  switch(t)
+    {
+    case pkgCache::Dep::PreDepends: return 7;
+    case pkgCache::Dep::Depends:    return 6;
+    case pkgCache::Dep::Recommends: return 5;
+    case pkgCache::Dep::Conflicts:  return 4;
+    case pkgCache::Dep::DpkgBreaks: return 3;
+    case pkgCache::Dep::Suggests:   return 2;
+    case pkgCache::Dep::Replaces:   return 1;
+    case pkgCache::Dep::Obsoletes:  return 0;
+    default: return -1;
+    }
+}
+
 namespace aptitude
 {
   namespace apt
