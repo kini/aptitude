@@ -871,12 +871,15 @@ namespace aptitude
 		  // The rest correspond directly to find_pkg_state() return values.
 		case pattern::action_reinstall:
 		  matches = find_pkg_state(pkg, cache) == pkg_reinstall;
+		  break;
 
 		case pattern::action_upgrade:
 		  matches = find_pkg_state(pkg, cache) == pkg_upgrade;
+		  break;
 
 		case pattern::action_downgrade:
 		  matches = find_pkg_state(pkg, cache) == pkg_downgrade;
+		  break;
 
 		case pattern::action_keep:
 		  matches = cache[pkg].Keep();
