@@ -362,46 +362,29 @@ public:
   }
 };
 
-struct dep_type_lt
+struct deptype_lt
 {
-  static int dep_type_to_int(const pkgCache::Dep::DepType dt)
+  static int deptype_to_int(const pkgCache::Dep::DepType t)
   {
-    switch(dt)
+    switch(t)
       {
-      case pkgCache::Dep::PreDepends:
-        return 7;
-
-      case pkgCache::Dep::Depends:
-        return 6;
-
-      case pkgCache::Dep::Recommends:
-        return 5;
-
-      case pkgCache::Dep::Conflicts:
-        return 4;
-
-      case pkgCache::Dep::DpkgBreaks:
-        return 3;
-
-      case pkgCache::Dep::Suggests:
-        return 2;
-
-      case pkgCache::Dep::Replaces:
-        return 1;
-
-      case pkgCache::Dep::Obsoletes:
-        return 0;
-
-      default:
-        return -1;
+      case pkgCache::Dep::PreDepends: return 7;
+      case pkgCache::Dep::Depends:    return 6;
+      case pkgCache::Dep::Recommends: return 5;
+      case pkgCache::Dep::Conflicts:  return 4;
+      case pkgCache::Dep::DpkgBreaks: return 3;
+      case pkgCache::Dep::Suggests:   return 2;
+      case pkgCache::Dep::Replaces:   return 1;
+      case pkgCache::Dep::Obsoletes:  return 0;
+      default: return -1;
       }
   }
 
 public:
-  bool operator()(const pkgCache::Dep::DepType dt1,
-                  const pkgCache::Dep::DepType dt2) const
+  bool operator()(const pkgCache::Dep::DepType t1,
+                  const pkgCache::Dep::DepType t2) const
   {
-    return dep_type_to_int(dt1) < dep_type_to_int(dt2);
+    return deptype_to_int(t1) < deptype_to_int(t2);
   }
 };
 

@@ -90,15 +90,15 @@ namespace
   }
 
   // Place weaker dependencies first, then order alphabetically.
-  struct compare_pair_by_dep_type
+  struct compare_pair_by_deptype
   {
-    dep_type_lt dep_type_less_than;
+    deptype_lt base;
   public:
     bool operator()(const std::pair<std::string, pkgCache::Dep::DepType> &p1,
 		    const std::pair<std::string, pkgCache::Dep::DepType> &p2) const
     {
       if(p1.second != p2.second)
-	return dep_type_less_than(p2.second, p1.second);
+	return base(p2.second, p1.second);
       else
 	return p1.first < p2.first;
     }
@@ -1500,7 +1500,7 @@ namespace aptitude
       if(mode == show_requiring_packages ||
 	 mode == show_requiring_packages_and_strength)
 	{
-	  dep_type_lt dep_less_than;
+	  deptype_lt deptype_less_than;
 	  // Maps root names to strongest dependency type.
 	  std::map<std::string, pkgCache::Dep::DepType> roots;
 	  for(std::vector<std::vector<action> >::const_iterator it =
@@ -1535,14 +1535,14 @@ namespace aptitude
 			{
 			  pkgCache::Dep::DepType current_type =
 			    (pkgCache::Dep::DepType)act_it->get_dep()->Type;
-			  if(dep_less_than(type, current_type))
+			  if(deptype_less_than(type, current_type))
 			    type = current_type;
 			}
 		    }
 
 		  if(found == roots.end())
 		    roots.insert(found, std::make_pair(name, type));
-		  else if(dep_less_than(found->second, type))
+		  else if(deptype_less_than(found->second, type))
 		    found->second = type;
 		}
 	    }
@@ -1558,7 +1558,7 @@ namespace aptitude
               // g++ emits a spurious error here.  Don't know why:
 	      std::sort(packages_by_dep_strength.begin(),
 			packages_by_dep_strength.end(),
-			compare_pair_by_dep_type());
+			compare_pair_by_deptype());
 
 	      for(std::vector<std::pair<std::string, pkgCache::Dep::DepType> >::const_iterator it =
 		    packages_by_dep_strength.begin();
