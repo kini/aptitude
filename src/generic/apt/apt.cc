@@ -48,6 +48,7 @@
 #include <apt-pkg/pkgcachegen.h>
 #include <apt-pkg/sourcelist.h>
 #include <apt-pkg/version.h>
+#include <apt-pkg/aptconfiguration.h>
 
 #include <fstream>
 
@@ -1270,6 +1271,18 @@ const char *multiarch_type(unsigned char type)
   return "";
 }
 
+int get_arch_order(const char *a)
+{
+  static const std::vector<std::string> archs =
+    APT::Configuration::getArchitectures();
+
+  if(strcmp(a, "all") == 0)
+    return -1;
+
+  const std::vector<std::string>::const_iterator it =
+    std::find(archs.begin(), archs.end(), a);
+  return it - archs.begin();
+}
 
 namespace aptitude
 {

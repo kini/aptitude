@@ -308,6 +308,30 @@ struct location_compare
 bool is_interesting_dep(const pkgCache::DepIterator &d,
 			pkgDepCache *cache);
 
+/** \return an int representing an architecture's position within the
+ *          system's prefered order.  Smaller values indicate greater
+ *          preference.
+ *
+ *  The order is defined by APT::Architectures with "all" considered
+ *  to be of preference `-1`.
+ *
+ *  \param a the architecture of interest.
+ */
+int get_arch_order(const char *a);
+
+/** Sort architectures by order of preference. */
+struct arch_lt
+{
+public:
+  bool operator()(const char *a1,
+                  const char *a2) const
+  {
+    if(a1 == a2)
+      return false;
+    return get_arch_order(a1) < get_arch_order(a2);
+  }
+};
+
 /** Sort packages by name. */
 struct pkg_name_lt
 {
