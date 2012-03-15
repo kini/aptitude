@@ -40,6 +40,7 @@
 
 // System includes:
 #include <apt-pkg/error.h>
+#include <apt-pkg/aptconfiguration.h>
 
 #include <boost/format.hpp>
 #include <boost/make_shared.hpp>
@@ -116,7 +117,7 @@ namespace
                     const cw::util::ref_ptr<m::structural_match> &match,
                     std::vector<std::string> &output)
     {
-      output.push_back(ver.ParentPkg().Name());
+      output.push_back(ver.ParentPkg().FullName(true));
     }
 
     std::string format_header(const std::string &group)
@@ -308,7 +309,14 @@ namespace
     // user wants us to automatically make that decision.
     bool package_names_should_auto_show;
 
+    // HACK: on multiarch setups *always* assume more than one package
+    // is returned.  Need a better way to count the packages returned,
+    // but this works for now.
+    const bool is_multiarch =
+      APT::Configuration::getArchitectures().size() > 1;
+
     const bool arguments_select_exactly_one_package_by_exact_name =
+      !is_multiarch &&
       (patterns.size() == 1 &&
        patterns[0]->get_type() == m::pattern::exact_name);
 
