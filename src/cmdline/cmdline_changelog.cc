@@ -425,7 +425,8 @@ void do_cmdline_changelog(const vector<string> &packages,
 	_error->Error(_("Couldn't find a changelog for %s"), input.c_str());
       else
 	// Run the user's pager.
-	system((string(pager) + " " + filename.get_name()).c_str());
+	if(system((string(pager) + " " + filename.get_name()).c_str()) != 0)
+          _error->Error(_("Couldn't run pager %s"), pager);
     }
 
   _error->DumpErrors();

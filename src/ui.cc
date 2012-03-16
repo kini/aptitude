@@ -480,7 +480,12 @@ static void do_su_to_root(string args)
       // Read one byte from the FIFO for synchronization
       char tmp;
       int fd = open(fifoname.get_name().c_str(), O_RDONLY);
-      read(fd, &tmp, 1); // Will block until the other process writes.
+      if(read(fd, &tmp, 1) < 0)
+	{
+	  std::string errmsg = ssprintf("aptitude: failed to synchronize with parent process");
+	  perror(errmsg.c_str());
+	  exit(1);
+	}
       close(fd);
 
       // It's ok to use argv0 to generate the command,
@@ -555,7 +560,13 @@ static void do_su_to_root(string args)
       // Ok, wake the other process up.
       char tmp=0;
       int fd=open(fifoname.get_name().c_str(), O_WRONLY);
-      write(fd, &tmp, 1);
+      if(write(fd, &tmp, 1) < 0)
+	{
+	  // If we can't synchronize with it, we'd better kill it.
+	  std::string errmsg = ssprintf("aptitude: failed to synchronize with child process");
+	  perror(errmsg.c_str());
+	  kill(pid, SIGTERM);
+	}
       close(fd);
 
       // Wait for a while so we don't accidentally daemonize ourselves.

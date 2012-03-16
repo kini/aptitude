@@ -166,7 +166,7 @@ pkgPackageManager::OrderResult download_install_manager::run_dpkg(int status_fd)
     case pkgPackageManager::Failed:
       _error->DumpErrors();
       cerr << _("A package failed to install.  Trying to recover:") << endl;
-      system("DPKG_NO_TSTP=1 dpkg --configure -a");
+      if(system("DPKG_NO_TSTP=1 dpkg --configure -a") != 0) { /* ignore */ }
       break;
     case pkgPackageManager::Completed:
       break;

@@ -371,7 +371,7 @@ bool pkg_item::dispatch_key(const cw::config::key &k, cw::tree *owner)
 
       printf(_("Reporting a bug in %s:\n"), package.Name());
 
-      system(cmd.c_str());
+      if(system(cmd.c_str()) != 0) { /* ignore */ }
 
       cw::toplevel::resume();
     }
@@ -405,7 +405,7 @@ bool pkg_item::dispatch_key(const cw::config::key &k, cw::tree *owner)
 	      snprintf(buf, 512, sucmd,
 		       package.FullName(true).c_str());
 
-	      system(buf);
+	      if(system(buf) != 0) { /* FIXME: ignore? */ }
 
 	      cerr<<_("Press return to continue.\n");
 	      getchar();

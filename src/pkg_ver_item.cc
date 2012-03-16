@@ -747,14 +747,9 @@ bool pkg_ver_item::dispatch_key(const cw::config::key &k, cw::tree *owner)
 
       printf(_("Reporting a bug in %s:\n"), version.ParentPkg().Name());
 
-
-
-
-      system(cmd.c_str());
+      if(system(cmd.c_str()) != 0) { /* ignore */ }
 
       sigaction(SIGCONT, &oldact, NULL);
-
-
 
       cw::toplevel::resume();
 
