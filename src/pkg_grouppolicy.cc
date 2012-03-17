@@ -696,7 +696,7 @@ class pkg_grouppolicy_firstchar:public pkg_grouppolicy
 {
   pkg_grouppolicy_factory *chain;
 
-  typedef map<char, pair<pkg_grouppolicy *, pkg_subtree *> > childmap;
+  typedef map<string, pair<pkg_grouppolicy *, pkg_subtree *> > childmap;
   // Store the child group policies and their associated subtrees.
   childmap children;
 public:
@@ -716,22 +716,23 @@ public:
   {
     eassert(pkg.Name());
 
-    char firstchar=toupper(pkg.Name()[0]);
+    string treename;
+    if(strncmp(pkg.Name(), "lib", 3) == 0)
+      treename = string(pkg.Name(), 4);
+    else
+      treename = pkg.Name()[0];
 
-    childmap::iterator found=children.find(firstchar);
+    childmap::iterator found=children.find(treename);
     if(found!=children.end())
       found->second.first->add_package(pkg, found->second.second);
     else
       {
-	string treename;
-	treename+=firstchar;
-
 	pkg_subtree *newtree=new pkg_subtree(cw::util::transcode(treename),
 					     L"", get_desc_sig());
 	pkg_grouppolicy *newchild=chain->instantiate(get_sig(),
 						     get_desc_sig());
-	children[firstchar].first=newchild;
-	children[firstchar].second=newtree;
+	children[treename].first=newchild;
+	children[treename].second=newtree;
 	root->add_child(newtree);
 	newtree->set_num_packages_parent(root);
 
