@@ -48,7 +48,7 @@ pkg_sortpolicy *parse_name_policy(const arglist &args,
 {
   if(args.size()>0)
     {
-      _error->Error(_("By-name sorting policies take no arguments"));
+      _error->Error(_("Sorting policy '%s' takes no arguments"), "name");
       return NULL;
     }
 
@@ -61,7 +61,7 @@ pkg_sortpolicy *parse_ver_policy(const arglist &args,
 {
   if(args.size() > 0)
     {
-      _error->Error(_("By-version sorting policies take no arguments"));
+      _error->Error(_("Sorting policy '%s' takes no arguments"), "version");
       return NULL;
     }
 
@@ -74,7 +74,7 @@ pkg_sortpolicy *parse_installsize_policy(const arglist &args,
 {
   if(args.size()>0)
     {
-      _error->Error(_("By-installed size sorting policies take no arguments"));
+      _error->Error(_("Sorting policy '%s' takes no arguments"), "installsize");
       return NULL;
     }
 
@@ -87,7 +87,7 @@ pkg_sortpolicy *parse_priority_policy(const arglist &args,
 {
   if(args.size()>0)
     {
-      _error->Error(_("By-priority sorting policies take no arguments"));
+      _error->Error(_("Sorting policy '%s' takes no arguments"), "priority");
       return NULL;
     }
 

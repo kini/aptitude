@@ -321,7 +321,7 @@ public:
 		auto_ptr<group_policy_parse_node> curr(found->second->parse(begin, end));
 
 		if(rval.get() != NULL && rval.get()->terminal())
-		  throw GroupParseException(_("Terminal policy \"%s\" should be the last policy in the list"), last.c_str());
+		  throw GroupParseException(_("Terminal policy '%s' should be the last policy in the list"), last.c_str());
 
 
 		if(rval.get() == NULL)
@@ -382,7 +382,7 @@ public:
 	if(begin != end)
 	  ++begin;
 	else
-	  throw GroupParseException(_("Unmatched '(' in pattern grouping policy"));
+	  throw GroupParseException(_("Unmatched '(' in grouping policy"));
       }
 
     return create_node(args);
@@ -425,7 +425,7 @@ public:
       }
 
     if(args.size()>2)
-      throw GroupParseException(_("Too many arguments to 'section' grouping policy"));
+      throw GroupParseException(_("Too many arguments to '%s' grouping policy"), "section");
 
     return new policy_node2<pkg_grouppolicy_section_factory,
       split_mode_type, bool>(split_mode, passthrough);
@@ -438,7 +438,7 @@ public:
   group_policy_parse_node *create_node(const vector<string> &args)
   {
     if(args.size()!=0)
-      throw GroupParseException(_("'status' grouping policy takes no arguments"));
+      throw GroupParseException(_("Grouping policy '%s' takes no arguments"), "status");
 
     return new policy_node0<pkg_grouppolicy_status_factory>;
   }
@@ -457,7 +457,7 @@ public:
     bool is_missing = true;
 
     if(begin != end && *begin != '(')
-      throw GroupParseException(_("Expected '(' after 'filter'"));
+      throw GroupParseException(_("Expected '(' after '%s'"), "filter");
 
     ++begin;
 
@@ -499,7 +499,7 @@ public:
 	else if(begin != end && *begin != ')')
 	  {
 	    eassert(*begin == ',');
-	    throw GroupParseException(_("Exactly one filter must be provided as an argument to a filter policy"));
+	    throw GroupParseException(_("Exactly one filter must be provided as an argument to a 'filter' policy"));
 	  }
 	else
 	  {
@@ -518,7 +518,7 @@ public:
   group_policy_parse_node *create_node(const vector<string> &args)
   {
     if(args.size()!=0)
-      throw GroupParseException(_("'action' grouping policy takes no arguments"));
+      throw GroupParseException(_("Grouping policy '%s' takes no arguments"), "action");
 
     return new policy_node0<pkg_grouppolicy_mode_factory>;
   }
@@ -529,7 +529,7 @@ class firstchar_policy_parser : public string_policy_parser
   group_policy_parse_node *create_node(const vector<string> &args)
   {
     if(args.size()!=0)
-      throw GroupParseException(_("'firstchar' grouping policy takes no arguments"));
+      throw GroupParseException(_("Grouping policy '%s' takes no arguments"), "firstchar");
 
     return new policy_node0<pkg_grouppolicy_firstchar_factory>;
   }
@@ -541,7 +541,7 @@ public:
   group_policy_parse_node *create_node(const vector<string> &args)
   {
     if(args.size()!=0)
-      throw GroupParseException(_("Too many arguments to 'source' grouping policy"));
+      throw GroupParseException(_("Too many arguments to '%s' grouping policy"), "source");
 
     return new policy_node0<pkg_grouppolicy_source_factory>;
   }
@@ -552,7 +552,7 @@ class ver_policy_parser : public string_policy_parser
   group_policy_parse_node *create_node(const vector<string> &args)
   {
     if(args.size()!=0)
-      throw GroupParseException(_("'versions' grouping policy takes no arguments"));
+      throw GroupParseException(_("Grouping policy '%s' takes no arguments"), "versions");
 
     return new policy_terminal_node0<pkg_grouppolicy_ver_factory>;
   }
@@ -563,7 +563,7 @@ class dep_policy_parser: public string_policy_parser
   group_policy_parse_node *create_node(const vector<string> &args)
   {
     if(args.size()!=0)
-      throw GroupParseException(_("'deps' grouping policy takes no arguments"));
+      throw GroupParseException(_("Grouping policy '%s' takes no arguments"), "deps");
 
     return new policy_terminal_node0<pkg_grouppolicy_dep_factory>;
   }
@@ -574,7 +574,7 @@ class priority_policy_parser : public string_policy_parser
   group_policy_parse_node *create_node(const vector<string> &args)
   {
     if(args.size()!=0)
-      throw GroupParseException(_("'priority' grouping policy takes no arguments"));
+      throw GroupParseException(_("Grouping policy '%s' takes no arguments"), "priority");
 
     return new policy_node0<pkg_grouppolicy_priority_factory>;
   }
@@ -605,7 +605,7 @@ class task_policy_parser : public string_policy_parser
   group_policy_parse_node *create_node(const vector<string> &args)
   {
     if(args.size()!=0)
-      throw GroupParseException(_("'task' grouping policy takes no arguments"));
+      throw GroupParseException(_("Grouping policy '%s' takes no arguments"), "task");
 
     return new policy_node0<pkg_grouppolicy_task_factory>;
   }
@@ -618,7 +618,7 @@ class tag_policy_parser : public string_policy_parser
     if(args.size() == 0)
       return new policy_node0<pkg_grouppolicy_facet_tag_factory>;
     else if(args.size() != 1)
-      throw GroupParseException(_("Expected no more than one argument to a 'tag' grouping policy"));
+      throw GroupParseException(_("Too many arguments to '%s' grouping policy"), "tag");
     else
       return new policy_node1<pkg_grouppolicy_tag_factory, string>(args[0]);
   }
@@ -633,7 +633,7 @@ class pattern_policy_parser : public group_policy_parser
       ++begin;
 
     if(begin == end || *begin != '(')
-      throw GroupParseException(_("Expected '(' after 'pattern'"));
+      throw GroupParseException(_("Expected '(' after '%s'"), "pattern");
 
     ++begin;
 
@@ -641,7 +641,7 @@ class pattern_policy_parser : public group_policy_parser
       ++begin;
 
     if(begin == end || *begin == ')')
-      throw GroupParseException(_("Missing arguments to 'pattern' grouping policy"));
+      throw GroupParseException(_("Missing arguments to '%s' grouping policy"), "pattern");
 
     vector<pkg_grouppolicy_patterns_factory::match_entry> subgroups;
 
@@ -747,7 +747,7 @@ class pattern_policy_parser : public group_policy_parser
       }
 
     if(begin == end)
-      throw GroupParseException(_("Unmatched '(' in pattern grouping policy"));
+      throw GroupParseException(_("Unmatched '(' in '%s' grouping policy"), "pattern");
     else
       {
 	eassert(*begin == ')');
