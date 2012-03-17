@@ -83,7 +83,7 @@ cw::config::column_type_defaults pkg_item::pkg_columnizer::defaults[pkg_columniz
 //
 // You can't set default widths for the program name and version here (those
 // strings aren't affected by translation, for one thing)
-const char *default_widths = N_("30 8 8 1 1 40 10 10 11 10 35 9 10 2 1 1 10 9 12 30 17 15");
+const char *default_widths = N_("30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 1 10 9 12 30 17 15");
 
 const char *pkg_item::pkg_columnizer::column_names[pkg_columnizer::numtypes]=
   {N_("Package"),
