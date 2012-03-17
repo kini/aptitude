@@ -1353,6 +1353,8 @@ namespace aptitude
     const std::vector<std::string> get_top_sections(const bool cached)
     {
       static std::vector<std::string> top_sections;
+      const char *defaults[] =
+        {N_("main"),N_("contrib"),N_("non-free"),N_("non-US")};
 
       if(top_sections.empty() == false)
         {
@@ -1364,12 +1366,7 @@ namespace aptitude
 
       top_sections = aptcfg->FindVector(PACKAGE "::Sections::Top-Sections");
       if(top_sections.empty() == true)
-        {
-          top_sections.push_back("main");
-          top_sections.push_back("contrib");
-          top_sections.push_back("non-free");
-          top_sections.push_back("non-US");
-        }
+        top_sections.assign(defaults, defaults + sizeof(defaults)/sizeof(*defaults));
 
       return top_sections;
     }
