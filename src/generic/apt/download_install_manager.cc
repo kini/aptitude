@@ -32,8 +32,6 @@
 
 #include <sigc++/bind.h>
 
-#include <sstream>
-
 #include <pthread.h>
 #include <signal.h>
 
@@ -163,24 +161,18 @@ pkgPackageManager::OrderResult download_install_manager::run_dpkg(int status_fd)
   pthread_sigmask(SIG_UNBLOCK, &allsignals, &oldsignals);
   pkgPackageManager::OrderResult pmres = pm->DoInstallPostFork(status_fd);
 
-  // HACK: try to fix a failed install.  Attemp to mimick how APT
-  // invokes dpkg here by using DPKG_NO_TSTP=1 (see #367052) and
-  // passing DPkg::Options (LP: #257279).  It would be better if APT
-  // was capable of doing this (is it?), then we wouldn't have to be
-  // so pedantic about the behaviour.
-  if(pmres == pkgPackageManager::Failed)
+  switch(pmres)
     {
+    case pkgPackageManager::Failed:
       _error->DumpErrors();
       cerr << _("A package failed to install.  Trying to recover:") << endl;
-      std::ostringstream command("DPKG_NO_TSTP=1 dpkg --configure -a");
-      std::vector<std::string> opts = aptcfg->FindVector("DPkg::Options");
-      for(size_t i = 0; i < opts.size(); ++i)
-	{
-	  if(opts[i].empty())
-	    continue;
-	  command << ' ' << opts[i];
-	}
-      if(system(command.str().c_str()) != 0) { /* ignore */ }
+      if(system("DPKG_NO_TSTP=1 dpkg --configure -a") != 0) { /* ignore */ }
+      break;
+    case pkgPackageManager::Completed:
+      break;
+
+    case pkgPackageManager::Incomplete:
+      break;
     }
 
   pthread_sigmask(SIG_SETMASK, &oldsignals, NULL);
