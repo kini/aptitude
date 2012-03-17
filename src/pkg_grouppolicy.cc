@@ -125,7 +125,10 @@ class pkg_grouppolicy_section:public pkg_grouppolicy
 
   // The descriptions are in the cw::style used by package descriptions.
   static std::map<string, wstring> section_descriptions;
-  static void init_section_descriptions();
+  // The available top sections (i.e. main, contrib, non-free) in order.
+  static std::vector<string> top_sections;
+  static void init_section_data();
+
 public:
   pkg_grouppolicy_section(pkg_grouppolicy_section_factory::split_mode_type _split_mode,
 			  bool _passthrough,
@@ -135,7 +138,7 @@ public:
     :pkg_grouppolicy(_sig, _desc_sig), chain(_chain),
      split_mode(_split_mode), passthrough(_passthrough)
   {
-    init_section_descriptions();
+    init_section_data();
   }
 
   virtual void add_package(const pkgCache::PkgIterator &pkg, pkg_subtree *root);
@@ -155,6 +158,7 @@ pkg_grouppolicy *pkg_grouppolicy_section_factory::instantiate(pkg_signal *_sig,
 }
 
 std::map<string, wstring> pkg_grouppolicy_section::section_descriptions;
+std::vector<string> pkg_grouppolicy_section::top_sections;
 
 namespace
 {
@@ -217,7 +221,7 @@ namespace
   }
 }
 
-void pkg_grouppolicy_section::init_section_descriptions()
+void pkg_grouppolicy_section::init_section_data()
 {
   static bool already_done=false;
 
@@ -239,6 +243,9 @@ void pkg_grouppolicy_section::init_section_descriptions()
 	  section_descriptions[Curr->Tag] = cw::util::transcode(final_desc, "UTF-8");
 	}
     }
+
+  // Read in the list of Top-Sections; do not use a cached value.
+  top_sections = aptitude::apt::get_top_sections(false);
 
   already_done = true;
 }
@@ -280,7 +287,7 @@ void pkg_grouppolicy_section::add_package(const pkgCache::PkgIterator &pkg,
       if(split_mode == pkg_grouppolicy_section_factory::split_topdir)
 	section = (first_split != section.npos
 		   ? section.substr(0,first_split)
-		   : _("main"));
+		   : top_sections[0]);
       else if((split_mode == pkg_grouppolicy_section_factory::split_subdir ||
 	       split_mode == pkg_grouppolicy_section_factory::split_subdirs) &&
 	      first_split != section.npos)
@@ -357,8 +364,6 @@ void pkg_grouppolicy_section::add_package(const pkgCache::PkgIterator &pkg,
 	      // sorted alphabetically (contrib, main, non-free)
 	      bool use_order = false;
 	      int order = -1;
-	      // get an ordered list of top-sections
-	      const vector<string> top_sections = aptitude::apt::get_top_sections();
 
 	      // get the order of the top-section (the lower the number,
 	      // the higher the priority)
