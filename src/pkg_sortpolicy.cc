@@ -120,20 +120,11 @@ int pkg_sortpolicy_wrapper::compare(cw::treeitem *item1,
     return 0; // punt!
 }
 
+static pkg_name_lt plt;
+
 // by-name sorting (including architecture)
 PKG_SORTPOLICY_SUBCLASS(pkg_sortpolicy_name,
-                        int order = strcmp(pkg1.Name(), pkg2.Name());
-                        if(order != 0)
-                          return order;
-
-                        const int i1 = get_arch_order(pkg1.Arch());
-                        const int i2 = get_arch_order(pkg2.Arch());
-                        if(i1 < i2)
-                          return -1;
-                        else if(i2 < i1)
-                          return 1;
-                        else
-                          return strcmp(pkg1.Arch(), pkg2.Arch()););
+			return plt(pkg1, pkg2););
 
 // installed-size-sorting, treats virtual packages as 0-size
 PKG_SORTPOLICY_SUBCLASS(pkg_sortpolicy_installed_size,

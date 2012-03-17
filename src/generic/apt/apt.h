@@ -332,14 +332,18 @@ public:
   }
 };
 
-/** Sort packages by name. */
+/** Sort packages by their full name (incl. architecture). */
 struct pkg_name_lt
 {
+  struct arch_lt alt;
 public:
   bool operator()(const pkgCache::PkgIterator &p1,
 		  const pkgCache::PkgIterator &p2) const
   {
-    return strcmp(p1.Name(), p2.Name()) < 0;
+    const int order = strcmp(p1.Name(), p2.Name());
+    if(order == 0)
+      return alt(p1.Arch(), p2.Arch());
+    return order < 0;
   }
 };
 
@@ -362,11 +366,12 @@ public:
 /** Sort versions by package name. */
 struct ver_name_lt
 {
+  pkg_name_lt plt;
 public:
   bool operator()(const pkgCache::VerIterator &v1,
 		  const pkgCache::VerIterator &v2) const
   {
-    return strcmp(v1.ParentPkg().Name(), v2.ParentPkg().Name()) < 0;
+    return plt(v1.ParentPkg(), v2.ParentPkg());
   }
 };
 
