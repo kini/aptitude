@@ -1,3 +1,142 @@
+[3/17/2012]
+Version 0.6.6                               "There is not one you,
+                                             there are many."
+
+NOTE: Still on libapt4.10 API.
+
+This version of aptitude brings in basic multi-arch support.  Similar
+to APT, foreign-arch packages are displayed using their full name,
+including architecture, for example: 'libc6:armel'.
+
+This is intended to provide some support for users of multi-arch
+systems without causing huge breakage.  For users of single-arch
+systems the changes are limited to displaying the full names of all
+packages in log files and internal messages.
+
+CAUTION: The problem resolver is not yet updated to handle multi-arch
+properly.  Do not rely on it to make intelligent suggestions at this
+stage, instead, use the architecture information to manually check and
+resolve any problems.
+
+- Removed features:
+
+  * [gtk]: Remove menu entry for minesweeper.  This was causing
+           security concerns by potentially invoking an external
+           program with root privledges. (Closes: #552522)
+
+- Security fixes:
+
+- Crashes and serious errors:
+
+  * [cmdline]: List update errors are reported. (Closes: #451137)
+
+  * [all]: Fix '?action(upgrade)' and others (were finding kept
+           packages instead).  Thanks to Rogier <rogier777@gmail.com>
+           for the patch (Closes: #603862)
+
+- New features:
+
+  * [all]: Basic multi-arch support as discussed above.
+
+      - Use arch-qualified names (full names) in most places.
+      - Sorting by name considers full names (i.e. architecture).
+      - Show architecture and multi-arch fields in package info.
+      - Store package states uniquely by name *and* architecture.
+      - Add related search terms:
+
+        * ?architecture(architecture), ~rarchitecture
+          Select packages for the given architecture (such as
+          "amd64", or "all").
+
+        * ?multiarch(multiarch)
+
+          Select packages with a multi-arch capability of multiarch
+          (that is, either "foreign", "same", "allowed", or "none").
+
+      (Closes: #659079, #661744)
+      (LP: #454941, #845136, #884945, #904486)
+
+- Minor bugs:
+
+  * [all]: List update now runs APT::Update hooks. (Closes: #476399)
+
+  * [cmdline]: Actually silence progress messages with '-q2'.
+               (Closes: #141719)
+
+  * [all]: Fix various locking issues:
+
+           - '[auto]clean' locks /var/cache/apt/archives;
+           - 'update' locks /var/lib/apt/lists; (Closes: #653479)
+
+  * [all]: Fix 'priority' cost level in resolver.  The values should
+           have been negated but were not.  Thanks to Modestas Vainius
+           for this one. (Closes: #608786)
+
+- Internal changes:
+
+  * [all]: Update package lists using ListUpdate (from libapt-pkg).
+           Now the process is identical to apt-get and other tools,
+           reporting errors more correctly and running the APT::Update
+           hooks.
+
+  * [all]: Refactor various APT-related comparison functors which
+           were spread all over the place.  There is now a single
+           implementation of each which resides sanely in apt.h.
+
+  * [curses]: Refactor duplicated make_{info,dep,ver}_screen + insert
+              code.  Three new functions replace all standard uses of
+              the previous code: show_info_screen, etc.
+
+- Cosmetic and UI bugs:
+
+  * [cmdline]: Fix some help and prompt strings which wrongly included
+               localized names for commands such as 'why'.
+               (Closes: #486615)
+
+  * [curses]: Change ordering of top-level sections to match the order
+              in aptitude::Sections::Top-Sections.  The default order
+              is now: main, contrib, non-free.  (Closes: #181997)
+
+  * [curses]: Improve error messages when parsing grouping policies to
+              use the user-visible names, rather than the internal
+              names.  (Closes: #231595)
+
+  * [all]: Change default width of %D, %I, %o, and %Z.  Thanks to
+           Michał Kułach for this one. (Closes: #599209)
+           (LP: #741417)
+
+  * [cmdline]: Use nice formatting for both parts of the download
+               progress display.  Previously the 'downloaded' size was
+               being reported in bytes; now it uses larger units as
+               appropriate to be more readable.
+
+  * [cmdline]: 'versions' now groups it's results by 'package:arch'
+               instead of 'package'.
+
+- Build system changes:
+
+  * [all]: Add configure option '--disable-tests'.
+
+  * [all]: Don't check for libvte if GTK+ is disabled.
+
+  * [all]: Apply patch from Ubuntu to fix build -D_FORTIFY_SOURCE=2
+           errors.  Thanks to Colin Watson and Michael Vogt
+           (Closes: #497539)
+
+- Documentation:
+
+  * [doc]: Minor correction to the user's manual. (Closes: #365485)
+
+  * [doc]: Clean recent changes to man page description of
+           'forbid-version'.
+
+- Translation updates:
+
+  * Brazilian Portuguese (Closes: #483964)
+  * Hungarian (Closes: #592468)
+  * Polish (Closes: #659803)
+  * Russian (Closes: #662624)
+
 [2/6/2012]
 Version 0.6.5                               "Splat!"
 
