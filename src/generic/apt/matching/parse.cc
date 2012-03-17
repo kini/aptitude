@@ -1336,6 +1336,8 @@ ref_ptr<pattern> parse_atom(string::const_iterator &start,
 		      return pattern::make_origin(substr);
 		    case 'p':
 		      return pattern::make_priority(parse_priority(substr));
+		    case 'r':
+		      return pattern::make_architecture(substr);
 		    case 's':
 		      return pattern::make_section(substr);
 		    case 't':
