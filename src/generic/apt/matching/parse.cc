@@ -759,6 +759,22 @@ ref_ptr<pattern> maybe_bind(const string &bound_variable,
 			      term);
 }
 
+/** \brief Return a ?version term giving consideration
+ *  to the special values CURRENT, CANDIDATE, TARGET.
+ */
+ref_ptr<pattern> parse_version(const string &version)
+{
+  if(version == "CURRENT")
+    return pattern::make_current_version();
+  else if(version == "TARGET")
+    return pattern::make_install_version();
+  else if(version == "CANDIDATE")
+    return pattern::make_candidate_version();
+  else
+    return pattern::make_version(version);
+}
+
+
 // NB: "partial" is passed in because ?for terms can have trailing strings.
 ref_ptr<pattern> parse_term_args(const string &term_name,
 				 string::const_iterator &start,
@@ -1002,17 +1018,7 @@ ref_ptr<pattern> parse_term_args(const string &term_name,
     case term_type_user_tag:
       return pattern::make_user_tag(parse_string_match_args(start, end));
     case term_type_version:
-      {
-	const std::string version = parse_string_match_args(start, end);
-	if(version == "CURRENT")
-	  return pattern::make_current_version();
-	else if(version == "TARGET")
-	  return pattern::make_install_version();
-	else if(version == "CANDIDATE")
-	  return pattern::make_candidate_version();
-	else
-	  return pattern::make_version(version);
-      }
+      return parse_version(parse_string_match_args(start, end));
     case term_type_widen:
       return pattern::make_widen(parse_term_args(start, end, terminators, true, name_context));
     case term_type_virtual:
@@ -1343,7 +1349,7 @@ ref_ptr<pattern> parse_atom(string::const_iterator &start,
 		    case 't':
 		      return pattern::make_task(substr);
 		    case 'V':
-		      return pattern::make_version(substr);
+		      return parse_version(substr);
 		    default:
 		      throw MatchingException(ssprintf(_("Unknown pattern type: %c"), search_flag));
 		    }
