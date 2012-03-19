@@ -116,12 +116,14 @@ switch(p->get_type())
   case pattern::essential:
   case pattern::equal:
   case pattern::false_tp:
+  case pattern::foreign_architecture:
   case pattern::garbage:
   case pattern::install_version:
   case pattern::installed:
   case pattern::maintainer:
   case pattern::multiarch:
   case pattern::name:
+  case pattern::native_architecture:
   case pattern::new_tp:
   case pattern::obsolete:
   case pattern::origin:

@@ -451,6 +451,16 @@ namespace aptitude
      *  or a builtin list of defaults.
      */
     const std::vector<std::string> get_top_sections(const bool cached=true);
+
+    /** \return \b true if the given package is for the native
+     *  architecture.
+     */
+    bool is_native_arch(const pkgCache::VerIterator &ver);
+
+    inline bool is_foreign_arch(const pkgCache::VerIterator &ver)
+    {
+      return !is_native_arch(ver) && (strcmp(ver.Arch(), "all") != 0);
+    }
   }
 }
 

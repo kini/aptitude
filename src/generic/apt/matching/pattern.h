@@ -340,6 +340,11 @@ namespace aptitude
 	   *  Fields: variable_name, pattern.
 	   */
 	  for_tp,
+          /** \brief ?architecture(foreign)
+           *
+           *  Matches packages of foreign architectures.
+           */
+          foreign_architecture,
 	  /** \brief ?garbage
 	   *
 	   *  Matches packages that are not required by any manually
@@ -384,6 +389,11 @@ namespace aptitude
 	   *  Fields: filter, pattern
 	   */
 	  narrow,
+          /** \brief ?architecture(native)
+           *
+           *  Matches packages of the native architecture.
+           */
+          native_architecture,
 	  /** \brief ?new
 	   *
 	   *  Matches packages that are "new".
@@ -1280,6 +1290,20 @@ namespace aptitude
 
       // @}
 
+      /** \name foreign_architecture term constructor */
+
+      // @{
+
+      /** \brief Create an ?architecture(foreign) term. */
+
+      static cwidget::util::ref_ptr<pattern>
+      make_foreign_architecture()
+      {
+	return new pattern(foreign_architecture);
+      }
+
+      // @}
+
       /** \name garbage term constructor. */
 
       // @{
@@ -1423,6 +1447,20 @@ namespace aptitude
 	eassert(tp == narrow && sub_patterns.size() == 2);
 
 	return sub_patterns[1];
+      }
+
+      // @}
+
+      /** \name native_architecture term constructor */
+
+      // @{
+
+      /** \brief Create an ?architecture(native) term. */
+
+      static cwidget::util::ref_ptr<pattern>
+      make_native_architecture()
+      {
+	return new pattern(native_architecture);
       }
 
       // @}

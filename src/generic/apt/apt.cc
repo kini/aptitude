@@ -86,6 +86,8 @@ sigc::signal0<void> cache_closed, cache_reloaded, cache_reload_failed;
 sigc::signal0<void> hier_reloaded;
 sigc::signal0<void> consume_errors;
 
+static string apt_native_arch;
+
 static void reset_interesting_dep_memoization()
 {
   delete[] cached_deps_interesting;
@@ -1369,6 +1371,13 @@ namespace aptitude
         top_sections.assign(defaults, defaults + sizeof(defaults)/sizeof(*defaults));
 
       return top_sections;
+    }
+
+    bool is_native_arch(const pkgCache::VerIterator &ver)
+    {
+      if(apt_native_arch.empty())
+	apt_native_arch = aptcfg->Find("APT::Architecture");
+      return apt_native_arch == ver.Arch();
     }
   }
 }

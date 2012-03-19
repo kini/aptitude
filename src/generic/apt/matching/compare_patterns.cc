@@ -183,6 +183,9 @@ namespace aptitude
 				      p2->get_for_pattern());
 	    }
 
+	  case pattern::foreign_architecture:
+	    return 0;
+
 	  case pattern::garbage:
 	    return 0;
 
@@ -216,6 +219,9 @@ namespace aptitude
 	      return compare_patterns(p1->get_narrow_pattern(),
 				      p2->get_narrow_pattern());
 	    }
+
+	  case pattern::native_architecture:
+	    return 0;
 
 	  case pattern::new_tp:
 	    return 0;

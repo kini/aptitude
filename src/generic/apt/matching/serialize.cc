@@ -356,6 +356,10 @@ namespace aptitude
 	    variable_name_stack.pop_back();
 	    break;
 
+	  case pattern::foreign_architecture:
+	    out << "?architecture(foreign)";
+	    break;
+
 	  case pattern::garbage:
 	    out << "?garbage";
 	    break;
@@ -412,6 +416,10 @@ namespace aptitude
 	    out << ", ";
 	    serialize_pattern(p->get_narrow_pattern(), out, variable_name_stack);
 	    out.put(')');
+	    break;
+
+	  case pattern::native_architecture:
+	    out << "?architecture(native)";
 	    break;
 
 	  case pattern::new_tp:

@@ -1164,6 +1164,14 @@ namespace aptitude
 	    return NULL;
 	    break;
 
+	  case pattern::foreign_architecture:
+	    if(target.get_has_version() &&
+	       aptitude::apt::is_foreign_arch(target.get_version_iterator(cache)))
+	      return match::make_atomic(p);
+	    else
+	      return NULL;
+	    break;
+
 	  case pattern::garbage:
 	    if(!target.get_has_version())
 	      return NULL;
@@ -1249,6 +1257,14 @@ namespace aptitude
 				   p->get_name_regex_info(),
 				   target.get_package_iterator(cache).Name(),
 				   debug);
+	    break;
+
+	  case pattern::native_architecture:
+	    if(target.get_has_version() &&
+	       aptitude::apt::is_native_arch(target.get_version_iterator(cache)))
+	      return match::make_atomic(p);
+	    else
+	      return NULL;
 	    break;
 
 	  case pattern::new_tp:
@@ -2089,12 +2105,14 @@ namespace aptitude
 	  case pattern::equal:
 	  case pattern::exact_name:
 	  case pattern::false_tp:
+	  case pattern::foreign_architecture:
 	  case pattern::garbage:
 	  case pattern::install_version:
 	  case pattern::installed:
 	  case pattern::maintainer:
 	  case pattern::multiarch:
 	  case pattern::name:
+	  case pattern::native_architecture:
 	  case pattern::new_tp:
 	  case pattern::obsolete:
 	  case pattern::origin:
@@ -2300,12 +2318,14 @@ namespace aptitude
 	  case pattern::essential:
 	  case pattern::equal:
 	  case pattern::false_tp:
+	  case pattern::foreign_architecture:
 	  case pattern::garbage:
 	  case pattern::install_version:
 	  case pattern::installed:
 	  case pattern::maintainer:
 	  case pattern::multiarch:
 	  case pattern::name:
+	  case pattern::native_architecture:
 	  case pattern::new_tp:
 	  case pattern::obsolete:
 	  case pattern::origin:
@@ -2424,12 +2444,14 @@ namespace aptitude
 	  case pattern::essential:
 	  case pattern::equal:
 	  case pattern::false_tp:
+	  case pattern::foreign_architecture:
 	  case pattern::garbage:
 	  case pattern::install_version:
 	  case pattern::installed:
 	  case pattern::maintainer:
 	  case pattern::multiarch:
 	  case pattern::name:
+	  case pattern::native_architecture:
 	  case pattern::new_tp:
 	  case pattern::obsolete:
 	  case pattern::origin:
@@ -2622,12 +2644,14 @@ namespace aptitude
 	  case pattern::equal:
 	  case pattern::exact_name:
 	  case pattern::false_tp:
+	  case pattern::foreign_architecture:
 	  case pattern::garbage:
 	  case pattern::install_version:
 	  case pattern::installed:
 	  case pattern::maintainer:
 	  case pattern::multiarch:
 	  case pattern::name:
+	  case pattern::native_architecture:
 	  case pattern::new_tp:
 	  case pattern::obsolete:
 	  case pattern::origin:
@@ -2911,12 +2935,14 @@ namespace aptitude
 	  case pattern::essential:
 	  case pattern::equal:
 	  case pattern::false_tp:
+	  case pattern::foreign_architecture:
 	  case pattern::garbage:
 	  case pattern::install_version:
 	  case pattern::installed:
 	  case pattern::maintainer:
 	  case pattern::multiarch:
 	  case pattern::name:
+	  case pattern::native_architecture:
 	  case pattern::new_tp:
 	  case pattern::obsolete:
 	  case pattern::origin:

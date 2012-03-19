@@ -774,6 +774,22 @@ ref_ptr<pattern> parse_version(const string &version)
     return pattern::make_version(version);
 }
 
+/** \brief Return an ?architecture term giving consideration
+ *  to the special values native and foreign.
+ *
+ *  Specifying an arch of "native" will return packages from both the
+ *  native arch and also arch "all".  This is the same behaviour
+ *  as libapt-pkg when using, e.g., FindPkg.
+ */
+ref_ptr<pattern> parse_architecture(const string &arch)
+{
+  if(arch == "native")
+    return pattern::make_native_architecture();
+  else if(arch == "foreign")
+    return pattern::make_foreign_architecture();
+  else
+    return pattern::make_architecture(arch);
+}
 
 // NB: "partial" is passed in because ?for terms can have trailing strings.
 ref_ptr<pattern> parse_term_args(const string &term_name,
@@ -924,7 +940,7 @@ ref_ptr<pattern> parse_term_args(const string &term_name,
       else
 	return pattern::make_any_version(parse_term_args(start, end, terminators, false, name_context));
     case term_type_architecture:
-      return pattern::make_architecture(parse_string_match_args(start, end));
+      return parse_architecture(parse_string_match_args(start, end));
     case term_type_archive:
       return pattern::make_archive(parse_string_match_args(start, end));
     case term_type_automatic:
@@ -1343,7 +1359,7 @@ ref_ptr<pattern> parse_atom(string::const_iterator &start,
 		    case 'p':
 		      return pattern::make_priority(parse_priority(substr));
 		    case 'r':
-		      return pattern::make_architecture(substr);
+		      return parse_architecture(substr);
 		    case 's':
 		      return pattern::make_section(substr);
 		    case 't':
