@@ -46,7 +46,8 @@ resolve any problems.
 
         * ?architecture(architecture), ~rarchitecture
           Select packages for the given architecture (such as
-          "amd64", or "all").
+          "amd64", or "all").  Special values: "native" and
+          "foreign".
 
         * ?multiarch(multiarch)
 
@@ -55,6 +56,9 @@ resolve any problems.
 
       (Closes: #659079, #661744)
       (LP: #454941, #845136, #884945, #904486)
+
+  * [curses]: Use libraries ("liba", "libb", etc.) with 'firstchar'
+              grouping policy.  Removes crowding of the "l" group.
 
 - Minor bugs:
 
@@ -71,6 +75,10 @@ resolve any problems.
   * [all]: Fix 'priority' cost level in resolver.  The values should
            have been negated but were not.  Thanks to Modestas Vainius
            for this one. (Closes: #608786)
+
+  * [all]: Make ~VCURRENT etc. behave like ?version(CURRENT).  A
+           latent bug was preventing the special values from being
+           handled by the short form.
 
 - Internal changes:
 
@@ -116,6 +124,9 @@ resolve any problems.
 
   * [cmdline]: 'versions' now groups it's results by 'package:arch'
                instead of 'package'.
+
+  * [all]: Cleared up grouping, sorting policy error messages.
+           (Closes: #231595)
 
 - Build system changes:
 
