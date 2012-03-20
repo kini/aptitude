@@ -40,6 +40,8 @@ namespace cwidget
   using namespace widgets;
 }
 
+using aptitude::apt::is_foreign_arch;
+
 class pkg_depitem:public pkg_subtree
 {
   pkgCache::DepIterator firstdep;
@@ -82,7 +84,7 @@ pkg_depitem::pkg_depitem(pkgCache::DepIterator &first, pkg_signal *sig):
 
       firstiter=false;
 
-      currlabel+=start.TargetPkg().FullName(true);
+      currlabel+=start.TargetPkg().Name();
       if(start.TargetVer())
 	{
 	  currlabel+=" (";
@@ -96,7 +98,8 @@ pkg_depitem::pkg_depitem(pkgCache::DepIterator &first, pkg_signal *sig):
 	if(_system->VS->CheckDep(i.VerStr(), start->CompareOp, start.TargetVer()))
 	  {
 	    available=true;
-	    add_child(new pkg_ver_item(i, sig, is_or));
+            const bool show_pkg_name = is_or || is_foreign_arch(i);
+            add_child(new pkg_ver_item(i, sig, show_pkg_name));
 	    inc_num_packages();
 	  }
 
