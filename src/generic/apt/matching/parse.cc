@@ -1376,7 +1376,13 @@ ref_ptr<pattern> parse_atom(string::const_iterator &start,
 	{
 	  std::string s = parse_substr(start, end, terminators, true);
 
-	  return pattern::make_name(s);
+	  const size_t found = s.rfind(':');
+	  if(found == std::string::npos)
+	    return pattern::make_name(s);
+	  const std::string arch = s.substr(found + 1);
+	  const std::string name = s.substr(0, found);
+	  return pattern::make_and(pattern::make_exact_name(name),
+				   parse_architecture(arch));
 	}
     }
 

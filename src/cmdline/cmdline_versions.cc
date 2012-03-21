@@ -600,23 +600,16 @@ int cmdline_versions(int argc, char *argv[], const char *status_fname,
   for(int i = 1; i < argc; ++i)
     {
       const char * const arg = argv[i];
-      const bool treat_as_exact_name =
-        !aptitude::matching::is_pattern(arg);
 
-      if(treat_as_exact_name)
-        matchers.push_back(m::pattern::make_exact_name(arg));
-      else
-        {
-          cw::util::ref_ptr<m::pattern> m = m::parse(arg);
-          if(!m.valid())
-            {
-              _error->DumpErrors();
+      cw::util::ref_ptr<m::pattern> m = m::parse(arg);
+      if(!m.valid())
+	{
+	  _error->DumpErrors();
 
-              return -1;
-            }
+	  return -1;
+	}
 
-          matchers.push_back(m);
-        }
+      matchers.push_back(m);
     }
 
   return do_search_versions(matchers,
