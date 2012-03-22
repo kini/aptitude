@@ -253,7 +253,9 @@ namespace aptitude
 	    break;
 
 	  case pattern::architecture:
-	    serialize_regexp_term("architecture", p->get_architecture_regex_info(), out);
+	    out << "?architecture(";
+	    serialize_string(p->get_architecture_architecture(), out);
+	    out.put(')');
 	    break;
 
 	  case pattern::automatic:

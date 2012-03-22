@@ -907,19 +907,19 @@ namespace aptitude
 
       /** \brief Create an ?architecture term.
        *
-       *  \param s  The regular expression to match against.
+       *  \param arch  The architecture to match.
        */
       static cwidget::util::ref_ptr<pattern>
-      make_architecture(const std::string &s)
+      make_architecture(const std::string &arch)
       {
-        return new pattern(architecture, regex_info(s));
+        return new pattern(architecture, arch);
       }
 
-      const regex_info &get_architecture_regex_info() const
+      const std::string &get_architecture_architecture() const
       {
         eassert(tp == architecture);
 
-        return regex_information;
+        return string_info;
       }
 
       // @}

@@ -903,16 +903,10 @@ namespace aptitude
 
 	    {
 	      pkgCache::VerIterator ver(target.get_version_iterator(cache));
-
-	      ref_ptr<match> m = evaluate_regexp(p,
-						 p->get_architecture_regex_info(),
-						 ver.Arch(),
-						 debug);
-
-	      if(m.valid())
-		return m;
-	      else
-		return NULL;
+              if(p->get_architecture_architecture() == ver.Arch())
+                return match::make_atomic(p);
+              else
+                return NULL;
 	    }
 	    break;
 
