@@ -1377,7 +1377,8 @@ namespace aptitude
     {
       if(apt_native_arch.empty())
 	apt_native_arch = aptcfg->Find("APT::Architecture");
-      return apt_native_arch == ver.Arch();
+      const char *arch = ver.Arch();
+      return apt_native_arch == arch || strcmp(arch, "all") == 0;
     }
   }
 }
