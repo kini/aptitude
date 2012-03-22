@@ -62,6 +62,7 @@
 
 #include <cwidget/generic/threads/threads.h>
 #include <cwidget/generic/util/eassert.h>
+#include <cwidget/curses++.h>
 
 #include <generic/util/dense_setset.h>
 #include <generic/util/maybe.h>
@@ -3730,7 +3731,8 @@ private:
               logging::LoggerPtr logger,
               const std::string &msg)
   {
-    if(debug)
+    // HACK: Block logging to stdout if running in curses (c.f. main.cc)
+    if(debug && (cwidget::rootwin == (cwidget::cwindow) NULL))
       std::cout << msg << std::endl;
   }
 

@@ -568,12 +568,16 @@ void handle_message_logged(const char *sourceFilename,
                            const std::string &filename)
 {
   if(filename == "-")
-    do_message_logged(std::cout,
-                      sourceFilename,
-                      sourceLineNumber,
-                      level,
-                      logger,
-                      msg);
+    {
+      // HACK: Block logging to stdout if running in curses (c.f. problemresolver.h)
+      if(cw::rootwin == (cw::cwindow) NULL)
+        do_message_logged(std::cout,
+                          sourceFilename,
+                          sourceLineNumber,
+                          level,
+                          logger,
+                          msg);
+    }
   else
     {
       std::ofstream f(filename.c_str(), std::ios::app);
