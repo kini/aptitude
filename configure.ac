@@ -7,6 +7,9 @@ AM_CONFIG_HEADER(config.h)
 dnl Use C++
 AC_LANG([C++])
 
+ALL_LINGUAS="ar ast bs ca cs da de dz el es eu fi fr gl hu it ja km ku lt mr nb ne nl nn pl pt pt_BR ro ru sk sv th tl tr uk vi zh_CN zh_TW"
+AM_GNU_GETTEXT([external])
+
 dnl Checks for programs.
 AC_PROG_CXX
 AC_PROG_RANLIB
@@ -22,6 +25,10 @@ dnl C++ has const and inline!!!
 ac_cv_c_const=yes
 ac_cv_c_inline=yes
 
+dnl Check for libraries only if compiling the program.
+AS_IF([test "x$enable_aptitude" != xno],
+  [
+
 dnl Checks for libraries.
 AC_CHECK_LIB(ncursesw, initscr, , [AC_MSG_ERROR([Can't find libncursesw -- please install libncursesw5-dev])])
 AC_CHECK_LIB(apt-pkg, main, , [AC_MSG_ERROR([Can't find the APT libraries -- please install libapt-pkg-dev])])
@@ -36,9 +43,6 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <apt-pkg/depcache.h>]],
 AC_CHECK_LIB(pthread, main,
 	HAVE_LIBPTHREAD=1
 	, [AC_MSG_ERROR([Can't find the POSIX thread libraries])])
-
-ALL_LINGUAS="ar ast bs ca cs da de dz el es eu fi fr gl hu it ja km ku lt mr nb ne nl nn pl pt pt_BR ro ru sk sv th tl tr uk vi zh_CN zh_TW"
-AM_GNU_GETTEXT([external])
 
 PKG_CHECK_MODULES(ept, libept, [], [AC_MSG_ERROR([Can't find the ept library -- please install libept-dev])])
 AC_DEFINE([HAVE_EPT], [], [Backwards compatibility symbol; must always be defined.])
@@ -523,49 +527,49 @@ int main(int argc, char **argv)
          CPPFLAGS="$OLD_CPPFLAGS"
          LIBS="$OLD_LIBS"])
 
-AM_CONDITIONAL([BUILD_LOCAL_GMOCK], [test x$BUILD_LOCAL_GMOCK = x1])
-
 ##### End Google Mock check #####
 
 PKG_CHECK_MODULES(SQLITE3, sqlite3)
 
-HAVE_GTK=1
+  ]) dnl Check for libraries only if compiling the program.
+
+AM_CONDITIONAL([BUILD_LOCAL_GMOCK], [test x$BUILD_LOCAL_GMOCK = x1])
+
+WANT_HAVE_GTK=0
 AC_ARG_ENABLE(gtk,
-	AS_HELP_STRING(--disable-gtk, [don't compile the GTK+/gtkmm frontend even if the appropriate libraries are available]),
+	AS_HELP_STRING(--enable-gtk, [compile the GTK+ frontend]),
 	[if test x$enableval = xyes
 	 then
-	     HAVE_GTK=1
+	     if test "x$enable_aptitude" = xno
+	     then
+		 AC_MSG_ERROR([Can not build the GTK+ frontend because --disable-aptitude.])
+	     fi
+	     WANT_HAVE_GTK=1
 	 else
-	     HAVE_GTK=
+	     WANT_HAVE_GTK=
 	 fi])
 
-WANT_HAVE_GTK=$HAVE_GTK
 
 dnl We always test all the libraries, even if some of them fail, so
 dnl that the user gets to see which libraries are needed for GTK+.
-if test x$HAVE_GTK = x1
-then
-  AC_MSG_NOTICE([Testing for the libraries needed to build the GTK+ frontend.])
+HAVE_GTK=0
+AS_IF(
+ [test x$WANT_HAVE_GTK = x1],
+ [AC_MSG_NOTICE([Testing for the libraries needed to build the GTK+ frontend.])
 
+  HAVE_GTK=1
   PKG_CHECK_MODULES(GLIBMM, glibmm-2.4,,[HAVE_GTK=])
   PKG_CHECK_MODULES(GTHREAD, gthread-2.0,,[HAVE_GTK=])
   PKG_CHECK_MODULES(GTKMM, gtkmm-2.4,,[HAVE_GTK=])
   PKG_CHECK_MODULES(LIBGLADEMM, libglademm-2.4,,[HAVE_GTK=])
   PKG_CHECK_MODULES(VTE, vte,,[HAVE_GTK=])
 
-else
-  AC_MSG_NOTICE([Disabling the GTK+ frontend at your request (--disable-gtk).])
-fi
+  AS_IF([test x$HAVE_GTK != x1],
+        [AC_MSG_ERROR([Unable to find the necessary GTK+ libraries.])],
+        [AC_MSG_NOTICE([The GTK+ frontend will be built.])])],
 
-if test x$WANT_HAVE_GTK = x1 && test x$HAVE_GTK != x1
-then
-  AC_MSG_WARN([Unable to find the necessary GTK+ libraries; disabling GTK+ support.])
-fi
-
-if test x$HAVE_GTK = x1
-then
-  AC_MSG_NOTICE([The GTK+ frontend will be built.])
-fi
+ [test "x$enable_aptitude" != xno],
+ [AC_MSG_NOTICE([GTK+ frontend not enabled; use --enable-gtk to enable it.])])
 
 AM_CONDITIONAL([BUILD_GTK], [test x$HAVE_GTK = x1])
 if test x$HAVE_GTK = x1
@@ -591,18 +595,22 @@ AC_DEFINE_UNQUOTED(SIGC_VERSION, ["$(pkg-config --modversion sigc++-2.0)"], [The
 
 WANT_HAVE_QT=0
 AC_ARG_ENABLE(qt,
-  AS_HELP_STRING(--enable-qt, [compile the Qt frontend if the appropriate libraries are available]),
+  AS_HELP_STRING(--enable-qt, [compile the Qt frontend]),
   [if test x$enableval = xyes
   then
+    if test "x$enable_aptitude" = xno
+    then
+      AC_MSG_ERROR([Can not build the Qt frontend because --disable-aptitude.])
+    fi
     WANT_HAVE_QT=1
   else
     WANT_HAVE_QT=
   fi])
 
 HAVE_QT=0
-if test x$WANT_HAVE_QT = x1
-then
-  AC_MSG_NOTICE([Testing for the libraries needed to build the Qt frontend.])
+AS_IF(
+  [test x$WANT_HAVE_QT = x1],
+  [AC_MSG_NOTICE([Testing for the libraries needed to build the Qt frontend.])
 
   # required version of Qt libraries
   QTCORE_REQUIRED=4.6.0
@@ -623,19 +631,13 @@ then
       AC_MSG_NOTICE([Qt MOC has been found.])
     fi
   fi
-else
-  AC_MSG_NOTICE([Qt frontend not enabled; use --enable-qt to enable it.])
-fi
 
-if test x$WANT_HAVE_QT = x1 && test x$HAVE_QT != x1
-then
-  AC_MSG_WARN([Unable to find the necessary Qt libraries; disabling Qt support.])
-fi
+  AS_IF([test x$HAVE_QT != x1],
+        [AC_MSG_ERROR([Unable to find the necessary Qt libraries.])],
+        [AC_MSG_NOTICE([The Qt frontend will be built.])])],
 
-if test x$HAVE_QT = x1
-then
-  AC_MSG_NOTICE([The Qt frontend will be built.])
-fi
+  [test "x$enable_aptitude" != xno],
+  [AC_MSG_NOTICE([Qt frontend not enabled; use --enable-qt to enable it.])])
 
 AM_CONDITIONAL([BUILD_QT], [test x$HAVE_QT = x1])
 if test x$HAVE_QT = x1
@@ -653,6 +655,10 @@ fi
 
 
 dnl Checks for header files.
+dnl Check for header files only if compiling the program.
+AS_IF([test "x$enable_aptitude" != xno],
+  [
+
 AC_HEADER_STDC
 
 AC_CHECK_HEADERS(fcntl.h sys/ioctl.h unistd.h, , [AC_MSG_ERROR([Can't find needed header file.])])
@@ -782,7 +788,6 @@ fi
 
 
 
-
 if test x$HAVE_LIBPTHREAD = x1
 then
   AC_CHECK_HEADER(pthread.h,
@@ -792,6 +797,9 @@ then
 	,
 	[AC_MSG_ERROR([POSIX thread header not installed])])
 fi
+
+dnl Check for header files only if compiling the program.
+  ])
 
 WERROR="-Werror"
 
