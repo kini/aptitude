@@ -318,7 +318,7 @@ TEST_P(CmdlineDownloadStatusDisplayTest, HasCpsNoFilesNoProgressHasTimeEstimate)
 // file at 0%.
 TEST_P(CmdlineDownloadStatusDisplayTest, OneFileWithNoProgress)
 {
-  EXPECT_MSG(L"0% [no progress 0/10 B 0%]");
+  EXPECT_MSG(L"0% [no progress 0 B/10 B 0%]");
 
   status_display->display_status(status(0, make_files(no_progress), 0, 0));
 }
@@ -327,7 +327,7 @@ TEST_P(CmdlineDownloadStatusDisplayTest, OneFileWithNoProgress)
 // file at 45.4%.
 TEST_P(CmdlineDownloadStatusDisplayTest, OneFileAlmostHalfCompleteRoundDown)
 {
-  EXPECT_MSG(L"0% [1 round down 454/1000 B 45%]");
+  EXPECT_MSG(L"0% [1 round down 454 B/1000 B 45%]");
 
   status_display->display_status(status(0, make_files(almost_half_complete_round_down), 0, 0));
 }
@@ -336,7 +336,7 @@ TEST_P(CmdlineDownloadStatusDisplayTest, OneFileAlmostHalfCompleteRoundDown)
 // file at 45.4% if the complete flag is set.
 TEST_P(CmdlineDownloadStatusDisplayTest, OneFileAlmostHalfCompleteRoundDownWithCompleteFlag)
 {
-  EXPECT_MSG(L"0% [1 round down 454]");
+  EXPECT_MSG(L"0% [1 round down 454 B]");
 
   status_display->display_status(status(0, make_files(almost_half_complete_round_down_with_complete_flag), 0, 0));
 }
@@ -345,7 +345,7 @@ TEST_P(CmdlineDownloadStatusDisplayTest, OneFileAlmostHalfCompleteRoundDownWithC
 // file at 45.5%.
 TEST_P(CmdlineDownloadStatusDisplayTest, OneFileAlmostHalfCompleteRoundUp)
 {
-  EXPECT_MSG(L"0% [2 round up 455/1000 B 46%]");
+  EXPECT_MSG(L"0% [2 round up 455 B/1000 B 46%]");
 
   status_display->display_status(status(0, make_files(almost_half_complete_round_up), 0, 0));
 }
@@ -354,7 +354,7 @@ TEST_P(CmdlineDownloadStatusDisplayTest, OneFileAlmostHalfCompleteRoundUp)
 // one file at 100%.
 TEST_P(CmdlineDownloadStatusDisplayTest, OneFileFullyComplete)
 {
-  EXPECT_MSG(L"0% [4 complete 10/10 B 100%]");
+  EXPECT_MSG(L"0% [4 complete 10 B/10 B 100%]");
 
   status_display->display_status(status(0, make_files(full_progress), 0, 0));
 }
@@ -372,7 +372,7 @@ TEST_P(CmdlineDownloadStatusDisplayTest, OneFileNoProgressNoSize)
 // one file that has progress but a total size of 0.
 TEST_P(CmdlineDownloadStatusDisplayTest, OneFileWithProgressZeroSize)
 {
-  EXPECT_MSG(L"0% [7 progress zero 15]");
+  EXPECT_MSG(L"0% [7 progress zero 15 B]");
 
   status_display->display_status(status(0, make_files(overcomplete_progress_out_of_zero), 0, 0));
 }
@@ -382,7 +382,7 @@ TEST_P(CmdlineDownloadStatusDisplayTest, OneFileWithProgressZeroSize)
 // flag is set.
 TEST_P(CmdlineDownloadStatusDisplayTest, OneFileWithProgressZeroSizeWithCompleteFlag)
 {
-  EXPECT_MSG(L"0% [7 progress zero 15]");
+  EXPECT_MSG(L"0% [7 progress zero 15 B]");
 
   status_display->display_status(status(0, make_files(overcomplete_progress_out_of_zero_with_complete_flag), 0, 0));
 }
@@ -391,7 +391,7 @@ TEST_P(CmdlineDownloadStatusDisplayTest, OneFileWithProgressZeroSizeWithComplete
 // one file above 100%.
 TEST_P(CmdlineDownloadStatusDisplayTest, OneFileOvercomplete)
 {
-  EXPECT_MSG(L"0% [6 overcomplete progress 15/10 B 100%]");
+  EXPECT_MSG(L"0% [6 overcomplete progress 15 B/10 B 100%]");
 
   status_display->display_status(status(0, make_files(overcomplete_progress), 0, 0));
 }
@@ -399,28 +399,28 @@ TEST_P(CmdlineDownloadStatusDisplayTest, OneFileOvercomplete)
 // Various tests of cases involving the mode string:
 TEST_P(CmdlineDownloadStatusDisplayTest, OneFileNoProgressWithModeNoIdNoDescription)
 {
-  EXPECT_MSG(L"0% [the mode 0/10 B 0%]");
+  EXPECT_MSG(L"0% [the mode 0 B/10 B 0%]");
 
   status_display->display_status(status(0, make_files(no_progress_with_mode_no_id_no_description), 0, 0));
 }
 
 TEST_P(CmdlineDownloadStatusDisplayTest, OneFileNoProgressWithModeWithIdNoDescription)
 {
-  EXPECT_MSG(L"0% [5 the mode 0/10 B 0%]");
+  EXPECT_MSG(L"0% [5 the mode 0 B/10 B 0%]");
 
   status_display->display_status(status(0, make_files(no_progress_with_mode_with_id_no_description), 0, 0));
 }
 
 TEST_P(CmdlineDownloadStatusDisplayTest, OneFileNoProgressWithModeNoIdWithDescription)
 {
-  EXPECT_MSG(L"0% [no progress the mode 0/10 B 0%]");
+  EXPECT_MSG(L"0% [no progress the mode 0 B/10 B 0%]");
 
   status_display->display_status(status(0, make_files(no_progress_with_mode_no_id_with_description), 0, 0));
 }
 
 TEST_P(CmdlineDownloadStatusDisplayTest, OneFileNoProgressWithModeWithIdWithDescription)
 {
-  EXPECT_MSG(L"0% [5 no progress the mode 0/10 B 0%]");
+  EXPECT_MSG(L"0% [5 no progress the mode 0 B/10 B 0%]");
 
   status_display->display_status(status(0, make_files(no_progress_with_mode_with_id_with_description), 0, 0));
 }
@@ -436,7 +436,7 @@ TEST_P(CmdlineDownloadStatusDisplayTest, OneFileNoProgressOutOfZeroWithMode)
 // Test that displaying two files works as expected.
 TEST_P(CmdlineDownloadStatusDisplayTest, TwoFiles)
 {
-  EXPECT_MSG(L"0% [no progress 0/10 B 0%] [3 half complete 5/10 B 50%]");
+  EXPECT_MSG(L"0% [no progress 0 B/10 B 0%] [3 half complete 5 B/10 B 50%]");
 
   status_display->display_status(status(0, make_files(no_progress, half_complete), 0, 0));
 }
