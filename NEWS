@@ -2,8 +2,6 @@
 Version 0.6.6                               "There is not one you,
                                              there are many."
 
-NOTE: Still on libapt4.10 API.
-
 This version of aptitude brings in basic multi-arch support.  Similar
 to APT, foreign-arch packages are displayed using their full name,
 including architecture, for example: 'libc6:armel'.
@@ -34,6 +32,9 @@ resolve any problems.
            packages instead).  Thanks to Rogier <rogier777@gmail.com>
            for the patch (Closes: #603862)
 
+  * [curses]: Hack to prevent debug messages dumping to the screen
+              (Closes: #651748)
+
 - New features:
 
   * [all]: Basic multi-arch support as discussed above.
@@ -53,6 +54,9 @@ resolve any problems.
 
           Select packages with a multi-arch capability of multiarch
           (that is, either "foreign", "same", "allowed", or "none").
+
+      - Default search (with no explicit term) now accepts "name:arch"
+        patterns which match "?exact-name(name)?architecture(arch)".
 
       (Closes: #659079, #661744)
       (LP: #454941, #845136, #884945, #904486)
@@ -137,6 +141,12 @@ resolve any problems.
   * [all]: Apply patch from Ubuntu to fix build -D_FORTIFY_SOURCE=2
            errors.  Thanks to Colin Watson and Michael Vogt
            (Closes: #497539)
+
+  * [all]: Avoid most library and header checks if --disable-aptitude.
+
+  * [all]: GTK+ frontend is disabled by default.
+
+  * [all]: Enabling GTK+ or Qt is an error if libraries are missing.
 
 - Documentation:
 
