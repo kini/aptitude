@@ -360,7 +360,8 @@ namespace aptitude
             // The old download indicator displayed a size of 0 if
             // current_size was 0.  I figure if we have no total size
             // and we haven't downloaded anything, there's no poing.
-            components.push_back((wformat(L"%lu") % current_size).str());
+            components.push_back((wformat(L"%sB")
+                                  % transcode(SizeToStr(current_size))).str());
 
           output += join(components, L" ");
         }
