@@ -40,6 +40,10 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <apt-pkg/depcache.h>]],
 		  AC_MSG_RESULT([yes]),
 		  AC_MSG_FAILURE([need libapt-pkg 0.7 or later]))
 
+AC_CHECK_MEMBER([struct pkgCache::Version.MultiArch], [],
+                [AC_MSG_ERROR([need libapt-pkg 0.8 or later])],
+                [[#include <apt-pkg/pkgcache.h>]])
+
 AC_CHECK_LIB(pthread, main,
 	HAVE_LIBPTHREAD=1
 	, [AC_MSG_ERROR([Can't find the POSIX thread libraries])])

@@ -1212,32 +1212,24 @@ namespace aptitude
 	    else
 	      {
 		bool matches = false;
-		const int multiarch = target.get_ver()->MultiArch;
+                const pattern::multiarch_type type = p->get_multiarch_multiarch_type();
 
-		switch(p->get_multiarch_multiarch_type())
-		  {
-		  case pattern::multiarch_none:
-		    matches = (multiarch == pkgCache::Version::None ||
-			       multiarch == pkgCache::Version::All);
-		    break;
-
-		  case pattern::multiarch_foreign:
-		    matches = (multiarch == pkgCache::Version::Foreign ||
-			       multiarch == pkgCache::Version::AllForeign);
-		    break;
-
-		  case pattern::multiarch_same:
-		    matches = multiarch == pkgCache::Version::Same;
-		    break;
-
-		  case pattern::multiarch_allowed:
-		    matches = (multiarch == pkgCache::Version::Allowed ||
-			       multiarch == pkgCache::Version::AllAllowed);
-		    break;
-
-		  default:
-		    throw MatchingException("Internal error: bad multiarch-type flag.");
-		  }
+                switch(target.get_ver()->MultiArch)
+                  {
+                  case pkgCache::Version::Foreign:
+                  case pkgCache::Version::AllForeign:
+                    matches = (type == pattern::multiarch_foreign);
+                    break;
+                  case pkgCache::Version::Same:
+                    matches = (type == pattern::multiarch_same);
+                    break;
+                  case pkgCache::Version::Allowed:
+                  case pkgCache::Version::AllAllowed:
+                    matches = (type == pattern::multiarch_allowed);
+                    break;
+                  default:
+                    matches = (type == pattern::multiarch_none);
+                  }
 
 		if(matches)
 		  return match::make_atomic(p);

@@ -1265,12 +1265,19 @@ std::wstring get_long_description(const pkgCache::VerIterator &ver,
 
 const char *multiarch_type(unsigned char type)
 {
-  const char *types[] = {"", "", _("foreign"), _("same"), _("allowed"),
-                         _("foreign"), _("allowed")};
-
-  if(type < sizeof(types)/sizeof(*types))
-    return types[type];
-  return "";
+  switch(type)
+    {
+    case pkgCache::Version::Foreign:
+    case pkgCache::Version::AllForeign:
+      return _("foreign");
+    case pkgCache::Version::Same:
+      return _("same");
+    case pkgCache::Version::Allowed:
+    case pkgCache::Version::AllAllowed:
+      return _("allowed");
+    default:
+      return "";
+    }
 }
 
 int get_arch_order(const char *a)
