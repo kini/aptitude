@@ -403,7 +403,7 @@ bool pkg_item::dispatch_key(const cw::config::key &k, cw::tree *owner)
 	  if(sucmd)
 	    {
 	      snprintf(buf, 512, sucmd,
-		       package.FullName(true).c_str());
+		       package.FullName().c_str());
 
 	      if(system(buf) != 0) { /* FIXME: ignore? */ }
 
