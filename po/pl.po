@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude 0.4.11\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2012-02-01 01:10+0800\n"
+"POT-Creation-Date: 2012-03-25 14:31+0800\n"
 "PO-Revision-Date: 2012-02-13 18:56+0100\n"
 "Last-Translator: Michał Kułach <michal.kulach@gmail.com>\n"
 "Language-Team: Polish <debian-l10n-polish@lists.debian.org>\n"
@@ -605,7 +605,7 @@ msgstr "Opcje interfejsu"
 msgid "Dependency handling"
 msgstr "Zależności"
 
-#: src/apt_options.cc:529 src/pkg_grouppolicy.cc:1022
+#: src/apt_options.cc:529 src/pkg_grouppolicy.cc:1064
 msgid "Miscellaneous"
 msgstr "Różne"
 
@@ -770,7 +770,7 @@ msgstr "Jest już zainstalowana żądana wersja pakietu \"%s\" (%s)\n"
 msgid "%s is not currently installed, so it will not be upgraded.\n"
 msgstr "Pakiet %s nie jest zainstalowany, więc nie zostanie zaktualizowany.\n"
 
-#: src/cmdline/cmdline_action.cc:331
+#: src/cmdline/cmdline_action.cc:332
 #, c-format
 msgid ""
 "%s is already installed at the latest version, so it will not be upgraded.\n"
@@ -778,33 +778,33 @@ msgstr ""
 "Pakiet %s jest już zainstalowany w najnowszej wersji, więc nie zostanie "
 "zaktualizowany.\n"
 
-#: src/cmdline/cmdline_action.cc:336
+#: src/cmdline/cmdline_action.cc:338
 #, c-format
 msgid "%s is not currently installed, so it will not be reinstalled.\n"
 msgstr ""
 "Pakiet %s nie jest zainstalowany, więc nie zostanie ponownie zainstalowany.\n"
 
-#: src/cmdline/cmdline_action.cc:343 src/cmdline/cmdline_action.cc:349
+#: src/cmdline/cmdline_action.cc:346 src/cmdline/cmdline_action.cc:353
 #, c-format
 msgid "Package %s is not installed, so it will not be removed\n"
 msgstr "Pakiet %s nie jest zainstalowany, więc nie zostanie usunięty.\n"
 
-#: src/cmdline/cmdline_action.cc:367
+#: src/cmdline/cmdline_action.cc:372
 #, c-format
 msgid "Package %s is not installed, cannot forbid an upgrade\n"
 msgstr "Pakiet %s nie jest zainstalowany, nie można zabronić aktualizacji\n"
 
-#: src/cmdline/cmdline_action.cc:369
+#: src/cmdline/cmdline_action.cc:375
 #, c-format
 msgid "Package %s is not upgradable, cannot forbid an upgrade\n"
 msgstr "Pakiet %s nie ma uaktualnienia, nie można zabronić aktualizacji\n"
 
-#: src/cmdline/cmdline_action.cc:470
+#: src/cmdline/cmdline_action.cc:477
 #, c-format
 msgid "Note: selecting the task \"%s: %s\" for installation\n"
 msgstr "Uwaga: wybranie zadania \"%s: %s\" do instalacji\n"
 
-#: src/cmdline/cmdline_action.cc:505
+#: src/cmdline/cmdline_action.cc:512
 #, c-format
 msgid ""
 "You can only specify a package version with an 'install' command or a "
@@ -813,12 +813,12 @@ msgstr ""
 "Wersję pakietu można podać tylko przy poleceniu \"install\" lub \"forbid-"
 "version\".\n"
 
-#: src/cmdline/cmdline_action.cc:514
+#: src/cmdline/cmdline_action.cc:521
 #, c-format
 msgid "You can only specify a package archive with an 'install' command.\n"
 msgstr "Archiwum pakietu można podać tylko przy poleceniu \"install\"\n"
 
-#: src/cmdline/cmdline_action.cc:552
+#: src/cmdline/cmdline_action.cc:559
 #, c-format
 msgid ""
 "Couldn't find package \"%s\", and more than 40\n"
@@ -827,7 +827,7 @@ msgstr ""
 "Nie znaleziono pakietu \"%s\".\n"
 "Nazwy ponad 40 pakietów zawierają \"%s\".\n"
 
-#: src/cmdline/cmdline_action.cc:555
+#: src/cmdline/cmdline_action.cc:562
 #, c-format
 msgid ""
 "Couldn't find package \"%s\".  However, the following\n"
@@ -836,12 +836,12 @@ msgstr ""
 "Nie znaleziono pakietu \"%s\".\n"
 "Następujące pakiety mają \"%s\" w nazwie:\n"
 
-#: src/cmdline/cmdline_action.cc:577
+#: src/cmdline/cmdline_action.cc:584
 #, c-format
 msgid "Couldn't find any package whose name or description matched \"%s\"\n"
 msgstr "Nie znaleziono pakietu, którego nazwa lub opis zawierałyby \"%s\"\n"
 
-#: src/cmdline/cmdline_action.cc:579
+#: src/cmdline/cmdline_action.cc:586
 #, c-format
 msgid ""
 "Couldn't find any package matching \"%s\", and more than 40\n"
@@ -850,7 +850,7 @@ msgstr ""
 "Nie znaleziono pakietu z \"%s\" w nazwie.\n"
 "Opisy ponad czterdziestu pakietów zawierają \"%s\".\n"
 
-#: src/cmdline/cmdline_action.cc:582
+#: src/cmdline/cmdline_action.cc:589
 #, c-format
 msgid ""
 "Couldn't find any package matching \"%s\".  However, the following\n"
@@ -859,7 +859,7 @@ msgstr ""
 "Nie znaleziono pakietu z \"%s\" w nazwie.\n"
 "Opisy następujących pakietów zawierają \"%s\":\n"
 
-#: src/cmdline/cmdline_action.cc:724
+#: src/cmdline/cmdline_action.cc:731
 #, c-format
 msgid "Bad action character '%c'\n"
 msgstr "Nieznana akcja \"%c\"\n"
@@ -894,32 +894,43 @@ msgstr ""
 msgid "Couldn't find a changelog for %s"
 msgstr "Nie znaleziono dziennika zmian pakietu %s"
 
+#: src/cmdline/cmdline_changelog.cc:429
+#, fuzzy, c-format
+msgid "Couldn't run pager %s"
+msgstr "Nie znaleziono dziennika zmian pakietu %s"
+
 #: src/cmdline/cmdline_clean.cc:60
 #, c-format
 msgid "E: The clean command takes no arguments\n"
 msgstr "E: Polecenie clean nie przyjmuje parametrów\n"
 
-#: src/cmdline/cmdline_clean.cc:89
+#: src/cmdline/cmdline_clean.cc:66
 #, c-format
 msgid "Del %s* %spartial/*\n"
 msgstr "Usuwanie %s* %spartial/*\n"
 
-#: src/cmdline/cmdline_clean.cc:117
+#: src/cmdline/cmdline_clean.cc:76 src/cmdline/cmdline_clean.cc:146
+#: src/ui.cc:1781 src/ui.cc:1869
+#, fuzzy
+msgid "Unable to lock the download directory"
+msgstr "Nie można ustalić katalogu domowego!"
+
+#: src/cmdline/cmdline_clean.cc:106
 #, c-format
 msgid "Del %s %s [%sB]\n"
 msgstr "Usuwanie %s %s [%sB]\n"
 
-#: src/cmdline/cmdline_clean.cc:144
+#: src/cmdline/cmdline_clean.cc:134
 #, c-format
 msgid "E: The autoclean command takes no arguments\n"
 msgstr "E: Polecenie autoclean nie przyjmuje parametrów\n"
 
-#: src/cmdline/cmdline_clean.cc:181
+#: src/cmdline/cmdline_clean.cc:172
 #, c-format
 msgid "Would free %sB of disk space\n"
 msgstr "Zwolni się %sB miejsca na dysku\n"
 
-#: src/cmdline/cmdline_clean.cc:184
+#: src/cmdline/cmdline_clean.cc:175
 #, c-format
 msgid "Freed %sB of disk space\n"
 msgstr "Zwolniło się %sB miejsca na dysku\n"
@@ -942,7 +953,7 @@ msgstr ""
 "uruchomić z opcją --full-resolver\n"
 
 #: src/cmdline/cmdline_do_action.cc:385 src/cmdline/cmdline_simulate.cc:60
-#: src/main.cc:1217
+#: src/main.cc:1221
 #, c-format
 msgid "Abort.\n"
 msgstr "Przerwane.\n"
@@ -1001,7 +1012,7 @@ msgstr ""
 "Wymiana nośnika: Proszę włożyć dysk oznaczony \"%s\" do napędu \"%s\" i "
 "nacisnąć [Enter]."
 
-#: src/cmdline/cmdline_download_progress_display.cc:435
+#: src/cmdline/cmdline_download_progress_display.cc:436
 msgid "[Working]"
 msgstr "[Pracuje]"
 
@@ -1084,73 +1095,73 @@ msgstr "Gotowe"
 msgid "DONE"
 msgstr "ZROBIONE"
 
-#: src/cmdline/cmdline_prompt.cc:89
+#: src/cmdline/cmdline_prompt.cc:84
 msgid "Couldn't read list of sources"
 msgstr "Nie można odczytać listy źródeł pakietów"
 
-#: src/cmdline/cmdline_prompt.cc:345
+#: src/cmdline/cmdline_prompt.cc:342
 msgid "Config files"
 msgstr "Konfiguracja"
 
-#: src/cmdline/cmdline_prompt.cc:396
+#: src/cmdline/cmdline_prompt.cc:393
 msgid "The following packages are BROKEN:"
 msgstr "Następujące pakiety mają NIESPEŁNIONE zależności:"
 
-#: src/cmdline/cmdline_prompt.cc:397
+#: src/cmdline/cmdline_prompt.cc:394
 msgid "The following packages are unused and will be REMOVED:"
 msgstr "Następujące pakiety nie są używane i zostaną USUNIĘTE:"
 
-#: src/cmdline/cmdline_prompt.cc:398
+#: src/cmdline/cmdline_prompt.cc:395
 msgid "The following packages have been automatically kept back:"
 msgstr "Następujące pakiety zostały automatycznie zatrzymane:"
 
-#: src/cmdline/cmdline_prompt.cc:399
+#: src/cmdline/cmdline_prompt.cc:396
 msgid "The following NEW packages will be automatically installed:"
 msgstr "Następujące NOWE pakiety zostaną automatycznie zainstalowane:"
 
-#: src/cmdline/cmdline_prompt.cc:400
+#: src/cmdline/cmdline_prompt.cc:397
 msgid "The following packages will be automatically REMOVED:"
 msgstr "Następujące pakiety zostaną automatycznie USUNIĘTE:"
 
-#: src/cmdline/cmdline_prompt.cc:401
+#: src/cmdline/cmdline_prompt.cc:398
 msgid "The following packages will be DOWNGRADED:"
 msgstr "Następujące pakiety zostaną COFNIĘTE:"
 
-#: src/cmdline/cmdline_prompt.cc:402
+#: src/cmdline/cmdline_prompt.cc:399
 msgid "The following packages have been kept back:"
 msgstr "Następujące pakiety zostały zatrzymane:"
 
-#: src/cmdline/cmdline_prompt.cc:403
+#: src/cmdline/cmdline_prompt.cc:400
 msgid "The following packages will be REINSTALLED:"
 msgstr "Następujące pakiety zostaną PONOWNIE zainstalowane:"
 
-#: src/cmdline/cmdline_prompt.cc:404
+#: src/cmdline/cmdline_prompt.cc:401
 msgid "The following NEW packages will be installed:"
 msgstr "Następujące NOWE pakiety zostaną zainstalowane:"
 
-#: src/cmdline/cmdline_prompt.cc:405
+#: src/cmdline/cmdline_prompt.cc:402
 msgid "The following packages will be REMOVED:"
 msgstr "Następujące pakiety zostaną USUNIĘTE:"
 
-#: src/cmdline/cmdline_prompt.cc:406
+#: src/cmdline/cmdline_prompt.cc:403
 msgid "The following packages will be upgraded:"
 msgstr "Następujące pakiety zostaną zaktualizowane:"
 
-#: src/cmdline/cmdline_prompt.cc:407
+#: src/cmdline/cmdline_prompt.cc:404
 msgid "The following partially installed packages will be configured:"
 msgstr "Następujące częściowo zainstalowane pakiety zostaną skonfigurowane:"
 
-#: src/cmdline/cmdline_prompt.cc:462 src/ui.cc:1517
+#: src/cmdline/cmdline_prompt.cc:459 src/ui.cc:1568
 #, c-format
 msgid "The following ESSENTIAL packages will be REMOVED!\n"
 msgstr "Następujące ISTOTNE pakiety zostaną USUNIĘTE!\n"
 
-#: src/cmdline/cmdline_prompt.cc:471 src/ui.cc:1532
+#: src/cmdline/cmdline_prompt.cc:468 src/ui.cc:1583
 #, c-format
 msgid "The following ESSENTIAL packages will be BROKEN by this action:\n"
 msgstr "Następujące ISTOTNE pakiet będą miały NIESPEŁNIONE zależności:\n"
 
-#: src/cmdline/cmdline_prompt.cc:481 src/ui.cc:1545
+#: src/cmdline/cmdline_prompt.cc:478 src/ui.cc:1596
 #, c-format
 msgid ""
 "WARNING: Performing this action will probably cause your system to break!\n"
@@ -1161,16 +1172,16 @@ msgstr ""
 
 # [pl_PL] było: "Zdaję sobie sprawę, że to bardzo zły pomysł", ale zostało
 # [pl_PL] zmienione aby umożliwić wpisanie tej frazy bez polskich znaków
-#: src/cmdline/cmdline_prompt.cc:483
+#: src/cmdline/cmdline_prompt.cc:480
 msgid "I am aware that this is a very bad idea"
 msgstr "Wiem, rozumiem, to bardzo kiepski koncept"
 
-#: src/cmdline/cmdline_prompt.cc:487 src/ui.cc:1546
+#: src/cmdline/cmdline_prompt.cc:484 src/ui.cc:1597
 #, c-format
 msgid "To continue, type the phrase \"%s\":\n"
 msgstr "Aby kontynuować napisz \"%s\":\n"
 
-#: src/cmdline/cmdline_prompt.cc:529
+#: src/cmdline/cmdline_prompt.cc:526
 #, c-format
 msgid ""
 "WARNING: untrusted versions of the following packages will be installed!\n"
@@ -1186,7 +1197,7 @@ msgstr ""
 "Kontynuuj instalację tylko jeżeli dobrze wiesz co chcesz zrobić.\n"
 "\n"
 
-#: src/cmdline/cmdline_prompt.cc:541
+#: src/cmdline/cmdline_prompt.cc:538
 #, c-format
 msgid ""
 "*** WARNING ***   Ignoring these trust violations because\n"
@@ -1195,7 +1206,7 @@ msgstr ""
 "*** UWAGA ***   Powyższe problemy zostaną zignorowane ponieważ parametr\n"
 "                %s::CmdLine::Ignore-Trust-Violations ma wartość 'true'!\n"
 
-#: src/cmdline/cmdline_prompt.cc:550
+#: src/cmdline/cmdline_prompt.cc:547
 msgid ""
 "*** WARNING ***   Ignoring these trust violations because\n"
 "                  Apt::Get::AllowUnauthenticated is 'true'!\n"
@@ -1208,7 +1219,7 @@ msgstr ""
 #. input methods.  Please include nothing but ASCII characters.
 #. The text preceding the pipe character (|) will be ignored and
 #. can be removed from your translation.
-#: src/cmdline/cmdline_prompt.cc:561
+#: src/cmdline/cmdline_prompt.cc:558
 msgid "Go ahead and ignore the warning|Yes"
 msgstr "Zignoruj ten komunikat i kontynuuj|Tak"
 
@@ -1217,98 +1228,98 @@ msgstr "Zignoruj ten komunikat i kontynuuj|Tak"
 #. input methods.  Please include nothing but ASCII characters.
 #. The text preceding the pipe character (|) will be ignored and
 #. can be removed from your translation.
-#: src/cmdline/cmdline_prompt.cc:567
+#: src/cmdline/cmdline_prompt.cc:564
 msgid "Abort instead of overriding the warning|No"
 msgstr "Przerwij|Nie"
 
-#: src/cmdline/cmdline_prompt.cc:578
+#: src/cmdline/cmdline_prompt.cc:575
 #, c-format
 msgid "Do you want to ignore this warning and proceed anyway?\n"
 msgstr "Zignorować ostrzeżenie i kontynuować?\n"
 
-#: src/cmdline/cmdline_prompt.cc:579
+#: src/cmdline/cmdline_prompt.cc:576
 #, c-format
 msgid "To continue, enter \"%s\"; to abort, enter \"%s\": "
 msgstr "Aby kontynuować, napisz \"%s\", aby przerwać, napisz \"%s\": "
 
-#: src/cmdline/cmdline_prompt.cc:596
+#: src/cmdline/cmdline_prompt.cc:593
 #, c-format
 msgid "Unrecognized input.  Enter either \"%s\" or \"%s\".\n"
 msgstr "Odpowiedź nierozpoznana. Napisz \"%s\" lub \"%s\".\n"
 
-#: src/cmdline/cmdline_prompt.cc:710
+#: src/cmdline/cmdline_prompt.cc:707
 #, c-format
 msgid "The following packages are RECOMMENDED but will NOT be installed:\n"
 msgstr "Następujące pakiety POLECANE przez inne NIE zostaną zainstalowane:\n"
 
-#: src/cmdline/cmdline_prompt.cc:716
+#: src/cmdline/cmdline_prompt.cc:713
 #, c-format
 msgid "The following packages are SUGGESTED but will NOT be installed:\n"
 msgstr "Następujące pakiety SUGEROWANE przez inne NIE zostaną zainstalowane:\n"
 
-#: src/cmdline/cmdline_prompt.cc:722
+#: src/cmdline/cmdline_prompt.cc:719
 #, c-format
 msgid "No packages will be installed, upgraded, or removed.\n"
 msgstr ""
 "Nie zostaną zainstalowane, zaktualizowane ani usunięte żadne pakiety.\n"
 
-#: src/cmdline/cmdline_prompt.cc:724
+#: src/cmdline/cmdline_prompt.cc:721
 #, c-format
 msgid "%lu packages upgraded, %lu newly installed, "
 msgstr "%lu pakietów aktualizowanych, %lu instalowanych, "
 
-#: src/cmdline/cmdline_prompt.cc:728
+#: src/cmdline/cmdline_prompt.cc:725
 #, c-format
 msgid "%lu reinstalled, "
 msgstr "%lu ponownie instalowanych, "
 
-#: src/cmdline/cmdline_prompt.cc:730
+#: src/cmdline/cmdline_prompt.cc:727
 #, c-format
 msgid "%lu downgraded, "
 msgstr "%lu cofanych, "
 
-#: src/cmdline/cmdline_prompt.cc:732
+#: src/cmdline/cmdline_prompt.cc:729
 #, c-format
 msgid "%lu to remove and %lu not upgraded.\n"
 msgstr "%lu do usunięcia i %lu nieaktualizowanych.\n"
 
-#: src/cmdline/cmdline_prompt.cc:739
+#: src/cmdline/cmdline_prompt.cc:736
 #, c-format
 msgid "Need to get %sB/%sB of archives. "
 msgstr "Do pobrania %sB/%sB archiwów. "
 
-#: src/cmdline/cmdline_prompt.cc:742
+#: src/cmdline/cmdline_prompt.cc:739
 #, c-format
 msgid "Need to get %sB of archives. "
 msgstr "Do pobrania %sB archiwów. "
 
-#: src/cmdline/cmdline_prompt.cc:749
+#: src/cmdline/cmdline_prompt.cc:746
 #, c-format
 msgid "After unpacking %sB will be used.\n"
 msgstr "Zajęte po rozpakowaniu: %sB.\n"
 
-#: src/cmdline/cmdline_prompt.cc:752
+#: src/cmdline/cmdline_prompt.cc:749
 #, c-format
 msgid "After unpacking %sB will be freed.\n"
 msgstr "Zwolnione po rozpakowaniu: %sB.\n"
 
-#: src/cmdline/cmdline_prompt.cc:774
+#: src/cmdline/cmdline_prompt.cc:771
 #, c-format
 msgid "No packages to show -- enter the package names on the line after 'i'.\n"
 msgstr ""
 "Brak pakietów do wyświetlenia -- po poleceniu \"i\" należy podać nazwy "
 "pakietów.\n"
 
-#: src/cmdline/cmdline_prompt.cc:780 src/cmdline/cmdline_prompt.cc:795
+#: src/cmdline/cmdline_prompt.cc:777 src/cmdline/cmdline_prompt.cc:792
 msgid "Press Return to continue."
 msgstr "Wciśnij return."
 
-#: src/cmdline/cmdline_prompt.cc:791
+#: src/cmdline/cmdline_prompt.cc:788
 #, c-format
 msgid "No packages found -- enter the package names on the line after 'c'.\n"
 msgstr "Brak pakietów -- po poleceniu \"c\" należy podać nazwy pakietów.\n"
 
-#: src/cmdline/cmdline_prompt.cc:806
+#: src/cmdline/cmdline_prompt.cc:803
 #, c-format
 msgid ""
 "No packages found -- enter zero or more roots of the search followed by the "
@@ -1317,80 +1328,80 @@ msgstr ""
 "Brak pakietów -- należy podać zero lub więcej korzeni wyszukiwania oraz "
 "pakiet dla którego szukane jest uzasadnienie.\n"
 
-#: src/cmdline/cmdline_prompt.cc:839
+#: src/cmdline/cmdline_prompt.cc:836
 #, c-format
 msgid "y: %F"
 msgstr "t: %F"
 
-#: src/cmdline/cmdline_prompt.cc:841
+#: src/cmdline/cmdline_prompt.cc:838
 msgid "continue with the installation"
 msgstr "kontynuacja instalacji"
 
-#: src/cmdline/cmdline_prompt.cc:843
+#: src/cmdline/cmdline_prompt.cc:840
 #, c-format
 msgid "n: %F"
 msgstr "n: %F"
 
-#: src/cmdline/cmdline_prompt.cc:845
+#: src/cmdline/cmdline_prompt.cc:842
 msgid "abort and quit"
 msgstr "przerwanie instalacji, zakończenie programu"
 
-#: src/cmdline/cmdline_prompt.cc:847
+#: src/cmdline/cmdline_prompt.cc:844
 #, c-format
 msgid "i: %F"
 msgstr "i: %F"
 
-#: src/cmdline/cmdline_prompt.cc:849
+#: src/cmdline/cmdline_prompt.cc:846
 msgid ""
 "show information about one or more packages; the package names should follow "
 "the 'i'"
 msgstr "wyświetlenie informacji o pakietach, ich nazwy należy podać po \"i\""
 
-#: src/cmdline/cmdline_prompt.cc:851
+#: src/cmdline/cmdline_prompt.cc:848
 #, c-format
 msgid "c: %F"
 msgstr "c: %F"
 
-#: src/cmdline/cmdline_prompt.cc:853
+#: src/cmdline/cmdline_prompt.cc:850
 msgid ""
 "show the Debian changelogs of one or more packages; the package names should "
 "follow the 'c'"
 msgstr ""
 "wyświetlenie dzienników zmian pakietów, ich nazwy należy podać po \"c\""
 
-#: src/cmdline/cmdline_prompt.cc:855
+#: src/cmdline/cmdline_prompt.cc:852
 #, c-format
 msgid "d: %F"
 msgstr "d: %F"
 
-#: src/cmdline/cmdline_prompt.cc:857
+#: src/cmdline/cmdline_prompt.cc:854
 msgid "toggle the display of dependency information"
 msgstr "przełączenie pokazywania zależności"
 
-#: src/cmdline/cmdline_prompt.cc:859
+#: src/cmdline/cmdline_prompt.cc:856
 #, c-format
 msgid "s: %F"
 msgstr "s: %F"
 
-#: src/cmdline/cmdline_prompt.cc:861
+#: src/cmdline/cmdline_prompt.cc:858
 msgid "toggle the display of changes in package sizes"
 msgstr "przełączenie pokazywania zmian rozmiarów pakietów"
 
-#: src/cmdline/cmdline_prompt.cc:863
+#: src/cmdline/cmdline_prompt.cc:860
 #, c-format
 msgid "v: %F"
 msgstr "v: %F"
 
-#: src/cmdline/cmdline_prompt.cc:865
+#: src/cmdline/cmdline_prompt.cc:862
 msgid "toggle the display of version numbers"
 msgstr "przełączenie pokazywania wersji"
 
-#: src/cmdline/cmdline_prompt.cc:867
+#: src/cmdline/cmdline_prompt.cc:864
 #, c-format
 msgid "w: %F"
 msgstr "w: %F"
 
-#: src/cmdline/cmdline_prompt.cc:869
+#: src/cmdline/cmdline_prompt.cc:866
 msgid ""
 "try to find a reason for installing a single package, or explain why "
 "installing one package should lead to installing another package."
@@ -1399,27 +1410,27 @@ msgstr ""
 "wyjaśnienia dlaczego instalacja jednego pakietu prowadzi do zainstalowania "
 "innego."
 
-#: src/cmdline/cmdline_prompt.cc:872
+#: src/cmdline/cmdline_prompt.cc:869
 #, c-format
 msgid "r: %F"
 msgstr "r: %F"
 
-#: src/cmdline/cmdline_prompt.cc:874
+#: src/cmdline/cmdline_prompt.cc:871
 msgid "run the automatic dependency resolver to fix the broken dependencies."
 msgstr ""
 "uruchomienie automatycznego rozwiązywania problemów w celu uzupełnienia "
 "niespełnionych zależności."
 
-#: src/cmdline/cmdline_prompt.cc:876
+#: src/cmdline/cmdline_prompt.cc:873
 #, c-format
 msgid "e: %F"
 msgstr "e: %F"
 
-#: src/cmdline/cmdline_prompt.cc:878
+#: src/cmdline/cmdline_prompt.cc:875
 msgid "enter the full visual interface"
 msgstr "przejście do interfejsu pełnoekranowego"
 
-#: src/cmdline/cmdline_prompt.cc:881
+#: src/cmdline/cmdline_prompt.cc:878
 msgid ""
 "You may also specify modification to the actions which will be taken.  To do "
 "so, type an action character followed by one or more package names (or "
@@ -1430,49 +1441,49 @@ msgstr ""
 "znak określający akcję, a po nim nazwy pakietów (lub wzorce). Akcja będzie "
 "dotyczyć wszystkich podanych pakietów. Dostępne są następujące akcje:"
 
-#: src/cmdline/cmdline_prompt.cc:888 src/cmdline/cmdline_resolver.cc:267
+#: src/cmdline/cmdline_prompt.cc:885 src/cmdline/cmdline_resolver.cc:267
 msgid "'+' to install packages"
 msgstr "\"+\": instalacja pakietów"
 
-#: src/cmdline/cmdline_prompt.cc:891 src/cmdline/cmdline_resolver.cc:269
+#: src/cmdline/cmdline_prompt.cc:888 src/cmdline/cmdline_resolver.cc:269
 msgid ""
 "'+M' to install packages and immediately flag them as automatically installed"
 msgstr ""
 "\"+M\": instalacja pakietów i oznaczenie ich jako zainstalowanych "
 "automatycznie"
 
-#: src/cmdline/cmdline_prompt.cc:893 src/cmdline/cmdline_resolver.cc:271
+#: src/cmdline/cmdline_prompt.cc:890 src/cmdline/cmdline_resolver.cc:271
 msgid "'-' to remove packages"
 msgstr "\"-\": usunięcie pakietów"
 
-#: src/cmdline/cmdline_prompt.cc:895 src/cmdline/cmdline_resolver.cc:273
+#: src/cmdline/cmdline_prompt.cc:892 src/cmdline/cmdline_resolver.cc:273
 msgid "'_' to purge packages"
 msgstr "\"_\": wyczyszczenie pakietów"
 
-#: src/cmdline/cmdline_prompt.cc:897 src/cmdline/cmdline_resolver.cc:275
+#: src/cmdline/cmdline_prompt.cc:894 src/cmdline/cmdline_resolver.cc:275
 msgid "'=' to place packages on hold"
 msgstr "\"=\": zatrzymanie pakietów"
 
-#: src/cmdline/cmdline_prompt.cc:899 src/cmdline/cmdline_resolver.cc:277
+#: src/cmdline/cmdline_prompt.cc:896 src/cmdline/cmdline_resolver.cc:277
 msgid ""
 "':' to keep packages in their current state without placing them on hold"
 msgstr ""
 "\":\": pozostawienie pakietów w bieżącym stanie bez trwałego zatrzymywania "
 "ich"
 
-#: src/cmdline/cmdline_prompt.cc:901 src/cmdline/cmdline_resolver.cc:279
+#: src/cmdline/cmdline_prompt.cc:898 src/cmdline/cmdline_resolver.cc:279
 msgid "'&M' to mark packages as automatically installed"
 msgstr "\"&M\": oznaczenie pakietów jako automatycznie zainstalowanych"
 
-#: src/cmdline/cmdline_prompt.cc:903 src/cmdline/cmdline_resolver.cc:281
+#: src/cmdline/cmdline_prompt.cc:900 src/cmdline/cmdline_resolver.cc:281
 msgid "'&m' to mark packages as manually installed"
 msgstr "\"&m\": oznaczenie pakietów jako ręcznie zainstalowanych"
 
-#: src/cmdline/cmdline_prompt.cc:905
+#: src/cmdline/cmdline_prompt.cc:902
 msgid "'&BD' to install the build-dependencies of a package."
 msgstr "\"&BD\": instalacja zależności na czas budowania dla pakietu."
 
-#: src/cmdline/cmdline_prompt.cc:908
+#: src/cmdline/cmdline_prompt.cc:905
 msgid ""
 "In the list of actions to be performed, some packages will be followed by "
 "one or more characters enclosed in braces; for instance: \"aptitude{u}\".  "
@@ -1484,31 +1495,31 @@ msgstr ""
 "dodatkowa informacja o stanie pakietu i może zawierać dowolną kombinację z "
 "poniższych:"
 
-#: src/cmdline/cmdline_prompt.cc:912
+#: src/cmdline/cmdline_prompt.cc:909
 msgid "'a': the package was automatically installed or removed."
 msgstr "\"a\": pakiet automatycznie zainstalowany lub usunięty."
 
-#: src/cmdline/cmdline_prompt.cc:914
+#: src/cmdline/cmdline_prompt.cc:911
 msgid ""
 "'b': some of the package's dependencies are violated by the proposed changes."
 msgstr ""
 "\"b\": niektóre z zależności pakietu są naruszone proponowanymi zmianami."
 
-#: src/cmdline/cmdline_prompt.cc:916
+#: src/cmdline/cmdline_prompt.cc:913
 msgid "'p': the package will be purged in addition to being removed."
 msgstr ""
 "\"p\": oprócz usunięcia pakietu zostaną również wyczyszczone pliki "
 "konfiguracyjne."
 
-#: src/cmdline/cmdline_prompt.cc:918
+#: src/cmdline/cmdline_prompt.cc:915
 msgid "'u': the package is being removed because it is unused."
 msgstr "\"u\": pakiet jest usuwany, ponieważ nie jest już używany."
 
-#: src/cmdline/cmdline_prompt.cc:923
+#: src/cmdline/cmdline_prompt.cc:920
 msgid "Commands:"
 msgstr "Polecenia:"
 
-#: src/cmdline/cmdline_prompt.cc:1039
+#: src/cmdline/cmdline_prompt.cc:1036
 msgid ""
 "aptitude failed to find a solution to these dependencies.  You can solve "
 "them yourself by hand or type 'n' to quit."
@@ -1517,21 +1528,21 @@ msgstr ""
 "uzupełnić zależności ręcznie lub wpisać \"n\" aby wyjść."
 
 # Nie należy tłumaczyć Y na T! Patrz #495551.
-#: src/cmdline/cmdline_prompt.cc:1058
+#: src/cmdline/cmdline_prompt.cc:1055
 msgid "Do you want to continue? [Y/n/?] "
 msgstr "Kontynuować? [Y/n/?] "
 
-#: src/cmdline/cmdline_prompt.cc:1059
+#: src/cmdline/cmdline_prompt.cc:1056
 msgid "Resolve these dependencies by hand? [N/+/-/_/:/?] "
 msgstr "Uzupełnić te zależności ręcznie? [N/+/-/_/:/?] "
 
-#: src/cmdline/cmdline_prompt.cc:1077
+#: src/cmdline/cmdline_prompt.cc:1074
 msgid "Invalid response.  Please enter a valid command or '?' for help.\n"
 msgstr ""
 "Nieprawidłowe polecenie. Proszę podać polecenie, lub \"?\" aby uzyskać "
 "pomoc.\n"
 
-#: src/cmdline/cmdline_prompt.cc:1083
+#: src/cmdline/cmdline_prompt.cc:1080
 msgid ""
 "Enter a package management command (such as '+ package' to install a "
 "package), 'R' to attempt automatic dependency resolution or 'N' to abort."
@@ -1540,7 +1551,7 @@ msgstr ""
 "zainstalować pakiet), \"R\" aby spróbować automatycznie uzupełnić zależności "
 "lub \"N\" aby przerwać."
 
-#: src/cmdline/cmdline_prompt.cc:1115
+#: src/cmdline/cmdline_prompt.cc:1112
 #, c-format
 msgid ""
 "\n"
@@ -1551,7 +1562,7 @@ msgstr ""
 "Zależności będą pokazywane.\n"
 "\n"
 
-#: src/cmdline/cmdline_prompt.cc:1117
+#: src/cmdline/cmdline_prompt.cc:1114
 #, c-format
 msgid ""
 "\n"
@@ -1562,7 +1573,7 @@ msgstr ""
 "Zależności nie będą pokazywane.\n"
 "\n"
 
-#: src/cmdline/cmdline_prompt.cc:1123
+#: src/cmdline/cmdline_prompt.cc:1120
 #, c-format
 msgid ""
 "\n"
@@ -1573,7 +1584,7 @@ msgstr ""
 "Wersje będą pokazywane.\n"
 "\n"
 
-#: src/cmdline/cmdline_prompt.cc:1125
+#: src/cmdline/cmdline_prompt.cc:1122
 #, c-format
 msgid ""
 "\n"
@@ -1584,7 +1595,7 @@ msgstr ""
 "Wersje nie będą pokazywane.\n"
 "\n"
 
-#: src/cmdline/cmdline_prompt.cc:1130
+#: src/cmdline/cmdline_prompt.cc:1127
 #, c-format
 msgid ""
 "\n"
@@ -1595,7 +1606,7 @@ msgstr ""
 "Zmiany rozmiaru będą pokazywane.\n"
 "\n"
 
-#: src/cmdline/cmdline_prompt.cc:1132
+#: src/cmdline/cmdline_prompt.cc:1129
 #, c-format
 msgid ""
 "\n"
@@ -1607,7 +1618,7 @@ msgstr ""
 "\n"
 
 #: src/cmdline/cmdline_resolver.cc:149 src/cmdline/cmdline_resolver.cc:1002
-#: src/generic/apt/apt.cc:285
+#: src/generic/apt/apt.cc:288
 #, c-format
 msgid "Unable to open %s for writing"
 msgstr "Nie można otworzyć %s do zapisu"
@@ -1983,7 +1994,7 @@ msgstr ""
 msgid "Unable to resolve dependencies for the upgrade: %s"
 msgstr "Nie można rozwiązać problemów z zależnościami aktualizacji: %s."
 
-#: src/cmdline/cmdline_search.cc:198 src/cmdline/cmdline_versions.cc:559
+#: src/cmdline/cmdline_search.cc:198 src/cmdline/cmdline_versions.cc:567
 #, c-format
 msgid "iconv of %s failed.\n"
 msgstr "Błąd \"iconv\" dla %s.\n"
@@ -1993,48 +2004,48 @@ msgstr "Błąd \"iconv\" dla %s.\n"
 msgid "search: You must provide at least one search term\n"
 msgstr "search: Należy podać przynajmniej jedno wyrażenie do wyszukania\n"
 
-#: src/cmdline/cmdline_show_broken.cc:72
+#: src/cmdline/cmdline_show_broken.cc:81
 #, c-format
 msgid "but %s is to be installed."
 msgstr "ale zaplanowana jest instalacja wersji %s."
 
-#: src/cmdline/cmdline_show_broken.cc:75
+#: src/cmdline/cmdline_show_broken.cc:84
 #, c-format
 msgid "but %s is installed and it is kept back."
 msgstr "ale wersja %s jest zainstalowana i zatrzymana."
 
-#: src/cmdline/cmdline_show_broken.cc:78
+#: src/cmdline/cmdline_show_broken.cc:87
 #, c-format
 msgid "but %s is installed."
 msgstr "ale zainstalowana jest wersja %s."
 
-#: src/cmdline/cmdline_show_broken.cc:85
+#: src/cmdline/cmdline_show_broken.cc:94
 #, c-format
 msgid "but it is not installable."
 msgstr "którego nie można zainstalować."
 
-#: src/cmdline/cmdline_show_broken.cc:87
+#: src/cmdline/cmdline_show_broken.cc:96
 #, c-format
 msgid "but it is not going to be installed."
 msgstr "ale nie ma być instalowany."
 
-#: src/cmdline/cmdline_show_broken.cc:92
+#: src/cmdline/cmdline_show_broken.cc:101
 #, c-format
 msgid " which is a virtual package."
 msgstr " który jest pakietem wirtualnym."
 
-#: src/cmdline/cmdline_show_broken.cc:95
+#: src/cmdline/cmdline_show_broken.cc:104
 #, c-format
 msgid " or"
 msgstr " lub"
 
-#: src/cmdline/cmdline_show_broken.cc:118
+#: src/cmdline/cmdline_show_broken.cc:127
 #, c-format
 msgid "The following packages have unmet dependencies:\n"
 msgstr "Następujące pakiety mają niespełnione zależności:\n"
 
-#: src/cmdline/cmdline_show.cc:198 src/cmdline/cmdline_show.cc:444
-#: src/cmdline/cmdline_versions.cc:207 src/gtk/resolver.cc:1192
+#: src/cmdline/cmdline_show.cc:198 src/cmdline/cmdline_show.cc:448
+#: src/cmdline/cmdline_versions.cc:208 src/gtk/resolver.cc:1192
 #: src/solution_fragment.cc:68
 msgid "<NULL>"
 msgstr "<NULL>"
@@ -2141,7 +2152,7 @@ msgstr "Pakiet: "
 msgid "State"
 msgstr "Stan"
 
-#: src/cmdline/cmdline_show.cc:379 src/cmdline/cmdline_show.cc:468
+#: src/cmdline/cmdline_show.cc:379 src/cmdline/cmdline_show.cc:472
 msgid "Provided by"
 msgstr "Udostępniany przez"
 
@@ -2170,110 +2181,113 @@ msgstr "Zainstalowany automatycznie"
 msgid "no"
 msgstr "nie"
 
-#: src/cmdline/cmdline_show.cc:419 src/gtk/entitysummary.cc:359
+#: src/cmdline/cmdline_show.cc:421 src/pkg_info_screen.cc:125
+msgid "Multi-Arch: "
+msgstr ""
+
+#: src/cmdline/cmdline_show.cc:423 src/gtk/entitysummary.cc:361
 #: src/gtk/previewtab.cc:230
 msgid "Version: "
 msgstr "Wersja: "
 
-#: src/cmdline/cmdline_show.cc:420 src/pkg_info_screen.cc:128
+#: src/cmdline/cmdline_show.cc:424 src/pkg_info_screen.cc:134
 msgid "Priority: "
 msgstr "Priorytet: "
 
-#: src/cmdline/cmdline_show.cc:421 src/cmdline/cmdline_show.cc:423
-#: src/cmdline/cmdline_show.cc:432
+#: src/cmdline/cmdline_show.cc:425 src/cmdline/cmdline_show.cc:427
 msgid "N/A"
 msgstr "Niedostępny"
 
-#: src/cmdline/cmdline_show.cc:422 src/pkg_info_screen.cc:129
+#: src/cmdline/cmdline_show.cc:426 src/pkg_info_screen.cc:135
 msgid "Section: "
 msgstr "Sekcja: "
 
-#: src/cmdline/cmdline_show.cc:424 src/pkg_info_screen.cc:130
+#: src/cmdline/cmdline_show.cc:428 src/pkg_info_screen.cc:136
 msgid "Maintainer: "
 msgstr "Opiekun: "
 
-#: src/cmdline/cmdline_show.cc:427
-msgid "Uncompressed Size: "
-msgstr "Rozmiar rozpakowanego: "
-
-#: src/cmdline/cmdline_show.cc:431
+#: src/cmdline/cmdline_show.cc:430 src/pkg_info_screen.cc:137
 msgid "Architecture: "
 msgstr "Architektura: "
 
 #: src/cmdline/cmdline_show.cc:433
+msgid "Uncompressed Size: "
+msgstr "Rozmiar rozpakowanego: "
+
+#: src/cmdline/cmdline_show.cc:437
 msgid "Compressed Size: "
 msgstr "Rozmiar pakietu: "
 
-#: src/cmdline/cmdline_show.cc:435
+#: src/cmdline/cmdline_show.cc:439
 msgid "Filename: "
 msgstr "Plik: "
 
-#: src/cmdline/cmdline_show.cc:437
+#: src/cmdline/cmdline_show.cc:441
 msgid "MD5sum: "
 msgstr "Suma MD5: "
 
-#: src/cmdline/cmdline_show.cc:441 src/cmdline/cmdline_show.cc:444
+#: src/cmdline/cmdline_show.cc:445 src/cmdline/cmdline_show.cc:448
 #: src/gtk/entityview.cc:606
 msgid "Archive"
 msgstr "Archiwum"
 
-#: src/cmdline/cmdline_show.cc:449
+#: src/cmdline/cmdline_show.cc:453
 msgid "Depends"
 msgstr "Wymaga"
 
-#: src/cmdline/cmdline_show.cc:451
+#: src/cmdline/cmdline_show.cc:455
 msgid "PreDepends"
 msgstr "Wymaga wstępnie"
 
-#: src/cmdline/cmdline_show.cc:453 src/cmdline/cmdline_why.cc:350
+#: src/cmdline/cmdline_show.cc:457 src/cmdline/cmdline_why.cc:299
 msgid "Recommends"
 msgstr "Poleca"
 
-#: src/cmdline/cmdline_show.cc:455 src/cmdline/cmdline_why.cc:353
+#: src/cmdline/cmdline_show.cc:459 src/cmdline/cmdline_why.cc:302
 msgid "Suggests"
 msgstr "Sugeruje"
 
-#: src/cmdline/cmdline_show.cc:457
+#: src/cmdline/cmdline_show.cc:461
 msgid "Conflicts"
 msgstr "W konflikcie z"
 
-#: src/cmdline/cmdline_show.cc:459
+#: src/cmdline/cmdline_show.cc:463
 msgid "Breaks"
 msgstr "Narusza zależności"
 
-#: src/cmdline/cmdline_show.cc:461
+#: src/cmdline/cmdline_show.cc:465
 msgid "Replaces"
 msgstr "Zastępuje"
 
-#: src/cmdline/cmdline_show.cc:463
+#: src/cmdline/cmdline_show.cc:467
 msgid "Obsoletes"
 msgstr "Dezaktualizuje"
 
-#: src/cmdline/cmdline_show.cc:465
+#: src/cmdline/cmdline_show.cc:469
 msgid "Enhances"
 msgstr "Rozszerza"
 
-#: src/cmdline/cmdline_show.cc:467 src/cmdline/cmdline_why.cc:281
-#: src/cmdline/cmdline_why.cc:1683 src/gtk/dependency_chains_tab.cc:205
+#: src/cmdline/cmdline_show.cc:471 src/cmdline/cmdline_why.cc:230
+#: src/cmdline/cmdline_why.cc:1632 src/gtk/dependency_chains_tab.cc:205
 msgid "Provides"
 msgstr "Udostępnia"
 
-#: src/cmdline/cmdline_show.cc:471 src/gtk/entitysummary.cc:367
+#: src/cmdline/cmdline_show.cc:475 src/gtk/entitysummary.cc:369
 #: src/gtk/info.cc:716 src/gtk/previewtab.cc:238 src/pkg_info_screen.cc:102
 msgid "Description: "
 msgstr "Opis: "
 
-#: src/cmdline/cmdline_show.cc:477 src/pkg_info_screen.cc:107
+#: src/cmdline/cmdline_show.cc:481 src/pkg_info_screen.cc:107
 #: src/pkg_view.cc:259
 msgid "Homepage: "
 msgstr "Strona internetowa: "
 
-#: src/cmdline/cmdline_show.cc:578
+#: src/cmdline/cmdline_show.cc:582
 #, c-format
 msgid "Unable to locate package %s"
 msgstr "Nie można znaleźć pakietu %s"
 
-#: src/cmdline/cmdline_show.cc:599
+#: src/cmdline/cmdline_show.cc:603
 #, c-format
 msgid "Unable to parse pattern %s"
 msgstr "Nie można przetworzyć wzorca %s"
@@ -2389,54 +2403,54 @@ msgstr[0] "Jest %d nowo zdezaktualizowany pakiet: "
 msgstr[1] "Są %d nowo zdezaktualizowane pakiety: "
 msgstr[2] "Jest %d nowo zdezaktualizowanych pakietów: "
 
-#: src/cmdline/cmdline_versions.cc:124
+#: src/cmdline/cmdline_versions.cc:125
 #, c-format
 msgid "Package %s:"
 msgstr "Pakiet %s:"
 
-#: src/cmdline/cmdline_versions.cc:151 src/cmdline/cmdline_versions.cc:190
+#: src/cmdline/cmdline_versions.cc:152 src/cmdline/cmdline_versions.cc:191
 #, c-format
 msgid "Source package %s:"
 msgstr "Pakiet źródłowy %s: "
 
-#: src/cmdline/cmdline_versions.cc:212
+#: src/cmdline/cmdline_versions.cc:213
 #, c-format
 msgid "Archive %s:"
 msgstr "Archiwum %s:"
 
-#: src/cmdline/cmdline_versions.cc:294
+#: src/cmdline/cmdline_versions.cc:295
 #, c-format
 msgid "No such package \"%s\"."
 msgstr "Brak pakietu \"%s\"."
 
 # wszystkie tego typu opcje pozostawiono bez tłumaczenia, aby uniknąć problemów z kompatybilnością (zmiany w tłumaczeniu itp.)
-#: src/cmdline/cmdline_versions.cc:494
+#: src/cmdline/cmdline_versions.cc:502
 msgid "--group-by|archive"
 msgstr "--group-by|archive"
 
-#: src/cmdline/cmdline_versions.cc:498
+#: src/cmdline/cmdline_versions.cc:506
 msgid "--group-by|auto"
 msgstr "--group-by|auto"
 
-#: src/cmdline/cmdline_versions.cc:502
+#: src/cmdline/cmdline_versions.cc:510
 msgid "--group-by|none"
 msgstr "--group-by|none"
 
-#: src/cmdline/cmdline_versions.cc:506
+#: src/cmdline/cmdline_versions.cc:514
 msgid "--group-by|package"
 msgstr "--group-by|package"
 
-#: src/cmdline/cmdline_versions.cc:510
+#: src/cmdline/cmdline_versions.cc:518
 msgid "--group-by|source-package"
 msgstr "--group-by|source-package"
 
-#: src/cmdline/cmdline_versions.cc:514
+#: src/cmdline/cmdline_versions.cc:522
 msgid "--group-by|source-version"
 msgstr "--group-by|source-version"
 
 #. ForTranslators: --group-by is the argument name and shouldn't
 #. be translated.
-#: src/cmdline/cmdline_versions.cc:520
+#: src/cmdline/cmdline_versions.cc:528
 #, c-format
 msgid ""
 "Invalid package grouping mode \"%s\" (should be \"auto\", \"none\", \"package"
@@ -2445,144 +2459,144 @@ msgstr ""
 "Nieprawidłowy tryb grupowania: %s\" (prawidłowe to: \"auto\", \"none\", "
 "\"package\" lub \"source-package\")"
 
-#: src/cmdline/cmdline_versions.cc:576
+#: src/cmdline/cmdline_versions.cc:584
 #, c-format
 msgid "versions: You must provide at least one package selector\n"
 msgstr "versions: Należy wybrać co najmniej jeden pakiet\n"
 
-#: src/cmdline/cmdline_why.cc:341
+#: src/cmdline/cmdline_why.cc:290
 msgid "dep_level"
 msgstr "poziom_zależności"
 
-#: src/cmdline/cmdline_why.cc:347
+#: src/cmdline/cmdline_why.cc:296
 msgid "DependsOnly"
 msgstr "Wymaga tylko"
 
-#: src/cmdline/cmdline_why.cc:361
+#: src/cmdline/cmdline_why.cc:310
 msgid "version_selection"
 msgstr "wybór_wersji"
 
-#: src/cmdline/cmdline_why.cc:366
+#: src/cmdline/cmdline_why.cc:315
 msgid "Current"
 msgstr "Bieżący"
 
-#: src/cmdline/cmdline_why.cc:369
+#: src/cmdline/cmdline_why.cc:318
 msgid "Candidate"
 msgstr "Kandydat"
 
-#: src/cmdline/cmdline_why.cc:372 src/gtk/gui.cc:91 src/gtk/gui.cc:1422
+#: src/cmdline/cmdline_why.cc:321 src/gtk/gui.cc:91 src/gtk/gui.cc:1417
 msgid "Install"
 msgstr "Do instalacji"
 
-#: src/cmdline/cmdline_why.cc:375
+#: src/cmdline/cmdline_why.cc:324
 msgid "InstallNotCurrent"
 msgstr "Instalowany nieaktualny"
 
-#: src/cmdline/cmdline_why.cc:383
+#: src/cmdline/cmdline_why.cc:332
 msgid "allow_choices"
 msgstr "dopuść_wybory"
 
-#: src/cmdline/cmdline_why.cc:386
+#: src/cmdline/cmdline_why.cc:335
 msgid "true"
 msgstr "prawda"
 
-#: src/cmdline/cmdline_why.cc:388
+#: src/cmdline/cmdline_why.cc:337
 msgid "false"
 msgstr "fałsz"
 
-#: src/cmdline/cmdline_why.cc:432
+#: src/cmdline/cmdline_why.cc:381
 #, c-format
 msgid "Install(%s)"
 msgstr "Instalacja(%s)"
 
-#: src/cmdline/cmdline_why.cc:434
+#: src/cmdline/cmdline_why.cc:383
 #, c-format
 msgid "Remove(%s)"
 msgstr "Usunięcie(%s)"
 
-#: src/cmdline/cmdline_why.cc:436
+#: src/cmdline/cmdline_why.cc:385
 #, c-format
 msgid "Install(%s provides %s)"
 msgstr "Instalacja(%s udostępnia %s)"
 
-#: src/cmdline/cmdline_why.cc:440
+#: src/cmdline/cmdline_why.cc:389
 #, c-format
 msgid "Remove(%s provides %s)"
 msgstr "Usunięcie(%s udostępnia %s)"
 
-#: src/cmdline/cmdline_why.cc:1125
+#: src/cmdline/cmdline_why.cc:1074
 #, c-format
 msgid "    ++ Examining %F\n"
 msgstr "    ++ Analiza %F\n"
 
-#: src/cmdline/cmdline_why.cc:1133
+#: src/cmdline/cmdline_why.cc:1082
 msgid "    ++   --> skipping, not a conflict\n"
 msgstr "    ++   --> pomijanie, to nie konflikt\n"
 
-#: src/cmdline/cmdline_why.cc:1139
+#: src/cmdline/cmdline_why.cc:1088
 msgid "    ++   --> skipping conflict\n"
 msgstr "    ++   --> pomijanie konfliktu\n"
 
-#: src/cmdline/cmdline_why.cc:1145
+#: src/cmdline/cmdline_why.cc:1094
 msgid "    ++   --> skipping, not relevant according to params\n"
 msgstr "    ++   --> pomijanie, nieistotne według parametrów\n"
 
-#: src/cmdline/cmdline_why.cc:1151
+#: src/cmdline/cmdline_why.cc:1100
 msgid "    ++   --> skipping, parent is not the selected version\n"
 msgstr "    ++   --> pomijanie, element nadrzędny nie jest wybraną wersją\n"
 
-#: src/cmdline/cmdline_why.cc:1157
+#: src/cmdline/cmdline_why.cc:1106
 msgid "    ++   --> skipping, the dep is satisfied by the current version\n"
 msgstr "    ++   --> pomijanie, zależność spełniona przez aktualną wersję\n"
 
-#: src/cmdline/cmdline_why.cc:1163
+#: src/cmdline/cmdline_why.cc:1112
 msgid "Skipping this solution, I've already seen it.\n"
 msgstr "Pomijanie rozwiązania, było już analizowane.\n"
 
-#: src/cmdline/cmdline_why.cc:1169
+#: src/cmdline/cmdline_why.cc:1118
 msgid "    ++   --> skipping, version check failed\n"
 msgstr "    ++   --> pomijanie, sprawdzanie wersji zawiodło\n"
 
-#: src/cmdline/cmdline_why.cc:1175
+#: src/cmdline/cmdline_why.cc:1124
 msgid "    ++   --> ENQUEUING\n"
 msgstr "    ++   --> KOLEJKOWANIE\n"
 
-#: src/cmdline/cmdline_why.cc:1181
+#: src/cmdline/cmdline_why.cc:1130
 #, c-format
 msgid "    ++   --> ENQUEUING %s Provides %s\n"
 msgstr "    ++   --> KOLEJKOWANIE %s Udostępnia %s\n"
 
-#: src/cmdline/cmdline_why.cc:1189
+#: src/cmdline/cmdline_why.cc:1138
 #, c-format
 msgid "Starting search with parameters %ls\n"
 msgstr "Rozpoczęcie wyszukiwania z parametrami %ls\n"
 
-#: src/cmdline/cmdline_why.cc:1245
+#: src/cmdline/cmdline_why.cc:1194
 #, c-format
 msgid "Unable to find a reason to remove %s.\n"
 msgstr "Nie można znaleźć uzasadnienia dla usunięcia %s.\n"
 
-#: src/cmdline/cmdline_why.cc:1247
+#: src/cmdline/cmdline_why.cc:1196
 #, c-format
 msgid "Unable to find a reason to install %s.\n"
 msgstr "Nie można znaleźć uzasadnienia instalacji %s.\n"
 
-#: src/cmdline/cmdline_why.cc:1286
+#: src/cmdline/cmdline_why.cc:1235
 #, c-format
 msgid "Packages requiring %s:"
 msgstr "Pakiety wymagające %s"
 
-#: src/cmdline/cmdline_why.cc:1350 src/cmdline/cmdline_why.cc:1378
-#: src/cmdline/cmdline_why.cc:1442
+#: src/cmdline/cmdline_why.cc:1299 src/cmdline/cmdline_why.cc:1327
+#: src/cmdline/cmdline_why.cc:1391
 #, c-format
 msgid "No package named \"%s\" exists."
 msgstr "Pakiet \"%s\" nie istnieje."
 
-#: src/cmdline/cmdline_why.cc:1382
+#: src/cmdline/cmdline_why.cc:1331
 msgid "Unable to parse some match patterns."
 msgstr "Nie można przetworzyć niektórych wzorców."
 
-#: src/cmdline/cmdline_why.cc:1417
+#: src/cmdline/cmdline_why.cc:1366
 #, c-format
 msgid ""
 "%s: this command requires at least one argument (the package to query).\n"
@@ -2591,11 +2605,6 @@ msgstr "%s: należy podać przynajmniej jeden argument (pakiet do wyszukania).\n
 #: src/cmdline/cmdline_why.h:212
 msgid "Unknown version selection, something is very wrong."
 msgstr "Nieznany wybór wersji, jest jakiś poważny problem."
-
-#: src/cmdline_parse.cc:22
-#, c-format
-msgid "Invalid command-line option '%s'"
-msgstr "Błędna opcja wiersza poleceń \"%s\""
 
 #: src/cmdline/terminal.cc:46
 msgid "Unexpected end-of-file on standard input"
@@ -2609,15 +2618,15 @@ msgstr "Niespodziewany koniec pliku na standardowym wejściu"
 msgid "[ ERR] %s"
 msgstr "[BŁĄD] %s"
 
-#: src/dep_item.cc:148
+#: src/dep_item.cc:151
 msgid "UNSATISFIED"
 msgstr "NIESPEŁNIONE"
 
-#: src/dep_item.cc:148 src/reason_fragment.cc:257
+#: src/dep_item.cc:151 src/reason_fragment.cc:234
 msgid "UNAVAILABLE"
 msgstr "NIEDOSTĘPNY"
 
-#: src/desc_render.cc:134 src/gtk/aptitude.glade:1060
+#: src/desc_render.cc:134 src/gtk/aptitude.glade:1051
 msgid "Tags"
 msgstr "Znaczniki"
 
@@ -2731,62 +2740,62 @@ msgstr "Niezakończony '\"' w liście znaczników użytkownika dla pakietu %s."
 msgid "Can't open Aptitude extended state file"
 msgstr "Nie można otworzyć dodatkowych informacji o stanie"
 
-#: src/generic/apt/aptcache.cc:406 src/generic/apt/aptcache.cc:494
-#: src/generic/apt/aptcache.cc:496
+#: src/generic/apt/aptcache.cc:406 src/generic/apt/aptcache.cc:501
+#: src/generic/apt/aptcache.cc:503
 msgid "Reading extended state information"
 msgstr "Odczyt dodatkowych informacji o stanie"
 
-#: src/generic/apt/aptcache.cc:502 src/generic/apt/aptcache.cc:584
-#: src/generic/apt/aptcache.cc:587
+#: src/generic/apt/aptcache.cc:509 src/generic/apt/aptcache.cc:591
+#: src/generic/apt/aptcache.cc:594
 msgid "Initializing package states"
 msgstr "Inicjalizacja stanów pakietów"
 
-#: src/generic/apt/aptcache.cc:745
+#: src/generic/apt/aptcache.cc:752
 msgid "Cannot open Aptitude state file"
 msgstr "Nie można otworzyć informacji o stanie"
 
-#: src/generic/apt/aptcache.cc:749 src/generic/apt/aptcache.cc:855
-#: src/generic/apt/aptcache.cc:858
+#: src/generic/apt/aptcache.cc:756 src/generic/apt/aptcache.cc:863
+#: src/generic/apt/aptcache.cc:866
 msgid "Writing extended state information"
 msgstr "Zapisywanie dodatkowych informacji o stanie"
 
-#: src/generic/apt/aptcache.cc:846
+#: src/generic/apt/aptcache.cc:854
 msgid "Couldn't write state file"
 msgstr "Nie można zapisać informacji o stanie"
 
-#: src/generic/apt/aptcache.cc:863
+#: src/generic/apt/aptcache.cc:871
 msgid "Error writing state file"
 msgstr "Błąd w czasie zapisu informacji o stanie"
 
-#: src/generic/apt/aptcache.cc:881
+#: src/generic/apt/aptcache.cc:889
 #, c-format
 msgid "failed to remove %s"
 msgstr "nie można usunąć %s"
 
-#: src/generic/apt/aptcache.cc:888
+#: src/generic/apt/aptcache.cc:896
 #, c-format
 msgid "failed to rename %s to %s"
 msgstr "nie można zmienić nazwy %s na %s"
 
-#: src/generic/apt/aptcache.cc:896
+#: src/generic/apt/aptcache.cc:904
 #, c-format
 msgid "couldn't replace %s with %s"
 msgstr "nie można zastąpić %s plikiem %s"
 
-#: src/generic/apt/aptcache.cc:1520
+#: src/generic/apt/aptcache.cc:1528
 msgid "Unable to correct dependencies, some packages cannot be installed"
 msgstr ""
 "Nie można poprawić zależności, część pakietów nie może być zainstalowana"
 
-#: src/generic/apt/aptcache.cc:2167
+#: src/generic/apt/aptcache.cc:2175
 msgid "The list of sources could not be read."
 msgstr "Nie można odczytać listy źródeł."
 
-#: src/generic/apt/aptcache.cc:2174
+#: src/generic/apt/aptcache.cc:2182
 msgid "The package lists or status file could not be parsed or opened."
 msgstr "Nie udało się odczytać lub przetworzyć list pakietów lub pliku stanu."
 
-#: src/generic/apt/aptcache.cc:2177
+#: src/generic/apt/aptcache.cc:2185
 msgid "You may want to update the package lists to correct these missing files"
 msgstr "Można uaktualnić listy pakietów aby uzupełnić brakujące pliki"
 
@@ -2800,23 +2809,23 @@ msgstr "Można uaktualnić listy pakietów aby uzupełnić brakujące pliki"
 #. indicated by translating "Localized defaults|" below to
 #. "aptitude-defaults.ww".  If you use this mechanism, you should
 #. also add your defaults file to pkgdata_DATA in Makefile.am.
-#: src/generic/apt/apt.cc:184
+#: src/generic/apt/apt.cc:187
 msgid "Localized defaults|"
 msgstr "aptitude-defaults.pl"
 
-#: src/generic/apt/apt.cc:257
+#: src/generic/apt/apt.cc:260
 #, c-format
 msgid "%s is readable but not writable; unable to write configuration file."
 msgstr ""
 "%s jest dostępny do odczytu, ale nie do zapisu; nie można zapisać pliku "
 "konfiguracyjnego."
 
-#: src/generic/apt/apt.cc:302
+#: src/generic/apt/apt.cc:305
 #, c-format
 msgid "Unable to replace %s with new configuration file"
 msgstr "Nie można zastąpić %s nowym plikiem konfiguracyjnym"
 
-#: src/generic/apt/apt.cc:453
+#: src/generic/apt/apt.cc:456
 msgid ""
 "Could not lock the cache file; this usually means that dpkg or another apt "
 "tool is already installing packages.  Opening in read-only mode; any changes "
@@ -2825,6 +2834,35 @@ msgstr ""
 "Nie udało się zablokować pliku magazynu podręcznego; zwykle oznacza to "
 "uruchomiony dpkg lub inne narzędzie apt do instalowania pakietów. Otwieranie "
 "tylko do odczytu; wprowadzone zmiany stanu pakietów NIE będą zachowane!"
+
+#: src/generic/apt/apt.cc:1272
+msgid "foreign"
+msgstr ""
+
+#: src/generic/apt/apt.cc:1274
+msgid "same"
+msgstr ""
+
+#: src/generic/apt/apt.cc:1277
+#, fuzzy
+msgid "allowed"
+msgstr "dopuść_wybory"
+
+#: src/generic/apt/apt.cc:1366
+msgid "main"
+msgstr "main"
+
+#: src/generic/apt/apt.cc:1366
+msgid "contrib"
+msgstr ""
+
+#: src/generic/apt/apt.cc:1366
+msgid "non-free"
+msgstr ""
+
+#: src/generic/apt/apt.cc:1366
+msgid "non-US"
+msgstr ""
 
 #: src/generic/apt/aptitude_resolver.cc:441
 #, c-format
@@ -2910,7 +2948,7 @@ msgstr ""
 
 # musi pasować do su i sudo
 #: src/generic/apt/download_install_manager.cc:80
-#: src/generic/apt/download_update_manager.cc:92
+#: src/generic/apt/download_update_manager.cc:95
 msgid "Couldn't lock list directory..are you root?"
 msgstr ""
 "Nie można zablokować katalogu z listami. Czy użyto uprawnień administratora?"
@@ -2938,56 +2976,49 @@ msgid ""
 msgstr ""
 "Nie udało się odzyskać blokady systemowej! (Może pracuje inny apt lub dpkg?)"
 
-#: src/generic/apt/download_update_manager.cc:77
+#: src/generic/apt/download_update_manager.cc:78
 msgid "Couldn't read list of package sources"
 msgstr "Nie można odczytać listy źródeł pakietów"
 
-#: src/generic/apt/download_update_manager.cc:139
+#: src/generic/apt/download_update_manager.cc:148
 #, c-format
 msgid "Unterminated quoted string in command: %s"
 msgstr "Niezakończone poprawnie cytowanie w poleceniu: %s"
 
-#: src/generic/apt/download_update_manager.cc:215
+#: src/generic/apt/download_update_manager.cc:224
 #, c-format
 msgid "fork() failed: %s"
 msgstr "wywołanie fork() zawiodło: %s"
 
-#: src/generic/apt/download_update_manager.cc:263
+#: src/generic/apt/download_update_manager.cc:272
 #, c-format
 msgid "waitpid() failed: %s"
 msgstr "wywołanie waitpid() zawiodło: %s"
 
-#: src/generic/apt/download_update_manager.cc:321
-msgid "Couldn't clean out list directories"
-msgstr "Nie można wyczyścić katalogów z listami"
-
-#: src/generic/apt/download_update_manager.cc:334
-msgid "Couldn't rebuild package cache"
-msgstr "Nie można przebudować informacji o pakietach"
-
-#: src/generic/apt/download_update_manager.cc:350
+#: src/generic/apt/download_update_manager.cc:318
 msgid "The debtags command must not be an empty string."
 msgstr "Polecenie debtags nie może być pustym ciągiem znaków."
 
-#: src/generic/apt/download_update_manager.cc:354
+#: src/generic/apt/download_update_manager.cc:322
 msgid "The debtags command must be an absolute path."
 msgstr "Polecenie debtags musi być ścieżką absolutną."
 
-#: src/generic/apt/download_update_manager.cc:367
+#: src/generic/apt/download_update_manager.cc:335
 #, c-format
 msgid "The debtags command (%s) cannot be executed: %s"
 msgstr "Polecenie debtags (%s) nie może zostać wykonane: %s"
 
-#: src/generic/apt/download_update_manager.cc:372
-msgid "Updating debtags database..."
+#: src/generic/apt/download_update_manager.cc:340
+#, fuzzy
+msgid "Updating debtags database"
 msgstr "Budowanie bazy debtags..."
 
-#: src/generic/apt/download_update_manager.cc:389
+#: src/generic/apt/download_update_manager.cc:357
 msgid "(core dumped)"
 msgstr "(zrzut pamięci)"
 
 #. ForTranslators: "%s update %s" gets replaced by a command line, do not translate it!
-#: src/generic/apt/download_update_manager.cc:392
+#: src/generic/apt/download_update_manager.cc:360
 #, c-format
 msgid "The debtags update process (%s update %s) was killed by signal %d%s."
 msgstr ""
@@ -2995,7 +3026,7 @@ msgstr ""
 "%s."
 
 #. ForTranslators: "%s update %s" gets replaced by a command line, do not translate it!
-#: src/generic/apt/download_update_manager.cc:400
+#: src/generic/apt/download_update_manager.cc:368
 #, c-format
 msgid "The debtags update process (%s update %s) exited abnormally (code %d)."
 msgstr ""
@@ -3003,7 +3034,7 @@ msgstr ""
 "(kod %d)."
 
 #. ForTranslators: "%s update %s" gets replaced by a command line, do not translate it!
-#: src/generic/apt/download_update_manager.cc:407
+#: src/generic/apt/download_update_manager.cc:375
 #, c-format
 msgid ""
 "The debtags update process (%s update %s) exited in an unexpected way "
@@ -3013,7 +3044,7 @@ msgstr ""
 "(status %d)."
 
 #. ForTranslators: "%s update %s" gets replaced by a command line, do not translate it!
-#: src/generic/apt/download_update_manager.cc:413
+#: src/generic/apt/download_update_manager.cc:381
 #, c-format
 msgid ""
 "Updating the debtags database (%s update %s) failed (perhaps debtags is not "
@@ -3147,56 +3178,61 @@ msgstr ""
 "\n"
 "Dziennik zakończony.\n"
 
-#: src/generic/apt/matching/match.cc:2996
-#: src/generic/apt/matching/match.cc:3113
+#: src/generic/apt/matching/match.cc:3080
+#: src/generic/apt/matching/match.cc:3197
 msgid "Accessing index"
 msgstr "Uzyskiwanie dostępu do indeksu"
 
-#: src/generic/apt/matching/match.cc:3006
-#: src/generic/apt/matching/match.cc:3120
+#: src/generic/apt/matching/match.cc:3090
+#: src/generic/apt/matching/match.cc:3204
 msgid "Filtering packages"
 msgstr "Filtrowanie pakietów"
 
-#: src/generic/apt/matching/parse.cc:311
+#: src/generic/apt/matching/parse.cc:315
 #, c-format
 msgid "Unknown action type: %s"
 msgstr "Nieznana akcja: %s"
 
-#: src/generic/apt/matching/parse.cc:352
+#: src/generic/apt/matching/parse.cc:330
+#, fuzzy, c-format
+msgid "Unknown multiarch type: %s"
+msgstr "Nieznana akcja: %s"
+
+#: src/generic/apt/matching/parse.cc:370
 #, c-format
 msgid "Unterminated literal string after %s"
 msgstr "Niezakończony poprawnie tekst po %s"
 
-#: src/generic/apt/matching/parse.cc:449
+#: src/generic/apt/matching/parse.cc:467
 #, c-format
 msgid "Unknown priority %s"
 msgstr "Nieznany priorytet: %s"
 
-#: src/generic/apt/matching/parse.cc:468
+#: src/generic/apt/matching/parse.cc:486
 #, c-format
 msgid "Match pattern ends unexpectedly (expected '%c')."
 msgstr "Wzorzec dopasowania nieoczekiwanie zakończony (oczekiwano \"%c\")."
 
-#: src/generic/apt/matching/parse.cc:471
+#: src/generic/apt/matching/parse.cc:489
 #, c-format
 msgid "Expected '%c', got '%c'."
 msgstr "Oczekiwano \"%c\", a napotkano \"%c\""
 
-#: src/generic/apt/matching/parse.cc:811
-#: src/generic/apt/matching/parse.cc:1259
-#: src/generic/apt/matching/parse.cc:1299
+#: src/generic/apt/matching/parse.cc:861
+#: src/generic/apt/matching/parse.cc:1306
+#: src/generic/apt/matching/parse.cc:1346
 #, c-format
 msgid "Unknown dependency type: %s"
 msgstr "Nieznany typ zależności: %s"
 
-#: src/generic/apt/matching/parse.cc:864
+#: src/generic/apt/matching/parse.cc:914
 #, c-format
 msgid "Unknown term type: \"%s\"."
 msgstr "Nieznany typ terminu: \"%s\"."
 
 #. ForTranslators: Question marks ("?") are used as prefix for function names.
 #. Leave the question marks attached to the string placeholders.
-#: src/generic/apt/matching/parse.cc:878 src/generic/apt/matching/parse.cc:887
+#: src/generic/apt/matching/parse.cc:928 src/generic/apt/matching/parse.cc:937
 #, c-format
 msgid ""
 "The ?%s term must be used in a \"wide\" context (a top-level context, or a "
@@ -3205,33 +3241,33 @@ msgstr ""
 "Termin ?%s musi być użyty w \"szerszym\" kontekście (na najwyższym poziomie "
 "lub objętym przez ?%s)."
 
-#: src/generic/apt/matching/parse.cc:1117
+#: src/generic/apt/matching/parse.cc:1164
 msgid "Unmatched '('"
 msgstr "Niesparowany nawias \"(\""
 
-#: src/generic/apt/matching/parse.cc:1265
+#: src/generic/apt/matching/parse.cc:1312
 msgid "Provides: cannot be broken"
 msgstr "Udostępnia: nie może być niespełnione"
 
-#: src/generic/apt/matching/parse.cc:1321
+#: src/generic/apt/matching/parse.cc:1370
 #, c-format
 msgid "Unknown pattern type: %c"
 msgstr "Nieznany typ wzorca: %c"
 
-#: src/generic/apt/matching/parse.cc:1335
+#: src/generic/apt/matching/parse.cc:1390
 msgid "Can't search for \"\""
 msgstr "Nie można szukać \"\""
 
-#: src/generic/apt/matching/parse.cc:1363
+#: src/generic/apt/matching/parse.cc:1418
 msgid "Unexpected empty expression"
 msgstr "Niespodziewane puste wyrażenie"
 
-#: src/generic/apt/matching/parse.cc:1392
+#: src/generic/apt/matching/parse.cc:1447
 #, c-format
 msgid "Badly formed expression: expected '|', got '%c'"
 msgstr "Niepoprawne wyrażenie: oczekiwano \"|\", otrzymano \"%c\""
 
-#: src/generic/apt/matching/parse.cc:1439
+#: src/generic/apt/matching/parse.cc:1494
 msgid "Unexpected ')'"
 msgstr "Niespodziewany nawias \")\""
 
@@ -3483,55 +3519,50 @@ msgstr "Błąd przy zamykaniu katalogu \"%s\""
 msgid "Unable to remove directory \"%s\""
 msgstr "Nie można usunąć katalogu \"%s\""
 
-#: src/gtk/aptitude.glade:6 src/gtk/aptitude.glade:2260
+#: src/gtk/aptitude.glade:6 src/gtk/aptitude.glade:2251
 #: src/qt/windows/main_window.cc:44
 msgid "Aptitude Package Manager"
 msgstr "Menedżer pakietów Aptitude"
 
-#: src/gtk/aptitude.glade:19 src/gtk/aptitude.glade:2273
+#: src/gtk/aptitude.glade:19 src/gtk/aptitude.glade:2264
 msgid "_File"
 msgstr "_Plik"
 
-#: src/gtk/aptitude.glade:28 src/gtk/aptitude.glade:2283 src/ui.cc:2266
+#: src/gtk/aptitude.glade:28 src/gtk/aptitude.glade:2274 src/ui.cc:2341
 msgid "Perform all pending installs and removals"
 msgstr "Przeprowadza zaplanowane instalacje/usunięcia"
 
-#: src/gtk/aptitude.glade:38 src/gtk/aptitude.glade:2294 src/ui.cc:2269
+#: src/gtk/aptitude.glade:38 src/gtk/aptitude.glade:2285 src/ui.cc:2344
 msgid "Check for new versions of packages"
 msgstr "Sprawdza dostępność nowszych wersji pakietów"
 
-#: src/gtk/aptitude.glade:53 src/gtk/aptitude.glade:2310 src/ui.cc:2274
+#: src/gtk/aptitude.glade:53 src/gtk/aptitude.glade:2301 src/ui.cc:2349
 msgid "Mark all upgradable packages which are not held for upgrade"
 msgstr "Zaznacza do aktualizacji wszystkie możliwe niezatrzymane pakiety"
 
-#: src/gtk/aptitude.glade:63 src/gtk/aptitude.glade:2321 src/ui.cc:2279
+#: src/gtk/aptitude.glade:63 src/gtk/aptitude.glade:2312 src/ui.cc:2354
 msgid "Forget which packages are \"new\""
 msgstr "Usuwa informacje o tym, które pakiety są nowe"
 
-#: src/gtk/aptitude.glade:72 src/gtk/aptitude.glade:2331 src/ui.cc:2283
+#: src/gtk/aptitude.glade:72 src/gtk/aptitude.glade:2322 src/ui.cc:2358
 msgid "Cancel all pending installations, removals, holds, and upgrades."
 msgstr ""
 "Anuluje wszystkie zaplanowane instalacje, usunięcia, wstrzymania i "
 "aktualizacje."
 
-#: src/gtk/aptitude.glade:81 src/gtk/aptitude.glade:2341 src/ui.cc:2287
+#: src/gtk/aptitude.glade:81 src/gtk/aptitude.glade:2332 src/ui.cc:2362
 msgid "Delete package files which were previously downloaded"
 msgstr "Usuwa wszystkie pobrane wcześniej pliki"
 
-#: src/gtk/aptitude.glade:90 src/gtk/aptitude.glade:2351 src/ui.cc:2291
+#: src/gtk/aptitude.glade:90 src/gtk/aptitude.glade:2342 src/ui.cc:2366
 msgid "Delete package files which can no longer be downloaded"
 msgstr "Usuwa pliki pakietów, które nie są dostępne do pobrania"
 
-#: src/gtk/aptitude.glade:104 src/gtk/aptitude.glade:2366 src/ui.cc:2298
+#: src/gtk/aptitude.glade:104 src/gtk/aptitude.glade:2357 src/ui.cc:2373
 msgid "Reload the package cache"
 msgstr "Ponownie odczytuje archiwum pakietów"
 
-#: src/gtk/aptitude.glade:113 src/gtk/aptitude.glade:2376 src/ui.cc:1713
-#: src/ui.cc:2303
-msgid "Waste time trying to find mines"
-msgstr "Tracenie czasu na poszukiwaniu min"
-
-#: src/gtk/aptitude.glade:127 src/gtk/aptitude.glade:2391 src/ui.cc:2308
+#: src/gtk/aptitude.glade:118 src/gtk/aptitude.glade:2372 src/ui.cc:2383
 msgid ""
 "Run 'su' to become root; this will restart the program, but your settings "
 "will be preserved"
@@ -3539,163 +3570,163 @@ msgstr ""
 "Użycie \"su\" do uzyskania uprawnień administratora. Program zostanie "
 "zrestartowany, ale ustawienia będą zachowane"
 
-#: src/gtk/aptitude.glade:136 src/gtk/aptitude.glade:2401 src/ui.cc:2311
+#: src/gtk/aptitude.glade:127 src/gtk/aptitude.glade:2382 src/ui.cc:2386
 msgid "Exit the program"
 msgstr "Kończy program"
 
-#: src/gtk/aptitude.glade:148 src/gtk/aptitude.glade:2413
+#: src/gtk/aptitude.glade:139 src/gtk/aptitude.glade:2394
 msgid "E_dit"
 msgstr "_Edycja"
 
-#: src/gtk/aptitude.glade:157 src/gtk/aptitude.glade:2423 src/ui.cc:2318
+#: src/gtk/aptitude.glade:148 src/gtk/aptitude.glade:2404 src/ui.cc:2393
 msgid "Undo the last package operation or group of operations"
 msgstr "Cofa ostatnią operację lub grupę operacji"
 
-#: src/gtk/aptitude.glade:206 src/gtk/aptitude.glade:2472
+#: src/gtk/aptitude.glade:197 src/gtk/aptitude.glade:2453
 msgid "_Package"
 msgstr "P_akiet"
 
-#: src/gtk/aptitude.glade:218 src/gtk/aptitude.glade:2484
+#: src/gtk/aptitude.glade:209 src/gtk/aptitude.glade:2465
 msgid "_View"
 msgstr "_Widok"
 
-#: src/gtk/aptitude.glade:227 src/gtk/aptitude.glade:2494
+#: src/gtk/aptitude.glade:218 src/gtk/aptitude.glade:2475
 msgid "Change which columns are visible in the currently active view."
 msgstr "Zmienia kolumny, które są widoczne w obecnie aktywnym widoku."
 
-#: src/gtk/aptitude.glade:241 src/gtk/aptitude.glade:2509
+#: src/gtk/aptitude.glade:232 src/gtk/aptitude.glade:2490
 msgid ""
 "View errors that have occurred in the apt system since the program was "
 "started."
 msgstr ""
 "Pokazuje błędy, które zaszły w systemie apt od czasu uruchomienia programu."
 
-#: src/gtk/aptitude.glade:250 src/gtk/aptitude.glade:2519
+#: src/gtk/aptitude.glade:241 src/gtk/aptitude.glade:2500
 msgid "Find chains of dependencies linking one package to another."
 msgstr "Pokazuje łańcuch zależności z jednego pakietu do drugiego."
 
-#: src/gtk/aptitude.glade:297 src/gtk/aptitude.glade:2566
+#: src/gtk/aptitude.glade:288 src/gtk/aptitude.glade:2547
 msgid "_Help"
 msgstr "P_omoc"
 
-#: src/gtk/aptitude.glade:326 src/gtk/aptitude.glade:2595
-#: src/gtk/dashboardtab.cc:754 src/gtk/gui.cc:1611 src/gtk/gui.cc:1809
+#: src/gtk/aptitude.glade:317 src/gtk/aptitude.glade:2576
+#: src/gtk/dashboardtab.cc:740 src/gtk/gui.cc:1603 src/gtk/gui.cc:1801
 msgid "Dashboard"
 msgstr "Tablica"
 
-#: src/gtk/aptitude.glade:345 src/gtk/aptitude.glade:2614
+#: src/gtk/aptitude.glade:336 src/gtk/aptitude.glade:2595
 msgid "Update"
 msgstr "Uaktualnianie"
 
-#: src/gtk/aptitude.glade:356 src/gtk/aptitude.glade:2625 src/gtk/gui.cc:1323
-#: src/qt/tabs_manager.cc:241 src/ui.cc:843 src/ui.cc:845 src/ui.cc:890
-#: src/ui.cc:892 src/ui.cc:918 src/ui.cc:920 src/ui.cc:941 src/ui.cc:943
+#: src/gtk/aptitude.glade:347 src/gtk/aptitude.glade:2606 src/gtk/gui.cc:1323
+#: src/qt/tabs_manager.cc:241 src/ui.cc:854 src/ui.cc:856 src/ui.cc:901
+#: src/ui.cc:903 src/ui.cc:929 src/ui.cc:931 src/ui.cc:952 src/ui.cc:954
 msgid "Packages"
 msgstr "Pakiety"
 
-#: src/gtk/aptitude.glade:367 src/gtk/aptitude.glade:2636 src/gtk/gui.cc:1033
-#: src/gtk/previewtab.cc:118 src/qt/tabs_manager.cc:220 src/ui.cc:1343
+#: src/gtk/aptitude.glade:358 src/gtk/aptitude.glade:2617 src/gtk/gui.cc:1033
+#: src/gtk/previewtab.cc:118 src/qt/tabs_manager.cc:220 src/ui.cc:1394
 msgid "Preview"
 msgstr "Przegląd"
 
-#: src/gtk/aptitude.glade:378 src/gtk/aptitude.glade:2647 src/gtk/gui.cc:1028
-#: src/qt/tabs_manager.cc:263 src/ui.cc:2702
+#: src/gtk/aptitude.glade:369 src/gtk/aptitude.glade:2628 src/gtk/gui.cc:1028
+#: src/qt/tabs_manager.cc:263 src/ui.cc:2777
 msgid "Resolver"
 msgstr "Zależności"
 
-#: src/gtk/aptitude.glade:389 src/gtk/aptitude.glade:2658
+#: src/gtk/aptitude.glade:380 src/gtk/aptitude.glade:2639
 msgid "Install/Remove"
 msgstr "Zainstaluj/usuń"
 
-#: src/gtk/aptitude.glade:592
+#: src/gtk/aptitude.glade:583
 msgid "Edit Columns..."
 msgstr "Edytuj kolumny..."
 
-#: src/gtk/aptitude.glade:606
+#: src/gtk/aptitude.glade:597
 msgid "Dummy label (will be replaced at runtime)."
 msgstr "Pusta etykieta (zostanie zastąpiona przy uruchomieniu)."
 
-#: src/gtk/aptitude.glade:634
+#: src/gtk/aptitude.glade:625
 msgid "Make this the default for new package lists."
 msgstr "Ustaw jako domyślne dla nowej listy pakietów."
 
-#: src/gtk/aptitude.glade:649
+#: src/gtk/aptitude.glade:640
 msgid "Apply these settings to all active package lists."
 msgstr "Zastosuj te zmiany do wszystkich aktywnych list pakietów."
 
-#: src/gtk/aptitude.glade:723 src/gtk/aptitude.glade:1457
-#: src/gtk/aptitude.glade:1789 src/gtk/aptitude.glade:1928
+#: src/gtk/aptitude.glade:714 src/gtk/aptitude.glade:1448
+#: src/gtk/aptitude.glade:1780 src/gtk/aptitude.glade:1919
 msgid "Search:"
 msgstr "Znajdź:"
 
-#: src/gtk/aptitude.glade:754
+#: src/gtk/aptitude.glade:745
 msgid "Incremental"
 msgstr "Przyrostowe"
 
-#: src/gtk/aptitude.glade:774 src/gtk/aptitude.glade:1496
-#: src/gtk/aptitude.glade:1828 src/gtk/aptitude.glade:1967
+#: src/gtk/aptitude.glade:765 src/gtk/aptitude.glade:1487
+#: src/gtk/aptitude.glade:1819 src/gtk/aptitude.glade:1958
 msgid "Errors"
 msgstr "Błędy"
 
-#: src/gtk/aptitude.glade:791 src/gtk/aptitude.glade:1845
-#: src/gtk/aptitude.glade:1984
+#: src/gtk/aptitude.glade:782 src/gtk/aptitude.glade:1836
+#: src/gtk/aptitude.glade:1975
 msgid "Show "
 msgstr "Pokaż"
 
-#: src/gtk/aptitude.glade:901
+#: src/gtk/aptitude.glade:892
 msgid "<span size=\"xx-large\">Versions:</span>"
 msgstr "<span size=\"xx-large\">Wersje:</span>"
 
-#: src/gtk/aptitude.glade:962
+#: src/gtk/aptitude.glade:953
 msgid "Dependencies"
 msgstr "Zależności"
 
-#: src/gtk/aptitude.glade:992
+#: src/gtk/aptitude.glade:983
 msgid "Changelog"
 msgstr "Dziennik zmian"
 
-#: src/gtk/aptitude.glade:1020
+#: src/gtk/aptitude.glade:1011
 msgid "Files"
 msgstr "Pliki"
 
-#: src/gtk/aptitude.glade:1031
+#: src/gtk/aptitude.glade:1022
 msgid "popcon"
 msgstr "popcon"
 
-#: src/gtk/aptitude.glade:1040
+#: src/gtk/aptitude.glade:1031
 msgid "Popcon"
 msgstr "Popularność"
 
-#: src/gtk/aptitude.glade:1051
+#: src/gtk/aptitude.glade:1042
 msgid "tags"
 msgstr "znaczniki"
 
-#: src/gtk/aptitude.glade:1085
+#: src/gtk/aptitude.glade:1076
 msgid "Screenshot"
 msgstr "Zrzut ekranu"
 
-#: src/gtk/aptitude.glade:1137
+#: src/gtk/aptitude.glade:1128
 msgid "Fixing upgrade manually:"
 msgstr "Napraw aktualizację ręcznie:"
 
-#: src/gtk/aptitude.glade:1147 src/gtk/dashboardtab.cc:540
+#: src/gtk/aptitude.glade:1138 src/gtk/dashboardtab.cc:526
 msgid "Calculating upgrade..."
 msgstr "Obliczanie aktualizacji..."
 
-#: src/gtk/aptitude.glade:1195
+#: src/gtk/aptitude.glade:1186
 msgid "<b>Solutions</b>"
 msgstr "<b>Rozwiązania</b>"
 
-#: src/gtk/aptitude.glade:1213 src/gtk/download.cc:261
+#: src/gtk/aptitude.glade:1204 src/gtk/download.cc:261
 #: src/gtk/entityview.cc:551
 msgid "Status"
 msgstr "Status"
 
-#: src/gtk/aptitude.glade:1247
+#: src/gtk/aptitude.glade:1238
 msgid "Group by action type"
 msgstr "Pogrupuj według typu akcji"
 
-#: src/gtk/aptitude.glade:1251
+#: src/gtk/aptitude.glade:1242
 msgid ""
 "Arrange the actions of the current solution so that actions that are of the "
 "same type are placed together (for instance, all the actions that remove "
@@ -3709,11 +3740,11 @@ msgstr ""
 "\n"
 "Jest to domyślny tryb widoku."
 
-#: src/gtk/aptitude.glade:1265
+#: src/gtk/aptitude.glade:1256
 msgid "Group by dependency"
 msgstr "Pogrupuj zależnościami"
 
-#: src/gtk/aptitude.glade:1269
+#: src/gtk/aptitude.glade:1260
 msgid ""
 "Show the order in which the actions in the current solution were performed "
 "and the dependency that triggered each action."
@@ -3721,50 +3752,50 @@ msgstr ""
 "Pokazuje kolejność, w której zostaną wykonane akcje w aktualnym rozwiązaniu "
 "oraz zależności, które wywołują każdą akcję."
 
-#: src/gtk/aptitude.glade:1286
+#: src/gtk/aptitude.glade:1277
 msgid "<b>View Mode</b>"
 msgstr "<b>Tryb widoku</b>"
 
-#: src/gtk/aptitude.glade:1328
+#: src/gtk/aptitude.glade:1319
 msgid "Rejected"
 msgstr "Odrzucone"
 
-#: src/gtk/aptitude.glade:1343
+#: src/gtk/aptitude.glade:1334
 msgid "No preference"
 msgstr "Brak preferencji"
 
-#: src/gtk/aptitude.glade:1359
+#: src/gtk/aptitude.glade:1350
 msgid "Accepted"
 msgstr "Zaakceptowane"
 
-#: src/gtk/aptitude.glade:1379
+#: src/gtk/aptitude.glade:1370
 msgid "<b>Status of selected action</b>"
 msgstr "<b>Status wybranej akcji</b>"
 
-#: src/gtk/aptitude.glade:1400
+#: src/gtk/aptitude.glade:1391
 msgid "Find a new solution"
 msgstr "Znajdź nowe rozwiązanie"
 
-#: src/gtk/aptitude.glade:1404
+#: src/gtk/aptitude.glade:1395
 msgid "Calculate the next solution that has not yet been generated."
 msgstr "Oblicz następne rozwiązanie, które jeszcze nie zostało wygenerowane."
 
-#: src/gtk/aptitude.glade:1419
+#: src/gtk/aptitude.glade:1410
 msgid ""
 "Perform the actions in the currently selected solution and close this tab."
 msgstr ""
 "Przeprowadź akcje według aktualnie zaznaczonego rozwiązania i zamknij tę "
 "kartę."
 
-#: src/gtk/aptitude.glade:1576
+#: src/gtk/aptitude.glade:1567
 msgid "Upgrade Summary"
 msgstr "Podsumowanie aktualizacji"
 
-#: src/gtk/aptitude.glade:1605
+#: src/gtk/aptitude.glade:1596
 msgid "Selected Package"
 msgstr "Wybrany pakiet"
 
-#: src/gtk/aptitude.glade:1640
+#: src/gtk/aptitude.glade:1631
 msgid ""
 "Label explaining the upgrade.  This text will not appear in the program at "
 "runtime."
@@ -3772,32 +3803,32 @@ msgstr ""
 "Etykieta objaśniająca aktualizację. Ten tekst nie pojawi się przy "
 "uruchomieniu programu."
 
-#: src/gtk/aptitude.glade:1652
+#: src/gtk/aptitude.glade:1643
 msgid "Fix Manually"
 msgstr "Napraw ręcznie"
 
-#: src/gtk/aptitude.glade:1665 src/gtk/areas.cc:72 src/gtk/gui.cc:93
-#: src/gtk/gui.cc:1413
+#: src/gtk/aptitude.glade:1656 src/gtk/areas.cc:72 src/gtk/gui.cc:93
+#: src/gtk/gui.cc:1408
 msgid "Upgrade"
 msgstr "Do aktualizacji"
 
-#: src/gtk/aptitude.glade:1696
+#: src/gtk/aptitude.glade:1687
 msgid "<b>Available Upgrades:</b>"
 msgstr "<b>Dostępne aktualizacje:</b>"
 
-#: src/gtk/aptitude.glade:1893
+#: src/gtk/aptitude.glade:1884
 msgid "<b>Start at these packages:</b>"
 msgstr "<b>Zacznij od tych pakietów:</b>"
 
-#: src/gtk/aptitude.glade:2032
+#: src/gtk/aptitude.glade:2023
 msgid "<b>End at these packages:</b>"
 msgstr "<b>Skończ na tych pakietach:</b>"
 
-#: src/gtk/aptitude.glade:2100
+#: src/gtk/aptitude.glade:2091
 msgid "A terminal running dpkg will appear here."
 msgstr "Tutaj pojawi się terminal z uruchomionym dpkg."
 
-#: src/gtk/aptitude.glade:2113
+#: src/gtk/aptitude.glade:2104
 msgid ""
 "Placeholder label for the explanation that two conffiles are being "
 "compared.\n"
@@ -3807,11 +3838,11 @@ msgstr ""
 "porównywane.\n"
 "Ten tekst nie powinien pojawić się w programie."
 
-#: src/gtk/aptitude.glade:2142
+#: src/gtk/aptitude.glade:2133
 msgid "View the differences\t"
 msgstr "Przejrzyj zmiany\t"
 
-#: src/gtk/aptitude.glade:2168
+#: src/gtk/aptitude.glade:2159
 msgid ""
 "Do you want to apply these changes?\n"
 "You can also modify the files by hand, then click \"No\"."
@@ -3847,7 +3878,7 @@ msgstr "Idź"
 msgid "Finalize and apply your changes to the system."
 msgstr "Dokończ i zatwierdź zmiany w systemie."
 
-#: src/gtk/areas.cc:84 src/ui.cc:702 src/ui.cc:704
+#: src/gtk/areas.cc:84 src/ui.cc:713 src/ui.cc:715
 msgid "Preferences"
 msgstr "Preferencje"
 
@@ -3916,15 +3947,15 @@ msgstr "Przygotowanie do pobierania dziennika zmian pakietu %s w wersji %s."
 msgid "Resolve Upgrade Manually"
 msgstr "Rozwiąż zależności ręcznie"
 
-#: src/gtk/dashboardtab.cc:311
+#: src/gtk/dashboardtab.cc:298
 msgid "Preparing to download changelogs"
 msgstr "Przygotowanie do pobierania dzienników zmian"
 
-#: src/gtk/dashboardtab.cc:397
+#: src/gtk/dashboardtab.cc:383
 msgid "Available upgrades:"
 msgstr "Dostępne aktualizacje:"
 
-#: src/gtk/dashboardtab.cc:414
+#: src/gtk/dashboardtab.cc:400
 #, c-format
 msgid "%d available upgrade:"
 msgid_plural "%d available upgrades:"
@@ -3932,15 +3963,15 @@ msgstr[0] "%d dostępna aktualizacja:"
 msgstr[1] "%d dostępne aktualizacje:"
 msgstr[2] "%d dostępnych aktualizacji:"
 
-#: src/gtk/dashboardtab.cc:633
+#: src/gtk/dashboardtab.cc:619
 msgid "No upgrades are available."
 msgstr "Nie są dostępne żadne aktualizacje."
 
-#: src/gtk/dashboardtab.cc:645
+#: src/gtk/dashboardtab.cc:631
 msgid "Unable to calculate an upgrade."
 msgstr "Nie można obliczyć aktualizacji."
 
-#: src/gtk/dashboardtab.cc:654
+#: src/gtk/dashboardtab.cc:640
 #, c-format
 msgid ""
 "Press \"%s\" to install <span size='large'>%d</span> upgrade out of <span "
@@ -3958,7 +3989,7 @@ msgstr[2] ""
 "Wciśnij \"%s\" aby zainstalować <span size='large'>%d</span> aktualizacji z "
 "<span size='large'>%d</span>."
 
-#: src/gtk/dashboardtab.cc:666
+#: src/gtk/dashboardtab.cc:652
 #, c-format
 msgid ""
 "Press \"%s\" to manually attempt to install the remaining <span size='large'>"
@@ -3976,7 +4007,7 @@ msgstr[2] ""
 "Wciśnij \"%s\" aby spróbować zainstalować ręcznie pozostałych <span "
 "size='large'>%d</span> aktualizacji."
 
-#: src/gtk/dashboardtab.cc:691
+#: src/gtk/dashboardtab.cc:677
 #, c-format
 msgid ""
 "Unable to calculate an upgrade.  Press \"%s\" to manually search for a "
@@ -3985,7 +4016,7 @@ msgstr ""
 "Nie udało się obliczyć aktualizacji. Wciśnij \"%s\" aby wyszukać rozwiązanie "
 "ręcznie."
 
-#: src/gtk/dashboardtab.cc:708
+#: src/gtk/dashboardtab.cc:694
 #, c-format
 msgid "Internal error encountered while calculating an upgrade: %s"
 msgstr "Podczas obliczania aktualizacji wystąpił błąd wewnętrzny: %s"
@@ -4203,16 +4234,16 @@ msgstr "Oznacz %s jako zainstalowany automatycznie."
 msgid "Mark %s as manually installed."
 msgstr "Oznacz %s jako zainstalowany ręcznie."
 
-#: src/gtk/entitysummary.cc:277
+#: src/gtk/entitysummary.cc:279
 #, c-format
 msgid "%s is a virtual package provided by:\n"
 msgstr "%s jest pakietem wirtualnym udostępnianym przez:\n"
 
-#: src/gtk/entitysummary.cc:341 src/gtk/previewtab.cc:215
+#: src/gtk/entitysummary.cc:343 src/gtk/previewtab.cc:215
 msgid "(more info...)"
 msgstr "(więcej informacji...)"
 
-#: src/gtk/entitysummary.cc:373
+#: src/gtk/entitysummary.cc:375
 msgid "Source: "
 msgstr "Pakiet źródłowy: "
 
@@ -4316,11 +4347,11 @@ msgstr "Zainstalowany"
 msgid "Reinstall"
 msgstr "Do ponownej instalacji"
 
-#: src/gtk/gui.cc:94 src/gtk/gui.cc:1419
+#: src/gtk/gui.cc:94 src/gtk/gui.cc:1414
 msgid "Downgrade"
 msgstr "Do cofnięcia"
 
-#: src/gtk/gui.cc:95 src/gtk/gui.cc:1429
+#: src/gtk/gui.cc:95 src/gtk/gui.cc:1424
 msgid "Remove"
 msgstr "Do usunięcia"
 
@@ -4353,7 +4384,7 @@ msgstr ""
 msgid "Download already running."
 msgstr "Pobieranie właśnie trwa."
 
-#: src/gtk/gui.cc:300 src/gtk/gui.cc:948 src/ui.cc:1469 src/ui.cc:1708
+#: src/gtk/gui.cc:300 src/gtk/gui.cc:948 src/ui.cc:1520 src/ui.cc:1759
 msgid "A package-list update or install run is already taking place."
 msgstr "Aktualizacja listy pakietów lub ich instalacja właśnie trwa."
 
@@ -4420,7 +4451,7 @@ msgstr "Błąd w pakiecie %s"
 msgid "Asking whether to replace the configuration file %s"
 msgstr "Pytanie o zastąpienie pliku konfiguracyjnego %s"
 
-#: src/gtk/gui.cc:962 src/ui.cc:1213
+#: src/gtk/gui.cc:962 src/ui.cc:1264
 msgid "Downloading packages"
 msgstr "Pobieranie pakietów"
 
@@ -4484,43 +4515,43 @@ msgstr "Rozmiar pobierania: %sB."
 msgid "Tags of %s:\n"
 msgstr "Znaczniki pakietu %s:\n"
 
-#: src/gtk/gui.cc:1350
+#: src/gtk/gui.cc:1345
 msgid "This feature is not implemented, yet."
 msgstr "Ta funkcja nie została jeszcze wdrożona."
 
-#: src/gtk/gui.cc:1356
+#: src/gtk/gui.cc:1351
 msgid "Not implemented"
 msgstr "Niewdrożone"
 
-#: src/gtk/gui.cc:1408 src/gtk/gui.cc:1427
+#: src/gtk/gui.cc:1403 src/gtk/gui.cc:1422
 msgid "Install/Upgrade"
 msgstr "Zainstaluj/aktualizuj"
 
-#: src/gtk/gui.cc:1434
+#: src/gtk/gui.cc:1429
 msgid "Purge"
 msgstr "Wyczyść"
 
-#: src/gtk/gui.cc:1439
+#: src/gtk/gui.cc:1434
 msgid "Keep"
 msgstr "Do pozostawienia"
 
-#: src/gtk/gui.cc:1444
+#: src/gtk/gui.cc:1439
 msgid "Hold"
 msgstr "Do zatrzymania"
 
-#: src/gtk/gui.cc:1450
+#: src/gtk/gui.cc:1445
 msgid "Set as automatic"
 msgstr "Ustaw jako automatycznie"
 
-#: src/gtk/gui.cc:1455
+#: src/gtk/gui.cc:1450
 msgid "Set as manual"
 msgstr "Ustaw jako ręcznie"
 
-#: src/gtk/gui.cc:1460
+#: src/gtk/gui.cc:1455
 msgid "Toggle automatic status"
 msgstr "Przełącz status automatyczny"
 
-#: src/gtk/gui.cc:1788 src/gtk/init.cc:144
+#: src/gtk/gui.cc:1780 src/gtk/init.cc:144
 #, c-format
 msgid "Unable to load the user interface definition file %s/aptitude.glade."
 msgstr ""
@@ -4557,8 +4588,8 @@ msgstr "Informacja"
 
 #: src/gtk/packageinformation.cc:104 src/gtk/packageinformation.cc:106
 #: src/pkg_columnizer.cc:354 src/pkg_columnizer.cc:375
-#: src/pkg_columnizer.cc:382 src/pkg_grouppolicy.cc:270
-#: src/pkg_info_screen.cc:128 src/pkg_info_screen.cc:129
+#: src/pkg_columnizer.cc:382 src/pkg_grouppolicy.cc:275
+#: src/pkg_info_screen.cc:134 src/pkg_info_screen.cc:135
 #: src/pkg_ver_item.cc:345 src/pkg_ver_item.cc:379 src/qt/package.cc:224
 #: src/qt/version.cc:114
 msgid "Unknown"
@@ -4614,7 +4645,7 @@ msgstr "Kończenie widoku"
 msgid "Building view"
 msgstr "Tworzenie widoku"
 
-#: src/gtk/previewtab.cc:97 src/pkg_grouppolicy.cc:637
+#: src/gtk/previewtab.cc:97 src/pkg_grouppolicy.cc:678
 msgid ""
 "Packages with unsatisfied dependencies\n"
 " The dependency requirements of these packages will be unmet after the "
@@ -4629,7 +4660,7 @@ msgstr ""
 " Obecność tego drzewa wskazuje, że występuje problem z zależnościami w tym "
 "systemie lub w archiwum Debiana."
 
-#: src/gtk/previewtab.cc:98 src/pkg_grouppolicy.cc:638
+#: src/gtk/previewtab.cc:98 src/pkg_grouppolicy.cc:679
 msgid ""
 "Packages being removed because they are no longer used\n"
 " These packages are being deleted because they were automatically installed "
@@ -4641,7 +4672,7 @@ msgstr ""
 "spełnienia zależności a zaplanowane akcje spowodują, że nie będzie "
 "zainstalowany żaden pakiet deklarujący \"ważną\" zależność od nich.\n"
 
-#: src/gtk/previewtab.cc:99 src/pkg_grouppolicy.cc:639
+#: src/gtk/previewtab.cc:99 src/pkg_grouppolicy.cc:680
 msgid ""
 "Packages being automatically held in their current state\n"
 " These packages could be upgraded, but they have been kept in their current "
@@ -4651,7 +4682,7 @@ msgstr ""
 " Te pakiety mogłyby być uaktualnione, ale zostały zatrzymane aby uniknąć "
 "powstania niespełnionych zależności."
 
-#: src/gtk/previewtab.cc:100 src/pkg_grouppolicy.cc:640
+#: src/gtk/previewtab.cc:100 src/pkg_grouppolicy.cc:681
 msgid ""
 "Packages being automatically installed to satisfy dependencies\n"
 " These packages are being installed because they are required by another "
@@ -4661,7 +4692,7 @@ msgstr ""
 " Te pakiety zostaną zainstalowane, ponieważ są wymagane przez inne pakiety "
 "wybrane do instalacji."
 
-#: src/gtk/previewtab.cc:101 src/pkg_grouppolicy.cc:641
+#: src/gtk/previewtab.cc:101 src/pkg_grouppolicy.cc:682
 msgid ""
 "Packages being deleted due to unsatisfied dependencies\n"
 " These packages are being deleted because one or more of their dependencies "
@@ -4671,7 +4702,7 @@ msgstr ""
 " Te pakiety zostaną usunięte, ponieważ jakieś pakiety, od których zależą nie "
 "są już dostępne, lub ponieważ jakieś pakiety wchodzą z nimi w konflikt."
 
-#: src/gtk/previewtab.cc:102 src/pkg_grouppolicy.cc:642
+#: src/gtk/previewtab.cc:102 src/pkg_grouppolicy.cc:683
 msgid ""
 "Packages to be downgraded\n"
 " An older version of these packages than is currently installed will be "
@@ -4681,7 +4712,7 @@ msgstr ""
 " Zostaną zainstalowane starsze wersje tych pakietów niż zainstalowane "
 "obecnie."
 
-#: src/gtk/previewtab.cc:103 src/pkg_grouppolicy.cc:643
+#: src/gtk/previewtab.cc:103 src/pkg_grouppolicy.cc:684
 msgid ""
 "Packages being held back\n"
 " These packages could be upgraded, but you have asked for them to be held at "
@@ -4691,7 +4722,7 @@ msgstr ""
 " Te pakiety mogłyby być uaktualnione, ale zażądano pozostawienia ich w "
 "bieżących wersjach."
 
-#: src/gtk/previewtab.cc:104 src/pkg_grouppolicy.cc:644
+#: src/gtk/previewtab.cc:104 src/pkg_grouppolicy.cc:685
 msgid ""
 "Packages to be reinstalled\n"
 " These packages will be reinstalled."
@@ -4699,7 +4730,7 @@ msgstr ""
 "Pakiety do ponownej instalacji\n"
 " Te pakiety zostaną zainstalowane ponownie."
 
-#: src/gtk/previewtab.cc:105 src/pkg_grouppolicy.cc:645
+#: src/gtk/previewtab.cc:105 src/pkg_grouppolicy.cc:686
 msgid ""
 "Packages to be installed\n"
 " These packages have been manually selected for installation on your "
@@ -4708,7 +4739,7 @@ msgstr ""
 "Pakiety do instalacji\n"
 " Te pakiety zostały ręcznie wybrane do instalacji."
 
-#: src/gtk/previewtab.cc:106 src/pkg_grouppolicy.cc:646
+#: src/gtk/previewtab.cc:106 src/pkg_grouppolicy.cc:687
 msgid ""
 "Packages to be removed\n"
 " These packages have been manually selected for removal."
@@ -4716,7 +4747,7 @@ msgstr ""
 "Pakiety do usunięcia\n"
 " Te pakiety zostały ręcznie wybrane do usunięcia."
 
-#: src/gtk/previewtab.cc:107 src/pkg_grouppolicy.cc:647
+#: src/gtk/previewtab.cc:107 src/pkg_grouppolicy.cc:688
 msgid ""
 "Packages to be upgraded\n"
 " These packages will be upgraded to a newer version."
@@ -4724,7 +4755,7 @@ msgstr ""
 "Pakiety do aktualizacji\n"
 " Te pakiety zostaną zaktualizowane do nowszej wersji."
 
-#: src/gtk/previewtab.cc:108 src/pkg_grouppolicy.cc:648
+#: src/gtk/previewtab.cc:108 src/pkg_grouppolicy.cc:689
 msgid ""
 "Packages that are partially installed\n"
 " These packages are not fully installed and configured; an attempt will be "
@@ -4760,7 +4791,7 @@ msgstr ""
 msgid "Virtual package"
 msgstr "Pakiet wirtualny"
 
-#: src/gtk/resolver.cc:246 src/solution_fragment.cc:455
+#: src/gtk/resolver.cc:246 src/solution_fragment.cc:457
 msgid "Not Installed"
 msgstr "niezainstalowany"
 
@@ -4913,48 +4944,48 @@ msgstr[2] ""
 "Stałe preferowanie tych akcji w stosunku do alternatyw, które nie zostały "
 "zaakceptowane."
 
-#: src/gtk/resolver.cc:1240 src/solution_fragment.cc:130
+#: src/gtk/resolver.cc:1240 src/solution_fragment.cc:131
 #, c-format
 msgid "%s depends upon %s"
 msgstr "%s wymaga %s"
 
-#: src/gtk/resolver.cc:1243 src/solution_fragment.cc:133
+#: src/gtk/resolver.cc:1243 src/solution_fragment.cc:134
 #, c-format
 msgid "%s pre-depends upon %s"
 msgstr "%s wymaga wstępnie %s"
 
-#: src/gtk/resolver.cc:1246 src/solution_fragment.cc:136
+#: src/gtk/resolver.cc:1246 src/solution_fragment.cc:137
 #, c-format
 msgid "%s suggests %s"
 msgstr "%s sugeruje %s"
 
-#: src/gtk/resolver.cc:1249 src/solution_fragment.cc:139
-#: src/solution_item.cc:603
+#: src/gtk/resolver.cc:1249 src/solution_fragment.cc:140
+#: src/solution_item.cc:599
 #, c-format
 msgid "%s recommends %s"
 msgstr "%s poleca %s"
 
-#: src/gtk/resolver.cc:1252 src/solution_fragment.cc:142
+#: src/gtk/resolver.cc:1252 src/solution_fragment.cc:143
 #, c-format
 msgid "%s conflicts with %s"
 msgstr "%s jest w konflikcie z %s"
 
-#: src/gtk/resolver.cc:1255 src/solution_fragment.cc:145
+#: src/gtk/resolver.cc:1255 src/solution_fragment.cc:146
 #, c-format
 msgid "%s breaks %s"
 msgstr "%s narusza zależności %s"
 
-#: src/gtk/resolver.cc:1258 src/solution_fragment.cc:148
+#: src/gtk/resolver.cc:1258 src/solution_fragment.cc:149
 #, c-format
 msgid "%s replaces %s"
 msgstr "%s zastępuje %s"
 
-#: src/gtk/resolver.cc:1261 src/solution_fragment.cc:151
+#: src/gtk/resolver.cc:1261 src/solution_fragment.cc:152
 #, c-format
 msgid "%s obsoletes %s"
 msgstr "%s dezaktualizuje %s"
 
-#: src/gtk/resolver.cc:1264 src/solution_fragment.cc:154
+#: src/gtk/resolver.cc:1264 src/solution_fragment.cc:155
 #, c-format
 msgid "%s enhances %s"
 msgstr "%s rozszerza %s"
@@ -5231,11 +5262,12 @@ msgstr "Nieznana metoda grupowania \"%s\""
 
 #: src/load_grouppolicy.cc:324
 #, c-format
-msgid "Terminal policy \"%s\" should be the last policy in the list"
+msgid "Terminal policy '%s' should be the last policy in the list"
 msgstr "Metoda \"%s\" powinna być ostatnia na liście"
 
-#: src/load_grouppolicy.cc:385 src/load_grouppolicy.cc:751
-msgid "Unmatched '(' in pattern grouping policy"
+#: src/load_grouppolicy.cc:385
+#, fuzzy
+msgid "Unmatched '(' in grouping policy"
 msgstr "Niesparowany nawias \"(\" w definicji metody grupowania \"pattern\""
 
 #: src/load_grouppolicy.cc:413
@@ -5251,17 +5283,24 @@ msgstr ""
 "Błędna wartość parametru passthrough: '%s' (może być 'passthrough' lub "
 "'nopassthrough')"
 
-#: src/load_grouppolicy.cc:428
-msgid "Too many arguments to by-section grouping policy"
-msgstr "Zbyt wiele parametrów przy grupowaniu według sekcji"
+#: src/load_grouppolicy.cc:428 src/load_grouppolicy.cc:544
+#: src/load_grouppolicy.cc:621
+#, fuzzy, c-format
+msgid "Too many arguments to '%s' grouping policy"
+msgstr "Zbyt wiele parametrów przy grupowaniu według źródła"
 
-#: src/load_grouppolicy.cc:441
-msgid "By-status grouping policies take no arguments"
-msgstr "Przy grupowaniu według stanu nie używa się żadnych parametrów"
+#: src/load_grouppolicy.cc:441 src/load_grouppolicy.cc:521
+#: src/load_grouppolicy.cc:532 src/load_grouppolicy.cc:555
+#: src/load_grouppolicy.cc:566 src/load_grouppolicy.cc:577
+#: src/load_grouppolicy.cc:608
+#, fuzzy, c-format
+msgid "Grouping policy '%s' takes no arguments"
+msgstr "Przy grupowaniu zadań nie używa się żadnych parametrów"
 
-#: src/load_grouppolicy.cc:460
-msgid "Expected '(' after 'filter'"
-msgstr "Brak \"(\" po \"filter\""
+#: src/load_grouppolicy.cc:460 src/load_grouppolicy.cc:636
+#, c-format
+msgid "Expected '(' after '%s'"
+msgstr "Brak \"(\" po \"%s\""
 
 #: src/load_grouppolicy.cc:497
 #, c-format
@@ -5269,68 +5308,36 @@ msgid "Unable to parse pattern at '%s'"
 msgstr "Nie można rozpoznać wzorca w \"%s\""
 
 #: src/load_grouppolicy.cc:502
-msgid "Exactly one filter must be provided as an argument to a filter policy"
+msgid "Exactly one filter must be provided as an argument to a 'filter' policy"
 msgstr ""
 "Wymagane jest podanie dokładnie jednego filtru jako parametru metody \"filter"
 "\""
 
-#: src/load_grouppolicy.cc:521
-msgid "By-mode grouping policies take no arguments"
-msgstr "Przy grupowaniu według akcji nie używa się żadnych parametrów"
-
-#: src/load_grouppolicy.cc:532
-msgid "First-character grouping policies take no arguments"
-msgstr ""
-"Przy grupowaniu według pierwszego znaku nie używa się żadnych parametrów"
-
-#: src/load_grouppolicy.cc:545
-msgid "Too many arguments to by-source grouping policy"
+#: src/load_grouppolicy.cc:644
+#, fuzzy, c-format
+msgid "Missing arguments to '%s' grouping policy"
 msgstr "Zbyt wiele parametrów przy grupowaniu według źródła"
 
-#: src/load_grouppolicy.cc:556
-msgid "Version-generating grouping policies take no arguments"
-msgstr "Przy grupowaniu wyświetlającym wersje nie używa się żadnych parametrów"
-
-#: src/load_grouppolicy.cc:567
-msgid "Dep-generating grouping policies take no arguments"
-msgstr ""
-"Przy grupowaniu wyświetlającym zależności nie używa się żadnych parametrów"
-
-#: src/load_grouppolicy.cc:578
-msgid "By-priority grouping policies take no arguments"
-msgstr "Przy grupowaniu według priorytetu nie używa się żadnych parametrów"
-
-#: src/load_grouppolicy.cc:609
-msgid "Task grouping policies take no arguments"
-msgstr "Przy grupowaniu zadań nie używa się żadnych parametrów"
-
-#: src/load_grouppolicy.cc:622
-msgid "Expected no more than one argument to a tag grouping policy"
-msgstr "Przy grupowaniu według etykiet można podać najwyżej jeden parametr"
-
-#: src/load_grouppolicy.cc:637
-msgid "Expected '(' after 'pattern'"
-msgstr "Brak \"(\" po \"pattern\""
-
-#: src/load_grouppolicy.cc:645
-msgid "Missing arguments to 'pattern'"
-msgstr "Brak parametrów metody \"pattern\""
-
-#: src/load_grouppolicy.cc:668
+#: src/load_grouppolicy.cc:667
 #, c-format
 msgid "Unable to parse pattern after \"%s\""
 msgstr "Nie można przetworzyć wzorca po \"%s\""
 
-#: src/load_grouppolicy.cc:706
+#: src/load_grouppolicy.cc:705
 #, c-format
 msgid "Unexpectedly empty tree title after \"%s\""
 msgstr "Nieoczekiwany pusty tytuł drzewa po \"%s\""
 
-#: src/load_grouppolicy.cc:725
+#: src/load_grouppolicy.cc:724
 #, c-format
 msgid "Expected '{', ')', or ',' following '||', got '%s'"
 msgstr ""
 "Oczekiwano \"{\", \")\" lub \",\" poprzedzanego przez '||', otrzymano '%s'"
+
+#: src/load_grouppolicy.cc:750
+#, fuzzy, c-format
+msgid "Unmatched '(' in '%s' grouping policy"
+msgstr "Niesparowany nawias \"(\" w definicji metody grupowania \"pattern\""
 
 #: src/load_pkgview.cc:64
 msgid "Couldn't parse layout: No column format specified for static item"
@@ -5364,21 +5371,11 @@ msgstr "Nie można przetworzyć układu ekranu: nie podano wysokości"
 msgid "Unknown alignment type '%s'"
 msgstr "Nieznany rodzaj wyrównania \"%s\""
 
-#: src/load_sortpolicy.cc:51
-msgid "By-name sorting policies take no arguments"
+#: src/load_sortpolicy.cc:51 src/load_sortpolicy.cc:64
+#: src/load_sortpolicy.cc:77 src/load_sortpolicy.cc:90
+#, fuzzy, c-format
+msgid "Sorting policy '%s' takes no arguments"
 msgstr "Przy sortowaniu według nazwy nie używa się żadnych parametrów"
-
-#: src/load_sortpolicy.cc:64
-msgid "By-version sorting policies take no arguments"
-msgstr "Przy sortowaniu według wersji nie używa się żadnych parametrów"
-
-#: src/load_sortpolicy.cc:77
-msgid "By-installed size sorting policies take no arguments"
-msgstr "Przy sortowaniu według rozmiaru nie używa się żadnych parametrów"
-
-#: src/load_sortpolicy.cc:90
-msgid "By-priority sorting policies take no arguments"
-msgstr "Przy sortowaniu według priorytetu nie używa się żadnych parametrów"
 
 #: src/load_sortpolicy.cc:148
 msgid "Invalid zero-length sorting policy name"
@@ -5892,43 +5889,43 @@ msgstr ""
 msgid "Invalid logger name \"%s\"."
 msgstr "Błędna nazwa loggera  \"%s\"."
 
-#: src/main.cc:761
+#: src/main.cc:765
 #, c-format
 msgid "Expected a number after -q=\n"
 msgstr "Brak liczby po -q=\n"
 
-#: src/main.cc:770
+#: src/main.cc:774
 #, c-format
 msgid "Expected a number after -q=, got %s\n"
 msgstr "Po -q= oczekiwano liczby, napotkano %s\n"
 
-#: src/main.cc:794
+#: src/main.cc:798
 #, c-format
 msgid "-o requires an argument of the form key=value, got %s\n"
 msgstr "-o wymaga podania argumentu postaci nazwa=wartość, otrzymano %s\n"
 
-#: src/main.cc:884
+#: src/main.cc:888
 #, c-format
 msgid "No comma following tag name \"%s\".\n"
 msgstr "Brak kropki po nazwie znacznika \"%s\".\n"
 
-#: src/main.cc:976 src/main.cc:986
+#: src/main.cc:980 src/main.cc:990
 msgid "WEIRDNESS: unknown option code received\n"
 msgstr "DZIWNE: otrzymano nieznany kod opcji\n"
 
-#: src/main.cc:1004
+#: src/main.cc:1008
 msgid "--show-package-names|never"
 msgstr "--show-package-names|never"
 
-#: src/main.cc:1007
+#: src/main.cc:1011
 msgid "--show-package-names|auto"
 msgstr "--show-package-names|auto"
 
-#: src/main.cc:1010
+#: src/main.cc:1014
 msgid "--show-package-names|always"
 msgstr "--show-package-names|always"
 
-#: src/main.cc:1015
+#: src/main.cc:1019
 #, c-format
 msgid ""
 "Invalid package names display mode \"%s\" (should be \"never\", \"auto\", or "
@@ -5937,29 +5934,29 @@ msgstr ""
 "Nieprawidłowy tryb wyświetlania nazw pakietów \"%s\" (oczekiwano \"never\", "
 "\"auto\" lub \"always\")."
 
-#: src/main.cc:1021
+#: src/main.cc:1025
 msgid "no-summary"
 msgstr "no-summary"
 
-#: src/main.cc:1023
+#: src/main.cc:1027
 msgid "first-package"
 msgstr "first-package"
 
-#: src/main.cc:1025
+#: src/main.cc:1029
 msgid "first-package-and-type"
 msgstr "first-package-and-type"
 
-#: src/main.cc:1027
+#: src/main.cc:1031
 msgid "all-packages"
 msgstr "all-packages"
 
-#: src/main.cc:1029
+#: src/main.cc:1033
 msgid "all-packages-with-dep-versions"
 msgstr "all-packages-with-dep-versions"
 
 #. ForTranslators: "why" here is the aptitude command name and
 #. should not be translated.
-#: src/main.cc:1035
+#: src/main.cc:1039
 #, c-format
 msgid ""
 "Invalid \"why\" summary mode \"%s\": expected \"no-summary\", \"first-package"
@@ -5970,7 +5967,7 @@ msgstr ""
 "\"first-package\", \"first-package-and-type\", \"all-packages\" lub \"all-"
 "packages-with-dep-versions\"."
 
-#: src/main.cc:1073
+#: src/main.cc:1077
 msgid ""
 "Only one of --auto-clean-on-startup, --clean-on-startup, -i, and -u may be "
 "specified\n"
@@ -5978,7 +5975,7 @@ msgstr ""
 "Można podać tylko jedną z opcji: --auto-clean-on-startup, --clean-on-"
 "startup, -i lub -u\n"
 
-#: src/main.cc:1082
+#: src/main.cc:1086
 msgid ""
 "-u, -i, and --clean-on-startup may not be specified in command-line mode "
 "(eg, with 'install')"
@@ -5986,21 +5983,21 @@ msgstr ""
 "-u, -i, ani --clean-on-startup nie można podać dla trybu wiersza poleceń "
 "(np. z \"install\")"
 
-#: src/main.cc:1099
+#: src/main.cc:1103
 msgid "-u, -i, and --clean-on-startup may not be specified with a command"
 msgstr "-u, -i, ani --clean-on-startup nie można podać razem z poleceniem"
 
-#: src/main.cc:1210
+#: src/main.cc:1214
 #, c-format
 msgid "Unknown command \"%s\"\n"
 msgstr "Nieznane polecenie: \"%s\"\n"
 
-#: src/main.cc:1222 src/main.cc:1307
+#: src/main.cc:1226 src/main.cc:1311
 #, c-format
 msgid "Uncaught exception: %s\n"
 msgstr "Nieobsłużony wyjątek: %s\n"
 
-#: src/main.cc:1226 src/main.cc:1311
+#: src/main.cc:1230 src/main.cc:1315
 #, c-format
 msgid ""
 "Backtrace:\n"
@@ -6018,7 +6015,7 @@ msgstr "Wyszukiwany tekst: "
 msgid "Search backwards for: "
 msgstr "Znajdź (wstecz): "
 
-#: src/mine/cmine.cc:115 src/mine/cmine.cc:154 src/ui.cc:1713
+#: src/mine/cmine.cc:115 src/mine/cmine.cc:154 src/ui.cc:1764
 msgid "Minesweeper"
 msgstr "Saper"
 
@@ -6227,7 +6224,7 @@ msgstr "Kodowanie mine-help.txt|UTF-8"
 msgid "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 1 10 9 12 30 17 15"
 msgstr "30 7 7 1 1 40 14 14 18 10 35 9 10 2 1 1 12 8 14 32 20 15"
 
-#: src/pkg_columnizer.cc:89 src/ui.cc:2701
+#: src/pkg_columnizer.cc:89 src/ui.cc:2776
 msgid "Package"
 msgstr "Pakiet"
 
@@ -6308,7 +6305,7 @@ msgstr "<NIEDOST.>"
 msgid "<none>"
 msgstr "<brak>"
 
-#: src/pkg_columnizer.cc:238 src/pkg_grouppolicy.cc:264 src/qt/package.cc:234
+#: src/pkg_columnizer.cc:238 src/pkg_grouppolicy.cc:269 src/qt/package.cc:234
 #: src/qt/widgets/packages_tab.cc:73
 msgid "virtual"
 msgstr "wirtualne"
@@ -6433,24 +6430,20 @@ msgstr "Do pobrania: %sB"
 msgid "HN too long"
 msgstr "nazwa za długa"
 
-#: src/pkg_columnizer.cc:670 src/pkg_columnizer.cc:679
+#: src/pkg_columnizer.cc:671 src/pkg_columnizer.cc:680
 #, c-format
 msgid "Unable to transcode package display format after \"%ls\""
 msgstr "Nie można przekodować formatu opisu pakietu po \"%ls\""
 
-#: src/pkg_columnizer.cc:686
+#: src/pkg_columnizer.cc:687
 msgid "Internal error: Default column string is unparsable"
 msgstr "Błąd wewnętrzny: domyślna konfiguracja kolumn jest błędna"
 
-#: src/pkg_grouppolicy.cc:259 src/pkg_grouppolicy.cc:1074
+#: src/pkg_grouppolicy.cc:264 src/pkg_grouppolicy.cc:1116
 msgid "Tasks"
 msgstr "Zadania"
 
-#: src/pkg_grouppolicy.cc:285
-msgid "main"
-msgstr "main"
-
-#: src/pkg_grouppolicy.cc:427
+#: src/pkg_grouppolicy.cc:468
 msgid ""
 "Security Updates\n"
 " Security updates for these packages are available from security.debian.org."
@@ -6459,7 +6452,7 @@ msgstr ""
 " Na serwerze security.debian.org dostępne są poprawki bezpieczeństwa tych "
 "programów."
 
-#: src/pkg_grouppolicy.cc:428
+#: src/pkg_grouppolicy.cc:469
 msgid ""
 "Upgradable Packages\n"
 " A newer version of these packages is available."
@@ -6467,7 +6460,7 @@ msgstr ""
 "Pakiety z możliwością aktualizacji\n"
 " Dostępne są nowsze wersje tych pakietów."
 
-#: src/pkg_grouppolicy.cc:429
+#: src/pkg_grouppolicy.cc:470
 msgid ""
 "New Packages\n"
 " These packages have been added to Debian since the last time you cleared "
@@ -6479,7 +6472,7 @@ msgstr ""
 "informacji o nowościach (aby wyczyścić tę listę należy wybrać \"Zapomnij o "
 "nowościach\" z menu \"Akcje\")."
 
-#: src/pkg_grouppolicy.cc:430
+#: src/pkg_grouppolicy.cc:471
 msgid ""
 "Installed Packages\n"
 " These packages are currently installed on your computer."
@@ -6487,7 +6480,7 @@ msgstr ""
 "Zainstalowane pakiety\n"
 " Te pakiety są aktualnie zainstalowane na komputerze."
 
-#: src/pkg_grouppolicy.cc:431
+#: src/pkg_grouppolicy.cc:472
 msgid ""
 "Not Installed Packages\n"
 " These packages are not installed on your computer."
@@ -6495,7 +6488,7 @@ msgstr ""
 "Niezainstalowane pakiety\n"
 " Te pakiety nie są zainstalowane na komputerze."
 
-#: src/pkg_grouppolicy.cc:432
+#: src/pkg_grouppolicy.cc:473
 msgid ""
 "Obsolete and Locally Created Packages\n"
 " These packages are currently installed on your computer, but they are not "
@@ -6507,7 +6500,7 @@ msgstr ""
 "żadnego źródła pakietów. Mogą być nieaktualne i usunięte z archiwum albo być "
 "prywatnymi wersjami zbudowanymi samodzielnie."
 
-#: src/pkg_grouppolicy.cc:433
+#: src/pkg_grouppolicy.cc:474
 msgid ""
 "Virtual Packages\n"
 " These packages do not exist; they are names other packages use to require "
@@ -6517,7 +6510,7 @@ msgstr ""
 " Takie pakiety nie istnieją. Są to nazwy, których używają inne pakiety aby "
 "zażądać jakiejś funkcjonalności lub ją udostępnić."
 
-#: src/pkg_grouppolicy.cc:588
+#: src/pkg_grouppolicy.cc:629
 msgid ""
 "Packages which are recommended by other packages\n"
 " These packages are not strictly required, but they may be necessary to "
@@ -6528,7 +6521,7 @@ msgstr ""
 " Te pakiety nie są ściśle wymagane, ale mogą być potrzebne aby zapewnić "
 "pełną funkcjonalność w innych instalowanych lub aktualizowanych programach."
 
-#: src/pkg_grouppolicy.cc:609
+#: src/pkg_grouppolicy.cc:650
 msgid ""
 "Packages which are suggested by other packages\n"
 " These packages are not required in order to make your system function "
@@ -6540,44 +6533,44 @@ msgstr ""
 "zapewniać rozszerzoną funkcjonalność w innych, aktualnie instalowanych "
 "programach."
 
-#: src/pkg_grouppolicy.cc:765
+#: src/pkg_grouppolicy.cc:807
 msgid "unknown"
 msgstr "nieznane"
 
-#: src/pkg_grouppolicy.cc:776
+#: src/pkg_grouppolicy.cc:818
 #, c-format
 msgid "Priority %s"
 msgstr "Priorytet: %s"
 
-#: src/pkg_grouppolicy.cc:890
+#: src/pkg_grouppolicy.cc:932
 msgid "UNCATEGORIZED"
 msgstr "BEZ PODZIAŁU NA KATEGORIE"
 
-#: src/pkg_grouppolicy.cc:1017
+#: src/pkg_grouppolicy.cc:1059
 msgid "End-user"
 msgstr "Użytkownicy końcowi"
 
-#: src/pkg_grouppolicy.cc:1018
+#: src/pkg_grouppolicy.cc:1060
 msgid "Servers"
 msgstr "Serwery"
 
-#: src/pkg_grouppolicy.cc:1019
+#: src/pkg_grouppolicy.cc:1061
 msgid "Development"
 msgstr "Programowanie"
 
-#: src/pkg_grouppolicy.cc:1020
+#: src/pkg_grouppolicy.cc:1062
 msgid "Localization"
 msgstr "Wersje językowe"
 
-#: src/pkg_grouppolicy.cc:1021
+#: src/pkg_grouppolicy.cc:1063
 msgid "Hardware Support"
 msgstr "Obsługa sprzętu"
 
-#: src/pkg_grouppolicy.cc:1023
+#: src/pkg_grouppolicy.cc:1065
 msgid "Unrecognized tasks"
 msgstr "Nierozpoznane zadania"
 
-#: src/pkg_grouppolicy.cc:1075
+#: src/pkg_grouppolicy.cc:1117
 msgid ""
 "\n"
 " Tasks are groups of packages which provide an easy way to select a "
@@ -6587,26 +6580,26 @@ msgstr ""
 " Zadania są grupami pakietów, dającymi możliwość łatwego wyboru "
 "predefiniowanego zbioru pakietów dla określonego celu."
 
-#: src/pkg_grouppolicy.cc:1207
+#: src/pkg_grouppolicy.cc:1249
 #, c-format
 msgid "Bad number in format string: %ls"
 msgstr "Niewłaściwa liczba w napisie formatującym: %ls"
 
-#: src/pkg_grouppolicy.cc:1216
+#: src/pkg_grouppolicy.cc:1258
 #, c-format
 msgid "Match indices must be 1 or greater, not \"%s\""
 msgstr "Indeksy dopasowań muszą mieć wartość 1 lub większą, nie \"%s\""
 
-#: src/pkg_grouppolicy.cc:1234
+#: src/pkg_grouppolicy.cc:1276
 #, c-format
 msgid "Match index %ls is too large; available groups are (%s)"
 msgstr "Indeks dopasowania %ls jest zbyt duży; dostępne grupy to (%s)"
 
-#: src/pkg_grouppolicy.cc:1510
+#: src/pkg_grouppolicy.cc:1552
 msgid "TAGLESS PACKAGES"
 msgstr "PAKIETY BEZ ZNACZNIKÓW"
 
-#: src/pkg_grouppolicy.cc:1511
+#: src/pkg_grouppolicy.cc:1553
 msgid ""
 "\n"
 " These packages have not yet been classified in debtags, or the debtags "
@@ -6617,33 +6610,33 @@ msgstr ""
 "znaczników debtags jest niedostępna (instalacja debtags może rozwiązać ten "
 "problem)."
 
-#: src/pkg_grouppolicy.cc:1551
+#: src/pkg_grouppolicy.cc:1593
 msgid "MISSING TAG"
 msgstr "BRAK ZNACZNIKA"
 
-#: src/pkg_info_screen.cc:131
+#: src/pkg_info_screen.cc:138
 msgid "Compressed size: "
 msgstr "Rozmiar archiwum: "
 
-#: src/pkg_info_screen.cc:132
+#: src/pkg_info_screen.cc:139
 msgid "Uncompressed size: "
 msgstr "Rozmiar rozpakowanego: "
 
-#: src/pkg_info_screen.cc:133
+#: src/pkg_info_screen.cc:140
 msgid "Source Package: "
 msgstr "Pakiet źródłowy: "
 
-#: src/pkg_info_screen.cc:143
+#: src/pkg_info_screen.cc:150
 #, c-format
 msgid "Package names provided by %s"
 msgstr "Pakiety udostępniane przez %s"
 
-#: src/pkg_info_screen.cc:156
+#: src/pkg_info_screen.cc:163
 #, c-format
 msgid "Packages which depend on %s"
 msgstr "Pakiety zależne od %s"
 
-#: src/pkg_info_screen.cc:162
+#: src/pkg_info_screen.cc:169
 #, c-format
 msgid "Versions of %s"
 msgstr "Wersje %s"
@@ -6657,52 +6650,12 @@ msgstr ""
 "%s jest istotnym pakietem!%n%nCzy na pewno ma zostać usunięty?%nJeśli tak, "
 "proszę wpisać \"%s\"."
 
-#: src/pkg_item.cc:232 src/pkg_ver_item.cc:678 src/solution_item.cc:299
-#, c-format
-msgid "Information about %s"
-msgstr "Informacje o %s"
-
-#: src/pkg_item.cc:234 src/pkg_ver_item.cc:680 src/solution_item.cc:297
-#, c-format
-msgid "%s info"
-msgstr "Informacje o %s"
-
-#: src/pkg_item.cc:330
-#, c-format
-msgid "Available versions of %s"
-msgstr "Dostępne wersje %s"
-
-#: src/pkg_item.cc:333
-#, c-format
-msgid "%s versions"
-msgstr "Wersje %s"
-
-#: src/pkg_item.cc:345 src/pkg_ver_item.cc:708
-#, c-format
-msgid "Dependencies of %s"
-msgstr "Zależności %s"
-
-#: src/pkg_item.cc:347 src/pkg_ver_item.cc:710
-#, c-format
-msgid "%s deps"
-msgstr "Zależności %s"
-
-#: src/pkg_item.cc:358 src/pkg_ver_item.cc:720
-#, c-format
-msgid "Packages depending on %s"
-msgstr "Pakiety zależne od %s"
-
-#: src/pkg_item.cc:360 src/pkg_ver_item.cc:722
-#, c-format
-msgid "%s reverse deps"
-msgstr "Zależne od %s"
-
-#: src/pkg_item.cc:410 src/pkg_ver_item.cc:770
+#: src/pkg_item.cc:372 src/pkg_ver_item.cc:748
 #, c-format
 msgid "Reporting a bug in %s:\n"
 msgstr "Zgłaszanie błędu w %s:\n"
 
-#: src/pkg_item.cc:430
+#: src/pkg_item.cc:392
 msgid ""
 "You are not root and I cannot find any way to become root.  To reconfigure "
 "this package, install the menu package, the login package, or run aptitude "
@@ -6712,20 +6665,20 @@ msgstr ""
 "By móc rekonfigurować pakiety, zainstaluj pakiet menu, login lub uruchamiaj "
 "aptitude jako administrator."
 
-#: src/pkg_item.cc:438
+#: src/pkg_item.cc:400
 #, c-format
 msgid "Reconfiguring %s\n"
 msgstr "Rekonfigurowanie pakietu \"%s\"\n"
 
-#: src/pkg_item.cc:448 src/ui.cc:1166
+#: src/pkg_item.cc:410 src/ui.cc:1217
 msgid "Press return to continue.\n"
 msgstr "Wciśnij return.\n"
 
-#: src/pkg_item.cc:465
+#: src/pkg_item.cc:427
 msgid "Hierarchy editor"
 msgstr "Edytor hierarchii"
 
-#: src/pkg_item.cc:465 src/pkg_view.cc:673
+#: src/pkg_item.cc:427 src/pkg_view.cc:673
 msgid "Hierarchy Editor"
 msgstr "Edytor hierarchii"
 
@@ -6849,60 +6802,60 @@ msgstr "P&akiety"
 msgid "&Help"
 msgstr "P&omoc"
 
-#: src/reason_fragment.cc:32
+#: src/reason_fragment.cc:31
 msgid "depends on"
 msgstr "wymaga"
 
-#: src/reason_fragment.cc:34
+#: src/reason_fragment.cc:33
 msgid "pre-depends on"
 msgstr "wymaga wstępnie"
 
-#: src/reason_fragment.cc:36
+#: src/reason_fragment.cc:35
 msgid "suggests"
 msgstr "sugeruje"
 
-#: src/reason_fragment.cc:37
+#: src/reason_fragment.cc:36
 msgid "recommends"
 msgstr "poleca"
 
-#: src/reason_fragment.cc:39
+#: src/reason_fragment.cc:38
 msgid "conflicts with"
 msgstr "w konflikcie z"
 
-#: src/reason_fragment.cc:41
+#: src/reason_fragment.cc:40
 msgid "breaks"
 msgstr "narusza zależności"
 
-#: src/reason_fragment.cc:43
+#: src/reason_fragment.cc:42
 msgid "replaces"
 msgstr "zastępuje"
 
-#: src/reason_fragment.cc:44
+#: src/reason_fragment.cc:43
 msgid "obsoletes"
 msgstr "dezaktualizuje"
 
-#: src/reason_fragment.cc:45
+#: src/reason_fragment.cc:44
 msgid "enhances"
 msgstr "rozszerza"
 
-#: src/reason_fragment.cc:178
+#: src/reason_fragment.cc:155
 #, c-format
 msgid " (provided by %F)"
 msgstr " (udostępniany przez %F)"
 
-#: src/reason_fragment.cc:288
+#: src/reason_fragment.cc:265
 #, c-format
 msgid "%F%s %F %F"
 msgstr "%F%s %F %F"
 
-#: src/reason_fragment.cc:337
+#: src/reason_fragment.cc:314
 msgid ""
 "If you select a package, an explanation of its current state will appear in "
 "this space."
 msgstr ""
 "Po wybraniu pakietu zostanie tu wyświetlony opis jego bieżącego stanu. "
 
-#: src/reason_fragment.cc:371
+#: src/reason_fragment.cc:348
 msgid ""
 "%B%s%b was installed automatically;  it is being removed because all of the "
 "packages which depend upon it are being removed:"
@@ -6910,20 +6863,20 @@ msgstr ""
 "Pakiet %B%s%b był zainstalowany automatycznie; zostanie usunięty, ponieważ "
 "usuwane są wszystkie wymagające go pakiety:"
 
-#: src/reason_fragment.cc:375
+#: src/reason_fragment.cc:352
 msgid "%B%s%b will be automatically removed because of dependency errors:"
 msgstr ""
 "Pakiet %B%s%b zostanie automatycznie usunięty z powodu niespełnionych "
 "zależności:"
 
-#: src/reason_fragment.cc:379
+#: src/reason_fragment.cc:356
 msgid ""
 "%B%s%b will be automatically installed to satisfy the following dependencies:"
 msgstr ""
 "Pakiet %B%s%b zostanie automatycznie zainstalowany w celu spełnienia "
 "następujących zależności:"
 
-#: src/reason_fragment.cc:385 src/reason_fragment.cc:397
+#: src/reason_fragment.cc:362 src/reason_fragment.cc:374
 msgid ""
 "%B%s%b cannot be upgraded now, but if it could be, it would still be held at "
 "version %B%s%b."
@@ -6931,7 +6884,7 @@ msgstr ""
 "Pakiet %B%s%b nie może teraz zostać zaktualizowany. Nawet gdyby mógł, "
 "zostałby zatrzymany na wersji %B%s%b."
 
-#: src/reason_fragment.cc:388
+#: src/reason_fragment.cc:365
 msgid ""
 "%B%s%b will not be upgraded to version %B%s%b, to avoid breaking the "
 "following dependencies:"
@@ -6939,28 +6892,28 @@ msgstr ""
 "Pakiet %B%s%b nie zostanie zaktualizowany do wersji %B%s%b, aby zapobiec "
 "niespełnieniu następujących zależności:"
 
-#: src/reason_fragment.cc:400
+#: src/reason_fragment.cc:377
 msgid "%B%s%b is currently installed."
 msgstr "Pakiet %B%s%b jest zainstalowany."
 
-#: src/reason_fragment.cc:406
+#: src/reason_fragment.cc:383
 msgid "%B%s%b is not currently installed."
 msgstr "Pakiet %B%s%b nie jest zainstalowany."
 
-#: src/reason_fragment.cc:414
+#: src/reason_fragment.cc:391
 msgid "Some dependencies of %B%s%b are not satisfied:"
 msgstr "Niektóre zależności pakietu %B%s%b nie są spełnione:"
 
-#: src/reason_fragment.cc:418
+#: src/reason_fragment.cc:395
 msgid "%B%s%b will be downgraded."
 msgstr "Pakiet %B%s%b zostanie cofnięty."
 
-#: src/reason_fragment.cc:425
+#: src/reason_fragment.cc:402
 msgid "%B%s%b will not be upgraded to the forbidden version %B%s%b."
 msgstr ""
 "Pakiet %B%s%b nie zostanie zaktualizowany do zabronionej wersji %B%s%b."
 
-#: src/reason_fragment.cc:429
+#: src/reason_fragment.cc:406
 msgid ""
 "%B%s%b could be upgraded to version %B%s%b, but it is being held at version "
 "%B%s%b."
@@ -6968,41 +6921,41 @@ msgstr ""
 "Pakiet %B%s%b może być zaktualizowany do wersji %B%s%b, jest jednak "
 "zatrzymany na wersji %B%s%b."
 
-#: src/reason_fragment.cc:436
+#: src/reason_fragment.cc:413
 msgid "%B%s%b will be re-installed."
 msgstr "Pakiet %B%s%b zostanie ponownie zainstalowany."
 
-#: src/reason_fragment.cc:440
+#: src/reason_fragment.cc:417
 msgid "%B%s%b will be installed."
 msgstr "Pakiet %B%s%b zostanie zainstalowany."
 
-#: src/reason_fragment.cc:444
+#: src/reason_fragment.cc:421
 msgid "%B%s%b will be removed."
 msgstr "Pakiet %B%s%b zostanie usunięty."
 
-#: src/reason_fragment.cc:449
+#: src/reason_fragment.cc:426
 msgid "%B%s%b will be upgraded from version %B%s%b to version %B%s%b."
 msgstr ""
 "Pakiet %B%s%b zostanie zaktualizowany z wersji %B%s%b do wersji %B%s%b."
 
-#: src/reason_fragment.cc:456
+#: src/reason_fragment.cc:433
 msgid "%B%s%b is only partly installed; its installation will be completed."
 msgstr ""
 "%B%s%b jest częściowo zainstalowany, jego instalacja zostanie dokończona."
 
-#: src/reason_fragment.cc:488
+#: src/reason_fragment.cc:465
 msgid ""
 "The following packages depend on %B%s%b and will be broken by its removal:"
 msgstr ""
 "Następujące pakiety wymagają pakietu %B%s%b i po jego usunięciu będą miały "
 "niespełnione zależności:"
 
-#: src/reason_fragment.cc:491
+#: src/reason_fragment.cc:468
 msgid "The following packages depend on %B%s%b and are broken:"
 msgstr ""
 "Następujące pakiety wymagają pakietu %B%s%b i mają niespełnione zależności:"
 
-#: src/reason_fragment.cc:498
+#: src/reason_fragment.cc:475
 msgid ""
 "The following packages conflict with %B%s%b and will be broken by its "
 "installation:"
@@ -7010,7 +6963,7 @@ msgstr ""
 "Następujące pakiety są w konflikcie z pakietem %B%s%b i po jego instalacji "
 "będą miały niespełnione zależności:"
 
-#: src/reason_fragment.cc:531
+#: src/reason_fragment.cc:508
 msgid ""
 "The following packages depend on a version of %B%s%b other than the "
 "currently installed version of %B%s%b, or conflict with the currently "
@@ -7019,7 +6972,7 @@ msgstr ""
 "Następujące pakiety wymagają wersji pakietu %B%s%b innej niż obecnie "
 "zainstalowana wersja %B%s%b lub są w konflikcie z obecną wersją:"
 
-#: src/reason_fragment.cc:535
+#: src/reason_fragment.cc:512
 msgid ""
 "The following packages conflict with %B%s%b, or depend on a version of it "
 "which is not going to be installed."
@@ -7027,11 +6980,11 @@ msgstr ""
 "Następujące pakiety są w konflikcie z pakietem %B%s%b lub wymagają takiej "
 "jego wersji, która nie jest planowana do instalacji."
 
-#: src/reason_fragment.cc:539
+#: src/reason_fragment.cc:516
 msgid "The following packages conflict with %B%s%b:"
 msgstr "Następujące pakiety są w konflikcie z pakietem %B%s%b:"
 
-#: src/reason_fragment.cc:544
+#: src/reason_fragment.cc:521
 msgid ""
 "The following packages depend on a version of %B%s%b other than the "
 "currently installed version of %B%s%b:"
@@ -7039,7 +6992,7 @@ msgstr ""
 "Następujące pakiety wymagają wersji pakietu %B%s%b różnej od obecnie "
 "zainstalowanej wersji %B%s%b:"
 
-#: src/reason_fragment.cc:548
+#: src/reason_fragment.cc:525
 msgid ""
 "The following packages depend on a version of %B%s%b which is not going to "
 "be installed."
@@ -7047,15 +7000,15 @@ msgstr ""
 "Następujące pakiety wymagają wersji pakietu %B%s%b, która nie jest planowana "
 "do instalacji."
 
-#: src/reason_fragment.cc:554
+#: src/reason_fragment.cc:531
 msgid "upgraded"
 msgstr "zaktualizowany"
 
-#: src/reason_fragment.cc:554
+#: src/reason_fragment.cc:531
 msgid "downgraded"
 msgstr "cofnięty"
 
-#: src/reason_fragment.cc:560
+#: src/reason_fragment.cc:537
 msgid ""
 "The following packages depend on the currently installed version of %B%s%b "
 "(%B%s%b), or conflict with the version it will be %s to (%B%s%b), and will "
@@ -7065,7 +7018,7 @@ msgstr ""
 "(%B%s%b) lub są w konflikcie z wersją do której ma być %s (%B%s%b), będą "
 "więc miały niespełnione zależności jeśli zostanie %s."
 
-#: src/reason_fragment.cc:567
+#: src/reason_fragment.cc:544
 msgid ""
 "The following packages conflict with version %B%s%b of %B%s%b, and will be "
 "broken if it is %s."
@@ -7073,7 +7026,7 @@ msgstr ""
 "Następujące pakiety są w konflikcie z pakietem %B%2$s%b w wersji %B%1$s%b, i "
 "będą miały niespełnione zależności jeśli zostanie %3$s."
 
-#: src/reason_fragment.cc:572
+#: src/reason_fragment.cc:549
 msgid ""
 "The following packages depend on version %B%s%b of %B%s%b, and will be "
 "broken if it is %s."
@@ -7109,47 +7062,47 @@ msgstr "Zastosuj"
 msgid "Close"
 msgstr "Zamknij"
 
-#: src/solution_fragment.cc:167
+#: src/solution_fragment.cc:168
 #, c-format
 msgid "%s conflicts with %s [provided by %s %s]"
 msgstr "%s jest w konflikcie z %s [udostępniany przez %s %s]"
 
-#: src/solution_fragment.cc:180
+#: src/solution_fragment.cc:181
 #, c-format
 msgid "Removing %s"
 msgstr "Usuwanie %s"
 
-#: src/solution_fragment.cc:182
+#: src/solution_fragment.cc:183
 #, c-format
 msgid "Installing %s %s (%s)"
 msgstr "Instalowanie %s %s (%s)"
 
-#: src/solution_fragment.cc:187
+#: src/solution_fragment.cc:189
 #, c-format
 msgid "Leave %ls unresolved."
 msgstr "Pozostawienie %ls bez rozwiązania."
 
-#: src/solution_fragment.cc:413
+#: src/solution_fragment.cc:415
 msgid "%BRemove%b the following packages:%n"
 msgstr "%BUsunięcie%b następujących pakietów:%n"
 
-#: src/solution_fragment.cc:428
+#: src/solution_fragment.cc:430
 msgid "%BInstall%b the following packages:%n"
 msgstr "%BInstalacja%b następujących pakietów:%n"
 
-#: src/solution_fragment.cc:446
+#: src/solution_fragment.cc:448
 msgid "%BKeep%b the following packages at their current version:%n"
 msgstr "%BZatrzymanie%b bieżących wersji następujących pakietów:%n"
 
-#: src/solution_fragment.cc:470
+#: src/solution_fragment.cc:472
 msgid "%BUpgrade%b the following packages:%n"
 msgstr "%BAktualizacja%b następujących pakietów:%n"
 
-#: src/solution_fragment.cc:490
+#: src/solution_fragment.cc:492
 msgid "%BDowngrade%b the following packages:%n"
 msgstr "%BCofnięcie%b następujących pakietów do wcześniejszych wersji:%n"
 
-#: src/solution_fragment.cc:511
+#: src/solution_fragment.cc:513
 #, c-format
 msgid "Leave the following dependencies unresolved:%n"
 msgstr "Pozostawienie następujących problemów z zależnościami:%n"
@@ -7189,7 +7142,7 @@ msgstr "Aktualizacja %F [%s (%s) -> %s (%s)]"
 msgid "Downgrade %F [%s (%s) -> %s (%s)]"
 msgstr "Cofnięcie %F [%s (%s) -> %s (%s)]"
 
-#: src/solution_item.cc:607
+#: src/solution_item.cc:603
 #, c-format
 msgid "-> Leave the dependency \"%s recommends %s\" unresolved."
 msgstr "-> Pozostawienie niespełnionej zależności \"%s poleca %s\"."
@@ -7289,44 +7242,84 @@ msgstr ""
 msgid "Unable to fork: %s"
 msgstr "Nie można wykonać fork na: %s"
 
-#: src/ui.cc:568
+#: src/ui.cc:579
 msgid ""
 "Subprocess exited with an error -- did you type your password correctly?"
 msgstr "Podproces zakończył się błędem -- czy podano poprawne hasło?"
 
-#: src/ui.cc:607
+#: src/ui.cc:618
 msgid "Loading cache"
 msgstr "Odczyt stanu"
 
-#: src/ui.cc:649
+#: src/ui.cc:660
 msgid "Really quit Aptitude?"
 msgstr "Zakończyć Aptitude?"
 
-#: src/ui.cc:703 src/ui.cc:2464
+#: src/ui.cc:714 src/ui.cc:2539
 msgid "Change the behavior of aptitude"
 msgstr "Zmiana działania aptitude"
 
-#: src/ui.cc:739
+#: src/ui.cc:750
 msgid "Really discard your personal settings and reload the defaults?"
 msgstr "Przywrócić ustawienia domyślne rezygnując z wprowadzonych zmian?"
 
-#: src/ui.cc:844 src/ui.cc:891 src/ui.cc:919 src/ui.cc:942
+#: src/ui.cc:855 src/ui.cc:902 src/ui.cc:930 src/ui.cc:953
 msgid "View available packages and choose actions to perform"
 msgstr "Przeglądanie dostępnych pakietów, wybór działań na nich"
 
-#: src/ui.cc:873
+#: src/ui.cc:884
 msgid "Recommended Packages"
 msgstr "Polecane pakiety"
 
-#: src/ui.cc:874
+#: src/ui.cc:885
 msgid "View packages that it is recommended that you install"
 msgstr "Przeglądanie pakietów polecanych do instalacji"
 
-#: src/ui.cc:875
+#: src/ui.cc:886
 msgid "Recommendations"
 msgstr "Polecane"
 
-#: src/ui.cc:984
+#: src/ui.cc:981
+#, c-format
+msgid "Information about %s"
+msgstr "Informacje o %s"
+
+#: src/ui.cc:983
+#, c-format
+msgid "%s info"
+msgstr "Informacje o %s"
+
+#: src/ui.cc:1004
+#, c-format
+msgid "Packages depending on %s"
+msgstr "Pakiety zależne od %s"
+
+#: src/ui.cc:1005
+#, c-format
+msgid "Dependencies of %s"
+msgstr "Zależności %s"
+
+#: src/ui.cc:1008
+#, c-format
+msgid "%s reverse deps"
+msgstr "Zależne od %s"
+
+#: src/ui.cc:1009
+#, c-format
+msgid "%s deps"
+msgstr "Zależności %s"
+
+#: src/ui.cc:1027
+#, c-format
+msgid "Available versions of %s"
+msgstr "Dostępne wersje %s"
+
+#: src/ui.cc:1029
+#, c-format
+msgid "%s versions"
+msgstr "Wersje %s"
+
+#: src/ui.cc:1035
 msgid ""
 "Aptitude %s%n%nCopyright 2000-2008 Daniel Burrows.%n%naptitude comes with "
 "%BABSOLUTELY NO WARRANTY%b; for details see 'license' in the Help menu.  "
@@ -7340,72 +7333,72 @@ msgstr ""
 "szczegółowe informacje można znaleźć wybierając pozycję Licencja z menu "
 "Pomoc."
 
-#: src/ui.cc:1034 src/ui.cc:1036
+#: src/ui.cc:1085 src/ui.cc:1087
 msgid "License"
 msgstr "Licencja"
 
-#: src/ui.cc:1035 src/ui.cc:2556
+#: src/ui.cc:1086 src/ui.cc:2631
 msgid "View the terms under which you may copy and distribute aptitude"
 msgstr "Wyświetla warunki kopiowania i rozpowszechniania Aptitude"
 
-#: src/ui.cc:1049
+#: src/ui.cc:1100
 msgid "help.txt"
 msgstr "help-pl.txt"
 
-#: src/ui.cc:1051
+#: src/ui.cc:1102
 msgid "Encoding of help.txt|UTF-8"
 msgstr "Kodowanie help-pl.txt|UTF-8"
 
-#: src/ui.cc:1062
+#: src/ui.cc:1113
 msgid "Online Help"
 msgstr "Pomoc on-line"
 
-#: src/ui.cc:1063
+#: src/ui.cc:1114
 msgid "View a brief introduction to aptitude"
 msgstr "Wyświetla krótkie wprowadzenie do Aptitude"
 
-#: src/ui.cc:1064 src/ui.cc:2706
+#: src/ui.cc:1115 src/ui.cc:2781
 msgid "Help"
 msgstr "Pomoc"
 
-#: src/ui.cc:1072
+#: src/ui.cc:1123
 msgid "README"
 msgstr "README"
 
-#: src/ui.cc:1073
+#: src/ui.cc:1124
 msgid "Encoding of README|ISO_8859-1"
 msgstr "Kodowanie README|ISO_8859-1"
 
-#: src/ui.cc:1084
+#: src/ui.cc:1135
 msgid "User's Manual"
 msgstr "Podręcznik użytkownika"
 
-#: src/ui.cc:1085
+#: src/ui.cc:1136
 msgid "Read the full user's manual of aptitude"
 msgstr "Podręcznik użytkownika aptitude"
 
-#: src/ui.cc:1086
+#: src/ui.cc:1137
 msgid "Manual"
 msgstr "Podręcznik"
 
-#: src/ui.cc:1093 src/ui.cc:1095
+#: src/ui.cc:1144 src/ui.cc:1146
 msgid "FAQ"
 msgstr "FAQ"
 
-#: src/ui.cc:1094 src/ui.cc:2548
+#: src/ui.cc:1145 src/ui.cc:2623
 msgid "View a list of frequently asked questions"
 msgstr "Wyświetla najczęściej zadawane pytania na temat Aptitude"
 
-#: src/ui.cc:1103 src/ui.cc:1105
+#: src/ui.cc:1154 src/ui.cc:1156
 msgid "News"
 msgstr "Nowości"
 
-#: src/ui.cc:1104
+#: src/ui.cc:1155
 #, c-format
 msgid "View the important changes made in each version of %s"
 msgstr "Wyświetla najważniejsze zmiany w kolejnych wersjach %s"
 
-#: src/ui.cc:1111
+#: src/ui.cc:1162
 #, c-format
 msgid ""
 "Unable to remove the old temporary directory; you should remove %s by hand."
@@ -7413,7 +7406,7 @@ msgstr ""
 "Nie można usunąć starego katalogu tymczasowego. Katalog %s musi być usunięty "
 "ręcznie."
 
-#: src/ui.cc:1116
+#: src/ui.cc:1167
 #, c-format
 msgid ""
 "Will not remove %s; you should examine the files in it and remove them by "
@@ -7422,7 +7415,7 @@ msgstr ""
 "Katalog %s nie zostanie usunięty. Należy przejrzeć jego zawartość i "
 "samodzielnie usunąć zbędne pliki."
 
-#: src/ui.cc:1142
+#: src/ui.cc:1193
 #, c-format
 msgid ""
 "It appears that a previous version of aptitude left files behind in %s.  "
@@ -7435,15 +7428,15 @@ msgstr ""
 "skasować.%n%nUsunąć ten katalog wraz z zawartością? Po wybraniu \"Nie\" "
 "komunikat ten nie będzie ponownie wyświetlany."
 
-#: src/ui.cc:1214
+#: src/ui.cc:1265
 msgid "View the progress of the package download"
 msgstr "Widok postępów pobierania pakietów"
 
-#: src/ui.cc:1215
+#: src/ui.cc:1266
 msgid "Package Download"
 msgstr "Pobieranie pakietów"
 
-#: src/ui.cc:1262
+#: src/ui.cc:1313
 msgid ""
 "%BWARNING%b: untrusted versions of the following packages will be installed!"
 "%n%nUntrusted packages could %Bcompromise your system's security%b.  You "
@@ -7454,35 +7447,35 @@ msgstr ""
 "%nNiepewne pakiety mogą %Bzagrozić bezpieczeństwu systemu%b. Kontynuuj "
 "instalację tylko jeżeli dobrze wiesz co chcesz zrobić.%n%n"
 
-#: src/ui.cc:1268
+#: src/ui.cc:1319
 msgid "  %S*%N %s [version %s]%n"
 msgstr "  %S*%N %s [wersja %s]%n"
 
-#: src/ui.cc:1274
+#: src/ui.cc:1325
 msgid "Really Continue"
 msgstr "Kontynuacja mimo tego"
 
-#: src/ui.cc:1276
+#: src/ui.cc:1327
 msgid "Abort Installation"
 msgstr "Przerwanie instalacji"
 
-#: src/ui.cc:1341
+#: src/ui.cc:1392
 msgid "Preview of package installation"
 msgstr "Przegląd planowanych działań"
 
-#: src/ui.cc:1342
+#: src/ui.cc:1393
 msgid "View and/or adjust the actions that will be performed"
 msgstr "Przeglądanie i modyfikowanie akcji do wykonania"
 
-#: src/ui.cc:1399
+#: src/ui.cc:1450
 msgid "Some packages were broken and have been fixed:"
 msgstr "Niektóre pakiety miały niespełnione zależności. Wprowadzono zmiany:"
 
-#: src/ui.cc:1407
+#: src/ui.cc:1458
 msgid "No solution to these dependency problems exists!"
 msgstr "Nie istnieje rozwiązanie problemów z zależnościami!"
 
-#: src/ui.cc:1413
+#: src/ui.cc:1464
 #, c-format
 msgid ""
 "Ran out of time while trying to resolve dependencies (press \"%s\" to try "
@@ -7491,7 +7484,7 @@ msgstr ""
 "Przy rozwiązywaniu problemów z zależnościami przekroczono limit czasu "
 "(wciśnij \"%s\" by próbować dalej)"
 
-#: src/ui.cc:1459
+#: src/ui.cc:1510
 msgid ""
 "Installing/removing packages requires administrative privileges, which you "
 "currently do not have.  Would you like to change to the root account?"
@@ -7499,20 +7492,20 @@ msgstr ""
 "Instalowanie/usuwanie pakietów wymaga uprawnień administratora, których nie "
 "posiadasz. Przełączyć na konto administratora?"
 
-#: src/ui.cc:1462 src/ui.cc:1701 src/ui.cc:1750 src/ui.cc:1833
+#: src/ui.cc:1513 src/ui.cc:1752 src/ui.cc:1813 src/ui.cc:1908
 msgid "Become root"
 msgstr "Uzyskaj prawa administratora"
 
-#: src/ui.cc:1464 src/ui.cc:1703 src/ui.cc:1752 src/ui.cc:1835
+#: src/ui.cc:1515 src/ui.cc:1754 src/ui.cc:1815 src/ui.cc:1910
 msgid "Don't become root"
 msgstr "Porzuć prawa administratora"
 
-#: src/ui.cc:1585
+#: src/ui.cc:1636
 msgid "No packages are scheduled to be installed, removed, or upgraded."
 msgstr ""
 "Nie jest zaplanowana instalacja, aktualizacja ani usunięcie żadnych pakietów."
 
-#: src/ui.cc:1591
+#: src/ui.cc:1642
 msgid ""
 "No packages will be installed, removed or upgraded.  Some packages could be "
 "upgraded, but you have not chosen to upgrade them.  Type \"U\" to prepare an "
@@ -7522,23 +7515,23 @@ msgstr ""
 "pakiety mogłyby być zaktualizowane, jednak wybrano pozostawienie ich w "
 "bieżących wersjach. Wciśnij \"U\" aby przygotować aktualizację."
 
-#: src/ui.cc:1654 src/ui.cc:1799
+#: src/ui.cc:1705 src/ui.cc:1874
 msgid "Deleting obsolete downloaded files"
 msgstr "Usuwanie nieaktualnych pobranych plików"
 
-#: src/ui.cc:1671
+#: src/ui.cc:1722
 msgid "Updating package lists"
 msgstr "Uaktualnianie list pakietów"
 
-#: src/ui.cc:1672
+#: src/ui.cc:1723
 msgid "View the progress of the package list update"
 msgstr "Widok postępów uaktualniania list pakietów"
 
-#: src/ui.cc:1673
+#: src/ui.cc:1724
 msgid "List Update"
 msgstr "Uaktualnianie list"
 
-#: src/ui.cc:1698
+#: src/ui.cc:1749
 msgid ""
 "Updating the package lists requires administrative privileges, which you "
 "currently do not have.  Would you like to change to the root account?"
@@ -7546,19 +7539,23 @@ msgstr ""
 "Uaktualnianie listy pakietów wymaga uprawnień administratora, których nie "
 "posiadasz. Przełączyć na konto administratora?"
 
-#: src/ui.cc:1720 src/ui.cc:1796
+#: src/ui.cc:1764 src/ui.cc:2378
+msgid "Waste time trying to find mines"
+msgstr "Tracenie czasu na poszukiwaniu min"
+
+#: src/ui.cc:1771 src/ui.cc:1859
 msgid "Cleaning while a download is in progress is not allowed"
 msgstr "Nie można czyścić archiwum w czasie pobierania pakietów"
 
-#: src/ui.cc:1723
+#: src/ui.cc:1786
 msgid "Deleting downloaded files"
 msgstr "Usuwanie pobranych plików"
 
-#: src/ui.cc:1737
+#: src/ui.cc:1800
 msgid "Downloaded package files have been deleted"
 msgstr "Usunięto pobrane pliki pakietów"
 
-#: src/ui.cc:1747
+#: src/ui.cc:1810
 msgid ""
 "Cleaning the package cache requires administrative privileges, which you "
 "currently do not have.  Would you like to change to the root account?"
@@ -7566,19 +7563,19 @@ msgstr ""
 "Czyszczenie magazynu podręcznego pakietów wymaga uprawnień administratora, "
 "których nie posiadasz. Przełączyć na konto administratora?"
 
-#: src/ui.cc:1793
+#: src/ui.cc:1856
 msgid "The apt cache file is not available; cannot auto-clean."
 msgstr ""
 "Informacje o pakietach są niedostępne, nie można usunąć nieaktualnych plików."
 
-#: src/ui.cc:1819
+#: src/ui.cc:1894
 #, c-format
 msgid ""
 "Obsolete downloaded package files have been deleted, freeing %sB of disk "
 "space."
 msgstr "Usunięto nieaktualne pliki pakietów, zwalniając %sB na dysku."
 
-#: src/ui.cc:1830
+#: src/ui.cc:1905
 msgid ""
 "Deleting obsolete files requires administrative privileges, which you "
 "currently do not have.  Would you like to change to the root account?"
@@ -7586,125 +7583,125 @@ msgstr ""
 "Usuwanie nieaktualnych plików wymaga uprawnień administratora, których nie "
 "posiadasz. Przełączyć na konto administratora?"
 
-#: src/ui.cc:1932
+#: src/ui.cc:2007
 msgid "No more solutions."
 msgstr "Nie ma więcej rozwiązań."
 
-#: src/ui.cc:2140
+#: src/ui.cc:2215
 msgid "Unable to find a solution to apply."
 msgstr "Nie można znaleźć rozwiązania do zastosowania."
 
-#: src/ui.cc:2146
+#: src/ui.cc:2221
 msgid "Ran out of time while trying to find a solution."
 msgstr "Poszukując rozwiązania przekroczono limit czasu."
 
-#: src/ui.cc:2206 src/ui.cc:2208
+#: src/ui.cc:2281 src/ui.cc:2283
 msgid "Resolve Dependencies"
 msgstr "Rozwiązywanie zależności"
 
-#: src/ui.cc:2207
+#: src/ui.cc:2282
 msgid "Search for solutions to unsatisfied dependencies"
 msgstr "Poszukiwanie rozwiązań problemów z niespełnionymi zależnościami"
 
-#: src/ui.cc:2219
+#: src/ui.cc:2294
 #, c-format
 msgid "Unable to open %ls"
 msgstr "Nie można otworzyć %ls"
 
-#: src/ui.cc:2225
+#: src/ui.cc:2300
 msgid "Error while dumping resolver state"
 msgstr "Błąd w czasie zapisu stanu procedury rozwiązywania zależności"
 
-#: src/ui.cc:2235
+#: src/ui.cc:2310
 msgid "File to which the resolver state should be dumped: "
 msgstr "Plik do zapisu stanu procedury rozwiązywania zależności: "
 
-#: src/ui.cc:2265
+#: src/ui.cc:2340
 msgid "^Install/remove packages"
 msgstr "Za^instaluj/usuń pakiety"
 
-#: src/ui.cc:2268
+#: src/ui.cc:2343
 msgid "^Update package list"
 msgstr "^Uaktualnij listę pakietów"
 
-#: src/ui.cc:2273
+#: src/ui.cc:2348
 msgid "Mark Up^gradable"
 msgstr "Zaznacz ^do aktualizacji"
 
-#: src/ui.cc:2278
+#: src/ui.cc:2353
 msgid "^Forget new packages"
 msgstr "^Zapomnij o nowościach"
 
-#: src/ui.cc:2282
+#: src/ui.cc:2357
 msgid "Canc^el pending actions"
 msgstr "Anuluj za^planowane zadania"
 
-#: src/ui.cc:2286
+#: src/ui.cc:2361
 msgid "^Clean package cache"
 msgstr "Wyczyść ^archiwum pakietów"
 
-#: src/ui.cc:2290
+#: src/ui.cc:2365
 msgid "Clean ^obsolete files"
 msgstr "Usuń ^nieaktualne pliki"
 
-#: src/ui.cc:2297
+#: src/ui.cc:2372
 msgid "^Reload package cache"
 msgstr "^Odśwież archiwum pakietów"
 
-#: src/ui.cc:2302
+#: src/ui.cc:2377
 msgid "^Play Minesweeper"
 msgstr "^Saper"
 
-#: src/ui.cc:2307
+#: src/ui.cc:2382
 msgid "^Become root"
 msgstr "Uzyskaj p^rawa administratora"
 
-#: src/ui.cc:2310
+#: src/ui.cc:2385
 msgid "^Quit"
 msgstr "Za^kończ"
 
-#: src/ui.cc:2317 src/ui.cc:2700
+#: src/ui.cc:2392 src/ui.cc:2775
 msgid "Undo"
 msgstr "Cofnij"
 
-#: src/ui.cc:2326
+#: src/ui.cc:2401
 msgid "^Install"
 msgstr "^Instaluj"
 
-#: src/ui.cc:2327
+#: src/ui.cc:2402
 msgid "Flag the currently selected package for installation or upgrade"
 msgstr "Dodaje wybrany pakiet do instalowanych/aktualizowanych"
 
-#: src/ui.cc:2330
+#: src/ui.cc:2405
 msgid "^Remove"
 msgstr "^Usuń"
 
-#: src/ui.cc:2331
+#: src/ui.cc:2406
 msgid "Flag the currently selected package for removal"
 msgstr "Dodaje wybrany pakiet do usuwanych"
 
-#: src/ui.cc:2334
+#: src/ui.cc:2409
 msgid "^Purge"
 msgstr "^Wyczyść"
 
-#: src/ui.cc:2335
+#: src/ui.cc:2410
 msgid ""
 "Flag the currently selected package and its configuration files for removal"
 msgstr "Dodaje wybrany pakiet do usuwanych wraz z plikami konfiguracyjnymi"
 
-#: src/ui.cc:2338
+#: src/ui.cc:2413
 msgid "^Keep"
 msgstr "^Pozostaw"
 
-#: src/ui.cc:2339
+#: src/ui.cc:2414
 msgid "Cancel any action on the selected package"
 msgstr "Odwołuje planowane działania na wybranym pakiecie"
 
-#: src/ui.cc:2342
+#: src/ui.cc:2417
 msgid "^Hold"
 msgstr "^Zatrzymaj"
 
-#: src/ui.cc:2343
+#: src/ui.cc:2418
 msgid ""
 "Cancel any action on the selected package, and protect it from future "
 "upgrades"
@@ -7712,11 +7709,11 @@ msgstr ""
 "Odwołuje planowane działania na wybranym pakiecie i zapobiega jego "
 "uaktualnieniom w przyszłości"
 
-#: src/ui.cc:2346
+#: src/ui.cc:2421
 msgid "Mark ^Auto"
 msgstr "^Automatyczny"
 
-#: src/ui.cc:2347
+#: src/ui.cc:2422
 msgid ""
 "Mark the selected package as having been automatically installed; it will "
 "automatically be removed if no other packages depend on it"
@@ -7724,11 +7721,11 @@ msgstr ""
 "Oznacza wybrany pakiet jako zainstalowany automatycznie, czyli przeznaczony "
 "do usunięcia, gdy nie będzie przez nic wymagany"
 
-#: src/ui.cc:2350
+#: src/ui.cc:2425
 msgid "Mark ^Manual"
 msgstr "Żą^dany"
 
-#: src/ui.cc:2351
+#: src/ui.cc:2426
 msgid ""
 "Mark the selected package as having been manually installed; it will not be "
 "removed unless you manually remove it"
@@ -7736,11 +7733,11 @@ msgstr ""
 "Oznacza wybrany pakiet jako zainstalowany ręcznie i niepodlegający "
 "automatycznemu usuwaniu"
 
-#: src/ui.cc:2354
+#: src/ui.cc:2429
 msgid "^Forbid Version"
 msgstr "Za^broń tej wersji"
 
-#: src/ui.cc:2355
+#: src/ui.cc:2430
 msgid ""
 "Forbid the candidate version of the selected package from being installed; "
 "newer versions of the package will be installed as usual"
@@ -7748,19 +7745,19 @@ msgstr ""
 "Zabrania instalacji kandydującej wersji wybranego pakietu; nowsze wersje "
 "będą instalowane normalnie"
 
-#: src/ui.cc:2359
+#: src/ui.cc:2434
 msgid "I^nformation"
 msgstr "I^nformacje"
 
-#: src/ui.cc:2360
+#: src/ui.cc:2435
 msgid "Display more information about the selected package"
 msgstr "Wyświetla szczegółowe informacje o wybranym pakiecie"
 
-#: src/ui.cc:2363
+#: src/ui.cc:2438
 msgid "C^ycle Package Information"
 msgstr "C^ykliczne przełączanie informacji o pakiecie"
 
-#: src/ui.cc:2364
+#: src/ui.cc:2439
 msgid ""
 "Cycle through the modes of the package information area: it can show the "
 "package's long description, a summary of its dependency status, or an "
@@ -7770,60 +7767,60 @@ msgstr ""
 "może być wyświetlany długi opis, podsumowanie zależności pakietu lub "
 "uzasadnienie dlaczego pakiet jest wymagany."
 
-#: src/ui.cc:2367
+#: src/ui.cc:2442
 msgid "^Changelog"
 msgstr "Dzi^ennik zmian"
 
-#: src/ui.cc:2368
+#: src/ui.cc:2443
 msgid "Display the Debian changelog of the selected package"
 msgstr "Wyświetla dziennik zmian wybranego pakietu"
 
-#: src/ui.cc:2375
+#: src/ui.cc:2450
 msgid "^Examine Solution"
 msgstr "^Wyświetl rozwiązanie"
 
-#: src/ui.cc:2376
+#: src/ui.cc:2451
 msgid "Examine the currently selected solution to the dependency problems."
 msgstr ""
 "Wyświetla szczegóły aktualnie wybranego rozwiązania problemów z zależnościami"
 
-#: src/ui.cc:2379
+#: src/ui.cc:2454
 msgid "Apply ^Solution"
 msgstr "^Zastosuj rozwiązanie"
 
-#: src/ui.cc:2380
+#: src/ui.cc:2455
 msgid "Perform the actions contained in the currently selected solution."
 msgstr "Wykonuje działania składające się na aktualnie wybrane rozwiązanie"
 
-#: src/ui.cc:2383
+#: src/ui.cc:2458
 msgid "^Next Solution"
 msgstr "^Następne rozwiązanie"
 
-#: src/ui.cc:2384
+#: src/ui.cc:2459
 msgid "Select the next solution to the dependency problems."
 msgstr "Wybiera następne rozwiązanie problemów z zależnościami"
 
-#: src/ui.cc:2387
+#: src/ui.cc:2462
 msgid "^Previous Solution"
 msgstr "^Poprzednie rozwiązanie"
 
-#: src/ui.cc:2388
+#: src/ui.cc:2463
 msgid "Select the previous solution to the dependency problems."
 msgstr "Wybiera poprzednie rozwiązanie problemów z zależnościami"
 
-#: src/ui.cc:2391
+#: src/ui.cc:2466
 msgid "^First Solution"
 msgstr "P^ierwsze rozwiązanie"
 
-#: src/ui.cc:2392
+#: src/ui.cc:2467
 msgid "Select the first solution to the dependency problems."
 msgstr "Wybiera pierwsze rozwiązanie problemów z zależnościami"
 
-#: src/ui.cc:2395
+#: src/ui.cc:2470
 msgid "^Last Solution"
 msgstr "O^statnie rozwiązanie"
 
-#: src/ui.cc:2396
+#: src/ui.cc:2471
 msgid ""
 "Select the last solution to the dependency problems that has been generated "
 "so far."
@@ -7831,35 +7828,35 @@ msgstr ""
 "Wybiera ostatnie wygenerowane do tej pory rozwiązanie problemów z "
 "zależnościami"
 
-#: src/ui.cc:2402
+#: src/ui.cc:2477
 msgid "Toggle ^Rejected"
 msgstr "Przełącz ^odrzucenie"
 
-#: src/ui.cc:2403
+#: src/ui.cc:2478
 msgid "Toggle whether the currently selected action is rejected."
 msgstr "Zmienia decyzję o odrzuceniu wybranej akcji"
 
-#: src/ui.cc:2407
+#: src/ui.cc:2482
 msgid "Toggle ^Approved"
 msgstr "Przełącz ^akceptację"
 
-#: src/ui.cc:2408
+#: src/ui.cc:2483
 msgid "Toggle whether the currently selected action is approved."
 msgstr "Zmienia decyzję o akceptacji wybranej akcji"
 
-#: src/ui.cc:2412
+#: src/ui.cc:2487
 msgid "^View Target"
 msgstr "Wyświetl ^cel"
 
-#: src/ui.cc:2413
+#: src/ui.cc:2488
 msgid "View the package which will be affected by the selected action"
 msgstr "Wyświetla informacje o pakiecie, którego dotyczy wybrana akcja"
 
-#: src/ui.cc:2419
+#: src/ui.cc:2494
 msgid "Reject Breaking ^Holds"
 msgstr "O^drzucaj naruszenia zatrzymań"
 
-#: src/ui.cc:2421
+#: src/ui.cc:2496
 msgid ""
 "Reject all actions that would change the state of held packages or install "
 "forbidden versions"
@@ -7867,221 +7864,221 @@ msgstr ""
 "Odrzucanie wszystkich akcji, które zmieniłyby stan zatrzymania pakietów lub "
 "mogły zainstalować ich zabronione wersje"
 
-#: src/ui.cc:2429
+#: src/ui.cc:2504
 msgid "^Find"
 msgstr "^Znajdź"
 
-#: src/ui.cc:2430
+#: src/ui.cc:2505
 msgid "Search forwards"
 msgstr "Nowe wyszukiwanie"
 
-#: src/ui.cc:2433
+#: src/ui.cc:2508
 msgid "^Find Backwards"
 msgstr "Z^najdź poprzedni"
 
-#: src/ui.cc:2434
+#: src/ui.cc:2509
 msgid "Search backwards"
 msgstr "Nowe wyszukiwanie wstecz"
 
-#: src/ui.cc:2437
+#: src/ui.cc:2512
 msgid "Find ^Again"
 msgstr "Znajdź ^kolejny"
 
-#: src/ui.cc:2438
+#: src/ui.cc:2513
 msgid "Repeat the last search"
 msgstr "Powtarza wyszukiwanie"
 
-#: src/ui.cc:2441
+#: src/ui.cc:2516
 msgid "Find Again ^Backwards"
 msgstr "Ponownie zn^ajdź poprzedni"
 
-#: src/ui.cc:2442
+#: src/ui.cc:2517
 msgid "Repeat the last search in the opposite direction"
 msgstr "Powtarza wyszukiwanie w przeciwnym kierunku"
 
-#: src/ui.cc:2446
+#: src/ui.cc:2521
 msgid "^Limit Display"
 msgstr "^Filtruj"
 
-#: src/ui.cc:2447
+#: src/ui.cc:2522
 msgid "Apply a filter to the package list"
 msgstr "Ogranicza wyświetlaną listę pakietów"
 
-#: src/ui.cc:2450
+#: src/ui.cc:2525
 msgid "^Un-Limit Display"
 msgstr "^Usuń filtr"
 
-#: src/ui.cc:2451
+#: src/ui.cc:2526
 msgid "Remove the filter from the package list"
 msgstr "Usuwa ograniczenie wyświetlanej listy pakietów"
 
-#: src/ui.cc:2455
+#: src/ui.cc:2530
 msgid "Find ^Broken"
 msgstr "Znajdź ^problem"
 
-#: src/ui.cc:2456
+#: src/ui.cc:2531
 msgid "Find the next package with unsatisfied dependencies"
 msgstr "Szuka kolejnego pakietu z niespełnionymi zależnościami"
 
-#: src/ui.cc:2463
+#: src/ui.cc:2538
 msgid "^Preferences"
 msgstr "^Preferencje"
 
-#: src/ui.cc:2468
+#: src/ui.cc:2543
 msgid "^UI options"
 msgstr "Opcje ^interfejsu"
 
-#: src/ui.cc:2469
+#: src/ui.cc:2544
 msgid "Change the settings which affect the user interface"
 msgstr "Zmienia opcje dotyczące interfejsu użytkownika"
 
-#: src/ui.cc:2472
+#: src/ui.cc:2547
 msgid "^Dependency handling"
 msgstr "^Zależności"
 
-#: src/ui.cc:2473
+#: src/ui.cc:2548
 msgid "Change the settings which affect how package dependencies are handled"
 msgstr "Zmienia opcje dotyczące zależności między pakietami"
 
-#: src/ui.cc:2476
+#: src/ui.cc:2551
 msgid "^Miscellaneous"
 msgstr "^Różne"
 
-#: src/ui.cc:2477
+#: src/ui.cc:2552
 msgid "Change miscellaneous program settings"
 msgstr "Zmienia różne inne opcje programu"
 
-#: src/ui.cc:2483
+#: src/ui.cc:2558
 msgid "^Revert options"
 msgstr "Przywróć ^domyślne"
 
-#: src/ui.cc:2484
+#: src/ui.cc:2559
 msgid "Reset all settings to the system defaults"
 msgstr "Przywraca wszystkim opcjom wartości domyślne"
 
-#: src/ui.cc:2495
+#: src/ui.cc:2570
 msgid "^Next"
 msgstr "^Następny"
 
-#: src/ui.cc:2496
+#: src/ui.cc:2571
 msgid "View next display"
 msgstr "Wyświetla następny widok"
 
-#: src/ui.cc:2499
+#: src/ui.cc:2574
 msgid "^Prev"
 msgstr "^Poprzedni"
 
-#: src/ui.cc:2500
+#: src/ui.cc:2575
 msgid "View previous display"
 msgstr "Wyświetla poprzedni widok"
 
-#: src/ui.cc:2503
+#: src/ui.cc:2578
 msgid "^Close"
 msgstr "^Zamknij"
 
-#: src/ui.cc:2504
+#: src/ui.cc:2579
 msgid "Close this display"
 msgstr "Zamyka bieżący widok"
 
-#: src/ui.cc:2509
+#: src/ui.cc:2584
 msgid "New Package ^View"
 msgstr "Nowy ^widok pakietów"
 
-#: src/ui.cc:2510
+#: src/ui.cc:2585
 msgid "Create a new default package view"
 msgstr "Tworzy nowy standardowy widok listy pakietów"
 
-#: src/ui.cc:2513
+#: src/ui.cc:2588
 msgid "Audit ^Recommendations"
 msgstr "P^olecane pakiety"
 
-#: src/ui.cc:2514
+#: src/ui.cc:2589
 msgid ""
 "View packages which it is recommended that you install, but which are not "
 "currently installed."
 msgstr "Wyświetla niezainstalowane pakiety, których instalacja jest polecana"
 
-#: src/ui.cc:2517
+#: src/ui.cc:2592
 msgid "New ^Flat Package List"
 msgstr "Nowy płaski w^idok pakietów"
 
-#: src/ui.cc:2518
+#: src/ui.cc:2593
 msgid "View all the packages on the system in a single uncategorized list"
 msgstr "Wyświetla wszystkie pakiety bez podziału na kategorie"
 
-#: src/ui.cc:2521
+#: src/ui.cc:2596
 msgid "New ^Debtags Browser"
 msgstr "Nowa przeglądarka ^etykiet"
 
-#: src/ui.cc:2523
+#: src/ui.cc:2598
 msgid "Browse packages using Debtags data"
 msgstr "Pozwala na przeglądanie pakietów według etykiet Debtags"
 
-#: src/ui.cc:2526
+#: src/ui.cc:2601
 msgid "New Categorical ^Browser"
 msgstr "Nowa przeglądarka ^kategorii"
 
-#: src/ui.cc:2528
+#: src/ui.cc:2603
 msgid "Browse packages by category"
 msgstr "Pozwala na przeglądanie pakietów według kategorii"
 
-#: src/ui.cc:2536
+#: src/ui.cc:2611
 msgid "^About"
 msgstr "^O Aptitude"
 
-#: src/ui.cc:2537
+#: src/ui.cc:2612
 msgid "View information about this program"
 msgstr "Wyświetla informacje o programie"
 
-#: src/ui.cc:2540
+#: src/ui.cc:2615
 msgid "^Help"
 msgstr "^Pomoc"
 
-#: src/ui.cc:2541
+#: src/ui.cc:2616
 msgid "View the on-line help"
 msgstr "Wyświetla pomoc Aptitude"
 
-#: src/ui.cc:2543
+#: src/ui.cc:2618
 msgid "User's ^Manual"
 msgstr "Podręcznik ^użytkownika"
 
-#: src/ui.cc:2544
+#: src/ui.cc:2619
 msgid "View the detailed program manual"
 msgstr "Wyświetla podręcznik użytkownika programu"
 
-#: src/ui.cc:2547
+#: src/ui.cc:2622
 msgid "^FAQ"
 msgstr "^FAQ"
 
-#: src/ui.cc:2551
+#: src/ui.cc:2626
 msgid "^News"
 msgstr "^Nowości"
 
-#: src/ui.cc:2552
+#: src/ui.cc:2627
 msgid "View the important changes made in each version of "
 msgstr "Wyświetla najważniejsze zmiany w kolejnych wersjach "
 
-#: src/ui.cc:2555
+#: src/ui.cc:2630
 msgid "^License"
 msgstr "^Licencja"
 
-#: src/ui.cc:2699
+#: src/ui.cc:2774
 msgid "Actions"
 msgstr "Akcje"
 
-#: src/ui.cc:2703
+#: src/ui.cc:2778
 msgid "Search"
 msgstr "Znajdź"
 
-#: src/ui.cc:2704
+#: src/ui.cc:2779
 msgid "Options"
 msgstr "Opcje"
 
-#: src/ui.cc:2705
+#: src/ui.cc:2780
 msgid "Views"
 msgstr "Widoki"
 
-#: src/ui.cc:2771
+#: src/ui.cc:2846
 #, c-format
 msgid ""
 "%ls: Menu  %ls: Help  %ls: Quit  %ls: Update  %ls: Download/Install/Remove "
@@ -8090,11 +8087,11 @@ msgstr ""
 "%ls: Menu  %ls: Pomoc  %ls: Zakończ  %ls: Uaktualnij  %ls: Pobierz/instaluj/"
 "usuń"
 
-#: src/ui.cc:3130
+#: src/ui.cc:3205
 msgid "yes_key"
 msgstr "t"
 
-#: src/ui.cc:3131
+#: src/ui.cc:3206
 msgid "no_key"
 msgstr "n"
 
@@ -8127,6 +8124,57 @@ msgid "You can only view changelogs of official Debian packages."
 msgstr ""
 "Możliwe jest wyświetlanie dzienników zmian tylko oficjalnych pakietów "
 "Debiana."
+
+#~ msgid "Invalid command-line option '%s'"
+#~ msgstr "Błędna opcja wiersza poleceń \"%s\""
+
+#~ msgid "Couldn't clean out list directories"
+#~ msgstr "Nie można wyczyścić katalogów z listami"
+
+#~ msgid "Couldn't rebuild package cache"
+#~ msgstr "Nie można przebudować informacji o pakietach"
+
+#~ msgid "Too many arguments to by-section grouping policy"
+#~ msgstr "Zbyt wiele parametrów przy grupowaniu według sekcji"
+
+#~ msgid "By-status grouping policies take no arguments"
+#~ msgstr "Przy grupowaniu według stanu nie używa się żadnych parametrów"
+
+#~ msgid "By-mode grouping policies take no arguments"
+#~ msgstr "Przy grupowaniu według akcji nie używa się żadnych parametrów"
+
+#~ msgid "First-character grouping policies take no arguments"
+#~ msgstr ""
+#~ "Przy grupowaniu według pierwszego znaku nie używa się żadnych parametrów"
+
+#~ msgid "Version-generating grouping policies take no arguments"
+#~ msgstr ""
+#~ "Przy grupowaniu wyświetlającym wersje nie używa się żadnych parametrów"
+
+#~ msgid "Dep-generating grouping policies take no arguments"
+#~ msgstr ""
+#~ "Przy grupowaniu wyświetlającym zależności nie używa się żadnych parametrów"
+
+#~ msgid "By-priority grouping policies take no arguments"
+#~ msgstr "Przy grupowaniu według priorytetu nie używa się żadnych parametrów"
+
+#~ msgid "Expected no more than one argument to a tag grouping policy"
+#~ msgstr "Przy grupowaniu według etykiet można podać najwyżej jeden parametr"
+
+#~ msgid "Expected '(' after 'pattern'"
+#~ msgstr "Brak \"(\" po \"pattern\""
+
+#~ msgid "Missing arguments to 'pattern'"
+#~ msgstr "Brak parametrów metody \"pattern\""
+
+#~ msgid "By-version sorting policies take no arguments"
+#~ msgstr "Przy sortowaniu według wersji nie używa się żadnych parametrów"
+
+#~ msgid "By-installed size sorting policies take no arguments"
+#~ msgstr "Przy sortowaniu według rozmiaru nie używa się żadnych parametrów"
+
+#~ msgid "By-priority sorting policies take no arguments"
+#~ msgstr "Przy sortowaniu według priorytetu nie używa się żadnych parametrów"
 
 #~ msgid ""
 #~ "%BOption:%b  %s\n"
