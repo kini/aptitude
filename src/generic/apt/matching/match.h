@@ -267,6 +267,17 @@ namespace aptitude
 			 (regexp_match *)0, (regexp_match *)0);
       }
 
+      static cwidget::util::ref_ptr<match> make_atomic(const cwidget::util::ref_ptr<pattern> &p,
+						       const std::string &match_string)
+      {
+	return new match(atomic, p,
+			 cwidget::util::ref_ptr<structural_match>(),
+			 pkgCache::DepIterator(),
+			 pkgCache::PrvIterator(),
+			 match_string,
+			 (regexp_match *)0, (regexp_match *)0);
+      }
+
       /** \brief Create a new regular expression match.
        *
        *  \param p  The pattern that produced this match.
