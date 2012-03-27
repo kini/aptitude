@@ -1765,3 +1765,71 @@ pkg_grouppolicy *pkg_grouppolicy_source_factory::instantiate(pkg_signal *sig,
 {
   return new pkg_grouppolicy_source(chain, sig, desc_sig);
 }
+
+/*****************************************************************************/
+
+// Groups packages by architecture
+class pkg_grouppolicy_arch:public pkg_grouppolicy
+{
+  typedef map<string,
+	      pair<pkg_grouppolicy *, pkg_subtree *> > childmap;
+
+  childmap children;
+  pkg_grouppolicy_factory *chain;
+
+  pkg_grouppolicy *spillover;
+
+public:
+  pkg_grouppolicy_arch(pkg_grouppolicy_factory *_chain,
+		       pkg_signal *_sig, desc_signal *_desc_sig)
+    :pkg_grouppolicy(_sig, _desc_sig),
+     chain(_chain),
+     spillover(_chain->instantiate(get_sig(), get_desc_sig()))
+  {
+  }
+
+  ~pkg_grouppolicy_arch()
+  {
+    for(childmap::iterator i=children.begin(); i!=children.end(); i++)
+      delete i->second.first;
+  }
+
+  void add_package(const pkgCache::PkgIterator &pkg, pkg_subtree *root)
+  {
+    string arch;
+
+    if(!pkg.VersionList().end())
+      {
+	arch=pkg.VersionList().Arch();
+      }
+    else
+      {
+	arch=_("virtual");
+      }
+
+    childmap::iterator found=children.find(arch);
+
+    if(found!=children.end())
+      found->second.first->add_package(pkg, found->second.second);
+    else
+      {
+	pkg_subtree *newtree=new pkg_subtree(cw::util::transcode(arch),
+					     L"",
+					     get_desc_sig());
+	pkg_grouppolicy *newchild=chain->instantiate(get_sig(),
+						     get_desc_sig());
+	children[arch].first=newchild;
+	children[arch].second=newtree;
+	root->add_child(newtree);
+	newtree->set_num_packages_parent(root);
+
+	newchild->add_package(pkg, newtree);
+      }
+  }  
+};
+
+pkg_grouppolicy *pkg_grouppolicy_arch_factory::instantiate(pkg_signal *sig,
+							   desc_signal *desc_sig)
+{
+  return new pkg_grouppolicy_arch(chain, sig, desc_sig);
+}

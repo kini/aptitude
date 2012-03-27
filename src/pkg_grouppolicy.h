@@ -391,4 +391,18 @@ public:
   {delete chain;}
 };
 
+// Groups by architecture
+class pkg_grouppolicy_arch_factory:public pkg_grouppolicy_factory
+{
+  pkg_grouppolicy_factory *chain;
+public:
+  pkg_grouppolicy_arch_factory(pkg_grouppolicy_factory *_chain):chain(_chain) {}
+
+  pkg_grouppolicy *instantiate(pkg_signal *_sig,
+			       desc_signal *_desc_sig);
+
+  virtual ~pkg_grouppolicy_arch_factory()
+  {delete chain;}
+};
+
 #endif

@@ -758,6 +758,17 @@ class pattern_policy_parser : public group_policy_parser
   }
 };
 
+class arch_policy_parser : public string_policy_parser
+{
+  group_policy_parse_node *create_node(const vector<string> &args)
+  {
+    if(args.size()!=0)
+      throw GroupParseException(_("Grouping policy '%s' takes no arguments"), "architecture");
+
+    return new policy_node0<pkg_grouppolicy_arch_factory>;
+  }
+};
+
 static void init_parse_types()
 {
   static bool initted_parse_types=false;
@@ -770,6 +781,7 @@ static void init_parse_types()
       parse_types["filter"]=new filter_policy_parser;
       parse_types["firstchar"]=new firstchar_policy_parser;
       parse_types["source"]=new source_policy_parser;
+      parse_types["architecture"]=new arch_policy_parser;
 
       parse_types["versions"]=new ver_policy_parser;
       parse_types["deps"]=new dep_policy_parser;
