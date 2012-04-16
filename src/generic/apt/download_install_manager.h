@@ -73,12 +73,6 @@ class download_install_manager : public download_manager
    */
   pkgPackageManager::OrderResult run_dpkg(int status_fd);
 
-  /** Actually perform the installation/removal of packages and tell
-   *  the caller what happened.
-   */
-  result execute_install_run(pkgAcquire::RunResult res,
-			     OpProgress &load_progress);
-
   /** \brief Invoke the part of finish() that runs after dpkg.
    *
    *  This function must be invoked in the foreground thread.
