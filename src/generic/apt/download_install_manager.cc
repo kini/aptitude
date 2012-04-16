@@ -109,8 +109,6 @@ download_manager::result download_install_manager::finish_pre_dpkg(pkgAcquire::R
 {
   if(res != pkgAcquire::Continue)
     return failure;
-  else if(download_only)
-    return success;
 
   bool failed=false;
   for(pkgAcquire::ItemIterator i = fetcher->ItemsBegin();
@@ -126,6 +124,20 @@ download_manager::result download_install_manager::finish_pre_dpkg(pkgAcquire::R
       failed=true;
       _error->Error(_("Failed to fetch %s: %s"), (*i)->DescURI().c_str(), (*i)->ErrorText.c_str());
       break;
+    }
+
+  if(download_only)
+    {
+      // TODO: Handle files on other CDROMs (StatIdle?).
+      if(failed)
+	{
+	  _error->Error(_("Some files failed to download"));
+	  return failure;
+	}
+      else
+	{
+	  return success;
+	}
     }
 
   if(failed && !pm->FixMissing())
@@ -226,9 +238,11 @@ void download_install_manager::finish_post_dpkg(pkgPackageManager::OrderResult d
       // world.
       //
       // This implicitly updates the package state file on disk.
-      apt_load_cache(progress, true);
+      if(!download_only)
+	apt_load_cache(progress, true);
 
-      if(aptcfg->FindB(PACKAGE "::Forget-New-On-Install", false))
+      if(aptcfg->FindB(PACKAGE "::Forget-New-On-Install", false)
+	 && !download_only)
 	{
 	  if(apt_cache_file != NULL)
 	    {
@@ -248,7 +262,7 @@ void download_install_manager::finish(pkgAcquire::RunResult result,
 {
   const download_manager::result pre_res = finish_pre_dpkg(result);
 
-  if(pre_res == success)
+  if(pre_res == success && !download_only)
     {
       run_dpkg_in_terminal(sigc::mem_fun(*this, &download_install_manager::run_dpkg),
 			   sigc::bind(sigc::mem_fun(*this, &download_install_manager::finish_post_dpkg),
@@ -258,7 +272,23 @@ void download_install_manager::finish(pkgAcquire::RunResult result,
     }
   else
     {
-      finish_post_dpkg(pkgPackageManager::Failed,
+      pkgPackageManager::OrderResult res;
+
+      switch(pre_res)
+	{
+	case success:
+	  res = pkgPackageManager::Completed;
+	  break;
+	case do_again:
+	  res = pkgPackageManager::Incomplete;
+	  break;
+	case failure:
+	default:
+	  res = pkgPackageManager::Failed;
+	  break;
+	}
+
+      finish_post_dpkg(res,
 		       progress,
 		       k);
       return;
