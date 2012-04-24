@@ -7,7 +7,7 @@ AM_CONFIG_HEADER(config.h)
 dnl Use C++
 AC_LANG([C++])
 
-ALL_LINGUAS="ar ast bs ca cs da de dz el es eu fi fr gl hu it ja km ku lt mr nb ne nl nn pl pt pt_BR ro ru sk sv th tl tr uk vi zh_CN zh_TW"
+ALL_LINGUAS="ar ast bs ca cs da de dz el es eu fi fr gl hu hr it ja km ku lt mr nb ne nl nn pl pt pt_BR ro ru sk sv th tl tr uk vi zh_CN zh_TW"
 AM_GNU_GETTEXT([external])
 
 dnl Checks for programs.
