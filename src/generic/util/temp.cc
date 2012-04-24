@@ -215,7 +215,7 @@ namespace temp
     temp_base = new std::string(tmpl.get());
     LOG_INFO(Loggers::getAptitudeTemp(),
 	     "Initialized the temporary file module using the base directory "
-	     << temp_base);
+	     << *temp_base);
   }
 
   void shutdown()
