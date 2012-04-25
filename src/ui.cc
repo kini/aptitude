@@ -2380,7 +2380,7 @@ cw::menu_info actions_menu[]={
   cw::menu_info::MENU_SEPARATOR,
 
   cw::menu_info(cw::menu_info::MENU_ITEM, N_("^Become root"), NULL,
-	       N_("Run 'su' to become root; this will restart the program, but your settings will be preserved"), sigc::bind(sigc::ptr_fun(do_su_to_root), ""), sigc::ptr_fun(su_to_root_enabled)),
+	       N_("Restart the program as root; your settings will be preserved"), sigc::bind(sigc::ptr_fun(do_su_to_root), ""), sigc::ptr_fun(su_to_root_enabled)),
 
   cw::menu_info(cw::menu_info::MENU_ITEM, N_("^Quit"), "QuitProgram",
 	       N_("Exit the program"), sigc::ptr_fun(do_quit)),
