@@ -51,6 +51,12 @@ int cmdline_download(int argc, char *argv[])
   shared_ptr<OpProgress> progress = make_text_progress(false, term, term, term);
   apt_init(progress.get(), false);
 
+  if(_error->PendingError())
+    {
+      _error->DumpErrors();
+      return -1;
+    }
+
   pkgSourceList list;
   if(!list.ReadMainList())
     {
