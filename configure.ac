@@ -515,10 +515,11 @@ int main(int argc, char **argv)
         dnl Ok, check whether we can link it if we include the gmock
         dnl source code.  Note that it will require both pthreads and
         dnl gtest; no way around that.
-        [LIBS="$OLD_LIBS -lpthread -lgtest"
+        [LIBS="$OLD_LIBS -lpthread"
          OLD_CPPFLAGS="$CPPFLAGS"
-         CPPFLAGS="$CPPFLAGS -I/usr/src/gmock"
+         CPPFLAGS="$CPPFLAGS -I/usr/src/gtest -I/usr/src/gmock"
          AC_LINK_IFELSE([AC_LANG_SOURCE([
+#include <src/gtest-all.cc>
 #include <src/gmock-all.cc>
 
 int main(int argc, char **argv)

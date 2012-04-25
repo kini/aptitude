@@ -36,9 +36,9 @@ test_promotion_set.o test_resolver_costs.o test_resolver_hints.o: $(top_srcdir)/
 if BUILD_LOCAL_GMOCK
 noinst_LIBRARIES = libgmock.a
 
-GMOCK_LDFLAGS = $(builddir)/libgmock.a -lgtest
-nodist_libgmock_a_SOURCES = /usr/src/gmock/src/gmock-all.cc
-libgmock_a_CPPFLAGS = -I/usr/src/gmock
+GMOCK_LDFLAGS = $(builddir)/libgmock.a
+nodist_libgmock_a_SOURCES = /usr/src/gtest/src/gtest-all.cc /usr/src/gmock/src/gmock-all.cc
+libgmock_a_CPPFLAGS = -I/usr/src/gtest -I/usr/src/gmock
 else
 GMOCK_LDFLAGS = -lgmock -lgtest
 endif
