@@ -149,7 +149,7 @@ static cwidget::fragment *prv_lst_frag(pkgCache::PrvIterator prv,
 
       for( ; !prv.end(); ++prv)
 	{
-	  string name         = prv.OwnerPkg().Name();
+	  const string name   = prv.OwnerPkg().FullName(true);
 	  const char *version = prv.OwnerVer().VerStr();
 
 	  if(version != NULL)
