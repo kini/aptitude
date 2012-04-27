@@ -103,8 +103,11 @@ bool download_update_manager::prepare(OpProgress &progress,
       fetcher = NULL;
       return false;
     }
-  else
-    return true;
+
+  // Run scripts
+  RunScripts("APT::Update::Pre-Invoke");
+
+  return true;
 }
 
 // TODO: this should be lifted to generic code.
@@ -283,6 +286,7 @@ void download_update_manager::finish(pkgAcquire::RunResult res,
       return;
     }
 
+  bool failed = false;
   bool transientNetworkFailure = false;
   result rval = success;
 
@@ -300,27 +304,47 @@ void download_update_manager::finish(pkgAcquire::RunResult res,
 
       (*it)->Finished();
 
+      ::URI uri((*it)->DescURI());
+      uri.User.clear();
+      uri.Password.clear();
+      const std::string descUri = string(uri);
+      _error->Warning(_("Failed to fetch %s: %s\n"), descUri.c_str(), (*it)->ErrorText.c_str());
+
       if((*it)->Status == pkgAcquire::Item::StatTransientNetworkError)
 	{
 	  transientNetworkFailure = true;
 	  continue;
 	}
 
-      // Q: should I display an error message for this source?
+      failed = true;
       rval = failure;
     }
 
   // Clean old stuff out
-  std::string listsdir = aptcfg->FindDir("Dir::State::lists");
-  if(rval == success && !transientNetworkFailure &&
-     aptcfg->FindB("APT::Get::List-Cleanup", true) == true &&
-     aptcfg->FindB("APT::List-Cleanup", true) == true &&
+  const std::string listsdir = aptcfg->FindDir("Dir::State::lists");
+  if(!transientNetworkFailure && !failed &&
+     (aptcfg->FindB("APT::Get::List-Cleanup", true) == true &&
+      aptcfg->FindB("APT::List-Cleanup", true) == true) &&
      (fetcher->Clean(listsdir) == false ||
       fetcher->Clean(listsdir + "partial/") == false))
     {
       _error->Error(_("Couldn't clean out list directories"));
-      k(failure);
-      return;
+      rval = failure;
+    }
+
+  if(transientNetworkFailure == true)
+    _error->Warning(_("Some index files failed to download. They have been ignored, or old ones used instead."));
+  else if(failed == true)
+    _error->Error(_("Some index files failed to download. They have been ignored, or old ones used instead."));
+
+  if(rval != failure)
+    {
+      // Run the success scripts if all was fine
+      if(!transientNetworkFailure && !failed)
+	RunScripts("APT::Update::Post-Invoke-Success");
+
+      // Run the other scripts
+      RunScripts("APT::Update::Post-Invoke");
     }
 
   // Rebuild the apt caches as done in apt-get.  cachefile is scoped
@@ -329,6 +353,7 @@ void download_update_manager::finish(pkgAcquire::RunResult res,
   // redundant work at the command-line.
   {
     pkgCacheFile cachefile;
+    pkgCacheFile::RemoveCaches();
     if(!cachefile.BuildCaches(progress, true))
       {
 	_error->Error(_("Couldn't rebuild package cache"));
