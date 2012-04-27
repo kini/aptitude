@@ -74,22 +74,9 @@ bool download_update_manager::prepare(OpProgress &progress,
   if(_error->PendingError())
     return false;
 
-  // Lock the list directory
-  FileFd lock;
-  if(aptcfg->FindB("Debug::NoLocking", false) == false)
-    {
-      lock.Fd(GetLock(aptcfg->FindDir("Dir::State::Lists")+"lock"));
-      if(_error->PendingError() == true)
-	{
-	  _error->Error(_("Couldn't lock list directory..are you root?"));
-	  return false;
-	}
-    }
-
   fetcher = new pkgAcquire();
-  fetcher->Setup(&acqlog);
-
-  if(!src_list.GetIndexes(fetcher))
+  if(fetcher->Setup(&acqlog, aptcfg->FindDir("Dir::State::Lists")) == false ||
+     src_list.GetIndexes(fetcher) == false)
     {
       delete fetcher;
       fetcher = NULL;
