@@ -183,7 +183,7 @@ class ui_download_manager : public sigc::trackable
    */
   sigc::slot0<void> done_progress_destructor;
 
-  void done(download_thread *, pkgAcquire::RunResult res);
+  void done(download_thread *t, pkgAcquire::RunResult res);
 
   /** \brief Finishes the work of done() after the post-download
    *  actions of the download manager have run.

@@ -49,8 +49,10 @@ ui_download_manager::~ui_download_manager()
   delete st;
 }
 
-void ui_download_manager::done(download_thread *, pkgAcquire::RunResult res)
+void ui_download_manager::done(download_thread *t, pkgAcquire::RunResult res)
 {
+  delete t;
+
   progress_with_destructor pair = make_progress_bar();
   done_progress = pair.first;
   done_progress_destructor = pair.second;
