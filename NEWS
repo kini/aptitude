@@ -10,6 +10,29 @@ Version 0.6.7                               "I said 'Step pause turn
   * [cmdline]: Check for apt_init errors in cmdline_download.cc
                (Closes: #670379)
 
+- Internal changes:
+
+  * [all]: No longer use ListUpdate (from libapt-pkg) to update package
+           lists.  Instead, restore the previous code and update it to
+           include the semantics from ListUpdate which were missing.
+
+           ListUpdate was too coarse to suit download_update_manager
+           properly even though it more-or-less worked.
+
+- Cosmetic and UI bugs:
+
+  * [curses]: Apply patch from Ubuntu: don't mention 'su' in 'Become
+              root'.
+
+- Build system changes:
+
+  * [all]: Include build of gtest when building gmock. (Closes: #670403)
+
+- Documentation:
+
+  * [doc]: Apply patch from Ubuntu: update Finnish manpage to point to
+           doc package.
+
 - New translations:
 
   * Croatian (Closes: #667934)
