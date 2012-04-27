@@ -27,7 +27,6 @@
 #include <apt-pkg/cachefile.h>
 #include <apt-pkg/clean.h>
 #include <apt-pkg/error.h>
-#include <apt-pkg/algorithms.h>
 
 #include <cwidget/generic/util/exception.h>
 #include <cwidget/generic/util/ssprintf.h>
@@ -79,8 +78,6 @@ bool download_update_manager::prepare(OpProgress &progress,
       return false;
     }
 
-  stat = &acqlog;
-
   // Abort here so we don't spew random messages below.
   if(_error->PendingError())
     return false;
@@ -97,23 +94,17 @@ bool download_update_manager::prepare(OpProgress &progress,
 	}
     }
 
-  return true;
-}
+  fetcher = new pkgAcquire();
+  fetcher->Setup(&acqlog);
 
-pkgAcquire::RunResult download_update_manager::do_download()
-{
-  if(ListUpdate(*stat, src_list) == false)
-    return pkgAcquire::Failed;
-
-  return pkgAcquire::Continue;
-}
-
-pkgAcquire::RunResult download_update_manager::do_download(int PulseInterval)
-{
-  if(ListUpdate(*stat, src_list, PulseInterval) == false)
-    return pkgAcquire::Failed;
-
-  return pkgAcquire::Continue;
+  if(!src_list.GetIndexes(fetcher))
+    {
+      delete fetcher;
+      fetcher = NULL;
+      return false;
+    }
+  else
+    return true;
 }
 
 // TODO: this should be lifted to generic code.
@@ -292,6 +283,46 @@ void download_update_manager::finish(pkgAcquire::RunResult res,
       return;
     }
 
+  bool transientNetworkFailure = false;
+  result rval = success;
+
+  // We need to claim that the download failed if any source failed,
+  // and invoke Finished() on any failed items.  Also, we shouldn't
+  // clean the package lists if any individual item failed because it
+  // makes users grumpy (see Debian bugs #201842 and #479620).
+  //
+  // See also apt-get.cc.
+  for(pkgAcquire::ItemIterator it = fetcher->ItemsBegin();
+      it != fetcher->ItemsEnd(); ++it)
+    {
+      if((*it)->Status == pkgAcquire::Item::StatDone)
+	continue;
+
+      (*it)->Finished();
+
+      if((*it)->Status == pkgAcquire::Item::StatTransientNetworkError)
+	{
+	  transientNetworkFailure = true;
+	  continue;
+	}
+
+      // Q: should I display an error message for this source?
+      rval = failure;
+    }
+
+  // Clean old stuff out
+  std::string listsdir = aptcfg->FindDir("Dir::State::lists");
+  if(rval == success && !transientNetworkFailure &&
+     aptcfg->FindB("APT::Get::List-Cleanup", true) == true &&
+     aptcfg->FindB("APT::List-Cleanup", true) == true &&
+     (fetcher->Clean(listsdir) == false ||
+      fetcher->Clean(listsdir + "partial/") == false))
+    {
+      _error->Error(_("Couldn't clean out list directories"));
+      k(failure);
+      return;
+    }
+
   // Rebuild the apt caches as done in apt-get.  cachefile is scoped
   // so it dies before we possibly-reload the cache.  This will do a
   // little redundant work in visual mode, but avoids lots of
@@ -300,6 +331,7 @@ void download_update_manager::finish(pkgAcquire::RunResult res,
     pkgCacheFile cachefile;
     if(!cachefile.BuildCaches(progress, true))
       {
+	_error->Error(_("Couldn't rebuild package cache"));
 	k(failure);
 	return;
       }
@@ -408,7 +440,7 @@ void download_update_manager::finish(pkgAcquire::RunResult res,
       post_autoclean_hook();
     }
 
-  k(success);
+  k(rval);
   return;
 }
 

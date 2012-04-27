@@ -38,7 +38,6 @@ class download_update_manager : public download_manager
   download_signal_log *log;
 
   pkgSourceList src_list;
-  pkgAcquireStatus *stat;
 
 public:
   /** Create a new manager.  Note that acqlog and signallog may or may
@@ -71,9 +70,6 @@ public:
   bool prepare(OpProgress &progress,
 	       pkgAcquireStatus &acqlog,
 	       download_signal_log *signallog);
-
-  pkgAcquire::RunResult do_download();
-  pkgAcquire::RunResult do_download(int PulseInterval);
 
   void finish(pkgAcquire::RunResult res,
 	      OpProgress *progress,
