@@ -19,9 +19,17 @@ Version 0.6.7                               "I said 'Step pause turn
            ListUpdate was too coarse to suit download_update_manager
            properly even though it more-or-less worked.
 
+           A side effect of this is that /var/lib/dpkg/lock is not
+           held while running APT::Update::Post-Invoke[-Success] hooks.
+           (Closes: #666130)
+
   * [all]: Do not call debtags on list update.  This was a rather
            unsightly kludge is better suited as a script for
            APT::Update::Post-Invoke.
+
+  * [all]: Destroy download_threads when done with them.  The objects
+           were previously left undestroyed, consuming resources and
+           keeping, e.g., locks open longer than needed.
 
 - Cosmetic and UI bugs:
 
