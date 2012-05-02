@@ -494,7 +494,7 @@ namespace
   }
 
   /** \brief Apply logging levels from the configuration file. */
-  void apply_config_file_logging_levels(Configuration *config)
+  void apply_config_file_logging_levels(signalling_config *config)
   {
     const Configuration::Item *tree = config->Tree(PACKAGE "::Logging::Levels");
     if(tree == NULL)
@@ -1040,6 +1040,8 @@ int main(int argc, char *argv[])
 		    show_why_summary_mode.c_str());
       why_display_mode = aptitude::why::no_summary;
     }
+
+  apply_config_file_logging_levels(aptcfg);
 
   if(!log_file.empty())
     Logger::getLogger("")
