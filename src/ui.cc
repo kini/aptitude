@@ -1374,10 +1374,9 @@ static void do_show_preview()
 	  grp=new pkg_grouppolicy_mode_factory(new pkg_grouppolicy_end_factory);
 	}
 
-      if(aptcfg->Exists(PACKAGE "::UI::Preview-Limit"))
-	active_preview_tree=pkg_tree::create(grpstr.c_str(), grp, cw::util::transcode(aptcfg->Find(PACKAGE "::UI::Preview-Limit").c_str()));
-      else
-	active_preview_tree=pkg_tree::create(grpstr.c_str(), grp);
+      const std::wstring limitstr =
+        cw::util::transcode(aptcfg->Find(PACKAGE "::UI::Preview-Limit", ""));
+      active_preview_tree=pkg_tree::create(grpstr.c_str(), grp, limitstr.c_str());
 
       active_preview=make_default_view(active_preview_tree,
 				       &active_preview_tree->selected_signal,

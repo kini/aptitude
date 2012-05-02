@@ -47,6 +47,13 @@ Version 0.6.7                               "I said 'Step pause turn
   * [cmdline]: Use arch-qualified names in 'Provided by' for virtual
                packages (LP: #972847)
 
+  * [curses]: Preview screen ignores Pkg-Display-Limit
+
+              Previously it would apply that limit if
+              UI::Preview-Limit was not set.  This was causing
+              confusion and it is more useful to have these as two
+              clearly distinct settings. (LP: #381507)
+
 - Build system changes:
 
   * [all]: Include build of gtest when building gmock. (Closes: #670403)
