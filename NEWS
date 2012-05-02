@@ -10,6 +10,16 @@ Version 0.6.7                               "I said 'Step pause turn
   * [cmdline]: Check for apt_init errors in cmdline_download.cc
                (Closes: #670379)
 
+- Minor bugs:
+
+  * [all]: Fix various locking issues:
+
+           - 'install' actions lock /var/cache/apt/archives
+
+             Other tasks which access that directory (such as 'apt-get
+             clean') will now fail if aptitude is downloading or
+             installing packages. (Closes: #370381)
+
 - Internal changes:
 
   * [all]: No longer use ListUpdate (from libapt-pkg) to update package

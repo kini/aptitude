@@ -70,27 +70,22 @@ bool download_install_manager::prepare(OpProgress &progress,
   if(_error->PendingError())
     return false;
 
-  // Lock the archive directory..
-  FileFd lock;
-  if(aptcfg->FindB("Debug::NoLocking", false) == false)
+  fetcher = new pkgAcquire;
+  if(fetcher->Setup(&acqlog, aptcfg->FindDir("Dir::Cache::archives")) == false)
     {
-      lock.Fd(GetLock(aptcfg->FindDir("Dir::State::Lists")+"lock"));
-      if(_error->PendingError() == true)
-	{
-	  _error->Error(_("Couldn't lock list directory..are you root?"));
-	  return false;
-	}
+      delete fetcher;
+      fetcher = NULL;
+      return false;
     }
 
   if(!src_list.ReadMainList())
     {
       _error->Error(_("Couldn't read source list"));
 
+      delete fetcher;
+      fetcher = NULL;
       return false;
     }
-
-  fetcher = new pkgAcquire;
-  fetcher->Setup(&acqlog);
 
   if(!pm->GetArchives(fetcher, &src_list, apt_package_records) ||
      _error->PendingError())
