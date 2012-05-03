@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude_po_km\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2012-03-27 16:51+0800\n"
+"POT-Creation-Date: 2012-05-03 15:37+0800\n"
 "PO-Revision-Date: 2012-02-23 16:52+0800\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -778,7 +778,7 @@ msgid "Del %s* %spartial/*\n"
 msgstr "Del %s* %spartial/*\n"
 
 #: src/cmdline/cmdline_clean.cc:76 src/cmdline/cmdline_clean.cc:146
-#: src/ui.cc:1781 src/ui.cc:1869
+#: src/ui.cc:1780 src/ui.cc:1868
 #, fuzzy
 msgid "Unable to lock the download directory"
 msgstr "មិន​អាច​ស្វែងរក​ថត​ផ្ទះ​របស់​អ្នក​ឃើញ​ឡើយ ។ កំពុង​រក្សាទុក​ទៅ /tmp/function_pkgs !"
@@ -819,7 +819,7 @@ msgid ""
 msgstr "មិនអាច​ដោះស្រាយ​​ភាពអាស្រ័យ​បានឡើយ​ ។"
 
 #: src/cmdline/cmdline_do_action.cc:385 src/cmdline/cmdline_simulate.cc:60
-#: src/main.cc:1221
+#: src/main.cc:1223
 #, c-format
 msgid "Abort.\n"
 msgstr "បោះបង់ ។\n"
@@ -829,17 +829,17 @@ msgstr "បោះបង់ ។\n"
 msgid "download: you must specify at least one package to download\n"
 msgstr "ទាញយក​ ៖ អ្នក​ត្រូវ​តែ​បញ្ជាក់​កញ្ចប់​យ៉ាងតិច​មួយ​ដើម្បី​ទាញ​យក\n"
 
-#: src/cmdline/cmdline_download.cc:57
-#: src/generic/apt/download_install_manager.cc:87
+#: src/cmdline/cmdline_download.cc:63
+#: src/generic/apt/download_install_manager.cc:83
 msgid "Couldn't read source list"
 msgstr "មិន​អាច​អាន​បញ្ជី​ប្រភព"
 
-#: src/cmdline/cmdline_download.cc:91
+#: src/cmdline/cmdline_download.cc:97
 #, c-format
 msgid "Can't find a package named \"%s\""
 msgstr "មិន​អាច​រក​កញ្ចប់​​​មួយ​ដែល​​មាន​ឈ្មោះ \"%s\" ឡើយ"
 
-#: src/cmdline/cmdline_download.cc:135
+#: src/cmdline/cmdline_download.cc:141
 #, c-format
 msgid ""
 "No downloadable files for %s version %s; perhaps it is a local or obsolete "
@@ -1018,17 +1018,17 @@ msgstr "កញ្ចប់​ខាង​ក្រោម នឹង​ត្រ�
 msgid "The following partially installed packages will be configured:"
 msgstr "កញ្ចប់​ខាង​ក្រោម នឹង​ត្រូវ​បាន​ធ្វើ​ឲ្យ​ប្រសើរ ៖"
 
-#: src/cmdline/cmdline_prompt.cc:459 src/ui.cc:1568
+#: src/cmdline/cmdline_prompt.cc:459 src/ui.cc:1567
 #, c-format
 msgid "The following ESSENTIAL packages will be REMOVED!\n"
 msgstr "កញ្ចប់​ចាំបាច់​ខាង​ក្រោម នឹង​ត្រូវ​បាន​យកចេញ !\n"
 
-#: src/cmdline/cmdline_prompt.cc:468 src/ui.cc:1583
+#: src/cmdline/cmdline_prompt.cc:468 src/ui.cc:1582
 #, c-format
 msgid "The following ESSENTIAL packages will be BROKEN by this action:\n"
 msgstr "កញ្ចប់​ចាំបាច់​ខាង​ក្រោម នឹង​ត្រូវ​បាន​ធ្វើ​ឲ្យ​ខូច​ដោយ​សកម្មភាព​នេះ ៖\n"
 
-#: src/cmdline/cmdline_prompt.cc:478 src/ui.cc:1596
+#: src/cmdline/cmdline_prompt.cc:478 src/ui.cc:1595
 #, c-format
 msgid ""
 "WARNING: Performing this action will probably cause your system to break!\n"
@@ -1041,7 +1041,7 @@ msgstr ""
 msgid "I am aware that this is a very bad idea"
 msgstr "ខ្ញុំ​ដឹង​ហើយ​ថា នេះ​គឺ​ជា​គំនិត​ដ៏​អាក្រក់​បំផុត"
 
-#: src/cmdline/cmdline_prompt.cc:484 src/ui.cc:1597
+#: src/cmdline/cmdline_prompt.cc:484 src/ui.cc:1596
 #, c-format
 msgid "To continue, type the phrase \"%s\":\n"
 msgstr "ដើម្បី​បន្ត សូម​វាយ​ឃ្លា \"%s\" ៖\n"
@@ -2729,102 +2729,56 @@ msgid ""
 "The package cache is not available; unable to download and install packages."
 msgstr "មិន​មាន​ឃ្លាំងសម្ងាត់​កញ្ចប់​ឡើយ ។ មិន​អាច​ទាញយក និង ដំឡើង​កញ្ចប់​បាន​ឡើយ ។"
 
-#: src/generic/apt/download_install_manager.cc:80
-#: src/generic/apt/download_update_manager.cc:95
-msgid "Couldn't lock list directory..are you root?"
-msgstr "មិន​អាច​ចាក់​សោ​ថត​បញ្ជី​បាន​ឡើយ...តើ​អ្នក​ជា​ root ​ឬ ?"
-
-#: src/generic/apt/download_install_manager.cc:98
+#: src/generic/apt/download_install_manager.cc:93
 msgid "Internal error: couldn't generate list of packages to download"
 msgstr "កំហុស​ខាង​ក្នុង ៖ មិន​អាច​បង្កើត​បញ្ជី​របស់​កញ្ចប់​ដើម្បី​ទាញ​យក​បាន​ឡើយ"
 
-#: src/generic/apt/download_install_manager.cc:127
+#: src/generic/apt/download_install_manager.cc:120
 #, fuzzy, c-format
 msgid "Failed to fetch %s: %s"
 msgstr "បរាជ័យ​ក្នុង​ការ​ប្ដូរ​ឈ្មោះ %s ទៅជា %s"
 
-#: src/generic/apt/download_install_manager.cc:133
+#: src/generic/apt/download_install_manager.cc:129
+msgid "Some files failed to download"
+msgstr ""
+
+#: src/generic/apt/download_install_manager.cc:140
 msgid "Unable to correct for unavailable packages"
 msgstr "មិន​អាច​កែ​កញ្ចប់​ដែល​មិន​មាន​បាន​ឡើយ"
 
-#: src/generic/apt/download_install_manager.cc:168
+#: src/generic/apt/download_install_manager.cc:175
 msgid "A package failed to install.  Trying to recover:"
 msgstr "បាន​បរាជ័យ​ក្នុង​ការ​ដំឡើង​កញ្ចប់ ។ កំពុង​តែ​ព្យាយាម​សង្គ្រោះ ៖"
 
-#: src/generic/apt/download_install_manager.cc:212
+#: src/generic/apt/download_install_manager.cc:219
 msgid ""
 "Could not regain the system lock!  (Perhaps another apt or dpkg is running?)"
 msgstr ""
 "មិន​អាច​យក​សោ​ប្រព័ន្ធ​មក​វិញ​បាន​ឡើយ !  (ប្រហែល​ជា apt ឬ dpkg មួយ​ទៀត កំពុង​តែ​រត់​ហើយ ​មើល​ទៅ ?)"
 
-#: src/generic/apt/download_update_manager.cc:78
+#: src/generic/apt/download_update_manager.cc:69
 msgid "Couldn't read list of package sources"
 msgstr "មិន​អាច​អាន​បញ្ជី​របស់​ប្រភព​កញ្ចប់​បាន​ឡើយ"
 
-#: src/generic/apt/download_update_manager.cc:148
+#: src/generic/apt/download_update_manager.cc:129
 #, fuzzy, c-format
-msgid "Unterminated quoted string in command: %s"
-msgstr "មាន​ខ្សែអក្សរ​ន័យ​ត្រង់​មិន​ទាន់​បាន​បញ្ចប់ នៅ​បន្ទាប់​ពី %s"
+msgid "Failed to fetch %s: %s\n"
+msgstr "បរាជ័យ​ក្នុង​ការ​ប្ដូរ​ឈ្មោះ %s ទៅជា %s"
 
-#: src/generic/apt/download_update_manager.cc:224
-#, c-format
-msgid "fork() failed: %s"
-msgstr ""
+#: src/generic/apt/download_update_manager.cc:149
+msgid "Couldn't clean out list directories"
+msgstr "មិន​អាច​ជម្រះ​ថត​បញ្ជី​បាន​ឡើយ"
 
-#: src/generic/apt/download_update_manager.cc:272
-#, c-format
-msgid "waitpid() failed: %s"
-msgstr ""
-
-#: src/generic/apt/download_update_manager.cc:318
-msgid "The debtags command must not be an empty string."
-msgstr ""
-
-#: src/generic/apt/download_update_manager.cc:322
-msgid "The debtags command must be an absolute path."
-msgstr ""
-
-#: src/generic/apt/download_update_manager.cc:335
-#, c-format
-msgid "The debtags command (%s) cannot be executed: %s"
-msgstr ""
-
-#: src/generic/apt/download_update_manager.cc:340
-#, fuzzy
-msgid "Updating debtags database"
-msgstr "កំពុង​បង្កើត​មូលដ្ឋាន​ទិន្នន័យ​ស្លាក"
-
-#: src/generic/apt/download_update_manager.cc:357
-msgid "(core dumped)"
-msgstr ""
-
-#. ForTranslators: "%s update %s" gets replaced by a command line, do not translate it!
-#: src/generic/apt/download_update_manager.cc:360
-#, c-format
-msgid "The debtags update process (%s update %s) was killed by signal %d%s."
-msgstr ""
-
-#. ForTranslators: "%s update %s" gets replaced by a command line, do not translate it!
-#: src/generic/apt/download_update_manager.cc:368
-#, c-format
-msgid "The debtags update process (%s update %s) exited abnormally (code %d)."
-msgstr ""
-
-#. ForTranslators: "%s update %s" gets replaced by a command line, do not translate it!
-#: src/generic/apt/download_update_manager.cc:375
-#, c-format
+#: src/generic/apt/download_update_manager.cc:154
+#: src/generic/apt/download_update_manager.cc:156
 msgid ""
-"The debtags update process (%s update %s) exited in an unexpected way "
-"(status %d)."
+"Some index files failed to download. They have been ignored, or old ones "
+"used instead."
 msgstr ""
 
-#. ForTranslators: "%s update %s" gets replaced by a command line, do not translate it!
-#: src/generic/apt/download_update_manager.cc:381
-#, fuzzy, c-format
-msgid ""
-"Updating the debtags database (%s update %s) failed (perhaps debtags is not "
-"installed?): %s"
-msgstr "មិន​អាច​ផ្ទុក​ពាក្យ debtags បាន​ឡើយ ។ ប្រហែល​ជា​មិន​បាន​ដំឡើង debtags ទេ​មើល​ទៅ ?"
+#: src/generic/apt/download_update_manager.cc:177
+msgid "Couldn't rebuild package cache"
+msgstr "មិន​អាច​បង្កើត​ឃ្លាំង​សម្ងាត់​កញ្ចប់​ឡើងវិញ​បាន​ឡើយ"
 
 #: src/generic/apt/dump_packages.cc:539 src/generic/apt/dump_packages.cc:629
 #, fuzzy, c-format
@@ -3298,47 +3252,49 @@ msgstr ""
 msgid "_File"
 msgstr "បិទ​"
 
-#: src/gtk/aptitude.glade:28 src/gtk/aptitude.glade:2274 src/ui.cc:2341
+#: src/gtk/aptitude.glade:28 src/gtk/aptitude.glade:2274 src/ui.cc:2340
 msgid "Perform all pending installs and removals"
 msgstr "អនុវត្ត​ការ​ដំឡើង និង ការ​យកចេញ​ទាំងអស់ ដែល​មិន​ទាន់​សម្រេច"
 
-#: src/gtk/aptitude.glade:38 src/gtk/aptitude.glade:2285 src/ui.cc:2344
+#: src/gtk/aptitude.glade:38 src/gtk/aptitude.glade:2285 src/ui.cc:2343
 msgid "Check for new versions of packages"
 msgstr "ពិនិត្យរក​កំណែ​ថ្មី​របស់​កញ្ចប់"
 
-#: src/gtk/aptitude.glade:53 src/gtk/aptitude.glade:2301 src/ui.cc:2349
+#: src/gtk/aptitude.glade:53 src/gtk/aptitude.glade:2301 src/ui.cc:2348
 msgid "Mark all upgradable packages which are not held for upgrade"
 msgstr "សម្គាល់​កញ្ចប់​ទាំងអស់​ដែល​អាច​ធ្វើ​ឲ្យ​ប្រសើរ​បាន"
 
-#: src/gtk/aptitude.glade:63 src/gtk/aptitude.glade:2312 src/ui.cc:2354
+#: src/gtk/aptitude.glade:63 src/gtk/aptitude.glade:2312 src/ui.cc:2353
 msgid "Forget which packages are \"new\""
 msgstr "បំភ្លេច​កញ្ចប់​ដែល \"ថ្មី\""
 
-#: src/gtk/aptitude.glade:72 src/gtk/aptitude.glade:2322 src/ui.cc:2358
+#: src/gtk/aptitude.glade:72 src/gtk/aptitude.glade:2322 src/ui.cc:2357
 msgid "Cancel all pending installations, removals, holds, and upgrades."
 msgstr "បោះបង់​ការ​ដំឡើង ការ​យកចេញ ការ​ទុក និង ធ្វើ​ឲ្យ​ប្រសើរ​ដែល​មិន​ទាន់​សម្រេច ។"
 
-#: src/gtk/aptitude.glade:81 src/gtk/aptitude.glade:2332 src/ui.cc:2362
+#: src/gtk/aptitude.glade:81 src/gtk/aptitude.glade:2332 src/ui.cc:2361
 msgid "Delete package files which were previously downloaded"
 msgstr "លុប​ឯកសារ​កញ្ចប់ ដែល​ត្រូវ​បាន​ទាញយក​ពី​មុន"
 
-#: src/gtk/aptitude.glade:90 src/gtk/aptitude.glade:2342 src/ui.cc:2366
+#: src/gtk/aptitude.glade:90 src/gtk/aptitude.glade:2342 src/ui.cc:2365
 msgid "Delete package files which can no longer be downloaded"
 msgstr "លុប​ឯកសារ​កញ្ចប់ ដែល​លែង​ទាញយក"
 
-#: src/gtk/aptitude.glade:104 src/gtk/aptitude.glade:2357 src/ui.cc:2373
+#: src/gtk/aptitude.glade:104 src/gtk/aptitude.glade:2357 src/ui.cc:2372
 msgid "Reload the package cache"
 msgstr "ផ្ទុក​ឃ្លាំងសម្ងាត់​កញ្ចប់​ឡើង​វិញ"
 
-#: src/gtk/aptitude.glade:118 src/gtk/aptitude.glade:2372 src/ui.cc:2383
-msgid ""
-"Run 'su' to become root; this will restart the program, but your settings "
-"will be preserved"
+#: src/gtk/aptitude.glade:118 src/gtk/aptitude.glade:2372 src/ui.cc:2382
+#, fuzzy
+#| msgid ""
+#| "Run 'su' to become root; this will restart the program, but your settings "
+#| "will be preserved"
+msgid "Restart the program as root; your settings will be preserved"
 msgstr ""
 "រត់ 'su' ដើម្បី​ក្លាយជា root ។ បន្ទាប់​មក​កម្មវិធី​នឹង​ត្រូវ​បាន​ចាប់ផ្ដើម​ឡើង​វិញ ប៉ុន្តែ​ការ​កំណត់​របស់​អ្នក​នឹង​"
 "ត្រូវ​បាន​ការពារ"
 
-#: src/gtk/aptitude.glade:127 src/gtk/aptitude.glade:2382 src/ui.cc:2386
+#: src/gtk/aptitude.glade:127 src/gtk/aptitude.glade:2382 src/ui.cc:2385
 msgid "Exit the program"
 msgstr "ចេញពី​កម្មវិធី​"
 
@@ -3346,7 +3302,7 @@ msgstr "ចេញពី​កម្មវិធី​"
 msgid "E_dit"
 msgstr ""
 
-#: src/gtk/aptitude.glade:148 src/gtk/aptitude.glade:2404 src/ui.cc:2393
+#: src/gtk/aptitude.glade:148 src/gtk/aptitude.glade:2404 src/ui.cc:2392
 msgid "Undo the last package operation or group of operations"
 msgstr "មិន​ធ្វើ​ប្រតិបត្តិការ​ ឬ ក្រុម​ប្រតិបត្តិការ​ចុងក្រោយ ដែល​ទាក់ទង​នឹង​កញ្ចប់"
 
@@ -3396,12 +3352,12 @@ msgid "Packages"
 msgstr "កញ្ចប់​"
 
 #: src/gtk/aptitude.glade:358 src/gtk/aptitude.glade:2617 src/gtk/gui.cc:1033
-#: src/gtk/previewtab.cc:118 src/qt/tabs_manager.cc:220 src/ui.cc:1394
+#: src/gtk/previewtab.cc:118 src/qt/tabs_manager.cc:220 src/ui.cc:1393
 msgid "Preview"
 msgstr "មើល​ជា​​​មុន"
 
 #: src/gtk/aptitude.glade:369 src/gtk/aptitude.glade:2628 src/gtk/gui.cc:1028
-#: src/qt/tabs_manager.cc:263 src/ui.cc:2777
+#: src/qt/tabs_manager.cc:263 src/ui.cc:2776
 msgid "Resolver"
 msgstr "កម្មវិធី​ដោះស្រាយ"
 
@@ -4162,7 +4118,7 @@ msgstr "អនុវត្ត​តម្រង​ទៅ​កាន់​បញ
 msgid "Download already running."
 msgstr "កំពុង​ទាញយក..."
 
-#: src/gtk/gui.cc:300 src/gtk/gui.cc:948 src/ui.cc:1520 src/ui.cc:1759
+#: src/gtk/gui.cc:300 src/gtk/gui.cc:948 src/ui.cc:1519 src/ui.cc:1758
 msgid "A package-list update or install run is already taking place."
 msgstr "កំពុង​តែ​ធ្វើ​ឲ្យ​បញ្ជី​កញ្ចប់​ទាន់សម័យ ឬ រត់​ការ​ដំឡើង រួច​ហើយ ។"
 
@@ -5684,36 +5640,36 @@ msgid ""
 "versions\"."
 msgstr ""
 
-#: src/main.cc:1077
+#: src/main.cc:1079
 #, fuzzy
 msgid ""
 "Only one of --auto-clean-on-startup, --clean-on-startup, -i, and -u may be "
 "specified\n"
 msgstr "អាច​បញ្ជាក់​តែ​មួយ​ប៉ុណ្ណោះ​ក្នុង​ចំណោម -u និង -i\n"
 
-#: src/main.cc:1086
+#: src/main.cc:1088
 #, fuzzy
 msgid ""
 "-u, -i, and --clean-on-startup may not be specified in command-line mode "
 "(eg, with 'install')"
 msgstr "មិន​គួរ​បញ្ជាក់ -u និង -i នៅ​ក្នុងរបៀប​បន្ទាត់​ពាក្យបញ្ជា​ឡើយ (ឧ. ជាមួយ 'install')"
 
-#: src/main.cc:1103
+#: src/main.cc:1105
 #, fuzzy
 msgid "-u, -i, and --clean-on-startup may not be specified with a command"
 msgstr "មិន​គួរ​បញ្ជាក់ -u និង -i ជាមួយ​ពាក្យបញ្ជា​ឡើយ"
 
-#: src/main.cc:1214
+#: src/main.cc:1216
 #, c-format
 msgid "Unknown command \"%s\"\n"
 msgstr "មិន​ស្គាល់​ពាក្យ​បញ្ជា \"%s\"\n"
 
-#: src/main.cc:1226 src/main.cc:1311
+#: src/main.cc:1228 src/main.cc:1313
 #, c-format
 msgid "Uncaught exception: %s\n"
 msgstr "ករណីលើកលែង​ដែល​មិន​បាន​ចាប់ ៖ %s\n"
 
-#: src/main.cc:1230 src/main.cc:1315
+#: src/main.cc:1232 src/main.cc:1317
 #, fuzzy, c-format
 msgid ""
 "Backtrace:\n"
@@ -5731,7 +5687,7 @@ msgstr "ស្វែងរក ៖ "
 msgid "Search backwards for: "
 msgstr "ស្វែងរក​ថយក្រោយ ៖ "
 
-#: src/mine/cmine.cc:115 src/mine/cmine.cc:154 src/ui.cc:1764
+#: src/mine/cmine.cc:115 src/mine/cmine.cc:154 src/ui.cc:1763
 msgid "Minesweeper"
 msgstr "អ្នក​ដោះ​មីន"
 
@@ -5940,7 +5896,7 @@ msgstr "សំណុំតួអក្សរ​របស់ mine-help.txt|UTF-8"
 msgid "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 1 10 9 12 30 17 15"
 msgstr "30 6 6 1 1 40 14 14 11 10 35 9 10 2 1 1 10 12 30 15 15"
 
-#: src/pkg_columnizer.cc:89 src/ui.cc:2776
+#: src/pkg_columnizer.cc:89 src/ui.cc:2775
 msgid "Package"
 msgstr "កញ្ចប់​"
 
@@ -6940,7 +6896,7 @@ msgstr "កំពុង​ផ្ទុកឃ្លាំងសម្ងាត់
 msgid "Really quit Aptitude?"
 msgstr "ពិត​ជា​ចេញ​ពី Aptitude ?"
 
-#: src/ui.cc:714 src/ui.cc:2539
+#: src/ui.cc:714 src/ui.cc:2538
 msgid "Change the behavior of aptitude"
 msgstr ""
 
@@ -7021,7 +6977,7 @@ msgstr ""
 msgid "License"
 msgstr "អាជ្ញាបណ្ណ"
 
-#: src/ui.cc:1086 src/ui.cc:2631
+#: src/ui.cc:1086 src/ui.cc:2630
 #, fuzzy
 msgid "View the terms under which you may copy and distribute aptitude"
 msgstr "មើល​កិច្ចព្រមព្រៀង មុន​នឹង​ចម្លង​កម្មវិធី"
@@ -7042,7 +6998,7 @@ msgstr ""
 msgid "View a brief introduction to aptitude"
 msgstr ""
 
-#: src/ui.cc:1115 src/ui.cc:2781
+#: src/ui.cc:1115 src/ui.cc:2780
 msgid "Help"
 msgstr "ជំនួយ"
 
@@ -7071,7 +7027,7 @@ msgstr "ដោយ​ដៃ"
 msgid "FAQ"
 msgstr "សំណួរ​ដែល​សួរ​រឿយៗ"
 
-#: src/ui.cc:1145 src/ui.cc:2623
+#: src/ui.cc:1145 src/ui.cc:2622
 msgid "View a list of frequently asked questions"
 msgstr "មើល​បញ្ជី​នៃ​សំណួរ​ដែល​សួរ​រឿយៗ"
 
@@ -7141,30 +7097,30 @@ msgstr "ពិត​ជាបន្ត​"
 msgid "Abort Installation"
 msgstr "បោះបង់ការ​ដំឡើង"
 
-#: src/ui.cc:1392
+#: src/ui.cc:1391
 msgid "Preview of package installation"
 msgstr "ទិដ្ឋភាព​របស់​ការ​ដំឡើង​កញ្ចប់"
 
-#: src/ui.cc:1393
+#: src/ui.cc:1392
 msgid "View and/or adjust the actions that will be performed"
 msgstr "មើល និង/ឬ លៃតម្រូវ​សកម្មភាព ដែល​នឹង​ត្រូវ​អនុវត្ត"
 
-#: src/ui.cc:1450
+#: src/ui.cc:1449
 msgid "Some packages were broken and have been fixed:"
 msgstr "កញ្ចប់​ខ្លះ​បានខូច ហើយ​ក៏បាន​ជួសជុល​ផងដែរ​ ៖"
 
-#: src/ui.cc:1458
+#: src/ui.cc:1457
 msgid "No solution to these dependency problems exists!"
 msgstr "គ្មាន​ដំណោះ​ស្រាយ​ទៅ​នឹង​បញ្ហា​ភាព​អាស្រ័យ​​ដែល​មាន​​ទាំង​នេះ !"
 
-#: src/ui.cc:1464
+#: src/ui.cc:1463
 #, c-format
 msgid ""
 "Ran out of time while trying to resolve dependencies (press \"%s\" to try "
 "harder)"
 msgstr "អស់​ពេលវេលា​រត់ ខណៈពេល​ព្យាយាម​ដោះស្រាយ​ភាព​អស្រ័យ​ (ចុច \"%s\" ឬ ព្យាយាម​បន្ត​ទៀត)"
 
-#: src/ui.cc:1510
+#: src/ui.cc:1509
 msgid ""
 "Installing/removing packages requires administrative privileges, which you "
 "currently do not have.  Would you like to change to the root account?"
@@ -7172,19 +7128,19 @@ msgstr ""
 "ការ​ដំឡើង និង ការ​យក​កញ្ចប់​ចេញ ត្រូវការ​សិទ្ធិ​ជា​អ្នក​គ្រប់គ្រង ដែល​បច្ចុប្បន្ន​អ្នក​មិន​មាន ។ តើ​អ្នក​ចង់​ប្ដូរ​"
 "ទៅ​គណនី root ឬ​ទេ ?"
 
-#: src/ui.cc:1513 src/ui.cc:1752 src/ui.cc:1813 src/ui.cc:1908
+#: src/ui.cc:1512 src/ui.cc:1751 src/ui.cc:1812 src/ui.cc:1907
 msgid "Become root"
 msgstr "ក្លាយជា​ root"
 
-#: src/ui.cc:1515 src/ui.cc:1754 src/ui.cc:1815 src/ui.cc:1910
+#: src/ui.cc:1514 src/ui.cc:1753 src/ui.cc:1814 src/ui.cc:1909
 msgid "Don't become root"
 msgstr "កុំ​ក្លាយ​ជា​ root"
 
-#: src/ui.cc:1636
+#: src/ui.cc:1635
 msgid "No packages are scheduled to be installed, removed, or upgraded."
 msgstr "មិន​បាន​កំណត់​កញ្ចប់​ឲ្យ​ដំឡើង យកចេញ ឬ ធ្វើ​ឲ្យ​ទាន់សម័យ​ឡើយ ។"
 
-#: src/ui.cc:1642
+#: src/ui.cc:1641
 msgid ""
 "No packages will be installed, removed or upgraded.  Some packages could be "
 "upgraded, but you have not chosen to upgrade them.  Type \"U\" to prepare an "
@@ -7193,23 +7149,23 @@ msgstr ""
 "មិន​មាន​កញ្ចប់​ត្រូវ​បាន​ដំឡើង យកចេញ ឬ ធ្វើ​ឲ្យ​ទាន់សម័យ​ឡើយ ។ កញ្ចប់​មួយ​ចំនួន​អាច​នឹង​ត្រូវ​បាន​ធ្វើ​ឲ្យ​ប្រសើរ "
 "ប៉ុន្តែ​អ្នក​មិន​បាន​ជ្រើស​ថា​ត្រូវ​ធ្វើ​ឲ្យ​ពួកវា​ប្រសើរ​ឡើយ ។ វាយ \"U\" ដើម្បី​រៀបចំ​ការ​ធ្វើ​ឲ្យ​ប្រសើរ ។"
 
-#: src/ui.cc:1705 src/ui.cc:1874
+#: src/ui.cc:1704 src/ui.cc:1873
 msgid "Deleting obsolete downloaded files"
 msgstr "កំពុង​លុប​ឯកសារ​ដែល​បាន​ទាញយក ហើយ​ដែល​លែង​ប្រើ"
 
-#: src/ui.cc:1722
+#: src/ui.cc:1721
 msgid "Updating package lists"
 msgstr "ធ្វើ​ឲ្យ​បញ្ជី​កញ្ចប់​ទាន់​សម័យ"
 
-#: src/ui.cc:1723
+#: src/ui.cc:1722
 msgid "View the progress of the package list update"
 msgstr "មើល​វឌ្ឍនភាព​របស់​ការ​ធ្វើ​ឲ្យ​បញ្ជី​កញ្ចប់​ទាន់សម័យ"
 
-#: src/ui.cc:1724
+#: src/ui.cc:1723
 msgid "List Update"
 msgstr "ធ្វើ​ឲ្យ​បញ្ជី​ទាន់សម័យ"
 
-#: src/ui.cc:1749
+#: src/ui.cc:1748
 msgid ""
 "Updating the package lists requires administrative privileges, which you "
 "currently do not have.  Would you like to change to the root account?"
@@ -7217,23 +7173,23 @@ msgstr ""
 "ការ​ធ្វើ​ឲ្យ​បញ្ជី​កញ្ចប់​ទាន់សម័យ ត្រូវការ​សិទ្ធិ​ជា​អ្នក​គ្រប់គ្រង ដែល​បច្ចុប្បន្ន​អ្នក​មិន​មាន ។ តើ​អ្នក​ចង់​ប្ដូរ​ទៅ​"
 "គណនី root ឬ​ទេ ?"
 
-#: src/ui.cc:1764 src/ui.cc:2378
+#: src/ui.cc:1763 src/ui.cc:2377
 msgid "Waste time trying to find mines"
 msgstr "ចំណាយពេល​រាវ​មីន"
 
-#: src/ui.cc:1771 src/ui.cc:1859
+#: src/ui.cc:1770 src/ui.cc:1858
 msgid "Cleaning while a download is in progress is not allowed"
 msgstr "មិន​អនុញ្ញាត​ឲ្យ​សម្អាត​ឡើយ ខណៈពេល​កំពុង​តែ​ទាញយក"
 
-#: src/ui.cc:1786
+#: src/ui.cc:1785
 msgid "Deleting downloaded files"
 msgstr "កំពុង​លុបឯកសារ​ដែល​បានទាញ​យក​"
 
-#: src/ui.cc:1800
+#: src/ui.cc:1799
 msgid "Downloaded package files have been deleted"
 msgstr "បាន​លុប​ឯកសារ​កញ្ចប់ ដែល​បាន​ទាញយក"
 
-#: src/ui.cc:1810
+#: src/ui.cc:1809
 #, fuzzy
 msgid ""
 "Cleaning the package cache requires administrative privileges, which you "
@@ -7242,18 +7198,18 @@ msgstr ""
 "ការ​ធ្វើ​ឲ្យ​បញ្ជី​កញ្ចប់​ទាន់សម័យ ត្រូវការ​សិទ្ធិ​ជា​អ្នក​គ្រប់គ្រង ដែល​បច្ចុប្បន្ន​អ្នក​មិន​មាន ។ តើ​អ្នក​ចង់​ប្ដូរ​ទៅ​"
 "គណនី root ឬ​ទេ ?"
 
-#: src/ui.cc:1856
+#: src/ui.cc:1855
 msgid "The apt cache file is not available; cannot auto-clean."
 msgstr "មិន​មាន​ឯកសារ​ឃ្លាំងសម្ងាត់ apt ឡើយ ដូច្នេះ​មិន​អាច​សម្អាត​ដោយ​ស្វ័យប្រវត្តិ​បាន​ឡើយ ។"
 
-#: src/ui.cc:1894
+#: src/ui.cc:1893
 #, c-format
 msgid ""
 "Obsolete downloaded package files have been deleted, freeing %sB of disk "
 "space."
 msgstr "បាន​លុប​ឯកសារ​កញ្ចប់​ដែល​បាន​ទាញយក ហើយ​លែងប្រើ ។ ថាស​ទំហំ %sបៃ កំពុង​តែ​ធ្វើ​ឲ្យ​ទំនេរ ។"
 
-#: src/ui.cc:1905
+#: src/ui.cc:1904
 #, fuzzy
 msgid ""
 "Deleting obsolete files requires administrative privileges, which you "
@@ -7262,136 +7218,136 @@ msgstr ""
 "ការ​ធ្វើ​ឲ្យ​បញ្ជី​កញ្ចប់​ទាន់សម័យ ត្រូវការ​សិទ្ធិ​ជា​អ្នក​គ្រប់គ្រង ដែល​បច្ចុប្បន្ន​អ្នក​មិន​មាន ។ តើ​អ្នក​ចង់​ប្ដូរ​ទៅ​"
 "គណនី root ឬ​ទេ ?"
 
-#: src/ui.cc:2007
+#: src/ui.cc:2006
 msgid "No more solutions."
 msgstr "មិន​មាន​ដំណោះស្រាយ​ផ្សេង​ឡើយ ។"
 
-#: src/ui.cc:2215
+#: src/ui.cc:2214
 msgid "Unable to find a solution to apply."
 msgstr "មិន​អាច​រក​ដំណោះស្រាយ​ដើម្បី​អនុវត្ត​បាន​ឡើយ ។"
 
-#: src/ui.cc:2221
+#: src/ui.cc:2220
 msgid "Ran out of time while trying to find a solution."
 msgstr "អស់​ពេល​ ខណៈ​ពេល​ព្យាយាម​រក​ដំណោះស្រាយ ។"
 
-#: src/ui.cc:2281 src/ui.cc:2283
+#: src/ui.cc:2280 src/ui.cc:2282
 msgid "Resolve Dependencies"
 msgstr "ដោះស្រាយ​ភាពអាស្រ័យ​"
 
-#: src/ui.cc:2282
+#: src/ui.cc:2281
 msgid "Search for solutions to unsatisfied dependencies"
 msgstr "ស្វែងរក​ដំណោះស្រាយ​​សម្រាប់​ភាពអាស្រ័យ ដែល​មិន​បាន​ដោះស្រាយ"
 
-#: src/ui.cc:2294
+#: src/ui.cc:2293
 #, c-format
 msgid "Unable to open %ls"
 msgstr "មិន​អាច​បើក​ %ls"
 
-#: src/ui.cc:2300
+#: src/ui.cc:2299
 msgid "Error while dumping resolver state"
 msgstr "មាន​កំហុស ខណៈពេល​បោះចោល​ស្ថានភាព​របស់​កម្មវិធី​ដោះស្រាយ"
 
-#: src/ui.cc:2310
+#: src/ui.cc:2309
 #, fuzzy
 msgid "File to which the resolver state should be dumped: "
 msgstr "ឯកសារ​ដែល​ស្ថានភាព​កម្មវិធី​ដោះស្រាយ គួរ​ត្រូវ​បាន​បោះចោល ៖"
 
-#: src/ui.cc:2340
+#: src/ui.cc:2339
 msgid "^Install/remove packages"
 msgstr "ដំឡើង​/យក​កញ្ចប់​ចេញ​"
 
-#: src/ui.cc:2343
+#: src/ui.cc:2342
 msgid "^Update package list"
 msgstr "ធ្វើ​ឲ្យ​បញ្ជី​កញ្ចប់​ទាន់សម័យ"
 
-#: src/ui.cc:2348
+#: src/ui.cc:2347
 msgid "Mark Up^gradable"
 msgstr "សម្គាល់​កញ្ចប់​ដែល​អាច​ធ្វើ​ឲ្យ​ប្រសើរ"
 
-#: src/ui.cc:2353
+#: src/ui.cc:2352
 msgid "^Forget new packages"
 msgstr "បំភ្លេច​កញ្ចប់​ថ្មី"
 
-#: src/ui.cc:2357
+#: src/ui.cc:2356
 msgid "Canc^el pending actions"
 msgstr "បោះបង់​សកម្មភាព​ដែល​មិន​ទាន់​សម្រេច"
 
-#: src/ui.cc:2361
+#: src/ui.cc:2360
 msgid "^Clean package cache"
 msgstr "សម្អាត​ឃ្លាំងសម្ងាត់​កញ្ចប់"
 
-#: src/ui.cc:2365
+#: src/ui.cc:2364
 msgid "Clean ^obsolete files"
 msgstr "សម្អាត​ឯកសារ​ដែល​លែងប្រើ"
 
-#: src/ui.cc:2372
+#: src/ui.cc:2371
 msgid "^Reload package cache"
 msgstr "ផ្ទុក​ឃ្លាំងសម្ងាត់​កញ្ចប់​ឡើង​វិញ"
 
-#: src/ui.cc:2377
+#: src/ui.cc:2376
 msgid "^Play Minesweeper"
 msgstr "លេង​ល្បែង​ដោះមីន"
 
-#: src/ui.cc:2382
+#: src/ui.cc:2381
 msgid "^Become root"
 msgstr "ក្លាយ​ជា​ root"
 
-#: src/ui.cc:2385
+#: src/ui.cc:2384
 msgid "^Quit"
 msgstr "ចេញ"
 
-#: src/ui.cc:2392 src/ui.cc:2775
+#: src/ui.cc:2391 src/ui.cc:2774
 msgid "Undo"
 msgstr "មិន​ធ្វើ​វិញ"
 
-#: src/ui.cc:2401
+#: src/ui.cc:2400
 msgid "^Install"
 msgstr "ដំឡើង"
 
-#: src/ui.cc:2402
+#: src/ui.cc:2401
 msgid "Flag the currently selected package for installation or upgrade"
 msgstr "បោះទង់​សម្គាល់​កញ្ចប់​ដែល​បាន​ជ្រើស​បច្ចុប្បន្ន ដើម្បី​ដំឡើង ឬ ធ្វើ​ឲ្យ​ប្រសើរ"
 
-#: src/ui.cc:2405
+#: src/ui.cc:2404
 msgid "^Remove"
 msgstr "យក​ចេញ"
 
-#: src/ui.cc:2406
+#: src/ui.cc:2405
 msgid "Flag the currently selected package for removal"
 msgstr "បោះទង់​សម្គាល់​កញ្ចប់​ដែល​បាន​ជ្រើស​បច្ចុប្បន្ន ដើម្បី​យកចេញ"
 
-#: src/ui.cc:2409
+#: src/ui.cc:2408
 msgid "^Purge"
 msgstr "លុប​បំបាត់"
 
-#: src/ui.cc:2410
+#: src/ui.cc:2409
 msgid ""
 "Flag the currently selected package and its configuration files for removal"
 msgstr "បោះទង់​សម្គាល់​កញ្ចប់ ដែល​បាន​ជ្រើស​បច្ចុប្បន្ន និង ឯកសារ​កំណត់​រចនាសម្ព័ន្ធ​របស់​វា ដើម្បី​យកចេញ"
 
-#: src/ui.cc:2413
+#: src/ui.cc:2412
 msgid "^Keep"
 msgstr "រក្សា"
 
-#: src/ui.cc:2414
+#: src/ui.cc:2413
 msgid "Cancel any action on the selected package"
 msgstr "បោះបង់​ចោល​សកម្មភាព​ចំពោះ​កញ្ចប់​ដែល​បាន​ជ្រើស"
 
-#: src/ui.cc:2417
+#: src/ui.cc:2416
 msgid "^Hold"
 msgstr "រង់ចាំ"
 
-#: src/ui.cc:2418
+#: src/ui.cc:2417
 msgid ""
 "Cancel any action on the selected package, and protect it from future "
 "upgrades"
 msgstr "បោះបង់​សកម្មភាព​នានា​ចំពោះ​កញ្ចប់​ដែល​បាន​ជ្រើស ហើយ​ការពារ​វា​កុំ​ឲ្យ​មាន​ការ​ធ្វើ​ឲ្យ​ប្រសើរ"
 
-#: src/ui.cc:2421
+#: src/ui.cc:2420
 msgid "Mark ^Auto"
 msgstr "សម្គាល់​ស្វ័យប្រវត្តិ"
 
-#: src/ui.cc:2422
+#: src/ui.cc:2421
 msgid ""
 "Mark the selected package as having been automatically installed; it will "
 "automatically be removed if no other packages depend on it"
@@ -7399,11 +7355,11 @@ msgstr ""
 "សម្គាល់​កញ្ចប់​ដែល​បាន​ជ្រើស ថា​ត្រូវ​បាន​ដំឡើង​ដោយ​ស្វ័យប្រវត្តិ ។ វា​នឹង​ត្រូវ​បាន​យកចេញ​ដោយ​ស្វ័យប្រវត្តិ បើ​មិន​"
 "មាន​កញ្ចប់​ណា​មួយ​អាស្រ័យ​តាម​វា"
 
-#: src/ui.cc:2425
+#: src/ui.cc:2424
 msgid "Mark ^Manual"
 msgstr "សម្គាល់​ដោយ​ដៃ"
 
-#: src/ui.cc:2426
+#: src/ui.cc:2425
 msgid ""
 "Mark the selected package as having been manually installed; it will not be "
 "removed unless you manually remove it"
@@ -7411,11 +7367,11 @@ msgstr ""
 "សម្គាល់​កញ្ចប់​ដែល​បាន​ជ្រើស ថា​ត្រូវ​បាន​ដំឡើង​ដោយ​ដៃ ។ វា​នឹង​មិន​ត្រូវ​បាន​យកចេញ​ឡើយ ទាល់​តែ​អ្នក​យកវា​ចេញ​"
 "ដោយ​ដៃ"
 
-#: src/ui.cc:2429
+#: src/ui.cc:2428
 msgid "^Forbid Version"
 msgstr "ហាមឃាត់​កំណែ"
 
-#: src/ui.cc:2430
+#: src/ui.cc:2429
 msgid ""
 "Forbid the candidate version of the selected package from being installed; "
 "newer versions of the package will be installed as usual"
@@ -7423,336 +7379,336 @@ msgstr ""
 "ហាមឃាត់​កំណែ​សាកល្បង​របស់​កញ្ចប់​ដែល​បាន​ជ្រើស ថា​កុំ​ឲ្យ​ដំឡើង ។ កំណែ​ថ្មី​ជាង​របស់​កញ្ចប់ នឹង​ត្រូវ​បាន​ដំឡើង​"
 "ធម្មតា"
 
-#: src/ui.cc:2434
+#: src/ui.cc:2433
 msgid "I^nformation"
 msgstr "ព័ត៌មាន​"
 
-#: src/ui.cc:2435
+#: src/ui.cc:2434
 msgid "Display more information about the selected package"
 msgstr "បង្ហាញ​ព័ត៌មាន​បន្ថែម​អំពី​កញ្ចប់​ដែល​បាន​ជ្រើ​ស"
 
-#: src/ui.cc:2438
+#: src/ui.cc:2437
 msgid "C^ycle Package Information"
 msgstr ""
 
-#: src/ui.cc:2439
+#: src/ui.cc:2438
 msgid ""
 "Cycle through the modes of the package information area: it can show the "
 "package's long description, a summary of its dependency status, or an "
 "analysis of why the package is required."
 msgstr ""
 
-#: src/ui.cc:2442
+#: src/ui.cc:2441
 msgid "^Changelog"
 msgstr "កំណត់​ហេតុ​ការ​ផ្លាស់ប្ដូរ"
 
-#: src/ui.cc:2443
+#: src/ui.cc:2442
 msgid "Display the Debian changelog of the selected package"
 msgstr "បង្ហាញ​កំណត់ហេតុ​ការ​ផ្លាស់ប្ដូរ​របស់​ដេបៀន នៃ​កញ្ចប់​ដែល​បាន​ជ្រើស"
 
-#: src/ui.cc:2450
+#: src/ui.cc:2449
 msgid "^Examine Solution"
 msgstr "ពិនិត្យ​ដំណោះស្រាយ​"
 
-#: src/ui.cc:2451
+#: src/ui.cc:2450
 msgid "Examine the currently selected solution to the dependency problems."
 msgstr "ពិនិត្យ​ដំណោះស្រាយ​ដែល​បាន​ជ្រើស​បច្ចុប្បន្ន របស់​បញ្ហា​ដែល​ទាក់ទង​នឹង​ភាព​អាស្រ័យ ។"
 
-#: src/ui.cc:2454
+#: src/ui.cc:2453
 msgid "Apply ^Solution"
 msgstr "អនុវត្តដំណោះស្រាយ​"
 
-#: src/ui.cc:2455
+#: src/ui.cc:2454
 msgid "Perform the actions contained in the currently selected solution."
 msgstr "អនុវត្ត​សកម្មភាព​ដែល​មាន​នៅ​ក្នុង​ដំណោះស្រាយ ដែល​បាន​ជ្រើស​បច្ចុប្បន្ន ។"
 
-#: src/ui.cc:2458
+#: src/ui.cc:2457
 msgid "^Next Solution"
 msgstr "ដំណោះស្រាយ​បន្ទាប់​"
 
-#: src/ui.cc:2459
+#: src/ui.cc:2458
 msgid "Select the next solution to the dependency problems."
 msgstr "ជ្រើស​ដំណោះស្រាយ​បន្ទាប់ ដើម្បី​ដោះស្រាយ​បញ្ហា​ភាព​អាស្រ័យ ។"
 
-#: src/ui.cc:2462
+#: src/ui.cc:2461
 msgid "^Previous Solution"
 msgstr "ដំណោះស្រាយ​មុន​"
 
-#: src/ui.cc:2463
+#: src/ui.cc:2462
 msgid "Select the previous solution to the dependency problems."
 msgstr "ជ្រើស​ដំណោះស្រាយ​មុន ដើម្បី​ដោះស្រាយ​បញ្ហា​ភាព​អាស្រ័យ ។"
 
-#: src/ui.cc:2466
+#: src/ui.cc:2465
 msgid "^First Solution"
 msgstr "ដំណោះស្រាយ​ដំបូង​"
 
-#: src/ui.cc:2467
+#: src/ui.cc:2466
 msgid "Select the first solution to the dependency problems."
 msgstr "ជ្រើស​ដំណោះស្រាយ​ដំបូង ដើម្បី​ដោះស្រាយ​បញ្ហា​ភាព​អាស្រ័យ ។"
 
-#: src/ui.cc:2470
+#: src/ui.cc:2469
 msgid "^Last Solution"
 msgstr "ដំណោះស្រាយ​ចុង​ក្រោយ"
 
-#: src/ui.cc:2471
+#: src/ui.cc:2470
 msgid ""
 "Select the last solution to the dependency problems that has been generated "
 "so far."
 msgstr "ជ្រើស​ដំណោះស្រាយ​ចុងក្រោយ ដើម្បី​ដោះស្រាយ​បញ្ហា​ភាព​អាស្រ័យ ។"
 
-#: src/ui.cc:2477
+#: src/ui.cc:2476
 msgid "Toggle ^Rejected"
 msgstr "បិទបើក ការ​ច្រានចោល"
 
-#: src/ui.cc:2478
+#: src/ui.cc:2477
 msgid "Toggle whether the currently selected action is rejected."
 msgstr "បិទបើក ថា​តើ​សកម្មភាព​ដែល​បាន​ជ្រើស​បច្ចុប្បន្ន ត្រូវ​បាន​ច្រានចោល​ឬ​ក៏​អត់ ។"
 
-#: src/ui.cc:2482
+#: src/ui.cc:2481
 msgid "Toggle ^Approved"
 msgstr "បិទបើក ការ​យល់ស្រប"
 
-#: src/ui.cc:2483
+#: src/ui.cc:2482
 msgid "Toggle whether the currently selected action is approved."
 msgstr "បិទបើក ថា​តើ​សកម្មភាព​ដែល​បាន​ជ្រើស​បច្ចុប្បន្ន​ត្រូវ​បាន​យល់ស្រប​ឬ​ក៏​អត់ ។"
 
-#: src/ui.cc:2487
+#: src/ui.cc:2486
 msgid "^View Target"
 msgstr "មើល​គោល​ដៅ​"
 
-#: src/ui.cc:2488
+#: src/ui.cc:2487
 msgid "View the package which will be affected by the selected action"
 msgstr "មើល​កញ្ចប់​ដែល​នឹង​ត្រូវ​ប៉ះពាល់​ដោយ​សកម្មភាព​ដែល​បាន​ជ្រើស"
 
-#: src/ui.cc:2494
+#: src/ui.cc:2493
 msgid "Reject Breaking ^Holds"
 msgstr ""
 
-#: src/ui.cc:2496
+#: src/ui.cc:2495
 msgid ""
 "Reject all actions that would change the state of held packages or install "
 "forbidden versions"
 msgstr ""
 
-#: src/ui.cc:2504
+#: src/ui.cc:2503
 msgid "^Find"
 msgstr "រក​"
 
-#: src/ui.cc:2505
+#: src/ui.cc:2504
 msgid "Search forwards"
 msgstr "ស្វែងរក​ទៅ​មុខ"
 
-#: src/ui.cc:2508
+#: src/ui.cc:2507
 msgid "^Find Backwards"
 msgstr "រក​ថយ​ក្រោយ​"
 
-#: src/ui.cc:2509
+#: src/ui.cc:2508
 msgid "Search backwards"
 msgstr "ស្វែង​រក​ថយ​ក្រោយ"
 
-#: src/ui.cc:2512
+#: src/ui.cc:2511
 msgid "Find ^Again"
 msgstr "រកម្តង​ទៀត​"
 
-#: src/ui.cc:2513
+#: src/ui.cc:2512
 msgid "Repeat the last search"
 msgstr "ធ្វើការ​ស្វែងរក​ចុងក្រោយ​ម្ដង​ទៀត"
 
-#: src/ui.cc:2516
+#: src/ui.cc:2515
 #, fuzzy
 msgid "Find Again ^Backwards"
 msgstr "រក​ថយ​ក្រោយ​"
 
-#: src/ui.cc:2517
+#: src/ui.cc:2516
 #, fuzzy
 msgid "Repeat the last search in the opposite direction"
 msgstr "ធ្វើការ​ស្វែងរក​ចុងក្រោយ​ម្ដង​ទៀត"
 
-#: src/ui.cc:2521
+#: src/ui.cc:2520
 msgid "^Limit Display"
 msgstr "កំណត់​ការ​បង្ហាញ"
 
-#: src/ui.cc:2522
+#: src/ui.cc:2521
 msgid "Apply a filter to the package list"
 msgstr "អនុវត្ត​តម្រង​ទៅ​កាន់​បញ្ជី​កញ្ចប់"
 
-#: src/ui.cc:2525
+#: src/ui.cc:2524
 msgid "^Un-Limit Display"
 msgstr "មិន​កំណត់​ការ​បង្ហាញ"
 
-#: src/ui.cc:2526
+#: src/ui.cc:2525
 msgid "Remove the filter from the package list"
 msgstr "យក​តម្រង​ចេញពី​បញ្ជី​កញ្ចប់​"
 
-#: src/ui.cc:2530
+#: src/ui.cc:2529
 msgid "Find ^Broken"
 msgstr "រក​កញ្ចប់​ដែល​ខូច"
 
-#: src/ui.cc:2531
+#: src/ui.cc:2530
 msgid "Find the next package with unsatisfied dependencies"
 msgstr "រក​កញ្ចប់​បន្ទាប់ ដែល​មាន​ភាពអាស្រ័យ​មិន​ទាន់​បាន​ដោះស្រាយ"
 
-#: src/ui.cc:2538
+#: src/ui.cc:2537
 #, fuzzy
 msgid "^Preferences"
 msgstr "ផ្អែកលើ​ជា​ស្រេច"
 
-#: src/ui.cc:2543
+#: src/ui.cc:2542
 msgid "^UI options"
 msgstr "ជម្រើស​ចំណុចប្រទាក់"
 
-#: src/ui.cc:2544
+#: src/ui.cc:2543
 msgid "Change the settings which affect the user interface"
 msgstr "ផ្លាស់ប្ដូរ​ការ​កំណត់ ដែល​ប៉ះពាល់​ដល់​ចំណុចប្រទាក់​អ្នកប្រើ"
 
-#: src/ui.cc:2547
+#: src/ui.cc:2546
 msgid "^Dependency handling"
 msgstr "ការ​ដោះស្រាយ​ភាព​អាស្រ័យ"
 
-#: src/ui.cc:2548
+#: src/ui.cc:2547
 msgid "Change the settings which affect how package dependencies are handled"
 msgstr "ផ្លាស់ប្ដូរ​ការ​កំណត់​ដែល​ប៉ះពាល់​របៀប​ដោះស្រាយ​ភាព​អាស្រ័យ​របស់​កញ្ចប់"
 
-#: src/ui.cc:2551
+#: src/ui.cc:2550
 msgid "^Miscellaneous"
 msgstr "ផ្សេងៗ"
 
-#: src/ui.cc:2552
+#: src/ui.cc:2551
 msgid "Change miscellaneous program settings"
 msgstr "ផ្លាស់ប្ដូរ​ការ​កំណត់​ផ្សេងៗ​របស់​កម្មវិធី"
 
-#: src/ui.cc:2558
+#: src/ui.cc:2557
 msgid "^Revert options"
 msgstr "បញ្ច្រាស​ជម្រើស"
 
-#: src/ui.cc:2559
+#: src/ui.cc:2558
 msgid "Reset all settings to the system defaults"
 msgstr "កំណត់​ការ​កំណត់​ទាំងអស់​ទៅ​ជា​លំនាំដើម​វិញ"
 
-#: src/ui.cc:2570
+#: src/ui.cc:2569
 msgid "^Next"
 msgstr "បន្ទាប់​"
 
-#: src/ui.cc:2571
+#: src/ui.cc:2570
 msgid "View next display"
 msgstr "មើល​ការ​បង្ហាញ​បន្ទាប់"
 
-#: src/ui.cc:2574
+#: src/ui.cc:2573
 msgid "^Prev"
 msgstr "មុន​"
 
-#: src/ui.cc:2575
+#: src/ui.cc:2574
 msgid "View previous display"
 msgstr "មើល​ការ​បង្ហាញ​មុន"
 
-#: src/ui.cc:2578
+#: src/ui.cc:2577
 msgid "^Close"
 msgstr "បិទ​"
 
-#: src/ui.cc:2579
+#: src/ui.cc:2578
 msgid "Close this display"
 msgstr "បិទ​ការ​បង្ហាញ​នេះ"
 
-#: src/ui.cc:2584
+#: src/ui.cc:2583
 msgid "New Package ^View"
 msgstr "ទិដ្ឋភាព​កញ្ចប់​ថ្មី"
 
-#: src/ui.cc:2585
+#: src/ui.cc:2584
 msgid "Create a new default package view"
 msgstr "បង្កើត​ទិដ្ឋភាព​កញ្ចប់​លំនាំដើម​ថ្មី"
 
-#: src/ui.cc:2588
+#: src/ui.cc:2587
 msgid "Audit ^Recommendations"
 msgstr "ពិនិត្យ​ការ​ផ្ដល់​អនុសាសន៍"
 
-#: src/ui.cc:2589
+#: src/ui.cc:2588
 msgid ""
 "View packages which it is recommended that you install, but which are not "
 "currently installed."
 msgstr "មើល​កញ្ចប់​ដែល​ត្រូវ​បាន​ផ្ដល់​អនុសាសន៍​ឲ្យ​ដំឡើង តែ​មិន​ទាន់​បាន​ដំឡើង ។"
 
-#: src/ui.cc:2592
+#: src/ui.cc:2591
 msgid "New ^Flat Package List"
 msgstr "បញ្ជី​កញ្ចប់​ធម្មតា"
 
-#: src/ui.cc:2593
+#: src/ui.cc:2592
 msgid "View all the packages on the system in a single uncategorized list"
 msgstr "មើល​កញ្ចប់​ទាំងអស់​នៅ​ក្នុង​ប្រព័ន្ធ នៅ​ក្នុង​បញ្ជី​តែមួយ"
 
-#: src/ui.cc:2596
+#: src/ui.cc:2595
 msgid "New ^Debtags Browser"
 msgstr "កម្មវិធី​រុករក ^Debtags ថ្មី"
 
-#: src/ui.cc:2598
+#: src/ui.cc:2597
 msgid "Browse packages using Debtags data"
 msgstr "រកមើល​កញ្ចប់​ដោយ​ប្រើ​ទិន្នន័យ Debtags"
 
-#: src/ui.cc:2601
+#: src/ui.cc:2600
 msgid "New Categorical ^Browser"
 msgstr "កម្មវិធី​រុករក​តាមប្រភេទ ថ្មី"
 
-#: src/ui.cc:2603
+#: src/ui.cc:2602
 msgid "Browse packages by category"
 msgstr "រកមើល​កញ្ចប់​តាម​ប្រភេទ"
 
-#: src/ui.cc:2611
+#: src/ui.cc:2610
 msgid "^About"
 msgstr "អំពី"
 
-#: src/ui.cc:2612
+#: src/ui.cc:2611
 msgid "View information about this program"
 msgstr "មើល​ព័ត៌មាន​អំពី​កម្មវិធី​នេះ​"
 
-#: src/ui.cc:2615
+#: src/ui.cc:2614
 msgid "^Help"
 msgstr "ជំនួយ​"
 
-#: src/ui.cc:2616
+#: src/ui.cc:2615
 msgid "View the on-line help"
 msgstr "មើល​ជំនួយ"
 
-#: src/ui.cc:2618
+#: src/ui.cc:2617
 msgid "User's ^Manual"
 msgstr "របៀបប្រើ"
 
-#: src/ui.cc:2619
+#: src/ui.cc:2618
 msgid "View the detailed program manual"
 msgstr "មើល​របៀបប្រើ​កម្មវិធី​នីមួយៗ"
 
-#: src/ui.cc:2622
+#: src/ui.cc:2621
 msgid "^FAQ"
 msgstr "សំណួរ​ដែល​សួរ​រឿយៗ"
 
-#: src/ui.cc:2626
+#: src/ui.cc:2625
 msgid "^News"
 msgstr "ព័ត៌មាន​"
 
-#: src/ui.cc:2627
+#: src/ui.cc:2626
 #, fuzzy
 msgid "View the important changes made in each version of "
 msgstr "មើល​ការ​ផ្លាស់ប្ដូរ​សំខាន់ៗ ដែល​បាន​ធ្វើ​នៅ​ក្នុង​កំណែ​នីមួយៗ​របស់ "
 
-#: src/ui.cc:2630
+#: src/ui.cc:2629
 msgid "^License"
 msgstr "អាជ្ញាបណ្ណ"
 
-#: src/ui.cc:2774
+#: src/ui.cc:2773
 msgid "Actions"
 msgstr "សកម្មភាព​"
 
-#: src/ui.cc:2778
+#: src/ui.cc:2777
 msgid "Search"
 msgstr "ស្វែងរក"
 
-#: src/ui.cc:2779
+#: src/ui.cc:2778
 msgid "Options"
 msgstr "ជម្រើស​"
 
-#: src/ui.cc:2780
+#: src/ui.cc:2779
 msgid "Views"
 msgstr "មើល​"
 
-#: src/ui.cc:2846
+#: src/ui.cc:2845
 #, c-format
 msgid ""
 "%ls: Menu  %ls: Help  %ls: Quit  %ls: Update  %ls: Download/Install/Remove "
@@ -7761,11 +7717,11 @@ msgstr ""
 "%ls ៖ ម៉ឺនុយ  %ls ៖ ជំនួយ  %ls ៖ ចេញ  %ls ៖ ធ្វើ​អោយ​ប្រសើរ  %ls ៖ ទាញយក​/​ដំឡើង​/​យក​ចេញ "
 "Pkgs"
 
-#: src/ui.cc:3205
+#: src/ui.cc:3204
 msgid "yes_key"
 msgstr "y"
 
-#: src/ui.cc:3206
+#: src/ui.cc:3205
 msgid "no_key"
 msgstr "n"
 
@@ -7797,16 +7753,27 @@ msgstr "​​ទាញយក​កំណត់​ហេតុ​ផ្លាស
 msgid "You can only view changelogs of official Debian packages."
 msgstr "អ្នក​អាច​មើល​តែ​កំណត់ហេតុ​ការ​ផ្លាស់ប្ដូរ របស់​កញ្ចប់​ដេបៀន​ផ្លូវការ​ប៉ុណ្ណោះ ។"
 
+#~ msgid "Couldn't lock list directory..are you root?"
+#~ msgstr "មិន​អាច​ចាក់​សោ​ថត​បញ្ជី​បាន​ឡើយ...តើ​អ្នក​ជា​ root ​ឬ ?"
+
+#, fuzzy
+#~ msgid "Unterminated quoted string in command: %s"
+#~ msgstr "មាន​ខ្សែអក្សរ​ន័យ​ត្រង់​មិន​ទាន់​បាន​បញ្ចប់ នៅ​បន្ទាប់​ពី %s"
+
+#, fuzzy
+#~ msgid "Updating debtags database"
+#~ msgstr "កំពុង​បង្កើត​មូលដ្ឋាន​ទិន្នន័យ​ស្លាក"
+
+#, fuzzy
+#~ msgid ""
+#~ "Updating the debtags database (%s update %s) failed (perhaps debtags is "
+#~ "not installed?): %s"
+#~ msgstr "មិន​អាច​ផ្ទុក​ពាក្យ debtags បាន​ឡើយ ។ ប្រហែល​ជា​មិន​បាន​ដំឡើង debtags ទេ​មើល​ទៅ ?"
+
 #, fuzzy
 #~| msgid "Invalid operation %s"
 #~ msgid "Invalid command-line option '%s'"
 #~ msgstr "ប្រតិបត្តិការ %s មិន​ត្រឹមត្រូវ"
-
-#~ msgid "Couldn't clean out list directories"
-#~ msgstr "មិន​អាច​ជម្រះ​ថត​បញ្ជី​បាន​ឡើយ"
-
-#~ msgid "Couldn't rebuild package cache"
-#~ msgstr "មិន​អាច​បង្កើត​ឃ្លាំង​សម្ងាត់​កញ្ចប់​ឡើងវិញ​បាន​ឡើយ"
 
 #~ msgid "Too many arguments to by-section grouping policy"
 #~ msgstr "មាន​អាគុយម៉ង់​ច្រើន​ពេក​ហើយ សម្រាប់​គោលការណ៍​ដាក់​ជាក្រុម​តាម​ផ្នែក"

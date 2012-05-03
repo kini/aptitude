@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude 0.4.x\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2012-03-27 16:51+0800\n"
+"POT-Creation-Date: 2012-05-03 15:37+0800\n"
 "PO-Revision-Date: 2008-04-22 19:08+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -880,7 +880,7 @@ msgid "Del %s* %spartial/*\n"
 msgstr "Del %s* %spartial/*\n"
 
 #: src/cmdline/cmdline_clean.cc:76 src/cmdline/cmdline_clean.cc:146
-#: src/ui.cc:1781 src/ui.cc:1869
+#: src/ui.cc:1780 src/ui.cc:1868
 #, fuzzy
 msgid "Unable to lock the download directory"
 msgstr ""
@@ -925,7 +925,7 @@ msgstr ""
 "chọn « --full-resolver » (bộ tháo gỡ đầy đủ).\n"
 
 #: src/cmdline/cmdline_do_action.cc:385 src/cmdline/cmdline_simulate.cc:60
-#: src/main.cc:1221
+#: src/main.cc:1223
 #, c-format
 msgid "Abort.\n"
 msgstr "Hủy bỏ.\n"
@@ -935,17 +935,17 @@ msgstr "Hủy bỏ.\n"
 msgid "download: you must specify at least one package to download\n"
 msgstr "tải về: bạn phải ghi rõ ít nhất một gói cần tải về\n"
 
-#: src/cmdline/cmdline_download.cc:57
-#: src/generic/apt/download_install_manager.cc:87
+#: src/cmdline/cmdline_download.cc:63
+#: src/generic/apt/download_install_manager.cc:83
 msgid "Couldn't read source list"
 msgstr "Không thể đọc danh sách nguồn"
 
-#: src/cmdline/cmdline_download.cc:91
+#: src/cmdline/cmdline_download.cc:97
 #, c-format
 msgid "Can't find a package named \"%s\""
 msgstr "Không tìm thấy gói nào tên « %s »"
 
-#: src/cmdline/cmdline_download.cc:135
+#: src/cmdline/cmdline_download.cc:141
 #, c-format
 msgid ""
 "No downloadable files for %s version %s; perhaps it is a local or obsolete "
@@ -1129,17 +1129,17 @@ msgstr "Những gói sau sẽ được nâng cấp:"
 msgid "The following partially installed packages will be configured:"
 msgstr "Theo đây có những gói đã cài đặt bộ phận sẽ được cấu hình:"
 
-#: src/cmdline/cmdline_prompt.cc:459 src/ui.cc:1568
+#: src/cmdline/cmdline_prompt.cc:459 src/ui.cc:1567
 #, c-format
 msgid "The following ESSENTIAL packages will be REMOVED!\n"
 msgstr "Những gói CHỦ YẾU sau sẽ được GỠ BỎ :\n"
 
-#: src/cmdline/cmdline_prompt.cc:468 src/ui.cc:1583
+#: src/cmdline/cmdline_prompt.cc:468 src/ui.cc:1582
 #, c-format
 msgid "The following ESSENTIAL packages will be BROKEN by this action:\n"
 msgstr "Những gói CHỦ YẾU sau sẽ bị HỎNG bởi hành động này:\n"
 
-#: src/cmdline/cmdline_prompt.cc:478 src/ui.cc:1596
+#: src/cmdline/cmdline_prompt.cc:478 src/ui.cc:1595
 #, c-format
 msgid ""
 "WARNING: Performing this action will probably cause your system to break!\n"
@@ -1153,7 +1153,7 @@ msgstr ""
 msgid "I am aware that this is a very bad idea"
 msgstr "Tôi hiểu rằng đây là ý kiến rất xấu"
 
-#: src/cmdline/cmdline_prompt.cc:484 src/ui.cc:1597
+#: src/cmdline/cmdline_prompt.cc:484 src/ui.cc:1596
 #, c-format
 msgid "To continue, type the phrase \"%s\":\n"
 msgstr "Để tiếp tục, hãy gõ cụm từ « %s »:\n"
@@ -2888,110 +2888,58 @@ msgid ""
 "The package cache is not available; unable to download and install packages."
 msgstr "Bộ nhớ tạm gói chưa sẵn sàng nên không thể tải về và cài đặt gói."
 
-#: src/generic/apt/download_install_manager.cc:80
-#: src/generic/apt/download_update_manager.cc:95
-msgid "Couldn't lock list directory..are you root?"
-msgstr ""
-"Không thể khoá thư mục danh sách...bạn đã đăng nhập với tư cách người chủ "
-"chưa?"
-
-#: src/generic/apt/download_install_manager.cc:98
+#: src/generic/apt/download_install_manager.cc:93
 msgid "Internal error: couldn't generate list of packages to download"
 msgstr "Gặp lỗi nội bộ : không thể tạo ra danh sách các gói cần tải về"
 
-#: src/generic/apt/download_install_manager.cc:127
+#: src/generic/apt/download_install_manager.cc:120
 #, c-format
 msgid "Failed to fetch %s: %s"
 msgstr "Lỗi lấy %s: %s"
 
-#: src/generic/apt/download_install_manager.cc:133
+#: src/generic/apt/download_install_manager.cc:129
+msgid "Some files failed to download"
+msgstr ""
+
+#: src/generic/apt/download_install_manager.cc:140
 msgid "Unable to correct for unavailable packages"
 msgstr "Không thể sửa chữa trường hợp có các gói không sẵn sàng"
 
-#: src/generic/apt/download_install_manager.cc:168
+#: src/generic/apt/download_install_manager.cc:175
 msgid "A package failed to install.  Trying to recover:"
 msgstr "Một gói không cài đặt được. Đang cố phục hồi:"
 
-#: src/generic/apt/download_install_manager.cc:212
+#: src/generic/apt/download_install_manager.cc:219
 msgid ""
 "Could not regain the system lock!  (Perhaps another apt or dpkg is running?)"
 msgstr ""
 "Không thể lấy lại khoá hệ thống. (Tiến trình apt hay dpkg khác có chạy "
 "không?)"
 
-#: src/generic/apt/download_update_manager.cc:78
+#: src/generic/apt/download_update_manager.cc:69
 msgid "Couldn't read list of package sources"
 msgstr "Không thể đọc danh sách các nguồn gói"
 
-#: src/generic/apt/download_update_manager.cc:148
+#: src/generic/apt/download_update_manager.cc:129
 #, fuzzy, c-format
-msgid "Unterminated quoted string in command: %s"
-msgstr "Có chuỗi nghĩa chữ chưa chấm dứt nằm sau %s"
+#| msgid "Failed to fetch %s: %s"
+msgid "Failed to fetch %s: %s\n"
+msgstr "Lỗi lấy %s: %s"
 
-#: src/generic/apt/download_update_manager.cc:224
-#, c-format
-msgid "fork() failed: %s"
-msgstr "fork() bị lỗi: %s"
+#: src/generic/apt/download_update_manager.cc:149
+msgid "Couldn't clean out list directories"
+msgstr "Không thể xóa sạch các thư mục danh sách"
 
-#: src/generic/apt/download_update_manager.cc:272
-#, c-format
-msgid "waitpid() failed: %s"
-msgstr "waitpid() bị lỗi: %s"
-
-#: src/generic/apt/download_update_manager.cc:318
-msgid "The debtags command must not be an empty string."
-msgstr "Câu lệnh debtags không thể là một chuỗi rỗng."
-
-#: src/generic/apt/download_update_manager.cc:322
-msgid "The debtags command must be an absolute path."
-msgstr "Câu lệnh debtags phải là một đường dẫn tuyệt đối."
-
-#: src/generic/apt/download_update_manager.cc:335
-#, c-format
-msgid "The debtags command (%s) cannot be executed: %s"
-msgstr "Câu lệnh debtags (%s) không thể được thực hiện: %s"
-
-#: src/generic/apt/download_update_manager.cc:340
-msgid "Updating debtags database"
-msgstr "Đang cập nhật cơ sở dữ liệu thẻ debtags"
-
-#: src/generic/apt/download_update_manager.cc:357
-msgid "(core dumped)"
-msgstr "(lõi bị đổ)"
-
-#. ForTranslators: "%s update %s" gets replaced by a command line, do not translate it!
-#: src/generic/apt/download_update_manager.cc:360
-#, c-format
-msgid "The debtags update process (%s update %s) was killed by signal %d%s."
-msgstr ""
-"Tiến trình cập nhật debtags (%s update %s) đã bị giết bởi tín hiệu %d%s."
-
-#. ForTranslators: "%s update %s" gets replaced by a command line, do not translate it!
-#: src/generic/apt/download_update_manager.cc:368
-#, c-format
-msgid "The debtags update process (%s update %s) exited abnormally (code %d)."
-msgstr ""
-"Tiến trình cập nhật debtags (%s update %s) đã thoát bất thường (mã %d)."
-
-#. ForTranslators: "%s update %s" gets replaced by a command line, do not translate it!
-#: src/generic/apt/download_update_manager.cc:375
-#, c-format
+#: src/generic/apt/download_update_manager.cc:154
+#: src/generic/apt/download_update_manager.cc:156
 msgid ""
-"The debtags update process (%s update %s) exited in an unexpected way "
-"(status %d)."
+"Some index files failed to download. They have been ignored, or old ones "
+"used instead."
 msgstr ""
-"Tiến trình cập nhật debtags (%s update %s) đã thoát bằng cách bất thường "
-"(trạng thái %d)."
 
-#. ForTranslators: "%s update %s" gets replaced by a command line, do not translate it!
-#: src/generic/apt/download_update_manager.cc:381
-#, c-format
-msgid ""
-"Updating the debtags database (%s update %s) failed (perhaps debtags is not "
-"installed?): %s"
-msgstr ""
-"Lỗi cập nhật cơ sở dữ liệu thẻ debtags (%s update %s): có thể vì debtags "
-"chưa cài đặt không?: %s"
+#: src/generic/apt/download_update_manager.cc:177
+msgid "Couldn't rebuild package cache"
+msgstr "Không thể xây dựng lại bộ nhớ tạm gói"
 
 #: src/generic/apt/dump_packages.cc:539 src/generic/apt/dump_packages.cc:629
 #, c-format
@@ -3471,48 +3419,50 @@ msgstr ""
 msgid "_File"
 msgstr "Sai"
 
-#: src/gtk/aptitude.glade:28 src/gtk/aptitude.glade:2274 src/ui.cc:2341
+#: src/gtk/aptitude.glade:28 src/gtk/aptitude.glade:2274 src/ui.cc:2340
 msgid "Perform all pending installs and removals"
 msgstr "Thực hiện mọi việc cài đặt và gỡ bỏ bị hoãn"
 
-#: src/gtk/aptitude.glade:38 src/gtk/aptitude.glade:2285 src/ui.cc:2344
+#: src/gtk/aptitude.glade:38 src/gtk/aptitude.glade:2285 src/ui.cc:2343
 msgid "Check for new versions of packages"
 msgstr "Kiểm tra có phiên bản gói mới chưa"
 
-#: src/gtk/aptitude.glade:53 src/gtk/aptitude.glade:2301 src/ui.cc:2349
+#: src/gtk/aptitude.glade:53 src/gtk/aptitude.glade:2301 src/ui.cc:2348
 msgid "Mark all upgradable packages which are not held for upgrade"
 msgstr ""
 "Đánh dấu mọi gói có khả năng nâng cấp mà không được giữ lại để nâng cấp"
 
-#: src/gtk/aptitude.glade:63 src/gtk/aptitude.glade:2312 src/ui.cc:2354
+#: src/gtk/aptitude.glade:63 src/gtk/aptitude.glade:2312 src/ui.cc:2353
 msgid "Forget which packages are \"new\""
 msgstr "Quên những gói nào là « Mới »"
 
-#: src/gtk/aptitude.glade:72 src/gtk/aptitude.glade:2322 src/ui.cc:2358
+#: src/gtk/aptitude.glade:72 src/gtk/aptitude.glade:2322 src/ui.cc:2357
 msgid "Cancel all pending installations, removals, holds, and upgrades."
 msgstr "Thôi các việc cài đặt, gỡ bỏ, giữ lại và nâng cấp bị hoãn."
 
-#: src/gtk/aptitude.glade:81 src/gtk/aptitude.glade:2332 src/ui.cc:2362
+#: src/gtk/aptitude.glade:81 src/gtk/aptitude.glade:2332 src/ui.cc:2361
 msgid "Delete package files which were previously downloaded"
 msgstr "Xóa các tập tin gói đã tải về trước"
 
-#: src/gtk/aptitude.glade:90 src/gtk/aptitude.glade:2342 src/ui.cc:2366
+#: src/gtk/aptitude.glade:90 src/gtk/aptitude.glade:2342 src/ui.cc:2365
 msgid "Delete package files which can no longer be downloaded"
 msgstr "Xóa các tập tin gói không còn tải về được"
 
-#: src/gtk/aptitude.glade:104 src/gtk/aptitude.glade:2357 src/ui.cc:2373
+#: src/gtk/aptitude.glade:104 src/gtk/aptitude.glade:2357 src/ui.cc:2372
 msgid "Reload the package cache"
 msgstr "Nạp lại bộ nhớ tạm gói"
 
-#: src/gtk/aptitude.glade:118 src/gtk/aptitude.glade:2372 src/ui.cc:2383
-msgid ""
-"Run 'su' to become root; this will restart the program, but your settings "
-"will be preserved"
+#: src/gtk/aptitude.glade:118 src/gtk/aptitude.glade:2372 src/ui.cc:2382
+#, fuzzy
+#| msgid ""
+#| "Run 'su' to become root; this will restart the program, but your settings "
+#| "will be preserved"
+msgid "Restart the program as root; your settings will be preserved"
 msgstr ""
 "Hãy chạy lệnh « su » để trở thành người chủ: việc này sẽ khởi chạy lại "
 "chương trình, còn giữ lại các thiết lập của bạn"
 
-#: src/gtk/aptitude.glade:127 src/gtk/aptitude.glade:2382 src/ui.cc:2386
+#: src/gtk/aptitude.glade:127 src/gtk/aptitude.glade:2382 src/ui.cc:2385
 msgid "Exit the program"
 msgstr "Thoát khỏi chương trình"
 
@@ -3520,7 +3470,7 @@ msgstr "Thoát khỏi chương trình"
 msgid "E_dit"
 msgstr ""
 
-#: src/gtk/aptitude.glade:148 src/gtk/aptitude.glade:2404 src/ui.cc:2393
+#: src/gtk/aptitude.glade:148 src/gtk/aptitude.glade:2404 src/ui.cc:2392
 msgid "Undo the last package operation or group of operations"
 msgstr "Hồi lại thao tác (hay nhóm thao tác) gói cuối cùng"
 
@@ -3570,12 +3520,12 @@ msgid "Packages"
 msgstr "Gói"
 
 #: src/gtk/aptitude.glade:358 src/gtk/aptitude.glade:2617 src/gtk/gui.cc:1033
-#: src/gtk/previewtab.cc:118 src/qt/tabs_manager.cc:220 src/ui.cc:1394
+#: src/gtk/previewtab.cc:118 src/qt/tabs_manager.cc:220 src/ui.cc:1393
 msgid "Preview"
 msgstr "Xem thử"
 
 #: src/gtk/aptitude.glade:369 src/gtk/aptitude.glade:2628 src/gtk/gui.cc:1028
-#: src/qt/tabs_manager.cc:263 src/ui.cc:2777
+#: src/qt/tabs_manager.cc:263 src/ui.cc:2776
 msgid "Resolver"
 msgstr "Bộ tháo gỡ"
 
@@ -4334,7 +4284,7 @@ msgstr "Áp dụng bộ lọc vào danh sách gói"
 msgid "Download already running."
 msgstr "Đang tải về..."
 
-#: src/gtk/gui.cc:300 src/gtk/gui.cc:948 src/ui.cc:1520 src/ui.cc:1759
+#: src/gtk/gui.cc:300 src/gtk/gui.cc:948 src/ui.cc:1519 src/ui.cc:1758
 msgid "A package-list update or install run is already taking place."
 msgstr "Việc cập nhật hoặc cài đặt danh sách gói đang xảy ra."
 
@@ -5868,14 +5818,14 @@ msgid ""
 "versions\"."
 msgstr ""
 
-#: src/main.cc:1077
+#: src/main.cc:1079
 #, fuzzy
 msgid ""
 "Only one of --auto-clean-on-startup, --clean-on-startup, -i, and -u may be "
 "specified\n"
 msgstr "Có thể ghi rõ chỉ một của hai tùy chọn « -u »  và « -i »\n"
 
-#: src/main.cc:1086
+#: src/main.cc:1088
 #, fuzzy
 msgid ""
 "-u, -i, and --clean-on-startup may not be specified in command-line mode "
@@ -5884,22 +5834,22 @@ msgstr ""
 "Không thể ghi rõ tùy chọn « -u » hay « -i » trong chế độ dòng lệnh (v.d. với "
 "lệnh 'install' (cài) đặt)."
 
-#: src/main.cc:1103
+#: src/main.cc:1105
 #, fuzzy
 msgid "-u, -i, and --clean-on-startup may not be specified with a command"
 msgstr "Không thể ghi rõ tùy chọn « -u » hay « -i » với lệnh nào"
 
-#: src/main.cc:1214
+#: src/main.cc:1216
 #, c-format
 msgid "Unknown command \"%s\"\n"
 msgstr "Không rõ lệnh « %s »\n"
 
-#: src/main.cc:1226 src/main.cc:1311
+#: src/main.cc:1228 src/main.cc:1313
 #, c-format
 msgid "Uncaught exception: %s\n"
 msgstr "Ngoại lệ chưa bắt: %s\n"
 
-#: src/main.cc:1230 src/main.cc:1315
+#: src/main.cc:1232 src/main.cc:1317
 #, c-format
 msgid ""
 "Backtrace:\n"
@@ -5917,7 +5867,7 @@ msgstr "Tìm kiếm:"
 msgid "Search backwards for: "
 msgstr "Tìm kiếm ngược: "
 
-#: src/mine/cmine.cc:115 src/mine/cmine.cc:154 src/ui.cc:1764
+#: src/mine/cmine.cc:115 src/mine/cmine.cc:154 src/ui.cc:1763
 msgid "Minesweeper"
 msgstr "Quét mìn"
 
@@ -6127,7 +6077,7 @@ msgstr "UTF-8"
 msgid "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 1 10 9 12 30 17 15"
 msgstr "30 6 6 1 1 40 14 14 11 10 35 9 10 2 1 1 10 12 30 15 15"
 
-#: src/pkg_columnizer.cc:89 src/ui.cc:2776
+#: src/pkg_columnizer.cc:89 src/ui.cc:2775
 msgid "Package"
 msgstr "Gói"
 
@@ -7160,7 +7110,7 @@ msgstr "Đang nạp bộ nhớ tạm"
 msgid "Really quit Aptitude?"
 msgstr "Thật sự thoát trình Aptitude không?"
 
-#: src/ui.cc:714 src/ui.cc:2539
+#: src/ui.cc:714 src/ui.cc:2538
 msgid "Change the behavior of aptitude"
 msgstr "Thay đổi ứng xử của aptitude"
 
@@ -7243,7 +7193,7 @@ msgstr ""
 msgid "License"
 msgstr "Giấy phép"
 
-#: src/ui.cc:1086 src/ui.cc:2631
+#: src/ui.cc:1086 src/ui.cc:2630
 msgid "View the terms under which you may copy and distribute aptitude"
 msgstr "Xem các điều kiện sao chép và phân phối aptitude"
 
@@ -7263,7 +7213,7 @@ msgstr "Trợ giúp trực tiếp"
 msgid "View a brief introduction to aptitude"
 msgstr "Xem lời giới thiệu ngắn về aptitude"
 
-#: src/ui.cc:1115 src/ui.cc:2781
+#: src/ui.cc:1115 src/ui.cc:2780
 msgid "Help"
 msgstr "Trợ giúp"
 
@@ -7291,7 +7241,7 @@ msgstr "Sổ tay"
 msgid "FAQ"
 msgstr "Hỏi Đáp"
 
-#: src/ui.cc:1145 src/ui.cc:2623
+#: src/ui.cc:1145 src/ui.cc:2622
 msgid "View a list of frequently asked questions"
 msgstr "Xem danh sách các câu thường hỏi"
 
@@ -7363,23 +7313,23 @@ msgstr "Thực sự tiếp tục"
 msgid "Abort Installation"
 msgstr "Hủy bỏ cài đặt"
 
-#: src/ui.cc:1392
+#: src/ui.cc:1391
 msgid "Preview of package installation"
 msgstr "Xem thử việc cài gói"
 
-#: src/ui.cc:1393
+#: src/ui.cc:1392
 msgid "View and/or adjust the actions that will be performed"
 msgstr "Xem và/hay điều chỉnh những hành động cần thực hiện"
 
-#: src/ui.cc:1450
+#: src/ui.cc:1449
 msgid "Some packages were broken and have been fixed:"
 msgstr "Một số gói bị hỏng thì đã được sửa chữa:"
 
-#: src/ui.cc:1458
+#: src/ui.cc:1457
 msgid "No solution to these dependency problems exists!"
 msgstr "Không có giải pháp nào cho những vấn đề quan hệ phụ thuộc này."
 
-#: src/ui.cc:1464
+#: src/ui.cc:1463
 #, c-format
 msgid ""
 "Ran out of time while trying to resolve dependencies (press \"%s\" to try "
@@ -7388,7 +7338,7 @@ msgstr ""
 "Hết thời gian khi cố gắng tháo gỡ quan hệ phụ thuộc (bấm « %s » để cố tích "
 "cực hơn)."
 
-#: src/ui.cc:1510
+#: src/ui.cc:1509
 msgid ""
 "Installing/removing packages requires administrative privileges, which you "
 "currently do not have.  Would you like to change to the root account?"
@@ -7396,19 +7346,19 @@ msgstr ""
 "Việc cài đặt/gỡ bỏ gói cần thiết quyền truy cập quản trị mà bạn hiện thời "
 "không có. Bạn có muốn chuyển đổi sang tài khoản ngươi chủ (root) phải không?"
 
-#: src/ui.cc:1513 src/ui.cc:1752 src/ui.cc:1813 src/ui.cc:1908
+#: src/ui.cc:1512 src/ui.cc:1751 src/ui.cc:1812 src/ui.cc:1907
 msgid "Become root"
 msgstr "Trở thành Người chủ"
 
-#: src/ui.cc:1515 src/ui.cc:1754 src/ui.cc:1815 src/ui.cc:1910
+#: src/ui.cc:1514 src/ui.cc:1753 src/ui.cc:1814 src/ui.cc:1909
 msgid "Don't become root"
 msgstr "Không trở thành Người chủ"
 
-#: src/ui.cc:1636
+#: src/ui.cc:1635
 msgid "No packages are scheduled to be installed, removed, or upgraded."
 msgstr "Không có gói nào được định cài đặt, gỡ bỏ hoặc nâng cấp."
 
-#: src/ui.cc:1642
+#: src/ui.cc:1641
 msgid ""
 "No packages will be installed, removed or upgraded.  Some packages could be "
 "upgraded, but you have not chosen to upgrade them.  Type \"U\" to prepare an "
@@ -7418,23 +7368,23 @@ msgstr ""
 "được nâng cấp, nhưng mà bạn chưa chọn nâng cấp chúng. Hãy gõ phím « U » để "
 "chuẩn bị việc nâng cấp."
 
-#: src/ui.cc:1705 src/ui.cc:1874
+#: src/ui.cc:1704 src/ui.cc:1873
 msgid "Deleting obsolete downloaded files"
 msgstr "Đang xóa các tập tin cũ đã tải về"
 
-#: src/ui.cc:1722
+#: src/ui.cc:1721
 msgid "Updating package lists"
 msgstr "Đang cập nhật các danh sách gói"
 
-#: src/ui.cc:1723
+#: src/ui.cc:1722
 msgid "View the progress of the package list update"
 msgstr "Xem cách tiến hành việc cập nhật danh sách gói"
 
-#: src/ui.cc:1724
+#: src/ui.cc:1723
 msgid "List Update"
 msgstr "Cập nhật danh sách"
 
-#: src/ui.cc:1749
+#: src/ui.cc:1748
 msgid ""
 "Updating the package lists requires administrative privileges, which you "
 "currently do not have.  Would you like to change to the root account?"
@@ -7442,23 +7392,23 @@ msgstr ""
 "Việc cập nhật danh sách gói cần thiết quyền truy cập quản trị, mà bạn hiện "
 "thời không có. Bạn có muốn chuyển đổi sang tài khoản người chủ phải không?"
 
-#: src/ui.cc:1764 src/ui.cc:2378
+#: src/ui.cc:1763 src/ui.cc:2377
 msgid "Waste time trying to find mines"
 msgstr "Hoài phí thì giờ bằng cách cố gắng tìm mìn"
 
-#: src/ui.cc:1771 src/ui.cc:1859
+#: src/ui.cc:1770 src/ui.cc:1858
 msgid "Cleaning while a download is in progress is not allowed"
 msgstr "Không cho phép xóa sạch trong khi tải về gì"
 
-#: src/ui.cc:1786
+#: src/ui.cc:1785
 msgid "Deleting downloaded files"
 msgstr "Đang xóa các tập tin đã tải về"
 
-#: src/ui.cc:1800
+#: src/ui.cc:1799
 msgid "Downloaded package files have been deleted"
 msgstr "Các tập tin gói đã tải về đã được xoá"
 
-#: src/ui.cc:1810
+#: src/ui.cc:1809
 #, fuzzy
 msgid ""
 "Cleaning the package cache requires administrative privileges, which you "
@@ -7467,11 +7417,11 @@ msgstr ""
 "Việc cập nhật danh sách gói cần thiết quyền truy cập quản trị, mà bạn hiện "
 "thời không có. Bạn có muốn chuyển đổi sang tài khoản người chủ phải không?"
 
-#: src/ui.cc:1856
+#: src/ui.cc:1855
 msgid "The apt cache file is not available; cannot auto-clean."
 msgstr "Bộ nhớ tạm apt chưa sẵn sàng nên không thể xóa sạch tự động."
 
-#: src/ui.cc:1894
+#: src/ui.cc:1893
 #, c-format
 msgid ""
 "Obsolete downloaded package files have been deleted, freeing %sB of disk "
@@ -7480,7 +7430,7 @@ msgstr ""
 "Các tập tin gói cũ đã tải về đã được xoá, mà giải phóng thêm %sB chỗ trên "
 "đĩa."
 
-#: src/ui.cc:1905
+#: src/ui.cc:1904
 #, fuzzy
 msgid ""
 "Deleting obsolete files requires administrative privileges, which you "
@@ -7489,126 +7439,126 @@ msgstr ""
 "Việc cập nhật danh sách gói cần thiết quyền truy cập quản trị, mà bạn hiện "
 "thời không có. Bạn có muốn chuyển đổi sang tài khoản người chủ phải không?"
 
-#: src/ui.cc:2007
+#: src/ui.cc:2006
 msgid "No more solutions."
 msgstr "Không có giải pháp nữa."
 
-#: src/ui.cc:2215
+#: src/ui.cc:2214
 msgid "Unable to find a solution to apply."
 msgstr "Không tìm thấy giải pháp để dụng."
 
-#: src/ui.cc:2221
+#: src/ui.cc:2220
 msgid "Ran out of time while trying to find a solution."
 msgstr "Hết thời gian khi cố gắng tìm giải pháp."
 
-#: src/ui.cc:2281 src/ui.cc:2283
+#: src/ui.cc:2280 src/ui.cc:2282
 msgid "Resolve Dependencies"
 msgstr "Tháo gỡ quan hệ phụ thuộc"
 
-#: src/ui.cc:2282
+#: src/ui.cc:2281
 msgid "Search for solutions to unsatisfied dependencies"
 msgstr "Tìm kiếm giải pháp quan hệ phụ thuộc chưa thỏa"
 
-#: src/ui.cc:2294
+#: src/ui.cc:2293
 #, c-format
 msgid "Unable to open %ls"
 msgstr "Không thể mở %ls"
 
-#: src/ui.cc:2300
+#: src/ui.cc:2299
 msgid "Error while dumping resolver state"
 msgstr "Gặp lỗi khi đổ tình trạng bộ tháo gỡ"
 
-#: src/ui.cc:2310
+#: src/ui.cc:2309
 #, fuzzy
 msgid "File to which the resolver state should be dumped: "
 msgstr "Tập tin vào đó cần đổ tình trạng bộ tháo gỡ :"
 
-#: src/ui.cc:2340
+#: src/ui.cc:2339
 msgid "^Install/remove packages"
 msgstr "Cà^i/Bỏ gói"
 
-#: src/ui.cc:2343
+#: src/ui.cc:2342
 msgid "^Update package list"
 msgstr "^Cập nhật danh sách gói"
 
-#: src/ui.cc:2348
+#: src/ui.cc:2347
 msgid "Mark Up^gradable"
 msgstr "Nhãn Nân^g cấp được"
 
-#: src/ui.cc:2353
+#: src/ui.cc:2352
 msgid "^Forget new packages"
 msgstr "^Quên các gói mới"
 
-#: src/ui.cc:2357
+#: src/ui.cc:2356
 msgid "Canc^el pending actions"
 msgstr "^Thôi các hành động bị hoãn"
 
-#: src/ui.cc:2361
+#: src/ui.cc:2360
 msgid "^Clean package cache"
 msgstr "^Xóa bộ nhớ tạm gói"
 
-#: src/ui.cc:2365
+#: src/ui.cc:2364
 msgid "Clean ^obsolete files"
 msgstr "Xóa các tập tin ^cũ"
 
-#: src/ui.cc:2372
+#: src/ui.cc:2371
 msgid "^Reload package cache"
 msgstr "Nạp ^lại bộ nhớ tạm gói"
 
-#: src/ui.cc:2377
+#: src/ui.cc:2376
 msgid "^Play Minesweeper"
 msgstr "Chơi Quét ^Mìn"
 
-#: src/ui.cc:2382
+#: src/ui.cc:2381
 msgid "^Become root"
 msgstr "Trở thành ^Người chủ"
 
-#: src/ui.cc:2385
+#: src/ui.cc:2384
 msgid "^Quit"
 msgstr "T^hoát"
 
-#: src/ui.cc:2392 src/ui.cc:2775
+#: src/ui.cc:2391 src/ui.cc:2774
 msgid "Undo"
 msgstr "Hủy bước"
 
-#: src/ui.cc:2401
+#: src/ui.cc:2400
 msgid "^Install"
 msgstr "Cà^i"
 
-#: src/ui.cc:2402
+#: src/ui.cc:2401
 msgid "Flag the currently selected package for installation or upgrade"
 msgstr "Đánh dấu gói đã chọn hiện thời để cài đặt hoặc nâng cấp"
 
-#: src/ui.cc:2405
+#: src/ui.cc:2404
 msgid "^Remove"
 msgstr "^Bỏ"
 
-#: src/ui.cc:2406
+#: src/ui.cc:2405
 msgid "Flag the currently selected package for removal"
 msgstr "Đánh dấu gói đã chọn hiện thời để gỡ bỏ"
 
-#: src/ui.cc:2409
+#: src/ui.cc:2408
 msgid "^Purge"
 msgstr "^Tẩy"
 
-#: src/ui.cc:2410
+#: src/ui.cc:2409
 msgid ""
 "Flag the currently selected package and its configuration files for removal"
 msgstr "Đánh dấu gói đã chọn hiện thời và các tập tin câu hình nó để gỡ bỏ"
 
-#: src/ui.cc:2413
+#: src/ui.cc:2412
 msgid "^Keep"
 msgstr "^Giữ"
 
-#: src/ui.cc:2414
+#: src/ui.cc:2413
 msgid "Cancel any action on the selected package"
 msgstr "Thôi hành động nào với gói được chọn"
 
-#: src/ui.cc:2417
+#: src/ui.cc:2416
 msgid "^Hold"
 msgstr "Giữ ^lại"
 
-#: src/ui.cc:2418
+#: src/ui.cc:2417
 msgid ""
 "Cancel any action on the selected package, and protect it from future "
 "upgrades"
@@ -7616,11 +7566,11 @@ msgstr ""
 "Thôi hành động nào với gói được chọn, và bảo vệ nó chống các việc nâng cấp "
 "sau"
 
-#: src/ui.cc:2421
+#: src/ui.cc:2420
 msgid "Mark ^Auto"
 msgstr "Nhãn ^Tự Động"
 
-#: src/ui.cc:2422
+#: src/ui.cc:2421
 msgid ""
 "Mark the selected package as having been automatically installed; it will "
 "automatically be removed if no other packages depend on it"
@@ -7628,11 +7578,11 @@ msgstr ""
 "Đánh dấu gói đã chọn « đã được cài đặt tự động »; nó sẽ được gỡ bỏ tự động "
 "nếu không có gói khác phụ thuộc vào nó."
 
-#: src/ui.cc:2425
+#: src/ui.cc:2424
 msgid "Mark ^Manual"
 msgstr "Nhãn ^Bằng tay"
 
-#: src/ui.cc:2426
+#: src/ui.cc:2425
 msgid ""
 "Mark the selected package as having been manually installed; it will not be "
 "removed unless you manually remove it"
@@ -7640,11 +7590,11 @@ msgstr ""
 "Đánh dấu gói đã chọn « đã được cài đặt bằng tay »; nó sẽ không được gỡ bỏ "
 "trừ khi bạn tự gỡ bỏ nó bằng tay."
 
-#: src/ui.cc:2429
+#: src/ui.cc:2428
 msgid "^Forbid Version"
 msgstr "Cấm ^Phiên bản"
 
-#: src/ui.cc:2430
+#: src/ui.cc:2429
 msgid ""
 "Forbid the candidate version of the selected package from being installed; "
 "newer versions of the package will be installed as usual"
@@ -7652,19 +7602,19 @@ msgstr ""
 "Cấm cài đặt phiên bản ứng cử của gói đã chọn; các phiên bản mới hơn sẽ được "
 "cài đặt như bình thường"
 
-#: src/ui.cc:2434
+#: src/ui.cc:2433
 msgid "I^nformation"
 msgstr "Thông ti^n"
 
-#: src/ui.cc:2435
+#: src/ui.cc:2434
 msgid "Display more information about the selected package"
 msgstr "Hiển thị thông tin thêm về gói đã chọn"
 
-#: src/ui.cc:2438
+#: src/ui.cc:2437
 msgid "C^ycle Package Information"
 msgstr "^Quay lại thông tin gói"
 
-#: src/ui.cc:2439
+#: src/ui.cc:2438
 msgid ""
 "Cycle through the modes of the package information area: it can show the "
 "package's long description, a summary of its dependency status, or an "
@@ -7674,94 +7624,94 @@ msgstr ""
 "về gói, một bản tóm tắt về trạng thái phụ thuộc của nó, hoặc sự phân tích về "
 "lý do cần thiết gói đó."
 
-#: src/ui.cc:2442
+#: src/ui.cc:2441
 msgid "^Changelog"
 msgstr "^Bản ghi đổi"
 
-#: src/ui.cc:2443
+#: src/ui.cc:2442
 msgid "Display the Debian changelog of the selected package"
 msgstr "Hiển thị bản ghi các thay đổi (ChangeLog) cho gói đa chọn"
 
-#: src/ui.cc:2450
+#: src/ui.cc:2449
 msgid "^Examine Solution"
 msgstr "X^em giải pháp"
 
-#: src/ui.cc:2451
+#: src/ui.cc:2450
 msgid "Examine the currently selected solution to the dependency problems."
 msgstr "Kiểm tra giải pháp vấn đề phụ thuộc hiện thời được chọn."
 
-#: src/ui.cc:2454
+#: src/ui.cc:2453
 msgid "Apply ^Solution"
 msgstr "Á^p dụng giải pháp"
 
-#: src/ui.cc:2455
+#: src/ui.cc:2454
 msgid "Perform the actions contained in the currently selected solution."
 msgstr "Thực hiện những hành động của giải pháp hiện thời được chọn."
 
-#: src/ui.cc:2458
+#: src/ui.cc:2457
 msgid "^Next Solution"
 msgstr "Giải pháp ^kế"
 
-#: src/ui.cc:2459
+#: src/ui.cc:2458
 msgid "Select the next solution to the dependency problems."
 msgstr "Chọn giải pháp vấn đề phụ thuộc kế tiếp."
 
-#: src/ui.cc:2462
+#: src/ui.cc:2461
 msgid "^Previous Solution"
 msgstr "Giải ^pháp trước"
 
-#: src/ui.cc:2463
+#: src/ui.cc:2462
 msgid "Select the previous solution to the dependency problems."
 msgstr "Chọn giải pháp vấn đề phụ thuộc trước đó."
 
-#: src/ui.cc:2466
+#: src/ui.cc:2465
 msgid "^First Solution"
 msgstr "Giải pháp đầ^u"
 
-#: src/ui.cc:2467
+#: src/ui.cc:2466
 msgid "Select the first solution to the dependency problems."
 msgstr "Chọn giải pháp vấn đề phụ thuộc thứ nhất."
 
-#: src/ui.cc:2470
+#: src/ui.cc:2469
 msgid "^Last Solution"
 msgstr "Giải pháp cuố_i"
 
-#: src/ui.cc:2471
+#: src/ui.cc:2470
 msgid ""
 "Select the last solution to the dependency problems that has been generated "
 "so far."
 msgstr ""
 "Chọn giải pháp vấn đề phụ thuộc cuối cùng đã được tạo ra cho đến bây giờ."
 
-#: src/ui.cc:2477
+#: src/ui.cc:2476
 msgid "Toggle ^Rejected"
 msgstr "Bật tắt ^Bác bỏ"
 
-#: src/ui.cc:2478
+#: src/ui.cc:2477
 msgid "Toggle whether the currently selected action is rejected."
 msgstr "Bật tắt bác bỏ hành động hiện thời được chọn."
 
-#: src/ui.cc:2482
+#: src/ui.cc:2481
 msgid "Toggle ^Approved"
 msgstr "Bật tắt ^Chấp nhận"
 
-#: src/ui.cc:2483
+#: src/ui.cc:2482
 msgid "Toggle whether the currently selected action is approved."
 msgstr "Bật tắt chấp nhận hành động hiện thời được chọn."
 
-#: src/ui.cc:2487
+#: src/ui.cc:2486
 msgid "^View Target"
 msgstr "^Xem đích"
 
-#: src/ui.cc:2488
+#: src/ui.cc:2487
 msgid "View the package which will be affected by the selected action"
 msgstr "Xem gói mà hành động được chọn sẽ tác động"
 
-#: src/ui.cc:2494
+#: src/ui.cc:2493
 msgid "Reject Breaking ^Holds"
 msgstr "Từ chối làm ^hư sự Giữ lại"
 
-#: src/ui.cc:2496
+#: src/ui.cc:2495
 msgid ""
 "Reject all actions that would change the state of held packages or install "
 "forbidden versions"
@@ -7769,221 +7719,221 @@ msgstr ""
 "Từ chối mọi hành vi có thể thay đổi tình trạng của gói đã giữ lại hoặc cài "
 "đặt phiên bản bị cấm"
 
-#: src/ui.cc:2504
+#: src/ui.cc:2503
 msgid "^Find"
 msgstr "^Tìm"
 
-#: src/ui.cc:2505
+#: src/ui.cc:2504
 msgid "Search forwards"
 msgstr "Tìm kiếm tới"
 
-#: src/ui.cc:2508
+#: src/ui.cc:2507
 msgid "^Find Backwards"
 msgstr "Tìm ^ngược"
 
-#: src/ui.cc:2509
+#: src/ui.cc:2508
 msgid "Search backwards"
 msgstr "Tìm kiếm ngược"
 
-#: src/ui.cc:2512
+#: src/ui.cc:2511
 msgid "Find ^Again"
 msgstr "Tìm ^lại"
 
-#: src/ui.cc:2513
+#: src/ui.cc:2512
 msgid "Repeat the last search"
 msgstr "Tìm lại chuỗi mới tìm"
 
-#: src/ui.cc:2516
+#: src/ui.cc:2515
 msgid "Find Again ^Backwards"
 msgstr "Tìm lại ^ngược"
 
-#: src/ui.cc:2517
+#: src/ui.cc:2516
 msgid "Repeat the last search in the opposite direction"
 msgstr "Tìm lại chuỗi mới tìm về hướng ngược"
 
-#: src/ui.cc:2521
+#: src/ui.cc:2520
 msgid "^Limit Display"
 msgstr "^Hạn hiện thị"
 
-#: src/ui.cc:2522
+#: src/ui.cc:2521
 msgid "Apply a filter to the package list"
 msgstr "Áp dụng bộ lọc vào danh sách gói"
 
-#: src/ui.cc:2525
+#: src/ui.cc:2524
 msgid "^Un-Limit Display"
 msgstr "^Bỏ hạn hiện thị"
 
-#: src/ui.cc:2526
+#: src/ui.cc:2525
 msgid "Remove the filter from the package list"
 msgstr "Gỡ bỏ bộ lọc khỏi danh sách gói"
 
-#: src/ui.cc:2530
+#: src/ui.cc:2529
 msgid "Find ^Broken"
 msgstr "Tìm ^Bị ngắt"
 
-#: src/ui.cc:2531
+#: src/ui.cc:2530
 msgid "Find the next package with unsatisfied dependencies"
 msgstr "Tìm gói kế tiếp có quan hệ phụ thuộc chưa được thỏa"
 
-#: src/ui.cc:2538
+#: src/ui.cc:2537
 msgid "^Preferences"
 msgstr "Tù^y thích"
 
-#: src/ui.cc:2543
+#: src/ui.cc:2542
 msgid "^UI options"
 msgstr "Tùy chọn _UI"
 
-#: src/ui.cc:2544
+#: src/ui.cc:2543
 msgid "Change the settings which affect the user interface"
 msgstr "Thay đổi thiết lập làm ảnh hưởng đến giao diện người dùng"
 
-#: src/ui.cc:2547
+#: src/ui.cc:2546
 msgid "^Dependency handling"
 msgstr "^Quản lý quan hệ phụ thuộc"
 
-#: src/ui.cc:2548
+#: src/ui.cc:2547
 msgid "Change the settings which affect how package dependencies are handled"
 msgstr "Thay đổi thiết lập làm ảnh hưởng đến cách quản lý quan hệ phụ thuộc."
 
-#: src/ui.cc:2551
+#: src/ui.cc:2550
 msgid "^Miscellaneous"
 msgstr "^Linh tinh"
 
-#: src/ui.cc:2552
+#: src/ui.cc:2551
 msgid "Change miscellaneous program settings"
 msgstr "Thay đổi thiết lập chương trình lặt vặt"
 
-#: src/ui.cc:2558
+#: src/ui.cc:2557
 msgid "^Revert options"
 msgstr "H^oàn nguyên tùy chọn"
 
-#: src/ui.cc:2559
+#: src/ui.cc:2558
 msgid "Reset all settings to the system defaults"
 msgstr "Hoàn nguyên trở lại các thiết lập thành giá trị măc định của hệ thống"
 
-#: src/ui.cc:2570
+#: src/ui.cc:2569
 msgid "^Next"
 msgstr "^Kế"
 
-#: src/ui.cc:2571
+#: src/ui.cc:2570
 msgid "View next display"
 msgstr "Xem bộ trình bày kế tiếp"
 
-#: src/ui.cc:2574
+#: src/ui.cc:2573
 msgid "^Prev"
 msgstr "^Lùi"
 
-#: src/ui.cc:2575
+#: src/ui.cc:2574
 msgid "View previous display"
 msgstr "Xem bộ trình bày trước đó"
 
-#: src/ui.cc:2578
+#: src/ui.cc:2577
 msgid "^Close"
 msgstr "Đón^g"
 
-#: src/ui.cc:2579
+#: src/ui.cc:2578
 msgid "Close this display"
 msgstr "Đóng bộ trình bày này"
 
-#: src/ui.cc:2584
+#: src/ui.cc:2583
 msgid "New Package ^View"
 msgstr "Ô ^xem gói mới"
 
-#: src/ui.cc:2585
+#: src/ui.cc:2584
 msgid "Create a new default package view"
 msgstr "Tạo một ô xem gói mặc định mới"
 
-#: src/ui.cc:2588
+#: src/ui.cc:2587
 msgid "Audit ^Recommendations"
 msgstr "Kiểm tra sự ^Khuyên"
 
-#: src/ui.cc:2589
+#: src/ui.cc:2588
 msgid ""
 "View packages which it is recommended that you install, but which are not "
 "currently installed."
 msgstr "Xem các gói đã khuyên bạn cài đặt, mà hiện thời không được cài đặt ."
 
-#: src/ui.cc:2592
+#: src/ui.cc:2591
 msgid "New ^Flat Package List"
 msgstr "Danh sách gói ^phẳng mới"
 
-#: src/ui.cc:2593
+#: src/ui.cc:2592
 msgid "View all the packages on the system in a single uncategorized list"
 msgstr "Xem các gói trong hệ thộng, theo cùng một danh sách không có loại"
 
-#: src/ui.cc:2596
+#: src/ui.cc:2595
 msgid "New ^Debtags Browser"
 msgstr "Bộ duyệt ^Debtags mới"
 
-#: src/ui.cc:2598
+#: src/ui.cc:2597
 msgid "Browse packages using Debtags data"
 msgstr "Duyệt qua các gói bằng dữ liệu Debtags"
 
-#: src/ui.cc:2601
+#: src/ui.cc:2600
 msgid "New Categorical ^Browser"
 msgstr "^Bộ duyệt phân loại mới"
 
-#: src/ui.cc:2603
+#: src/ui.cc:2602
 msgid "Browse packages by category"
 msgstr "Duyệt các gói theo phân loại"
 
-#: src/ui.cc:2611
+#: src/ui.cc:2610
 msgid "^About"
 msgstr "^Giới thiệu"
 
-#: src/ui.cc:2612
+#: src/ui.cc:2611
 msgid "View information about this program"
 msgstr "Xem thông tin về chương trình này"
 
-#: src/ui.cc:2615
+#: src/ui.cc:2614
 msgid "^Help"
 msgstr "Trợ g^iúp"
 
-#: src/ui.cc:2616
+#: src/ui.cc:2615
 msgid "View the on-line help"
 msgstr "Xem trợ giúp có sẵn"
 
-#: src/ui.cc:2618
+#: src/ui.cc:2617
 msgid "User's ^Manual"
 msgstr "^Sổ tay người dùng"
 
-#: src/ui.cc:2619
+#: src/ui.cc:2618
 msgid "View the detailed program manual"
 msgstr "Xem sổ hướng dẫn chi tiết cho chương trình này"
 
-#: src/ui.cc:2622
+#: src/ui.cc:2621
 msgid "^FAQ"
 msgstr "^Hỏi Đáp"
 
-#: src/ui.cc:2626
+#: src/ui.cc:2625
 msgid "^News"
 msgstr "Ti^n tức"
 
-#: src/ui.cc:2627
+#: src/ui.cc:2626
 msgid "View the important changes made in each version of "
 msgstr "Xem những thay đổi quan trọng được làm trong mỗi phiên bản của "
 
-#: src/ui.cc:2630
+#: src/ui.cc:2629
 msgid "^License"
 msgstr "Giấ^y phép"
 
-#: src/ui.cc:2774
+#: src/ui.cc:2773
 msgid "Actions"
 msgstr "Hành vi"
 
-#: src/ui.cc:2778
+#: src/ui.cc:2777
 msgid "Search"
 msgstr "Tìm kiếm"
 
-#: src/ui.cc:2779
+#: src/ui.cc:2778
 msgid "Options"
 msgstr "Tùy chọn"
 
-#: src/ui.cc:2780
+#: src/ui.cc:2779
 msgid "Views"
 msgstr "Xem"
 
-#: src/ui.cc:2846
+#: src/ui.cc:2845
 #, c-format
 msgid ""
 "%ls: Menu  %ls: Help  %ls: Quit  %ls: Update  %ls: Download/Install/Remove "
@@ -7992,11 +7942,11 @@ msgstr ""
 "%ls: Trình đơn  %ls: Trợ giúp  %ls: Thoát  %ls: Cập nhật  %ls: Tải về/Cài "
 "đặt/Bỏ gói"
 
-#: src/ui.cc:3205
+#: src/ui.cc:3204
 msgid "yes_key"
 msgstr "c"
 
-#: src/ui.cc:3206
+#: src/ui.cc:3205
 msgid "no_key"
 msgstr "k"
 
@@ -8028,16 +7978,63 @@ msgstr "Đang tải về Bản ghi đổi"
 msgid "You can only view changelogs of official Debian packages."
 msgstr "Bạn chỉ có thể xem bản ghi đổi của gói Debian chính thức."
 
+#~ msgid "Couldn't lock list directory..are you root?"
+#~ msgstr ""
+#~ "Không thể khoá thư mục danh sách...bạn đã đăng nhập với tư cách người chủ "
+#~ "chưa?"
+
+#, fuzzy
+#~ msgid "Unterminated quoted string in command: %s"
+#~ msgstr "Có chuỗi nghĩa chữ chưa chấm dứt nằm sau %s"
+
+#~ msgid "fork() failed: %s"
+#~ msgstr "fork() bị lỗi: %s"
+
+#~ msgid "waitpid() failed: %s"
+#~ msgstr "waitpid() bị lỗi: %s"
+
+#~ msgid "The debtags command must not be an empty string."
+#~ msgstr "Câu lệnh debtags không thể là một chuỗi rỗng."
+
+#~ msgid "The debtags command must be an absolute path."
+#~ msgstr "Câu lệnh debtags phải là một đường dẫn tuyệt đối."
+
+#~ msgid "The debtags command (%s) cannot be executed: %s"
+#~ msgstr "Câu lệnh debtags (%s) không thể được thực hiện: %s"
+
+#~ msgid "Updating debtags database"
+#~ msgstr "Đang cập nhật cơ sở dữ liệu thẻ debtags"
+
+#~ msgid "(core dumped)"
+#~ msgstr "(lõi bị đổ)"
+
+#~ msgid "The debtags update process (%s update %s) was killed by signal %d%s."
+#~ msgstr ""
+#~ "Tiến trình cập nhật debtags (%s update %s) đã bị giết bởi tín hiệu %d%s."
+
+#~ msgid ""
+#~ "The debtags update process (%s update %s) exited abnormally (code %d)."
+#~ msgstr ""
+#~ "Tiến trình cập nhật debtags (%s update %s) đã thoát bất thường (mã %d)."
+
+#~ msgid ""
+#~ "The debtags update process (%s update %s) exited in an unexpected way "
+#~ "(status %d)."
+#~ msgstr ""
+#~ "Tiến trình cập nhật debtags (%s update %s) đã thoát bằng cách bất thường "
+#~ "(trạng thái %d)."
+
+#~ msgid ""
+#~ "Updating the debtags database (%s update %s) failed (perhaps debtags is "
+#~ "not installed?): %s"
+#~ msgstr ""
+#~ "Lỗi cập nhật cơ sở dữ liệu thẻ debtags (%s update %s): có thể vì debtags "
+#~ "chưa cài đặt không?: %s"
+
 #, fuzzy
 #~| msgid "Invalid operation %s"
 #~ msgid "Invalid command-line option '%s'"
 #~ msgstr "Thao tác không hợp lệ %s"
-
-#~ msgid "Couldn't clean out list directories"
-#~ msgstr "Không thể xóa sạch các thư mục danh sách"
-
-#~ msgid "Couldn't rebuild package cache"
-#~ msgstr "Không thể xây dựng lại bộ nhớ tạm gói"
 
 #~ msgid "Too many arguments to by-section grouping policy"
 #~ msgstr "Quá nhiều đối số với chính sách nhóm lại theo phần"

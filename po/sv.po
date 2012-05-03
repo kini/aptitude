@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2012-03-27 16:51+0800\n"
+"POT-Creation-Date: 2012-05-03 15:37+0800\n"
 "PO-Revision-Date: 2012-02-23 16:53+0800\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
@@ -899,7 +899,7 @@ msgid "Del %s* %spartial/*\n"
 msgstr "Radera %s* %spartial/*\n"
 
 #: src/cmdline/cmdline_clean.cc:76 src/cmdline/cmdline_clean.cc:146
-#: src/ui.cc:1781 src/ui.cc:1869
+#: src/ui.cc:1780 src/ui.cc:1868
 #, fuzzy
 msgid "Unable to lock the download directory"
 msgstr "Kunde inte lokalisera din hemkatalog, sparar till /tmp/function_pkgs!"
@@ -942,7 +942,7 @@ msgstr ""
 "resolver.\n"
 
 #: src/cmdline/cmdline_do_action.cc:385 src/cmdline/cmdline_simulate.cc:60
-#: src/main.cc:1221
+#: src/main.cc:1223
 #, c-format
 msgid "Abort.\n"
 msgstr "Avbryt.\n"
@@ -952,19 +952,19 @@ msgstr "Avbryt.\n"
 msgid "download: you must specify at least one package to download\n"
 msgstr "hämtning: du måste åtminstone ange ett paket att hämta\n"
 
-#: src/cmdline/cmdline_download.cc:57
-#: src/generic/apt/download_install_manager.cc:87
+#: src/cmdline/cmdline_download.cc:63
+#: src/generic/apt/download_install_manager.cc:83
 msgid "Couldn't read source list"
 msgstr "Kunde inte läsa källistan"
 
-#: src/cmdline/cmdline_download.cc:91
+#: src/cmdline/cmdline_download.cc:97
 #, c-format
 msgid "Can't find a package named \"%s\""
 msgstr "Kunde inte hitta ett paket med namnet \"%s\""
 
 # Kbabel marked this one as faulty, poedit
 # shows no error however. maybe it's correct?
-#: src/cmdline/cmdline_download.cc:135
+#: src/cmdline/cmdline_download.cc:141
 #, c-format
 msgid ""
 "No downloadable files for %s version %s; perhaps it is a local or obsolete "
@@ -1145,17 +1145,17 @@ msgstr "Följande paket kommer att bli uppgraderade:"
 msgid "The following partially installed packages will be configured:"
 msgstr "Följande delvis installerade paket kommer att konfigureras:"
 
-#: src/cmdline/cmdline_prompt.cc:459 src/ui.cc:1568
+#: src/cmdline/cmdline_prompt.cc:459 src/ui.cc:1567
 #, c-format
 msgid "The following ESSENTIAL packages will be REMOVED!\n"
 msgstr "Följande SYSTEMKRITISKA paket kommer att TAS BORT!\n"
 
-#: src/cmdline/cmdline_prompt.cc:468 src/ui.cc:1583
+#: src/cmdline/cmdline_prompt.cc:468 src/ui.cc:1582
 #, c-format
 msgid "The following ESSENTIAL packages will be BROKEN by this action:\n"
 msgstr "Följande SYSTEMKRITISKA paket kommer bli TRASIGA av denna åtgärd:\n"
 
-#: src/cmdline/cmdline_prompt.cc:478 src/ui.cc:1596
+#: src/cmdline/cmdline_prompt.cc:478 src/ui.cc:1595
 #, c-format
 msgid ""
 "WARNING: Performing this action will probably cause your system to break!\n"
@@ -1168,7 +1168,7 @@ msgstr ""
 msgid "I am aware that this is a very bad idea"
 msgstr "Jag vet att det är en mycket dålig ide"
 
-#: src/cmdline/cmdline_prompt.cc:484 src/ui.cc:1597
+#: src/cmdline/cmdline_prompt.cc:484 src/ui.cc:1596
 #, c-format
 msgid "To continue, type the phrase \"%s\":\n"
 msgstr "För att fortsätta, skriv in frasen \"%s\":\n"
@@ -2890,106 +2890,57 @@ msgid ""
 msgstr ""
 "Paketcachen finns inte tillgänglig, kan inte hämta och installera paket."
 
-#: src/generic/apt/download_install_manager.cc:80
-#: src/generic/apt/download_update_manager.cc:95
-msgid "Couldn't lock list directory..are you root?"
-msgstr "Kunde inte låsa listkatalogen.. är du root?"
-
-#: src/generic/apt/download_install_manager.cc:98
+#: src/generic/apt/download_install_manager.cc:93
 msgid "Internal error: couldn't generate list of packages to download"
 msgstr "Internt fel: kunde inte generera lista på paket för hämtning"
 
-#: src/generic/apt/download_install_manager.cc:127
+#: src/generic/apt/download_install_manager.cc:120
 #, c-format
 msgid "Failed to fetch %s: %s"
 msgstr "Misslyckades med att hämta %s: %s"
 
-#: src/generic/apt/download_install_manager.cc:133
+#: src/generic/apt/download_install_manager.cc:129
+msgid "Some files failed to download"
+msgstr ""
+
+#: src/generic/apt/download_install_manager.cc:140
 msgid "Unable to correct for unavailable packages"
 msgstr "Kunde inte rätta till för otillgängliga paket"
 
-#: src/generic/apt/download_install_manager.cc:168
+#: src/generic/apt/download_install_manager.cc:175
 msgid "A package failed to install.  Trying to recover:"
 msgstr "En paketinstallation misslyckades.  Försöker att återhämta:"
 
-#: src/generic/apt/download_install_manager.cc:212
+#: src/generic/apt/download_install_manager.cc:219
 msgid ""
 "Could not regain the system lock!  (Perhaps another apt or dpkg is running?)"
 msgstr ""
 "Kunde inte återuppta systemlåset!  (Kanske är en annan apt eller dpkg igång?)"
 
-#: src/generic/apt/download_update_manager.cc:78
+#: src/generic/apt/download_update_manager.cc:69
 msgid "Couldn't read list of package sources"
 msgstr "Kunde inte läsa listan av paketkällor"
 
-#: src/generic/apt/download_update_manager.cc:148
+#: src/generic/apt/download_update_manager.cc:129
 #, fuzzy, c-format
-msgid "Unterminated quoted string in command: %s"
-msgstr "Ej avslutande bokstavlig sträng efter %s"
+#| msgid "Failed to fetch %s: %s"
+msgid "Failed to fetch %s: %s\n"
+msgstr "Misslyckades med att hämta %s: %s"
 
-#: src/generic/apt/download_update_manager.cc:224
-#, c-format
-msgid "fork() failed: %s"
-msgstr "fork() kunde inte utföras: %s"
+#: src/generic/apt/download_update_manager.cc:149
+msgid "Couldn't clean out list directories"
+msgstr "Kunde inte rensa ut listkataloger"
 
-#: src/generic/apt/download_update_manager.cc:272
-#, c-format
-msgid "waitpid() failed: %s"
-msgstr "waitpid() kunde inte utföras: %s"
-
-#: src/generic/apt/download_update_manager.cc:318
-msgid "The debtags command must not be an empty string."
-msgstr "Kommandot debtags kan inte vara tomt."
-
-#: src/generic/apt/download_update_manager.cc:322
-msgid "The debtags command must be an absolute path."
-msgstr "Kommandot debtags måste vara en absolut sökväg."
-
-#: src/generic/apt/download_update_manager.cc:335
-#, c-format
-msgid "The debtags command (%s) cannot be executed: %s"
-msgstr "Kommandot debtags (%s) kunde inte utföras: %s"
-
-#: src/generic/apt/download_update_manager.cc:340
-#, fuzzy
-msgid "Updating debtags database"
-msgstr "Bygger databas för etiketter (debtags)..."
-
-# okej. kunde fan inte låta bli
-#: src/generic/apt/download_update_manager.cc:357
-msgid "(core dumped)"
-msgstr "(härdsmälta, dumpar kossor - core dump)"
-
-#. ForTranslators: "%s update %s" gets replaced by a command line, do not translate it!
-#: src/generic/apt/download_update_manager.cc:360
-#, c-format
-msgid "The debtags update process (%s update %s) was killed by signal %d%s."
-msgstr "Uppdateringen av debtags (%s update %s) avbröts med signalen %d%s."
-
-#. ForTranslators: "%s update %s" gets replaced by a command line, do not translate it!
-#: src/generic/apt/download_update_manager.cc:368
-#, c-format
-msgid "The debtags update process (%s update %s) exited abnormally (code %d)."
-msgstr ""
-"Uppdateringen av debtags (%s update %s) avbröts onaturligt (felkod %d)."
-
-#. ForTranslators: "%s update %s" gets replaced by a command line, do not translate it!
-#: src/generic/apt/download_update_manager.cc:375
-#, c-format
+#: src/generic/apt/download_update_manager.cc:154
+#: src/generic/apt/download_update_manager.cc:156
 msgid ""
-"The debtags update process (%s update %s) exited in an unexpected way "
-"(status %d)."
-msgstr "Uppdateringen av debtags (%s update %s) avbröts oväntat (status %d)."
-
-#. ForTranslators: "%s update %s" gets replaced by a command line, do not translate it!
-#: src/generic/apt/download_update_manager.cc:381
-#, c-format
-msgid ""
-"Updating the debtags database (%s update %s) failed (perhaps debtags is not "
-"installed?): %s"
+"Some index files failed to download. They have been ignored, or old ones "
+"used instead."
 msgstr ""
-"Kunde inte läsa in databas för etiketter (%s update %s), kanske är inte "
-"debtags installerat? %s"
+
+#: src/generic/apt/download_update_manager.cc:177
+msgid "Couldn't rebuild package cache"
+msgstr "Kunde inte bygga om paketcachen"
 
 #: src/generic/apt/dump_packages.cc:539 src/generic/apt/dump_packages.cc:629
 #, c-format
@@ -3466,50 +3417,52 @@ msgstr ""
 msgid "_File"
 msgstr "Falskt"
 
-#: src/gtk/aptitude.glade:28 src/gtk/aptitude.glade:2274 src/ui.cc:2341
+#: src/gtk/aptitude.glade:28 src/gtk/aptitude.glade:2274 src/ui.cc:2340
 msgid "Perform all pending installs and removals"
 msgstr "Genomför alla väntande installationer och borttagningar"
 
-#: src/gtk/aptitude.glade:38 src/gtk/aptitude.glade:2285 src/ui.cc:2344
+#: src/gtk/aptitude.glade:38 src/gtk/aptitude.glade:2285 src/ui.cc:2343
 msgid "Check for new versions of packages"
 msgstr "Leta efter nya versioner av paket"
 
-#: src/gtk/aptitude.glade:53 src/gtk/aptitude.glade:2301 src/ui.cc:2349
+#: src/gtk/aptitude.glade:53 src/gtk/aptitude.glade:2301 src/ui.cc:2348
 msgid "Mark all upgradable packages which are not held for upgrade"
 msgstr ""
 "Markera alla uppgraderingsbara paket som inte hålls kvar för uppgradering"
 
-#: src/gtk/aptitude.glade:63 src/gtk/aptitude.glade:2312 src/ui.cc:2354
+#: src/gtk/aptitude.glade:63 src/gtk/aptitude.glade:2312 src/ui.cc:2353
 msgid "Forget which packages are \"new\""
 msgstr "Glöm vilka paket som är \"nya\""
 
-#: src/gtk/aptitude.glade:72 src/gtk/aptitude.glade:2322 src/ui.cc:2358
+#: src/gtk/aptitude.glade:72 src/gtk/aptitude.glade:2322 src/ui.cc:2357
 msgid "Cancel all pending installations, removals, holds, and upgrades."
 msgstr ""
 "Avbryt alla väntande installationer, borttagningar, tillbakahållningar och "
 "uppgraderingar."
 
-#: src/gtk/aptitude.glade:81 src/gtk/aptitude.glade:2332 src/ui.cc:2362
+#: src/gtk/aptitude.glade:81 src/gtk/aptitude.glade:2332 src/ui.cc:2361
 msgid "Delete package files which were previously downloaded"
 msgstr "Ta bort paketfiler som tidigare har hämtats"
 
-#: src/gtk/aptitude.glade:90 src/gtk/aptitude.glade:2342 src/ui.cc:2366
+#: src/gtk/aptitude.glade:90 src/gtk/aptitude.glade:2342 src/ui.cc:2365
 msgid "Delete package files which can no longer be downloaded"
 msgstr "Ta bort paketfiler som inte längre kan hämtas"
 
-#: src/gtk/aptitude.glade:104 src/gtk/aptitude.glade:2357 src/ui.cc:2373
+#: src/gtk/aptitude.glade:104 src/gtk/aptitude.glade:2357 src/ui.cc:2372
 msgid "Reload the package cache"
 msgstr "Läs om paketcachen"
 
-#: src/gtk/aptitude.glade:118 src/gtk/aptitude.glade:2372 src/ui.cc:2383
-msgid ""
-"Run 'su' to become root; this will restart the program, but your settings "
-"will be preserved"
+#: src/gtk/aptitude.glade:118 src/gtk/aptitude.glade:2372 src/ui.cc:2382
+#, fuzzy
+#| msgid ""
+#| "Run 'su' to become root; this will restart the program, but your settings "
+#| "will be preserved"
+msgid "Restart the program as root; your settings will be preserved"
 msgstr ""
 "Kör \"su\" för att bli root, detta kommer att starta om programmet men dina "
 "inställningar kommer att bevaras"
 
-#: src/gtk/aptitude.glade:127 src/gtk/aptitude.glade:2382 src/ui.cc:2386
+#: src/gtk/aptitude.glade:127 src/gtk/aptitude.glade:2382 src/ui.cc:2385
 msgid "Exit the program"
 msgstr "Avsluta programmet"
 
@@ -3517,7 +3470,7 @@ msgstr "Avsluta programmet"
 msgid "E_dit"
 msgstr ""
 
-#: src/gtk/aptitude.glade:148 src/gtk/aptitude.glade:2404 src/ui.cc:2393
+#: src/gtk/aptitude.glade:148 src/gtk/aptitude.glade:2404 src/ui.cc:2392
 msgid "Undo the last package operation or group of operations"
 msgstr "Ångra den senaste paketåtgärden eller gruppoperationer"
 
@@ -3567,12 +3520,12 @@ msgid "Packages"
 msgstr "Paket"
 
 #: src/gtk/aptitude.glade:358 src/gtk/aptitude.glade:2617 src/gtk/gui.cc:1033
-#: src/gtk/previewtab.cc:118 src/qt/tabs_manager.cc:220 src/ui.cc:1394
+#: src/gtk/previewtab.cc:118 src/qt/tabs_manager.cc:220 src/ui.cc:1393
 msgid "Preview"
 msgstr "Förhandsvisning"
 
 #: src/gtk/aptitude.glade:369 src/gtk/aptitude.glade:2628 src/gtk/gui.cc:1028
-#: src/qt/tabs_manager.cc:263 src/ui.cc:2777
+#: src/qt/tabs_manager.cc:263 src/ui.cc:2776
 msgid "Resolver"
 msgstr "Problemlösaren"
 
@@ -4334,7 +4287,7 @@ msgstr "Aktivera ett filter på paketlistan"
 msgid "Download already running."
 msgstr "Hämtar..."
 
-#: src/gtk/gui.cc:300 src/gtk/gui.cc:948 src/ui.cc:1520 src/ui.cc:1759
+#: src/gtk/gui.cc:300 src/gtk/gui.cc:948 src/ui.cc:1519 src/ui.cc:1758
 msgid "A package-list update or install run is already taking place."
 msgstr ""
 "En uppdatering av paketlistan eller en installationskörning sker just nu."
@@ -5878,14 +5831,14 @@ msgid ""
 "versions\"."
 msgstr ""
 
-#: src/main.cc:1077
+#: src/main.cc:1079
 #, fuzzy
 msgid ""
 "Only one of --auto-clean-on-startup, --clean-on-startup, -i, and -u may be "
 "specified\n"
 msgstr "Endast en av -u och -i får anges\n"
 
-#: src/main.cc:1086
+#: src/main.cc:1088
 #, fuzzy
 msgid ""
 "-u, -i, and --clean-on-startup may not be specified in command-line mode "
@@ -5893,22 +5846,22 @@ msgid ""
 msgstr ""
 "-u och -i får inte anges i kommandoradsläget (exempelvis, med \"install\")"
 
-#: src/main.cc:1103
+#: src/main.cc:1105
 #, fuzzy
 msgid "-u, -i, and --clean-on-startup may not be specified with a command"
 msgstr "-u och -i får inte anges med ett kommando"
 
-#: src/main.cc:1214
+#: src/main.cc:1216
 #, c-format
 msgid "Unknown command \"%s\"\n"
 msgstr "Okänt kommando \"%s\"\n"
 
-#: src/main.cc:1226 src/main.cc:1311
+#: src/main.cc:1228 src/main.cc:1313
 #, c-format
 msgid "Uncaught exception: %s\n"
 msgstr "Ofångat undantag: %s\n"
 
-#: src/main.cc:1230 src/main.cc:1315
+#: src/main.cc:1232 src/main.cc:1317
 #, c-format
 msgid ""
 "Backtrace:\n"
@@ -5926,7 +5879,7 @@ msgstr "Sök efter: "
 msgid "Search backwards for: "
 msgstr "Sök bakåt efter: "
 
-#: src/mine/cmine.cc:115 src/mine/cmine.cc:154 src/ui.cc:1764
+#: src/mine/cmine.cc:115 src/mine/cmine.cc:154 src/ui.cc:1763
 msgid "Minesweeper"
 msgstr "Minröj"
 
@@ -6137,7 +6090,7 @@ msgstr "UTF-8"
 msgid "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 1 10 9 12 30 17 15"
 msgstr "30 6 6 1 1 40 14 14 11 10 35 9 10 2 1 1 10 12 30 15 15"
 
-#: src/pkg_columnizer.cc:89 src/ui.cc:2776
+#: src/pkg_columnizer.cc:89 src/ui.cc:2775
 msgid "Package"
 msgstr "Paket"
 
@@ -7173,7 +7126,7 @@ msgstr "Läser in cache"
 msgid "Really quit Aptitude?"
 msgstr "Verkligen avsluta Aptitude?"
 
-#: src/ui.cc:714 src/ui.cc:2539
+#: src/ui.cc:714 src/ui.cc:2538
 msgid "Change the behavior of aptitude"
 msgstr "Ändra hur aptitude fungerar"
 
@@ -7255,7 +7208,7 @@ msgstr ""
 msgid "License"
 msgstr "Licens"
 
-#: src/ui.cc:1086 src/ui.cc:2631
+#: src/ui.cc:1086 src/ui.cc:2630
 msgid "View the terms under which you may copy and distribute aptitude"
 msgstr ""
 "Visa villkoren för kopiering och distribution som gäller för programmet"
@@ -7276,7 +7229,7 @@ msgstr "Direkthjälp"
 msgid "View a brief introduction to aptitude"
 msgstr "Visa en enkel introduktion till aptitude"
 
-#: src/ui.cc:1115 src/ui.cc:2781
+#: src/ui.cc:1115 src/ui.cc:2780
 msgid "Help"
 msgstr "Hjälp"
 
@@ -7304,7 +7257,7 @@ msgstr "Handbok"
 msgid "FAQ"
 msgstr "Vanliga frågor"
 
-#: src/ui.cc:1145 src/ui.cc:2623
+#: src/ui.cc:1145 src/ui.cc:2622
 msgid "View a list of frequently asked questions"
 msgstr "Visa en lista med vanliga frågor med svar"
 
@@ -7378,23 +7331,23 @@ msgstr "Verkligen fortsätta"
 msgid "Abort Installation"
 msgstr "Avbryt installation"
 
-#: src/ui.cc:1392
+#: src/ui.cc:1391
 msgid "Preview of package installation"
 msgstr "Förhandsgranska paketinstallationen"
 
-#: src/ui.cc:1393
+#: src/ui.cc:1392
 msgid "View and/or adjust the actions that will be performed"
 msgstr "Visa och/eller justera åtgärderna som ska genomföras"
 
-#: src/ui.cc:1450
+#: src/ui.cc:1449
 msgid "Some packages were broken and have been fixed:"
 msgstr "Vissa paket var trasiga och har rättats till:"
 
-#: src/ui.cc:1458
+#: src/ui.cc:1457
 msgid "No solution to these dependency problems exists!"
 msgstr "Ingen lösning till dessa beroendeproblem finns!"
 
-#: src/ui.cc:1464
+#: src/ui.cc:1463
 #, c-format
 msgid ""
 "Ran out of time while trying to resolve dependencies (press \"%s\" to try "
@@ -7403,7 +7356,7 @@ msgstr ""
 "Fick slut på tid under försöket att lösa beroendeproblemen (tryck \"%s\" för "
 "att försöka hårdare)"
 
-#: src/ui.cc:1510
+#: src/ui.cc:1509
 msgid ""
 "Installing/removing packages requires administrative privileges, which you "
 "currently do not have.  Would you like to change to the root account?"
@@ -7411,20 +7364,20 @@ msgstr ""
 "Installation/borttagning av paket kräver administrativa rättigheter som du "
 "för närvarande inte har.  Vill du byta till root-kontot?"
 
-#: src/ui.cc:1513 src/ui.cc:1752 src/ui.cc:1813 src/ui.cc:1908
+#: src/ui.cc:1512 src/ui.cc:1751 src/ui.cc:1812 src/ui.cc:1907
 msgid "Become root"
 msgstr "Bli root"
 
-#: src/ui.cc:1515 src/ui.cc:1754 src/ui.cc:1815 src/ui.cc:1910
+#: src/ui.cc:1514 src/ui.cc:1753 src/ui.cc:1814 src/ui.cc:1909
 msgid "Don't become root"
 msgstr "Bli inte root"
 
-#: src/ui.cc:1636
+#: src/ui.cc:1635
 msgid "No packages are scheduled to be installed, removed, or upgraded."
 msgstr ""
 "Inga paket är schemalagda för installation, borttagning eller uppgradering."
 
-#: src/ui.cc:1642
+#: src/ui.cc:1641
 msgid ""
 "No packages will be installed, removed or upgraded.  Some packages could be "
 "upgraded, but you have not chosen to upgrade them.  Type \"U\" to prepare an "
@@ -7434,23 +7387,23 @@ msgstr ""
 "kunde uppgraderas men du har inte valt att uppgradera dem. Tryck \"U\" för "
 "att förbereda en uppgradering."
 
-#: src/ui.cc:1705 src/ui.cc:1874
+#: src/ui.cc:1704 src/ui.cc:1873
 msgid "Deleting obsolete downloaded files"
 msgstr "Tar bort hämtade och föråldrade filer"
 
-#: src/ui.cc:1722
+#: src/ui.cc:1721
 msgid "Updating package lists"
 msgstr "Uppdaterar paketlistor"
 
-#: src/ui.cc:1723
+#: src/ui.cc:1722
 msgid "View the progress of the package list update"
 msgstr "Visa förloppet för uppdateringen av paketlistan"
 
-#: src/ui.cc:1724
+#: src/ui.cc:1723
 msgid "List Update"
 msgstr "Listuppdatering"
 
-#: src/ui.cc:1749
+#: src/ui.cc:1748
 msgid ""
 "Updating the package lists requires administrative privileges, which you "
 "currently do not have.  Would you like to change to the root account?"
@@ -7458,23 +7411,23 @@ msgstr ""
 "Uppdatering av paketlistan kräver att du har administrativa rättigheter "
 "vilket du inte har för tillfället. Vill du byta till root-kontot?"
 
-#: src/ui.cc:1764 src/ui.cc:2378
+#: src/ui.cc:1763 src/ui.cc:2377
 msgid "Waste time trying to find mines"
 msgstr "Slösa bort tid med att leta minor"
 
-#: src/ui.cc:1771 src/ui.cc:1859
+#: src/ui.cc:1770 src/ui.cc:1858
 msgid "Cleaning while a download is in progress is not allowed"
 msgstr "Rensning under tiden en hämtning pågår är inte tillåtet"
 
-#: src/ui.cc:1786
+#: src/ui.cc:1785
 msgid "Deleting downloaded files"
 msgstr "Tar bort hämtade filer"
 
-#: src/ui.cc:1800
+#: src/ui.cc:1799
 msgid "Downloaded package files have been deleted"
 msgstr "Hämtade paketfiler har tagits bort"
 
-#: src/ui.cc:1810
+#: src/ui.cc:1809
 #, fuzzy
 msgid ""
 "Cleaning the package cache requires administrative privileges, which you "
@@ -7483,11 +7436,11 @@ msgstr ""
 "Uppdatering av paketlistan kräver att du har administrativa rättigheter "
 "vilket du inte har för tillfället. Vill du byta till root-kontot?"
 
-#: src/ui.cc:1856
+#: src/ui.cc:1855
 msgid "The apt cache file is not available; cannot auto-clean."
 msgstr "Cachefilen för apt är inte tillgänglig, kan inte rensa automatiskt."
 
-#: src/ui.cc:1894
+#: src/ui.cc:1893
 #, c-format
 msgid ""
 "Obsolete downloaded package files have been deleted, freeing %sB of disk "
@@ -7495,7 +7448,7 @@ msgid ""
 msgstr ""
 "Föråldrade hämtade paketfiler har tagits bort, frigjorde %sB diskplats."
 
-#: src/ui.cc:1905
+#: src/ui.cc:1904
 #, fuzzy
 msgid ""
 "Deleting obsolete files requires administrative privileges, which you "
@@ -7504,125 +7457,125 @@ msgstr ""
 "Uppdatering av paketlistan kräver att du har administrativa rättigheter "
 "vilket du inte har för tillfället. Vill du byta till root-kontot?"
 
-#: src/ui.cc:2007
+#: src/ui.cc:2006
 msgid "No more solutions."
 msgstr "Inga fler lösningar."
 
-#: src/ui.cc:2215
+#: src/ui.cc:2214
 msgid "Unable to find a solution to apply."
 msgstr "Kunde inte hitta en lösning att verkställa."
 
-#: src/ui.cc:2221
+#: src/ui.cc:2220
 msgid "Ran out of time while trying to find a solution."
 msgstr "Fick slut på tid under försöket att hitta en lösning."
 
-#: src/ui.cc:2281 src/ui.cc:2283
+#: src/ui.cc:2280 src/ui.cc:2282
 msgid "Resolve Dependencies"
 msgstr "Lös beroenden"
 
-#: src/ui.cc:2282
+#: src/ui.cc:2281
 msgid "Search for solutions to unsatisfied dependencies"
 msgstr "Sök efter lösningar för otillfredsställda beroenden"
 
-#: src/ui.cc:2294
+#: src/ui.cc:2293
 #, c-format
 msgid "Unable to open %ls"
 msgstr "Kunde inte öppna %ls"
 
-#: src/ui.cc:2300
+#: src/ui.cc:2299
 msgid "Error while dumping resolver state"
 msgstr "Fel vid dumpning av problemlösarens tillstånd"
 
-#: src/ui.cc:2310
+#: src/ui.cc:2309
 msgid "File to which the resolver state should be dumped: "
 msgstr "Fil i vilken problemlösaren ska dumpa sitt tillstånd: "
 
-#: src/ui.cc:2340
+#: src/ui.cc:2339
 msgid "^Install/remove packages"
 msgstr "^Installera/Ta bort paket"
 
-#: src/ui.cc:2343
+#: src/ui.cc:2342
 msgid "^Update package list"
 msgstr "^Uppdatera paketlista"
 
-#: src/ui.cc:2348
+#: src/ui.cc:2347
 msgid "Mark Up^gradable"
 msgstr "Markera upp^graderingsbar"
 
-#: src/ui.cc:2353
+#: src/ui.cc:2352
 msgid "^Forget new packages"
 msgstr "^Glöm nya paket"
 
-#: src/ui.cc:2357
+#: src/ui.cc:2356
 msgid "Canc^el pending actions"
 msgstr "Avbry^t väntande åtgärder"
 
-#: src/ui.cc:2361
+#: src/ui.cc:2360
 msgid "^Clean package cache"
 msgstr "^Rensa paketcachen"
 
-#: src/ui.cc:2365
+#: src/ui.cc:2364
 msgid "Clean ^obsolete files"
 msgstr "Rensa föråldra^de filer"
 
-#: src/ui.cc:2372
+#: src/ui.cc:2371
 msgid "^Reload package cache"
 msgstr "^Läs om paketcache"
 
-#: src/ui.cc:2377
+#: src/ui.cc:2376
 msgid "^Play Minesweeper"
 msgstr "^Spela Minröj"
 
-#: src/ui.cc:2382
+#: src/ui.cc:2381
 msgid "^Become root"
 msgstr "^Bli root"
 
-#: src/ui.cc:2385
+#: src/ui.cc:2384
 msgid "^Quit"
 msgstr "A^vsluta"
 
-#: src/ui.cc:2392 src/ui.cc:2775
+#: src/ui.cc:2391 src/ui.cc:2774
 msgid "Undo"
 msgstr "Ångra"
 
-#: src/ui.cc:2401
+#: src/ui.cc:2400
 msgid "^Install"
 msgstr "^Installera"
 
-#: src/ui.cc:2402
+#: src/ui.cc:2401
 msgid "Flag the currently selected package for installation or upgrade"
 msgstr "Flagga det valda paketet för installation eller uppgradering"
 
-#: src/ui.cc:2405
+#: src/ui.cc:2404
 msgid "^Remove"
 msgstr "^Ta bort"
 
-#: src/ui.cc:2406
+#: src/ui.cc:2405
 msgid "Flag the currently selected package for removal"
 msgstr "Flagga det valda paketet för borttagning"
 
-#: src/ui.cc:2409
+#: src/ui.cc:2408
 msgid "^Purge"
 msgstr "^Rensa"
 
-#: src/ui.cc:2410
+#: src/ui.cc:2409
 msgid ""
 "Flag the currently selected package and its configuration files for removal"
 msgstr "Flagga det valda paketet och dess konfigurationsfiler för borttagning"
 
-#: src/ui.cc:2413
+#: src/ui.cc:2412
 msgid "^Keep"
 msgstr "^Behåll"
 
-#: src/ui.cc:2414
+#: src/ui.cc:2413
 msgid "Cancel any action on the selected package"
 msgstr "Avbryt alla åtgärder för det valda paketet"
 
-#: src/ui.cc:2417
+#: src/ui.cc:2416
 msgid "^Hold"
 msgstr "^Håll kvar"
 
-#: src/ui.cc:2418
+#: src/ui.cc:2417
 msgid ""
 "Cancel any action on the selected package, and protect it from future "
 "upgrades"
@@ -7630,11 +7583,11 @@ msgstr ""
 "Avbryt alla åtgärder för det valda paketet och skydda det från framtida "
 "uppgraderingar"
 
-#: src/ui.cc:2421
+#: src/ui.cc:2420
 msgid "Mark ^Auto"
 msgstr "Markera ^automatiskt"
 
-#: src/ui.cc:2422
+#: src/ui.cc:2421
 msgid ""
 "Mark the selected package as having been automatically installed; it will "
 "automatically be removed if no other packages depend on it"
@@ -7642,11 +7595,11 @@ msgstr ""
 "Markera det valda paketet som om det har installerats automatiskt, det "
 "kommer automatiskt tas bort om inga andra paket är beroende av det"
 
-#: src/ui.cc:2425
+#: src/ui.cc:2424
 msgid "Mark ^Manual"
 msgstr "Markera ^manuell"
 
-#: src/ui.cc:2426
+#: src/ui.cc:2425
 msgid ""
 "Mark the selected package as having been manually installed; it will not be "
 "removed unless you manually remove it"
@@ -7654,11 +7607,11 @@ msgstr ""
 "Markera det valda paketet som om det blivit manuellt installerat, det kommer "
 "inte att tas bort om inte du manuellt tar bort det"
 
-#: src/ui.cc:2429
+#: src/ui.cc:2428
 msgid "^Forbid Version"
 msgstr "^Förbjud version"
 
-#: src/ui.cc:2430
+#: src/ui.cc:2429
 msgid ""
 "Forbid the candidate version of the selected package from being installed; "
 "newer versions of the package will be installed as usual"
@@ -7666,19 +7619,19 @@ msgstr ""
 "Förbjud den kandidatversionen av det valda paketet från att bli installerad, "
 "nyare versioner av paketet kommer att installeras som vanligt"
 
-#: src/ui.cc:2434
+#: src/ui.cc:2433
 msgid "I^nformation"
 msgstr "I^nformation"
 
-#: src/ui.cc:2435
+#: src/ui.cc:2434
 msgid "Display more information about the selected package"
 msgstr "Visa ytterligare information om det valda paketet"
 
-#: src/ui.cc:2438
+#: src/ui.cc:2437
 msgid "C^ycle Package Information"
 msgstr "Cirk^ulera paketinformation"
 
-#: src/ui.cc:2439
+#: src/ui.cc:2438
 msgid ""
 "Cycle through the modes of the package information area: it can show the "
 "package's long description, a summary of its dependency status, or an "
@@ -7688,59 +7641,59 @@ msgstr ""
 "beskrivning, en  summerad beskrivning av beroendestatusen eller en analys av "
 "varför paketet behövs."
 
-#: src/ui.cc:2442
+#: src/ui.cc:2441
 msgid "^Changelog"
 msgstr "^Ändringslogg"
 
-#: src/ui.cc:2443
+#: src/ui.cc:2442
 msgid "Display the Debian changelog of the selected package"
 msgstr "Visa Debians ändringslogg för det valda paketet"
 
-#: src/ui.cc:2450
+#: src/ui.cc:2449
 msgid "^Examine Solution"
 msgstr "Und^ersök lösning"
 
-#: src/ui.cc:2451
+#: src/ui.cc:2450
 msgid "Examine the currently selected solution to the dependency problems."
 msgstr "Undersök den nuvarande valda lösningen till beroendeproblemen."
 
-#: src/ui.cc:2454
+#: src/ui.cc:2453
 msgid "Apply ^Solution"
 msgstr "Genomför lö^sning"
 
-#: src/ui.cc:2455
+#: src/ui.cc:2454
 msgid "Perform the actions contained in the currently selected solution."
 msgstr "Genomför åtgärderna som nuvarande lösning innebär."
 
-#: src/ui.cc:2458
+#: src/ui.cc:2457
 msgid "^Next Solution"
 msgstr "^Nästa lösning"
 
-#: src/ui.cc:2459
+#: src/ui.cc:2458
 msgid "Select the next solution to the dependency problems."
 msgstr "Välj nästa lösning till beroendeproblemen."
 
-#: src/ui.cc:2462
+#: src/ui.cc:2461
 msgid "^Previous Solution"
 msgstr "Föregåe^nde lösning"
 
-#: src/ui.cc:2463
+#: src/ui.cc:2462
 msgid "Select the previous solution to the dependency problems."
 msgstr "Välj föregående lösning till beroendeproblemen."
 
-#: src/ui.cc:2466
+#: src/ui.cc:2465
 msgid "^First Solution"
 msgstr "^Första lösningen"
 
-#: src/ui.cc:2467
+#: src/ui.cc:2466
 msgid "Select the first solution to the dependency problems."
 msgstr "Välj den första lösningen för beroendeproblemen."
 
-#: src/ui.cc:2470
+#: src/ui.cc:2469
 msgid "^Last Solution"
 msgstr "Sista ^lösningen"
 
-#: src/ui.cc:2471
+#: src/ui.cc:2470
 msgid ""
 "Select the last solution to the dependency problems that has been generated "
 "so far."
@@ -7748,35 +7701,35 @@ msgstr ""
 "Välj den sista lösningen för beroendeproblemen som än så länge har "
 "genererats."
 
-#: src/ui.cc:2477
+#: src/ui.cc:2476
 msgid "Toggle ^Rejected"
 msgstr "Växla väg^rad"
 
-#: src/ui.cc:2478
+#: src/ui.cc:2477
 msgid "Toggle whether the currently selected action is rejected."
 msgstr "Växla om den nuvarande valda åtgärden är icke godkänd."
 
-#: src/ui.cc:2482
+#: src/ui.cc:2481
 msgid "Toggle ^Approved"
 msgstr "Växl^a godkänd"
 
-#: src/ui.cc:2483
+#: src/ui.cc:2482
 msgid "Toggle whether the currently selected action is approved."
 msgstr "Växla om den nuvarande valda åtgärden är godkänd."
 
-#: src/ui.cc:2487
+#: src/ui.cc:2486
 msgid "^View Target"
 msgstr "^Visa mål"
 
-#: src/ui.cc:2488
+#: src/ui.cc:2487
 msgid "View the package which will be affected by the selected action"
 msgstr "Visa de paket som kommer att påverkas av den valda åtgärden"
 
-#: src/ui.cc:2494
+#: src/ui.cc:2493
 msgid "Reject Breaking ^Holds"
 msgstr "Avvisa brott mot ^Hold"
 
-#: src/ui.cc:2496
+#: src/ui.cc:2495
 msgid ""
 "Reject all actions that would change the state of held packages or install "
 "forbidden versions"
@@ -7784,135 +7737,135 @@ msgstr ""
 "Avvisa alla åtgärder som skulle innebära förändringar på tillbakahållna "
 "paket eller kräva installation av förbjudna versioner"
 
-#: src/ui.cc:2504
+#: src/ui.cc:2503
 msgid "^Find"
 msgstr "^Sök"
 
-#: src/ui.cc:2505
+#: src/ui.cc:2504
 msgid "Search forwards"
 msgstr "Sök framåt"
 
-#: src/ui.cc:2508
+#: src/ui.cc:2507
 msgid "^Find Backwards"
 msgstr "Sök ^baklänges"
 
-#: src/ui.cc:2509
+#: src/ui.cc:2508
 msgid "Search backwards"
 msgstr "Sök bakåt"
 
-#: src/ui.cc:2512
+#: src/ui.cc:2511
 msgid "Find ^Again"
 msgstr "Sök ^igen"
 
-#: src/ui.cc:2513
+#: src/ui.cc:2512
 msgid "Repeat the last search"
 msgstr "Upprepa senaste sökningen"
 
-#: src/ui.cc:2516
+#: src/ui.cc:2515
 msgid "Find Again ^Backwards"
 msgstr "Sök igen ^baklänges"
 
-#: src/ui.cc:2517
+#: src/ui.cc:2516
 msgid "Repeat the last search in the opposite direction"
 msgstr "Upprepa senaste sökningen i motstående riktning"
 
-#: src/ui.cc:2521
+#: src/ui.cc:2520
 msgid "^Limit Display"
 msgstr "^Begränsa visning"
 
-#: src/ui.cc:2522
+#: src/ui.cc:2521
 msgid "Apply a filter to the package list"
 msgstr "Aktivera ett filter på paketlistan"
 
-#: src/ui.cc:2525
+#: src/ui.cc:2524
 msgid "^Un-Limit Display"
 msgstr "^Ta bort begränsning"
 
-#: src/ui.cc:2526
+#: src/ui.cc:2525
 msgid "Remove the filter from the package list"
 msgstr "Ta bort filtret från paketlistan"
 
-#: src/ui.cc:2530
+#: src/ui.cc:2529
 msgid "Find ^Broken"
 msgstr "Sök ^trasiga"
 
-#: src/ui.cc:2531
+#: src/ui.cc:2530
 msgid "Find the next package with unsatisfied dependencies"
 msgstr "Hitta nästa paket med otillfredsställda beroenden"
 
-#: src/ui.cc:2538
+#: src/ui.cc:2537
 msgid "^Preferences"
 msgstr "^Egenskaper"
 
-#: src/ui.cc:2543
+#: src/ui.cc:2542
 msgid "^UI options"
 msgstr "^Gränssnitt"
 
-#: src/ui.cc:2544
+#: src/ui.cc:2543
 msgid "Change the settings which affect the user interface"
 msgstr "Ändra inställningar som påverkar användargränssnittet"
 
-#: src/ui.cc:2547
+#: src/ui.cc:2546
 msgid "^Dependency handling"
 msgstr "^Beroendehantering"
 
-#: src/ui.cc:2548
+#: src/ui.cc:2547
 msgid "Change the settings which affect how package dependencies are handled"
 msgstr "Ändra inställningar som påverkar hur paketberoenden hanteras"
 
-#: src/ui.cc:2551
+#: src/ui.cc:2550
 msgid "^Miscellaneous"
 msgstr "^Diverse"
 
-#: src/ui.cc:2552
+#: src/ui.cc:2551
 msgid "Change miscellaneous program settings"
 msgstr "Ändra diverse programinställningar"
 
-#: src/ui.cc:2558
+#: src/ui.cc:2557
 msgid "^Revert options"
 msgstr "^Återställ"
 
-#: src/ui.cc:2559
+#: src/ui.cc:2558
 msgid "Reset all settings to the system defaults"
 msgstr "Återställ alla inställningar till systemets standard"
 
-#: src/ui.cc:2570
+#: src/ui.cc:2569
 msgid "^Next"
 msgstr "^Nästa"
 
-#: src/ui.cc:2571
+#: src/ui.cc:2570
 msgid "View next display"
 msgstr "Visa nästa vy"
 
-#: src/ui.cc:2574
+#: src/ui.cc:2573
 msgid "^Prev"
 msgstr "^Föregående"
 
-#: src/ui.cc:2575
+#: src/ui.cc:2574
 msgid "View previous display"
 msgstr "Visa föregående vy"
 
-#: src/ui.cc:2578
+#: src/ui.cc:2577
 msgid "^Close"
 msgstr "^Stäng"
 
-#: src/ui.cc:2579
+#: src/ui.cc:2578
 msgid "Close this display"
 msgstr "Stäng denna vy"
 
-#: src/ui.cc:2584
+#: src/ui.cc:2583
 msgid "New Package ^View"
 msgstr "^Vy för nya paket"
 
-#: src/ui.cc:2585
+#: src/ui.cc:2584
 msgid "Create a new default package view"
 msgstr "Skapa en ny standardpaketvy"
 
-#: src/ui.cc:2588
+#: src/ui.cc:2587
 msgid "Audit ^Recommendations"
 msgstr "Granska ^rekommendationer"
 
-#: src/ui.cc:2589
+#: src/ui.cc:2588
 msgid ""
 "View packages which it is recommended that you install, but which are not "
 "currently installed."
@@ -7920,87 +7873,87 @@ msgstr ""
 "Visa paket som det rekommenderas att du installerar men som för närvarande "
 "inte är installerade."
 
-#: src/ui.cc:2592
+#: src/ui.cc:2591
 msgid "New ^Flat Package List"
 msgstr "Ny ^flat paketlista"
 
-#: src/ui.cc:2593
+#: src/ui.cc:2592
 msgid "View all the packages on the system in a single uncategorized list"
 msgstr "Visa alla paket på systemet i en okategoriserad lista"
 
-#: src/ui.cc:2596
+#: src/ui.cc:2595
 msgid "New ^Debtags Browser"
 msgstr "Bläddra bland nya ^debtaggar"
 
-#: src/ui.cc:2598
+#: src/ui.cc:2597
 msgid "Browse packages using Debtags data"
 msgstr "Bläddra bland paket med Debtags-data"
 
-#: src/ui.cc:2601
+#: src/ui.cc:2600
 msgid "New Categorical ^Browser"
 msgstr "^Bläddra bland nya kategorier"
 
-#: src/ui.cc:2603
+#: src/ui.cc:2602
 msgid "Browse packages by category"
 msgstr "Bläddra bland paket efter kategori"
 
-#: src/ui.cc:2611
+#: src/ui.cc:2610
 msgid "^About"
 msgstr "^Om"
 
-#: src/ui.cc:2612
+#: src/ui.cc:2611
 msgid "View information about this program"
 msgstr "Visa information om detta program"
 
-#: src/ui.cc:2615
+#: src/ui.cc:2614
 msgid "^Help"
 msgstr "^Hjälp"
 
-#: src/ui.cc:2616
+#: src/ui.cc:2615
 msgid "View the on-line help"
 msgstr "Visa hjälp på nätet"
 
-#: src/ui.cc:2618
+#: src/ui.cc:2617
 msgid "User's ^Manual"
 msgstr "Användar^handbok"
 
-#: src/ui.cc:2619
+#: src/ui.cc:2618
 msgid "View the detailed program manual"
 msgstr "Visa den detaljerade programhandboken"
 
-#: src/ui.cc:2622
+#: src/ui.cc:2621
 msgid "^FAQ"
 msgstr "^Vanliga frågor"
 
-#: src/ui.cc:2626
+#: src/ui.cc:2625
 msgid "^News"
 msgstr "^Nyheter"
 
-#: src/ui.cc:2627
+#: src/ui.cc:2626
 msgid "View the important changes made in each version of "
 msgstr "Visa de viktiga ändringarna som gjorts i varje version av "
 
-#: src/ui.cc:2630
+#: src/ui.cc:2629
 msgid "^License"
 msgstr "^Licens"
 
-#: src/ui.cc:2774
+#: src/ui.cc:2773
 msgid "Actions"
 msgstr "Åtgärder"
 
-#: src/ui.cc:2778
+#: src/ui.cc:2777
 msgid "Search"
 msgstr "Sök"
 
-#: src/ui.cc:2779
+#: src/ui.cc:2778
 msgid "Options"
 msgstr "Inställningar"
 
-#: src/ui.cc:2780
+#: src/ui.cc:2779
 msgid "Views"
 msgstr "Vyer"
 
-#: src/ui.cc:2846
+#: src/ui.cc:2845
 #, c-format
 msgid ""
 "%ls: Menu  %ls: Help  %ls: Quit  %ls: Update  %ls: Download/Install/Remove "
@@ -8009,11 +7962,11 @@ msgstr ""
 "%ls: Meny  %ls: Hjälp  %ls: Avsluta  %ls: Uppdatera  %ls: Hämta/Installera/"
 "Ta bort"
 
-#: src/ui.cc:3205
+#: src/ui.cc:3204
 msgid "yes_key"
 msgstr "y"
 
-#: src/ui.cc:3206
+#: src/ui.cc:3205
 msgid "no_key"
 msgstr "n"
 
@@ -8045,16 +7998,61 @@ msgstr "Hämtar ändringslogg"
 msgid "You can only view changelogs of official Debian packages."
 msgstr "Du kan endast se ändringsloggar från officiella Debianpaket."
 
+#~ msgid "Couldn't lock list directory..are you root?"
+#~ msgstr "Kunde inte låsa listkatalogen.. är du root?"
+
+#, fuzzy
+#~ msgid "Unterminated quoted string in command: %s"
+#~ msgstr "Ej avslutande bokstavlig sträng efter %s"
+
+#~ msgid "fork() failed: %s"
+#~ msgstr "fork() kunde inte utföras: %s"
+
+#~ msgid "waitpid() failed: %s"
+#~ msgstr "waitpid() kunde inte utföras: %s"
+
+#~ msgid "The debtags command must not be an empty string."
+#~ msgstr "Kommandot debtags kan inte vara tomt."
+
+#~ msgid "The debtags command must be an absolute path."
+#~ msgstr "Kommandot debtags måste vara en absolut sökväg."
+
+#~ msgid "The debtags command (%s) cannot be executed: %s"
+#~ msgstr "Kommandot debtags (%s) kunde inte utföras: %s"
+
+#, fuzzy
+#~ msgid "Updating debtags database"
+#~ msgstr "Bygger databas för etiketter (debtags)..."
+
+# okej. kunde fan inte låta bli
+#~ msgid "(core dumped)"
+#~ msgstr "(härdsmälta, dumpar kossor - core dump)"
+
+#~ msgid "The debtags update process (%s update %s) was killed by signal %d%s."
+#~ msgstr "Uppdateringen av debtags (%s update %s) avbröts med signalen %d%s."
+
+#~ msgid ""
+#~ "The debtags update process (%s update %s) exited abnormally (code %d)."
+#~ msgstr ""
+#~ "Uppdateringen av debtags (%s update %s) avbröts onaturligt (felkod %d)."
+
+#~ msgid ""
+#~ "The debtags update process (%s update %s) exited in an unexpected way "
+#~ "(status %d)."
+#~ msgstr ""
+#~ "Uppdateringen av debtags (%s update %s) avbröts oväntat (status %d)."
+
+#~ msgid ""
+#~ "Updating the debtags database (%s update %s) failed (perhaps debtags is "
+#~ "not installed?): %s"
+#~ msgstr ""
+#~ "Kunde inte läsa in databas för etiketter (%s update %s), kanske är inte "
+#~ "debtags installerat? %s"
+
 #, fuzzy
 #~| msgid "Invalid operation %s"
 #~ msgid "Invalid command-line option '%s'"
 #~ msgstr "Ogiltig åtgärd %s"
-
-#~ msgid "Couldn't clean out list directories"
-#~ msgstr "Kunde inte rensa ut listkataloger"
-
-#~ msgid "Couldn't rebuild package cache"
-#~ msgstr "Kunde inte bygga om paketcachen"
 
 #~ msgid "Too many arguments to by-section grouping policy"
 #~ msgstr "För många argument till grupperingspolicyn \"by-section\""
