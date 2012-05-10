@@ -450,6 +450,8 @@ public:
 		    aptitudeDepCache *cache,
 		    pkgPolicy *_policy);
 
+  virtual ~aptitude_resolver() {}
+
   /** \brief Return \b true if the given version will break a hold or
    *  install a forbidden version.
    */

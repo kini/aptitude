@@ -91,7 +91,7 @@ namespace aptitude
     void dynamic_list_impl<T>::insert(const T &t, std::size_t position)
     {
       entries.insert(entries.begin() + position, t);
-      signal_inserted(t, position);
+      this->signal_inserted(t, position);
     }
 
     template<typename T>
@@ -99,7 +99,7 @@ namespace aptitude
     {
       T val = entries[position];
       entries.erase(entries.begin() + position);
-      signal_removed(val, position);
+      this->signal_removed(val, position);
     }
 
     template<typename T>
@@ -129,7 +129,7 @@ namespace aptitude
       const std::size_t idx_to_delete = to < from  ?  from + 1  :  from;
       entries.erase(entries.begin() + idx_to_delete);
 
-      signal_moved(val, from, to);
+      this->signal_moved(val, from, to);
     }
   }
 }

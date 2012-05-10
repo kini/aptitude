@@ -254,7 +254,7 @@ namespace aptitude
 
       const std::size_t insert_idx = insert_location - concrete_view.begin();
       concrete_view.insert(insert_location, cell(list, idx, value));
-      signal_inserted(value, insert_idx);
+      this->signal_inserted(value, insert_idx);
     }
 
     template<typename T>
@@ -316,7 +316,7 @@ namespace aptitude
           // removal BEFORE removing it!
           const std::size_t remove_idx = remove_location - concrete_view.begin();
           concrete_view.erase(remove_location);
-          signal_removed(value, remove_idx);
+          this->signal_removed(value, remove_idx);
         }
     }
 
@@ -412,7 +412,7 @@ namespace aptitude
         relocate_target = to_location;
 
       concrete_view.relocate(relocate_target, from_location);
-      signal_moved(value, from_idx, to_idx);
+      this->signal_moved(value, from_idx, to_idx);
     }
 
     template<typename T>

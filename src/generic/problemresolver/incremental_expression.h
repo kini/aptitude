@@ -533,7 +533,7 @@ public:
       {
 	T old_value = value;
 	value = new_value;
-	signal_value_changed(old_value, new_value);
+	this->signal_value_changed(old_value, new_value);
       }
   }
 
