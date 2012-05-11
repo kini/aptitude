@@ -278,18 +278,6 @@ TEST_P(CmdlineDownloadStatusDisplayTest, HasCpsNoFilesNoProgressNoTimeEstimate)
                                         0));
 }
 
-// Test that updating the progress produces correct results when the
-// download rate indicator is negative.
-TEST_P(CmdlineDownloadStatusDisplayTest, HasNegativeCpsNoFilesNoProgressNoTimeEstimate)
-{
-  EXPECT_MSG(L"0% [Working]");
-
-  status_display->display_status(status(-20 * 1000,
-                                        make_files(),
-                                        0,
-                                        0));
-}
-
 // Test that updating the progress produces correct results with a
 // time estimate.
 TEST_P(CmdlineDownloadStatusDisplayTest, NoCpsNoFilesNoProgressHasTimeEstimate)

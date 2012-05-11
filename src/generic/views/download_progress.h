@@ -48,8 +48,8 @@ namespace aptitude
       /** \brief Represents the download progress of a single file. */
       class file_progress
       {
-        unsigned long current_size;
-        unsigned long total_size;
+        unsigned long long current_size;
+        unsigned long long total_size;
 
         bool complete;
         std::string description;
@@ -57,8 +57,8 @@ namespace aptitude
         std::string mode;
 
       public:
-        file_progress(unsigned long _current_size,
-                      unsigned long _total_size,
+        file_progress(unsigned long long _current_size,
+                      unsigned long long _total_size,
                       bool _complete,
                       const std::string &_description,
                       const boost::optional<unsigned long> &_id,
@@ -74,10 +74,10 @@ namespace aptitude
         }
 
         /** \brief Get the number of bytes that have been downloaded. */
-        unsigned long get_current_size() const { return current_size; }
+        unsigned long long get_current_size() const { return current_size; }
 
         /** \brief Get the total size of the file. */
-        unsigned long get_total_size() const { return total_size; }
+        unsigned long long get_total_size() const { return total_size; }
 
         /** \return \b true if the file has been successfully fetched
          *  according to the download backend.
@@ -113,16 +113,16 @@ namespace aptitude
         typedef boost::variant<file_progress, std::string> worker_status;
 
       private:
-        const double download_rate;
+        const unsigned long long download_rate;
         const std::vector<worker_status> active_downloads;
         const double fraction_complete;
-        const unsigned long time_remaining;
+        const unsigned long long time_remaining;
 
       public:
-        status(const double _download_rate,
+        status(const unsigned long long _download_rate,
                const std::vector<worker_status> &_active_downloads,
                const double _fraction_complete,
-               const unsigned long _time_remaining)
+               const unsigned long long _time_remaining)
           : download_rate(_download_rate),
             active_downloads(_active_downloads),
             fraction_complete(_fraction_complete),
@@ -131,7 +131,7 @@ namespace aptitude
         }
 
         /** \brief Get the current download speed in bytes per second. */
-        double get_download_rate() const { return download_rate; }
+        unsigned long long get_download_rate() const { return download_rate; }
 
         /** \brief Get the currently active download processes. */
         const std::vector<worker_status> &get_active_downloads() const
@@ -147,7 +147,7 @@ namespace aptitude
         /** \brief Get the estimated number of seconds until the download
          *  completes.
          */
-        unsigned long get_time_remaining() const { return time_remaining; }
+        unsigned long long get_time_remaining() const { return time_remaining; }
 
         bool operator==(const status &other) const;
         bool operator!=(const status &other) const
@@ -231,9 +231,9 @@ namespace aptitude
        * \todo Should the parameters be incorporated into a status
        * snapshot so that can be used instead?
        */
-      virtual void done(double fetched_bytes,
-                        unsigned long elapsed_time,
-                        double latest_download_rate) = 0;
+      virtual void done(unsigned long long fetched_bytes,
+                        unsigned long long elapsed_time,
+                        unsigned long long latest_download_rate) = 0;
 
       /** \brief Invoked when the install media should be replaced.
        *
@@ -258,9 +258,9 @@ namespace aptitude
        *
        *  \param latest_download_rate  The final estimated download rate.
        */
-      virtual void complete(double fetched_bytes,
-                            unsigned long elapsed_time,
-                            double latest_download_rate) = 0;
+      virtual void complete(unsigned long long fetched_bytes,
+                            unsigned long long elapsed_time,
+                            unsigned long long latest_download_rate) = 0;
     };
 
     std::ostream &operator<<(std::ostream &out,

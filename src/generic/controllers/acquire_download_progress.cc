@@ -165,20 +165,20 @@ namespace aptitude
             }
         }
 
-      const double download_rate = manager.get_currentCPS();
+      const unsigned long long download_rate = manager.get_currentCPS();
 
-      const double current_bytes = manager.get_current_bytes();
-      const double current_items = manager.get_current_items();
-      const double total_bytes = manager.get_total_bytes();
-      const double total_items = manager.get_total_items();
+      const unsigned long long current_bytes = manager.get_current_bytes();
+      const unsigned long long total_bytes = manager.get_total_bytes();
+      const unsigned long current_items = manager.get_current_items();
+      const unsigned long total_items = manager.get_total_items();
 
       const double fraction_complete =
-        ((double) (current_bytes + current_items)) / (total_bytes + total_items);
+        ((double) (current_bytes + current_items)) / ((double) (total_bytes + total_items));
 
-      const unsigned long time_remaining =
+      const unsigned long long time_remaining =
         download_rate == 0
           ? 0
-          : (total_bytes - current_bytes) / download_rate;
+          : ((unsigned long long) (total_bytes - current_bytes)) / download_rate;
 
       return boost::make_shared<status>(manager.get_currentCPS(),
                                         active_downloads,

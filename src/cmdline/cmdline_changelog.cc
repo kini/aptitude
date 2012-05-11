@@ -88,8 +88,8 @@ void set_name(temp::name n, temp::name *target)
     }
 
     void partial_download(const temp::name &name,
-			  unsigned long currentSize,
-			  unsigned long totalSize)
+			  unsigned long long currentSize,
+			  unsigned long long totalSize)
     {
       // Hack: ripped this code from AcqTextStatus.
 
@@ -98,8 +98,8 @@ void set_name(temp::name n, temp::name *target)
 
       const int screen_width = term_metrics->get_screen_width();
 
-      unsigned long TotalBytes = totalSize;
-      unsigned long CurrentBytes = currentSize;
+      unsigned long long TotalBytes = totalSize;
+      unsigned long long CurrentBytes = currentSize;
 
       std::ostringstream bufferStream;
 

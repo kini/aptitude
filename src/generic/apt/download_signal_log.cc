@@ -40,7 +40,7 @@ static void set_bool(bool val, int *out)
   *out = val ? 1 : 0;
 }
 
-void download_signal_log::Fetched(unsigned long Size, unsigned long ResumePoint)
+void download_signal_log::Fetched(unsigned long long Size, unsigned long long ResumePoint)
 {
   pkgAcquireStatus::Fetched(Size, ResumePoint);
 

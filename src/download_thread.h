@@ -61,7 +61,7 @@ class background_status : public pkgAcquireStatus
   post_thunk_func post_thunk;
 
 public:
-  void Fetched(unsigned long Size, unsigned long ResumePoint);
+  void Fetched(unsigned long long Size, unsigned long long ResumePoint);
   bool MediaChange(std::string Media, std::string Drive);
   void IMSHit(pkgAcquire::ItemDesc &);
   void Fetch(pkgAcquire::ItemDesc &);

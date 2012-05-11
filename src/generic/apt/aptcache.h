@@ -224,8 +224,8 @@ public:
     StateCache *PkgState;
     unsigned char *DepState;
     aptitude_state *AptitudeState;
-    double iUsrSize;
-    double iDownloadSize;
+    signed long long iUsrSize;
+    unsigned long long iDownloadSize;
     unsigned long iInstCount;
     unsigned long iDelCount;
     unsigned long iKeepCount;

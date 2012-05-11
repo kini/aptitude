@@ -153,8 +153,8 @@ namespace aptitude
 
       /** \brief Invoke the partial download callback on each listener. */
       void invoke_partial_download(const temp::name &filename,
-				   unsigned long currentSize,
-				   unsigned long totalSize) const
+				   unsigned long long currentSize,
+				   unsigned long long totalSize) const
       {
 	for(std::list<listener>::const_iterator
 	      it = listeners.begin(); it != listeners.end(); ++it)
@@ -284,7 +284,7 @@ namespace aptitude
       }
 
       void Done(std::string Message,
-		unsigned long Size,
+		unsigned long long Size,
 		std::string CalcHash,
 		pkgAcquire::MethodConfig *Cnf)
       {

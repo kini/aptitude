@@ -48,10 +48,10 @@ class download_list:public cwidget::widgets::widget
   struct workerinf
   {
     std::wstring msg;
-    unsigned long current, total;
+    unsigned long long current, total;
 
-    workerinf(const std::wstring &_msg, unsigned long _current, unsigned long _total);
-    workerinf(const std::string &_msg, unsigned long _current, unsigned long _total);
+    workerinf(const std::wstring &_msg, unsigned long long _current, unsigned long long _total);
+    workerinf(const std::string &_msg, unsigned long long _current, unsigned long long _total);
   };
 
   typedef std::pair<std::wstring, cwidget::style> msg;
@@ -100,7 +100,7 @@ class download_list:public cwidget::widgets::widget
   // We have to mirror the download_signal_log's information, since
   // we're only synchronous with it in the log callbacks.
   unsigned long TotalItems, CurrentItems;
-  double CurrentCPS, TotalBytes, CurrentBytes;
+  unsigned long long CurrentCPS, TotalBytes, CurrentBytes;
 
   /** \brief When the download started, as returned by time(2).
    *

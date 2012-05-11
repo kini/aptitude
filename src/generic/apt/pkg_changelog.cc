@@ -305,8 +305,8 @@ namespace aptitude
 	}
 
 	void partial_download(const temp::name &filename,
-			      unsigned long currentSize,
-			      unsigned long totalSize)
+			      unsigned long long currentSize,
+			      unsigned long long totalSize)
 	{
 	  parent->partial_download(filename, currentSize, totalSize);
 	}

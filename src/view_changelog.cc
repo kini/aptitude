@@ -373,8 +373,8 @@ public:
   }
 
   void partial_download(const temp::name &name,
-			unsigned long currentSize,
-			unsigned long totalSize)
+			unsigned long long currentSize,
+			unsigned long long totalSize)
   {
     cwidget::util::ref_ptr<refcounted_progress> p = download_progress->get_progress();
 

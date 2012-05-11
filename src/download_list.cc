@@ -58,12 +58,12 @@ namespace cwidget
  */
 const int download_list_spinner_interval = 1;
 
-download_list::workerinf::workerinf(const wstring &_msg, unsigned long _current, unsigned long _total)
+download_list::workerinf::workerinf(const wstring &_msg, unsigned long long _current, unsigned long long _total)
   :msg(_msg), current(_current), total(_total)
 {
 }
 
-download_list::workerinf::workerinf(const string &_msg, unsigned long _current, unsigned long _total)
+download_list::workerinf::workerinf(const string &_msg, unsigned long long _current, unsigned long long _total)
   :msg(cw::util::transcode(_msg)), current(_current), total(_total)
 {
 }
@@ -73,9 +73,9 @@ static cw::widget_ref download_summary(const download_list_ref &l,
 				       bool failed,
 				       bool already_cancelled,
 				       const sigc::slot0<void> &cancel_slot,
-				       double FetchedBytes,
-				       unsigned long ElapsedTime,
-				       double CurrentCPS)
+				       unsigned long long FetchedBytes,
+				       unsigned long long ElapsedTime,
+				       unsigned long long CurrentCPS)
 {
   vector<cw::fragment *> fragments;
 
@@ -221,12 +221,13 @@ void download_list::paint(const cw::style &st)
 
       if(display_cumulative_progress)
 	{
-	  unsigned long ETA = 0;
+	  unsigned long long ETA = 0;
 
 	  if(CurrentCPS > 0)
-	    ETA=(unsigned long)((TotalBytes-CurrentBytes)/CurrentCPS);
+	    ETA = (TotalBytes - CurrentBytes) / CurrentCPS;
 
-	  double fraction_complete = (double(CurrentBytes + CurrentItems))/(TotalBytes + TotalItems);
+	  double fraction_complete =
+            ((double) (CurrentBytes + CurrentItems)) / ((double) (TotalBytes + TotalItems));
 
 	  // Clamp to [0,1]
 	  if(fraction_complete > 1)

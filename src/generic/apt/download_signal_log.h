@@ -66,18 +66,18 @@ public:
 
   struct timeval &get_time() {return Time;}
   struct timeval &get_start_time() {return StartTime;}
-  double get_last_bytes() {return LastBytes;}
-  double get_currentCPS() {return CurrentCPS;}
-  double get_current_bytes() {return CurrentBytes;}
-  double get_total_bytes() {return TotalBytes;}
-  double get_fetched_bytes() {return FetchedBytes;}
-  unsigned long get_elapsed_time() {return ElapsedTime;}
+  unsigned long long get_last_bytes() {return LastBytes;}
+  unsigned long long get_currentCPS() {return CurrentCPS;}
+  unsigned long long get_current_bytes() {return CurrentBytes;}
+  unsigned long long get_total_bytes() {return TotalBytes;}
+  unsigned long long get_fetched_bytes() {return FetchedBytes;}
+  unsigned long long get_elapsed_time() {return ElapsedTime;}
   unsigned long get_total_items() {return TotalItems;}
   unsigned long get_current_items() {return CurrentItems;}
 
   void set_update(bool _Update) {Update=_Update;}
 
-  sigc::signal3<void, unsigned long, unsigned long,
+  sigc::signal3<void, unsigned long long, unsigned long long,
 		download_signal_log &> Fetched_sig;
   sigc::signal4<void, std::string, std::string,
 		download_signal_log &, const sigc::slot1<void, bool> &> MediaChange_sig;
@@ -92,7 +92,7 @@ public:
 		const sigc::slot0<void> &> Stop_sig;
   sigc::signal1<void, download_signal_log &> Complete_sig;
 
-  void Fetched(unsigned long Size, unsigned long ResumePoint);
+  void Fetched(unsigned long long Size, unsigned long long ResumePoint);
   void MediaChange(const std::string &Media, const std::string &Drive,
 		   const sigc::slot1<void, bool> &k);
   bool MediaChange(std::string Media, std::string Drive);

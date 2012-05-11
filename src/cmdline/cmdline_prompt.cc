@@ -66,7 +66,7 @@ using boost::shared_ptr;
 
 struct fetchinfo
 {
-  double FetchBytes, FetchPBytes, DebBytes;
+  unsigned long long FetchBytes, FetchPBytes, DebBytes;
 
   fetchinfo()
     : FetchBytes(0), FetchPBytes(0), DebBytes(0)

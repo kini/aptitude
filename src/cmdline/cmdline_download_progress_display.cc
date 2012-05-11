@@ -88,17 +88,17 @@ namespace aptitude
         void file_finished(const std::string &description,
                            const boost::optional<unsigned long> &id);
 
-        void done(double fetched_bytes,
-                  unsigned long elapsed_time,
-                  double latest_download_rate);
+        void done(unsigned long long fetched_bytes,
+                  unsigned long long elapsed_time,
+                  unsigned long long latest_download_rate);
 
         void media_change(const std::string &media,
                           const std::string &drive,
                           const sigc::slot1<void, bool> &k);
 
-        virtual void complete(double fetched_bytes,
-                              unsigned long elapsed_time,
-                              double latest_download_rate);
+        virtual void complete(unsigned long long fetched_bytes,
+                              unsigned long long elapsed_time,
+                              unsigned long long latest_download_rate);
       };
 
       download_progress::download_progress(bool _display_messages,
@@ -199,9 +199,9 @@ namespace aptitude
       {
       }
 
-      void download_progress::done(double fetched_bytes,
-                                   unsigned long elapsed_time,
-                                   double latest_download_rate)
+      void download_progress::done(unsigned long long fetched_bytes,
+                                   unsigned long long elapsed_time,
+                                   unsigned long long latest_download_rate)
       {
         if(display_messages)
           {
@@ -244,9 +244,9 @@ namespace aptitude
         k(true);
       }
 
-      void download_progress::complete(double fetched_bytes,
-                                       unsigned long elapsed_time,
-                                       double latest_download_rate)
+      void download_progress::complete(unsigned long long fetched_bytes,
+                                       unsigned long long elapsed_time,
+                                       unsigned long long latest_download_rate)
       {
       }
 
@@ -332,8 +332,8 @@ namespace aptitude
 
         void operator()(const file_progress &progress) const
         {
-          const unsigned long current_size = progress.get_current_size();
-          const unsigned long total_size = progress.get_total_size();
+          const unsigned long long current_size = progress.get_current_size();
+          const unsigned long long total_size = progress.get_total_size();
 
           const bool complete = progress.get_complete();
           const std::string &description = progress.get_description();
@@ -420,11 +420,11 @@ namespace aptitude
       void download_status_display_impl::display_status(const download_progress::status &status)
       {
         typedef views::download_progress::status::worker_status worker_status;
-        const double download_rate = status.get_download_rate();
+        const unsigned long long download_rate = status.get_download_rate();
         const std::vector<worker_status> &active_downloads =
           status.get_active_downloads();
         const double fraction_complete = status.get_fraction_complete();
-        const unsigned long time_remaining = status.get_time_remaining();
+        const unsigned long long time_remaining = status.get_time_remaining();
 
         const int percent = as_percent(fraction_complete);
 
