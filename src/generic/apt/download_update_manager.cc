@@ -27,6 +27,7 @@
 #include <apt-pkg/cachefile.h>
 #include <apt-pkg/clean.h>
 #include <apt-pkg/error.h>
+#include <apt-pkg/strutl.h>
 
 namespace cw = cwidget;
 
