@@ -11,6 +11,10 @@
 
 <xsl:output method="html" encoding="UTF-8"/>
 <xsl:param name="chunker.output.encoding" select="'utf-8'"/>
+<xsl:param name="chunker.output.doctype-public"
+    select="'-//W3C//DTD HTML 4.01 Transitional//EN'"/>
+<xsl:param name="chunker.output.doctype-system"
+    select="'http://www.w3.org/TR/html4/loose.dtd'"/>
 
 <xsl:param name="chunk.section.depth" select="2"/>
 <xsl:param name="chunk.quietly" select="1"/>
