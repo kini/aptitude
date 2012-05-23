@@ -7,8 +7,9 @@
 # Carlos Z.F. Liu <carlosliu@users.sourceforge.net>, 2005, 2006.
 # Kov Chai <tchaikov@sjtu.org>, 2007.
 # Deng Xiyue <manphiz-guest@users.alioth.debian.org>, 2007, 2008, 2010.
-# YunQiang Su <wzssyqa@gmail.com>, 2010.
+# YunQiang Su <wzssyqa@gmail.com>, 2010, 2011.
 # Aron Xu <happyaron.xu@gmail.com>, 2010.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: aptitude\n"
@@ -35,11 +36,11 @@ msgstr "%B默认：%b   "
 
 #: src/apt_config_treeitems.cc:102 src/apt_config_treeitems.cc:104
 msgid "True"
-msgstr "True"
+msgstr "真"
 
 #: src/apt_config_treeitems.cc:102 src/apt_config_treeitems.cc:104
 msgid "False"
-msgstr "False"
+msgstr "假"
 
 #: src/apt_config_treeitems.cc:103 src/apt_config_treeitems.cc:214
 #: src/apt_config_treeitems.cc:398
@@ -47,9 +48,9 @@ msgid "%BValue:%b   "
 msgstr "%B值：%b     "
 
 #: src/apt_config_treeitems.cc:280
-#, fuzzy, c-format
+#, c-format
 msgid "Editing \"%ls\": "
-msgstr "正在编辑“%ls”"
+msgstr "正在编辑“%ls”："
 
 #: src/apt_config_treeitems.cc:402
 msgid "%BChoice:%b  "
@@ -696,10 +697,10 @@ msgid "%s is not currently installed, so it will not be upgraded.\n"
 msgstr "%s 目前未被安装，所以它不会被升级。\n"
 
 #: src/cmdline/cmdline_action.cc:332
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is already installed at the latest version, so it will not be upgraded.\n"
-msgstr "%s 已经安装了最新版本，所有不会被升级。"
+msgstr "%s 已经安装了最新版本，所以不会升级。\n"
 
 #: src/cmdline/cmdline_action.cc:338
 #, c-format
@@ -897,38 +898,34 @@ msgid ""
 msgstr "%s 版本 %s 没有可下载的文件；也许它是一个本地软件包或者过期的软件包？"
 
 #: src/cmdline/cmdline_download_progress_display.cc:154
-#, fuzzy
 msgid "Hit"
-msgstr "命中 "
+msgstr "命中"
 
 #. ForTranslators: this stands for "ignored" and should be
 #. the same width as the translation of "Err".
 #: src/cmdline/cmdline_download_progress_display.cc:181
-#, fuzzy
 msgid "Ign"
-msgstr "忽略 "
+msgstr "忽略"
 
 #. ForTranslators: this stands for "error" and should be the
 #. same width as the translation of "Ign".
 #: src/cmdline/cmdline_download_progress_display.cc:185
-#, fuzzy
 msgid "Err"
-msgstr "错误 "
+msgstr "错误"
 
 #: src/cmdline/cmdline_download_progress_display.cc:211
-#, fuzzy, c-format
+#, c-format
 msgid "Fetched %sB in %s (%sB/s)"
-msgstr "已下载 %sB，耗时 %s (%sB/s)\n"
+msgstr "已下载 %sB，耗时 %s (%sB/s)"
 
 #: src/cmdline/cmdline_download_progress_display.cc:230
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Media change: Please insert the disc labeled '%s' into the drive '%s' and "
 "press [Enter]."
-msgstr "更换介质：请将标签为“%s”的光盘插入驱动器“%s”并按回车[Enter]\n"
+msgstr "更换介质：请将标签为“%s”的磁盘插入驱动器“%s”并按[回车(Enter)]。"
 
 #: src/cmdline/cmdline_download_progress_display.cc:436
-#, fuzzy
 msgid "[Working]"
 msgstr "[正在工作]"
 
@@ -1121,7 +1118,7 @@ msgid ""
 "                  Apt::Get::AllowUnauthenticated is 'true'!\n"
 msgstr ""
 "*** 警告 ***  忽略这些违反信任机制的问题，因为\n"
-"              Apt::Get::AllowUnauthenticated 的值为“true”！\n"
+"              Apt::Get::AllowUnauthenticated 的值为“真”！\n"
 
 #. ForTranslators: This string is a confirmation message, which
 #. users (especially CJK users) should be able to input without
@@ -1130,7 +1127,7 @@ msgstr ""
 #. can be removed from your translation.
 #: src/cmdline/cmdline_prompt.cc:558
 msgid "Go ahead and ignore the warning|Yes"
-msgstr "Go ahead and ignore the warning|Yes"
+msgstr "Shi"
 
 #. ForTranslators: This string is a confirmation message, which
 #. users (especially CJK users) should be able to input without
@@ -1139,7 +1136,7 @@ msgstr "Go ahead and ignore the warning|Yes"
 #. can be removed from your translation.
 #: src/cmdline/cmdline_prompt.cc:564
 msgid "Abort instead of overriding the warning|No"
-msgstr "Abort instead of overriding the warning|No"
+msgstr "Fou"
 
 #: src/cmdline/cmdline_prompt.cc:575
 #, c-format
@@ -1520,13 +1517,11 @@ msgid "Resolver state successfully written!"
 msgstr "成功写入依赖关系解决状态！"
 
 #: src/cmdline/cmdline_resolver.cc:222
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "y: %Fn: %Fq: %F.: %F,: %Fo: %Fe: %Fx: %Fr (ID|pkg ver) ...: %F%na (ID|pkg "
 "ver) ...: %F%n<ID>: %F%n<ACTION> pkg... : %F%n%F%F%F%F%F%F%F%F"
 msgstr ""
-"y: %Fn: %Fq: %F,: %F.: %Fo: %Fe: %Fx: %Fr (ID|pkg ver) ...: %F%na (ID|pkg "
-"ver) ...: %F%n<ID>: %F%n<ACTION> pkg... : %F%n%F%F%F%F%F%F%F%F"
 
 #: src/cmdline/cmdline_resolver.cc:243
 msgid "accept the proposed changes"
@@ -1696,7 +1691,7 @@ msgstr "忽略这些推荐结果：%s"
 #: src/cmdline/cmdline_resolver.cc:576
 #, c-format
 msgid "Action \"%s\""
-msgstr "动作 \"%s\""
+msgstr "动作“%s”"
 
 #. ForTranslators: the substitution is
 #. replaced in English with something
@@ -2087,7 +2082,7 @@ msgstr "文件名："
 
 #: src/cmdline/cmdline_show.cc:441
 msgid "MD5sum: "
-msgstr "MD5sum: "
+msgstr ""
 
 #: src/cmdline/cmdline_show.cc:445 src/cmdline/cmdline_show.cc:448
 #: src/gtk/entityview.cc:606
@@ -2315,7 +2310,7 @@ msgstr "版本：您必须提供至少一个查找项\n"
 
 #: src/cmdline/cmdline_why.cc:290
 msgid "dep_level"
-msgstr "依赖级(_L)"
+msgstr "依赖级"
 
 #: src/cmdline/cmdline_why.cc:296
 msgid "DependsOnly"
@@ -2567,9 +2562,8 @@ msgid "Couldn't open \"%s\" for writing"
 msgstr "无法打开“%s”以写入"
 
 #: src/edit_pkg_hier.cc:340
-#, fuzzy
 msgid "Unable to look up your home directory!"
-msgstr "无法查阅您的主目录，保存到 /tmp/function_pkgs！"
+msgstr "无法查阅您的主目录！"
 
 #: src/generic/apt/aptcache.cc:271
 #, c-format
@@ -2717,7 +2711,7 @@ msgstr "无效的线索 %s：期望得到一个动作，但没有找到。"
 msgid ""
 "Invalid hint \"%s\": expected a component name and a number, but found "
 "nothing."
-msgstr "无效的线索 \"%s\"：期望得到一个组件名和一个数字，但是没有找到。"
+msgstr "无效的线索 %s：期望得到一个组件名和一个数字，但是没有找到。"
 
 #: src/generic/apt/aptitude_resolver.cc:485
 #, c-format
@@ -2807,10 +2801,9 @@ msgid "Couldn't read list of package sources"
 msgstr "无法读取软件包源列表"
 
 #: src/generic/apt/download_update_manager.cc:129
-#, fuzzy, c-format
-#| msgid "Failed to fetch %s: %s"
+#, c-format
 msgid "Failed to fetch %s: %s\n"
-msgstr "无法下载 %s：%s"
+msgstr "无法下载 %s：%s\n"
 
 #: src/generic/apt/download_update_manager.cc:149
 msgid "Couldn't clean out list directories"
@@ -2830,7 +2823,7 @@ msgstr "无法重建软件包缓存"
 #: src/generic/apt/dump_packages.cc:539 src/generic/apt/dump_packages.cc:629
 #, c-format
 msgid "Unable to stat %s."
-msgstr "无法获取 “%s” 的状态。"
+msgstr "无法获取 %s 的状态。"
 
 #: src/generic/apt/dump_packages.cc:674
 #, c-format
@@ -3064,7 +3057,7 @@ msgstr ""
 #, c-format
 msgid ""
 "The package index files are corrupted. No Filename: field for package %s."
-msgstr "软件包索引文件被损坏。软件包 %s 无 Filename: 域。"
+msgstr "软件包索引文件被损坏。软件包 %s 无 Filename：域。"
 
 #: src/generic/apt/pkg_changelog.cc:441 src/view_changelog.cc:272
 #, c-format
@@ -3167,7 +3160,7 @@ msgstr ""
 
 #: src/generic/problemresolver/exceptions.h:114
 msgid "The maximum cost value was exceeded."
-msgstr ""
+msgstr "超出了最大消耗值。"
 
 #: src/generic/problemresolver/exceptions.h:124
 msgid "A single cost level was both added and lower-bounded."
@@ -3239,7 +3232,7 @@ msgstr "预期得到 %s"
 
 #: src/generic/util/parsers.h:2007
 msgid " or "
-msgstr " 或者"
+msgstr " 或者 "
 
 #: src/generic/util/parsers.h:2770
 #, c-format
@@ -3425,7 +3418,7 @@ msgstr "增量"
 #: src/gtk/aptitude.glade:765 src/gtk/aptitude.glade:1487
 #: src/gtk/aptitude.glade:1819 src/gtk/aptitude.glade:1958
 msgid "Errors"
-msgstr "错误 "
+msgstr "错误"
 
 #: src/gtk/aptitude.glade:782 src/gtk/aptitude.glade:1836
 #: src/gtk/aptitude.glade:1975
@@ -4154,7 +4147,7 @@ msgstr "正在应用更改..."
 #: src/gtk/gui.cc:875
 #, c-format
 msgid "%s: %s"
-msgstr "%s： %s"
+msgstr "%s：%s"
 
 #: src/gtk/gui.cc:878
 #, c-format
@@ -4172,11 +4165,11 @@ msgstr "正在下载软件包"
 
 #: src/gtk/gui.cc:1038
 msgid "Broken packages"
-msgstr "破损的软件包。"
+msgstr "破损的软件包"
 
 #: src/gtk/gui.cc:1071
 msgid "Show broken packages"
-msgstr "显示破损的软件包。"
+msgstr "显示破损的软件包"
 
 #: src/gtk/gui.cc:1075
 msgid "Resolve dependencies"
@@ -5114,9 +5107,9 @@ msgid "  Running on Qt %s\n"
 msgstr ""
 
 #: src/main.cc:182
-#, fuzzy, c-format
+#, c-format
 msgid "  Qt support disabled.\n"
-msgstr "  Ept 支持已禁用\n"
+msgstr "  Qt 支持已禁用\n"
 
 #: src/main.cc:184
 msgid ""
@@ -5314,15 +5307,15 @@ msgid " --no-gui       Do not use the GTK GUI even if available.\n"
 msgstr " --no-gui       即使可用，也不使用 GTK 图形用户界面。\n"
 
 #: src/main.cc:232
-#, fuzzy, c-format
+#, c-format
 msgid " --qt           Use the Qt GUI.\n"
-msgstr " -h             此帮助文本。\n"
+msgstr " --qt           使用 Qt 图形界面。\n"
 
 #: src/main.cc:233
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " --no-qt        Do not use the Qt GUI even if enabled in the configuration.\n"
-msgstr " --gui          即使配置中禁用了，也要使用 GTK 图形用户界面。\n"
+msgstr " --no-qt        不要使用 Qt 图形界面，即使在配置中启用。\n"
 
 #: src/main.cc:235
 #, c-format
@@ -6355,17 +6348,15 @@ msgstr "make_package_view: 未发现主要部件"
 
 #: src/qt/tabs_manager.cc:254
 msgid "Perform Changes"
-msgstr ""
+msgstr "执行更改"
 
 #: src/qt/widgets/packages_tab.cc:72
-#, fuzzy
 msgid "all"
-msgstr "安装"
+msgstr "全部"
 
 #: src/qt/widgets/packages_tab.cc:72
-#, fuzzy
 msgid "installed locally"
-msgstr "已安装"
+msgstr "已从本地安装"
 
 #: src/qt/widgets/packages_tab.cc:72
 #, fuzzy
@@ -6373,42 +6364,36 @@ msgid "new"
 msgstr "新"
 
 #: src/qt/widgets/packages_tab.cc:78
-#, fuzzy
 msgid "Show:"
-msgstr "显示"
+msgstr "显示："
 
 #: src/qt/widgets/packages_tab.cc:84
 msgid "Manage Filters"
-msgstr ""
+msgstr "管理过滤器"
 
 #: src/qt/widgets/packages_tab.cc:105
-#, fuzzy
 msgid "Name and Description"
-msgstr "描述"
+msgstr "名称描述"
 
 #: src/qt/widgets/packages_tab.cc:111
-#, fuzzy
 msgid "Find:"
-msgstr "查找"
+msgstr "查找："
 
 #: src/qt/widgets/packages_tab.cc:113
 msgid "by"
 msgstr ""
 
 #: src/qt/windows/main_window.cc:96
-#, fuzzy
 msgid "&File"
-msgstr "文件(_F)"
+msgstr "文件(&F)"
 
 #: src/qt/windows/main_window.cc:104
-#, fuzzy
 msgid "&Packages"
-msgstr "软件包"
+msgstr "软件包(&P)"
 
 #: src/qt/windows/main_window.cc:112
-#, fuzzy
 msgid "&Help"
-msgstr "帮助"
+msgstr "帮助(&H)"
 
 #: src/reason_fragment.cc:31
 msgid "depends on"
