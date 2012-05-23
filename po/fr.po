@@ -5,13 +5,13 @@
 # Martin Quinson <mquinson@ens-lyon.fr>, 2001.
 # Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>, 2004, 2005, 2006, 2007, 2008.
 # Christian Perrier <bubulle@debian.org>, 2004, 2006, 2008, 2009.
-# Jean-Baka Domelevo Entfellner <domelevo@gmail.com>, 2011.
+# Jean-Baka Domelevo Entfellner <domelevo@gmail.com>, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: aptitude\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
 "POT-Creation-Date: 2012-05-03 15:37+0800\n"
-"PO-Revision-Date: 2012-02-12 16:03+0800\n"
+"PO-Revision-Date: 2012-04-23 10:05+0100\n"
 "Last-Translator: Jean-Baka Domelevo Entfellner <domelevo@gmail.com>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "Language: fr\n"
@@ -26,12 +26,12 @@ msgstr ""
 #: src/apt_config_treeitems.cc:99 src/apt_config_treeitems.cc:210
 #: src/apt_config_treeitems.cc:394
 msgid "%BOption:%b  "
-msgstr "%BOption :%b  "
+msgstr "%BOption : %b  "
 
 #: src/apt_config_treeitems.cc:101 src/apt_config_treeitems.cc:212
 #: src/apt_config_treeitems.cc:396
 msgid "%BDefault:%b "
-msgstr "%BDéfaut :%b "
+msgstr "%BDéfaut : %b "
 
 #: src/apt_config_treeitems.cc:102 src/apt_config_treeitems.cc:104
 msgid "True"
@@ -44,17 +44,16 @@ msgstr "Faux"
 #: src/apt_config_treeitems.cc:103 src/apt_config_treeitems.cc:214
 #: src/apt_config_treeitems.cc:398
 msgid "%BValue:%b   "
-msgstr "%BValeur :%b   "
+msgstr "%BValeur : %b   "
 
 #: src/apt_config_treeitems.cc:280
-#, fuzzy, c-format
-#| msgid "Editing \"%ls\""
+#, c-format
 msgid "Editing \"%ls\": "
-msgstr "Modification de « %ls »"
+msgstr "Modification de « %ls » : "
 
 #: src/apt_config_treeitems.cc:402
 msgid "%BChoice:%b  "
-msgstr "%BChoix :%b  "
+msgstr "%BChoix : %b  "
 
 #: src/apt_options.cc:160
 msgid "Display some available commands at the top of the screen"
@@ -884,7 +883,7 @@ msgstr "Err "
 #: src/cmdline/cmdline_changelog.cc:179
 #, c-format
 msgid "Changelog download failed: %s"
-msgstr "Échec lors du téléchargement du journal des modifications : %s"
+msgstr "Échec lors du téléchargement du journal des modifications : %s"
 
 #: src/cmdline/cmdline_changelog.cc:283
 msgid "Can't execute sensible-pager, is this a working Debian system?"
@@ -906,11 +905,9 @@ msgstr ""
 "Impossible de trouver le journal des modifications (« changelog ») pour %s"
 
 #: src/cmdline/cmdline_changelog.cc:429
-#, fuzzy, c-format
-#| msgid "Couldn't find a changelog for %s"
+#, c-format
 msgid "Couldn't run pager %s"
-msgstr ""
-"Impossible de trouver le journal des modifications (« changelog ») pour %s"
+msgstr "Impossible d'exécuter l'outil de mise en page %s"
 
 #: src/cmdline/cmdline_clean.cc:60
 #, c-format
@@ -924,12 +921,8 @@ msgstr "Effacer %s* %spartial/*\n"
 
 #: src/cmdline/cmdline_clean.cc:76 src/cmdline/cmdline_clean.cc:146
 #: src/ui.cc:1780 src/ui.cc:1868
-#, fuzzy
-#| msgid "Unable to look up your home directory, saving to /tmp/function_pkgs!"
 msgid "Unable to lock the download directory"
-msgstr ""
-"Votre répertoire personnel est introuvable, enregistrement dans /tmp/"
-"function_pkgs !"
+msgstr "Impossible de verrouiller le répertoire de téléchargement"
 
 #: src/cmdline/cmdline_clean.cc:106
 #, c-format
@@ -999,26 +992,20 @@ msgstr ""
 "obsolète ?"
 
 #: src/cmdline/cmdline_download_progress_display.cc:154
-#, fuzzy
-#| msgid "Hit "
 msgid "Hit"
-msgstr "Atteint "
+msgstr "Atteint"
 
 #. ForTranslators: this stands for "ignored" and should be
 #. the same width as the translation of "Err".
 #: src/cmdline/cmdline_download_progress_display.cc:181
-#, fuzzy
-#| msgid "Ign "
 msgid "Ign"
-msgstr "Ign "
+msgstr "Ignoré"
 
 #. ForTranslators: this stands for "error" and should be the
 #. same width as the translation of "Ign".
 #: src/cmdline/cmdline_download_progress_display.cc:185
-#, fuzzy
-#| msgid "Err "
 msgid "Err"
-msgstr "Err "
+msgstr "Erreur"
 
 #: src/cmdline/cmdline_download_progress_display.cc:211
 #, c-format
@@ -1534,7 +1521,7 @@ msgstr ""
 
 #: src/cmdline/cmdline_prompt.cc:909
 msgid "'a': the package was automatically installed or removed."
-msgstr "'a' : le paquet a été automatiquement installé ou désinstallé."
+msgstr "'a' : le paquet a été automatiquement installé ou désinstallé."
 
 #: src/cmdline/cmdline_prompt.cc:911
 msgid ""
@@ -1668,16 +1655,13 @@ msgid "Resolver state successfully written!"
 msgstr "L'état du solveur a été enregistré avec succès."
 
 #: src/cmdline/cmdline_resolver.cc:222
-#, fuzzy, c-format
-#| msgid ""
-#| "y: %Fn: %Fq: %F,: %F.: %Fo: %Fe: %Fx: %Fr (ID|pkg ver) ...: %F%na (ID|pkg "
-#| "ver) ...: %F%n<ID>: %F%n<ACTION> pkg... : %F%n%F%F%F%F%F%F%F%F"
+#, c-format
 msgid ""
 "y: %Fn: %Fq: %F.: %F,: %Fo: %Fe: %Fx: %Fr (ID|pkg ver) ...: %F%na (ID|pkg "
 "ver) ...: %F%n<ID>: %F%n<ACTION> pkg... : %F%n%F%F%F%F%F%F%F%F"
 msgstr ""
-"y: %Fn: %Fq: %F,: %F.: %Fo: %Fe: %Fx: %Fr (ID| ver pqt) ...: %F%na (ID| ver "
-"pqt) ...: %F%n<ID>: %F%n<ACTION> pqt... : %F%n%F%F%F%F%F%F%F%F"
+"y: %Fn: %Fq: %F.: %F,: %Fo: %Fe: %Fx: %Fr (ID|ver paquet) ...: %F%na (ID|ver "
+"paquet) ...: %F%n<ID>: %F%n<ACTION> paquet... : %F%n%F%F%F%F%F%F%F%F"
 
 #: src/cmdline/cmdline_resolver.cc:243
 msgid "accept the proposed changes"
@@ -2232,7 +2216,7 @@ msgstr "non"
 
 #: src/cmdline/cmdline_show.cc:421 src/pkg_info_screen.cc:125
 msgid "Multi-Arch: "
-msgstr ""
+msgstr "Multiarchitecture : "
 
 #: src/cmdline/cmdline_show.cc:423 src/gtk/entitysummary.cc:361
 #: src/gtk/previewtab.cc:230
@@ -2314,7 +2298,7 @@ msgstr "Rend obsolète"
 
 #: src/cmdline/cmdline_show.cc:469
 msgid "Enhances"
-msgstr ""
+msgstr "Améliore"
 
 #: src/cmdline/cmdline_show.cc:471 src/cmdline/cmdline_why.cc:230
 #: src/cmdline/cmdline_why.cc:1632 src/gtk/dependency_chains_tab.cc:205
@@ -2368,7 +2352,7 @@ msgstr "Ajout de l'étiquette utilisateur « %s » au paquet « %s ».\n"
 #: src/cmdline/cmdline_user_tag.cc:71
 #, c-format
 msgid "Removing user tag \"%s\" from the package \"%s\".\n"
-msgstr "Suppression de l'étiquette utilisateur « %s » du paquet « %s ».\n"
+msgstr "Suppression de l'étiquette utilisateur « %s » du paquet « %s ».\n"
 
 #: src/cmdline/cmdline_user_tag.cc:103
 #, c-format
@@ -2769,12 +2753,8 @@ msgid "Couldn't open \"%s\" for writing"
 msgstr "Ouverture en écriture de « %s » impossible"
 
 #: src/edit_pkg_hier.cc:340
-#, fuzzy
-#| msgid "Unable to look up your home directory, saving to /tmp/function_pkgs!"
 msgid "Unable to look up your home directory!"
-msgstr ""
-"Votre répertoire personnel est introuvable, enregistrement dans /tmp/"
-"function_pkgs !"
+msgstr "Votre répertoire personnel est introuvable !"
 
 #: src/generic/apt/aptcache.cc:271
 #, c-format
@@ -2898,17 +2878,15 @@ msgstr ""
 
 #: src/generic/apt/apt.cc:1272
 msgid "foreign"
-msgstr ""
+msgstr "étranger"
 
 #: src/generic/apt/apt.cc:1274
 msgid "same"
-msgstr ""
+msgstr "même"
 
 #: src/generic/apt/apt.cc:1277
-#, fuzzy
-#| msgid "allow_choices"
 msgid "allowed"
-msgstr "autoriser_choix"
+msgstr "autorisé"
 
 #: src/generic/apt/apt.cc:1366
 msgid "main"
@@ -2916,15 +2894,15 @@ msgstr "main"
 
 #: src/generic/apt/apt.cc:1366
 msgid "contrib"
-msgstr ""
+msgstr "contrib"
 
 #: src/generic/apt/apt.cc:1366
 msgid "non-free"
-msgstr ""
+msgstr "non-free"
 
 #: src/generic/apt/apt.cc:1366
 msgid "non-US"
-msgstr ""
+msgstr "non-US"
 
 #: src/generic/apt/aptitude_resolver.cc:441
 #, c-format
@@ -3046,10 +3024,9 @@ msgid "Couldn't read list of package sources"
 msgstr "Impossible de lire les sources de listes de paquets"
 
 #: src/generic/apt/download_update_manager.cc:129
-#, fuzzy, c-format
-#| msgid "Failed to fetch %s: %s"
+#, c-format
 msgid "Failed to fetch %s: %s\n"
-msgstr "impossible de récupérer %s : %s"
+msgstr "impossible de récupérer %s : %s\n"
 
 #: src/generic/apt/download_update_manager.cc:149
 msgid "Couldn't clean out list directories"
@@ -3084,7 +3061,7 @@ msgstr "Impossible d'ouvrir %s pour enregistrer les actions"
 #. ForTranslators: This is a date and time format.  See strftime(3).
 #: src/generic/apt/log.cc:66
 msgid "%a, %b %e %Y %T %z"
-msgstr ""
+msgstr "%a, %b %e %Y %T %z"
 
 #: src/generic/apt/log.cc:68
 #, c-format
@@ -3208,10 +3185,9 @@ msgid "Unknown action type: %s"
 msgstr "Type d'action inconnu : %s"
 
 #: src/generic/apt/matching/parse.cc:330
-#, fuzzy, c-format
-#| msgid "Unknown action type: %s"
+#, c-format
 msgid "Unknown multiarch type: %s"
-msgstr "Type d'action inconnu : %s"
+msgstr "Type multiarchitecture inconnu : %s"
 
 #: src/generic/apt/matching/parse.cc:370
 #, c-format
@@ -4014,7 +3990,7 @@ msgstr[0] ""
 "Tapez « %s » pour installer <span size='large'>%d</span> mise à jour de "
 "<span size='large'>%d</span>."
 msgstr[1] ""
-"Tapez « %s » pour installer les <span size='large'>%d</span> mises à jour de "
+"Tapez « %s » pour installer les <span size='large'>%d</span> mises à jour de "
 "<span size='large'>%d</span>."
 
 #: src/gtk/dashboardtab.cc:652
@@ -5000,10 +4976,9 @@ msgid "%s obsoletes %s"
 msgstr "%s rend obsolète %s"
 
 #: src/gtk/resolver.cc:1264 src/solution_fragment.cc:155
-#, fuzzy, c-format
-#| msgid "%s replaces %s"
+#, c-format
 msgid "%s enhances %s"
-msgstr "%s remplace %s"
+msgstr "%s améliore %s"
 
 #: src/gtk/resolver.cc:1376 src/gtk/resolver.cc:1841
 #: src/solution_screen.cc:272
@@ -5277,10 +5252,8 @@ msgid "Terminal policy '%s' should be the last policy in the list"
 msgstr "La règle terminale « %s » devrait être la dernière règle de la liste"
 
 #: src/load_grouppolicy.cc:385
-#, fuzzy
-#| msgid "Unmatched '(' in pattern grouping policy"
 msgid "Unmatched '(' in grouping policy"
-msgstr "« ( » non fermée dans la règle de regroupement par expression"
+msgstr "« ( » non fermée dans la règle de regroupement"
 
 #: src/load_grouppolicy.cc:413
 #, c-format
@@ -5298,19 +5271,17 @@ msgstr ""
 
 #: src/load_grouppolicy.cc:428 src/load_grouppolicy.cc:544
 #: src/load_grouppolicy.cc:621
-#, fuzzy, c-format
-#| msgid "Too many arguments to by-section grouping policy"
+#, c-format
 msgid "Too many arguments to '%s' grouping policy"
-msgstr "Trop de paramètres dans la règle de regroupement par section"
+msgstr "Trop de paramètres dans la règle de regroupement pour « %s »"
 
 #: src/load_grouppolicy.cc:441 src/load_grouppolicy.cc:521
 #: src/load_grouppolicy.cc:532 src/load_grouppolicy.cc:555
 #: src/load_grouppolicy.cc:566 src/load_grouppolicy.cc:577
 #: src/load_grouppolicy.cc:608 src/load_grouppolicy.cc:766
-#, fuzzy, c-format
-#| msgid "Task grouping policies take no arguments"
+#, c-format
 msgid "Grouping policy '%s' takes no arguments"
-msgstr "La règle de regroupement par tâche ne prend aucun paramètre"
+msgstr "La règle de regroupement « %s » ne prend aucun paramètre"
 
 #: src/load_grouppolicy.cc:460 src/load_grouppolicy.cc:636
 #, c-format
@@ -5323,19 +5294,15 @@ msgid "Unable to parse pattern at '%s'"
 msgstr "Analyse de l'expression impossible à « %s »"
 
 #: src/load_grouppolicy.cc:502
-#, fuzzy
-#| msgid ""
-#| "Exactly one filter must be provided as an argument to a filter policy"
 msgid "Exactly one filter must be provided as an argument to a 'filter' policy"
 msgstr ""
 "Un et un seul nom de filtre doit être passé en paramètre à une règle de "
 "filtrage"
 
 #: src/load_grouppolicy.cc:644
-#, fuzzy, c-format
-#| msgid "Too many arguments to by-section grouping policy"
+#, c-format
 msgid "Missing arguments to '%s' grouping policy"
-msgstr "Trop de paramètres dans la règle de regroupement par section"
+msgstr "Trop peu de paramètres dans la règle de regroupement « %s »"
 
 #: src/load_grouppolicy.cc:667
 #, c-format
@@ -5353,10 +5320,9 @@ msgid "Expected '{', ')', or ',' following '||', got '%s'"
 msgstr "Attendu « { », « ) », o « , » après « || », reçu « %s »"
 
 #: src/load_grouppolicy.cc:750
-#, fuzzy, c-format
-#| msgid "Unmatched '(' in pattern grouping policy"
+#, c-format
 msgid "Unmatched '(' in '%s' grouping policy"
-msgstr "« ( » non fermée dans la règle de regroupement par expression"
+msgstr "« ( » non fermée dans la règle de regroupement « %s »"
 
 # A TRADUIRE
 #: src/load_pkgview.cc:64
@@ -5393,10 +5359,9 @@ msgstr "Type d'alignement inconnu « %s »"
 
 #: src/load_sortpolicy.cc:51 src/load_sortpolicy.cc:64
 #: src/load_sortpolicy.cc:77 src/load_sortpolicy.cc:90
-#, fuzzy, c-format
-#| msgid "By-name sorting policies take no arguments"
+#, c-format
 msgid "Sorting policy '%s' takes no arguments"
-msgstr "Les règles de tri par nom ne prennent aucun paramètre"
+msgstr "La règle de tri « %s » ne prend aucun paramètre"
 
 #: src/load_sortpolicy.cc:148
 msgid "Invalid zero-length sorting policy name"
@@ -5481,21 +5446,19 @@ msgid "  Gtk+ support disabled.\n"
 msgstr "  prise en charge de Gtk+ désactivée.\n"
 
 #: src/main.cc:179
-#, fuzzy, c-format
-#| msgid "%s %s compiled at %s %s\n"
+#, c-format
 msgid "  Compiled with Qt %s\n"
-msgstr "%s %s compilé le %s %s\n"
+msgstr "  Compilé avec Qt %s\n"
 
 #: src/main.cc:180
 #, c-format
 msgid "  Running on Qt %s\n"
-msgstr ""
+msgstr "  Fonctionnant sous Qt %s\n"
 
 #: src/main.cc:182
-#, fuzzy, c-format
-#| msgid "  Ept support disabled.\n"
+#, c-format
 msgid "  Qt support disabled.\n"
-msgstr "  gestion d'Ept désactivée.\n"
+msgstr "  Prise en charge de Qt désactivée.\n"
 
 #: src/main.cc:184
 msgid ""
@@ -5629,11 +5592,9 @@ msgstr ""
 " show         - Afficher les informations détaillées concernant un paquet.\n"
 
 #: src/main.cc:213
-#, fuzzy, c-format
-#| msgid " show         - Display detailed information about a package.\n"
+#, c-format
 msgid " versions     - Displays the versions of specified packages.\n"
-msgstr ""
-" show         - Afficher les informations détaillées concernant un paquet.\n"
+msgstr " versions     - Affiche les versions des paquets spécifiés.\n"
 
 #: src/main.cc:214
 #, c-format
@@ -5713,20 +5674,17 @@ msgid " --no-gui       Do not use the GTK GUI even if available.\n"
 msgstr " --no-gui       Ne pas utiliser l'interface GTK même si disponible.\n"
 
 #: src/main.cc:232
-#, fuzzy, c-format
-#| msgid " -h             This help text.\n"
+#, c-format
 msgid " --qt           Use the Qt GUI.\n"
-msgstr " -h             Afficher ce texte d'aide.\n"
+msgstr " --qt           Utiliser l'interface graphique Qt.\n"
 
 #: src/main.cc:233
-#, fuzzy, c-format
-#| msgid ""
-#| " --gui          Use the GTK GUI even if disabled in the configuration.\n"
+#, c-format
 msgid ""
 " --no-qt        Do not use the Qt GUI even if enabled in the configuration.\n"
 msgstr ""
-" --gui          Utiliser l'interface GTK même si désactivée dans la\n"
-"                configuration.\n"
+" --no-qt        Ne pas utiliser l'interface graphique Qt, même lorsqu'elle "
+"est                    activée dans la configuration.\n"
 
 #: src/main.cc:235
 #, c-format
@@ -6010,7 +5968,7 @@ msgid ""
 "\", \"first-package-and-type\", \"all-packages\", or \"all-packages-with-dep-"
 "versions\"."
 msgstr ""
-"Mode de résumé « %s » de « why » non valable : attendus « no-summary », "
+"Mode de résumé « %s » de « why » non valable : attendus « no-summary », "
 "« first-package », « first-package-and-type », « all-packages », ou « all-"
 "packages-with-dep-versions »."
 
@@ -6277,10 +6235,8 @@ msgid "Encoding of mine-help.txt|UTF-8"
 msgstr "Encodage de mine-help-fr.txt|ISO-8859-15"
 
 #: src/pkg_columnizer.cc:86
-#, fuzzy
-#| msgid "30 6 6 1 1 40 14 14 11 10 35 9 10 2 1 1 10 12 30 15 15"
 msgid "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 1 10 9 12 30 17 15"
-msgstr "30 6 6 1 1 40 14 14 11 10 35 9 10 2 1 1 10 12 30 15 15"
+msgstr "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 1 10 9 12 30 17 15"
 
 #: src/pkg_columnizer.cc:89 src/ui.cc:2775
 msgid "Package"
@@ -6823,69 +6779,51 @@ msgstr "make_package_view : le widget principal n'a pas été trouvé"
 
 #: src/qt/tabs_manager.cc:254
 msgid "Perform Changes"
-msgstr ""
+msgstr "Appliquer les changements"
 
 #: src/qt/widgets/packages_tab.cc:72
-#, fuzzy
-#| msgid "Install"
 msgid "all"
-msgstr "Installer"
+msgstr "tout"
 
 #: src/qt/widgets/packages_tab.cc:72
-#, fuzzy
-#| msgid "installed"
 msgid "installed locally"
-msgstr "installé"
+msgstr "installé en local"
 
 #: src/qt/widgets/packages_tab.cc:72
-#, fuzzy
-#| msgid "New"
 msgid "new"
-msgstr "Nouveau"
+msgstr "nouveau"
 
 #: src/qt/widgets/packages_tab.cc:78
-#, fuzzy
-#| msgid "Show "
 msgid "Show:"
-msgstr "Montrer "
+msgstr "Montrer :"
 
 #: src/qt/widgets/packages_tab.cc:84
 msgid "Manage Filters"
-msgstr ""
+msgstr "Gérer les filtres"
 
 #: src/qt/widgets/packages_tab.cc:105
-#, fuzzy
-#| msgid "Description"
 msgid "Name and Description"
-msgstr "Description"
+msgstr "Nom et description"
 
 #: src/qt/widgets/packages_tab.cc:111
-#, fuzzy
-#| msgid "Find"
 msgid "Find:"
-msgstr "Rechercher"
+msgstr "Rechercher :"
 
 #: src/qt/widgets/packages_tab.cc:113
 msgid "by"
-msgstr ""
+msgstr "par"
 
 #: src/qt/windows/main_window.cc:96
-#, fuzzy
-#| msgid "_File"
 msgid "&File"
-msgstr "_Fichier"
+msgstr "&Fichier"
 
 #: src/qt/windows/main_window.cc:104
-#, fuzzy
-#| msgid "Packages"
 msgid "&Packages"
-msgstr "Paquets"
+msgstr "&Paquets"
 
 #: src/qt/windows/main_window.cc:112
-#, fuzzy
-#| msgid "Help"
 msgid "&Help"
-msgstr "Aide"
+msgstr "&Aide"
 
 #: src/reason_fragment.cc:31
 msgid "depends on"
@@ -6921,7 +6859,7 @@ msgstr "rend obsolète"
 
 #: src/reason_fragment.cc:44
 msgid "enhances"
-msgstr ""
+msgstr "améliore"
 
 #: src/reason_fragment.cc:155
 #, c-format
@@ -8215,7 +8153,7 @@ msgstr ""
 #, c-format
 msgid "Failed to download the changelog of %s: %s"
 msgstr ""
-"Échec du téléchargement du fichier de suivi des modifications de %s : %s"
+"Échec du téléchargement du fichier de suivi des modifications de %s : %s"
 
 #: src/view_changelog.cc:382
 #, c-format
@@ -8227,11 +8165,6 @@ msgid "You can only view changelogs of official Debian packages."
 msgstr ""
 "Vous ne pouvez afficher les fichiers de suivi de modifications que pour les "
 "paquets Debian officiels."
-
-#~ msgid "Couldn't lock list directory..are you root?"
-#~ msgstr ""
-#~ "Impossible de bloquer le répertoire des listes… Avez-vous les droits "
-#~ "superutilisateur ? "
 
 #~ msgid "Unterminated quoted string in command: %s"
 #~ msgstr "Chaîne non terminée dans la commande : %s"
@@ -8281,112 +8214,3 @@ msgstr ""
 #~ msgstr ""
 #~ "Échec de mise à jour de la base de données de debtags (%s update %s). Le "
 #~ "paquet debtags n'est peut-être pas installé : %s"
-
-#, fuzzy
-#~| msgid "Invalid operation %s"
-#~ msgid "Invalid command-line option '%s'"
-#~ msgstr "Opération non valable %s"
-
-#~ msgid "Too many arguments to by-section grouping policy"
-#~ msgstr "Trop de paramètres dans la règle de regroupement par section"
-
-#~ msgid "By-status grouping policies take no arguments"
-#~ msgstr "Les règles de regroupement par état ne prennent aucun paramètre"
-
-#~ msgid "By-mode grouping policies take no arguments"
-#~ msgstr "Les règles de regroupement par mode ne prennent aucun paramètre"
-
-#~ msgid "First-character grouping policies take no arguments"
-#~ msgstr ""
-#~ "La règle de regroupement selon le premier caractère ne prend aucun "
-#~ "paramètre"
-
-#~ msgid "Version-generating grouping policies take no arguments"
-#~ msgstr "La règle de regroupement par version ne prend aucun paramètre"
-
-#~ msgid "Dep-generating grouping policies take no arguments"
-#~ msgstr "La règle de regroupement par dépendances ne prend aucun paramètre"
-
-#~ msgid "By-priority grouping policies take no arguments"
-#~ msgstr "La règle de regroupement par priorité ne prend aucun paramètre"
-
-#~ msgid "Expected no more than one argument to a tag grouping policy"
-#~ msgstr ""
-#~ "Un seul paramètre est attendu dans une règle de regroupement par étiquette"
-
-#~ msgid "Expected '(' after 'pattern'"
-#~ msgstr "« ( » est attendu après « pattern »"
-
-#~ msgid "Missing arguments to 'pattern'"
-#~ msgstr "Paramètres manquants pour « pattern »"
-
-#~ msgid "By-version sorting policies take no arguments"
-#~ msgstr "Les règles de tri par version ne prennent aucun paramètre"
-
-#~ msgid "By-installed size sorting policies take no arguments"
-#~ msgstr "Les règles de tri par taille ne prennent aucun paramètre"
-
-#~ msgid "By-priority sorting policies take no arguments"
-#~ msgstr "Les règles de tri par priorité ne prennent aucun paramètre"
-
-#~ msgid ""
-#~ "%BOption:%b  %s\n"
-#~ "%BDefault:%b %s\n"
-#~ "%BValue:%b   %s\n"
-#~ msgstr ""
-#~ "%BOption :%b  %s\n"
-#~ "%BDéfaut :%b %s\n"
-#~ "%BValeur :%b   %s\n"
-
-#~ msgid "Press Return to continue"
-#~ msgstr "Appuyez sur Entrée pour continuer"
-
-#~ msgid "Search for:"
-#~ msgstr "Rechercher :"
-
-#~ msgid ""
-#~ "Unable to resolve dependencies for the upgrade (the resolver timed out)."
-#~ msgstr ""
-#~ "Impossible de résoudre les dépendances pour la mise à jour (délai "
-#~ "d'attente écoulé pour le solveur)."
-
-#~ msgid "Safe actions"
-#~ msgstr "Actions sûres"
-
-#~ msgid "Cancel all user actions"
-#~ msgstr "Annuler toutes les actions utilisateur"
-
-#~ msgid "Remove packages"
-#~ msgstr "Supprimer des paquets"
-
-#~ msgid "Modify held packages"
-#~ msgstr "Modifier des paquets gardés"
-
-#~ msgid "Install versions from non-default sources"
-#~ msgstr "Installer des versions issues de sources autres que par défaut"
-
-#~ msgid "Remove essential packages"
-#~ msgstr "Supprimer des paquets essentiels"
-
-#~ msgid ""
-#~ "The tier \"%s\", configured in %s::ProblemResolver::Tier-Names, is "
-#~ "missing a Tier entry."
-#~ msgstr ""
-#~ "Le « tier » « %s », configuré dans %s::ProblemResolver::Tier-Names n'a "
-#~ "pas d'entrée Tier »."
-
-#~ msgid ""
-#~ "The tier %d, configured in %s::ProblemResolver::Tier-Names, is missing a "
-#~ "Name entry."
-#~ msgstr ""
-#~ "Le « tier » %d configuré dans %s::ProblemResolver::Tier-Names n'a pas "
-#~ "d'entrée Name."
-
-#~ msgid "Unknown error"
-#~ msgstr "Erreur inconnue"
-
-#~ msgid "Tier: %s"
-#~ msgstr "Tier: %s"
-
-#~ msgid "Downloading Changelog"
-#~ msgstr "Téléchargement du fichier « Changelog »"
