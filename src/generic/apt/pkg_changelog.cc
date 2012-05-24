@@ -438,7 +438,7 @@ namespace aptitude
 	  const string source_version(info.get_source_version());
 	  const string section(info.get_section());
 	  const string name(info.get_display_name());
-	  const string short_description = cw::util::ssprintf(_("ChangeLog of %s"), name.c_str());
+	  const string short_description = cw::util::ssprintf(_("Changelog of %s"), name.c_str());
 
 	  try
 	    {

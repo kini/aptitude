@@ -143,7 +143,7 @@ void set_name(temp::name n, temp::name *target)
                   << std::string(term_metrics->get_screen_width(), ' ')
                   << "\r";
 
-      std::cout << _("Err ") << description << std::endl;
+      std::cout << _("Err") << " " << description << std::endl;
     }
   };
 

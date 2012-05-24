@@ -292,7 +292,7 @@ namespace
            (*pIt)->get_type() == m::pattern::exact_name)
           {
             return_value = 1;
-            _error->Error(_("No such package \"%s\"."),
+            _error->Error(_("No such package \"%s\""),
                           (*pIt)->get_exact_name_name().c_str());
           }
       }

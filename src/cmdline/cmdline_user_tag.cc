@@ -34,6 +34,7 @@
 #include <generic/apt/matching/match.h>
 #include <generic/apt/matching/parse.h>
 #include <generic/apt/matching/pattern.h>
+#include <generic/util/util.h>
 
 #include <stdio.h>
 #include <string.h>
@@ -127,7 +128,8 @@ namespace aptitude
 	      if(pkg.end())
 		{
 		  if(quiet == 0)
-		    fprintf(stderr, _("No such package \"%s\".\n"), argv[i]);
+                    std::cerr << ssprintf(_("No such package \"%s\""), argv[i])
+                              << std::endl;
 		  all_ok = false;
 		}
 	      else

@@ -407,7 +407,7 @@ bool pkg_item::dispatch_key(const cw::config::key &k, cw::tree *owner)
 
 	      if(system(buf) != 0) { /* FIXME: ignore? */ }
 
-	      cerr<<_("Press return to continue.\n");
+	      cerr << _("Press Return to continue.") << endl;
 	      getchar();
 
 	      cw::toplevel::resume();
@@ -424,7 +424,7 @@ bool pkg_item::dispatch_key(const cw::config::key &k, cw::tree *owner)
       e->set_package(package, visible_version());
 
       // FIXME: better title
-      add_main_widget(e, _("Hierarchy editor"), "", _("Hierarchy Editor"));
+      add_main_widget(e, _("Hierarchy Editor"), "", _("Hierarchy Editor"));
 
       e->connect_key("Quit", &cw::config::global_bindings,
 		     sigc::mem_fun(*e.unsafe_get_ref(), &cw::widget::destroy));

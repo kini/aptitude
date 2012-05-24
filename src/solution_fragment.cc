@@ -510,7 +510,7 @@ cw::fragment *solution_fragment_with_ids(const aptitude_solution &sol,
   if(!unresolved.empty())
     {
       ids_column.append_newline();
-      fragments.push_back(cw::fragf(_("Leave the following dependencies unresolved:%n")));
+      fragments.push_back(cw::fragf("%s%n", _("Leave the following dependencies unresolved:")));
 
       for(std::vector<std::pair<pkgCache::DepIterator, choice> >::const_iterator i = unresolved.begin();
 	  i != unresolved.end(); ++i)

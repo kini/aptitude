@@ -32,6 +32,7 @@
 #include <generic/apt/matching/match.h>
 #include <generic/apt/matching/parse.h>
 #include <generic/apt/matching/pattern.h>
+#include <generic/util/util.h>
 
 
 // System includes:
@@ -89,8 +90,8 @@ namespace aptitude
 		  pkgCache::PkgIterator pIt = (*apt_cache_file)->FindPkg(arg);
 		  if(pIt.end())
 		    {
-		      fprintf(stderr, _("No such package \"%s\".\n"),
-			      arg.c_str());
+                      std::cerr << ssprintf(_("No such package \"%s\""), arg.c_str())
+                                << std::endl;
 		      ok = false;
 		    }
 		  else

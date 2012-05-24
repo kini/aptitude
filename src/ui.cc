@@ -1214,7 +1214,7 @@ namespace
     
     if(rval != pkgPackageManager::Incomplete)
       {
-	cerr << _("Press return to continue.\n");
+	cerr << _("Press Return to continue.") << endl;
 	int c = getchar();
 
 	while(c != '\n'  && c != EOF)
@@ -2306,7 +2306,7 @@ static void do_dump_resolver()
   static cw::editline::history_list history;
 
   if(resman != NULL && resman->resolver_exists())
-    prompt_string(_("File to which the resolver state should be dumped: "),
+    prompt_string(_("File to write resolver state to: "),
 		  "",
 		  cw::util::arg(sigc::ptr_fun(handle_dump_resolver_response)),
 		  NULL,
