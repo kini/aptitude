@@ -469,38 +469,36 @@ bool cmdline_applyaction(string s,
 
   string sourcestr, package;
 
-  // Handle task installation.  Won't work if tasksel isn't installed.
-  if(task_list->find(s)!=task_list->end())
-    {
-      task t=(*task_list)[s];
-
-      printf(_("Note: selecting the task \"%s: %s\" for installation\n"),
-	     s.c_str(), t.shortdesc.c_str());
-
-      for(pkgCache::PkgIterator pkg=(*apt_cache_file)->PkgBegin();
-	  !pkg.end(); ++pkg)
-	{
-	  std::set<std::string> *tasks = get_tasks(pkg);
-
-	  for(std::set<std::string>::iterator i = tasks->begin();
-	      i!=tasks->end(); ++i)
-	    if(*i==s)
-	      rval=cmdline_applyaction(action, pkg,
-				       seen_virtual_packages,
-				       to_install, to_hold, to_remove, to_purge,
-				       verbose, source,
-				       sourcestr,
-				       policy, arch_only,
-				       allow_auto,
-                                       term_metrics) && rval;
-	}
-
-      // break out.
-      return rval;
-    }
-
   if(!cmdline_parse_source(s, source, package, sourcestr))
     return false;
+
+  // Handle task installation.  Won't work if tasksel isn't installed.
+  aptitude::apt::task task;
+  string arch;
+  if(cmdline_parse_task(package, task, arch) == true)
+  {
+    printf(_("Note: selecting the task \"%s: %s\" for installation\n"),
+           task.name.c_str(), cw::util::transcode(task.shortdesc).c_str());
+
+    pkgset pkgset;
+    aptitude::apt::get_task_packages(&pkgset, task, arch);
+    for(pkgset::iterator pkg = pkgset.begin();
+        pkg != pkgset.end();
+        ++pkg)
+      {
+        rval = cmdline_applyaction(action, *pkg,
+                                   seen_virtual_packages,
+                                   to_install, to_hold, to_remove, to_purge,
+                                   verbose, source,
+                                   sourcestr,
+                                   policy, arch_only,
+                                   allow_auto,
+                                   term_metrics) && rval;
+      }
+
+    // break out.
+    return rval;
+  }
 
   // This is harmless for other commands, but it won't make sense.
   if(source == cmdline_version_version &&

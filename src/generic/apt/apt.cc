@@ -366,7 +366,7 @@ void apt_close_cache()
   else
     LOG_TRACE(logger, "No global dependency resolver manager exists; none deleted.");
 
-  reset_tasks();
+  aptitude::apt::reset_tasks();
 
   LOG_TRACE(logger, "Tasks reset.");
 
@@ -484,7 +484,7 @@ void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
   apt_undos->clear_items();
 
   LOG_TRACE(logger, "Loading task information.");
-  load_tasks(*progress_bar);
+  aptitude::apt::load_tasks(*progress_bar);
   LOG_TRACE(logger, "Loading tags.");
 #ifndef HAVE_EPT
   load_tags(*progress_bar);

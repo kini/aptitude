@@ -29,7 +29,7 @@
 #include <generic/apt/download_manager.h>
 #include <generic/apt/matching/pattern.h>
 #include <generic/apt/matching/match.h> // For structural_match.
-
+#include <generic/apt/tasks.h>
 
 // System includes:
 #include <apt-pkg/srcrecords.h>
@@ -93,6 +93,10 @@ bool cmdline_parse_source(const string &input,
 			  cmdline_version_source &source,
 			  string &package,
 			  string &sourcestr);
+
+bool cmdline_parse_task(std::string pattern,
+                        aptitude::apt::task &task,
+                        std::string &arch);
 
 /** Run the given download and post-download commands using the
  *  standard command-line UI.  Runs the preparation routine, the

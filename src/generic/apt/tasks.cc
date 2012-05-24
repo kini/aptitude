@@ -1,6 +1,22 @@
 // tasks.cc
 //
-//  Copyright 2001 Daniel Burrows
+//  Copyright (C) 2001 Daniel Burrows
+//  Copyright (C) 2012 Daniel Hartwig
+//
+//  This program is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation; either version 2 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License along
+//  with this program; if not, write to the Free Software Foundation, Inc.,
+//  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+//
 
 #include "tasks.h"
 #include "apt.h"
@@ -12,18 +28,34 @@
 #include <apt-pkg/tagfile.h>
 
 #include <cwidget/generic/util/eassert.h>
-#include <errno.h>
+#include <cwidget/generic/util/transcode.h>
 
+#include <errno.h>
 #include <ctype.h>
 
 #include <map>
 #include <vector>
+#include <iterator>
 #include <algorithm>
 #include <sstream>
 
+namespace cw = cwidget;
+
 using namespace std;
 
+namespace aptitude {
+namespace apt {
+
+// Stores the various tasks.
 map<string, task> *task_list=new map<string, task>;
+
+task *find_task(const std::string &name)
+{
+  if(task_list->find(name) == task_list->end())
+    return NULL;
+
+  return &((*task_list)[name]);
+}
 
 // This is an array indexed by package ID, managed by load_tasks.
 // (as usual, it's initialized to NULL)
@@ -38,6 +70,86 @@ std::set<std::string> *get_tasks(const pkgCache::PkgIterator &pkg)
   return tasks_by_package+pkg->ID;
 }
 
+// Based on task_packages in tasksel.pl.
+bool get_task_packages(std::set<pkgCache::PkgIterator> * const pkgset,
+                       const task &task, const string &arch)
+{
+  // key packages are always included
+  for(set<string>::const_iterator it = task.keys.begin();
+      it != task.keys.end();
+      ++it)
+    {
+      pkgCache::PkgIterator pkg = (*apt_cache_file)->FindPkg(*it, arch);
+      if(pkg.end() != false)
+        pkgset->insert(pkg);
+    }
+
+  if(task.packages.empty() == true)
+    {
+      // only key
+    }
+  else if(task.packages[0] == "task-fields")
+    {
+      // task-fields method is built-in for speed
+      for(pkgCache::GrpIterator grp = (*apt_cache_file)->GrpBegin();
+          grp.end() == false;
+          ++grp)
+        {
+          pkgCache::PkgIterator pkg = grp.FindPkg(arch);
+          if(pkg.end() == true)
+            continue;
+          set<string> *tasks = get_tasks(pkg);
+          if(tasks->find(task.name) != tasks->end())
+            pkgset->insert(pkg);
+        }
+    }
+  else if(task.packages[0] == "list")
+    {
+      // list method is build-in for speed
+      for(vector<string>::const_iterator it = task.packages.begin() + 1;
+          it != task.packages.end();
+          ++it)
+        {
+          const pkgCache::PkgIterator pkg = (*apt_cache_file)->FindPkg(*it, arch);
+          if(pkg.end() != false)
+            pkgset->insert(pkg);
+        }
+    }
+  else
+    {
+      // TODO: Handle other methods.  One option is to just call
+      // 'tasksel --task-packages' and process the list of search
+      // patterns returned.
+      return _error->Warning(_("Unhandled packages method in task %s: %s"),
+                             task.name.c_str(),
+                             task.packages[0].c_str());
+    }
+
+  return true;
+}
+
+bool is_task_package(const pkgCache::PkgIterator &pkg)
+{
+  // TODO: Enable this optimization on Debian systems.
+  // if(pkg.Section() != NULL && strcmp(pkg.Section(), "tasks") == 0)
+  //   return true;
+  set<string> *pkg_tasks = get_tasks(pkg);
+  for(set<string>::const_iterator it = pkg_tasks->begin();
+      it != pkg_tasks->end();
+      ++it)
+    {
+      if(task_list->find(*it) != task_list->end())
+        {
+          const task t = (*task_list)[*it];
+          if(t.packages.empty() == true
+             && t.keys.find(pkg.Name()) != t.keys.end())
+            return true;
+        }
+    }
+
+  return false;
+}
+
 /** \brief Add any tasks found in the given version-file pointer to
  *  the tasks of the given package.
  */
@@ -47,9 +159,6 @@ static void append_tasks(const pkgCache::PkgIterator &pkg,
   // This should never be called before load_tasks has initialized the
   // tasks structure.
   eassert(tasks_by_package);
-
-  if(strcmp(pkg.Name(), "kdeadmin") == 0)
-    eassert(pkg.Name());
 
   set<string> &task_set=tasks_by_package[pkg->ID];
 
@@ -126,7 +235,6 @@ bool task::keys_present()
 	    {
 	      keys_present_cache=false;
 	      return false;
-	      break;
 	    }
 	}
     }
@@ -227,6 +335,98 @@ static string rfc822dgettext(string textdomain, string msgid)
   return msgstr;
 }
 
+static void set_task_description(task &task, const wstring &desc)
+{
+  const wstring::size_type newline = desc.find(L'\n');
+  task.shortdesc = wstring(desc, 0, newline);
+  task.longdesc = wstring(L"\n ") + wstring(desc, newline+1);
+}
+
+static void read_task_desc(const string &filename, OpProgress &prog)
+{
+  FileFd fd;
+
+  fd.Open(filename, FileFd::ReadOnly);
+  if(!fd.IsOpen())
+    return;
+
+  const unsigned long long file_size = fd.Size();
+  unsigned long long amt = 0;
+  prog.SubProgress(file_size);
+
+  pkgTagFile tagfile(&fd);
+  pkgTagSection section;
+  const string taskdomain("debian-tasks");
+
+  while(tagfile.Step(section))
+    {
+      task newtask;
+      const string taskname(section.FindS("Task"));
+
+      if(!taskname.empty())
+        {
+          newtask.name = taskname;
+          newtask.section = section.FindS("Section");
+          newtask.relevance = section.FindI("Relevance", 5);
+
+          istringstream keyss(section.FindS("Key"));
+          for(istream_iterator<string> key(keyss);
+              key != istream_iterator<string>();
+              ++key)
+            {
+              newtask.keys.insert(*key);
+
+              pkgCache::GrpIterator grp = (*apt_cache_file)->FindGrp(*key);
+              if(grp.end() == true)
+                continue;
+
+              for(pkgCache::PkgIterator pkg = grp.PackageList();
+                  pkg.end() == false;
+                  pkg = pkg.Group().NextPkg(pkg))
+                tasks_by_package[pkg->ID].insert(taskname);
+            }
+
+          istringstream packagess(section.FindS("Packages"));
+          copy(istream_iterator<string>(packagess),
+               istream_iterator<string>(),
+               back_inserter(newtask.packages));
+
+          string desc = section.FindS("Description");
+          if(desc.empty() == false)
+            {
+              desc = rfc822dgettext(taskdomain, desc);
+              set_task_description(newtask, cw::util::transcode(desc));
+            }
+          else
+            {
+              for(set<string>::const_iterator key = newtask.keys.begin();
+                  key != newtask.keys.end();
+                  ++key)
+                {
+                  const pkgCache::PkgIterator pkg((*apt_cache_file)->FindPkg(*key));
+                  if(pkg.end() == true)
+                    continue;
+                  const pkgCache::VerIterator ver(pkg.VersionList());
+                  if(ver.end() == true)
+                    continue;
+
+                  const wstring desc(get_long_description(ver, apt_package_records));
+                  if(desc.empty() == true)
+                    continue;
+
+                  set_task_description(newtask, desc);
+                  break;
+                }
+            }
+
+          (*task_list)[taskname] = newtask;
+        }
+
+      amt += section.size();
+      prog.Progress(amt);
+    }
+}
+
 void load_tasks(OpProgress &progress)
 {
   // Build a list for each package of the tasks that package belongs to.
@@ -262,71 +462,28 @@ void load_tasks(OpProgress &progress)
       ++i)
     append_tasks(i->first.ParentPkg(), i->second);
 
-  FileFd task_file;
-
   // Load the task descriptions:
-  task_file.Open("/usr/share/tasksel/debian-tasks.desc", FileFd::ReadOnly);
-
-  if(!task_file.IsOpen())
+  const char *descdirs[] =
+    {"/usr/share/tasksel/descs",
+     "/usr/local/share/tasksel/descs",
+     NULL};
+  vector<string> descfiles;
+  for(const char **it = descdirs; *it != NULL; ++it)
     {
-      _error->Discard();
-
-      // Allow the task file not to exist (eg, the user might not have
-      // tasksel installed)
-      if(errno!=ENOENT)
-	_error->Errno("load_tasks",
-		      _("Unable to open /usr/share/tasksel/debian-tasks.desc"));
-
-      return;
+      if(DirectoryExists(*it) == false)
+        continue;
+      const vector<string> v =
+        GetListOfFilesInDir(*it, "desc", false, false);
+      copy(v.begin(), v.end(), back_inserter(descfiles));
     }
-
-  int file_size=task_file.Size();
-  int amt=0;
-  progress.OverallProgress(0, file_size, 1, _("Reading task descriptions"));
-
-  pkgTagFile tagfile(&task_file);
-  pkgTagSection section;
-  string taskdomain="debian-tasks";
-
-  while(tagfile.Step(section))
+  for(vector<string>::const_iterator it = descfiles.begin();
+      it != descfiles.end();
+      ++it)
     {
-      task newtask;
-      string desc;
-      string taskname=section.FindS("Task");
-
-      if(!taskname.empty())
-	{
-	  istringstream keystr(section.FindS("Key"));
-
-	  keystr >> ws;
-
-	  while(!keystr.eof())
-	    {
-	      string s;
-
-	      keystr >> ws >> s >> ws;
-
-	      newtask.keys.insert(s);
-	    }
-
-	  newtask.name=taskname;
-	  newtask.section=section.FindS("Section");
-	  newtask.relevance=section.FindI("Relevance", 5);
-
-	  desc=section.FindS("Description");
-
-	  string::size_type newline=desc.find('\n');
-	  newtask.shortdesc=dgettext(taskdomain.c_str(), string(desc, 0, newline).c_str());
-	  newtask.longdesc=string("\n ");
-	  newtask.longdesc+=rfc822dgettext(taskdomain, string(desc, newline+1));
-
-	  (*task_list)[taskname]=newtask;
-	}
-
-      amt+=section.size();
-      progress.OverallProgress(amt, file_size, 1, _("Reading task descriptions"));
+      progress.OverallProgress(it - descfiles.begin(), descfiles.size(), 1,
+                               _("Reading task descriptions"));
+      read_task_desc(*it, progress);
     }
-  progress.OverallProgress(file_size, file_size, 1, _("Reading task descriptions"));
 
   progress.Done();
 }
@@ -336,4 +493,7 @@ void reset_tasks()
   task_list->clear();
   delete[] tasks_by_package;
   tasks_by_package=NULL;
+}
+
+}
 }
