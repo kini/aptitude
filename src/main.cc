@@ -1221,7 +1221,7 @@ int main(int argc, char *argv[])
       catch(StdinEOFException)
 	{
 	  printf("%s", _("Abort.\n"));
-	  return -1;
+	  return 1;
 	}
       catch(const cwidget::util::Exception &e)
 	{
