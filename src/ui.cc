@@ -1405,6 +1405,9 @@ static void do_show_preview()
 
 static void do_keep_all()
 {
+  if(apt_cache_file == NULL)
+    return;
+
   auto_ptr<undo_group> undo(new apt_undo_group);
 
   aptitudeDepCache::action_group group(*apt_cache_file, undo.get());
@@ -1415,6 +1418,8 @@ static void do_keep_all()
 
   if(!undo.get()->empty())
     apt_undos->add_item(undo.release());
+
+  package_states_changed();
 }
 
 static void fixer_dialog_done()
