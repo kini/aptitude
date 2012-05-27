@@ -58,7 +58,7 @@ int cmdline_simulate(bool as_upgrade,
                         term_metrics))
     {
       printf(_("Abort.\n"));
-      return 0;
+      return 1;
     }
 
   if(verbose==0)

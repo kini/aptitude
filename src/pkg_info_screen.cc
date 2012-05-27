@@ -135,8 +135,8 @@ void pkg_grouppolicy_info::setup_package_info(const pkgCache::PkgIterator &pkg,
 				    _("Section: "),pkg.Section()?pkg.Section():_("Unknown"),
 				    _("Maintainer: "),rec.Maintainer().c_str(),
 				    _("Architecture: "),pkgCache::VerIterator(ver).Arch(),
-				    _("Compressed size: "), SizeToStr(ver->Size).c_str(),
-				    _("Uncompressed size: "), SizeToStr(ver->InstalledSize).c_str(),
+				    _("Compressed Size: "), SizeToStr(ver->Size).c_str(),
+				    _("Uncompressed Size: "), SizeToStr(ver->InstalledSize).c_str(),
 				    _("Source Package: "),
 				    rec.SourcePkg().empty()?pkg.Name():rec.SourcePkg().c_str())));
 

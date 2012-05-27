@@ -1214,7 +1214,7 @@ namespace
     
     if(rval != pkgPackageManager::Incomplete)
       {
-	cerr << _("Press return to continue.\n");
+	cerr << _("Press Return to continue.") << endl;
 	int c = getchar();
 
 	while(c != '\n'  && c != EOF)
@@ -1405,6 +1405,9 @@ static void do_show_preview()
 
 static void do_keep_all()
 {
+  if(apt_cache_file == NULL)
+    return;
+
   auto_ptr<undo_group> undo(new apt_undo_group);
 
   aptitudeDepCache::action_group group(*apt_cache_file, undo.get());
@@ -1415,6 +1418,8 @@ static void do_keep_all()
 
   if(!undo.get()->empty())
     apt_undos->add_item(undo.release());
+
+  package_states_changed();
 }
 
 static void fixer_dialog_done()
@@ -2306,7 +2311,7 @@ static void do_dump_resolver()
   static cw::editline::history_list history;
 
   if(resman != NULL && resman->resolver_exists())
-    prompt_string(_("File to which the resolver state should be dumped: "),
+    prompt_string(_("File to write resolver state to: "),
 		  "",
 		  cw::util::arg(sigc::ptr_fun(handle_dump_resolver_response)),
 		  NULL,

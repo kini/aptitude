@@ -41,7 +41,7 @@ using boost::shared_ptr;
 
 void print_autoclean_msg()
 {
-  printf(_("Deleting obsolete downloaded files\n"));
+  printf("%s\n", _("Deleting obsolete downloaded files"));
 }
 
 int cmdline_update(int argc, char *argv[], int verbose)

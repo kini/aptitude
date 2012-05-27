@@ -383,7 +383,7 @@ int cmdline_do_action(int argc, char *argv[],
 			    policy, arch_only, term))
 	{
 	  printf(_("Abort.\n"));
-	  return 0;
+	  return 1;
 	}
 
       aptitude::cmdline::apply_user_tags(user_tags);

@@ -38,7 +38,7 @@
 #include <generic/apt/matching/match.h>
 #include <generic/apt/matching/parse.h>
 #include <generic/apt/matching/pattern.h>
-
+#include <generic/apt/tasks.h>
 
 // System includes:
 #include <apt-pkg/error.h>
@@ -252,6 +252,29 @@ bool cmdline_parse_source(const string &input,
   return true;
 }
 
+bool cmdline_parse_task(string pattern,
+                        aptitude::apt::task &task,
+                        string &arch)
+{
+  const string::size_type archfound = pattern.find_last_of(':');
+  arch = "native";
+  if(archfound != string::npos)
+    {
+      arch = pattern.substr(archfound+1);
+      pattern.erase(archfound);
+    }
+
+  if(pattern[pattern.length() - 1] != '^')
+    return false;
+  pattern.erase(pattern.length() - 1);
+
+  const aptitude::apt::task *t = aptitude::apt::find_task(pattern);
+  if(t == NULL)
+    return _error->Error(_("Couldn't find task '%s'"), pattern.c_str());
+
+  task = *t;
+  return true;
+}
 
 namespace
 {

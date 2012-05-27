@@ -18,15 +18,45 @@ earlier releases.
            files greater than several gigabytes in size -- using the
            'unsigned long long' type to store the file size.
 
+  * [all]: Update to tasks support: task packages, multi-arch, syntax
+
+           Task packages (introduced with tasksel 3.0) are
+           meta-packages which define the dependencies of tasks.  The
+           packages themselves have always worked but the 'tasks'
+           grouping policy and '?task' search term did not support
+           them.  This update corrects for this.
+
+           As a result of this change to tasksel all Debian tasks now
+           function exactly like meta-packages. (Closes: #382631)
+
+           The syntax for installing tasks from the command line has
+           been updated.  It now supports specifying an arch and
+           requires the same syntax as apt-utils ('^' must be the last
+           part of the name).  Examples:
+
+             # aptitude install gnome-desktop^
+             # aptitude install ssh-server^:armel
+
+           This avoids ambiguity that may arise when a task and
+           package have the same name.
+
 - Minor bugs:
 
   * [all]: Changelog downloading is restored
            (Closes: #669569, LP: #824708)
 
+  * [cmdline]: Exit with non-zero status when a package run is
+               aborted. (Closes: #293008)
+
 - Cosmetic and UI bugs:
 
   * [curses]: Adjust default widths of localized columns:
               broken_count, downloadsize (Closes: #674045)
+
+  * [all]: Fold some near-duplicate strings
+
+  * [curses]: Update package views after 'Cancel pending actions'
+              (Closes: #595753)
 
 - Documentation:
 

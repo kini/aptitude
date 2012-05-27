@@ -1069,14 +1069,25 @@ void pkg_grouppolicy_task::init_section_descriptions()
 class task_subtree:public pkg_subtree
 {
   char relevance[2];
+  void set_relevance(int _relevance)
+  {
+    relevance[0]='z'-_relevance;
+    relevance[1]=0;
+  }
+
 public:
   task_subtree(const std::wstring &_name, const std::wstring &_description,
 	       desc_signal *_info_signal,
 	       int _relevance)
     :pkg_subtree(_name, _description, _info_signal)
   {
-    relevance[0]='z'-_relevance;
-    relevance[1]=0;
+    set_relevance(_relevance);
+  }
+
+  task_subtree(const aptitude::apt::task &_task, desc_signal *_info_signal)
+    : pkg_subtree(_task.shortdesc, _task.longdesc, _info_signal)
+  {
+    set_relevance(_task.relevance);
   }
 
   const char *tag() const {return relevance;}
@@ -1085,7 +1096,9 @@ public:
 void pkg_grouppolicy_task::add_package(const pkgCache::PkgIterator &pkg,
 				       pkg_subtree *root)
 {
-  set<string> *tasks=get_tasks(pkg);
+  using aptitude::apt::task_list;
+
+  set<string> *tasks = aptitude::apt::get_tasks(pkg);
 
   eassert(tasks);
 
@@ -1097,19 +1110,17 @@ void pkg_grouppolicy_task::add_package(const pkgCache::PkgIterator &pkg,
 
       if(found==task_children.end())
 	{
-	  string section;
-	  map<string,task>::iterator taskfound=task_list->find(*i);
+	  string section = "unknown";
+          aptitude::apt::task *task = aptitude::apt::find_task(*i);
+          bool taskfound = (task != NULL);
 	  pkg_subtree *newtree, *sectiontree;
 
-	  if(taskfound==task_list->end())
-	    section="unknown";
-	  else
-	    {
-	      if(!taskfound->second.keys_present())
+          if(taskfound == true)
+            {
+	      if(task->keys_present() == false)
 		continue; // skip to the next task of this package.
-
-	      section=taskfound->second.section;
-	    }
+              section = task->section;
+            }
 
 	  if(!tasks_subtree)
 	    {
@@ -1141,11 +1152,8 @@ void pkg_grouppolicy_task::add_package(const pkgCache::PkgIterator &pkg,
 	  else
 	    sectiontree=sectionfound->second;
 
-	  if(taskfound!=task_list->end())
-	    newtree=new task_subtree(cw::util::transcode(taskfound->second.shortdesc),
-				     cw::util::transcode(taskfound->second.longdesc),
-				     get_desc_sig(),
-				     taskfound->second.relevance);
+	  if(taskfound == true)
+	    newtree=new task_subtree(*task, get_desc_sig());
 	  else
 	    newtree=new task_subtree(cw::util::transcode(*i), L"",
 				     get_desc_sig(), 5);
