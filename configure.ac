@@ -944,6 +944,8 @@ AC_CONFIG_FILES([
 	doc/fi/images/Makefile
 	doc/fr/Makefile
 	doc/fr/images/Makefile
+	doc/it/Makefile
+	doc/it/images/Makefile
 	doc/ja/Makefile
 	doc/ja/images/Makefile
 	doc/pl/Makefile
