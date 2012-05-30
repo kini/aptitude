@@ -247,7 +247,7 @@ BOOST_FIXTURE_TEST_CASE(testBindBlob, parameter_binding_test)
 {
   put_statement->bind_int(1, test_A);
 
-  const char data[8] = { 0x54, 0x10, 0x20, 0x67,
+  const unsigned char data[8] = { 0x54, 0x10, 0x20, 0x67,
 			 0xd9, 0x45, 0xbd, 0x1a };
   BOOST_CHECK_THROW(put_statement->bind_blob(3, data, sizeof(data)),
 		    exception);
@@ -265,8 +265,8 @@ BOOST_FIXTURE_TEST_CASE(testBindBlob, parameter_binding_test)
     int blob_bytes;
     const void *blob(get_C_statement->get_blob(0, blob_bytes));
     BOOST_CHECK_EQUAL(blob_bytes, sizeof(data));
-    BOOST_CHECK_EQUAL_COLLECTIONS(reinterpret_cast<const char *>(blob),
-				  reinterpret_cast<const char *>(blob) + blob_bytes,
+    BOOST_CHECK_EQUAL_COLLECTIONS(reinterpret_cast<const unsigned char *>(blob),
+				  reinterpret_cast<const unsigned char *>(blob) + blob_bytes,
 				  data, data + sizeof(data));
 
     BOOST_CHECK(!ex.step());
