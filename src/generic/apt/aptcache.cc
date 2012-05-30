@@ -1209,6 +1209,7 @@ void aptitudeDepCache::internal_mark_keep(const PkgIterator &Pkg, bool Automatic
   if(was_garbage_removed)
     MarkAuto(Pkg, false);
 
+  set_candidate_version(GetCandidateVer(Pkg), NULL);
 
   pkgDepCache::MarkKeep(Pkg, false, !Automatic);
   pkgDepCache::SetReInstall(Pkg, false);
@@ -1258,11 +1259,7 @@ void aptitudeDepCache::set_candidate_version(const VerIterator &ver,
       if(set_to_manual)
 	MarkAuto(ver.ParentPkg(), false);
 
-
-
-      // Use the InstVerIter instead of GetCandidateVersion, since
-      // that seems to store the currently to-be-installed version.
-      VerIterator prev=(*this)[(ver.ParentPkg())].InstVerIter(GetCache());
+      VerIterator prev=(*this)[(ver.ParentPkg())].CandidateVerIter(GetCache());
 
       aptitude_state &estate = get_ext_state(ver.ParentPkg());
 

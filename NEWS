@@ -48,6 +48,12 @@ earlier releases.
   * [cmdline]: Exit with non-zero status when a package run is
                aborted. (Closes: #293008)
 
+  * Restore candidate version on undo, keep
+
+    Previously, undo incorrectly restored the candidate
+    to be currently installed version.  Keep did not
+    restore it at all. (Closes: #529403)
+
 - Cosmetic and UI bugs:
 
   * [curses]: Adjust default widths of localized columns:
