@@ -11,10 +11,8 @@ sed -i 's/search motifs/\\fBsearch\\fR motifs/' $MANPAGE
 sed -i 's/\\fBaptitude\\fR help/\\fBaptitude\\fR \\fBhelp\\fR/' $MANPAGE
 sed -i 's/^\.SH NAME$/.SH NOM/' $MANPAGE
 
-head -n-2 $MANPAGE > ${MANPAGE}.tmp
+cp $MANPAGE ${MANPAGE}.tmp
 cat ${MANPAGE}.tmp - >$MANPAGE <<EOF
-.SH "AUTEUR"
-Daniel Burrows.
 
 .SH "TRADUCTEURS"
 Cette page de man a été originellement traduite par
@@ -23,3 +21,4 @@ Sylvain Cherrier <sylvain.cherrier@free.fr> jusqu'en 2004. Cette page est
 depuis maintenue par Olivier Trichet <nive@freesurf.fr>.
 
 EOF
+rm ${MANPAGE}.tmp
