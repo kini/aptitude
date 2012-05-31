@@ -56,7 +56,7 @@ $(MANPAGE): $(XMLSOURCES) $(srcdir)/../aptitude-man.xsl
 $(README): $(XMLSOURCES)  $(srcdir)/../aptitude-txt.xsl
 	-rm -fr output-txt
 	xsltproc -o output-txt/index.html $(srcdir)/../aptitude-txt.xsl aptitude.xml
-	$(HTML2TEXT) output-txt/index.html > $(README)
+	$(HTML2TEXT) output-txt/index.html utf-8 > $(README)
 
 doc-css-stamp: doc-html-stamp $(srcdir)/../aptitude.css
 	rm -f output-html/aptitude.css

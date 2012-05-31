@@ -7,6 +7,8 @@ HTML2TEXT=$(top_srcdir)/doc/html-to-text
 localemandir=$(mandir)/$(LANGCODE)
 htmldir=$(docdir)/html/$(LANGCODE)
 
+pkgdata_DATA=$(README)
+
 images/%.png: images/%.svg
 	rsvg-convert -x 1.5 -y 1.5 -f png -o $@ $<
 
@@ -28,9 +30,6 @@ install-data-hook:
 	$(INSTALL_DATA) output-html/*.html output-html/*.css $(DESTDIR)$(htmldir)
 	$(INSTALL_DATA) output-html/images/* $(DESTDIR)$(htmldir)/images
 
-	$(mkinstalldirs) $(DESTDIR)$(pkgdatadir)
-	$(INSTALL_DATA) $(README) $(DESTDIR)$(pkgdatadir)
-
 $(MANPAGE): $(XMLSOURCES) $(top_srcdir)/doc/aptitude-man.xsl
 	-rm -fr output-man $(MANPAGE)
 	xsltproc -o output-man/aptitude.8 $(top_srcdir)/doc/aptitude-man.xsl aptitude.xml
@@ -43,7 +42,7 @@ $(MANPAGE): $(XMLSOURCES) $(top_srcdir)/doc/aptitude-man.xsl
 $(README): $(XMLSOURCES) $(top_srcdir)/doc/aptitude-txt.xsl
 	-rm -fr output-txt/
 	xsltproc -o output-txt/index.html $(top_srcdir)/doc/aptitude-txt.xsl aptitude.xml
-	$(HTML2TEXT) output-txt/index.html > $(README)
+	$(HTML2TEXT) output-txt/index.html $(README_encoding) > $(README)
 
 doc-css-stamp: doc-html-stamp $(top_srcdir)/doc/aptitude.css
 	rm -f output-html/aptitude.css

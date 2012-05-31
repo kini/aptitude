@@ -7,6 +7,8 @@ SUBDIRS=images
 EXTRA_DIST=fixman
 LANGCODE=fr
 
+README_encoding=utf-8
+
 XMLSOURCES=aptitude.xml manpage.xml
 
 IMAGES=$(wildcard $(srcdir)/images/*.png) images/safety-cost-level-diagram.png

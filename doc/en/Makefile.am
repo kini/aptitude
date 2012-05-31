@@ -29,7 +29,8 @@ install-data-hook:
 	$(INSTALL_DATA) output-html/*.html output-html/*.css $(DESTDIR)$(docdir)/html/en
 	$(INSTALL_DATA) output-html/images/* $(DESTDIR)$(docdir)/html/en/images
 
-	$(INSTALL_DATA) README.en $(DESTDIR)$(pkgdatadir)/README
+	$(mkinstalldirs) $(DESTDIR)$(pkgdatadir)
+	$(INSTALL_DATA) $(README) $(DESTDIR)$(pkgdatadir)/README
 
 doc-stamp: doc-html-stamp doc-css-stamp $(README) man-stamp
 	touch doc-stamp
@@ -47,7 +48,7 @@ aptitude.8 aptitude-create-state-bundle.1 aptitude-run-state-bundle.1: man-stamp
 $(README): $(srcdir)/aptitude.xml $(srcdir)/manpage.xml $(srcdir)/../aptitude-txt.xsl $(srcdir)/../aptitude-common.xsl
 	-rm -fr output-txt/
 	xsltproc -o output-txt/index.html $(srcdir)/../aptitude-txt.xsl $(srcdir)/aptitude.xml
-	$(HTML2TEXT) output-txt/index.html | $(srcdir)/../fixup-text > $(README)
+	$(HTML2TEXT) output-txt/index.html iso-8859-1 > $(README)
 
 doc-fo-stamp: $(srcdir)/aptitude.xml $(srcdir)/manpage.xml $(srcdir)/../aptitude-fo.xsl $(srcdir)/../aptitude-common.xsl $(IMAGES)
 	-rm -fr output-fo/

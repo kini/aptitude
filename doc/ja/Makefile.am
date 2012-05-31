@@ -20,6 +20,8 @@ htmldir=$(DESTDIR)$(docdir)/html/$(LANGCODE)
 
 IMAGES = $(wildcard $(srcdir)/images/*.png)
 
+pkgdata_DATA=$(README)
+
 if USE_PO4A
 all-local: doc-stamp
 else
@@ -40,8 +42,6 @@ install-data-hook:
 	$(INSTALL_DATA) output-html/*.html output-html/*.css $(htmldir)
 	$(INSTALL_DATA) output-html/images/* $(htmldir)/images
 
-#	$(INSTALL_DATA) $(README) $(DESTDIR)$(pkgdatadir)/$(README)
-
 doc-stamp: doc-html-stamp doc-css-stamp $(README) $(MANPAGE)
 	touch doc-stamp
 
@@ -61,7 +61,7 @@ $(MANPAGE): $(XMLSOURCES) $(srcdir)/../aptitude-man.xsl
 $(README): $(XMLSOURCES) $(srcdir)/../aptitude-txt.xsl $(srcdir)/../aptitude-common.xsl
 	-rm -fr output-txt/
 	xsltproc -o output-txt/index.html $(srcdir)/../aptitude-txt.xsl aptitude.xml
-	$(HTML2TEXT) output-txt/index.html > $(README)
+	$(HTML2TEXT) output-txt/index.html utf-8 > $(README)
 
 doc-db2latex-stamp: output-db2latex/aptitude.tex $(IMAGES)
 	ln -s ../images output-db2latex/images

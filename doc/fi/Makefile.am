@@ -18,6 +18,8 @@ HTML2TEXT=$(srcdir)/../html-to-text
 
 IMAGES = $(wildcard $(srcdir)/images/*.png)
 
+pkgdata_DATA=$(README)
+
 all-local: doc-stamp
 
 clean-local:
@@ -28,11 +30,10 @@ clean-local:
 install-data-hook:
 	$(mkinstalldirs) $(DESTDIR)$(localemandir)/man8
 	$(INSTALL_DATA) $(MANPAGE) $(DESTDIR)$(localemandir)/man8/aptitude.8
+
 	$(mkinstalldirs) $(DESTDIR)$(docdir)/html/$(LANGCODE)/images
 	$(INSTALL_DATA) output-html/*.html output-html/*.css $(DESTDIR)$(docdir)/html/$(LANGCODE)
 	$(INSTALL_DATA) output-html/images/* $(DESTDIR)$(docdir)/html/$(LANGCODE)/images
-
-	$(INSTALL_DATA) README.$(LANGCODE) $(DESTDIR)$(pkgdatadir)/README.$(LANGCODE)
 
 doc-stamp: doc-html-stamp doc-css-stamp $(README) $(MANPAGE)
 	touch doc-stamp
@@ -46,7 +47,7 @@ $(MANPAGE): aptitude.xml manpage.xml $(srcdir)/../aptitude-man.xsl
 $(README): aptitude.xml manpage.xml $(srcdir)/../aptitude-txt.xsl $(srcdir)/../aptitude-common.xsl
 	-rm -fr output-txt/
 	xsltproc -o output-txt/index.html $(srcdir)/../aptitude-txt.xsl $(srcdir)/aptitude.xml
-	$(HTML2TEXT) output-txt/index.html > $(README)
+	$(HTML2TEXT) output-txt/index.html utf-8 > $(README)
 
 doc-css-stamp: doc-html-stamp $(srcdir)/../aptitude.css
 	rm -f output-html/aptitude.css

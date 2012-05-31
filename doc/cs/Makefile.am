@@ -26,7 +26,7 @@ clean-local:
 	-rm -f doc-stamp doc-css-stamp doc-html-stamp doc-txt-stamp doc-man-stamp
 	-rm -fr $(MANPAGE) $(README)
 
-# pkgdata_DATA=$(README)
+pkgdata_DATA=$(README)
 
 install-data-hook:
 	$(mkinstalldirs) $(DESTDIR)$(localemandir)/man8
@@ -47,7 +47,7 @@ $(MANPAGE): aptitude.xml $(srcdir)/../aptitude-man.xsl
 $(README): aptitude.xml $(srcdir)/../aptitude-txt.xsl $(srcdir)/../aptitude-common.xsl
 	-rm -fr output-txt/
 	xsltproc -o output-txt/index.html $(srcdir)/../aptitude-txt.xsl $(srcdir)/aptitude.xml
-	$(HTML2TEXT) output-txt/index.html > $(README)
+	$(HTML2TEXT) output-txt/index.html utf-8 > $(README)
 
 doc-css-stamp: doc-html-stamp $(srcdir)/../aptitude.css
 	rm -f output-html/aptitude.css
