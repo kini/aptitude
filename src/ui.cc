@@ -1097,7 +1097,8 @@ static void do_help_help()
       return;
     }
 
-  std::string filename = ssprintf(HELPDIR "/%s", _("help.txt"));
+  // ForTranslators: You can translate help.txt and set the filename here.
+  std::string filename = ssprintf(HELPDIR "/%s", P_("Localized file|help.txt"));
 
   const char *encoding = P_("Encoding of help.txt|UTF-8");
 
@@ -1120,7 +1121,8 @@ static void do_help_help()
 static void do_help_readme()
 {
   // Look up the translation of README.
-  std::string readme_file = ssprintf(HELPDIR "/%s", _("README"));
+  // ForTranslators: You can translate README and set the filename here.
+  std::string readme_file = ssprintf(HELPDIR "/%s", P_("Localized file|README"));
   const char *encoding    = P_("Encoding of README|ISO_8859-1");
 
   // Deal with missing localized docs.
