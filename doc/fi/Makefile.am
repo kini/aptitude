@@ -10,12 +10,10 @@ README_encoding = utf-8
 
 IMAGES := $(wildcard $(srcdir)/images/*.png)
 
-DOCBOOK_XML = aptitude.xml manpage.xml
 DOCBOOK_TARGETS = docbook-man docbook-html docbook-readme
 
 DOCBOOK_MANS = aptitude.8
 
 include $(top_srcdir)/buildlib/docbook.mk
 
-all-local: $(DOCBOOK_TARGETS)
-
+all-local: docbook-stamp

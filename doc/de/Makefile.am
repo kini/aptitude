@@ -12,4 +12,4 @@ DOCBOOK_TARGETS = docbook-man
 
 include $(top_srcdir)/buildlib/docbook.mk
 
-all-local: $(DOCBOOK_TARGETS)
+all-local: docbook-stamp
