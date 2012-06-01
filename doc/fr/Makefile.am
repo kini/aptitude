@@ -1,14 +1,18 @@
-# automake doesn't play nicely with DocBook :(
+SUBDIRS = images
+EXTRA_DIST = fixman
 
-include $(top_srcdir)/doc/common.mk
-include $(top_srcdir)/doc/po4a.mk
+LC = fr
 
-SUBDIRS=images
-EXTRA_DIST=fixman
-LANGCODE=fr
+include $(top_srcdir)/buildlib/doc.mk
+include $(top_srcdir)/buildlib/po4a.mk
 
-README_encoding=utf-8
+README = README.fr
+README_encoding = utf-8
 
-XMLSOURCES=aptitude.xml manpage.xml
+IMAGES := $(wildcard $(srcdir)/images/*.png) $(PO4A_IMAGES)
 
-IMAGES=$(wildcard $(srcdir)/images/*.png) images/safety-cost-level-diagram.png
+DOCBOOK_TARGETS = docbook-html docbook-man docbook-readme
+
+include $(top_srcdir)/buildlib/docbook.mk
+
+all-local: $(DOCBOOK_TARGETS)

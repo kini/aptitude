@@ -7,7 +7,7 @@ SRCDIRS=@SRCDIRS@
 DOCDIRS=@DOCDIRS@
 TESTDIRS=@TESTDIRS@
 
-SUBDIRS=$(SRCDIRS) $(DOCDIRS) m4 po $(TESTDIRS)
+SUBDIRS=buildlib $(SRCDIRS) $(DOCDIRS) m4 po $(TESTDIRS)
 
 dist_bin_SCRIPTS = aptitude-create-state-bundle aptitude-run-state-bundle
 

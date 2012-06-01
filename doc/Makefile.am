@@ -2,17 +2,21 @@ SUBDIRS=cs de en es fi fr it ja pl po4a
 
 EXTRA_DIST=aptitude-common.xsl aptitude-html.xsl aptitude-man.xsl aptitude-txt.xsl aptitude.css html-to-text
 
-PO4AFLAGS="--srcdir=$(top_srcdir)/doc" "--destdir=$(top_builddir)/doc" \
-	"$(top_srcdir)/doc/po4a/po4a.cfg"
+PO4AFLAGS = --srcdir=$(top_srcdir)/doc --destdir=$(top_builddir)/doc \
+	--package-name='$(PACKAGE)' --package-version='$(PACKAGE_VERSION)' \
+	--msgid-bugs-address='$(PACKAGE_BUGREPORT)' \
+	$(top_srcdir)/doc/po4a/po4a.cfg
 
-dist distdir: update-po
+if HAVE_PO4A
+
+dist: update-po
 
 update-po:
-	if [ -n "$(PO4A)" ]; then \
-	  $(PO4A) \
-	    --no-translations \
-	    "--package-name=$(PACKAGE)" "--package-version=$(VERSION)" \
-	    $(PO4AFLAGS); \
-	fi
+	$(PO4A) --no-backups --force --no-translations $(PO4AFLAGS)
+
+po4a:
+	$(PO4A) --no-backups $(PO4AFLAGS)
+
+endif
 
 .PHONY: update-po

@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT([aptitude], [0.6.8])
+AC_INIT([aptitude], [0.6.8], [aptitude-devel@lists.alioth.debian.org])
 AC_CONFIG_SRCDIR([src/main.cc])
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([-Wno-portability])
 AM_CONFIG_HEADER(config.h)
 
 dnl Use C++
@@ -13,13 +13,16 @@ AM_GNU_GETTEXT([external])
 dnl Checks for programs.
 AC_PROG_CXX
 AC_PROG_RANLIB
-dnl Checks for programs.
+dnl Checks for programs used to generate the documentation.
 AC_PATH_PROG(PO4A, po4a)
-if test "x$PO4A" = "x" ; then
-  AM_CONDITIONAL(USE_PO4A, false)
-else
-  AM_CONDITIONAL(USE_PO4A, true)
-fi
+AC_PATH_PROG(XSLTPROC, xsltproc)
+AC_PATH_PROG(RSVGCONVERT, rsvg-convert)
+AC_PATH_PROG(FOP, fop)
+
+AM_CONDITIONAL(HAVE_PO4A, [test "x$PO4A" != "x"])
+AM_CONDITIONAL(HAVE_XSLTPROC, [test "x$XSLTPROC" != "x"])
+AM_CONDITIONAL(HAVE_RSVGCONVERT, [test "x$RSVGCONVERT" != "x"])
+AM_CONDITIONAL(HAVE_FOP, [test "x$FOP" != "x"])
 
 dnl C++ has const and inline!!!
 ac_cv_c_const=yes
@@ -932,6 +935,7 @@ dnl AC_DEFINE_UNQUOTED(PKGDATADIR, "$PKGDATADIR", [The location in which the pro
 AC_CONFIG_FILES([
 	Doxyfile
 	Makefile
+	buildlib/Makefile
 	doc/Makefile
 	doc/cs/Makefile
 	doc/cs/images/Makefile
