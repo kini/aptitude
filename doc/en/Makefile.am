@@ -5,7 +5,7 @@ LC = en
 
 include $(top_srcdir)/buildlib/doc.mk
 
-README = README.en
+README = README
 README_encoding = iso-8859-1
 
 IMAGES := $(wildcard $(srcdir)/images/*.png) images/safety-cost-level-diagram.svg
