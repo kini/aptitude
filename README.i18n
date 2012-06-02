@@ -3,12 +3,35 @@ aptitude: information for translators
 Aptitude uses the standard gettext mechanism for translations.  However,
 there are a few twists that you should be aware of.
 
+  * Documents using po4a -- man page, user's manual
+
+    These documents can be translated and maintained quite simply
+    using po4a.  The po template is doc/po4a/po/aptitude.pot and
+    contains messages associated with all the documents.  If you just
+    wish to translate the man page then focus on the entities from
+    manpage.xml.
+
+    The user's manual is typically supplied in both html form, for
+    offline reading, and text form (README.$LANG), for browsing from
+    the program.  We have set up a makefile system which makes it
+    simple to generate and install the translated documents, see the
+    file doc/xx/Makefile.am to get started.
+
+    All a translator needs to do is provide a po file based on the
+    doc/po4a/po/aptitude.pot template.  Additionally, if translating
+    the user's manual, please also provide screenshots based on those
+    in doc/en/images/.
+
   * External data files.
 
     There are several external data files that you can choose to
     translate: help.txt (online help), help-mine.txt (online help for
-    Minesweeper), and aptitude.xml (user's manual/online manual).
-    aptitude.xml is a large file, but help.txt and help-mine.txt are
+    Minesweeper), and README (user's manual/online manual).
+
+    README is generated using po4a or by translating aptitude.xml
+    manually.  See the previous section for using po4a.
+
+    The online help files, help.txt and help-mine.txt, are
     quite tractable and it is recommended that you translate
     them. (especially help.txt)
 
@@ -21,6 +44,9 @@ there are a few twists that you should be aware of.
     should translate this as necessary if you write an alternate file.
 
   * Manpage.
+
+    [This section is old and only applies if you do not wish to use
+     po4a for the man page.]
 
     aptitude has a manpage, and it can be translated; if you choose to
     translate it, your translation should be named aptitude.XX.1
