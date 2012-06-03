@@ -28,7 +28,10 @@ IMAGES := $(wildcard $(srcdir)/images/*.png) $(PO4A_IMAGES)
 # Uncomment this to provide your own stylesheet for producing the html
 # output.  Such a stylesheet could, for example, change the output
 # encoding of the html document.
-#DOCBOOK_HTML_XSL = aptitude-html-xx.xsl
+#
+# Set this to your stylesheet, then any that it imports.  Only the
+# first value is passed to xsltproc.
+#DOCBOOK_HTML_XSL = aptitude-html-xx.xsl aptitude-html.xsl aptitude-common.xsl
 
 # By default the docbook-man target will output all available
 # man pages.  Uncomment this line if you only have the main one

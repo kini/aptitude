@@ -11,7 +11,7 @@ README_encoding = utf-8
 
 IMAGES := $(wildcard $(srcdir)/images/*.png) $(PO4A_IMAGES)
 
-DOCBOOK_HTML_XSL = aptitude-html-ja.xsl
+DOCBOOK_HTML_XSL = aptitude-html-ja.xsl aptitude-html.xsl aptitude-common.xsl
 
 DOCBOOK_MANS = aptitude.8
 DOCBOOK_TARGETS = docbook-html docbook-man docbook-readme

@@ -6,7 +6,7 @@ dbiftargets = $(if $(findstring $(1),$(DOCBOOK_TARGETS)),$(2))
 DOCBOOK_IMAGES ?= $(patsubst %.svg,%.png,$(IMAGES))
 
 DOCBOOK_XML ?= aptitude.xml manpage.xml
-DOCBOOK_HTML_XSL ?= aptitude-html.xsl
+DOCBOOK_HTML_XSL ?= aptitude-html.xsl aptitude-common.xsl
 
 DOCBOOK_HTML ?= $(wildcard output-html/*.html) $(wildcard output-html/*.css)
 DOCBOOK_HTML_IMAGES ?= $(wildcard output-html/images/*.png) $(wildcard output-html/images/*.gif)
@@ -120,7 +120,7 @@ if HAVE_XSLTPROC
 
 docbook-man-stamp: $(DOCBOOK_XML) aptitude-man.xsl aptitude-common.xsl
 	-rm -fr output-man/
-	$(XSLTPROC) -o output-man/aptitude.8 $(filter %aptitude-man.xsl,$^) $<
+	$(XSLTPROC) -o output-man/aptitude.8 $(firstword $(filter %.xsl,$^)) $<
 	ln -f $(addprefix output-man/,$(DOCBOOK_MANS)) .
 	@if [ -x "$(srcdir)/fixman" ]; then \
 	  for i in $(DOCBOOK_MANS); do \
@@ -130,14 +130,14 @@ docbook-man-stamp: $(DOCBOOK_XML) aptitude-man.xsl aptitude-common.xsl
         fi
 	touch docbook-man-stamp
 
-docbook-html-stamp: $(DOCBOOK_XML) $(DOCBOOK_HTML_XSL) aptitude-common.xsl
+docbook-html-stamp: $(DOCBOOK_XML) $(DOCBOOK_HTML_XSL)
 	-rm -fr output-html/
-	$(XSLTPROC) -o output-html/ $(filter %$(DOCBOOK_HTML_XSL),$^) $<
+	$(XSLTPROC) -o output-html/ $(firstword $(filter %.xsl,$^)) $<
 	touch docbook-html-stamp
 
 docbook-readme-stamp: $(DOCBOOK_XML) aptitude-txt.xsl aptitude-common.xsl
 	-rm -fr output-readme/ $(README)
-	$(XSLTPROC) -o output-readme/index.html $(filter %aptitude-txt.xsl,$^) $<
+	$(XSLTPROC) -o output-readme/index.html $(firstword $(filter %.xsl,$^)) $<
 	@echo "$(HTML2TEXT) output-readme/index.html $(README_encoding) > $(README)"; \
 	$(HTML2TEXT) output-readme/index.html $(README_encoding) > $(README) \
 	    || (rm -f $(README); exit 1)
@@ -145,7 +145,7 @@ docbook-readme-stamp: $(DOCBOOK_XML) aptitude-txt.xsl aptitude-common.xsl
 
 docbook-fo-stamp: $(DOCBOOK_XML) aptitude-fo.xsl aptitude-common.xsl $(IMAGES)
 	-rm -fr output-fo/
-	$(XSLTPROC) -o output-fo/aptitude.fo $(filter %aptitude-fo.xsl,$^) $<
+	$(XSLTPROC) -o output-fo/aptitude.fo $(firstword $(filter %.xsl,$^)) $<
 
 	mkdir output-fo/images/
 	ln -f $(srcdir)/images/*.png output-fo/images/
