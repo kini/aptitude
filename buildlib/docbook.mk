@@ -109,10 +109,10 @@ $(DOCBOOK_MANS): $(findstring docbook-man,$(DOCBOOK_TARGETS))
 $(README): $(findstring docbook-readme,$(DOCBOOK_TARGETS))
 $(aptitude.pdf): $(findstring docbook-pdf,$(DOCBOOK_TARGETS)
 
-if HAVE_RSVGCONVERT
+if HAVE_RSVG_CONVERT
 
 images/%.png: images/%.svg
-	$(RSVGCONVERT) -x 1.5 -y 1.5 -f png -o $@ $<
+	$(RSVG_CONVERT) -x 1.5 -y 1.5 -f png -o $@ $<
 
 endif
 

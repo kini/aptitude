@@ -16,12 +16,12 @@ AC_PROG_RANLIB
 dnl Checks for programs used to generate the documentation.
 AC_PATH_PROG(PO4A, po4a)
 AC_PATH_PROG(XSLTPROC, xsltproc)
-AC_PATH_PROG(RSVGCONVERT, rsvg-convert)
+AC_PATH_PROG(RSVG_CONVERT, rsvg-convert)
 AC_PATH_PROG(FOP, fop)
 
 AM_CONDITIONAL(HAVE_PO4A, [test "x$PO4A" != "x"])
 AM_CONDITIONAL(HAVE_XSLTPROC, [test "x$XSLTPROC" != "x"])
-AM_CONDITIONAL(HAVE_RSVGCONVERT, [test "x$RSVGCONVERT" != "x"])
+AM_CONDITIONAL(HAVE_RSVG_CONVERT, [test "x$RSVG_CONVERT" != "x"])
 AM_CONDITIONAL(HAVE_FOP, [test "x$FOP" != "x"])
 
 dnl C++ has const and inline!!!
