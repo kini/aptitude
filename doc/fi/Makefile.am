@@ -17,3 +17,5 @@ DOCBOOK_MANS = aptitude.8
 include $(top_srcdir)/buildlib/docbook.mk
 
 all-local: docbook-stamp
+
+man_MANS = aptitude.8

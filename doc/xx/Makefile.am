@@ -47,3 +47,7 @@ include $(top_srcdir)/buildlib/docbook.mk
 
 # Finally, this target ensures that all desired documents get built.
 all-local: docbook-stamp
+
+# Install targets for man pages must be specified manually for now.
+man_MANS = aptitude.8
+notrans_man_MANS = aptitude-create-state-bundle.1 aptitude-run-state-bundle.1

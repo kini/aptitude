@@ -10,8 +10,7 @@ DOCBOOK_HTML_XSL ?= aptitude-html.xsl aptitude-common.xsl
 
 DOCBOOK_HTML ?= $(wildcard output-html/*.html) $(wildcard output-html/*.css)
 DOCBOOK_HTML_IMAGES ?= $(wildcard output-html/images/*.png) $(wildcard output-html/images/*.gif)
-DOCBOOK_MANS ?= $(call dbiftargets,docbook-man, \
-	aptitude.8 aptitude-create-state-bundle.1 aptitude-run-state-bundle.1)
+DOCBOOK_MANS ?= aptitude.8 aptitude-create-state-bundle.1 aptitude-run-state-bundle.1
 
 docbook-stamp: $(DOCBOOK_TARGETS)
 	touch docbook-stamp
@@ -58,7 +57,8 @@ dbuninstall = @list='$(1)'; test -n "$(2)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(2)'; $(am__uninstall_files_from_dir)
 
-man_MANS += $(DOCBOOK_MANS)
+#man_MANS += $(filter aptitude.8,$(DOCBOOK_MANS))
+#notrans_man_MANS += $(filter-out aptitude.8,$(DOCBOOK_MANS))
 
 install-docbook-html: docbook-html
 	@$(NORMAL_INSTALL)
