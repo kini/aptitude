@@ -3,7 +3,7 @@
 
 HTML2TEXT = $(top_srcdir)/doc/html-to-text
 
-mandir = @mandir@/${LC}
+mandir = $(if $(findstring en,$(LC)),@mandir@,@mandir@/${LC})
 htmldir = @htmldir@/${LC}
 imagesdir = ${htmldir}/images
 
