@@ -79,7 +79,7 @@ clean-docbook-html: clean-docbook-css clean-docbook-html-images
 clean-docbook-css:
 	-rm -f output-html/aptitude.css docbook-css-stamp
 clean-docbook-html-images:
-	-rm -f output-html/images/ docbook-html-images-stamp
+	-rm -fr output-html/images/ docbook-html-images-stamp
 clean-docbook-readme:
 	-rm -fr output-readme/ docbook-readme-stamp $(README)
 clean-docbook-fo:
