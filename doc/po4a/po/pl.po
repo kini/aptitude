@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude 0.6.3\n"
 "Report-Msgid-Bugs-To: aptitude-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2012-06-03 10:50+0800\n"
-"PO-Revision-Date: 2012-02-13 20:17+0100\n"
+"POT-Creation-Date: 2012-09-07 19:44+0800\n"
+"PO-Revision-Date: 2012-06-08 15:40+0200\n"
 "Last-Translator: Michał Kułach <michal.kulach@gmail.com>\n"
 "Language-Team: Polish <debian-l10n-polish@lists.debian.org>\n"
 "Language: pl\n"
@@ -47,7 +47,7 @@ msgstr ""
 
 #. type: Content of the VERSION entity
 #: en/aptitude.xml:10
-msgid "0.6.8"
+msgid "0.6.8.2"
 msgstr ""
 
 #. type: Content of the actions-install entity
@@ -6516,11 +6516,6 @@ msgstr "Instaluje <replaceable>pakiet</replaceable>."
 #. type: Content of: <book><chapter><section><section><table><tgroup><tbody><row><entry>
 #: en/aptitude.xml:5568
 #, fuzzy
-#| msgid ""
-#| "<literal>archive</literal> to group packages by the archive they occur in "
-#| "(<quote><literal>stable</literal></quote>, <quote><literal>unstable</"
-#| "literal></quote>, etc).  If a package occurs in several archives, it will "
-#| "be displayed in each of them."
 msgid ""
 "Select packages for the given architecture (such as <quote><literal>amd64</"
 "literal></quote>, or <quote><literal>all</literal></quote>).  Special "
@@ -16926,9 +16921,8 @@ msgstr ""
 
 #. type: Content of: <book><reference><title>
 #: en/aptitude.xml:13210
-#, fuzzy
 msgid "Command-line reference"
-msgstr "Wiersz poleceń"
+msgstr "Opis wiersza poleceń"
 
 #. type: Content of: <refentry><refnamediv><refname>
 #: en/manpage.xml:17 en/manpage.xml:54 en/manpage.xml:59
@@ -17508,13 +17502,6 @@ msgstr ""
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:459
-#, fuzzy
-#| msgid ""
-#| "This command is useful for avoiding broken versions of packages without "
-#| "having to set and clear manual holds.  If you decide you really want the "
-#| "forbidden version after all, <quote><literal>install package...</"
-#| "literal></quote> will remove the ban. <literal>--schedule-only</literal> "
-#| "here can be used to just remove the ban without installing anything."
 msgid ""
 "This command is useful for avoiding broken versions of packages without "
 "having to set and clear manual holds.  If you decide you really want the "
@@ -17524,9 +17511,8 @@ msgstr ""
 "To polecenie jest użyteczne do unikania uszkodzonych wersji pakietów, bez "
 "potrzeby ręcznego ustawiania i usuwania statusu zatrzymania. Jeśli jednak "
 "zaistnieje potrzeba zainstalowania zabronionej wersji, polecenie "
-"<quote><literal>install</literal></quote> usunie ten zakaz. Opcja <literal>--"
-"schedule-only</literal> może być użyta do usunięcia zakazu, bez instalowania "
-"czegokolwiek."
+"<quote><literal>aptitude install <replaceable>pakiet</replaceable></"
+"literal></quote> usunie ten zakaz."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: en/manpage.xml:469
@@ -18598,15 +18584,6 @@ msgstr "<literal>--disable-columns</literal>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:1194
-#, fuzzy
-#| msgid ""
-#| "This option causes <literal>aptitude search</literal> and "
-#| "<literal>aptitude version</literal> to output their results without any "
-#| "special formatting.  In particular: normally &aptitude; will add "
-#| "whitespace or truncate search results in an attempt to fit its results "
-#| "into vertical <quote>columns</quote>.  With this flag, each line will be "
-#| "formed by replacing any format escapes in the format string with the "
-#| "corresponding text; column widths will be ignored."
 msgid ""
 "This option causes <literal>aptitude search</literal> and <literal>aptitude "
 "versions</literal> to output their results without any special formatting.  "
@@ -18617,7 +18594,7 @@ msgid ""
 "be ignored."
 msgstr ""
 "Opcja nakazuje poleceniom <literal>aptitude search</literal> i "
-"<literal>aptitude version</literal> wyświetlać wyniki bez specjalnego "
+"<literal>aptitude versions</literal> wyświetlać wyniki bez specjalnego "
 "formatowania. W szczególności: zwykle &aptitude; dodaje białe znaki lub "
 "ucina wyniki, próbując wpasować wyniki wyszukiwania w <quote>kolumny</"
 "quote>. Z tą flagą, każdy wiersz będzie wypisywany przez zastąpienie znaków "
@@ -18741,16 +18718,6 @@ msgstr ""
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:1275
-#, fuzzy
-#| msgid ""
-#| "Specify the format which should be used to display output from the "
-#| "<literal>search</literal> and <literal>version</literal> commands.  For "
-#| "instance, passing <quote><literal>%p %V %v</literal></quote> for "
-#| "<replaceable>format</replaceable> will display a package's name, followed "
-#| "by its currently installed version and its available version (see the "
-#| "section <quote><link linkend='secDisplayFormat'>Customizing how packages "
-#| "are displayed</link></quote> in the &aptitude; reference manual for more "
-#| "information)."
 msgid ""
 "Specify the format which should be used to display output from the "
 "<literal>search</literal> and <literal>versions</literal> commands.  For "
@@ -18762,7 +18729,7 @@ msgid ""
 "information)."
 msgstr ""
 "Określa format, który powinien być użyty do wyświetlenia wyniku poleceń "
-"<literal>search</literal> i <literal>version</literal>. Dla przykładu, "
+"<literal>search</literal> i <literal>versions</literal>. Dla przykładu, "
 "wpisanie <quote><literal>%p %V %v</literal></quote> dla <replaceable>format</"
 "replaceable>u wyświetli kolejno: nazwę pakietu, aktualnie zainstalowaną "
 "wersję i dostępne wersje (proszę zapoznać się z rozdziałem <quote><link "
