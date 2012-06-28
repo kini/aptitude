@@ -254,7 +254,7 @@ namespace aptitude
 
 	  case pattern::architecture:
 	    out << "?architecture(";
-	    serialize_string(p->get_architecture_architecture(), out);
+	    serialize_string(p->get_architecture_arch_specification()->get_specification(), out);
 	    out.put(')');
 	    break;
 

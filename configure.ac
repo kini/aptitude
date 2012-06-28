@@ -47,6 +47,10 @@ AC_CHECK_MEMBER([struct pkgCache::Version.MultiArch], [],
                 [AC_MSG_ERROR([need libapt-pkg 0.8 or later])],
                 [[#include <apt-pkg/pkgcache.h>]])
 
+AC_CHECK_TYPE([APT::CacheFilter::PackageArchitectureMatchesSpecification], [],
+              [AC_MSG_ERROR([need libapt-pkg 0.9.7 or later])],
+              [[#include <apt-pkg/cachefilter.h>]])
+
 AC_CHECK_LIB(pthread, main,
 	HAVE_LIBPTHREAD=1
 	, [AC_MSG_ERROR([Can't find the POSIX thread libraries])])

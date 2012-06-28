@@ -71,6 +71,17 @@ namespace aptitude
       return 0 == regexec(&r, s, num_matches, matches, eflags);
     }
 
+    arch_specification::arch_specification(const std::string &_spec)
+      : pams(_spec),
+        spec(_spec)
+    {
+    }
+
+    bool arch_specification::matches(const char * const &arch)
+    {
+      return pams(arch);
+    }
+
     cwidget::util::ref_ptr<pattern>
     pattern::make_action(const action_type act)
     {

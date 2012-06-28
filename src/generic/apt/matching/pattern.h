@@ -33,6 +33,8 @@
 #include <sys/types.h>
 
 #include <apt-pkg/pkgcache.h>
+#include <apt-pkg/cachefilter.h>
+
 
 namespace aptitude
 {
@@ -53,6 +55,28 @@ namespace aptitude
 
       /** \brief Retrieve the error message associated with this exception. */
       std::string errmsg() const;
+    };
+
+    /** \brief Ref-counted wrapper for PackageArchitectureMatchesSpecification.
+     */
+    class arch_specification : public util::refcounted_base_threadsafe
+    {
+      APT::CacheFilter::PackageArchitectureMatchesSpecification pams;
+      const std::string spec;
+
+    public:
+      arch_specification(const std::string &_spec);
+
+      bool matches(const char * const &arch);
+      inline bool matches(const pkgCache::VerIterator &ver)
+      {
+        return matches(ver.Arch());
+      }
+
+      inline const std::string &get_specification() const
+      {
+        return spec;
+      }
     };
 
     /** \brief C++ wrapper for regular expression objects.
@@ -238,11 +262,12 @@ namespace aptitude
 	   *  Fields: pattern.
 	   */
 	  any_version,
-          /** \brief ?architecture(PATTERN)
+          /** \brief ?architecture(SPECIFICATION)
            *
-           *  Matches packages by their architecture.
+           *  Matches packages whose architecture meets the given
+           *  SPECIFICATION string (see Debian Policy section 11.1).
            *
-           *  Fields: regex_info.
+           *  Fields: arch_specification.
            */
           architecture,
 	  /** \brief ?automatic
@@ -669,6 +694,8 @@ namespace aptitude
       // to the action match information.
       std::string string_info;
 
+      cwidget::util::ref_ptr<arch_specification> arch_spec;
+
       // Groups several POD values that aren't used simultaneously.
       union
       {
@@ -804,6 +831,14 @@ namespace aptitude
 	info.multiarch = multiarch_type;
       }
 
+      // Allocate a pattern that has an architecture specification.
+      pattern(type _tp,
+              const cwidget::util::ref_ptr<arch_specification> &spec)
+        : tp(_tp),
+          arch_spec(spec)
+      {
+      }
+
     public:
 
       /** \name archive term constructor and accessors. */
@@ -907,19 +942,21 @@ namespace aptitude
 
       /** \brief Create an ?architecture term.
        *
-       *  \param arch  The architecture to match.
+       *  \param spec  The architecture specification string to match.
        */
       static cwidget::util::ref_ptr<pattern>
-      make_architecture(const std::string &arch)
+      make_architecture(const std::string &spec)
       {
-        return new pattern(architecture, arch);
+        return new pattern(architecture,
+                           new arch_specification(spec));
       }
 
-      const std::string &get_architecture_architecture() const
+      const cwidget::util::ref_ptr<arch_specification> &
+      get_architecture_arch_specification() const
       {
         eassert(tp == architecture);
 
-        return string_info;
+        return arch_spec;
       }
 
       // @}

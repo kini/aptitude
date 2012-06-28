@@ -99,7 +99,8 @@ namespace aptitude
 				    p2->get_any_version_pattern());
 
 	  case pattern::architecture:
-	    return p1->get_architecture_architecture().compare(p2->get_architecture_architecture());
+	    return p1->get_architecture_arch_specification()->get_specification()
+              .compare(p2->get_architecture_arch_specification()->get_specification());
 
 	  case pattern::automatic:
 	    return 0;

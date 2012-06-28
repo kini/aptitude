@@ -31,6 +31,7 @@
 #include <apt-pkg/pkgrecords.h>
 #include <apt-pkg/pkgsystem.h>
 #include <apt-pkg/version.h>
+#include <apt-pkg/cachefilter.h>
 
 #include <cwidget/generic/util/transcode.h>
 
@@ -907,8 +908,9 @@ namespace aptitude
 
 	    {
 	      pkgCache::VerIterator ver(target.get_version_iterator(cache));
-              if(p->get_architecture_architecture().empty() == true ||
-		 p->get_architecture_architecture() == ver.Arch())
+              const ref_ptr<arch_specification> spec(p->get_architecture_arch_specification());
+
+              if(spec->matches(ver.Arch()) == true)
                 return match::make_atomic(p, ver.Arch());
               else
                 return NULL;
