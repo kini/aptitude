@@ -55,6 +55,24 @@ AC_CHECK_LIB(pthread, main,
 	HAVE_LIBPTHREAD=1
 	, [AC_MSG_ERROR([Can't find the POSIX thread libraries])])
 
+AC_PATH_PROG(XAPIAN_CONFIG, xapian-config)
+if test ! -x "$XAPIAN_CONFIG"
+then
+  AC_MSG_ERROR([Can't find xapian-config -- please install libxapian-dev])
+fi
+XAPIAN_CXXFLAGS="$($XAPIAN_CONFIG --cxxflags)"
+XAPIAN_LIBS="$($XAPIAN_CONFIG --libs)"
+
+OLD_CXXFLAGS="$CXXFLAGS"
+OLD_LIBS="$LIBS"
+
+CXXFLAGS="$CXXFLAGS $XAPIAN_CXXFLAGS"
+LIBS="$LIBS $XAPIAN_LIBS"
+AC_CHECK_HEADER([xapian.h], [],
+    [AC_MSG_ERROR([Can't find the xapian headers -- please install libxapian-dev])])
+CXXFLAGS="$OLD_CXXFLAGS"
+LIBS="$OLD_LIBS"
+
 PKG_CHECK_MODULES(ept, libept, [], [AC_MSG_ERROR([Can't find the ept library -- please install libept-dev])])
 AC_DEFINE([HAVE_EPT], [], [Backwards compatibility symbol; must always be defined.])
 
@@ -509,8 +527,8 @@ then
   AC_DEFINE([HAVE_GTK], [], [Define if the GTK+ frontend is included in the build.])
 fi
 
-CXXFLAGS="$CXXFLAGS $SIGC_CFLAGS $CWIDGET_CFLAGS $ept_CFLAGS $SQLITE3_CFLAGS"
-LIBS="$LIBS $SIGC_LIBS $CWIDGET_LIBS $ept_LIBS $SQLITE3_LIBS $BOOST_IOSTREAMS_LIB"
+CXXFLAGS="$CXXFLAGS $SIGC_CFLAGS $CWIDGET_CFLAGS $ept_CFLAGS $SQLITE3_CFLAGS $XAPIAN_CXXFLAGS"
+LIBS="$LIBS $SIGC_LIBS $CWIDGET_LIBS $ept_LIBS $SQLITE3_LIBS $BOOST_IOSTREAMS_LIB $XAPIAN_LIBS"
 CPPFLAGS="$CPPFLAGS $BOOST_CPPFLAGS"
 LDFLAGS="$LDFLAGS $BOOST_LDFLAGS"
 
