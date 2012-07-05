@@ -4,22 +4,22 @@
 #
 # Martin Quinson <mquinson@ens-lyon.fr>, 2001.
 # Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>, 2004, 2005, 2006, 2007, 2008.
-# Christian Perrier <bubulle@debian.org>, 2004, 2006, 2008, 2009.
+# Christian Perrier <bubulle@debian.org>, 2004, 2006, 2008, 2009, 2012.
 # Jean-Baka Domelevo Entfellner <domelevo@gmail.com>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: aptitude\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
 "POT-Creation-Date: 2012-09-07 19:44+0800\n"
-"PO-Revision-Date: 2012-06-03 12:25+0800\n"
-"Last-Translator: Jean-Baka Domelevo Entfellner <domelevo@gmail.com>\n"
+"PO-Revision-Date: 2012-07-04 20:36-0600\n"
+"Last-Translator: Christian Perrier <bubulle@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 1.4\n"
 "X-Poedit-Language: French\n"
 "X-Poedit-Country: FRANCE\n"
 
@@ -2388,10 +2388,9 @@ msgstr ""
 "paquet\n"
 
 #: src/cmdline/cmdline_util.cc:273
-#, fuzzy, c-format
-#| msgid "Couldn't run pager %s"
+#, c-format
 msgid "Couldn't find task '%s'"
-msgstr "Impossible d'exécuter l'outil de mise en page %s"
+msgstr "Impossible de trouve la tâche « %s »"
 
 #: src/cmdline/cmdline_util.cc:361
 #, c-format
@@ -2997,7 +2996,7 @@ msgstr "impossible de récupérer %s : %s"
 
 #: src/generic/apt/download_install_manager.cc:129
 msgid "Some files failed to download"
-msgstr ""
+msgstr "Échec du téléchargement de certains fichiers"
 
 #: src/generic/apt/download_install_manager.cc:140
 msgid "Unable to correct for unavailable packages"
@@ -3028,6 +3027,8 @@ msgid ""
 "Some index files failed to download. They have been ignored, or old ones "
 "used instead."
 msgstr ""
+"Certains fichiers d'index n'ont pas pu être téléchargés. Ils ont été ignorés "
+"et de plus anciens seront utilisés à la place."
 
 #: src/generic/apt/download_update_manager.cc:178
 msgid "Couldn't rebuild package cache"
@@ -3382,7 +3383,7 @@ msgstr "Pas de description disponible pour %s."
 #: src/generic/apt/tasks.cc:123
 #, c-format
 msgid "Unhandled packages method in task %s: %s"
-msgstr ""
+msgstr "Méthode de paquets non gérée dans la tâche %s : %s"
 
 #: src/generic/apt/tasks.cc:484
 msgid "Reading task descriptions"
@@ -3562,14 +3563,10 @@ msgid "Reload the package cache"
 msgstr "Recharger le cache des paquets"
 
 #: src/gtk/aptitude.glade:118 src/gtk/aptitude.glade:2372 src/ui.cc:2389
-#, fuzzy
-#| msgid ""
-#| "Run 'su' to become root; this will restart the program, but your settings "
-#| "will be preserved"
 msgid "Restart the program as root; your settings will be preserved"
 msgstr ""
-"Utilisez la commande « su » pour devenir administrateur. Cela relancera le "
-"programme mais vos préférences seront conservées"
+"Veuillez lancer le programme avec les privilèges du superutilisateur ; vos "
+"préférences seront conservées"
 
 #: src/gtk/aptitude.glade:127 src/gtk/aptitude.glade:2382 src/ui.cc:2392
 msgid "Exit the program"
@@ -5976,7 +5973,7 @@ msgid ""
 "Only one of --auto-clean-on-startup, --clean-on-startup, -i, and -u may be "
 "specified\n"
 msgstr ""
-"Seule une des options --auto-clean-on-startup, --clean-on-startup, -u et -i  "
+"Seule une des options --auto-clean-on-startup, --clean-on-startup, -i et -u  "
 "peut être indiquée à la fois\n"
 
 #: src/main.cc:1088
