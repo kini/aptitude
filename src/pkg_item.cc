@@ -38,6 +38,7 @@
 #include <generic/apt/apt.h>
 #include <generic/apt/apt_undo_group.h>
 #include <generic/apt/config_signal.h>
+#include <generic/apt/dpkg.h>
 #include <generic/apt/matching/match.h>
 #include <generic/apt/matching/parse.h>
 #include <generic/apt/matching/pattern.h>
@@ -402,8 +403,8 @@ bool pkg_item::dispatch_key(const cw::config::key &k, cw::tree *owner)
 	  char buf[512];
 	  if(sucmd)
 	    {
-	      snprintf(buf, 512, sucmd,
-		       package.FullName().c_str());
+              const string name(aptitude::apt::dpkg_package_name(package));
+              snprintf(buf, 512, sucmd, name.c_str());
 
 	      if(system(buf) != 0) { /* FIXME: ignore? */ }
 
