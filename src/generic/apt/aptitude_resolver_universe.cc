@@ -264,11 +264,17 @@ aptitude_resolver_version::dep_iterator::applicable(const pkgCache::DepIterator 
       eassert(!prv.end());
       eassert(is_conflict(dep->Type));
 
-      if(const_cast<pkgCache::PrvIterator &>(prv).OwnerPkg() == const_cast<pkgCache::DepIterator &>(dep).ParentPkg())
-	return false;
+      // NB: inlined pkgCache::DepIterator::IsIgnorable
+      // if(dep.IsIgnorable(prv) == true)
+      //   return false;
+      const pkgCache::PkgIterator pkg = dep.ParentPkg();
+      if(prv.OwnerPkg()->Group == pkg->Group)
+        return false;
+      if(pkg->Group == dep.TargetPkg()->Group && prv.OwnerPkg()->Group != pkg->Group)
+        return false;
     }
   else
-    if(const_cast<pkgCache::DepIterator &>(dep).ParentPkg() == const_cast<pkgCache::DepIterator &>(dep).TargetPkg())
+    if(dep.ParentPkg() == dep.TargetPkg())
       return false;
 
   if(!is_interesting_dep(dep, cache))
@@ -316,39 +322,34 @@ void aptitude_resolver_dep::solver_iterator::normalize()
     {
       while(!end())
 	{
-	  while(!ver_lst.end())
-	    {
-	      bool ver_matches =
-		!dep_lst.TargetVer() ||
-		_system->VS->CheckDep(ver_lst.VerStr(),
-				      dep_lst->CompareOp,
-				      dep_lst.TargetVer());
+          for(; ver_lst.end() == false; ++ver_lst)
+            {
+              if(dep_lst.IsIgnorable(ver_lst.ParentPkg()) == true)
+                continue;
 
-	      if(ver_matches && ver_disappeared(ver_lst))
-		ver_matches = false;
+              if(_system->VS->CheckDep(ver_lst.VerStr(),
+                                       dep_lst->CompareOp,
+                                       dep_lst.TargetVer()) == false)
+                continue;
 
-	      if(ver_matches)
-		// Found the next entry; drop out.
-		return;
-	      else
-		++ver_lst;
-	    }
+              if(ver_disappeared(ver_lst) == false)
+                return;
+            }
 
 	  // If we ran out of versions, try provides instead.
-	  while(!prv_lst.end())
-	    {
-	      bool prv_matches=(!dep_lst.TargetVer()) ||
-		(prv_lst.ProvideVersion() &&
-		 _system->VS->CheckDep(prv_lst.ProvideVersion(),
-				       dep_lst->CompareOp,
-				       dep_lst.TargetVer()));
+          for(; prv_lst.end() == false; ++prv_lst)
+            {
+              if(dep_lst.IsIgnorable(prv_lst) == true)
+                continue;
 
-	      if(prv_matches &&
-		 !ver_disappeared(prv_lst.OwnerVer()))
-		return;
-	      else
-		++prv_lst;
-	    }
+              if(_system->VS->CheckDep(prv_lst.ProvideVersion(),
+                                       dep_lst->CompareOp,
+                                       dep_lst.TargetVer()) == false)
+                continue;
+
+              if(ver_disappeared(prv_lst.OwnerVer()) == false)
+                return;
+            }
 
 	  // No more target versions or providers of the target;
 	  // increment the dependency list if we aren't yet at the
@@ -440,18 +441,27 @@ bool aptitude_resolver_dep::solved_by(const aptitude_resolver_version &v) const
 
       while(1)
 	{
-	  if(d.TargetPkg() == v.get_pkg() &&
-	     (!d.TargetVer() || _system->VS->CheckDep(v.get_ver().VerStr(),
-						      d->CompareOp,
-						      d.TargetVer())))
-	    return true;
+          if(d.IsIgnorable(v.get_pkg()) == false
+             && _system->VS->CheckDep(v.get_ver().VerStr(),
+                                      d->CompareOp,
+                                      d.TargetVer()) == true)
+            return true;
 
 	  // Check for a resolution via Provides.
-	  if(!d.TargetVer())
-	    for(pkgCache::PrvIterator p2 = v.get_ver().ProvidesList();
-		!p2.end(); ++p2)
-	      if(const_cast<pkgCache::PrvIterator &>(p2).ParentPkg() == d.TargetPkg())
-		return true;
+          for(pkgCache::PrvIterator p2 = v.get_ver().ProvidesList();
+              p2.end() == false; ++p2)
+            {
+              if(d.IsIgnorable(p2) == true)
+                continue;
+
+              if(p2.ParentPkg() != d.TargetPkg())
+                continue;
+
+              if(_system->VS->CheckDep(p2.ProvideVersion(),
+                                       d->CompareOp,
+                                       d.TargetVer()) == true)
+                return true;
+            }
 
 	  if((d->CompareOp & pkgCache::Dep::Or) != 0)
 	    ++d;

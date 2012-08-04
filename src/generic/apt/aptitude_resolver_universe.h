@@ -982,25 +982,32 @@ bool aptitude_resolver_dep::broken_under(const InstallationType &I) const
 
       while(!dep.end())
 	{
-	  pkgCache::VerIterator direct_ver=I.version_of(aptitude_resolver_package(dep.TargetPkg(), cache)).get_ver();
-	  if(!direct_ver.end())
-	    {
-	      const char * const direct_verstr = direct_ver.VerStr();
-	      const char * const dep_targetstr = dep.TargetVer();
-	      if(!direct_ver.end() &&
-		 _system->VS->CheckDep(direct_verstr,
-				       dep->CompareOp,
-				       dep_targetstr))
-		return false;
-	    }
+          if(dep.IsIgnorable(dep.TargetPkg()) == false)
+            {
+              const aptitude_resolver_package pkg(dep.TargetPkg(), cache);
+              const pkgCache::VerIterator direct_ver = I.version_of(pkg).get_ver();
+              if((direct_ver.end() == false)
+                 && (_system->VS->CheckDep(direct_ver.VerStr(),
+                                           dep->CompareOp,
+                                           dep.TargetVer()) == true))
+                return false;
+            }
 
-	  if(!dep.TargetVer())
-	    {
-	      for(pkgCache::PrvIterator prv=dep.TargetPkg().ProvidesList();
-		  !prv.end(); ++prv)
-		if(prv.OwnerVer() == I.version_of(aptitude_resolver_package(prv.OwnerPkg(), cache)).get_ver())
-		  return false;
-	    }
+          for(pkgCache::PrvIterator prv = dep.TargetPkg().ProvidesList();
+              prv.end() == false; ++prv)
+            {
+              if(dep.IsIgnorable(prv) == true)
+                continue;
+
+              if(_system->VS->CheckDep(prv.ProvideVersion(),
+                                       dep->CompareOp,
+                                       dep.TargetVer()) == false)
+                continue;
+
+              const aptitude_resolver_package pkg(prv.OwnerPkg(), cache);
+              if(prv.OwnerVer() == I.version_of(pkg).get_ver())
+                return false;
+            }
 
 	  if(!(dep->CompareOp & pkgCache::Dep::Or))
 	    break;
@@ -1015,10 +1022,14 @@ bool aptitude_resolver_dep::broken_under(const InstallationType &I) const
       // single element of the Conflicts/Breaks: either a direct
       // conflict or an indirect conflict (i.e., via a virtual pkg).
 
+      // NB: The dep_iterator already skips conflicts for which
+      // DepIterator::IsIgnorable is true so avoid repeating those
+      // tests here.
+
       if(prv == NULL)
 	{
-	  if(start_iter.TargetPkg() == start_iter.ParentPkg())
-	    return false;
+          // if(start_iter.IsIgnorable(start_iter.TargetPkg()) == true)
+          //   return false;
 
 	  pkgCache::VerIterator direct_ver=I.version_of(aptitude_resolver_package(start_iter.TargetPkg(), cache)).get_ver();
 
@@ -1034,8 +1045,8 @@ bool aptitude_resolver_dep::broken_under(const InstallationType &I) const
 	{
 	  pkgCache::PrvIterator prv_iter(cache->GetCache(), const_cast<pkgCache::Provides *>(prv), (pkgCache::Package *)0);
 
-	  if(prv_iter.OwnerPkg() == start_iter.ParentPkg())
-	    return false;
+	  // if(start_iter.IsIgnorable(prv_iter) == true)
+	  //   return false;
 
 	  if(start_iter.TargetVer() != NULL)
 	    return false;
