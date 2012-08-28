@@ -6,14 +6,14 @@
 # Yuriy Talakan' <yt@amur.elektra.ru>, 2004.
 # Dmitry Beloglazov <dm-guest@alioth.debian.org>, 2004.
 # Max Kosmach <max@tcen.ru>, 2008.
-# Yuri Kozlov <kozlov.y@gmail.com>, 2004, 2005, 2006, 2007, 2008.
+# Yuri Kozlov <yuray@komyakino.ru>, 2004, 2005, 2006, 2007, 2008.
 # Yuri Kozlov <yuray@komyakino.ru>, 2009, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: aptitude 0.6.5-1+\n"
+"Project-Id-Version: aptitude 0.6.8.1\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2012-06-03 11:30+0800\n"
-"PO-Revision-Date: 2012-06-03 12:29+0800\n"
+"POT-Creation-Date: 2012-09-07 19:44+0800\n"
+"PO-Revision-Date: 2012-08-28 21:01+0400\n"
 "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "Language: ru\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 1.4\n"
 
 #: src/apt_config_treeitems.cc:99 src/apt_config_treeitems.cc:210
 #: src/apt_config_treeitems.cc:394
@@ -889,9 +889,9 @@ msgid "Couldn't find a changelog for %s"
 msgstr "Не удалось найти список изменений для %s"
 
 #: src/cmdline/cmdline_changelog.cc:429
-#, fuzzy, c-format
+#, c-format
 msgid "Couldn't run pager %s"
-msgstr "Не удалось найти список изменений для %s"
+msgstr "Не удалось запустить программу просмотра %s"
 
 #: src/cmdline/cmdline_clean.cc:60
 #, c-format
@@ -905,9 +905,8 @@ msgstr "Удалить %s* %spartial/*\n"
 
 #: src/cmdline/cmdline_clean.cc:76 src/cmdline/cmdline_clean.cc:146
 #: src/ui.cc:1787 src/ui.cc:1875
-#, fuzzy
 msgid "Unable to lock the download directory"
-msgstr "Не удалось обнаружить ваш домашний каталог!"
+msgstr "Не удалось заблокировать каталог для скачиваемых файлов"
 
 #: src/cmdline/cmdline_clean.cc:106
 #, c-format
@@ -1190,16 +1189,15 @@ msgid ""
 "*** WARNING ***   Ignoring these trust violations because\n"
 "                  %s::CmdLine::Ignore-Trust-Violations is 'true'!\n"
 msgstr ""
-"*** ПРЕДУПРЕЖДЕНИЕ ***   Игнорирование этих надёжных противоречий, так как\n"
-"                  %s::CmdLine::Ignore-Trust-Violations установлено в "
-"«true»!\n"
+"*** ПРЕДУПРЕЖДЕНИЕ ***   Игнорирование нарушения условий доверительности, так как\n"
+"                  %s::CmdLine::Ignore-Trust-Violations установлено в «true»!\n"
 
 #: src/cmdline/cmdline_prompt.cc:547
 msgid ""
 "*** WARNING ***   Ignoring these trust violations because\n"
 "                  Apt::Get::AllowUnauthenticated is 'true'!\n"
 msgstr ""
-"*** ПРЕДУПРЕЖДЕНИЕ ***   Игнорирование этих надёжных противоречий, так как\n"
+"*** ПРЕДУПРЕЖДЕНИЕ ***   Игнорирование нарушения условий доверительности, так как\n"
 "                  Apt::Get::AllowUnauthenticated установлено в «true»!\n"
 
 #. ForTranslators: This string is a confirmation message, which
@@ -1298,7 +1296,7 @@ msgid "No packages to show -- enter the package names on the line after 'i'.\n"
 msgstr "Нет пакетов для показа — введите имена пакетов в строке после «i».\n"
 
 #: src/cmdline/cmdline_prompt.cc:777 src/cmdline/cmdline_prompt.cc:792
-#: src/pkg_item.cc:410 src/ui.cc:1219
+#: src/pkg_item.cc:411 src/ui.cc:1219
 msgid "Press Return to continue."
 msgstr "Нажмите Ввод для продолжения."
 
@@ -2158,7 +2156,7 @@ msgstr "нет"
 
 #: src/cmdline/cmdline_show.cc:421 src/pkg_info_screen.cc:125
 msgid "Multi-Arch: "
-msgstr ""
+msgstr "Мульти-архитектура: "
 
 #: src/cmdline/cmdline_show.cc:423 src/gtk/entitysummary.cc:361
 #: src/gtk/previewtab.cc:230
@@ -2331,9 +2329,9 @@ msgid "You cannot specify both an archive and a version for a package\n"
 msgstr "Вы не можете указать архив и версию пакета одновременно\n"
 
 #: src/cmdline/cmdline_util.cc:273
-#, fuzzy, c-format
+#, c-format
 msgid "Couldn't find task '%s'"
-msgstr "Не удалось найти список изменений для %s"
+msgstr "Не удалось найти задачу «%s»"
 
 #: src/cmdline/cmdline_util.cc:361
 #, c-format
@@ -2812,16 +2810,15 @@ msgstr ""
 
 #: src/generic/apt/apt.cc:1272
 msgid "foreign"
-msgstr ""
+msgstr "сторонняя"
 
 #: src/generic/apt/apt.cc:1274
 msgid "same"
-msgstr ""
+msgstr "такая же"
 
 #: src/generic/apt/apt.cc:1277
-#, fuzzy
 msgid "allowed"
-msgstr "allow_choices"
+msgstr "allowed"
 
 #: src/generic/apt/apt.cc:1366
 msgid "main"
@@ -2829,15 +2826,15 @@ msgstr "main"
 
 #: src/generic/apt/apt.cc:1366
 msgid "contrib"
-msgstr ""
+msgstr "contrib"
 
 #: src/generic/apt/apt.cc:1366
 msgid "non-free"
-msgstr ""
+msgstr "non-free"
 
 #: src/generic/apt/apt.cc:1366
 msgid "non-US"
-msgstr ""
+msgstr "non-US"
 
 #: src/generic/apt/aptitude_resolver.cc:441
 #, c-format
@@ -2901,7 +2898,7 @@ msgstr ""
 msgid "Conflicting types for the cost component %s."
 msgstr "Конфликт типов стоимости компонента %s."
 
-#: src/generic/apt/aptitude_resolver_universe.cc:828
+#: src/generic/apt/aptitude_resolver_universe.cc:838
 #, c-format
 msgid ""
 "Invalid safety level \"%s\" (not \"discard\", \"maximum\", \"minimum\", or "
@@ -2927,7 +2924,7 @@ msgstr "Не удалось получить %s: %s"
 
 #: src/generic/apt/download_install_manager.cc:129
 msgid "Some files failed to download"
-msgstr ""
+msgstr "Не удалось скачать некоторые файлы"
 
 #: src/generic/apt/download_install_manager.cc:140
 msgid "Unable to correct for unavailable packages"
@@ -2958,10 +2955,23 @@ msgid ""
 "Some index files failed to download. They have been ignored, or old ones "
 "used instead."
 msgstr ""
+"Не удалось скачать некоторые индексные файлы. Они были проигнорированы, "
+"или вместо них использовались старые."
 
 #: src/generic/apt/download_update_manager.cc:178
 msgid "Couldn't rebuild package cache"
 msgstr "Не удалось перестроить кэш пакетов"
+
+#: src/generic/apt/dpkg.cc:102
+#, fuzzy, c-format
+#| msgid "Couldn't find a changelog for %s"
+msgid "Couldn't chroot into %s for %s"
+msgstr "Не удалось найти список изменений для %s"
+
+#: src/generic/apt/dpkg.cc:124
+#, c-format
+msgid "Waited for %s but it wasn't there"
+msgstr ""
 
 #: src/generic/apt/dump_packages.cc:539 src/generic/apt/dump_packages.cc:629
 #, c-format
@@ -3105,9 +3115,9 @@ msgid "Unknown action type: %s"
 msgstr "Неизвестный тип действия: %s"
 
 #: src/generic/apt/matching/parse.cc:330
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown multiarch type: %s"
-msgstr "Неизвестный тип действия: %s"
+msgstr "Неизвестный мульти-архитектурный тип: %s"
 
 #: src/generic/apt/matching/parse.cc:370
 #, c-format
@@ -3289,7 +3299,7 @@ msgstr "Недоступно описание для %s."
 #: src/generic/apt/tasks.cc:123
 #, c-format
 msgid "Unhandled packages method in task %s: %s"
-msgstr ""
+msgstr "Ничем необработанный метод для пакетов в задаче %s: %s"
 
 #: src/generic/apt/tasks.cc:484
 msgid "Reading task descriptions"
@@ -3462,14 +3472,10 @@ msgid "Reload the package cache"
 msgstr "Перезагрузить кэш пакетов"
 
 #: src/gtk/aptitude.glade:118 src/gtk/aptitude.glade:2372 src/ui.cc:2389
-#, fuzzy
-#| msgid ""
-#| "Run 'su' to become root; this will restart the program, but your settings "
-#| "will be preserved"
 msgid "Restart the program as root; your settings will be preserved"
 msgstr ""
-"Запуск «su», чтобы стать суперпользователем. Это приведёт к перезапуску "
-"программы, но ваши настройки будут сохранены"
+"Перезапустите программу с правами суперпользователя; "
+"ваши настройки будут сохранены"
 
 #: src/gtk/aptitude.glade:127 src/gtk/aptitude.glade:2382 src/ui.cc:2392
 msgid "Exit the program"
@@ -5139,9 +5145,8 @@ msgid "Terminal policy '%s' should be the last policy in the list"
 msgstr "Завершающее правило «%s» должно быть последним правилом в списке"
 
 #: src/load_grouppolicy.cc:385
-#, fuzzy
 msgid "Unmatched '(' in grouping policy"
-msgstr "Нет пары для «(» в шаблоне группирующего правила"
+msgstr "Нет пары для «(» в группирующем правиле"
 
 #: src/load_grouppolicy.cc:413
 #, c-format
@@ -5159,17 +5164,17 @@ msgstr ""
 
 #: src/load_grouppolicy.cc:428 src/load_grouppolicy.cc:544
 #: src/load_grouppolicy.cc:621
-#, fuzzy, c-format
+#, c-format
 msgid "Too many arguments to '%s' grouping policy"
-msgstr "Слишком много аргументов для группирующего правила by-source"
+msgstr "Слишком много аргументов для группирующего правила «%s»"
 
 #: src/load_grouppolicy.cc:441 src/load_grouppolicy.cc:521
 #: src/load_grouppolicy.cc:532 src/load_grouppolicy.cc:555
 #: src/load_grouppolicy.cc:566 src/load_grouppolicy.cc:577
 #: src/load_grouppolicy.cc:608 src/load_grouppolicy.cc:766
-#, fuzzy, c-format
+#, c-format
 msgid "Grouping policy '%s' takes no arguments"
-msgstr "Группирующим правилам Task не нужно аргументов"
+msgstr "Для группирующего правила «%s» аргументы не требуются"
 
 #: src/load_grouppolicy.cc:460 src/load_grouppolicy.cc:636
 #, c-format
@@ -5182,14 +5187,13 @@ msgid "Unable to parse pattern at '%s'"
 msgstr "Не удалось проанализировать шаблон начиная с «%s»"
 
 #: src/load_grouppolicy.cc:502
-#, fuzzy
 msgid "Exactly one filter must be provided as an argument to a 'filter' policy"
-msgstr "Только один фильтр должен быть указан в параметре правила фильтрации"
+msgstr "Только один фильтр должен быть указан в параметре правила «filter»"
 
 #: src/load_grouppolicy.cc:644
-#, fuzzy, c-format
+#, c-format
 msgid "Missing arguments to '%s' grouping policy"
-msgstr "Слишком много аргументов для группирующего правила by-source"
+msgstr "Отсутствуют аргументы для группирующего правила «%s»"
 
 #: src/load_grouppolicy.cc:667
 #, c-format
@@ -5207,9 +5211,9 @@ msgid "Expected '{', ')', or ',' following '||', got '%s'"
 msgstr "Ожидался символ «{», «)» или «,» после «||», получен «%s»"
 
 #: src/load_grouppolicy.cc:750
-#, fuzzy, c-format
+#, c-format
 msgid "Unmatched '(' in '%s' grouping policy"
-msgstr "Нет пары для «(» в шаблоне группирующего правила"
+msgstr "Нет пары для «(» в группирующем правиле «%s»"
 
 #: src/load_pkgview.cc:64
 msgid "Couldn't parse layout: No column format specified for static item"
@@ -5246,9 +5250,9 @@ msgstr "Неизвестный тип выравнивания «%s»"
 
 #: src/load_sortpolicy.cc:51 src/load_sortpolicy.cc:64
 #: src/load_sortpolicy.cc:77 src/load_sortpolicy.cc:90
-#, fuzzy, c-format
+#, c-format
 msgid "Sorting policy '%s' takes no arguments"
-msgstr "Сортирующим правилам By-name не нужно аргументов"
+msgstr "Сортирующему правилу «%s» аргументов не требуется"
 
 #: src/load_sortpolicy.cc:148
 msgid "Invalid zero-length sorting policy name"
@@ -5844,8 +5848,8 @@ msgid ""
 "Only one of --auto-clean-on-startup, --clean-on-startup, -i, and -u may be "
 "specified\n"
 msgstr ""
-"Можно указать только одно из: --auto-clean-on-startup, --clean-on-startup, -"
-"i и -u\n"
+"Можно указать только одно из: --auto-clean-on-startup, --clean-on-startup, -i "
+"и -u\n"
 
 #: src/main.cc:1088
 msgid ""
@@ -6282,7 +6286,7 @@ msgstr "ERR"
 #: src/pkg_columnizer.cc:394
 #, c-format
 msgid "#Broken: %ld"
-msgstr ""
+msgstr "#Сломано: %ld"
 
 #: src/pkg_columnizer.cc:409
 #, c-format
@@ -6508,7 +6512,7 @@ msgstr "Пакеты, которые зависят от %s"
 msgid "Versions of %s"
 msgstr "Версии %s"
 
-#: src/pkg_item.cc:87
+#: src/pkg_item.cc:88
 #, c-format
 msgid ""
 "%s is an essential package!%n%nAre you sure you want to remove it?%nType "
@@ -6517,12 +6521,12 @@ msgstr ""
 "%s это пакет первой необходимости!%n%nВы действительно хотите его удалить?"
 "%nЕсли да, то введите «%s»."
 
-#: src/pkg_item.cc:372 src/pkg_ver_item.cc:748
+#: src/pkg_item.cc:373 src/pkg_ver_item.cc:748
 #, c-format
 msgid "Reporting a bug in %s:\n"
 msgstr "Отправка сообщения об ошибке в %s:\n"
 
-#: src/pkg_item.cc:392
+#: src/pkg_item.cc:393
 msgid ""
 "You are not root and I cannot find any way to become root.  To reconfigure "
 "this package, install the menu package, the login package, or run aptitude "
@@ -6532,12 +6536,12 @@ msgstr ""
 "суперпользователя. Для перенастройки этого пакета, установите пакет menu, "
 "login, или запустите aptitude с правами суперпользователя."
 
-#: src/pkg_item.cc:400
+#: src/pkg_item.cc:401
 #, c-format
 msgid "Reconfiguring %s\n"
 msgstr "Перенастройка %s\n"
 
-#: src/pkg_item.cc:427 src/pkg_view.cc:673
+#: src/pkg_item.cc:428 src/pkg_view.cc:673
 msgid "Hierarchy Editor"
 msgstr "Редактор иерархии"
 
