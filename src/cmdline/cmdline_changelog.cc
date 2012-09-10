@@ -288,8 +288,6 @@ void do_cmdline_changelog(const vector<string> &packages,
 	pager="more";
     }
 
-  string default_release = aptcfg->Find("APT::Default-Release");
-
   for(vector<string>::const_iterator i=packages.begin(); i!=packages.end(); ++i)
     {
       // We need to do this because some code (see above) checks
@@ -305,12 +303,6 @@ void do_cmdline_changelog(const vector<string> &packages,
 
       if(!cmdline_parse_source(input, source, package, sourcestr))
 	continue;
-
-      if(source == cmdline_version_cand && !default_release.empty())
-	{
-	  source    = cmdline_version_archive;
-	  sourcestr = default_release;
-	}
 
       pkgCache::PkgIterator pkg=(*apt_cache_file)->FindPkg(package);
 
@@ -341,8 +333,13 @@ void do_cmdline_changelog(const vector<string> &packages,
 		  _error->Error(_("%s is not an official Debian package, cannot display its changelog."), input.c_str());
 		  continue;
 		}
-	    }
 
+              get_changelog(ver, filename, term_metrics);
+	    }
+        }
+
+      if(!filename.valid())
+        {
 	  aptitude::cmdline::source_package p =
 	    aptitude::cmdline::find_source_package(package,
 						   source,
@@ -361,39 +358,6 @@ void do_cmdline_changelog(const vector<string> &packages,
 	    }
 	  else
 	    {
-	      // Fall back to string-based guessing if the version is
-	      // invalid.
-	      if(ver.end())
-                {
-                  if(source == cmdline_version_version)
-                    filename = changelog_by_version(package, sourcestr, term_metrics);
-                  // If we don't even have a version string, leave
-                  // filename blank; we'll fail below.
-                }
-	      else
-		{
-		  get_changelog(ver, filename, term_metrics);
-		}
-	    }
-	}
-      else
-	{
-	  aptitude::cmdline::source_package p =
-	    aptitude::cmdline::find_source_package(package,
-						   source,
-						   sourcestr);
-
-	  if(p.valid())
-	    {
-	      get_changelog_from_source(p.get_package(),
-					p.get_version(),
-					p.get_section(),
-					p.get_package(),
-					filename,
-                                        term_metrics);
-	    }
-	  else
-	    {
 	      // We couldn't find a real or source package with the
 	      // given name and version.
 	      //
@@ -402,6 +366,11 @@ void do_cmdline_changelog(const vector<string> &packages,
 	      // recourse.  But if they passed a version number, we
 	      // can fall back to just blindly guessing that the
 	      // version exists.
+
+              // TODO: We can try using the path "current" rather than
+              // "SOURCE_VERSION" in the default case, because this is
+              // supported on http://packages.debian.org/changelogs to
+              // fetch details for the latest version.
 
 	      switch(source)
 		{

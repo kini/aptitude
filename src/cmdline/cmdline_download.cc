@@ -72,7 +72,6 @@ int cmdline_download(int argc, char *argv[])
   pkgAcquire fetcher;
   fetcher.Setup(progress_display.first);
   string filenames[(*apt_cache_file)->Head().PackageCount];
-  string default_release = aptcfg->Find("APT::Default-Release");
 
   for(int i=1; i<argc; ++i)
     {
@@ -80,12 +79,6 @@ int cmdline_download(int argc, char *argv[])
       string name, sourcestr;
       if(!cmdline_parse_source(argv[i], source, name, sourcestr))
 	continue;
-
-      if(source == cmdline_version_cand && !default_release.empty())
-	{
-	  source = cmdline_version_archive;
-	  sourcestr = default_release;
-	}
 
       std::vector<pkgCache::PkgIterator> packages;
 
