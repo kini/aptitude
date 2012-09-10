@@ -80,7 +80,7 @@ bool get_task_packages(std::set<pkgCache::PkgIterator> * const pkgset,
       ++it)
     {
       pkgCache::PkgIterator pkg = (*apt_cache_file)->FindPkg(*it, arch);
-      if(pkg.end() != false)
+      if(pkg.end() == false)
         pkgset->insert(pkg);
     }
 
