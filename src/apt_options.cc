@@ -291,12 +291,12 @@ option_item misc_options[]={
 		 "downloaded from any archive in sources.list."),
 	      PACKAGE "::AutoClean-After-Update", false),
   option_item(N_("URL to use to download changelogs"),
-	      N_("This option controls the template that's used to "
-		 "download changelogs from the Debian Web site.  You "
+	      N_("This option controls the server used to "
+		 "download changelogs.  You "
 		 "should only need to change this if the changelogs move "
 		 "to a different URL."),
-	      PACKAGE "::Changelog-URL-Template",
-	      "http://cgi.debian.org/cgi-bin/get-changelog?package=%s"),
+	      "APT::Changelogs::Server",
+	      "http://packages.debian.org/changelogs"),
   option_item(N_("Display a preview of what will be done before doing it"),
 	      N_("If this option is enabled, then when you ask "
 		 "aptitude to perform an install run, it will "

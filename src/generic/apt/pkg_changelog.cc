@@ -20,6 +20,7 @@
 #include "pkg_changelog.h"
 
 #include "apt.h"
+#include "config_signal.h"
 #include "download_queue.h"
 
 #include <generic/util/job_queue_thread.h>
@@ -542,12 +543,18 @@ namespace aptitude
 	      else
 		realver = source_version;
 
-	      string uri = cw::util::ssprintf("http://packages.debian.org/changelogs/pool/%s/%s/%s/%s_%s/changelog",
+              // WATCH: apt/cmdline/apt-get.cc(DownloadChangelog)
+              string server = aptcfg->Find("APT::Changelogs::Server",
+                                           "http://packages.debian.org/changelogs");
+	      string path = cw::util::ssprintf("pool/%s/%s/%s/%s_%s",
 					      realsection.c_str(),
 					      prefix.c_str(),
 					      source_package.c_str(),
 					      source_package.c_str(),
 					      realver.c_str());
+              string uri = cw::util::ssprintf("%s/%s/changelog",
+                                              server.c_str(),
+                                              path.c_str());
 	      LOG_TRACE(logger,
 			"Adding " << uri
 			<< " as a URI for the changelog of " << source_package << " " << source_version);
