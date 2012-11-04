@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude 0.6.3-3.2\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2012-06-03 11:30+0800\n"
+"POT-Creation-Date: 2012-11-04 19:55+0800\n"
 "PO-Revision-Date: 2012-06-03 12:22+0800\n"
 "Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -378,10 +378,14 @@ msgid "URL to use to download changelogs"
 msgstr "URL som ændringslogs skal hentes fra"
 
 #: src/apt_options.cc:294
+#, fuzzy
+#| msgid ""
+#| "This option controls the template that's used to download changelogs from "
+#| "the Debian Web site.  You should only need to change this if the "
+#| "changelogs move to a different URL."
 msgid ""
-"This option controls the template that's used to download changelogs from "
-"the Debian Web site.  You should only need to change this if the changelogs "
-"move to a different URL."
+"This option controls the server used to download changelogs.  You should "
+"only need to change this if the changelogs move to a different URL."
 msgstr ""
 "Her angives hvilken adresse ændringslogfiler skal hentes fra på Debians "
 "website. Du behøver kun at ændre denne hvis ændringslogfilerne flytter til "
@@ -882,17 +886,17 @@ msgstr "Hentning af ændringslog mislykkedes: %s"
 msgid "Can't execute sensible-pager, is this a working Debian system?"
 msgstr "Kan ikke starte et skærmvisningsprogram, virker dette Debian-system?"
 
-#: src/cmdline/cmdline_changelog.cc:341
+#: src/cmdline/cmdline_changelog.cc:333
 #, c-format
 msgid "%s is not an official Debian package, cannot display its changelog."
 msgstr "%s er ikke en officiel Debian-pakke, kan ikke vise dens ændringslog."
 
-#: src/cmdline/cmdline_changelog.cc:425
+#: src/cmdline/cmdline_changelog.cc:394
 #, c-format
 msgid "Couldn't find a changelog for %s"
 msgstr "Kunne ikke finde en ændringslog til %s"
 
-#: src/cmdline/cmdline_changelog.cc:429
+#: src/cmdline/cmdline_changelog.cc:398
 #, fuzzy, c-format
 #| msgid "Couldn't find a changelog for %s"
 msgid "Couldn't run pager %s"
@@ -968,12 +972,12 @@ msgstr "download: du skal angive mindst én pakke til download\n"
 msgid "Couldn't read source list"
 msgstr "Kunne ikke læse liste over pakkekilder"
 
-#: src/cmdline/cmdline_download.cc:97
+#: src/cmdline/cmdline_download.cc:90
 #, c-format
 msgid "Can't find a package named \"%s\""
 msgstr "Kan ikke finde nogen pakke ved navn \"%s\""
 
-#: src/cmdline/cmdline_download.cc:141
+#: src/cmdline/cmdline_download.cc:134
 #, c-format
 msgid ""
 "No downloadable files for %s version %s; perhaps it is a local or obsolete "
@@ -1308,7 +1312,7 @@ msgid "No packages to show -- enter the package names on the line after 'i'.\n"
 msgstr "Ingen pakker at vise - angiv pakkenavne på linjen efter \"i\".\n"
 
 #: src/cmdline/cmdline_prompt.cc:777 src/cmdline/cmdline_prompt.cc:792
-#: src/pkg_item.cc:410 src/ui.cc:1219
+#: src/pkg_item.cc:411 src/ui.cc:1219
 msgid "Press Return to continue."
 msgstr "Tryk retur for at fortsætte."
 
@@ -2272,12 +2276,12 @@ msgstr "Beskrivelse: "
 msgid "Homepage: "
 msgstr "Hjemmeside: "
 
-#: src/cmdline/cmdline_show.cc:582
+#: src/cmdline/cmdline_show.cc:575
 #, c-format
 msgid "Unable to locate package %s"
 msgstr "Kunne ikke finde pakke %s"
 
-#: src/cmdline/cmdline_show.cc:603
+#: src/cmdline/cmdline_show.cc:596
 #, c-format
 msgid "Unable to parse pattern %s"
 msgstr "Kunne ikke fortolke mønster %s"
@@ -2913,7 +2917,7 @@ msgstr ""
 msgid "Conflicting types for the cost component %s."
 msgstr "Modstridende typer for omkostningskomponenten %s."
 
-#: src/generic/apt/aptitude_resolver_universe.cc:828
+#: src/generic/apt/aptitude_resolver_universe.cc:838
 #, c-format
 msgid ""
 "Invalid safety level \"%s\" (not \"discard\", \"maximum\", \"minimum\", or "
@@ -2974,6 +2978,17 @@ msgstr ""
 #: src/generic/apt/download_update_manager.cc:178
 msgid "Couldn't rebuild package cache"
 msgstr "Kunne ikke genopbygge pakkecachen"
+
+#: src/generic/apt/dpkg.cc:102
+#, fuzzy, c-format
+#| msgid "Couldn't find a changelog for %s"
+msgid "Couldn't chroot into %s for %s"
+msgstr "Kunne ikke finde en ændringslog til %s"
+
+#: src/generic/apt/dpkg.cc:124
+#, c-format
+msgid "Waited for %s but it wasn't there"
+msgstr ""
 
 #: src/generic/apt/dump_packages.cc:539 src/generic/apt/dump_packages.cc:629
 #, c-format
@@ -3099,13 +3114,13 @@ msgstr ""
 "\n"
 "Log færdig.\n"
 
-#: src/generic/apt/matching/match.cc:3093
-#: src/generic/apt/matching/match.cc:3210
+#: src/generic/apt/matching/match.cc:3095
+#: src/generic/apt/matching/match.cc:3212
 msgid "Accessing index"
 msgstr "Tilgår indeks"
 
-#: src/generic/apt/matching/match.cc:3103
-#: src/generic/apt/matching/match.cc:3217
+#: src/generic/apt/matching/match.cc:3105
+#: src/generic/apt/matching/match.cc:3219
 msgid "Filtering packages"
 msgstr "Filtrerer pakker"
 
@@ -3216,18 +3231,18 @@ msgid ""
 "The package index files are corrupted. No Filename: field for package %s."
 msgstr "Pakkeindeksfilerne er ødelagt. Ingen Filename:-linje for pakke %s."
 
-#: src/generic/apt/pkg_changelog.cc:441 src/generic/apt/pkg_changelog.cc:589
+#: src/generic/apt/pkg_changelog.cc:442 src/generic/apt/pkg_changelog.cc:596
 #: src/view_changelog.cc:272
 #, c-format
 msgid "Changelog of %s"
 msgstr "Ændringslog for %s"
 
-#: src/generic/apt/pkg_changelog.cc:565 src/generic/apt/pkg_changelog.cc:570
+#: src/generic/apt/pkg_changelog.cc:572 src/generic/apt/pkg_changelog.cc:577
 #, c-format
 msgid "Failed to download changelogs: %s"
 msgstr "Kunne ikke hente ændringslogge: %s"
 
-#: src/generic/apt/pkg_changelog.cc:575
+#: src/generic/apt/pkg_changelog.cc:582
 msgid "Failed to download changelogs: unexpected exception."
 msgstr "Kunne ikke hente ændringslogge: uventet undtagelse."
 
@@ -6537,7 +6552,7 @@ msgstr "Pakker som afhænger af %s"
 msgid "Versions of %s"
 msgstr "Versioner af %s"
 
-#: src/pkg_item.cc:87
+#: src/pkg_item.cc:88
 #, c-format
 msgid ""
 "%s is an essential package!%n%nAre you sure you want to remove it?%nType "
@@ -6546,12 +6561,12 @@ msgstr ""
 "%s er en essentiel pakke!%n%nEr du sikker på at du vil afinstallere den?%n "
 "Tast \"%s\" hvis du er sikker."
 
-#: src/pkg_item.cc:372 src/pkg_ver_item.cc:748
+#: src/pkg_item.cc:373 src/pkg_ver_item.cc:748
 #, c-format
 msgid "Reporting a bug in %s:\n"
 msgstr "Rapporterer en programfejl i %s:\n"
 
-#: src/pkg_item.cc:392
+#: src/pkg_item.cc:393
 msgid ""
 "You are not root and I cannot find any way to become root.  To reconfigure "
 "this package, install the menu package, the login package, or run aptitude "
@@ -6561,12 +6576,12 @@ msgstr ""
 "For at genopsætte denne pakke, skal pakkerne \"menu\" og \"login\" "
 "installeres, eller aptitude skal køres som root."
 
-#: src/pkg_item.cc:400
+#: src/pkg_item.cc:401
 #, c-format
 msgid "Reconfiguring %s\n"
 msgstr "Genopsætter %s\n"
 
-#: src/pkg_item.cc:427 src/pkg_view.cc:673
+#: src/pkg_item.cc:428 src/pkg_view.cc:673
 msgid "Hierarchy Editor"
 msgstr "Hierarki-redigering"
 

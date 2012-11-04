@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude 0.6.8.1\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2012-09-07 19:44+0800\n"
+"POT-Creation-Date: 2012-11-04 19:55+0800\n"
 "PO-Revision-Date: 2012-08-28 21:01+0400\n"
 "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -373,10 +373,14 @@ msgid "URL to use to download changelogs"
 msgstr "URL для скачивания списков изменений"
 
 #: src/apt_options.cc:294
+#, fuzzy
+#| msgid ""
+#| "This option controls the template that's used to download changelogs from "
+#| "the Debian Web site.  You should only need to change this if the "
+#| "changelogs move to a different URL."
 msgid ""
-"This option controls the template that's used to download changelogs from "
-"the Debian Web site.  You should only need to change this if the changelogs "
-"move to a different URL."
+"This option controls the server used to download changelogs.  You should "
+"only need to change this if the changelogs move to a different URL."
 msgstr ""
 "Эта настройка контролирует шаблон, который используется для скачивания "
 "списка изменений с веб-сайта Debian. Её нужно менять только, если изменился "
@@ -877,18 +881,18 @@ msgstr ""
 "Не удалось запустить соответствующую программу просмотра, это работающий "
 "Debian?"
 
-#: src/cmdline/cmdline_changelog.cc:341
+#: src/cmdline/cmdline_changelog.cc:333
 #, c-format
 msgid "%s is not an official Debian package, cannot display its changelog."
 msgstr ""
 "%s не официальный пакет Debian, невозможно отобразить его список изменений."
 
-#: src/cmdline/cmdline_changelog.cc:425
+#: src/cmdline/cmdline_changelog.cc:394
 #, c-format
 msgid "Couldn't find a changelog for %s"
 msgstr "Не удалось найти список изменений для %s"
 
-#: src/cmdline/cmdline_changelog.cc:429
+#: src/cmdline/cmdline_changelog.cc:398
 #, c-format
 msgid "Couldn't run pager %s"
 msgstr "Не удалось запустить программу просмотра %s"
@@ -961,12 +965,12 @@ msgstr "скачивание: вы должны указать хотя бы о�
 msgid "Couldn't read source list"
 msgstr "Не удалось прочитать файл sources.list"
 
-#: src/cmdline/cmdline_download.cc:97
+#: src/cmdline/cmdline_download.cc:90
 #, c-format
 msgid "Can't find a package named \"%s\""
 msgstr "Не удалось найти пакет, с именем «%s»"
 
-#: src/cmdline/cmdline_download.cc:141
+#: src/cmdline/cmdline_download.cc:134
 #, c-format
 msgid ""
 "No downloadable files for %s version %s; perhaps it is a local or obsolete "
@@ -1189,15 +1193,18 @@ msgid ""
 "*** WARNING ***   Ignoring these trust violations because\n"
 "                  %s::CmdLine::Ignore-Trust-Violations is 'true'!\n"
 msgstr ""
-"*** ПРЕДУПРЕЖДЕНИЕ ***   Игнорирование нарушения условий доверительности, так как\n"
-"                  %s::CmdLine::Ignore-Trust-Violations установлено в «true»!\n"
+"*** ПРЕДУПРЕЖДЕНИЕ ***   Игнорирование нарушения условий доверительности, "
+"так как\n"
+"                  %s::CmdLine::Ignore-Trust-Violations установлено в "
+"«true»!\n"
 
 #: src/cmdline/cmdline_prompt.cc:547
 msgid ""
 "*** WARNING ***   Ignoring these trust violations because\n"
 "                  Apt::Get::AllowUnauthenticated is 'true'!\n"
 msgstr ""
-"*** ПРЕДУПРЕЖДЕНИЕ ***   Игнорирование нарушения условий доверительности, так как\n"
+"*** ПРЕДУПРЕЖДЕНИЕ ***   Игнорирование нарушения условий доверительности, "
+"так как\n"
 "                  Apt::Get::AllowUnauthenticated установлено в «true»!\n"
 
 #. ForTranslators: This string is a confirmation message, which
@@ -2255,12 +2262,12 @@ msgstr "Описание: "
 msgid "Homepage: "
 msgstr "Сайт: "
 
-#: src/cmdline/cmdline_show.cc:582
+#: src/cmdline/cmdline_show.cc:575
 #, c-format
 msgid "Unable to locate package %s"
 msgstr "Не удалось найти пакет %s"
 
-#: src/cmdline/cmdline_show.cc:603
+#: src/cmdline/cmdline_show.cc:596
 #, c-format
 msgid "Unable to parse pattern %s"
 msgstr "Не удалось проанализировать шаблон %s"
@@ -2955,8 +2962,8 @@ msgid ""
 "Some index files failed to download. They have been ignored, or old ones "
 "used instead."
 msgstr ""
-"Не удалось скачать некоторые индексные файлы. Они были проигнорированы, "
-"или вместо них использовались старые."
+"Не удалось скачать некоторые индексные файлы. Они были проигнорированы, или "
+"вместо них использовались старые."
 
 #: src/generic/apt/download_update_manager.cc:178
 msgid "Couldn't rebuild package cache"
@@ -3099,13 +3106,13 @@ msgstr ""
 "\n"
 "Конец журнала.\n"
 
-#: src/generic/apt/matching/match.cc:3093
-#: src/generic/apt/matching/match.cc:3210
+#: src/generic/apt/matching/match.cc:3095
+#: src/generic/apt/matching/match.cc:3212
 msgid "Accessing index"
 msgstr "Выполняется доступ к индексу"
 
-#: src/generic/apt/matching/match.cc:3103
-#: src/generic/apt/matching/match.cc:3217
+#: src/generic/apt/matching/match.cc:3105
+#: src/generic/apt/matching/match.cc:3219
 msgid "Filtering packages"
 msgstr "Фильтруются пакеты"
 
@@ -3215,18 +3222,18 @@ msgid ""
 "The package index files are corrupted. No Filename: field for package %s."
 msgstr "Индексный файл пакетов повреждён. Нет поля Filename: для пакета %s."
 
-#: src/generic/apt/pkg_changelog.cc:441 src/generic/apt/pkg_changelog.cc:589
+#: src/generic/apt/pkg_changelog.cc:442 src/generic/apt/pkg_changelog.cc:596
 #: src/view_changelog.cc:272
 #, c-format
 msgid "Changelog of %s"
 msgstr "Changelog для %s"
 
-#: src/generic/apt/pkg_changelog.cc:565 src/generic/apt/pkg_changelog.cc:570
+#: src/generic/apt/pkg_changelog.cc:572 src/generic/apt/pkg_changelog.cc:577
 #, c-format
 msgid "Failed to download changelogs: %s"
 msgstr "Не удалось скачать список изменений: %s"
 
-#: src/generic/apt/pkg_changelog.cc:575
+#: src/generic/apt/pkg_changelog.cc:582
 msgid "Failed to download changelogs: unexpected exception."
 msgstr "Не удалось скачать список изменений: неожиданное исключение."
 
@@ -3474,8 +3481,8 @@ msgstr "Перезагрузить кэш пакетов"
 #: src/gtk/aptitude.glade:118 src/gtk/aptitude.glade:2372 src/ui.cc:2389
 msgid "Restart the program as root; your settings will be preserved"
 msgstr ""
-"Перезапустите программу с правами суперпользователя; "
-"ваши настройки будут сохранены"
+"Перезапустите программу с правами суперпользователя; ваши настройки будут "
+"сохранены"
 
 #: src/gtk/aptitude.glade:127 src/gtk/aptitude.glade:2382 src/ui.cc:2392
 msgid "Exit the program"
@@ -5848,8 +5855,8 @@ msgid ""
 "Only one of --auto-clean-on-startup, --clean-on-startup, -i, and -u may be "
 "specified\n"
 msgstr ""
-"Можно указать только одно из: --auto-clean-on-startup, --clean-on-startup, -i "
-"и -u\n"
+"Можно указать только одно из: --auto-clean-on-startup, --clean-on-startup, -"
+"i и -u\n"
 
 #: src/main.cc:1088
 msgid ""

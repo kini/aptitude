@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2012-06-03 11:30+0800\n"
+"POT-Creation-Date: 2012-11-04 19:55+0800\n"
 "PO-Revision-Date: 2012-06-03 12:23+0800\n"
 "Last-Translator: quad-nrg.net <yodesy@quad-nrg.net>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -385,10 +385,14 @@ msgid "URL to use to download changelogs"
 msgstr "Διεύθυνση που θα χρησιμοποιηθεί για τη μεταφόρτωση των αρχείων αλλαγών"
 
 #: src/apt_options.cc:294
+#, fuzzy
+#| msgid ""
+#| "This option controls the template that's used to download changelogs from "
+#| "the Debian Web site.  You should only need to change this if the "
+#| "changelogs move to a different URL."
 msgid ""
-"This option controls the template that's used to download changelogs from "
-"the Debian Web site.  You should only need to change this if the changelogs "
-"move to a different URL."
+"This option controls the server used to download changelogs.  You should "
+"only need to change this if the changelogs move to a different URL."
 msgstr ""
 "Η επιλογή αυτή ελέγχει το υπόδειγμα που χρησιμοποιείται για το κατέβασμα "
 "αρχείων αλλαγών (changelogs) από τον δικτυακό τόπο του Debian. Θα χρειαστεί "
@@ -894,19 +898,19 @@ msgstr "Αρχείο Αλλαγής του %s"
 msgid "Can't execute sensible-pager, is this a working Debian system?"
 msgstr "Δεν βρέθηκε πρόγραμμα εμφάνισης, είναι σωστά εγκατεστημένο το σύστημα;"
 
-#: src/cmdline/cmdline_changelog.cc:341
+#: src/cmdline/cmdline_changelog.cc:333
 #, c-format
 msgid "%s is not an official Debian package, cannot display its changelog."
 msgstr ""
 "το %s δεν είναι επίσημο πακέτο του Debian, δεν μπορώ να εμφανίσω το "
 "ημερολόγιο αλλαγών του."
 
-#: src/cmdline/cmdline_changelog.cc:425
+#: src/cmdline/cmdline_changelog.cc:394
 #, c-format
 msgid "Couldn't find a changelog for %s"
 msgstr "Δεν βρέθηκε το ημερολόγιο αλλαγών του %s"
 
-#: src/cmdline/cmdline_changelog.cc:429
+#: src/cmdline/cmdline_changelog.cc:398
 #, fuzzy, c-format
 #| msgid "Couldn't find a changelog for %s"
 msgid "Couldn't run pager %s"
@@ -984,12 +988,12 @@ msgstr ""
 msgid "Couldn't read source list"
 msgstr "Αδύνατη η ανάγνωση της λίστας πηγών  "
 
-#: src/cmdline/cmdline_download.cc:97
+#: src/cmdline/cmdline_download.cc:90
 #, c-format
 msgid "Can't find a package named \"%s\""
 msgstr "Δεν βρέθηκε πακέτο με όνομα \"%s\""
 
-#: src/cmdline/cmdline_download.cc:141
+#: src/cmdline/cmdline_download.cc:134
 #, c-format
 msgid ""
 "No downloadable files for %s version %s; perhaps it is a local or obsolete "
@@ -1334,7 +1338,7 @@ msgstr ""
 "'i'.\n"
 
 #: src/cmdline/cmdline_prompt.cc:777 src/cmdline/cmdline_prompt.cc:792
-#: src/pkg_item.cc:410 src/ui.cc:1219
+#: src/pkg_item.cc:411 src/ui.cc:1219
 msgid "Press Return to continue."
 msgstr "Πατήστε Return για συνέχεια"
 
@@ -2313,12 +2317,12 @@ msgstr "Περιγραφή: "
 msgid "Homepage: "
 msgstr "Homepage: "
 
-#: src/cmdline/cmdline_show.cc:582
+#: src/cmdline/cmdline_show.cc:575
 #, c-format
 msgid "Unable to locate package %s"
 msgstr "Αδύνατος ο εντοπισμός του πακέτου %s"
 
-#: src/cmdline/cmdline_show.cc:603
+#: src/cmdline/cmdline_show.cc:596
 #, c-format
 msgid "Unable to parse pattern %s"
 msgstr "Αδύνατο το parse του προτύπου %s"
@@ -2961,7 +2965,7 @@ msgstr ""
 msgid "Conflicting types for the cost component %s."
 msgstr ""
 
-#: src/generic/apt/aptitude_resolver_universe.cc:828
+#: src/generic/apt/aptitude_resolver_universe.cc:838
 #, c-format
 msgid ""
 "Invalid safety level \"%s\" (not \"discard\", \"maximum\", \"minimum\", or "
@@ -3023,6 +3027,17 @@ msgstr ""
 #: src/generic/apt/download_update_manager.cc:178
 msgid "Couldn't rebuild package cache"
 msgstr "Αδυναμία αναδημιουργίας της cache των πακέτων"
+
+#: src/generic/apt/dpkg.cc:102
+#, fuzzy, c-format
+#| msgid "Couldn't find a changelog for %s"
+msgid "Couldn't chroot into %s for %s"
+msgstr "Δεν βρέθηκε το ημερολόγιο αλλαγών του %s"
+
+#: src/generic/apt/dpkg.cc:124
+#, c-format
+msgid "Waited for %s but it wasn't there"
+msgstr ""
 
 #: src/generic/apt/dump_packages.cc:539 src/generic/apt/dump_packages.cc:629
 #, c-format
@@ -3151,13 +3166,13 @@ msgstr ""
 "\n"
 "Η καταγραφή ολοκληρώθηκε.\n"
 
-#: src/generic/apt/matching/match.cc:3093
-#: src/generic/apt/matching/match.cc:3210
+#: src/generic/apt/matching/match.cc:3095
+#: src/generic/apt/matching/match.cc:3212
 msgid "Accessing index"
 msgstr ""
 
-#: src/generic/apt/matching/match.cc:3103
-#: src/generic/apt/matching/match.cc:3217
+#: src/generic/apt/matching/match.cc:3105
+#: src/generic/apt/matching/match.cc:3219
 #, fuzzy
 #| msgid "Downloading packages"
 msgid "Filtering packages"
@@ -3276,20 +3291,20 @@ msgid ""
 "The package index files are corrupted. No Filename: field for package %s."
 msgstr "Οι κατάλογοι των πακέτων είναι κατεστραμένοι. Το: %s δεν υπάρχει"
 
-#: src/generic/apt/pkg_changelog.cc:441 src/generic/apt/pkg_changelog.cc:589
+#: src/generic/apt/pkg_changelog.cc:442 src/generic/apt/pkg_changelog.cc:596
 #: src/view_changelog.cc:272
 #, fuzzy, c-format
 #| msgid "ChangeLog of %s"
 msgid "Changelog of %s"
 msgstr "Αρχείο Αλλαγής του %s"
 
-#: src/generic/apt/pkg_changelog.cc:565 src/generic/apt/pkg_changelog.cc:570
+#: src/generic/apt/pkg_changelog.cc:572 src/generic/apt/pkg_changelog.cc:577
 #, fuzzy, c-format
 #| msgid "URL to use to download changelogs"
 msgid "Failed to download changelogs: %s"
 msgstr "Διεύθυνση που θα χρησιμοποιηθεί για τη μεταφόρτωση των αρχείων αλλαγών"
 
-#: src/generic/apt/pkg_changelog.cc:575
+#: src/generic/apt/pkg_changelog.cc:582
 #, fuzzy
 #| msgid "URL to use to download changelogs"
 msgid "Failed to download changelogs: unexpected exception."
@@ -6852,7 +6867,7 @@ msgstr "Πακέτα που εξαρτώνται από το %s"
 msgid "Versions of %s"
 msgstr "Εκδόσεις του %s"
 
-#: src/pkg_item.cc:87
+#: src/pkg_item.cc:88
 #, c-format
 msgid ""
 "%s is an essential package!%n%nAre you sure you want to remove it?%nType "
@@ -6861,12 +6876,12 @@ msgstr ""
 "το %s είναι απαραίτητο πακέτο!%n%nΕίστε βέβαιοι για την αφαίρεσή του;"
 "%nΠληκτρολογήστε '%s' αν είσαστε."
 
-#: src/pkg_item.cc:372 src/pkg_ver_item.cc:748
+#: src/pkg_item.cc:373 src/pkg_ver_item.cc:748
 #, c-format
 msgid "Reporting a bug in %s:\n"
 msgstr "Αναφορά ενός σφάλματος για το %s:\n"
 
-#: src/pkg_item.cc:392
+#: src/pkg_item.cc:393
 msgid ""
 "You are not root and I cannot find any way to become root.  To reconfigure "
 "this package, install the menu package, the login package, or run aptitude "
@@ -6876,12 +6891,12 @@ msgstr ""
 "ξανά αυτό το πακέτο, εγκαταστήστε το πακέτο μενού, το πακέτο , ή εκτελέστε "
 "το aptitude ως root."
 
-#: src/pkg_item.cc:400
+#: src/pkg_item.cc:401
 #, c-format
 msgid "Reconfiguring %s\n"
 msgstr "Ξαναρυθμίζεται το %s\n"
 
-#: src/pkg_item.cc:427 src/pkg_view.cc:673
+#: src/pkg_item.cc:428 src/pkg_view.cc:673
 msgid "Hierarchy Editor"
 msgstr "Επεξεργαστής Ιεραρχίας"
 

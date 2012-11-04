@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude 0.4.4\n"
 "Report-Msgid-Bugs-To: aptitude-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2012-06-03 10:50+0800\n"
+"POT-Creation-Date: 2012-11-04 19:57+0800\n"
 "PO-Revision-Date: 2006-11-04 23:34+0900\n"
 "Last-Translator: Noritada Kobayashi <nori1@dolphin.c.u-tokyo.ac.jp>\n"
 "Language-Team: Japanese\n"
@@ -50,7 +50,7 @@ msgstr "<systemitem class=\"username\">root</systemitem>"
 
 #. type: Content of the VERSION entity
 #: en/aptitude.xml:10
-msgid "0.6.8"
+msgid "0.6.8.2"
 msgstr ""
 
 # type: Content of the actions-install entity
@@ -6740,8 +6740,9 @@ msgstr ""
 msgid ""
 "More precisely: they will be removed when there is no path via Depends, "
 "PreDepends, or Recommends to them from a manually installed package.  If "
-"<link linkend='configKeep-Suggests'>Aptitude::Keep-Suggests</link> is true, "
-"a Suggests relationship is also enough to keep a package installed."
+"<link linkend='configApt-AutoRemove-SuggestsImportant'>Apt::AutoRemove::"
+"SuggestsImportant</link> is true, a Suggests relationship is also enough to "
+"keep a package installed."
 msgstr ""
 "より正確には、自動的にインストールされたパッケージは、手動でインストールされ"
 "たパッケージから依存 (Depends)・事前依存 (PreDepends)・推奨 (Recommends) され"
@@ -18391,13 +18392,14 @@ msgstr "<literal>-r</literal>, <literal>--with-recommends</literal>"
 
 # type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
-#: en/aptitude.xml:10585 en/aptitude.xml:10614 en/aptitude.xml:10628
-#: en/aptitude.xml:10642 en/aptitude.xml:10700 en/aptitude.xml:10710
-#: en/aptitude.xml:11120 en/aptitude.xml:11146 en/aptitude.xml:11393
-#: en/aptitude.xml:11491 en/aptitude.xml:11891 en/aptitude.xml:12053
-#: en/aptitude.xml:12085 en/aptitude.xml:12150 en/aptitude.xml:12165
-#: en/aptitude.xml:12203 en/aptitude.xml:12215 en/aptitude.xml:12295
-#: en/aptitude.xml:12381 en/aptitude.xml:12406 en/aptitude.xml:12419
+#: en/aptitude.xml:10585 en/aptitude.xml:10601 en/aptitude.xml:10614
+#: en/aptitude.xml:10628 en/aptitude.xml:10642 en/aptitude.xml:10700
+#: en/aptitude.xml:10710 en/aptitude.xml:11120 en/aptitude.xml:11146
+#: en/aptitude.xml:11393 en/aptitude.xml:11491 en/aptitude.xml:11891
+#: en/aptitude.xml:12053 en/aptitude.xml:12085 en/aptitude.xml:12150
+#: en/aptitude.xml:12165 en/aptitude.xml:12203 en/aptitude.xml:12215
+#: en/aptitude.xml:12295 en/aptitude.xml:12381 en/aptitude.xml:12406
+#: en/aptitude.xml:12419
 #, fuzzy
 msgid "<literal>true</literal>"
 msgstr "リテラル <literal>%</literal>"
@@ -18425,27 +18427,6 @@ msgstr ""
 #, fuzzy
 msgid "<literal>Apt::AutoRemove::SuggestsImportant</literal>"
 msgstr "<literal>~B<replaceable>種類</replaceable></literal>"
-
-# type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
-#. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
-#: en/aptitude.xml:10601 en/aptitude.xml:10662 en/aptitude.xml:10676
-#: en/aptitude.xml:10689 en/aptitude.xml:10721 en/aptitude.xml:10733
-#: en/aptitude.xml:10745 en/aptitude.xml:10757 en/aptitude.xml:10770
-#: en/aptitude.xml:10784 en/aptitude.xml:10796 en/aptitude.xml:10826
-#: en/aptitude.xml:10864 en/aptitude.xml:10876 en/aptitude.xml:10900
-#: en/aptitude.xml:10925 en/aptitude.xml:10940 en/aptitude.xml:10953
-#: en/aptitude.xml:10979 en/aptitude.xml:10991 en/aptitude.xml:11038
-#: en/aptitude.xml:11079 en/aptitude.xml:11108 en/aptitude.xml:11159
-#: en/aptitude.xml:11173 en/aptitude.xml:11214 en/aptitude.xml:11233
-#: en/aptitude.xml:11256 en/aptitude.xml:11272 en/aptitude.xml:11422
-#: en/aptitude.xml:11871 en/aptitude.xml:11909 en/aptitude.xml:11924
-#: en/aptitude.xml:11986 en/aptitude.xml:12013 en/aptitude.xml:12029
-#: en/aptitude.xml:12070 en/aptitude.xml:12179 en/aptitude.xml:12191
-#: en/aptitude.xml:12229 en/aptitude.xml:12255 en/aptitude.xml:12266
-#: en/aptitude.xml:12282
-#, fuzzy
-msgid "<literal>false</literal>"
-msgstr "リテラル <literal>%</literal>"
 
 # type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
@@ -18526,6 +18507,26 @@ msgstr ""
 #: en/aptitude.xml:10661
 msgid "<literal>Aptitude::Allow-Null-Upgrade</literal>"
 msgstr ""
+
+# type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
+#. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
+#: en/aptitude.xml:10662 en/aptitude.xml:10676 en/aptitude.xml:10689
+#: en/aptitude.xml:10721 en/aptitude.xml:10733 en/aptitude.xml:10745
+#: en/aptitude.xml:10757 en/aptitude.xml:10770 en/aptitude.xml:10784
+#: en/aptitude.xml:10796 en/aptitude.xml:10826 en/aptitude.xml:10864
+#: en/aptitude.xml:10876 en/aptitude.xml:10900 en/aptitude.xml:10925
+#: en/aptitude.xml:10940 en/aptitude.xml:10953 en/aptitude.xml:10979
+#: en/aptitude.xml:10991 en/aptitude.xml:11038 en/aptitude.xml:11079
+#: en/aptitude.xml:11108 en/aptitude.xml:11159 en/aptitude.xml:11173
+#: en/aptitude.xml:11214 en/aptitude.xml:11233 en/aptitude.xml:11256
+#: en/aptitude.xml:11272 en/aptitude.xml:11422 en/aptitude.xml:11871
+#: en/aptitude.xml:11909 en/aptitude.xml:11924 en/aptitude.xml:11986
+#: en/aptitude.xml:12013 en/aptitude.xml:12029 en/aptitude.xml:12070
+#: en/aptitude.xml:12179 en/aptitude.xml:12191 en/aptitude.xml:12229
+#: en/aptitude.xml:12255 en/aptitude.xml:12266 en/aptitude.xml:12282
+#, fuzzy
+msgid "<literal>false</literal>"
+msgstr "リテラル <literal>%</literal>"
 
 # type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
@@ -19445,10 +19446,10 @@ msgstr "<literal>-r</literal>, <literal>--with-recommends</literal>"
 #, fuzzy
 msgid ""
 "This is an obsolete option; use <literal><link linkend='configApt-AutoRemove-"
-"RecommendsImportant'>Apt::AutoRemove::Recommends-Important</link></literal> "
+"RecommendsImportant'>Apt::AutoRemove::RecommendsImportant</link></literal> "
 "instead.  Setting this option to <literal>true</literal> has the same effect "
 "as setting <literal><link linkend='configApt-AutoRemove-"
-"RecommendsImportant'>Apt::AutoRemove::Recommends-Important</link></literal> "
+"RecommendsImportant'>Apt::AutoRemove::RecommendsImportant</link></literal> "
 "to <literal>true</literal>."
 msgstr ""
 "This is an obsolete option; use <literal><link "
@@ -19470,10 +19471,10 @@ msgstr "<literal>~B<replaceable>種類</replaceable></literal>"
 #, fuzzy
 msgid ""
 "This is an obsolete option; use <literal><link linkend='configApt-AutoRemove-"
-"SuggestsImportant'>Apt::AutoRemove::Suggests-Important</link></literal> "
+"SuggestsImportant'>Apt::AutoRemove::SuggestsImportant</link></literal> "
 "instead.  Setting this option to <literal>true</literal> has the same effect "
 "as setting <literal><link linkend='configApt-AutoRemove-"
-"SuggestsImportant'>Apt::AutoRemove::Suggests-Important</link></literal> to "
+"SuggestsImportant'>Apt::AutoRemove::SuggestsImportant</link></literal> to "
 "<literal>true</literal>."
 msgstr ""
 "This is an obsolete option; use <literal><link "

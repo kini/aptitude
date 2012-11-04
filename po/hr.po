@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2012-06-03 11:30+0800\n"
+"POT-Creation-Date: 2012-11-04 19:55+0800\n"
 "PO-Revision-Date: 2012-06-03 12:26+0800\n"
 "Last-Translator: Tomislav Krznar <tomislav.krznar@gmail.com>\n"
 "Language-Team: Hrvatski <lokalizacija@linux.hr>\n"
@@ -368,10 +368,14 @@ msgid "URL to use to download changelogs"
 msgstr "URL korišten za preuzimanje popisa promjena"
 
 #: src/apt_options.cc:294
+#, fuzzy
+#| msgid ""
+#| "This option controls the template that's used to download changelogs from "
+#| "the Debian Web site.  You should only need to change this if the "
+#| "changelogs move to a different URL."
 msgid ""
-"This option controls the template that's used to download changelogs from "
-"the Debian Web site.  You should only need to change this if the changelogs "
-"move to a different URL."
+"This option controls the server used to download changelogs.  You should "
+"only need to change this if the changelogs move to a different URL."
 msgstr ""
 "Ova opcija kontrolira predložak koji se koristi za preuzimanje popisa "
 "promjena s Debian Web stranice.  Ovo biste trebali promijeniti samo ako su "
@@ -866,17 +870,17 @@ msgstr "Preuzimanje popisa promjena nije uspjelo: %s"
 msgid "Can't execute sensible-pager, is this a working Debian system?"
 msgstr "Ne mogu izvršiti sensible-pager, je li ovo Debian sustav?"
 
-#: src/cmdline/cmdline_changelog.cc:341
+#: src/cmdline/cmdline_changelog.cc:333
 #, c-format
 msgid "%s is not an official Debian package, cannot display its changelog."
 msgstr "%s nije službeni Debian paket, ne mogu prikazati popis promjena."
 
-#: src/cmdline/cmdline_changelog.cc:425
+#: src/cmdline/cmdline_changelog.cc:394
 #, c-format
 msgid "Couldn't find a changelog for %s"
 msgstr "Ne mogu pronaći popis promjena za %s"
 
-#: src/cmdline/cmdline_changelog.cc:429
+#: src/cmdline/cmdline_changelog.cc:398
 #, c-format
 msgid "Couldn't run pager %s"
 msgstr "Ne mogu pokrenuti preglednik %s"
@@ -948,12 +952,12 @@ msgstr "download: morate navesti barem jedan paket za preuzimanje\n"
 msgid "Couldn't read source list"
 msgstr "Ne mogu čitati popis izvora"
 
-#: src/cmdline/cmdline_download.cc:97
+#: src/cmdline/cmdline_download.cc:90
 #, c-format
 msgid "Can't find a package named \"%s\""
 msgstr "Ne mogu pronaći paket imena \"%s\""
 
-#: src/cmdline/cmdline_download.cc:141
+#: src/cmdline/cmdline_download.cc:134
 #, c-format
 msgid ""
 "No downloadable files for %s version %s; perhaps it is a local or obsolete "
@@ -1284,7 +1288,7 @@ msgid "No packages to show -- enter the package names on the line after 'i'.\n"
 msgstr "Nema paketa za prikaz -- unesite imena paketa u redak nakon 'i'.\n"
 
 #: src/cmdline/cmdline_prompt.cc:777 src/cmdline/cmdline_prompt.cc:792
-#: src/pkg_item.cc:410 src/ui.cc:1219
+#: src/pkg_item.cc:411 src/ui.cc:1219
 msgid "Press Return to continue."
 msgstr "Pritisnite Return za nastavak."
 
@@ -2241,12 +2245,12 @@ msgstr "Opis: "
 msgid "Homepage: "
 msgstr "Početna stranica: "
 
-#: src/cmdline/cmdline_show.cc:582
+#: src/cmdline/cmdline_show.cc:575
 #, c-format
 msgid "Unable to locate package %s"
 msgstr "Ne mogu pronaći paket %s"
 
-#: src/cmdline/cmdline_show.cc:603
+#: src/cmdline/cmdline_show.cc:596
 #, c-format
 msgid "Unable to parse pattern %s"
 msgstr "Ne mogu analizirati uzorak %s"
@@ -2883,7 +2887,7 @@ msgstr ""
 msgid "Conflicting types for the cost component %s."
 msgstr "Sukobljene vrste za cjenovnu komponentu %s."
 
-#: src/generic/apt/aptitude_resolver_universe.cc:828
+#: src/generic/apt/aptitude_resolver_universe.cc:838
 #, c-format
 msgid ""
 "Invalid safety level \"%s\" (not \"discard\", \"maximum\", \"minimum\", or "
@@ -2947,6 +2951,17 @@ msgstr ""
 #| msgid "Couldn't read list of package sources"
 msgid "Couldn't rebuild package cache"
 msgstr "Ne mogu čitati popis izvora paketa"
+
+#: src/generic/apt/dpkg.cc:102
+#, fuzzy, c-format
+#| msgid "Couldn't find a changelog for %s"
+msgid "Couldn't chroot into %s for %s"
+msgstr "Ne mogu pronaći popis promjena za %s"
+
+#: src/generic/apt/dpkg.cc:124
+#, c-format
+msgid "Waited for %s but it wasn't there"
+msgstr ""
 
 #: src/generic/apt/dump_packages.cc:539 src/generic/apt/dump_packages.cc:629
 #, c-format
@@ -3074,13 +3089,13 @@ msgstr ""
 "\n"
 "Zapisivanje gotovo.\n"
 
-#: src/generic/apt/matching/match.cc:3093
-#: src/generic/apt/matching/match.cc:3210
+#: src/generic/apt/matching/match.cc:3095
+#: src/generic/apt/matching/match.cc:3212
 msgid "Accessing index"
 msgstr "Pristupam indeksu"
 
-#: src/generic/apt/matching/match.cc:3103
-#: src/generic/apt/matching/match.cc:3217
+#: src/generic/apt/matching/match.cc:3105
+#: src/generic/apt/matching/match.cc:3219
 msgid "Filtering packages"
 msgstr "Filtriram pakete"
 
@@ -3191,18 +3206,18 @@ msgid ""
 msgstr ""
 "Datoteke indeksa paketa su pokvarene. Nema polja `Ime datoteke:' za paket %s."
 
-#: src/generic/apt/pkg_changelog.cc:441 src/generic/apt/pkg_changelog.cc:589
+#: src/generic/apt/pkg_changelog.cc:442 src/generic/apt/pkg_changelog.cc:596
 #: src/view_changelog.cc:272
 #, c-format
 msgid "Changelog of %s"
 msgstr "Popis promjena za %s"
 
-#: src/generic/apt/pkg_changelog.cc:565 src/generic/apt/pkg_changelog.cc:570
+#: src/generic/apt/pkg_changelog.cc:572 src/generic/apt/pkg_changelog.cc:577
 #, c-format
 msgid "Failed to download changelogs: %s"
 msgstr "Nisam uspio preuzeti popise promjena: %s"
 
-#: src/generic/apt/pkg_changelog.cc:575
+#: src/generic/apt/pkg_changelog.cc:582
 msgid "Failed to download changelogs: unexpected exception."
 msgstr "Nisam uspio preuzeti popise promjena: neočekivana iznimka."
 
@@ -6490,7 +6505,7 @@ msgstr "Paketi koji ovise o %s"
 msgid "Versions of %s"
 msgstr "Inačice %s"
 
-#: src/pkg_item.cc:87
+#: src/pkg_item.cc:88
 #, c-format
 msgid ""
 "%s is an essential package!%n%nAre you sure you want to remove it?%nType "
@@ -6499,12 +6514,12 @@ msgstr ""
 "%s je esencijalni paket!%n%nJeste li sigurni da ga želite ukloniti?%nUpišite "
 "'%s' ako jeste."
 
-#: src/pkg_item.cc:372 src/pkg_ver_item.cc:748
+#: src/pkg_item.cc:373 src/pkg_ver_item.cc:748
 #, c-format
 msgid "Reporting a bug in %s:\n"
 msgstr "Prijavljujem grešku u %s:\n"
 
-#: src/pkg_item.cc:392
+#: src/pkg_item.cc:393
 msgid ""
 "You are not root and I cannot find any way to become root.  To reconfigure "
 "this package, install the menu package, the login package, or run aptitude "
@@ -6514,12 +6529,12 @@ msgstr ""
 "konfiguracije ovog paketa instalirajte pakete menu i login ili pokrenite "
 "aptitude kao root."
 
-#: src/pkg_item.cc:400
+#: src/pkg_item.cc:401
 #, c-format
 msgid "Reconfiguring %s\n"
 msgstr "Ponovo konfiguriram %s\n"
 
-#: src/pkg_item.cc:427 src/pkg_view.cc:673
+#: src/pkg_item.cc:428 src/pkg_view.cc:673
 msgid "Hierarchy Editor"
 msgstr "Uređivač hijerarhije"
 
