@@ -6,12 +6,13 @@
 # Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>, 2004, 2005, 2006, 2007, 2008.
 # Christian Perrier <bubulle@debian.org>, 2004, 2006, 2008, 2009, 2012.
 # Jean-Baka Domelevo Entfellner <domelevo@gmail.com>, 2011, 2012.
+# David Prévot <david@tilapin.org>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: aptitude\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
 "POT-Creation-Date: 2012-11-04 19:55+0800\n"
-"PO-Revision-Date: 2012-07-30 09:23+0100\n"
+"PO-Revision-Date: 2012-11-15 10:11-0400\n"
 "Last-Translator: Jean-Baka Domelevo Entfellner <domelevo@gmail.com>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "Language: fr\n"
@@ -19,19 +20,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 1.4\n"
 "X-Poedit-Language: French\n"
 "X-Poedit-Country: FRANCE\n"
 
 #: src/apt_config_treeitems.cc:99 src/apt_config_treeitems.cc:210
 #: src/apt_config_treeitems.cc:394
 msgid "%BOption:%b  "
-msgstr "%BOption : %b  "
+msgstr "%BOption :%b "
 
 #: src/apt_config_treeitems.cc:101 src/apt_config_treeitems.cc:212
 #: src/apt_config_treeitems.cc:396
 msgid "%BDefault:%b "
-msgstr "%BDéfaut : %b "
+msgstr "%BDéfaut :%b "
 
 #: src/apt_config_treeitems.cc:102 src/apt_config_treeitems.cc:104
 msgid "True"
@@ -44,7 +45,7 @@ msgstr "Faux"
 #: src/apt_config_treeitems.cc:103 src/apt_config_treeitems.cc:214
 #: src/apt_config_treeitems.cc:398
 msgid "%BValue:%b   "
-msgstr "%BValeur : %b   "
+msgstr "%BValeur :%b "
 
 #: src/apt_config_treeitems.cc:280
 #, c-format
@@ -53,7 +54,7 @@ msgstr "Modification de « %ls » : "
 
 #: src/apt_config_treeitems.cc:402
 msgid "%BChoice:%b  "
-msgstr "%BChoix : %b  "
+msgstr "%BChoix :%b  "
 
 #: src/apt_options.cc:160
 msgid "Display some available commands at the top of the screen"
@@ -378,7 +379,6 @@ msgid "URL to use to download changelogs"
 msgstr "URL d'où télécharger les journaux des modifications"
 
 #: src/apt_options.cc:294
-#, fuzzy
 #| msgid ""
 #| "This option controls the template that's used to download changelogs from "
 #| "the Debian Web site.  You should only need to change this if the "
@@ -387,9 +387,9 @@ msgid ""
 "This option controls the server used to download changelogs.  You should "
 "only need to change this if the changelogs move to a different URL."
 msgstr ""
-"Cette option contrôle le patron utilisé pour télécharger les journaux des "
-"modifications depuis le site web de Debian. Vous ne devriez avoir besoin de "
-"le modifier que si l'adresse de téléchargement de ces journaux est modifiée."
+"Cette option contrôle le serveur utilisé pour télécharger les journaux des "
+"modifications. Vous ne devriez avoir besoin de le modifier que si l'adresse "
+"de téléchargement de ces journaux est modifiée."
 
 #: src/apt_options.cc:300
 msgid "Display a preview of what will be done before doing it"
@@ -3039,16 +3039,16 @@ msgid "Couldn't rebuild package cache"
 msgstr "Impossible de reconstruire le cache des paquets"
 
 #: src/generic/apt/dpkg.cc:102
-#, fuzzy, c-format
+#, c-format
 #| msgid "Couldn't find a changelog for %s"
 msgid "Couldn't chroot into %s for %s"
 msgstr ""
-"Impossible de trouver le journal des modifications (« changelog ») pour %s"
+"Impossible d'exécuter %1$s dans le répertoire racine fermé (« chroot ») %1$s"
 
 #: src/generic/apt/dpkg.cc:124
 #, c-format
 msgid "Waited for %s but it wasn't there"
-msgstr ""
+msgstr "%s a été attendu, mais il n'était pas présent"
 
 #: src/generic/apt/dump_packages.cc:539 src/generic/apt/dump_packages.cc:629
 #, c-format
