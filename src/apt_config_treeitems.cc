@@ -391,14 +391,22 @@ namespace aptitude
 	    : W_(dflt_found->second.get_untranslated_description().c_str());
 
 	  std::vector<cw::fragment *> fragments;
+          // ForTranslators: These strings describing config items
+          // should be the same width.
 	  fragments.push_back(drophardwrapbox(cw::fragf(_("%BOption:%b  ")),
 					      item));
+          // ForTranslators: These strings describing config items
+          // should be the same width.
 	  fragments.push_back(drophardwrapbox(cw::fragf(_("%BDefault:%b ")),
 					      dflt_desc));
+          // ForTranslators: These strings describing config items
+          // should be the same width.
 	  fragments.push_back(drophardwrapbox(cw::fragf(_("%BValue:%b   ")),
 					      value_desc));
 
 	  fragments.push_back(cw::newline_fragment());
+          // ForTranslators: These strings describing config items
+          // should be the same width.
 	  fragments.push_back(drophardwrapbox(cw::fragf(_("%BChoice:%b  ")),
 					      _(my_choice_found->second.get_untranslated_description().c_str())));
 	  fragments.push_back(wrapbox(cw::text_fragment(_(my_choice_found->second.get_untranslated_long_description().c_str()))));
