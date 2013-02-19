@@ -1,22 +1,24 @@
 # Danish translations of the Aptitude message strings
 # Morten Brix Pedersen <morten@wtf.dk>, 2001-2002.
-# Morten Bo Johansen <mojo@mbjnet.dk>, 2002-2009.
+# Morten Bo Johansen <mojo@mbjnet.dk>, 2002-2013.
 # Claus Hindsgaul <claus_h@image.dk>, 2004.
 # Claus Hindsgaul <claus.hindsgaul@gmail.com>, 2006, 2007.
 # Ask Hjorth Larsen <asklarsen@gmail.com>, 2010.
 # Copyright (C) 2004, 2006, 2007, 2010 Free Software Foundation, Inc.
 # Version 2.11 korrekturlæst af Ole Laursen og Byrial Jensen
 #
-# defer -> udsætte (tror det er når "triggers" bliver udsat til senere kørsel.  De "deferred" triggers bliver så skrevet ned i en fil til senere kørsel)
-# cost -> omkostning
+# defer -> udsætte (tror det er når "triggers" bliver udsat til senere
+# kørsel.  De "deferred" triggers bliver så skrevet ned i en fil til
+# senere kørsel)
 #
+# cost -> omkostning
 msgid ""
 msgstr ""
-"Project-Id-Version: aptitude 0.6.3-3.2\n"
+"Project-Id-Version: aptitude _0.6.8.2-1\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
 "POT-Creation-Date: 2012-11-04 19:55+0800\n"
-"PO-Revision-Date: 2012-06-03 12:22+0800\n"
-"Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
+"PO-Revision-Date: 2013-02-18 17:37+0100\n"
+"Last-Translator: Morten Bo Johansen <mbj@spamcop.net>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -375,21 +377,15 @@ msgstr ""
 
 #: src/apt_options.cc:293
 msgid "URL to use to download changelogs"
-msgstr "URL som ændringslogs skal hentes fra"
+msgstr "URL som ændringslogge skal hentes fra"
 
 #: src/apt_options.cc:294
-#, fuzzy
-#| msgid ""
-#| "This option controls the template that's used to download changelogs from "
-#| "the Debian Web site.  You should only need to change this if the "
-#| "changelogs move to a different URL."
 msgid ""
 "This option controls the server used to download changelogs.  You should "
 "only need to change this if the changelogs move to a different URL."
 msgstr ""
-"Her angives hvilken adresse ændringslogfiler skal hentes fra på Debians "
-"website. Du behøver kun at ændre denne hvis ændringslogfilerne flytter til "
-"en anden adresse."
+"Her angives serveren som ændringslogfiler skal hentes fra. Du behøver kun at "
+"ændre denne hvis ændringslogfilerne flytter til en anden adresse."
 
 #: src/apt_options.cc:300
 msgid "Display a preview of what will be done before doing it"
@@ -872,10 +868,8 @@ msgstr "Hent:"
 #. same width as the translation of "Ign".
 #: src/cmdline/cmdline_changelog.cc:146
 #: src/cmdline/cmdline_download_progress_display.cc:185
-#, fuzzy
-#| msgid "Err "
 msgid "Err"
-msgstr "Fejl "
+msgstr "Fjl"
 
 #: src/cmdline/cmdline_changelog.cc:179
 #, c-format
@@ -897,10 +891,9 @@ msgid "Couldn't find a changelog for %s"
 msgstr "Kunne ikke finde en ændringslog til %s"
 
 #: src/cmdline/cmdline_changelog.cc:398
-#, fuzzy, c-format
-#| msgid "Couldn't find a changelog for %s"
+#, c-format
 msgid "Couldn't run pager %s"
-msgstr "Kunne ikke finde en ændringslog til %s"
+msgstr "Kunne ikke køre skærmvisningsprogrammet %s"
 
 #: src/cmdline/cmdline_clean.cc:60
 #, c-format
@@ -914,10 +907,8 @@ msgstr "Slet %s* %sdelvis/*\n"
 
 #: src/cmdline/cmdline_clean.cc:76 src/cmdline/cmdline_clean.cc:146
 #: src/ui.cc:1787 src/ui.cc:1875
-#, fuzzy
-#| msgid "Unable to look up your home directory, saving to /tmp/function_pkgs!"
 msgid "Unable to lock the download directory"
-msgstr "Kunne ikke finde dit hjemmekatalog, gemmer i /tmp/function_pkgs!"
+msgstr "Kunne ikke låse kataloget til downloads"
 
 #: src/cmdline/cmdline_clean.cc:106
 #, c-format
@@ -987,18 +978,14 @@ msgstr ""
 "forældet pakke?"
 
 #: src/cmdline/cmdline_download_progress_display.cc:154
-#, fuzzy
-#| msgid "Hit "
 msgid "Hit"
-msgstr "Fundet "
+msgstr "Fundet"
 
 #. ForTranslators: this stands for "ignored" and should be
 #. the same width as the translation of "Err".
 #: src/cmdline/cmdline_download_progress_display.cc:181
-#, fuzzy
-#| msgid "Ign "
 msgid "Ign"
-msgstr "Ign "
+msgstr "Ign"
 
 #: src/cmdline/cmdline_download_progress_display.cc:211
 #, c-format
@@ -1630,16 +1617,13 @@ msgid "Resolver state successfully written!"
 msgstr "Status for afhængighedsudreder gemt!"
 
 #: src/cmdline/cmdline_resolver.cc:222
-#, fuzzy, c-format
-#| msgid ""
-#| "y: %Fn: %Fq: %F,: %F.: %Fo: %Fe: %Fx: %Fr (ID|pkg ver) ...: %F%na (ID|pkg "
-#| "ver) ...: %F%n<ID>: %F%n<ACTION> pkg... : %F%n%F%F%F%F%F%F%F%F"
+#, c-format
 msgid ""
 "y: %Fn: %Fq: %F.: %F,: %Fo: %Fe: %Fx: %Fr (ID|pkg ver) ...: %F%na (ID|pkg "
 "ver) ...: %F%n<ID>: %F%n<ACTION> pkg... : %F%n%F%F%F%F%F%F%F%F"
 msgstr ""
-"y: %Fn: %Fq: %F,: %F.: %Fo: %Fe: %Fx: %Fr (ID|pkg ver) ...: %F%na (ID|pkg "
-"ver) ...: %F%n<ID>: %F%n<HANDLING> pkg... : %F%n%F%F%F%F%F%F%F%F"
+"y: %Fn: %Fq: %F.: %F,: %Fo: %Fe: %Fx: %Fr (ID|pak ver) ...: %F%na (ID|pak "
+"ver) ...: %F%n<ID>: %F%n<HANDLING> pak... : %F%n%F%F%F%F%F%F%F%F"
 
 #: src/cmdline/cmdline_resolver.cc:243
 msgid "accept the proposed changes"
@@ -2177,7 +2161,7 @@ msgstr "nej"
 
 #: src/cmdline/cmdline_show.cc:421 src/pkg_info_screen.cc:125
 msgid "Multi-Arch: "
-msgstr ""
+msgstr "Multiarkt: "
 
 #: src/cmdline/cmdline_show.cc:423 src/gtk/entitysummary.cc:361
 #: src/gtk/previewtab.cc:230
@@ -2259,7 +2243,7 @@ msgstr "Forælder"
 
 #: src/cmdline/cmdline_show.cc:469
 msgid "Enhances"
-msgstr ""
+msgstr "Forbedrer"
 
 #: src/cmdline/cmdline_show.cc:471 src/cmdline/cmdline_why.cc:230
 #: src/cmdline/cmdline_why.cc:1632 src/gtk/dependency_chains_tab.cc:205
@@ -2350,10 +2334,9 @@ msgid "You cannot specify both an archive and a version for a package\n"
 msgstr "Man kan ikke anføre både et arkiv og en version af en pakke\n"
 
 #: src/cmdline/cmdline_util.cc:273
-#, fuzzy, c-format
-#| msgid "Couldn't find a changelog for %s"
+#, c-format
 msgid "Couldn't find task '%s'"
-msgstr "Kunne ikke finde en ændringslog til %s"
+msgstr "Kunne ikke finde opgave \"%s\""
 
 #: src/cmdline/cmdline_util.cc:361
 #, c-format
@@ -2708,10 +2691,8 @@ msgid "Couldn't open \"%s\" for writing"
 msgstr "Kunne ikke åbne \"%s\" til skrivning"
 
 #: src/edit_pkg_hier.cc:340
-#, fuzzy
-#| msgid "Unable to look up your home directory, saving to /tmp/function_pkgs!"
 msgid "Unable to look up your home directory!"
-msgstr "Kunne ikke finde dit hjemmekatalog, gemmer i /tmp/function_pkgs!"
+msgstr "Kunne ikke finde dit hjemmekatalog!"
 
 #: src/generic/apt/aptcache.cc:271
 #, c-format
@@ -2826,17 +2807,15 @@ msgstr ""
 
 #: src/generic/apt/apt.cc:1272
 msgid "foreign"
-msgstr ""
+msgstr "foreign"
 
 #: src/generic/apt/apt.cc:1274
 msgid "same"
-msgstr ""
+msgstr "same"
 
 #: src/generic/apt/apt.cc:1277
-#, fuzzy
-#| msgid "allow_choices"
 msgid "allowed"
-msgstr "allow_choices"
+msgstr "allowed"
 
 #: src/generic/apt/apt.cc:1366
 msgid "main"
@@ -2844,15 +2823,15 @@ msgstr "main"
 
 #: src/generic/apt/apt.cc:1366
 msgid "contrib"
-msgstr ""
+msgstr "contrib"
 
 #: src/generic/apt/apt.cc:1366
 msgid "non-free"
-msgstr ""
+msgstr "non-free"
 
 #: src/generic/apt/apt.cc:1366
 msgid "non-US"
-msgstr ""
+msgstr "non-US"
 
 #: src/generic/apt/aptitude_resolver.cc:441
 #, c-format
@@ -2944,7 +2923,7 @@ msgstr "Kunne ikke hente %s: %s"
 
 #: src/generic/apt/download_install_manager.cc:129
 msgid "Some files failed to download"
-msgstr ""
+msgstr "Visse filer kunne ikke hentes"
 
 #: src/generic/apt/download_install_manager.cc:140
 msgid "Unable to correct for unavailable packages"
@@ -2974,21 +2953,22 @@ msgid ""
 "Some index files failed to download. They have been ignored, or old ones "
 "used instead."
 msgstr ""
+"Visse indeksfiler kunne ikke hentes. De er blevet ignoreret eller også er "
+"ældre indeksfiler anvendt i stedet."
 
 #: src/generic/apt/download_update_manager.cc:178
 msgid "Couldn't rebuild package cache"
 msgstr "Kunne ikke genopbygge pakkecachen"
 
 #: src/generic/apt/dpkg.cc:102
-#, fuzzy, c-format
-#| msgid "Couldn't find a changelog for %s"
+#, c-format
 msgid "Couldn't chroot into %s for %s"
-msgstr "Kunne ikke finde en ændringslog til %s"
+msgstr "Kunne ikke udføre chroot i %s for %s"
 
 #: src/generic/apt/dpkg.cc:124
 #, c-format
 msgid "Waited for %s but it wasn't there"
-msgstr ""
+msgstr "Ventede på %s, men den var der ikke"
 
 #: src/generic/apt/dump_packages.cc:539 src/generic/apt/dump_packages.cc:629
 #, c-format
@@ -3008,7 +2988,7 @@ msgstr "Kunne ikke åbne %s til at logge handlinger"
 #. ForTranslators: This is a date and time format.  See strftime(3).
 #: src/generic/apt/log.cc:66
 msgid "%a, %b %e %Y %T %z"
-msgstr ""
+msgstr "%a, %d. %b %Y %T %z"
 
 #: src/generic/apt/log.cc:68
 #, c-format
@@ -3130,10 +3110,9 @@ msgid "Unknown action type: %s"
 msgstr "Ukendt handlingstype: %s"
 
 #: src/generic/apt/matching/parse.cc:330
-#, fuzzy, c-format
-#| msgid "Unknown action type: %s"
+#, c-format
 msgid "Unknown multiarch type: %s"
-msgstr "Ukendt handlingstype: %s"
+msgstr "Ukendt multiarkitektur-type: %s"
 
 #: src/generic/apt/matching/parse.cc:370
 #, c-format
@@ -3313,7 +3292,7 @@ msgstr "Der er ingen tilgængelige beskrivelser til %s."
 #: src/generic/apt/tasks.cc:123
 #, c-format
 msgid "Unhandled packages method in task %s: %s"
-msgstr ""
+msgstr "Uhåndteret pakkemetode i opgave %s: %s"
 
 #: src/generic/apt/tasks.cc:484
 msgid "Reading task descriptions"
@@ -3488,14 +3467,8 @@ msgid "Reload the package cache"
 msgstr "Genindlæs pakkecachen"
 
 #: src/gtk/aptitude.glade:118 src/gtk/aptitude.glade:2372 src/ui.cc:2389
-#, fuzzy
-#| msgid ""
-#| "Run 'su' to become root; this will restart the program, but your settings "
-#| "will be preserved"
 msgid "Restart the program as root; your settings will be preserved"
-msgstr ""
-"Kør \"su\" for at blive root. Dette vil genstarte programmet, men dine "
-"indstillinger vil blive bevaret"
+msgstr "Genstart programmet som root. Dine indstillinger vil blive bevaret"
 
 #: src/gtk/aptitude.glade:127 src/gtk/aptitude.glade:2382 src/ui.cc:2392
 msgid "Exit the program"
@@ -3571,7 +3544,7 @@ msgstr "Redigér kolonner ..."
 
 #: src/gtk/aptitude.glade:597
 msgid "Dummy label (will be replaced at runtime)."
-msgstr "Standard mærkat (vil blive erstatet ved programkørsel)."
+msgstr "Standard mærkat (vil blive erstattet ved programkørsel)."
 
 #: src/gtk/aptitude.glade:625
 msgid "Make this the default for new package lists."
@@ -3820,7 +3793,7 @@ msgid ""
 "version of this package."
 msgstr ""
 "Ingen nye tilførsler til ændringsloggen. Det ser ud som om du har "
-"installeret en egenoversat verssion af denne pakke."
+"installeret en egenoversat version af denne pakke."
 
 #: src/gtk/changelog.cc:288
 msgid ""
@@ -4362,7 +4335,7 @@ msgstr "Fejl i pakken %s"
 #: src/gtk/gui.cc:906
 #, c-format
 msgid "Asking whether to replace the configuration file %s"
-msgstr "Spørger om opsætningsfilen %s skal erstates"
+msgstr "Spørger om opsætningsfilen %s skal erstattes"
 
 #: src/gtk/gui.cc:962 src/ui.cc:1266
 msgid "Downloading packages"
@@ -4888,10 +4861,9 @@ msgid "%s obsoletes %s"
 msgstr "%s gør %s forældet"
 
 #: src/gtk/resolver.cc:1264 src/solution_fragment.cc:155
-#, fuzzy, c-format
-#| msgid "%s replaces %s"
+#, c-format
 msgid "%s enhances %s"
-msgstr "%s erstatter %s"
+msgstr "%s forbedrer %s"
 
 #: src/gtk/resolver.cc:1376 src/gtk/resolver.cc:1841
 #: src/solution_screen.cc:272
@@ -5164,10 +5136,8 @@ msgid "Terminal policy '%s' should be the last policy in the list"
 msgstr "Terminal-metode \"%s\" bør være den sidste metode i listen"
 
 #: src/load_grouppolicy.cc:385
-#, fuzzy
-#| msgid "Unmatched '(' in pattern grouping policy"
 msgid "Unmatched '(' in grouping policy"
-msgstr "Ubalanceret \"(\" i grupperingsmetode for mønster"
+msgstr "Ubalanceret \"(\" i grupperingsmetode"
 
 #: src/load_grouppolicy.cc:413
 #, c-format
@@ -5184,19 +5154,17 @@ msgstr ""
 
 #: src/load_grouppolicy.cc:428 src/load_grouppolicy.cc:544
 #: src/load_grouppolicy.cc:621
-#, fuzzy, c-format
-#| msgid "Too many arguments to by-section grouping policy"
+#, c-format
 msgid "Too many arguments to '%s' grouping policy"
-msgstr "For mange parametre til grupperingsmetode efter afsnit"
+msgstr "For mange parametre til grupperingsreglen \"%s\""
 
 #: src/load_grouppolicy.cc:441 src/load_grouppolicy.cc:521
 #: src/load_grouppolicy.cc:532 src/load_grouppolicy.cc:555
 #: src/load_grouppolicy.cc:566 src/load_grouppolicy.cc:577
 #: src/load_grouppolicy.cc:608 src/load_grouppolicy.cc:766
-#, fuzzy, c-format
-#| msgid "Task grouping policies take no arguments"
+#, c-format
 msgid "Grouping policy '%s' takes no arguments"
-msgstr "Grupperingsmetode for opgavepakker tager ingen parametre"
+msgstr "Grupperingsmetoden \"%s\" tager ingen parametre"
 
 #: src/load_grouppolicy.cc:460 src/load_grouppolicy.cc:636
 #, c-format
@@ -5209,17 +5177,13 @@ msgid "Unable to parse pattern at '%s'"
 msgstr "Kunne ikke fortolke mønster ved \"%s\""
 
 #: src/load_grouppolicy.cc:502
-#, fuzzy
-#| msgid ""
-#| "Exactly one filter must be provided as an argument to a filter policy"
 msgid "Exactly one filter must be provided as an argument to a 'filter' policy"
 msgstr "Præcis ét filter skal gives som parameter til en filtermetode"
 
 #: src/load_grouppolicy.cc:644
-#, fuzzy, c-format
-#| msgid "Too many arguments to by-section grouping policy"
+#, c-format
 msgid "Missing arguments to '%s' grouping policy"
-msgstr "For mange parametre til grupperingsmetode efter afsnit"
+msgstr "Manglende parametre til grupperingsmetoden \"%s\""
 
 #: src/load_grouppolicy.cc:667
 #, c-format
@@ -5237,10 +5201,9 @@ msgid "Expected '{', ')', or ',' following '||', got '%s'"
 msgstr "Forventede \"{\", \")\", eller \",\" efter \"||\", fik \"%s\""
 
 #: src/load_grouppolicy.cc:750
-#, fuzzy, c-format
-#| msgid "Unmatched '(' in pattern grouping policy"
+#, c-format
 msgid "Unmatched '(' in '%s' grouping policy"
-msgstr "Ubalanceret \"(\" i grupperingsmetode for mønster"
+msgstr "Ubalanceret \"(\" i grupperingsmetoden \"%s\""
 
 #: src/load_pkgview.cc:64
 msgid "Couldn't parse layout: No column format specified for static item"
@@ -5275,10 +5238,9 @@ msgstr "Ukendt grupperingstype \"%s\""
 
 #: src/load_sortpolicy.cc:51 src/load_sortpolicy.cc:64
 #: src/load_sortpolicy.cc:77 src/load_sortpolicy.cc:90
-#, fuzzy, c-format
-#| msgid "By-name sorting policies take no arguments"
+#, c-format
 msgid "Sorting policy '%s' takes no arguments"
-msgstr "Sorteringsmetode efter navn tager ingen parametre"
+msgstr "Sorteringsmetoden \"%s\" tager ingen parametre"
 
 #: src/load_sortpolicy.cc:148
 msgid "Invalid zero-length sorting policy name"
@@ -5363,21 +5325,19 @@ msgid "  Gtk+ support disabled.\n"
 msgstr "  Gtk+-understøttelse slået fra.\n"
 
 #: src/main.cc:179
-#, fuzzy, c-format
-#| msgid "%s %s compiled at %s %s\n"
+#, c-format
 msgid "  Compiled with Qt %s\n"
-msgstr "%s %s oversat på %s %s\n"
+msgstr "  Kompileret med Qt %s\n"
 
 #: src/main.cc:180
 #, c-format
 msgid "  Running on Qt %s\n"
-msgstr ""
+msgstr "  Kører på Qt %s\n"
 
 #: src/main.cc:182
-#, fuzzy, c-format
-#| msgid "  Ept support disabled.\n"
+#, c-format
 msgid "  Qt support disabled.\n"
-msgstr "  Ept-understøttelse slået fra.\n"
+msgstr "  Qt-understøttelse slået fra.\n"
 
 #: src/main.cc:184
 msgid ""
@@ -5505,10 +5465,9 @@ msgid " show         - Display detailed information about a package.\n"
 msgstr " show         - Vis detaljerede oplysninger om en pakke.\n"
 
 #: src/main.cc:213
-#, fuzzy, c-format
-#| msgid " show         - Display detailed information about a package.\n"
+#, c-format
 msgid " versions     - Displays the versions of specified packages.\n"
-msgstr " show         - Vis detaljerede oplysninger om en pakke.\n"
+msgstr " versions     - Viser versionerne af specificerede pakker.\n"
 
 #: src/main.cc:214
 #, c-format
@@ -5579,8 +5538,8 @@ msgstr " -h             Denne hjælpetekst.\n"
 msgid ""
 " --gui          Use the GTK GUI even if disabled in the configuration.\n"
 msgstr ""
-" --gui          Anvend den grafiske brugerflade GTK, selvom den er slået fra "
-"i opsætningen.\n"
+" --gui          Brug den grafiske brugerflade GTK, selvom den er slået fra i "
+"opsætningen.\n"
 
 #: src/main.cc:230
 #, c-format
@@ -5590,20 +5549,17 @@ msgstr ""
 "tilgængelig,\n"
 
 #: src/main.cc:232
-#, fuzzy, c-format
-#| msgid " -h             This help text.\n"
+#, c-format
 msgid " --qt           Use the Qt GUI.\n"
-msgstr " -h             Denne hjælpetekst.\n"
+msgstr " --qt           Anvend den grafiske Qt-brugerflade.\n"
 
 #: src/main.cc:233
-#, fuzzy, c-format
-#| msgid ""
-#| " --gui          Use the GTK GUI even if disabled in the configuration.\n"
+#, c-format
 msgid ""
 " --no-qt        Do not use the Qt GUI even if enabled in the configuration.\n"
 msgstr ""
-" --gui          Anvend den grafiske brugerflade GTK, selvom den er slået fra "
-"i opsætningen.\n"
+" --no-qt        Brug ikke den grafiske Qt-brugerflade selv om den er "
+"aktiveret i opsætningen.\n"
 
 #: src/main.cc:235
 #, c-format
@@ -6137,10 +6093,8 @@ msgid "Encoding of mine-help.txt|UTF-8"
 msgstr "Kodning af mine-help.txt|UTF-8"
 
 #: src/pkg_columnizer.cc:86
-#, fuzzy
-#| msgid "30 6 6 1 1 40 14 14 11 10 35 9 10 2 1 1 10 12 30 15 15"
 msgid "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 1 10 9 12 30 17 15"
-msgstr "30 6 6 1 1 40 14 14 11 10 35 9 10 2 1 1 10 12 30 15 15"
+msgstr "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 1 10 9 12 30 17 15"
 
 #: src/pkg_columnizer.cc:89 src/ui.cc:2782
 msgid "Package"
@@ -6217,7 +6171,7 @@ msgstr "Hent.str"
 #: src/pkg_columnizer.cc:139 src/pkg_columnizer.cc:151 src/pkg_ver_item.cc:99
 #: src/pkg_ver_item.cc:164
 msgid "<N/A>"
-msgstr "<N/A>"
+msgstr "<I/T>"
 
 #: src/pkg_columnizer.cc:181 src/pkg_columnizer.cc:192
 msgid "<none>"
@@ -6658,69 +6612,51 @@ msgstr "make_package_view: ingen \"main widget\" fundet"
 
 #: src/qt/tabs_manager.cc:254
 msgid "Perform Changes"
-msgstr ""
+msgstr "Udfør ændringer"
 
 #: src/qt/widgets/packages_tab.cc:72
-#, fuzzy
-#| msgid "Install"
 msgid "all"
-msgstr "Installér"
+msgstr "alle"
 
 #: src/qt/widgets/packages_tab.cc:72
-#, fuzzy
-#| msgid "installed"
 msgid "installed locally"
-msgstr "installeret"
+msgstr "installeret lokalt"
 
 #: src/qt/widgets/packages_tab.cc:72
-#, fuzzy
-#| msgid "New"
 msgid "new"
-msgstr "Nye"
+msgstr "nye"
 
 #: src/qt/widgets/packages_tab.cc:78
-#, fuzzy
-#| msgid "Show "
 msgid "Show:"
-msgstr "Vis "
+msgstr "Vis:"
 
 #: src/qt/widgets/packages_tab.cc:84
 msgid "Manage Filters"
-msgstr ""
+msgstr "Håndtér filtre"
 
 #: src/qt/widgets/packages_tab.cc:105
-#, fuzzy
-#| msgid "Description"
 msgid "Name and Description"
-msgstr "Beskrivelse"
+msgstr "Navn og beskrivelse"
 
 #: src/qt/widgets/packages_tab.cc:111
-#, fuzzy
-#| msgid "Find"
 msgid "Find:"
-msgstr "Find"
+msgstr "Find:"
 
 #: src/qt/widgets/packages_tab.cc:113
 msgid "by"
-msgstr ""
+msgstr "af"
 
 #: src/qt/windows/main_window.cc:96
-#, fuzzy
-#| msgid "_File"
 msgid "&File"
-msgstr "_Fil"
+msgstr "&Fil"
 
 #: src/qt/windows/main_window.cc:104
-#, fuzzy
-#| msgid "Packages"
 msgid "&Packages"
-msgstr "Pakker"
+msgstr "&Pakker"
 
 #: src/qt/windows/main_window.cc:112
-#, fuzzy
-#| msgid "Help"
 msgid "&Help"
-msgstr "Hjælp"
+msgstr "&Hjælp"
 
 #: src/reason_fragment.cc:31
 msgid "depends on"
@@ -6756,7 +6692,7 @@ msgstr "forælder"
 
 #: src/reason_fragment.cc:44
 msgid "enhances"
-msgstr ""
+msgstr "forbedrer"
 
 #: src/reason_fragment.cc:155
 #, c-format
@@ -8022,381 +7958,3 @@ msgstr "Henter ændringsloggen for %s"
 #: src/view_changelog.cc:415
 msgid "You can only view changelogs of official Debian packages."
 msgstr "Du kan kun se ændringslogfiler for officielle Debian-pakker."
-
-#~ msgid "Err "
-#~ msgstr "Fejl "
-
-#~ msgid "Unable to open /usr/share/tasksel/debian-tasks.desc"
-#~ msgstr "Kunne ikke åbne /usr/share/tasksel/debian-tasks.desc"
-
-#~ msgid "Press return to continue.\n"
-#~ msgstr "Tryk retur for at fortsætte.\n"
-
-#~ msgid "Hierarchy editor"
-#~ msgstr "Hierarkiredigering"
-
-#~ msgid "Leave the following dependencies unresolved:%n"
-#~ msgstr "Efterlad de følgende afhængigheder uafklaret:%n"
-
-#~ msgid "File to which the resolver state should be dumped: "
-#~ msgstr "Fil som status for afhængighedsudreder skal skrives til: "
-
-#~ msgid "Couldn't lock list directory..are you root?"
-#~ msgstr "Kunne ikke låse katalog med lister ... er du root?"
-
-#~ msgid "Unterminated quoted string in command: %s"
-#~ msgstr "Manglende afsluttende citattegn i tekststreng i kommandoen: %s"
-
-#~ msgid "fork() failed: %s"
-#~ msgstr "fork() mislykkedes: %s"
-
-#~ msgid "waitpid() failed: %s"
-#~ msgstr "waitpid() mislykkedes: %s"
-
-#~ msgid "The debtags command must not be an empty string."
-#~ msgstr "Kommandoen \"debtags\" kan ikke være en tom streng."
-
-#~ msgid "The debtags command must be an absolute path."
-#~ msgstr "Kommandoen \"debtags\" skal være en absolut sti."
-
-#~ msgid "The debtags command (%s) cannot be executed: %s"
-#~ msgstr "Kommandoen \"debtags\" (%s) kan ikke udføres: %s"
-
-#~ msgid "Updating debtags database"
-#~ msgstr "Opbygger database over debtags"
-
-#~ msgid "(core dumped)"
-#~ msgstr "(core dumpet)"
-
-#~ msgid "The debtags update process (%s update %s) was killed by signal %d%s."
-#~ msgstr ""
-#~ "Opdateringsprocessen for debtags (%s update %s) blev dræbt ved signal %d"
-#~ "%s."
-
-#~ msgid ""
-#~ "The debtags update process (%s update %s) exited abnormally (code %d)."
-#~ msgstr ""
-#~ "Opdateringsprocessen for debtags (%s update %s) afsluttedes unormalt "
-#~ "(kode %d)."
-
-#~ msgid ""
-#~ "The debtags update process (%s update %s) exited in an unexpected way "
-#~ "(status %d)."
-#~ msgstr ""
-#~ "Opdateringsprocessen for debtags (%s update %s) afsluttedes på uventet "
-#~ "vis (status %d)."
-
-#~ msgid ""
-#~ "Updating the debtags database (%s update %s) failed (perhaps debtags is "
-#~ "not installed?): %s"
-#~ msgstr ""
-#~ "Opdatering af debtags-databasen (%s update %s) mislykkedes (måske fordi "
-#~ "debtags ikke er installeret?): %s"
-
-#~ msgid "Invalid command-line option '%s'"
-#~ msgstr "Ugyldigt kommandolinje-tilvalg  \"%s\""
-
-#~ msgid "Too many arguments to by-section grouping policy"
-#~ msgstr "For mange parametre til grupperingsmetode efter afsnit"
-
-#~ msgid "By-status grouping policies take no arguments"
-#~ msgstr "Grupperingsmetode efter status tager ingen parametre"
-
-#~ msgid "By-mode grouping policies take no arguments"
-#~ msgstr "Grupperingsmetode efter tilstand tager ingen parametre"
-
-#~ msgid "First-character grouping policies take no arguments"
-#~ msgstr "Grupperingsmetode efter forbogstav tager ingen parametre"
-
-#~ msgid "Version-generating grouping policies take no arguments"
-#~ msgstr "Versionsgenererende grupperingsmetode tager ingen parametre"
-
-#~ msgid "Dep-generating grouping policies take no arguments"
-#~ msgstr "Afhængighedsgenererende grupperingsmetoder tager ingen parametre"
-
-#~ msgid "By-priority grouping policies take no arguments"
-#~ msgstr "Grupperingsmetoder efter prioritet tager ingen parametre"
-
-#~ msgid "Expected no more than one argument to a tag grouping policy"
-#~ msgstr "Forventede kun ét argument til grupperingsmetode for mærkater"
-
-#~ msgid "Expected '(' after 'pattern'"
-#~ msgstr "Forventede \"(\" efter \"mønster\""
-
-#~ msgid "Missing arguments to 'pattern'"
-#~ msgstr "Manglende argumenter til \"mønster\""
-
-#~ msgid "By-version sorting policies take no arguments"
-#~ msgstr "Sorteringsmetode efter version tager ingen parametre"
-
-#~ msgid "By-installed size sorting policies take no arguments"
-#~ msgstr "Sorteringsmetode efter installeret størrelse tager ingen parametre"
-
-#~ msgid "By-priority sorting policies take no arguments"
-#~ msgstr "Sorteringsmetode efter prioritet tager ingen parametre"
-
-#~ msgid ""
-#~ "%BOption:%b  %s\n"
-#~ "%BDefault:%b %s\n"
-#~ "%BValue:%b   %s\n"
-#~ msgstr ""
-#~ "%BTilvalg:%b  %s\n"
-#~ "%BForvalgt:%b %s\n"
-#~ "%BVærdi:%b   %s\n"
-
-#~ msgid "Press Return to continue"
-#~ msgstr "Tryk retur for at fortsætte"
-
-#~ msgid "Search for:"
-#~ msgstr "Søg efter:"
-
-#~ msgid ""
-#~ "Unable to resolve dependencies for the upgrade (the resolver timed out)."
-#~ msgstr ""
-#~ "Opgraderingens afhængigheder kunne ikke udredes (tidsudløb på "
-#~ "afhængighedsudreder)."
-
-#~ msgid "Safe actions"
-#~ msgstr "Sikre handlinger"
-
-#~ msgid "Cancel all user actions"
-#~ msgstr "Annullér alle brugerhandlinger"
-
-#~ msgid "Remove packages"
-#~ msgstr "Afinstallér pakker"
-
-#~ msgid "Modify held packages"
-#~ msgstr "Redigér tilbageholdte pakker"
-
-#~ msgid "Install versions from non-default sources"
-#~ msgstr "Installér versioner fra kilder der ikke er standard"
-
-#~ msgid "Remove essential packages"
-#~ msgstr "Afinstallér essentielle pakker"
-
-#~ msgid ""
-#~ "The tier \"%s\", configured in %s::ProblemResolver::Tier-Names, is "
-#~ "missing a Tier entry."
-#~ msgstr ""
-#~ "Laget \"%s\", konfigureret i %s::ProblemResolver::Tier-Names, mangler "
-#~ "etlag."
-
-#~ msgid ""
-#~ "The tier %d, configured in %s::ProblemResolver::Tier-Names, is missing a "
-#~ "Name entry."
-#~ msgstr ""
-#~ "Laget %d, konfigureret i %s::ProblemResolver::Tier-Names, mangler etnavn."
-
-#~ msgid "Unknown error"
-#~ msgstr "Ukendt fejl"
-
-#~ msgid "Tier: %s"
-#~ msgstr "Lag: %s"
-
-#~ msgid "Downloading Changelog"
-#~ msgstr "Henter ændringslog"
-
-#~ msgid "Download Changelog"
-#~ msgstr "Hent ændringslog"
-
-#~ msgid "Unable to delete temporary directory \"%s\""
-#~ msgstr "Kunne ikke fjerne midlertidigt katalog \"%s\""
-
-#~ msgid "_Install/Remove Packages"
-#~ msgstr "_Installér/afinstallér pakker"
-
-#~ msgid "_Update Package List"
-#~ msgstr "_Opdatér pakkeliste"
-
-#~ msgid "Mark Up_gradable"
-#~ msgstr "Markér op_gradérbare"
-
-#~ msgid "_Forget New Packages"
-#~ msgstr "_Ryd liste over nye pakker"
-
-#~ msgid "Canc_el Pending Actions"
-#~ msgstr "A_nnullér afventende handlinger"
-
-#~ msgid "C_lean Package Cache"
-#~ msgstr "_Tøm pakkecache"
-
-#~ msgid "Clean _Obsolete Files"
-#~ msgstr "Slet f_orældede filer"
-
-#~ msgid "_Reload Package Cache"
-#~ msgstr "_Genindlæs pakkecache"
-
-#~ msgid "_Play Minesweeper"
-#~ msgstr "_Spil minestryger"
-
-#~ msgid "_Become Root"
-#~ msgstr "_Bliv root"
-
-#~ msgid "_Quit"
-#~ msgstr "_Afslut"
-
-#~ msgid "View Apt _Errors"
-#~ msgstr "Vis Apt-_fejl"
-
-#~ msgid "Find _Dependency Chains"
-#~ msgstr "Find _afhængighedskæder"
-
-#~ msgid "gtk-close"
-#~ msgstr "gtk-close"
-
-#~ msgid "gtk-find"
-#~ msgstr "gtk-find"
-
-#~ msgid "gtk-apply"
-#~ msgstr "gtk-apply"
-
-#~ msgid "gtk-yes"
-#~ msgstr "gtk-yes"
-
-#~ msgid "gtk-no"
-#~ msgstr "gtk-no"
-
-#~ msgid ""
-#~ "The package %s has no candidate version and will not be upgraded; unable "
-#~ "to show its changelog."
-#~ msgstr ""
-#~ "Pakken %s har ingen kandidatversion og vil ikke blive opgraderet; kunne "
-#~ "ikke vise dens ændringslog."
-
-#~ msgid "but it is not installable"
-#~ msgstr "men den kan ikke installeres"
-
-#~ msgid "Yes"
-#~ msgstr "Ja"
-
-#~ msgid "No"
-#~ msgstr "Nej"
-
-#~ msgid "E: The %s command takes no arguments\n"
-#~ msgstr "E:  Kommandoen %s tager ingen argumenter\n"
-
-#~ msgid "There are now %F."
-#~ msgstr "Der er nu %F."
-
-#~ msgid "The package \"%s\" is a starting point of the search.\n"
-#~ msgstr "Pakken \"%s\" er søgningens udgangspunkt.\n"
-
-#~ msgid "Automatically Installed"
-#~ msgstr "Automatisk installeret"
-
-#~ msgid "Unchanged"
-#~ msgstr "Uændret"
-
-#~ msgid "Remove [unused]"
-#~ msgstr "Afinstallér [ubrugte]"
-
-#~ msgid "Hold [auto]"
-#~ msgstr "Tilbagehold [auto]"
-
-#~ msgid "Install [auto]"
-#~ msgstr "Installér [auto]"
-
-#~ msgid "Remove [auto]"
-#~ msgstr "Afinstallér [auto]"
-
-#~ msgid "Essential"
-#~ msgstr "Essentiel"
-
-#~ msgid "Config Files Remain"
-#~ msgstr "Efterladte opsætningsfiler"
-
-#~ msgid "Garbage"
-#~ msgstr "Spild"
-
-#~ msgid "No reverse dependencies"
-#~ msgstr "Ingen omvendte afhængigheder"
-
-#~ msgid "New Package"
-#~ msgstr "Ny pakke"
-
-#~ msgid "Upgradable"
-#~ msgstr "Kan opgraderes"
-
-#~ msgid "Obsolete"
-#~ msgstr "Forældet"
-
-#~ msgid "Score is %d"
-#~ msgstr "Score er %d"
-
-#~ msgid "(for %s)"
-#~ msgid_plural "(for %s)"
-#~ msgstr[0] "(til %s)"
-#~ msgstr[1] "(til %s)"
-
-#~ msgid ""
-#~ "The resolver timed out after producing a solution; some possible upgrades "
-#~ "might not be performed."
-#~ msgstr ""
-#~ "Afhængighedsudrederen overskred tidsfrist efter at være fremkommet med en "
-#~ "løsning. Visse opgraderinger bliver måske ikke udført."
-
-#~ msgid ""
-#~ "Dependency resolution incomplete (%s); some possible upgrades might not "
-#~ "be performed."
-#~ msgstr ""
-#~ "Afhængighedsudredning ufuldstændig (%s). Visse mulige opgraderinger vil "
-#~ "måske ikke blive gennemført."
-
-#~ msgid ""
-#~ "              - why one or more packages would require the given package\n"
-#~ msgstr ""
-#~ "              - hvorfor en eller flere pakker måtte kræve en given pakke\n"
-
-#~ msgid ""
-#~ " why-not      - Show the manually installed packages that lead to a "
-#~ "conflict\n"
-#~ msgstr ""
-#~ " why-not      - Vis de manuelt installerede pakker som fører til en "
-#~ "konflikt\n"
-
-#~ msgid ""
-#~ "                with the given package, or why one or more packages "
-#~ "would\n"
-#~ msgstr ""
-#~ "                med den givne pakke, eller hvorfor en eller flere pakker "
-#~ "måtte\n"
-
-#~ msgid ""
-#~ "                lead to a conflict with the given package if installed\n"
-#~ msgstr ""
-#~ "                føre til en konflikt med den givne pakke, hvis "
-#~ "installeret\n"
-
-#~ msgid "                indicators.\n"
-#~ msgstr "                indikatorer.\n"
-
-#~ msgid ""
-#~ "The options --safe-resolver and --full-resolver are not meaningful\n"
-#~ "for %s, which always uses the safe resolver.\n"
-#~ msgstr ""
-#~ "Indstillingerne --safe-resolver og --full-resolver giver ikke mening\n"
-#~ "for %s, som altid bruger den sikre afhængighedsudreder.\n"
-
-#~ msgid "Don't warn about the obsolete \"Recommends-Important\" option."
-#~ msgstr ""
-#~ "Undlad at advare om den forældede \"Recommends-Important\"-indstilling."
-
-#~ msgid ""
-#~ "If the configuration option %BRecommends-Important%b is set in the system "
-#~ "configuration file, aptitude will warn you about it on start-up.  Enable "
-#~ "this option to skip this warning (for instance, if your apt configuration "
-#~ "is shared with a system that has an older version of aptitude installed)."
-#~ msgstr ""
-#~ "Hvis indstillingen %BRecommends-Important%b er sat i opsætningsfilen, vil "
-#~ "aptitude advare dig om det ved opstart. Vælg denne indstilling for at "
-#~ "undgå advarslen, f.eks. fordi din apt-opsætning deles med et system der "
-#~ "har en ældre verson af aptitude installeret."
-
-#~ msgid ""
-#~ "The system configuration file (%s) contains a setting for the obsolete "
-#~ "option 'Aptitude::Recommends-Important'; consider setting 'APT::Install-"
-#~ "Recommends' instead or removing this setting."
-#~ msgstr ""
-#~ "System-opsætningsfilen (%s) indeholder den forældede indstilling "
-#~ "\"Aptitude::Recommends-Important\". Du bør i stedet bruge indstillingen "
-#~ "\"APT::Install-Recommends\", eller fjerne førstnævnte indstilling."
