@@ -822,7 +822,6 @@ std::ostream &operator<<(std::ostream &out, const cfg_level &level)
 
 cfg_level aptitude_universe::parse_level(const std::string &s)
 {
-  typedef generic_problem_resolver<aptitude_universe> aptitude_resolver;
   if(s == "maximum")
     return cfg_level::make_level(cost_limits::maximum_level);
   else if(s == "minimum" || s == "")

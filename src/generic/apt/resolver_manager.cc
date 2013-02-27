@@ -384,7 +384,7 @@ void resolver_manager::write_test_control_file(const std::string &outDir,
 
 	typedef generic_choice_set<aptitude_universe> choice_set;
 	typedef generic_choice<aptitude_universe> choice;
-	typedef aptitude_resolver_package package;
+	// typedef aptitude_resolver_package package;
 	typedef aptitude_resolver_version version;
 	typedef aptitude_resolver_dep dep;
 	const choice_set &choices = sol.get_choices();

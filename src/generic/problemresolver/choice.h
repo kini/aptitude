@@ -405,8 +405,6 @@ struct generic_compare_choices_by_effects
 {
   int operator()(const generic_choice<PackageUniverse> &c1, const generic_choice<PackageUniverse> &c2) const
   {
-    typedef typename PackageUniverse::version version;
-    typedef typename PackageUniverse::dep dep;
     using aptitude::util::compare3;
 
     if(c1.get_type() < c2.get_type())
