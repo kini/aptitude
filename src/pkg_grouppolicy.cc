@@ -1096,8 +1096,6 @@ public:
 void pkg_grouppolicy_task::add_package(const pkgCache::PkgIterator &pkg,
 				       pkg_subtree *root)
 {
-  using aptitude::apt::task_list;
-
   set<string> *tasks = aptitude::apt::get_tasks(pkg);
 
   eassert(tasks);

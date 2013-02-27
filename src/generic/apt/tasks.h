@@ -63,9 +63,6 @@ public:
   int relevance;
 };
 
-// Stores the various tasks.
-extern std::map<std::string, task> *task_list;
-
 task *find_task(const std::string &name);
 
 /** \brief Get the set of tasks associated with the given package.
