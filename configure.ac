@@ -957,12 +957,15 @@ AC_CONFIG_FILES([
 	doc/ja/Makefile
 	doc/ja/images/Makefile
 	doc/pl/Makefile
+	doc/ru/Makefile
+	doc/ru/images/Makefile
 	doc/po4a/Makefile
 	doc/po4a/po/Makefile
 	doc/po4a/add_de/Makefile
 	doc/po4a/add_es/Makefile
 	doc/po4a/add_fr/Makefile
 	doc/po4a/add_pl/Makefile
+	doc/po4a/add_ru/Makefile
 	m4/Makefile
 	po/Makefile.in
 	src/Makefile
