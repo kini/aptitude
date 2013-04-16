@@ -1,5 +1,5 @@
 EXTRA_DIST=become-root-snapshot.png broken-snapshot.png \
-	colors-snapshot.png dselect-theme.png expand-once-snapshot.png \
+	dselect-theme.png expand-once-snapshot.png \
 	expand-thrice-snapshot.png expand-twice-snapshot.png \
 	info-snapshot.png install-snapshot.png limit-result-snapshot.png \
 	limit-snapshot.png menu-snapshot.png mine-snapshot2.png \
