@@ -27,13 +27,9 @@
 
 // System includes:
 #include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
 
 #include <gmock/gmock.h>
-
-namespace boost
-{
-  template<typename T> boost::shared_ptr<T> make_shared();
-}
 
 namespace aptitude
 {

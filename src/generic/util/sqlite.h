@@ -374,6 +374,10 @@ namespace aptitude
       statement(db &_parent, sqlite3_stmt *_handle);
       template<typename A, typename B, typename C>
       friend boost::shared_ptr<A> boost::make_shared(const B &, const C &);
+      // FIXME: Ouch.  Boost 1.53 requires this mess or something else
+      // I haven't worked out yet.
+      template<typename A, typename B, typename C>
+      friend typename boost::detail::sp_if_not_array<A>::type boost::make_shared(const B &, const C &);
 
       /** \brief Throw an exception if there isn't result data ready
        *  to be read.
@@ -567,6 +571,9 @@ namespace aptitude
       blob(db &_parent, sqlite3_blob *_handle);
       template<typename A, typename B, typename C>
       friend boost::shared_ptr<A> boost::make_shared(const B &, const C &);
+      // FIXME: Ouch.  Again.
+      template<typename A, typename B, typename C>
+      friend typename boost::detail::sp_if_not_array<A>::type boost::make_shared(const B &, const C &);
 
     public:
       /** \brief Open an existing BLOB.
