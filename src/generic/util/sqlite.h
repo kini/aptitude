@@ -20,6 +20,10 @@
 #ifndef SQLITE_H
 #define SQLITE_H
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <cwidget/generic/threads/threads.h>
 #include <cwidget/generic/util/exception.h>
 
@@ -372,12 +376,15 @@ namespace aptitude
       friend class db::statement_proxy_impl;
 
       statement(db &_parent, sqlite3_stmt *_handle);
+#if defined(BOOST_MAKE_SHARED_SHARED_PTR)
       template<typename A, typename B, typename C>
       friend boost::shared_ptr<A> boost::make_shared(const B &, const C &);
+#elif defined(BOOST_MAKE_SHARED_SP_IF_NOT_ARRAY_TYPE)
       // FIXME: Ouch.  Boost 1.53 requires this mess or something else
       // I haven't worked out yet.
       template<typename A, typename B, typename C>
       friend typename boost::detail::sp_if_not_array<A>::type boost::make_shared(const B &, const C &);
+#endif
 
       /** \brief Throw an exception if there isn't result data ready
        *  to be read.
@@ -569,11 +576,14 @@ namespace aptitude
       friend class db;
 
       blob(db &_parent, sqlite3_blob *_handle);
+#if defined(BOOST_MAKE_SHARED_SHARED_PTR)
       template<typename A, typename B, typename C>
       friend boost::shared_ptr<A> boost::make_shared(const B &, const C &);
+#elif defined(BOOST_MAKE_SHARED_SP_IF_NOT_ARRAY_TYPE)
       // FIXME: Ouch.  Again.
       template<typename A, typename B, typename C>
       friend typename boost::detail::sp_if_not_array<A>::type boost::make_shared(const B &, const C &);
+#endif
 
     public:
       /** \brief Open an existing BLOB.
