@@ -463,7 +463,8 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
     case autoset:
       // Display the "auto" flag UNLESS the package has been removed
       // or purged already and is not presently being installed.
-      if((!pkg.CurrentVer().end() ||
+      if(!pkg.end() &&
+         (!pkg.CurrentVer().end() ||
 	  (*apt_cache_file)[pkg].Install()) &&
 	 ((*apt_cache_file)[pkg].Flags & pkgCache::Flag::Auto))
 	return cw::column_disposition("A", 0);
@@ -472,7 +473,7 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
 
       break;
     case tagged:
-      if((*apt_cache_file)->get_ext_state(pkg).tagged)
+      if(!pkg.end() && (*apt_cache_file)->get_ext_state(pkg).tagged)
 	return cw::column_disposition("*", 0);
       else
 	return cw::column_disposition("", 0);
@@ -505,6 +506,10 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
       {
 	int count=0;
 	char buf[100];
+
+        if(pkg.end())
+          return cw::column_disposition("", 0);
+
 	if(!visible_ver.end())
 	  {
 	    for(pkgCache::DepIterator D=pkg.RevDependsList(); !D.end(); D++)
