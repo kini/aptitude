@@ -7,13 +7,13 @@
 # Dmitry Beloglazov <dm-guest@alioth.debian.org>, 2004.
 # Max Kosmach <max@tcen.ru>, 2008.
 # Yuri Kozlov <yuray@komyakino.ru>, 2004, 2005, 2006, 2007, 2008.
-# Yuri Kozlov <yuray@komyakino.ru>, 2009, 2012.
+# Yuri Kozlov <yuray@komyakino.ru>, 2009, 2012, 2013.
 msgid ""
 msgstr ""
-"Project-Id-Version: aptitude 0.6.8.1\n"
+"Project-Id-Version: aptitude 0.6.8.2\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
 "POT-Creation-Date: 2012-11-04 19:55+0800\n"
-"PO-Revision-Date: 2012-08-28 21:01+0400\n"
+"PO-Revision-Date: 2013-10-03 19:29+0400\n"
 "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "Language: ru\n"
@@ -373,17 +373,12 @@ msgid "URL to use to download changelogs"
 msgstr "URL для скачивания списков изменений"
 
 #: src/apt_options.cc:294
-#, fuzzy
-#| msgid ""
-#| "This option controls the template that's used to download changelogs from "
-#| "the Debian Web site.  You should only need to change this if the "
-#| "changelogs move to a different URL."
 msgid ""
 "This option controls the server used to download changelogs.  You should "
 "only need to change this if the changelogs move to a different URL."
 msgstr ""
-"Эта настройка контролирует шаблон, который используется для скачивания "
-"списка изменений с веб-сайта Debian. Её нужно менять только, если изменился "
+"Этой настройкой задаётся сервер для скачивания "
+"списка изменений. Её нужно менять только, если изменился "
 "URL списка изменений."
 
 #: src/apt_options.cc:300
@@ -2303,7 +2298,7 @@ msgstr "Удаляется пользовательская метка «%s» д
 #: src/cmdline/cmdline_user_tag.cc:104
 #, c-format
 msgid "%s: too few arguments; expected at least a tag name and a package.\n"
-msgstr "%s: слишком много параметров; ожидается только имя метки и пакета.\n"
+msgstr "%s: слишком мало параметров; ожидается только имя метки и пакета.\n"
 
 #: src/cmdline/cmdline_util.cc:167
 #, c-format
@@ -2970,15 +2965,14 @@ msgid "Couldn't rebuild package cache"
 msgstr "Не удалось перестроить кэш пакетов"
 
 #: src/generic/apt/dpkg.cc:102
-#, fuzzy, c-format
-#| msgid "Couldn't find a changelog for %s"
+#, c-format
 msgid "Couldn't chroot into %s for %s"
-msgstr "Не удалось найти список изменений для %s"
+msgstr "Не удалось выполнить chroot в %s для %s"
 
 #: src/generic/apt/dpkg.cc:124
 #, c-format
 msgid "Waited for %s but it wasn't there"
-msgstr ""
+msgstr "Ожидалось завершение процесса %s, но он не был запущен"
 
 #: src/generic/apt/dump_packages.cc:539 src/generic/apt/dump_packages.cc:629
 #, c-format
@@ -3098,11 +3092,13 @@ msgstr "[%s] %s\n"
 #: src/generic/apt/log.cc:145
 #, c-format
 msgid ""
-"===============================================================================\n"
+"=============================================================================="
+"=\n"
 "\n"
 "Log complete.\n"
 msgstr ""
-"===============================================================================\n"
+"=============================================================================="
+"=\n"
 "\n"
 "Конец журнала.\n"
 
