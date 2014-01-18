@@ -4,17 +4,18 @@
 # Copyright (c) 2004 Sebastian Kapfer <sebastian_kapfer@gmx.net>
 # Copyright (c) 2004 Dennis Stampfer <seppy@debian.org>
 # Copyright (c) 2006, 2008 Jens Seidel <jensseidel@users.sf.net>
-# Copyright (c) 2010, 2012, Holger Wansing <linux@wansing-online.de>
+# Copyright (c) 2010-2013 Holger Wansing <linux@wansing-online.de>
+# Copyright (c) 2013 Benjamin Weis <benjamin.weis@gmx.com>
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: aptitude 0.6.6-1\n"
+"Project-Id-Version: aptitude 0.6.8.2-1.2\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
 "POT-Creation-Date: 2012-11-04 19:55+0800\n"
-"PO-Revision-Date: 2012-06-03 12:22+0800\n"
-"Last-Translator: Holger Wansing <linux@wansing-online.de>\n"
+"PO-Revision-Date: 2013-11-11 21:37+0100\n"
+"Last-Translator: Benjamin Weis <benjamin.weis@gmx.com>\n"
 "Language-Team: Debian German <debian-l10n-german@lists.debian.org>\n"
-"Language: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -369,21 +370,16 @@ msgstr ""
 
 #: src/apt_options.cc:293
 msgid "URL to use to download changelogs"
-msgstr "URL für Änderungsprotokolle (Changelog)"
+msgstr "URL zum Herunterladen von Änderungsprotokollen (Changelogs)"
 
 #: src/apt_options.cc:294
-#, fuzzy
-#| msgid ""
-#| "This option controls the template that's used to download changelogs from "
-#| "the Debian Web site.  You should only need to change this if the "
-#| "changelogs move to a different URL."
 msgid ""
 "This option controls the server used to download changelogs.  You should "
 "only need to change this if the changelogs move to a different URL."
 msgstr ""
-"Diese Option steuert die Vorlage, die zum Herunterladen von "
-"Änderungsprotokollen von der Debian-Website verwendet wird. Sie müssen dies "
-"nur ändern, falls sich die URL der Änderungsprotokolle ändert."
+"Diese Option steuert den Server, der zum Herunterladen von "
+"Änderungsprotokollen benutzt wird. Sie müssen dies nur ändern, falls sich "
+"die URL der Änderungsprotokolle ändert."
 
 #: src/apt_options.cc:300
 msgid "Display a preview of what will be done before doing it"
@@ -2383,10 +2379,9 @@ msgstr ""
 "Sie können nicht sowohl Archiv als auch Version eines Pakets angeben.\n"
 
 #: src/cmdline/cmdline_util.cc:273
-#, fuzzy, c-format
-#| msgid "Couldn't run pager %s"
+#, c-format
 msgid "Couldn't find task '%s'"
-msgstr "Pager »%s« konnte nicht gestartet werden."
+msgstr "Task »%s« konnte nicht gefunden werden."
 
 #: src/cmdline/cmdline_util.cc:361
 #, c-format
@@ -2672,7 +2667,7 @@ msgstr "[Treffer]"
 
 #: src/download_item.cc:110 src/download_list.cc:384
 msgid "[Downloaded]"
-msgstr "[Geladen]"
+msgstr "[Heruntergeladen]"
 
 #: src/download_list.cc:82
 #, c-format
@@ -2993,7 +2988,7 @@ msgstr "Herunterladen von %s fehlgeschlagen: %s"
 
 #: src/generic/apt/download_install_manager.cc:129
 msgid "Some files failed to download"
-msgstr ""
+msgstr "Einige Dateien konnten nicht heruntergeladen werden."
 
 # CHECKME
 #: src/generic/apt/download_install_manager.cc:140
@@ -3027,21 +3022,22 @@ msgid ""
 "Some index files failed to download. They have been ignored, or old ones "
 "used instead."
 msgstr ""
+"Einige Indexdateien konnten nicht heruntergeladen werden. Sie wurden "
+"ignoriert oder alte an ihrer Stelle benutzt."
 
 #: src/generic/apt/download_update_manager.cc:178
 msgid "Couldn't rebuild package cache"
 msgstr "Paket-Zwischenspeicher konnte nicht neu erzeugt werden"
 
 #: src/generic/apt/dpkg.cc:102
-#, fuzzy, c-format
-#| msgid "Couldn't find a changelog for %s"
+#, c-format
 msgid "Couldn't chroot into %s for %s"
-msgstr "Änderungsprotokoll für »%s« konnte nicht gefunden werden."
+msgstr "Chroot in %s für %s konnte nicht durchgeführt werden."
 
 #: src/generic/apt/dpkg.cc:124
 #, c-format
 msgid "Waited for %s but it wasn't there"
-msgstr ""
+msgstr "Warten auf %s, existierte aber nicht."
 
 #: src/generic/apt/dump_packages.cc:539 src/generic/apt/dump_packages.cc:629
 #, c-format
@@ -3373,7 +3369,7 @@ msgstr "Keine Beschreibung für %s verfügbar."
 #: src/generic/apt/tasks.cc:123
 #, c-format
 msgid "Unhandled packages method in task %s: %s"
-msgstr ""
+msgstr "Methode für unbehandelte Pakete in Task %s: %s"
 
 #: src/generic/apt/tasks.cc:484
 msgid "Reading task descriptions"
@@ -3556,14 +3552,9 @@ msgid "Reload the package cache"
 msgstr "Paket-Zwischenspeicher neu laden"
 
 #: src/gtk/aptitude.glade:118 src/gtk/aptitude.glade:2372 src/ui.cc:2389
-#, fuzzy
-#| msgid ""
-#| "Run 'su' to become root; this will restart the program, but your settings "
-#| "will be preserved"
 msgid "Restart the program as root; your settings will be preserved"
 msgstr ""
-"»su« ausführen, um root zu werden. Dies wird das Programm neu starten, aber "
-"Ihre Einstellungen werden erhalten bleiben."
+"Starten Sie das Programm als root; Ihre Einstellungen bleiben erhalten."
 
 #: src/gtk/aptitude.glade:127 src/gtk/aptitude.glade:2382 src/ui.cc:2392
 msgid "Exit the program"
@@ -3905,7 +3896,7 @@ msgid ""
 "package."
 msgstr ""
 "Keine neuen Einträge im Änderungsprotokoll; dies wurde wahrscheinlich "
-"verursacht durch einen Binary-only-Upload dieses Pakets."
+"durch einen Binary-only-Upload dieses Pakets verursacht."
 
 #: src/gtk/changelog.cc:390
 #, c-format
