@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude 0.6.8.2\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2012-11-04 19:55+0800\n"
+"POT-Creation-Date: 2014-01-19 13:28+0000\n"
 "PO-Revision-Date: 2013-10-03 19:29+0400\n"
 "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -24,13 +24,17 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 1.4\n"
 
+#. ForTranslators: These strings describing config items
+#. should be the same width.
 #: src/apt_config_treeitems.cc:99 src/apt_config_treeitems.cc:210
-#: src/apt_config_treeitems.cc:394
+#: src/apt_config_treeitems.cc:396
 msgid "%BOption:%b  "
 msgstr "%BПараметр:%b     "
 
+#. ForTranslators: These strings describing config items
+#. should be the same width.
 #: src/apt_config_treeitems.cc:101 src/apt_config_treeitems.cc:212
-#: src/apt_config_treeitems.cc:396
+#: src/apt_config_treeitems.cc:400
 msgid "%BDefault:%b "
 msgstr "%BПо умолчанию:%b "
 
@@ -42,8 +46,10 @@ msgstr "True"
 msgid "False"
 msgstr "False"
 
+#. ForTranslators: These strings describing config items
+#. should be the same width.
 #: src/apt_config_treeitems.cc:103 src/apt_config_treeitems.cc:214
-#: src/apt_config_treeitems.cc:398
+#: src/apt_config_treeitems.cc:404
 msgid "%BValue:%b   "
 msgstr "%BЗначение:%b     "
 
@@ -52,7 +58,9 @@ msgstr "%BЗначение:%b     "
 msgid "Editing \"%ls\": "
 msgstr "Редактируется «%ls»: "
 
-#: src/apt_config_treeitems.cc:402
+#. ForTranslators: These strings describing config items
+#. should be the same width.
+#: src/apt_config_treeitems.cc:410
 msgid "%BChoice:%b  "
 msgstr "%BВыбор:%b        "
 
@@ -377,9 +385,8 @@ msgid ""
 "This option controls the server used to download changelogs.  You should "
 "only need to change this if the changelogs move to a different URL."
 msgstr ""
-"Этой настройкой задаётся сервер для скачивания "
-"списка изменений. Её нужно менять только, если изменился "
-"URL списка изменений."
+"Этой настройкой задаётся сервер для скачивания списка изменений. Её нужно "
+"менять только, если изменился URL списка изменений."
 
 #: src/apt_options.cc:300
 msgid "Display a preview of what will be done before doing it"
@@ -2900,7 +2907,7 @@ msgstr ""
 msgid "Conflicting types for the cost component %s."
 msgstr "Конфликт типов стоимости компонента %s."
 
-#: src/generic/apt/aptitude_resolver_universe.cc:838
+#: src/generic/apt/aptitude_resolver_universe.cc:837
 #, c-format
 msgid ""
 "Invalid safety level \"%s\" (not \"discard\", \"maximum\", \"minimum\", or "
@@ -3092,13 +3099,11 @@ msgstr "[%s] %s\n"
 #: src/generic/apt/log.cc:145
 #, c-format
 msgid ""
-"=============================================================================="
-"=\n"
+"===============================================================================\n"
 "\n"
 "Log complete.\n"
 msgstr ""
-"=============================================================================="
-"=\n"
+"===============================================================================\n"
 "\n"
 "Конец журнала.\n"
 
@@ -6186,7 +6191,7 @@ msgid "<none>"
 msgstr "<пусто>"
 
 #: src/pkg_columnizer.cc:238 src/pkg_grouppolicy.cc:269
-#: src/pkg_grouppolicy.cc:1815 src/qt/package.cc:234
+#: src/pkg_grouppolicy.cc:1813 src/qt/package.cc:234
 #: src/qt/widgets/packages_tab.cc:73
 msgid "virtual"
 msgstr "виртуальный"
@@ -6215,7 +6220,7 @@ msgstr "triggers-awaited"
 msgid "triggers-pending"
 msgstr "triggers-pending"
 
-#: src/pkg_columnizer.cc:266 src/pkg_columnizer.cc:546 src/pkg_ver_item.cc:237
+#: src/pkg_columnizer.cc:266 src/pkg_columnizer.cc:551 src/pkg_ver_item.cc:237
 msgid "ERROR"
 msgstr "ОШИБКА"
 
@@ -6307,21 +6312,21 @@ msgid "DL Size: %sB"
 msgstr "DL размер: %sB"
 
 #. ForTranslators: Hostname
-#: src/pkg_columnizer.cc:498
+#: src/pkg_columnizer.cc:499
 msgid "HN too long"
 msgstr "HN слишком длинна"
 
-#: src/pkg_columnizer.cc:671 src/pkg_columnizer.cc:680
+#: src/pkg_columnizer.cc:676 src/pkg_columnizer.cc:685
 #, c-format
 msgid "Unable to transcode package display format after \"%ls\""
 msgstr ""
 "Не удалось выполнить преобразование формата отображения пакета после «%ls»"
 
-#: src/pkg_columnizer.cc:687
+#: src/pkg_columnizer.cc:692
 msgid "Internal error: Default column string is unparsable"
 msgstr "Внутренняя ошибка: Колонку строки по умолчанию нельзя разобрать"
 
-#: src/pkg_grouppolicy.cc:264 src/pkg_grouppolicy.cc:1127
+#: src/pkg_grouppolicy.cc:264 src/pkg_grouppolicy.cc:1125
 msgid "Tasks"
 msgstr "Задачи"
 
@@ -6453,7 +6458,7 @@ msgstr "Поддержка оборудования"
 msgid "Unrecognized tasks"
 msgstr "Задачи без категории"
 
-#: src/pkg_grouppolicy.cc:1128
+#: src/pkg_grouppolicy.cc:1126
 msgid ""
 "\n"
 " Tasks are groups of packages which provide an easy way to select a "
@@ -6463,26 +6468,26 @@ msgstr ""
 " Задачи — это группы пакетов, которые предоставляют лёгкий способ выбора "
 "заранее сформированного набора пакетов под определённую цель."
 
-#: src/pkg_grouppolicy.cc:1257
+#: src/pkg_grouppolicy.cc:1255
 #, c-format
 msgid "Bad number in format string: %ls"
 msgstr "Неправильное число в строке формата: %ls"
 
-#: src/pkg_grouppolicy.cc:1266
+#: src/pkg_grouppolicy.cc:1264
 #, c-format
 msgid "Match indices must be 1 or greater, not \"%s\""
 msgstr "Индексы совпадения должны быть равны 1 или более, а не «%s»"
 
-#: src/pkg_grouppolicy.cc:1284
+#: src/pkg_grouppolicy.cc:1282
 #, c-format
 msgid "Match index %ls is too large; available groups are (%s)"
 msgstr "Индекс совпадения %ls слишком большой; есть доступные группы (%s)"
 
-#: src/pkg_grouppolicy.cc:1560
+#: src/pkg_grouppolicy.cc:1558
 msgid "TAGLESS PACKAGES"
 msgstr "ПАКЕТЫ БЕЗ МЕТОК"
 
-#: src/pkg_grouppolicy.cc:1561
+#: src/pkg_grouppolicy.cc:1559
 msgid ""
 "\n"
 " These packages have not yet been classified in debtags, or the debtags "
@@ -6492,7 +6497,7 @@ msgstr ""
 " Эти пакеты ещё не отнесены к определенным категориям в debtags, или база "
 "данных debtags не существует (проблема может быть решена установкой debtags)."
 
-#: src/pkg_grouppolicy.cc:1601
+#: src/pkg_grouppolicy.cc:1599
 msgid "MISSING TAG"
 msgstr "МЕТКА ОТСУТСТВУЕТ"
 
