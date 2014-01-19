@@ -1,5 +1,11 @@
 [2014-01-19] Version 0.6.8.3
 
+- Bug fixes:
+
+  * Avoid segfault with some status line formats (Closes: #714186)
+    * src/pkg_columnizer.cc (setup_column): Avoid a crash by checking that the
+      current item is really a package before accessing package properties.
+
 - Build system changes:
 
   * Fix FTBFS with g++-4.8 by removing unused typedefs (Closes: #701243)
@@ -31,13 +37,20 @@
   * Replace solitary use of "visual mode" with "visual interface" in
     doc/en/aptitude.xml
 
+  * Typo in manual: 'Apt::AutoRemove::InstallRecommends' should be
+    'RecommendsImportant' in doc/en/manpage.xml
+
 - Translation updates:
 
+  * Some config item strings should be the same width
+    * po/*.po: Use whitespace to adjust the widths where they differ.
+    * src/apt_config_treeitems.cc: Add comment for translators.
   * German, by Benjamin Weis and Holger Wansing (Closes: #729329)
   * Japanese (Closes: #728115)
   * Russian by Yuri Kozlov (Closes: #725280)
   * Asturian by Inigo Varela (Closes: #698512)
   * Danish by Morten Bo Johansen (Closes: #700885)
+  * French by David Prévot (Closes: #693323)
 
 [9/7/2012]
 Version 0.6.8.2                             "Say 'what' again"
