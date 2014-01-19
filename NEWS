@@ -1,9 +1,43 @@
-UNRELEASED
+[2014-01-19] Version 0.6.8.3
+
+- Build system changes:
+
+  * Fix FTBFS with g++-4.8 by removing unused typedefs (Closes: #701243)
+    * src/generic/apt/aptitude_resolver.universe.cc
+    * src/generic/apt/resolver_manager.cc
+    * src/generic/problemresolver/choice.h
+
+  * Support Boost 1.53 (Closes: #710208)
+    * configure.ac: Determine the return type of boost::make_shared.
+    * src/generic/util/sqlite.h: Use that information.
+    * src/generic/util/sqlite.h (statement, blob): Also befriend the new
+      boost::make_shared prototype.  Some better solution may be possible at a
+      later point, this is enough for now.
+    * src/cmdline/mocks/terminal.h: Remove predefinition of boost::make_shared
+      that conflicts with Boost 1.53.
+
+- Internal changes:
+
+  * task_list is not extern
+    * src/generic/apt/tasks.h:
+    * src/pkg_grouppolicy.cc: Variable task_list is only used within tasks.cc,
+      and need not be extern.
 
 - Documentation:
 
-  * Russian translation.  Thanks to Lev Lamberov and the Russian
-    localization team.
+  * Russian translation.  Thanks to Lev Lamberov and the Russian localization
+    team.
+
+  * Replace solitary use of "visual mode" with "visual interface" in
+    doc/en/aptitude.xml
+
+- Translation updates:
+
+  * German, by Benjamin Weis and Holger Wansing (Closes: #729329)
+  * Japanese (Closes: #728115)
+  * Russian by Yuri Kozlov (Closes: #725280)
+  * Asturian by Inigo Varela (Closes: #698512)
+  * Danish by Morten Bo Johansen (Closes: #700885)
 
 [9/7/2012]
 Version 0.6.8.2                             "Say 'what' again"
