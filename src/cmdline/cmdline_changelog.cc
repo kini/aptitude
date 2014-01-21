@@ -325,7 +325,8 @@ void do_cmdline_changelog(const vector<string> &packages,
 	      for(pkgCache::VerFileIterator vf=ver.FileList();
 		  !vf.end() && !in_debian; ++vf)
 		if(!vf.File().end() && vf.File().Origin()!=NULL &&
-		   strcmp(vf.File().Origin(), "Debian")==0)
+		   (strcmp(vf.File().Origin(), "Debian")==0 ||
+		    strcmp(vf.File().Origin(), "Debian Backports")==0))
 		  in_debian=true;
 
 	      if(!in_debian)
