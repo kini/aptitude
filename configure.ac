@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT([aptitude], [0.6.8.3], [aptitude-devel@lists.alioth.debian.org])
+AC_INIT([aptitude], [0.6.8.4], [aptitude-devel@lists.alioth.debian.org])
 AC_CONFIG_SRCDIR([src/main.cc])
 AM_INIT_AUTOMAKE([dist-xz no-dist-gzip -Wno-portability])
 AM_CONFIG_HEADER(config.h)
