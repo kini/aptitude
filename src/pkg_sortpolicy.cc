@@ -161,6 +161,21 @@ PKG_SORTPOLICY_SUBCLASS(pkg_sortpolicy_priority,
 			else // if(pri1>pri2)
 			  return 1;);
 
+// debsize-sorting, treats virtual packages as 0-size
+PKG_SORTPOLICY_SUBCLASS(pkg_sortpolicy_debsize,
+			if(ver1.end() && ver2.end())
+			  return 0;
+			else if(ver1.end())
+			  return 1;
+			else if(ver2.end())
+			  return -1;
+			else if(ver1->Size<ver2->Size)
+			  return -1;
+			else if(ver1->Size>ver2->Size)
+			  return 1;
+			else
+			  return 0;);
+
 // Sort by version number
 PKG_SORTPOLICY_SUBCLASS(pkg_sortpolicy_ver,
 			if(ver1.end())
