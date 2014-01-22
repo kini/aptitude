@@ -259,12 +259,7 @@ void pkg_grouppolicy_section::add_package(const pkgCache::PkgIterator &pkg,
   bool may_passthrough = false;
 
   string section;
-  if(!strncmp(pkg.Name(), "task-", 5))
-    {
-      section=_("Tasks");
-      may_passthrough = true;
-    }
-  else if(pkg.VersionList().end())
+  if(pkg.VersionList().end())
     {
       section=_("virtual");
       may_passthrough = true;
@@ -273,6 +268,11 @@ void pkg_grouppolicy_section::add_package(const pkgCache::PkgIterator &pkg,
 	  (*pkg.VersionList().Section()) == '\0')
     {
       section=_("Unknown");
+      may_passthrough = true;
+    }
+  else if(strcmp(pkg.VersionList().Section(), "tasks") == 0)
+    {
+      section=_("Tasks");
       may_passthrough = true;
     }
   else
