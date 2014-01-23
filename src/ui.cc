@@ -172,6 +172,7 @@ sigc::signal0<bool, cw::util::accumulate_or> find_cancel_limit_enabled;
 sigc::signal0<bool, cw::util::accumulate_or> find_broken_enabled;
 
 sigc::signal0<bool, cw::util::accumulate_or> package_install;
+sigc::signal0<bool, cw::util::accumulate_or> package_reinstall;
 sigc::signal0<bool, cw::util::accumulate_or> package_remove;
 sigc::signal0<bool, cw::util::accumulate_or> package_purge;
 sigc::signal0<bool, cw::util::accumulate_or> package_hold;
@@ -2407,6 +2408,10 @@ cw::menu_info package_menu[]={
   cw::menu_info(cw::menu_info::MENU_ITEM, N_("^Install"), "Install",
 	       N_("Flag the currently selected package for installation or upgrade"),
 	       sigc::hide_return(package_install.make_slot()),
+	       package_menu_enabled.make_slot()),
+  cw::menu_info(cw::menu_info::MENU_ITEM, N_("R^einstall"), "Reinstall",
+	       N_("Flag the currently selected package for reinstallation"),
+	       sigc::hide_return(package_reinstall.make_slot()),
 	       package_menu_enabled.make_slot()),
   cw::menu_info(cw::menu_info::MENU_ITEM, N_("^Remove"), "Remove",
 	       N_("Flag the currently selected package for removal"),

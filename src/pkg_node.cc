@@ -115,6 +115,12 @@ bool pkg_tree_node::package_install()
 
 }
 
+bool pkg_tree_node::package_reinstall()
+{
+  return package_action(&pkg_tree_node::reinstall);
+
+}
+
 bool pkg_tree_node::package_remove()
 {
   return package_action(&pkg_tree_node::remove);

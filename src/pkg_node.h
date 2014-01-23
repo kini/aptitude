@@ -74,6 +74,7 @@ public:
   // Menu redirections:
   bool package_enabled();
   bool package_install();
+  bool package_reinstall();
   bool package_remove();
   bool package_purge();
   bool package_hold();

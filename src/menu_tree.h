@@ -115,6 +115,9 @@ public:
   /** If a pkg_node is currently selected, execute its "install" operation. */
   bool package_install();
 
+  /** If a pkg_node is currently selected, execute its "reinstall" operation. */
+  bool package_reinstall();
+
   /** If a pkg_node is currently selected, execute its "remove" operation. */
   bool package_remove();
 

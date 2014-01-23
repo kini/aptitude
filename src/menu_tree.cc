@@ -125,6 +125,11 @@ bool menu_tree::package_install()
   return proxy_redirect(&menu_redirect::package_install);
 }
 
+bool menu_tree::package_reinstall()
+{
+  return proxy_redirect(&menu_redirect::package_reinstall);
+}
+
 bool menu_tree::package_remove()
 {
   return proxy_redirect(&menu_redirect::package_remove);

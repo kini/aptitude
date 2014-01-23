@@ -86,6 +86,9 @@ extern sigc::signal0<bool, cwidget::util::accumulate_or> package_menu_enabled;
 /** Emitted for Package -> Install. */
 extern sigc::signal0<bool, cwidget::util::accumulate_or> package_install;
 
+/** Emitted for Package -> Reinstall. */
+extern sigc::signal0<bool, cwidget::util::accumulate_or> package_reinstall;
+
 /** Emitted for Package -> Remove. */
 extern sigc::signal0<bool, cwidget::util::accumulate_or> package_remove;
 

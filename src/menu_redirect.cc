@@ -36,6 +36,7 @@ bool menu_redirect::undo_undo_enabled() { return false; }
 bool menu_redirect::undo_undo() { return false; }
 bool menu_redirect::package_enabled() { return false; }
 bool menu_redirect::package_install() { return false; }
+bool menu_redirect::package_reinstall() { return false; }
 bool menu_redirect::package_remove() { return false; }
 bool menu_redirect::package_purge() { return false; }
 bool menu_redirect::package_hold() { return false; }
@@ -110,6 +111,11 @@ void create_menu_bindings(menu_redirect *menu_handler,
 				     valve.weak_ref(),
 				     menu_handler,
 				     &menu_redirect::package_install));
+
+  package_reinstall.connect(sigc::bind(sigc::ptr_fun(do_menu_callback),
+				     valve.weak_ref(),
+				     menu_handler,
+				     &menu_redirect::package_reinstall));
 
   package_remove.connect(sigc::bind(sigc::ptr_fun(do_menu_callback),
 				    valve.weak_ref(),

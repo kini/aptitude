@@ -25,6 +25,7 @@
   <!ENTITY undo-undo "<menuchoice><shortcut><keycombo action='simul'><keycap>Control</keycap><keycap>u</keycap></keycombo></shortcut><guimenu>Undo</guimenu><guimenuitem>Undo</guimenuitem></menuchoice>">
 
   <!ENTITY package-install "<menuchoice><shortcut><keycap>+</keycap></shortcut><guimenu>Package</guimenu><guimenuitem>Install</guimenuitem></menuchoice>">
+  <!ENTITY package-reinstall "<menuchoice><shortcut><keycap>L</keycap></shortcut><guimenu>Package</guimenu><guimenuitem>Reinstall</guimenuitem></menuchoice>">
   <!ENTITY package-remove "<menuchoice><shortcut><keycap>-</keycap></shortcut><guimenu>Package</guimenu><guimenuitem>Remove</guimenuitem></menuchoice>">
   <!ENTITY package-purge "<menuchoice><shortcut><keycap>_</keycap></shortcut><guimenu>Package</guimenu><guimenuitem>Purge</guimenuitem></menuchoice>">
   <!ENTITY package-keep "<menuchoice><shortcut><keycap>:</keycap></shortcut><guimenu>Package</guimenu><guimenuitem>Keep</guimenuitem></menuchoice>">
@@ -2270,6 +2271,15 @@ Abort.</screen>
 		  </row>
 
 		  <row>
+		    <entry>&package-reinstall;</entry>
+
+		    <entry>
+		      Flag the currently selected package for <link
+		      linkend='pkgCmdReinstall'>reinstallation</link>.
+		    </entry>
+		  </row>
+
+		  <row>
 		    <entry>&package-remove;</entry>
 
 		    <entry>
@@ -3537,16 +3547,10 @@ i A 0.5.25
 	      </row>
 
 	      <row id='pkgCmdReinstall'>
-		<entry>
-		  <para>
-		    Reinstall: press <keycap>L</keycap>
-		  </para>
-		</entry>
+		<entry>Reinstall: &package-reinstall;</entry>
 
 		<entry>
-		  <para>
-		    Reinstalls the package.
-		  </para>
+		  <para>Flag the current package for reinstallation.</para>
 
 		  <para>
 		    Note that the reinstallation will not be saved

@@ -50,6 +50,12 @@ public:
    */
   virtual bool package_install();
 
+  /** Reinstall the selected package (if any).
+   *
+   *  \return \b true to stop emission of the signal.
+   */
+  virtual bool package_reinstall();
+
   /** Remove the selected package (if any). */
   virtual bool package_remove();
 
