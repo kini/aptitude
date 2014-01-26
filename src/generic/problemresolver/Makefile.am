@@ -1,4 +1,4 @@
-INCLUDES = -I$(top_builddir) -I$(srcdir) -I$(top_srcdir) -I$(top_srcdir)/src
+AM_CPPFLAGS = -I$(top_builddir) -I$(srcdir) -I$(top_srcdir) -I$(top_srcdir)/src
 
 EXTRA_DIST=model.tex test1.txt test3.txt test4.txt resolver_undo.h
 

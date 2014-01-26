@@ -13,7 +13,7 @@ endif
 SUBDIRS=generic $(MAYBE_GTK) $(MAYBE_QT) cmdline mine
 
 localedir = $(datadir)/locale
-INCLUDES = -I$(top_builddir) -I$(srcdir) -I$(top_srcdir) -I$(top_srcdir)/src
+AM_CPPFLAGS = -I$(top_builddir) -I$(srcdir) -I$(top_srcdir) -I$(top_srcdir)/src
 DEFS = -DLOCALEDIR=\"$(localedir)\" @DEFS@
 
 bin_PROGRAMS=aptitude
