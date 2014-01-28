@@ -61,11 +61,6 @@ using boost::shared_ptr;
 namespace
 {
 
-void set_name(temp::name n, temp::name *target)
-{
-  *target = n;
-}
-
   // Temporary hack to display download progress for a single file.
   //
   // Eventually there should be a generic class to track the progress
@@ -184,23 +179,49 @@ void set_name(temp::name n, temp::name *target)
     }
   };
 
-  void get_changelog(const pkgCache::VerIterator &ver,
+
+  /** \brief Get a package's changelog.
+   *
+   *  \param info Structure with the information needed to get the changelog
+   *  \param out_changelog_file  Where to store the resulting file.
+   *  \param term_metrics Data about the terminal
+   *
+   *  This routine exits once the download is complete.
+   */
+  void get_changelog(const boost::shared_ptr<aptitude::apt::changelog_info>& info,
 		     temp::name &out_changelog_file,
-                     const shared_ptr<terminal_metrics> &term_metrics)
+		     const shared_ptr<terminal_metrics> &term_metrics)
   {
-    const std::string short_description =
-      (boost::format("Changelog of %s") % ver.ParentPkg().Name()).str();
+    const std::string short_description = _("Changelog of") + std::string(" ") + info->get_display_name();
 
     boost::shared_ptr<changelog_download_callbacks>
       callbacks = boost::make_shared<changelog_download_callbacks>(boost::ref(out_changelog_file),
 								   short_description,
                                                                    term_metrics);
 
-    get_changelog(aptitude::apt::changelog_info::create(ver),
-		  callbacks,
-		  aptitude::cmdline::post_thunk);
+    aptitude::apt::get_changelog(info, callbacks, aptitude::cmdline::post_thunk);
 
     aptitude::cmdline::main_loop();
+  }
+
+  /** \brief Get a package's changelog.
+   *
+   *  \param ver Version iterator for which to get the changelog
+   *  \param out_changelog_file  Where to store the resulting file.
+   *  \param term_metrics Data about the terminal
+   *
+   *  This routine exits once the download is complete.
+   */
+  void get_changelog(const pkgCache::VerIterator &ver,
+		     temp::name &out_changelog_file,
+                     const shared_ptr<terminal_metrics> &term_metrics)
+  {
+    boost::shared_ptr<aptitude::apt::changelog_info> info =
+      aptitude::apt::changelog_info::create(ver);
+
+    get_changelog(info,
+		  out_changelog_file,
+		  term_metrics);
   }
 
   /** \brief download a source package's changelog.
@@ -222,24 +243,13 @@ void set_name(temp::name n, temp::name *target)
 				 temp::name &out_changelog_file,
                                  const shared_ptr<terminal_metrics> &term_metrics)
   {
-    const std::string short_description =
-      (boost::format("Changelog of %s") % name).str();
-
-    boost::shared_ptr<changelog_download_callbacks>
-      callbacks = boost::make_shared<changelog_download_callbacks>(boost::ref(out_changelog_file),
-								   short_description,
-                                                                   term_metrics);
-
-    boost::shared_ptr<aptitude::apt::changelog_info>
-      info = aptitude::apt::changelog_info::create(srcpkg, ver, section, name);
+    boost::shared_ptr<aptitude::apt::changelog_info> info =
+      aptitude::apt::changelog_info::create(srcpkg, ver, section, name);
 
     get_changelog(info,
-		  callbacks,
-		  aptitude::cmdline::post_thunk);
-
-    aptitude::cmdline::main_loop();
+		  out_changelog_file,
+		  term_metrics);
   }
-
 
 /** Try to find a particular package version without knowing the
  *  section that it occurs in.  The resulting name will be invalid if
