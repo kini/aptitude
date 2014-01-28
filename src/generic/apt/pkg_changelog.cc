@@ -545,14 +545,14 @@ namespace aptitude
 
               // WATCH: apt/cmdline/apt-get.cc(DownloadChangelog)
               string server = aptcfg->Find("APT::Changelogs::Server",
-                                           "http://packages.debian.org/changelogs");
-	      string path = cw::util::ssprintf("pool/%s/%s/%s/%s_%s",
+                                           "http://metadata.ftp-master.debian.org/changelogs");
+	      string path = cw::util::ssprintf("%s/%s/%s/%s_%s",
 					      realsection.c_str(),
 					      prefix.c_str(),
 					      source_package.c_str(),
 					      source_package.c_str(),
 					      realver.c_str());
-              string uri = cw::util::ssprintf("%s/%s/changelog",
+              string uri = cw::util::ssprintf("%s/%s_changelog",
                                               server.c_str(),
                                               path.c_str());
 	      LOG_TRACE(logger,
