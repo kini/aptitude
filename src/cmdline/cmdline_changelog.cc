@@ -353,7 +353,7 @@ void do_cmdline_changelog(const vector<string> &packages,
 	      get_changelog_from_source(p.get_package(),
 					p.get_version(),
 					p.get_section(),
-					pkg.Name(),
+					p.get_package(),
 					filename,
                                         term_metrics);
 	    }
