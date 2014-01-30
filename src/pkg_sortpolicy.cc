@@ -150,6 +150,26 @@ PKG_SORTPOLICY_SUBCLASS(pkg_sortpolicy_installed_size,
 			else
 			  return 0;);
 
+// installed-size-change-sorting, treats virtual packages as 0-size
+PKG_SORTPOLICY_SUBCLASS(pkg_sortpolicy_installed_size_change,
+
+			signed long long pkg1_instsizechange = 0;
+			if (pkg1.CurrentVer()) { pkg1_instsizechange -= pkg1.CurrentVer()->InstalledSize; }
+			if (! ver1.end())      { pkg1_instsizechange += ver1->InstalledSize;              }
+
+			signed long long pkg2_instsizechange = 0;
+			if (pkg2.CurrentVer()) { pkg2_instsizechange -= pkg2.CurrentVer()->InstalledSize; }
+			if (! ver2.end())      { pkg2_instsizechange += ver2->InstalledSize;              }
+
+			// mafm: if returning zero, the comparison stops for
+			// other packages
+			if (pkg1_instsizechange > pkg2_instsizechange) {
+			  return +1;
+			} else {
+			  return -1;
+			}
+	);
+
 // Priority sorting
 PKG_SORTPOLICY_SUBCLASS(pkg_sortpolicy_priority,
 			int pri1=ver1.end()?0:ver1->Priority;

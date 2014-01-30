@@ -81,6 +81,19 @@ pkg_sortpolicy *parse_installsize_policy(const arglist &args,
   return pkg_sortpolicy_installed_size(chain, reversed);
 }
 
+pkg_sortpolicy *parse_installsizechange_policy(const arglist &args,
+					       pkg_sortpolicy *chain,
+					       bool reversed)
+{
+  if(args.size()>0)
+    {
+      _error->Error(_("Sorting policy '%s' takes no arguments"), "installsizechange");
+      return NULL;
+    }
+
+  return pkg_sortpolicy_installed_size_change(chain, reversed);
+}
+
 pkg_sortpolicy *parse_priority_policy(const arglist &args,
 				      pkg_sortpolicy *chain,
 				      bool reversed)
@@ -120,6 +133,7 @@ static void init_parse_types()
       parse_types["name"]=parse_name_policy;
       parse_types["version"] = parse_ver_policy;
       parse_types["installsize"]=parse_installsize_policy;
+      parse_types["installsizechange"]=parse_installsizechange_policy;
       parse_types["debsize"]=parse_debsize_policy;
       parse_types["priority"]=parse_priority_policy;
       initted_parse_types=true;
