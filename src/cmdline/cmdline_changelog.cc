@@ -34,6 +34,8 @@
 #include <generic/apt/pkg_changelog.h>
 
 // System includes:
+#include <cwidget/generic/util/ssprintf.h>
+
 #include <apt-pkg/error.h>
 #include <apt-pkg/metaindex.h>
 #include <apt-pkg/progress.h>
@@ -192,7 +194,7 @@ namespace
 		     temp::name &out_changelog_file,
 		     const shared_ptr<terminal_metrics> &term_metrics)
   {
-    const std::string short_description = _("Changelog of") + std::string(" ") + info->get_display_name();
+    const std::string short_description = cwidget::util::ssprintf(_("Changelog of %s"), info->get_display_name().c_str());
 
     boost::shared_ptr<changelog_download_callbacks>
       callbacks = boost::make_shared<changelog_download_callbacks>(boost::ref(out_changelog_file),
