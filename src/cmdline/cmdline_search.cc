@@ -133,9 +133,21 @@ namespace
 
     std::sort(output.begin(), output.end(),
               aptitude::cmdline::package_results_lt(sort_policy));
+
+    /* mafm: Disabled because it does not respect the 3 way comparison of the
+     * sort policies, so it removes from the result set any items with the same
+     * result for the given policy (package_results_eq with successful result,
+     * which means comparison result zero in policy).
+     *
+     * This is usually not noticeable in names (should be unique) or sizes of
+     * packages (very rare that the size is the same); but it does not work well
+     * on versions (repeated sometimes) and specially not in priorities, since
+     * they are only a few of them for all of the packages in the archive.
+
     output.erase(std::unique(output.begin(), output.end(),
                              aptitude::cmdline::package_results_eq(sort_policy)),
                  output.end());
+    */
 
     for(results_list::const_iterator it = output.begin(); it != output.end(); ++it)
       {
