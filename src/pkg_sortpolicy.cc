@@ -153,19 +153,25 @@ PKG_SORTPOLICY_SUBCLASS(pkg_sortpolicy_installed_size,
 // installed-size-change-sorting, treats virtual packages as 0-size
 PKG_SORTPOLICY_SUBCLASS(pkg_sortpolicy_installed_size_change,
 
+			const pkgCache::VerIterator& pkg1_desired = install_version(pkg1, (aptitudeDepCache &) (*apt_cache_file));
+			const pkgCache::VerIterator& pkg2_desired = install_version(pkg2, (aptitudeDepCache &) (*apt_cache_file));
+
 			signed long long pkg1_instsizechange = 0;
-			if (pkg1.CurrentVer()) { pkg1_instsizechange -= pkg1.CurrentVer()->InstalledSize; }
-			if (! ver1.end())      { pkg1_instsizechange += ver1->InstalledSize;              }
+			if (pkg1.CurrentVer())    { pkg1_instsizechange -= pkg1.CurrentVer()->InstalledSize; }
+			if (! pkg1_desired.end()) { pkg1_instsizechange += pkg1_desired->InstalledSize;      }
 
 			signed long long pkg2_instsizechange = 0;
-			if (pkg2.CurrentVer()) { pkg2_instsizechange -= pkg2.CurrentVer()->InstalledSize; }
-			if (! ver2.end())      { pkg2_instsizechange += ver2->InstalledSize;              }
+			if (pkg2.CurrentVer())    { pkg2_instsizechange -= pkg2.CurrentVer()->InstalledSize; }
+			if (! pkg2_desired.end()) { pkg2_instsizechange += pkg2_desired->InstalledSize;      }
 
-			// mafm: if returning zero, the comparison stops for
-			// other packages
+
 			if (pkg1_instsizechange > pkg2_instsizechange) {
 			  return +1;
-			} else {
+			}
+			else if (pkg1_instsizechange == pkg2_instsizechange) {
+			  return 0;
+			}
+			else {
 			  return -1;
 			}
 	);

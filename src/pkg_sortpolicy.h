@@ -34,9 +34,6 @@
  * 
  *  \file pkg_sortpolicy.h
  */
-
-class pkg_tree_node;
-
 class pkg_sortpolicy
 {
   pkg_sortpolicy *chain;
