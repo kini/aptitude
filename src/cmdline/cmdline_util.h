@@ -389,16 +389,6 @@ namespace aptitude
     };
 
 
-    /** \brief Custom hash on packages. */
-    class hash_pkgiterator
-    {
-    public:
-      std::size_t operator()(const pkgCache::PkgIterator &pkg) const
-      {
-        return pkg->ID;
-      }
-    };
-
     /// \brief A helper object to generate columns from the result of
     /// a search.
     ///
