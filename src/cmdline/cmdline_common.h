@@ -18,7 +18,6 @@
  */
 
 typedef std::vector<pkgCache::PkgIterator> pkgvector;
-typedef std::vector<pkgCache::PrvIterator> prvvector;
 typedef std::set<pkgCache::PkgIterator> pkgset;
 typedef std::vector<string> strvector;
 
