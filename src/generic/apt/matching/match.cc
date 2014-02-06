@@ -35,14 +35,10 @@
 
 #include <cwidget/generic/util/transcode.h>
 
-#ifdef HAVE_EPT_TEXTSEARCH
-#include <ept/textsearch/textsearch.h>
-#else
 #ifdef HAVE_EPT_AXI
 #include <ept/axi/axi.h>
 #else
 #error "Don't know how to use the debtags Xapian database."
-#endif
 #endif
 
 #include <xapian/enquire.h>
@@ -65,21 +61,6 @@ namespace aptitude
   {
     namespace
     {
-#ifdef HAVE_EPT_TEXTSEARCH
-      typedef ept::textsearch::TextSearch debtags_db;
-
-      Xapian::docid get_docid_by_name(const debtags_db &db,
-				      const char *name)
-      {
-        return db.docidByName(name);
-      }
-
-      const Xapian::Database &get_xapian_db(const debtags_db &db)
-      {
-        return db.db();
-      }
-#endif
-
 #ifdef HAVE_EPT_AXI
       typedef Xapian::Database debtags_db;
 
@@ -407,14 +388,10 @@ namespace aptitude
       {
 	try
 	  {
-#ifdef HAVE_EPT_TEXTSEARCH
-	    db.reset(new ept::textsearch::TextSearch);
-#else
 #ifdef HAVE_EPT_AXI
             db.reset(new Xapian::Database(ept::axi::path_db()));
 #else
 #error "Can't figure out how to create the debtags database."
-#endif
 #endif
 	  }
 	catch(...)

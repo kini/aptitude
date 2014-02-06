@@ -412,17 +412,6 @@ namespace aptitude
         return std::string(name, split_pos + 2);
     }
 
-#ifdef HAVE_EPT_DEBTAGS_FACET_DESCRIPTION
-    std::string get_facet_long_description(const tag &t)
-    {
-      return t.facet().longDescription();
-    }
-
-    std::string get_facet_short_description(const tag &t)
-    {
-      return t.facet().shortDescription();
-    }
-#else
 #ifdef HAVE_EPT_DEBTAGS_VOCABULARY_FACET_DATA
     std::string get_facet_long_description(const tag &t)
     {
@@ -456,19 +445,7 @@ namespace aptitude
 #else
 #error "Don't know how to retrieve facet descriptions."
 #endif
-#endif
 
-#ifdef HAVE_EPT_DEBTAGS_TAG_DESCRIPTION
-    std::string get_tag_long_description(const tag &t)
-    {
-      return t.longDescription();
-    }
-
-    std::string get_tag_short_description(const tag &t)
-    {
-      return t.shortDescription();
-    }
-#else
 #ifdef HAVE_EPT_DEBTAGS_VOCABULARY_TAG_DATA
     std::string get_tag_long_description(const tag &t)
     {
@@ -501,7 +478,6 @@ namespace aptitude
     }
 #else
 #error "Don't know how to retrieve tag descriptions."
-#endif
 #endif
   }
 }

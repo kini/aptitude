@@ -233,13 +233,6 @@ namespace aptitude
 {
   namespace apt
   {
-#ifdef HAVE_EPT_DEBTAGS_TAG
-    typedef ept::debtags::Tag tag;
-    inline std::string get_fullname(const tag &t)
-    {
-      return t.fullname();
-    }
-#else
 #ifdef EPT_DEBTAGS_GETTAGSOFITEM_RETURNS_STRINGS
     typedef std::string tag;
     inline std::string get_fullname(const std::string &t)
@@ -250,7 +243,6 @@ namespace aptitude
     // Probably means a new version of libept does something the
     // configure checks can't recognize.
 #error "Don't know how to represent a debtags tag."
-#endif
 #endif
 
     const std::set<tag> get_tags(const pkgCache::PkgIterator &pkg);

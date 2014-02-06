@@ -64,42 +64,7 @@ OLD_CXXFLAGS="$CXXFLAGS"
 
 CXXFLAGS="$CXXFLAGS $ept_CFLAGS"
 
-dnl Newer versions of libept use strings instead of various old ept
-dnl data structures.  Test for each one individually.
 DEBTAGS_OK=0
-
-AC_MSG_CHECKING([whether ept::debtags::Tag exists])
-AC_COMPILE_IFELSE([AC_LANG_SOURCE([
-#include <ept/debtags/tag.h>
-
-int main(int argc, char **argv)
-{
-  ept::debtags::Tag t;
-
-  return 0;
-}])],
-        [
-        AC_MSG_RESULT(yes)
-        AC_DEFINE([HAVE_EPT_DEBTAGS_TAG], [], [Define if ept::debtags::Tag exists.])
-        DEBTAGS_OK=1
-        ],
-        [AC_MSG_RESULT(no)])
-
-AC_MSG_CHECKING([whether ept::debtags::Facet exists])
-AC_COMPILE_IFELSE([AC_LANG_SOURCE([
-#include <ept/debtags/tag.h>
-
-int main(int argc, char **argv)
-{
-  ept::debtags::Facet f;
-
-  return 0;
-}])],
-        [
-        AC_DEFINE([HAVE_EPT_DEBTAGS_FACET], [], [Define if ept::debtags::Facet exists])
-        AC_MSG_RESULT([yes])
-        ],
-        [AC_MSG_RESULT([no])])
 
 AC_MSG_CHECKING([whether ept::debtags::getTagsOfItem returns a set of strings.])
 AC_COMPILE_IFELSE([AC_LANG_SOURCE([
@@ -130,31 +95,7 @@ fi
 
 TEXTSEARCH_OK=0
 
-dnl Newer versions of ept got rid of the whole textsearch header and
-dnl instead just include the Xapian database directly.  See which
-dnl version we're dealing with.
-AC_MSG_CHECKING([whether ept::textsearch exists])
-AC_COMPILE_IFELSE([AC_LANG_SOURCE([
-#include <ept/textsearch/textsearch.h>
-
-int main(int argc, char **argv)
-{
-  ept::textsearch::TextSearch db;
-
-  db.docidByName("foo");
-
-  return 0;
-}])],
-        [
-        AC_MSG_RESULT(yes)
-        AC_DEFINE([HAVE_EPT_TEXTSEARCH], [], [Define if ept::textsearch exists])
-        TEXTSEARCH_OK=1
-        ],
-        [
-        AC_MSG_RESULT(no)
-        ])
-
-dnl Now look in the new location:
+dnl Check ept for apt-xapian-index support.
 AC_MSG_CHECKING([whether ept/axi exists])
 AC_COMPILE_IFELSE([AC_LANG_SOURCE([
 #include <ept/axi/axi.h>
@@ -213,82 +154,6 @@ int main(int argc, char **argv)
         [
         AC_MSG_RESULT([yes])
         AC_DEFINE([HAVE_EPT_DEBTAGS_VOCABULARY_FACET_DATA], [], [Define if the ept debtags vocabulary object exists and supports facetData()])
-        ],
-        [AC_MSG_RESULT([no])])
-
-AC_MSG_CHECKING([whether ept::debtags::Tag::fullname() exists])
-AC_COMPILE_IFELSE([AC_LANG_SOURCE([
-#include <ept/debtags/tag.h>
-
-int main(int argc, char **argv)
-{
-  ept::debtags::Tag t;
-
-  std::string s = t.fullname();
-
-  return 0;
-}])],
-        [
-        AC_MSG_RESULT([yes])
-        AC_DEFINE([HAVE_EPT_DEBTAGS_TAG_FULLNAME], [], [Define if ept::debtags::Tag exists and has a fullname() method])
-        ],
-        [AC_MSG_RESULT([no])])
-
-
-AC_MSG_CHECKING([whether ept::debtags::Facet exists and supports name()])
-AC_COMPILE_IFELSE([AC_LANG_SOURCE([
-#include <ept/debtags/tag.h>
-
-int main(int argc, char **argv)
-{
-  ept::debtags::Facet f;
-
-  const std::string name = f.name();
-
-  return 0;
-}])],
-        [
-        AC_MSG_RESULT([yes])
-        AC_DEFINE([HAVE_EPT_DEBTAGS_FACET_NAME], [], [Define if ept::debtags::Facet exists and supports description retrieval.])
-        ],
-        [AC_MSG_RESULT([no])])
-
-
-AC_MSG_CHECKING([whether ept::debtags::Facet exists and supports description retrieval])
-AC_COMPILE_IFELSE([AC_LANG_SOURCE([
-#include <ept/debtags/tag.h>
-
-int main(int argc, char **argv)
-{
-  ept::debtags::Facet f;
-
-  const std::string longDesc = f.longDescription();
-  const std::string shortDesc = f.shortDescription();
-
-  return 0;
-}])],
-        [
-        AC_MSG_RESULT([yes])
-        AC_DEFINE([HAVE_EPT_DEBTAGS_FACET_DESCRIPTION], [], [Define if ept::debtags::Facet exists and supports description retrieval.])
-        ],
-        [AC_MSG_RESULT([no])])
-
-AC_MSG_CHECKING([whether ept::debtags::Tag exists and supports description retrieval])
-AC_COMPILE_IFELSE([AC_LANG_SOURCE([
-#include <ept/debtags/tag.h>
-
-int main(int argc, char **argv)
-{
-  ept::debtags::Tag t;
-
-  const std::string longDesc = t.longDescription();
-  const std::string shortDesc = t.shortDescription();
-
-  return 0;
-}])],
-        [
-        AC_MSG_RESULT([yes])
-        AC_DEFINE([HAVE_EPT_DEBTAGS_TAG_DESCRIPTION], [], [Define if ept::debtags::Tag exists and supports description retrieval.])
         ],
         [AC_MSG_RESULT([no])])
 
