@@ -486,11 +486,7 @@ void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
   LOG_TRACE(logger, "Loading task information.");
   aptitude::apt::load_tasks(*progress_bar);
   LOG_TRACE(logger, "Loading tags.");
-#ifndef HAVE_EPT
-  load_tags(*progress_bar);
-#else
-  aptitude::apt::load_tags();
-#endif
+  aptitude::apt::load_tags(progress_bar);
 
   if(user_pkg_hier)
     {

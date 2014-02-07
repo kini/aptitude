@@ -61,7 +61,6 @@ cppunit_test_SOURCES = \
 	test_resolver_costs.cc \
 	test_resolver_hints.cc \
 	test_setset.cc \
-	test_tags.cc \
 	test_temp.cc \
 	test_wtree.cc
 

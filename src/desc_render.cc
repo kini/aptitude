@@ -103,30 +103,20 @@ cw::fragment *make_tags_fragment(const pkgCache::PkgIterator &pkg)
   if(pkg.end())
     return NULL;
 
-#ifdef HAVE_EPT
   using aptitude::apt::get_fullname;
   using aptitude::apt::get_tags;
   using aptitude::apt::tag;
-#endif
 
-#ifdef HAVE_EPT
-  const set<tag> realS(get_tags(pkg));
-  const set<tag> * const s(&realS);
-#else
-  const set<tag> * const s(get_tags(pkg));
-#endif
+  const set<tag> s(get_tags(pkg));
 
   vector<cw::fragment *> rval;
-  if(s != NULL && !s->empty())
+  if(s.empty() == false)
     {
       vector<cw::fragment *> tags;
-      for(set<tag>::const_iterator i = s->begin(); i != s->end(); ++i)
+      for(set<tag>::const_iterator i = s.begin();
+          i != s.end(); ++i)
 	{
-#ifdef HAVE_EPT
-	  std::string name(get_fullname(*i));
-#else
-	  const std::string name(i->str());
-#endif
+	  const std::string name(get_fullname(*i));
 
 	  tags.push_back(cw::text_fragment(name));
 	}

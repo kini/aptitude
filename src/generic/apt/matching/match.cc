@@ -1602,29 +1602,19 @@ namespace aptitude
 	    {
 	      pkgCache::PkgIterator pkg(target.get_package_iterator(cache));
 
-#ifdef HAVE_EPT
               using aptitude::apt::get_fullname;
 	      using aptitude::apt::get_tags;
               using aptitude::apt::tag;
-#endif
 
-#ifdef HAVE_EPT
-	      const std::set<tag> realTags(get_tags(pkg));
-	      const std::set<tag> * const tags(&realTags);
-#else
-	      const std::set<tag> * const tags(get_tags(pkg));
-#endif
+	      const std::set<tag> tags(get_tags(pkg));
 
-	      if(tags == NULL)
+	      if(tags.empty() == true)
 		return NULL;
 
-	      for(std::set<tag>::const_iterator i=tags->begin(); i!=tags->end(); ++i)
+	      for(std::set<tag>::const_iterator i = tags.begin();
+                  i != tags.end(); ++i)
 		{
-#ifdef HAVE_EPT
-		  std::string name(get_fullname(*i));
-#else
-		  const std::string name = i->str().c_str();
-#endif
+		  const std::string name(get_fullname(*i));
 		  ref_ptr<match> rval =
 		    evaluate_regexp(p,
 				    p->get_tag_regex_info(),
