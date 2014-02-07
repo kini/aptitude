@@ -157,6 +157,9 @@ public:
       if(start != limit) // Push past the comma.
         ++start;
 
+      while(start != limit && isspace(*start)) // Skip whitespace.
+        ++start;
+
       if(start == limit)
         finish = limit;
       else
