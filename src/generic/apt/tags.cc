@@ -108,38 +108,101 @@ int tag::cmp(const tag &other) const
     return 0;
 }
 
-tag_list::const_iterator &tag_list::const_iterator::operator++()
+class tag_list
 {
-  start = finish;
-
-  while(start != limit && (*start) != ',')
-    ++start;
-
-  if(start != limit) // Push past the comma.
-    ++start;
-
-  if(start == limit)
-    finish = limit;
-  else
+  // The string to parse.
+  std::string s;
+public:
+  class const_iterator
+  {
+    std::string::const_iterator start, finish, limit;
+  public:
+    const_iterator(const std::string::const_iterator &_start,
+		   const std::string::const_iterator &_finish,
+		   const std::string::const_iterator &_limit)
+      :start(_start), finish(_finish), limit(_limit)
     {
-      // Eat everything up to the next comma.
-      finish = start+1;
-      while(finish != limit && (*finish) != ',')
-	++finish;
     }
 
-  return *this;
-}
+    const_iterator operator=(const const_iterator &other)
+    {
+      start = other.start;
+      finish = other.finish;
+      limit = other.limit;
 
-tag_list::const_iterator tag_list::begin() const
-{
-  std::string::const_iterator endfirst=s.begin();
-  while(endfirst != s.end() && (*endfirst) != ',')
-    ++endfirst;
+      return *this;
+    }
 
-  const_iterator rval(s.begin(), endfirst, s.end());
-  return rval;
-}
+    bool operator==(const const_iterator &other)
+    {
+      return (other.start == start &&
+              other.finish == finish &&
+              other.limit == limit);
+    }
+
+    bool operator!=(const const_iterator &other)
+    {
+      return (other.start != start ||
+              other.finish != finish ||
+              other.limit != limit);
+    }
+
+    const_iterator &operator++()
+    {
+      start = finish;
+
+      while(start != limit && (*start) != ',')
+        ++start;
+
+      if(start != limit) // Push past the comma.
+        ++start;
+
+      if(start == limit)
+        finish = limit;
+      else
+        {
+          // Eat everything up to the next comma.
+          finish = start + 1;
+          while(finish != limit && (*finish) != ',')
+            ++finish;
+        }
+
+      return *this;
+    }
+
+    tag operator*()
+    {
+      return tag(start, finish);
+    }
+  };
+
+  tag_list(const char *start, const char *finish)
+    :s(start, finish)
+  {
+  }
+
+  tag_list &operator=(const tag_list &other)
+  {
+    s = other.s;
+
+    return *this;
+  }
+
+  const_iterator begin() const
+  {
+    std::string::const_iterator endfirst = s.begin();
+    while(endfirst != s.end() && (*endfirst) != ',')
+      ++endfirst;
+
+    const_iterator rval(s.begin(), endfirst, s.end());
+    return rval;
+  }
+
+  const_iterator end() const
+  {
+    return const_iterator(s.end(), s.end(), s.end());
+  }
+};
 
 typedef set<tag> db_entry;
 

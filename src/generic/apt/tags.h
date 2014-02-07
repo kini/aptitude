@@ -144,68 +144,6 @@ public:
   }
 };
 
-class tag_list
-{
-  // The string to parse.
-  std::string s;
-public:
-  class const_iterator
-  {
-    std::string::const_iterator start, finish, limit;
-  public:
-    const_iterator(const std::string::const_iterator &_start,
-		   const std::string::const_iterator &_finish,
-		   const std::string::const_iterator &_limit)
-      :start(_start), finish(_finish), limit(_limit)
-    {
-    }
-
-    const_iterator operator=(const const_iterator &other)
-    {
-      start = other.start;
-      finish = other.finish;
-      limit = other.limit;
-
-      return *this;
-    }
-
-    bool operator==(const const_iterator &other)
-    {
-      return other.start == start && other.finish == finish && other.limit == limit;
-    }
-
-    bool operator!=(const const_iterator &other)
-    {
-      return other.start != start || other.finish != finish || other.limit != limit;
-    }
-
-    const_iterator &operator++();
-
-    tag operator*()
-    {
-      return tag(start, finish);
-    }
-  };
-
-  tag_list(const char *start, const char *finish)
-    :s(start, finish)
-  {
-  }
-
-  tag_list &operator=(const tag_list &other)
-  {
-    s=other.s;
-
-    return *this;
-  }
-
-  const_iterator begin() const;
-  const_iterator end() const
-  {
-    return const_iterator(s.end(), s.end(), s.end());
-  }
-};
-
 // Grab the tags for the given package:
 const std::set<tag> *get_tags(const pkgCache::PkgIterator &pkg);
 
