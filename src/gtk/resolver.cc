@@ -2076,7 +2076,9 @@ namespace gui
 	    // away. :-)
 	    text_row[solution_view->get_columns().Name] =
 	      _("To view a solution, select it from the list to the right.");
-	    pResolverStatus->set_text(ssprintf(_("%u solutions."),
+	    pResolverStatus->set_text(ssprintf(ngettext("%u solution.",
+							"%u solutions.",
+							already_generated_model->children().size()),
 					       already_generated_model->children().size()));
 	  }
 

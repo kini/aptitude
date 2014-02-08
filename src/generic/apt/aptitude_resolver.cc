@@ -674,6 +674,8 @@ bool aptitude_resolver::hint::parse(const std::string &hint, aptitude_resolver::
       unsigned long score_tweak = 0;
       if(!StrToNum(action.c_str(), score_tweak, action.size()))
 	{
+	  // ForTranslators: actions ("approve", etc.) are keywords and should
+	  // not be translated
 	  LOG_ERROR(loggerHintsParse,
 			ssprintf("Invalid hint \"%s\": the action \"%s\" should be \"approve\", \"reject\", or a number.",
 				 hint.c_str(), action.c_str()));

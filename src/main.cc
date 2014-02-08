@@ -485,6 +485,20 @@ namespace
 
     if(!targetLogger)
       {
+	/* ForTranslators: following paragraph copied from src/generic/util/logging.h
+	 *
+         *  A category consists of one or more nonempty components
+         *  separated by ".", such as "aptitude.util.logging", with
+         *  the exception that the root logger is indicated by the
+         *  empty string ("").
+         *
+	 * A list of the used ones in src/loggers.h
+	 *
+	 * So 'logger' here is the name of the 'category', 'component' or
+	 * 'module', in the case that users want to configure different logging
+	 * levels for different categories (e.g. level 'warn' for
+	 * 'aptitude.changelog', debug for 'aptitude.why'), etc.
+         */
 	_error->Error(_("Invalid logger name \"%s\"."),
 		      logger_name.c_str());
 	return;
@@ -1034,9 +1048,11 @@ int main(int argc, char *argv[])
     why_display_mode = aptitude::why::show_chain_with_versions;
   else
     {
-      // ForTranslators: "why" here is the aptitude command name and
-      // should not be translated.
-      _error->Error(_("Invalid \"why\" summary mode \"%s\": expected \"no-summary\", \"first-package\", \"first-package-and-type\", \"all-packages\", or \"all-packages-with-dep-versions\"."),
+      // ForTranslators: "why" here is the aptitude command name and should not
+      // be translated.  Both the translated and the untranslated log level
+      // names are accepted here.
+      _error->Error(_("Invalid \"why\" summary mode \"%s\": expected "
+		      "\"no-summary\", \"first-package\", \"first-package-and-type\", \"all-packages\", or \"all-packages-with-dep-versions\"."),
 		    show_why_summary_mode.c_str());
       why_display_mode = aptitude::why::no_summary;
     }
