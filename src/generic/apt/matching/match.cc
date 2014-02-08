@@ -68,8 +68,8 @@ namespace aptitude
 #ifdef HAVE_EPT_TEXTSEARCH
       typedef ept::textsearch::TextSearch debtags_db;
 
-      const Xapian::docid get_docid_by_name(const debtags_db &db,
-                                            const char *name)
+      Xapian::docid get_docid_by_name(const debtags_db &db,
+				      const char *name)
       {
         return db.docidByName(name);
       }
@@ -83,8 +83,8 @@ namespace aptitude
 #ifdef HAVE_EPT_AXI
       typedef Xapian::Database debtags_db;
 
-      const Xapian::docid get_docid_by_name(const debtags_db &db,
-                                            const char *name)
+      Xapian::docid get_docid_by_name(const debtags_db &db,
+				      const char *name)
       {
         std::string term = "XP";
         term += name;
@@ -933,7 +933,7 @@ namespace aptitude
 	    // If this assert fails, something went wrong internally.
 	    {
 	      const std::size_t variable_index = p->get_bind_variable_index();
-	      eassert(variable_index >= 0 && variable_index < the_stack.size());
+	      eassert(variable_index < the_stack.size());
 
 	      ref_ptr<structural_match>
 		sub_match(evaluate_toplevel(structural_eval_any,
@@ -1140,7 +1140,7 @@ namespace aptitude
 	  case pattern::equal:
 	    {
 	      const std::size_t variable_index = p->get_equal_stack_position();
-	      eassert(variable_index >= 0 && variable_index < the_stack.size());
+	      eassert(variable_index < the_stack.size());
 
 	      // Search for the incoming package/version in the pool
 	      // referenced by this pattern.

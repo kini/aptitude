@@ -1609,7 +1609,7 @@ void resolver_manager::select_solution(unsigned int solnum)
   cwidget::threads::mutex::lock l(mutex);
 
   cwidget::threads::mutex::lock sol_l(solutions_mutex);
-  if(solnum >= 0 && solnum <= solutions.size())
+  if(solnum <= solutions.size())
     selected_solution = solnum;
   sol_l.release();
 

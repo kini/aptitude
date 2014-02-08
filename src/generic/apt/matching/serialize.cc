@@ -282,8 +282,7 @@ namespace aptitude
 
 	  case pattern::bind:
 	    out << "?bind(";
-	    eassert(p->get_bind_variable_index() >= 0 &&
-		    p->get_bind_variable_index() < variable_name_stack.size());
+	    eassert(p->get_bind_variable_index() < variable_name_stack.size());
 	    out << variable_name_stack[p->get_bind_variable_index()];
 	    out << ", ";
 	    serialize_pattern(p->get_bind_pattern(), out, variable_name_stack);
@@ -333,7 +332,6 @@ namespace aptitude
 
 	  case pattern::equal:
 	    out << "?=";
-	    eassert(p->get_equal_stack_position() >= 0);
 	    eassert(p->get_equal_stack_position() < variable_name_stack.size());
 	    out << variable_name_stack[p->get_equal_stack_position()];
 	    break;

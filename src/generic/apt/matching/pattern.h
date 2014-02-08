@@ -878,7 +878,7 @@ namespace aptitude
       /** \brief Retrieve the information associated with an ?action
        *  term.
        */
-      const action_type get_action_action_type() const
+      action_type get_action_action_type() const
       {
 	eassert(tp == action);
 
@@ -1420,7 +1420,7 @@ namespace aptitude
       /** \brief Retrieve the information associated with a ?multiarch
        *  term.
        */
-      const multiarch_type get_multiarch_multiarch_type() const
+      multiarch_type get_multiarch_multiarch_type() const
       {
 	eassert(tp == multiarch);
 

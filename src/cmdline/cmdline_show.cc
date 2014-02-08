@@ -617,8 +617,10 @@ bool do_cmdline_show(string s, int verbose, const shared_ptr<terminal_metrics> &
 	}
     }
   else
-    ; // TODO: print an error message -- Christian will kill me if I
+    {
+      // TODO: print an error message -- Christian will kill me if I
       // make the pofile bigger right now.
+    }
 
   return true;
 }

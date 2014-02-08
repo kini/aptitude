@@ -44,7 +44,7 @@ void undo_list::clear_items()
 
 void undo_list::collapse_to(unsigned int prev_size)
 {
-  if(items.size()>prev_size && prev_size>=0)
+  if(items.size()>prev_size)
     {
       eassert(prev_size>=floors.back());
 
@@ -64,13 +64,10 @@ void undo_list::collapse_to(unsigned int prev_size)
 
 void undo_list::revert_to(unsigned int prev_size)
 {
-  if(prev_size>=0)
-    {
-      eassert(prev_size>=floors.back());
+  eassert(prev_size>=floors.back());
 
-      while(items.size()>prev_size)
-	undo();
-    }
+  while(items.size()>prev_size)
+    undo();
 
   changed();
 }
