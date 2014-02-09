@@ -583,7 +583,7 @@ void cmdline_resolver_show_choice(const choice &c,
                                 // traditional way and maybe explain
                                 // which part failed?
                                 //
-                                // ForTranslators: the substitution is
+                                // TRANSLATORS: the substitution is
                                 // replaced in English with something
                                 // like "Pkg1 depends upon Pkg2".
                                 cw::fragf(_("This action was selected because %ls."),
@@ -591,25 +591,25 @@ void cmdline_resolver_show_choice(const choice &c,
 				is_rejected ? cw::fragf("%s\n", _("This action is currently rejected; it will not appear in new solutions.")) :
 				is_approved ? cw::fragf("%s\n", _("This action is currently approved; it will be selected whenever possible.")) :
 				cw::text_fragment(""),
-				// ForTranslators: the "r" here is
+				// TRANSLATORS: the "r" here is
 				// for "reject", but should not be
 				// translated since the commands in
 				// aptitude's internal command-line
 				// aren't translated.
 				is_rejected ? cw::fragf(_("Enter \"r %s\" to allow this action to appear in new solutions."), tag.c_str())
-				// ForTranslators: the "r" here is
+				// TRANSLATORS: the "r" here is
 				// for "reject", but should not be
 				// translated since the commands in
 				// aptitude's internal command-line
 				// aren't translated.
                                             : cw::fragf(_("Enter \"r %s\" to prevent this action from appearing in new solutions."), tag.c_str()),
-				// ForTranslators: the "a" here is
+				// TRANSLATORS: the "a" here is
 				// for "approve", but should not be
 				// translated since the commands in
 				// aptitude's internal command-line
 				// aren't translated.
 				is_approved ? cw::fragf(_("Enter \"a %s\" to cease requiring that new solutions include this action if possible."), tag.c_str())
-				// ForTranslators: the "a" here is
+				// TRANSLATORS: the "a" here is
 				// for "approve", but should not be
 				// translated since the commands in
 				// aptitude's internal command-line

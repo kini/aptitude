@@ -495,7 +495,7 @@ const char *GroupByParseException::what() const throw ()
 
 group_by_option parse_group_by_option(const std::string &option)
 {
-  // Translators: if you add synonyms to the possible values here,
+  // TRANSLATORS: if you add synonyms to the possible values here,
   // please also use the translations in your manpage and in the error
   // string below.
   if(option == "archive" ||
@@ -523,7 +523,7 @@ group_by_option parse_group_by_option(const std::string &option)
     return group_by_source_version;
 
   else
-    // ForTranslators: --group-by is the argument name and shouldn't
+    // TRANSLATORS: --group-by is the argument name and shouldn't
     // be translated.
     throw GroupByParseException((boost::format(_("Invalid package grouping mode \"%s\" (should be \"auto\", \"none\", \"package\", or \"source-package\")"))
                                  % option).str());

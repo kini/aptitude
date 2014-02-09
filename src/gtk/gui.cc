@@ -1186,7 +1186,7 @@ namespace gui
 	  if(install_count > 0)
 	    {
 	      buffer->insert(buffer->end(),
-			     // ForTranslators: any numbers in this
+			     // TRANSLATORS: any numbers in this
 			     // string will be displayed in a larger
 			     // font.
 			     ssprintf(ngettext("%d package to install",
@@ -1201,7 +1201,7 @@ namespace gui
 	  if(remove_count > 0)
 	    {
 	      buffer->insert(buffer->end(),
-			     // ForTranslators: any numbers in this
+			     // TRANSLATORS: any numbers in this
 			     // string will be displayed in a larger
 			     // font.
 			     ssprintf(ngettext("%d package to remove",

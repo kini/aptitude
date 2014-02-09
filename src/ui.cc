@@ -205,7 +205,7 @@ sigc::signal1<void, bool> update_finished;
 const char *default_pkgstatusdisplay="%d";
 const char *default_pkgheaderdisplay="%N %n #%B %u %o";
 const char *default_grpstr="task,status,section(subdirs,passthrough),section(topdir)";
-// ForTranslators: This string is a confirmation message, which users
+// TRANSLATORS: This string is a confirmation message, which users
 // (especially CJK users) should be able to input without input
 // methods.  Please include nothing but ASCII characters.
 const char *confirm_delete_essential_str=N_("Yes, I am aware this is a very bad idea");
@@ -1098,7 +1098,7 @@ static void do_help_help()
       return;
     }
 
-  // ForTranslators: You can translate help.txt and set the filename here.
+  // TRANSLATORS: You can translate help.txt and set the filename here.
   std::string filename = ssprintf(HELPDIR "/%s", P_("Localized file|help.txt"));
 
   const char *encoding = P_("Encoding of help.txt|UTF-8");
@@ -1122,7 +1122,7 @@ static void do_help_help()
 static void do_help_readme()
 {
   // Look up the translation of README.
-  // ForTranslators: You can translate README and set the filename here.
+  // TRANSLATORS: You can translate README and set the filename here.
   std::string readme_file = ssprintf(HELPDIR "/%s", P_("Localized file|README"));
   const char *encoding    = P_("Encoding of README|ISO_8859-1");
 

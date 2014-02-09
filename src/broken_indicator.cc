@@ -424,7 +424,7 @@ public:
 	    suggestions.push_back(downgrade_count_fragment);
 	  }
 
-	/* ForTranslators: %F is replaced with a comma separated list such as
+	/* TRANSLATORS: %F is replaced with a comma separated list such as
 	   "n1 installs, n2 removals", ...
 	*/
 	fragments.push_back(cw::fragf(_("Suggest %F"), cw::join_fragments(suggestions, L", ")));

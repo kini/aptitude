@@ -172,20 +172,20 @@ namespace
     { "essential", term_type_essential },
     { "exact-name", term_type_exact_name },
     { "false", term_type_false },
-    // ForTranslators: As in the sentence "for x = 5, do BLAH".
+    // TRANSLATORS: As in the sentence "for x = 5, do BLAH".
     { "for", term_type_for },
     { "garbage", term_type_garbage },
     { "installed", term_type_installed },
     { "maintainer", term_type_maintainer },
     { "multiarch", term_type_multiarch },
     { "name", term_type_name },
-    /* ForTranslators: Opposite of widen. Search for "widen" in this file for details. */
+    /* TRANSLATORS: Opposite of widen. Search for "widen" in this file for details. */
     { "narrow", term_type_narrow },
     { "new", term_type_new },
     { "not", term_type_not },
     { "obsolete", term_type_obsolete },
     { "or", term_type_or },
-    /* ForTranslators: This specifies who is providing this archive. In the case of Debian the
+    /* TRANSLATORS: This specifies who is providing this archive. In the case of Debian the
        string will read 'Debian'. Other providers may use their own string, such as
        "Ubuntu" or "Xandros". */
     { "origin", term_type_origin },
@@ -203,7 +203,7 @@ namespace
     { "user-tag", term_type_user_tag },
     { "version", term_type_version },
     { "virtual", term_type_virtual },
-    /* ForTranslators: Opposite of narrow. Search for "widen" in this file for details. */
+    /* TRANSLATORS: Opposite of narrow. Search for "widen" in this file for details. */
     { "widen", term_type_widen }
   };
 }
@@ -923,7 +923,7 @@ ref_ptr<pattern> parse_term_args(const string &term_name,
       }
     case term_type_all:
       if(!wide_context)
-	/* ForTranslators: Question marks ("?") are used as prefix for function names.
+	/* TRANSLATORS: Question marks ("?") are used as prefix for function names.
 	   Leave the question marks attached to the string placeholders. */
 	throw MatchingException(ssprintf(_("The ?%s term must be used in a \"wide\" context (a top-level context, or a context enclosed by ?%s)."),
 					 term_name.c_str(),

@@ -495,7 +495,7 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
 	buf[255]=0;
 	if(gethostname(buf, 255)!=0)
 	  // Panic
-	  // ForTranslators: Hostname
+	  // TRANSLATORS: Hostname
 	  return cw::column_disposition(_("HN too long"), 0);
 	else
 	  return cw::column_disposition(buf, 0);

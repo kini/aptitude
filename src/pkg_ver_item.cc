@@ -350,19 +350,19 @@ cw::column_disposition pkg_ver_columnizer::setup_column(const pkgCache::VerItera
       switch(ver->Priority)
 	{
 	case pkgCache::State::Important:
-	  // ForTranslators: Imp = Important
+	  // TRANSLATORS: Imp = Important
 	  return cw::column_disposition(_("Imp"), 0);
 	case pkgCache::State::Required:
-	  // ForTranslators: Req = Required
+	  // TRANSLATORS: Req = Required
 	  return cw::column_disposition(_("Req"), 0);
 	case pkgCache::State::Standard:
-	  // ForTranslators: Std = Standard
+	  // TRANSLATORS: Std = Standard
 	  return cw::column_disposition(_("Std"), 0);
 	case pkgCache::State::Optional:
-	  // ForTranslators: Opt = Optional
+	  // TRANSLATORS: Opt = Optional
 	  return cw::column_disposition(_("Opt"), 0);
 	case pkgCache::State::Extra:
-	  // ForTranslators: Xtr = Extra
+	  // TRANSLATORS: Xtr = Extra
 	  return cw::column_disposition(_("Xtr"), 0);
 	default:
 	  return cw::column_disposition(_("ERR"), 0);

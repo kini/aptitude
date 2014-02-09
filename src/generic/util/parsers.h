@@ -2028,7 +2028,7 @@ namespace parsers
       std::ostringstream msg;
       get_expected(msg);
 
-      // ForTranslators: this is used to generate an error
+      // TRANSLATORS: this is used to generate an error
       // message; a brief description of what we expected to see
       // is inserted into it.
       input.fail((boost::format(_("Expected %s")) % msg.str()).str());
@@ -2079,7 +2079,7 @@ namespace parsers
       std::ostringstream msg;
       get_expected(msg);
 
-      // ForTranslators: this is used to generate an error
+      // TRANSLATORS: this is used to generate an error
       // message; a brief description of what we expected to see
       // is inserted into it.
       input.fail((boost::format(_("Expected %s")) % msg.str()).str());

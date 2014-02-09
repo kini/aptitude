@@ -168,7 +168,7 @@ namespace aptitude
                                                  % transcode(_("Done"))).str() );
                 else
                   message->display_and_advance( (wformat(L"[%4s] %s")
-                  // ForTranslators: the string replacing "DONE"
+                  // TRANSLATORS: the string replacing "DONE"
                   // be truncated or padded to 4 characters.
                                                  % transcode(_("DONE"))
                                                  % msg).str() );

@@ -62,7 +62,7 @@ bool do_log(const string &log,
   string timestr;
 
   if(localtime_r(&curtime, &ltime) != NULL)
-    // ForTranslators: This is a date and time format.  See strftime(3).
+    // TRANSLATORS: This is a date and time format.  See strftime(3).
     timestr = sstrftime(_("%a, %b %e %Y %T %z"), &ltime);
   else
     timestr = ssprintf(_("Error generating local time (%s)"),

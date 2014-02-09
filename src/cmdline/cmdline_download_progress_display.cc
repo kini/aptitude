@@ -176,11 +176,11 @@ namespace aptitude
             std::vector<std::string> entries;
 
             if(ignored)
-              // ForTranslators: this stands for "ignored" and should be
+              // TRANSLATORS: this stands for "ignored" and should be
               // the same width as the translation of "Err".
               entries.push_back(_("Ign"));
             else
-              // ForTranslators: this stands for "error" and should be the
+              // TRANSLATORS: this stands for "error" and should be the
               // same width as the translation of "Ign".
               entries.push_back(_("Err"));
 

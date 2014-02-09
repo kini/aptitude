@@ -90,7 +90,7 @@ namespace aptitude
                 display->done();
 
                 if(_error->PendingError() == true)
-                  // ForTranslators: the text between [] should be
+                  // TRANSLATORS: the text between [] should be
                   // exactly 4 character cells wide; "ERR" is short
                   // for "ERROR".
                   std::cout << (format(_("[ ERR] %s")) % last_op) << std::endl;
