@@ -73,10 +73,24 @@ AC_CHECK_HEADER([xapian.h], [],
 CXXFLAGS="$OLD_CXXFLAGS"
 LIBS="$OLD_LIBS"
 
-PKG_CHECK_MODULES(ept, libept, [], [AC_MSG_ERROR([Can't find the ept library -- please install libept-dev])])
-AC_DEFINE([HAVE_EPT], [], [Backwards compatibility symbol; must always be defined.])
+WANT_HAVE_EPT=1
+AC_ARG_ENABLE(ept,
+	AS_HELP_STRING(--disable-ept, [disable use of ept library]),
+	[if test x$enableval = xno
+	 then
+	     WANT_HAVE_EPT=0
+	 fi])
+
 
 ############################ CHECKS FOR EPT ############################
+
+HAVE_EPT=0
+AS_IF(
+  [test x$WANT_HAVE_EPT = x1],
+  [
+HAVE_EPT=1
+PKG_CHECK_MODULES([ept], [libept], [],
+  [AC_MSG_ERROR([Can't find the ept library -- please install libept-dev])])
 
 OLD_CXXFLAGS="$CXXFLAGS"
 
@@ -176,6 +190,14 @@ int main(int argc, char **argv)
         [AC_MSG_RESULT([no])])
 
 CXXFLAGS="$OLD_CXXFLAGS"
+  ], dnl test x$WANT_HAVE_EPT = x0
+
+  [AC_MSG_NOTICE([The ept library is not being used; use --enable-ept to enable it.])])
+
+if test x$HAVE_EPT = x1
+then
+  AC_DEFINE([HAVE_EPT], [], [Define if the ept library is to be used.])
+fi
 
 ########################################################################
 
