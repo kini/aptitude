@@ -391,8 +391,6 @@ string tag_description(const std::string &tag)
 
 #include <aptitude.h>
 
-#include <boost/format.hpp>
-
 namespace aptitude
 {
   namespace apt
@@ -482,14 +480,13 @@ namespace aptitude
     std::string get_facet_long_description(const tag &t)
     {
       if(debtagsVocabulary == NULL)
-        return _("No tag descriptions are available.");
+        return string();
 
       const ept::debtags::voc::FacetData * const fd =
         debtagsVocabulary->facetData(get_facet_name(t));
 
       if(fd == NULL)
-        return (boost::format(_("No description available for %s."))
-                % get_facet_name(t)).str();
+        return string();
       else
         return fd->longDescription();
     }
@@ -497,14 +494,13 @@ namespace aptitude
     std::string get_facet_short_description(const tag &t)
     {
       if(debtagsVocabulary == NULL)
-        return _("No tag descriptions are available.");
+        return string();
 
       const ept::debtags::voc::FacetData * const fd =
         debtagsVocabulary->facetData(get_facet_name(t));
 
       if(fd == NULL)
-        return (boost::format(_("No description available for %s."))
-                % get_facet_name(t)).str();
+        return string();
       else
         return fd->shortDescription();
     }
@@ -516,14 +512,13 @@ namespace aptitude
     std::string get_tag_long_description(const tag &t)
     {
       if(debtagsVocabulary == NULL)
-        return _("No tag descriptions are available.");
+        return string();
 
       const ept::debtags::voc::TagData * const td =
         debtagsVocabulary->tagData(t);
 
       if(td == NULL)
-        return (boost::format(_("No description available for %s."))
-                % get_fullname(t)).str();
+        return string();
       else
         return td->longDescription();
     }
@@ -537,8 +532,7 @@ namespace aptitude
         debtagsVocabulary->tagData(get_fullname(t));
 
       if(td == NULL)
-        return (boost::format(_("No description available for %s."))
-                % get_fullname(t)).str();
+        return string();
       else
         return td->shortDescription();
     }
