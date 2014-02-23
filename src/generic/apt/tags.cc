@@ -155,7 +155,7 @@ db_entry *tagDB;
 static void insert_tags(const pkgCache::VerIterator &ver,
 			const pkgCache::VerFileIterator &vf)
 {
-  set<tag> *tags = tagDB + ver.ParentPkg()->ID;
+  set<tag> *tags = tagDB + ver.ParentPkg().Group()->ID;
 
   const char *recstart=0, *recend=0;
   const char *tagstart, *tagend;
@@ -190,7 +190,7 @@ const std::set<tag> aptitude::apt::get_tags(const pkgCache::PkgIterator &pkg)
   if(!apt_cache_file || !tagDB)
     return std::set<tag>();
 
-  return tagDB[pkg->ID];
+  return tagDB[pkg.Group()->ID];
 }
 
 bool initialized_reset_signal;
@@ -205,7 +205,7 @@ void aptitude::apt::load_tags(OpProgress *progress)
       initialized_reset_signal = true;
     }
 
-  tagDB = new db_entry[(*apt_cache_file)->Head().PackageCount];
+  tagDB = new db_entry[(*apt_cache_file)->Head().GroupCount];
 
   std::vector<loc_pair> verfiles;
 
