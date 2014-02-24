@@ -26,10 +26,6 @@
 #include <config.h>
 #endif
 
-#ifdef HAVE_EPT
-#include <ept/debtags/debtags.h>
-#endif // HAVE_EPT
-
 #include <set>
 #include <string>
 
@@ -39,14 +35,6 @@
  * 
  *  \file tags.h
  */
-
-#ifdef HAVE_EPT
-#ifndef EPT_DEBTAGS_GETTAGSOFITEM_RETURNS_STRINGS
-    // Probably means a new version of libept does something the
-    // configure checks can't recognize.
-#error "Don't know how to represent a debtags tag."
-#endif // !EPT_DEBTAGS_GETTAGSOFITEM_RETURNS_STRINGS
-#endif // HAVE_EPT
 
 class OpProgress;
 

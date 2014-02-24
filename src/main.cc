@@ -161,11 +161,6 @@ static void show_version()
   printf(_("  NCurses version %s\n"), NCURSES_VERSION);
 #endif
   printf(_("  libsigc++ version: %s\n"), SIGC_VERSION);
-#ifdef HAVE_EPT
-  printf(_("  Ept support enabled.\n"));
-#else
-  printf(_("  Ept support disabled.\n"));
-#endif
 #ifdef HAVE_GTK
   printf(_("  Gtk+ version %d.%d.%d\n"),
 	 GTK_MAJOR_VERSION, GTK_MINOR_VERSION, GTK_MICRO_VERSION);
