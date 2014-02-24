@@ -1604,14 +1604,14 @@ namespace aptitude
 
               using aptitude::apt::get_fullname;
 	      using aptitude::apt::get_tags;
-              using aptitude::apt::tag;
+              using aptitude::apt::tag_set;
 
-	      const std::set<tag> tags(get_tags(pkg));
+	      const tag_set tags(get_tags(pkg));
 
 	      if(tags.empty() == true)
 		return NULL;
 
-	      for(std::set<tag>::const_iterator i = tags.begin();
+              for(tag_set::const_iterator i = tags.begin();
                   i != tags.end(); ++i)
 		{
 		  const std::string name(get_fullname(*i));

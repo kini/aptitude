@@ -105,15 +105,15 @@ cw::fragment *make_tags_fragment(const pkgCache::PkgIterator &pkg)
 
   using aptitude::apt::get_fullname;
   using aptitude::apt::get_tags;
-  using aptitude::apt::tag;
+  using aptitude::apt::tag_set;
 
-  const set<tag> s(get_tags(pkg));
+  const tag_set s(get_tags(pkg));
 
   vector<cw::fragment *> rval;
   if(s.empty() == false)
     {
       vector<cw::fragment *> tags;
-      for(set<tag>::const_iterator i = s.begin();
+      for(tag_set::const_iterator i = s.begin();
           i != s.end(); ++i)
 	{
 	  const std::string name(get_fullname(*i));

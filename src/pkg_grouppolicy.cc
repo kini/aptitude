@@ -1402,14 +1402,14 @@ public:
     using aptitude::apt::get_tag_name;
     using aptitude::apt::get_tag_short_description;
     using aptitude::apt::get_tags;
-    using aptitude::apt::tag;
+    using aptitude::apt::tag_set;
 
-    const set<tag> tags(get_tags(pkg));
+    const tag_set tags(get_tags(pkg));
 
     if(tags.empty() == true)
       return;
 
-    for(set<tag>::const_iterator ti = tags.begin();
+    for(tag_set::const_iterator ti = tags.begin();
 	ti != tags.end(); ++ti)
       {
         const std::string thisfacet = get_facet_name(*ti);
@@ -1507,9 +1507,9 @@ public:
 			   pkg_subtree *root)
   {
     using aptitude::apt::get_tags;
-    using aptitude::apt::tag;
+    using aptitude::apt::tag_set;
 
-    const set<tag> tags(get_tags(pkg));
+    const tag_set tags(get_tags(pkg));
 
     // Put all untagged, non-virtual packages into a separate list.
     if(tags.empty() == true && !pkg.VersionList().end())
@@ -1533,7 +1533,7 @@ public:
     if(tags.empty() == true)
       return;
 
-    for(set<tag>::const_iterator ti = tags.begin();
+    for(tag_set::const_iterator ti = tags.begin();
 	ti != tags.end(); ++ti)
       {
         using aptitude::apt::get_facet_long_description;

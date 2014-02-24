@@ -43,6 +43,8 @@ namespace aptitude
   namespace apt
   {
     typedef std::string tag;
+    typedef std::set<tag> tag_set;
+
     inline std::string get_fullname(const tag &t)
     {
       return static_cast<std::string>(t);
@@ -52,7 +54,7 @@ namespace aptitude
     void load_tags(OpProgress *progress);
 
     /** \brief Get the tags for the given package. */
-    const std::set<tag> get_tags(const pkgCache::PkgIterator &pkg);
+    const tag_set get_tags(const pkgCache::PkgIterator &pkg);
 
     /** \brief Get the name of the facet corresponding to a tag. */
     std::string get_facet_name(const tag &t);

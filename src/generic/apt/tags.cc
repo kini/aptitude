@@ -43,6 +43,7 @@
 
 using namespace std;
 using aptitude::apt::tag;
+using aptitude::apt::tag_set;
 
 class tag_list
 {
@@ -143,17 +144,15 @@ public:
   }
 };
 
-typedef set<tag> db_entry;
-
 // The database is built eagerly, since the common use case is
 // to scan everything in sight right away and this makes it easy
 // to provide a progress bar to the user.
-db_entry *tagDB;
+tag_set *tagDB;
 
 static void insert_tags(const pkgCache::VerIterator &ver,
 			const pkgCache::VerFileIterator &vf)
 {
-  set<tag> *tags = tagDB + ver.ParentPkg().Group()->ID;
+  tag_set *tags = tagDB + ver.ParentPkg().Group()->ID;
 
   const char *recstart=0, *recend=0;
   const char *tagstart, *tagend;
@@ -183,10 +182,10 @@ static void reset_tags()
   tagDB = NULL;
 }
 
-const std::set<tag> aptitude::apt::get_tags(const pkgCache::PkgIterator &pkg)
+const tag_set aptitude::apt::get_tags(const pkgCache::PkgIterator &pkg)
 {
   if(!apt_cache_file || !tagDB)
-    return std::set<tag>();
+    return tag_set();
 
   return tagDB[pkg.Group()->ID];
 }
@@ -228,7 +227,7 @@ static bool load_tags_from_debtags(OpProgress *progress)
       if(grp.end() == true)
         continue;
 
-      set<tag> *tags = tagDB + grp->ID;
+      tag_set *tags = tagDB + grp->ID;
 
       const char *tagstart = sep + 2;
       const char *tagend = tagstart;
@@ -290,7 +289,7 @@ void aptitude::apt::load_tags(OpProgress *progress)
       initialized_reset_signal = true;
     }
 
-  tagDB = new db_entry[(*apt_cache_file)->Head().GroupCount];
+  tagDB = new tag_set[(*apt_cache_file)->Head().GroupCount];
 
   if(load_tags_from_debtags(progress) == true)
     return;
