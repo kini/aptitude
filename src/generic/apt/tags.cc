@@ -394,11 +394,7 @@ std::string aptitude::apt::get_tag_short_description(const tag &t)
   return string(desc, 0, desc.find('\n'));
 }
 
-namespace aptitude
-{
-namespace apt
-{
-std::string get_facet_name(const tag &t)
+std::string aptitude::apt::get_facet_name(const tag &t)
 {
   const string name = get_fullname(t);
   string::size_type split_pos = name.find("::");
@@ -408,7 +404,7 @@ std::string get_facet_name(const tag &t)
     return std::string(name, 0, split_pos);
 }
 
-std::string get_tag_name(const tag &t)
+std::string aptitude::apt::get_tag_name(const tag &t)
 {
   const string name = get_fullname(t);
   string::size_type split_pos = name.find("::");
@@ -417,5 +413,3 @@ std::string get_tag_name(const tag &t)
   else
     return std::string(name, split_pos + 2);
 }
-} /* namespace aptitude::apt */
-} /* namespace aptitude */
