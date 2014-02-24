@@ -193,6 +193,63 @@ const std::set<tag> aptitude::apt::get_tags(const pkgCache::PkgIterator &pkg)
   return tagDB[pkg.Group()->ID];
 }
 
+static bool load_tags_from_debtags(OpProgress *progress)
+{
+  const string filename(aptcfg->FindFile("Debtags::Package-Tags",
+                                         "/var/lib/debtags/package-tags"));
+  _error->PushToStack(); // Ignore no-such-file errors.
+  FileFd F(filename, FileFd::ReadOnly);
+  _error->RevertToStack();
+
+  if(F.IsOpen() == false)
+    {
+      // Fail silently; debtags need not be installed.
+      return false;
+    }
+
+  const unsigned long long m = F.Size();
+
+  if(progress != NULL)
+    progress->OverallProgress(0, m, 1,
+                              _("Building tag database"));
+
+  const unsigned long long buf_size = 4096;
+  char buf[buf_size];
+  while(F.ReadLine(buf, buf_size) != NULL)
+    {
+      if(progress != NULL)
+        progress->OverallProgress(F.Tell(), m, 1,
+                                  _("Building tag database"));
+
+      const char *sep = strstr(buf, ": ");
+      if(sep == NULL)
+        continue;
+
+      const string pkg_name(buf, sep - buf);
+      const pkgCache::GrpIterator grp((*apt_cache_file)->FindGrp(pkg_name));
+      if(grp.end() == true)
+        continue;
+
+      set<tag> *tags = tagDB + grp->ID;
+
+      const char *tagstart = sep + 2;
+      const char *tagend = tagstart;
+      while((*tagend) != '\0')
+        ++tagend;
+
+      tag_list ts(tagstart, tagend);
+      for(tag_list::const_iterator t = ts.begin();
+          t != ts.end();
+          ++t)
+        tags->insert(*t);
+    }
+
+  if(progress != NULL)
+    progress->Done();
+
+  return true;
+}
+
 static bool load_tags_from_verfiles(OpProgress *progress)
 {
   std::vector<loc_pair> verfiles;
@@ -236,6 +293,9 @@ void aptitude::apt::load_tags(OpProgress *progress)
     }
 
   tagDB = new db_entry[(*apt_cache_file)->Head().GroupCount];
+
+  if(load_tags_from_debtags(progress) == true)
+    return;
 
   load_tags_from_verfiles(progress);
 }
