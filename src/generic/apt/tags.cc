@@ -193,20 +193,8 @@ const std::set<tag> aptitude::apt::get_tags(const pkgCache::PkgIterator &pkg)
   return tagDB[pkg.Group()->ID];
 }
 
-bool initialized_reset_signal;
-void aptitude::apt::load_tags(OpProgress *progress)
+static bool load_tags_from_verfiles(OpProgress *progress)
 {
-  eassert(apt_cache_file && apt_package_records);
-
-  if(!initialized_reset_signal)
-    {
-      cache_closed.connect(sigc::ptr_fun(reset_tags));
-      cache_reload_failed.connect(sigc::ptr_fun(reset_tags));
-      initialized_reset_signal = true;
-    }
-
-  tagDB = new db_entry[(*apt_cache_file)->Head().GroupCount];
-
   std::vector<loc_pair> verfiles;
 
   for(pkgCache::PkgIterator p = (*apt_cache_file)->PkgBegin();
@@ -231,10 +219,26 @@ void aptitude::apt::load_tags(OpProgress *progress)
     }
 
   progress->Done();
+
+  return true;
 }
 
+bool initialized_reset_signal;
+void aptitude::apt::load_tags(OpProgress *progress)
+{
+  eassert(apt_cache_file && apt_package_records);
 
+  if(!initialized_reset_signal)
+    {
+      cache_closed.connect(sigc::ptr_fun(reset_tags));
+      cache_reload_failed.connect(sigc::ptr_fun(reset_tags));
+      initialized_reset_signal = true;
+    }
 
+  tagDB = new db_entry[(*apt_cache_file)->Head().GroupCount];
+
+  load_tags_from_verfiles(progress);
+}
 
 // TAG VOCABULARY FILE
 typedef map<string, string> facet_description_map;
