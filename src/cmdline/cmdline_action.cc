@@ -247,14 +247,16 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 		    {
 		      if(verbose>0)
 			printf(_("Note: \"%s\", providing the virtual package\n      \"%s\", is already installed.\n"),
-			       prv.OwnerPkg().FullName(true).c_str(), pkg.Name());
+			       prv.OwnerPkg().FullName(true).c_str(),
+                               pkg.FullName(true).c_str());
 		      return true;
 		    }
 		  else if((*apt_cache_file)[prv.OwnerPkg()].InstVerIter(*apt_cache_file)==prv.OwnerVer())
 		    {
 		      if(verbose>0)
 			printf(_("Note: \"%s\", providing the virtual package\n      \"%s\", is already going to be installed.\n"),
-			       prv.OwnerPkg().FullName(true).c_str(), pkg.Name());
+			       prv.OwnerPkg().FullName(true).c_str(),
+                               pkg.FullName(true).c_str());
 		      return true;
 		    }
 		}
@@ -276,7 +278,7 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 	    {
 	      if(!seen_in_first_pass)
 		printf(_("\"%s\" exists in the package database, but it is not a\nreal package and no package provides it.\n"),
-		     pkg.Name());
+                       pkg.FullName(true).c_str());
 	      return false;
 	    }
 	  else if(cands.size()>1)
@@ -284,7 +286,7 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 	      if(!seen_in_first_pass)
 		{
 		  printf(_("\"%s\" is a virtual package provided by:\n"),
-			 pkg.Name());
+			 pkg.FullName(true).c_str());
 		  cmdline_show_pkglist(cands, term_metrics);
 		  printf(_("You must choose one to install.\n"));
 		}
@@ -295,7 +297,8 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 	      if(!seen_in_first_pass)
 		{
 		  printf(_("Note: selecting \"%s\" instead of the\n      virtual package \"%s\"\n"),
-			 cands[0].FullName(true).c_str(), pkg.Name());
+			 cands[0].FullName(true).c_str(),
+                         pkg.FullName(true).c_str());
 		}
 	      pkg = cands[0];
 	    }
