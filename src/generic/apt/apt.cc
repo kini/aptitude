@@ -49,6 +49,7 @@
 #include <apt-pkg/sourcelist.h>
 #include <apt-pkg/version.h>
 #include <apt-pkg/aptconfiguration.h>
+#include <apt-pkg/fileutl.h>
 
 #include <fstream>
 
