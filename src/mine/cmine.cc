@@ -233,7 +233,7 @@ void cmine::do_start_custom_game(cw::widget &w_bare,
 
   wstring s=heightedit->get_text();
 
-  wchar_t *end=const_cast<wchar_t *>(s.c_str());
+  wchar_t *end;
 
   long height=wcstol(s.c_str(), &end, 0);
 
@@ -251,7 +251,6 @@ void cmine::do_start_custom_game(cw::widget &w_bare,
     }
 
   s=widthedit->get_text();
-  end=const_cast<wchar_t *>(s.c_str());
   long width=wcstol(s.c_str(), &end, 0);
 
   if(s.c_str()[0]=='\0' || *end!='\0' || width<1)
@@ -263,7 +262,6 @@ void cmine::do_start_custom_game(cw::widget &w_bare,
     }
 
   s=minesedit->get_text();
-  end=const_cast<wchar_t *>(s.c_str());
   long mines=wcstol(s.c_str(), &end, 0);
 
   if(s.c_str()[0]=='\0' || *end!='\0' || mines<1)

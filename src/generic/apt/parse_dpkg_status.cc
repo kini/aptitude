@@ -153,8 +153,7 @@ namespace aptitude
 	  const std::string percent_str(parse_colon_fragment(where, end));
 	  const std::string msg(strip_range(where, end));
 
-	  char *percent_parse_end;
-	  const double percent = strtod(percent_str.c_str(), &percent_parse_end);
+	  const double percent = strtod(percent_str.c_str(), NULL);
 
 	  return dpkg_status_message::make_error(percent, pkg, msg);
 	}
@@ -166,8 +165,7 @@ namespace aptitude
 	  const std::string percent_str(parse_colon_fragment(where, end));
 	  const std::string msg(strip_range(where, end));
 
-	  char *percent_parse_end;
-	  const double percent = strtod(percent_str.c_str(), &percent_parse_end);
+	  const double percent = strtod(percent_str.c_str(), NULL);
 
 	  const std::string old_filename(parse_single_quoted_string(where, end));
 	  const std::string new_filename(parse_single_quoted_string(where, end));
@@ -185,8 +183,7 @@ namespace aptitude
 	  const std::string percent_str(parse_colon_fragment(where, end));
 	  const std::string msg(strip_range(where, end));
 
-	  char *percent_parse_end;
-	  const double percent = strtod(percent_str.c_str(), &percent_parse_end);
+	  const double percent = strtod(percent_str.c_str(), NULL);
 
 	  return dpkg_status_message::make_status(percent, package, msg);
 	}

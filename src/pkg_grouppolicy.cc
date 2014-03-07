@@ -1245,10 +1245,10 @@ private:
 		    ++i;
 		  }
 
-		wchar_t *endptr = NULL;
+		wchar_t *endptr;
 		unsigned long val = wcstoul(tocvt.c_str(), &endptr, 0);
 
-		if(endptr && (*endptr) != L'\0')
+		if(*endptr != L'\0')
 		  {
 		    wchar_t buf[512];
 
