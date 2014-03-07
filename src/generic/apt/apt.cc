@@ -195,7 +195,7 @@ void apt_preinit(const char *rootdir)
 
   string cfgloc;
 
-  if(HOME != NULL && *HOME != '\0' &&
+  if(strempty(HOME) == false &&
      access((string(HOME) + "/.aptitude").c_str(), R_OK | X_OK) == 0)
     cfgloc = string(HOME) + "/.aptitude/config";
   else
@@ -248,7 +248,7 @@ void apt_dumpcfg(const char *root)
   string cfgloc;
 
   const char *HOME = getenv("HOME");
-  if(HOME != NULL && *HOME != '\0')
+  if(strempty(HOME) == false)
     {
       string tmp(HOME);
       tmp += "/.aptitude";

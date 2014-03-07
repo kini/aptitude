@@ -61,6 +61,14 @@ void splitws(const std::string &s, std::vector<std::string> &output,
  */
 void splitws(const std::string &s, std::vector<std::string> &output);
 
+/** \return \b true if the string is NULL or empty.
+ */
+bool strempty(const char *s);
+
+/** \return \b true if the string is NULL or empty.
+ */
+bool wcsempty(const wchar_t *s);
+
 // Printf for std::string.
 #ifdef __GNUG__
 __attribute__ ((format (printf, 1, 2)))

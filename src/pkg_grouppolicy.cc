@@ -264,8 +264,7 @@ void pkg_grouppolicy_section::add_package(const pkgCache::PkgIterator &pkg,
       section=_("virtual");
       may_passthrough = true;
     }
-  else if(!pkg.VersionList().Section() ||
-	  (*pkg.VersionList().Section()) == '\0')
+  else if(strempty(pkg.VersionList().Section()) == true)
     {
       section=_("Unknown");
       may_passthrough = true;
@@ -802,7 +801,7 @@ public:
       }
 
     // Some packages don't have a reasonable priority
-    if(!pstr)
+    if(strempty(pstr)==true)
       {
 	pstr=_("unknown");
 	priority=0;

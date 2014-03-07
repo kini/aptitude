@@ -237,7 +237,7 @@ void cmine::do_start_custom_game(cw::widget &w_bare,
 
   long height=wcstol(s.c_str(), &end, 0);
 
-  if(s.c_str()[0]=='\0' || *end!='\0' || height<1)
+  if(s.empty()==true || *end!='\0' || height<1)
     {
       // FIXME: should say "positive integer" but the translators will
       // lynch me ;-)
@@ -253,7 +253,7 @@ void cmine::do_start_custom_game(cw::widget &w_bare,
   s=widthedit->get_text();
   long width=wcstol(s.c_str(), &end, 0);
 
-  if(s.c_str()[0]=='\0' || *end!='\0' || width<1)
+  if(s.empty()==true || *end!='\0' || width<1)
     {
       popup_widget(dialogs::ok(W_("The board width must be a positive integer"),
 			       NULL,
@@ -264,7 +264,7 @@ void cmine::do_start_custom_game(cw::widget &w_bare,
   s=minesedit->get_text();
   long mines=wcstol(s.c_str(), &end, 0);
 
-  if(s.c_str()[0]=='\0' || *end!='\0' || mines<1)
+  if(s.empty()==true || *end!='\0' || mines<1)
     {
       popup_widget(dialogs::ok(W_("Invalid mine count; please enter a positive integer"),
 			       NULL,

@@ -101,6 +101,16 @@ void splitws(const string &s, vector<string> &output)
   return splitws(s, output, 0, s.size());
 }
 
+bool strempty(const char *s)
+{
+  return s == NULL || strcmp(s, "") == 0;
+}
+
+bool wcsempty(const wchar_t *s)
+{
+  return s == NULL || wcscmp(s, L"") == 0;
+}
+
 string ssprintf(const char *format, ...)
 {
   va_list ap;
