@@ -32,6 +32,7 @@
 #include <generic/apt/config_signal.h>
 #include <generic/apt/download_queue.h>
 #include <generic/apt/pkg_changelog.h>
+#include <generic/util/util.h>
 
 // System includes:
 #include <cwidget/generic/util/ssprintf.h>
@@ -296,7 +297,7 @@ void do_cmdline_changelog(const vector<string> &packages,
 
       pager=getenv("PAGER");
 
-      if(pager==NULL)
+      if(strempty(pager)==true)
 	pager="more";
     }
 

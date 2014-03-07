@@ -170,10 +170,10 @@ namespace temp
 
     const char *tmpdir = getenv("TMPDIR");
 
-    if(tmpdir == NULL)
+    if(strempty(tmpdir) == true)
       tmpdir = getenv("TMP");
 
-    if(tmpdir == NULL)
+    if(strempty(tmpdir) == true)
       tmpdir = "/tmp";
 
     // User name and process information is encoded into the temporary

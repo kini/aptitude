@@ -160,7 +160,7 @@ void apt_preinit(const char *rootdir)
   theme_config=new Configuration;
   user_config=new Configuration;
 
-  if(rootdir != NULL)
+  if(strempty(rootdir) == false)
     {
       _config->Set("RootDir", rootdir);
       theme_config->Set("RootDir", rootdir);
@@ -505,12 +505,12 @@ void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
   // 10MB of on-disk cache.
   std::string download_cache_dir;
   const char *XDG_CACHE_HOME = getenv("XDG_CACHE_HOME");
-  if(XDG_CACHE_HOME)
+  if(strempty(XDG_CACHE_HOME) == false)
     download_cache_dir = string(XDG_CACHE_HOME) + string("/aptitude");
   else
     {
       const char *HOME = getenv("HOME");
-      if(HOME)
+      if(strempty(HOME) == false)
         download_cache_dir = string(HOME) + string("/.cache/aptitude");
     }
   if(download_cache_dir.empty() == false)
