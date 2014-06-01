@@ -49,6 +49,7 @@
 #include <apt-pkg/sourcelist.h>
 #include <apt-pkg/version.h>
 #include <apt-pkg/aptconfiguration.h>
+#include <apt-pkg/fileutl.h>
 
 #include <fstream>
 
@@ -500,34 +501,16 @@ void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
 
   LOG_TRACE(logger, "Initializing the download cache.");
   // Open the download cache.  By default, it goes in
-  // $XDG_CACHE_HOME/aptitude/download (typically
-  // ~/.cache/aptitude/download); it has 512Kb of in-memory cache and
-  // 10MB of on-disk cache.
-  std::string download_cache_dir;
-  const char *XDG_CACHE_HOME = getenv("XDG_CACHE_HOME");
-  if(strempty(XDG_CACHE_HOME) == false)
-    download_cache_dir = string(XDG_CACHE_HOME) + string("/aptitude");
-  else
+  // ~/.aptitude/cache; it has 512Kb of in-memory cache and 10MB of
+  // on-disk cache.
+  const char *HOME = getenv("HOME");
+  if(strempty(HOME) == false)
     {
-      const char *HOME = getenv("HOME");
-      if(strempty(HOME) == false)
-        download_cache_dir = string(HOME) + string("/.cache/aptitude");
-    }
-  if(download_cache_dir.empty() == false)
-    {
-      if(DirectoryExists(download_cache_dir) == false)
-        {
-          // basedir-spec: create missing directory with permission 0700
-          aptitude::util::mkdir_parents(download_cache_dir, 0700);
-        }
-      
-      const string download_cache_file_name =
-        download_cache_dir + string("/download");
+      std::string download_cache_file_name = string(HOME) + "/.aptitude/cache";
       const int download_cache_memory_size =
 	aptcfg->FindI(PACKAGE "::UI::DownloadCache::MemorySize", 512 * 1024);
       const int download_cache_disk_size   =
 	aptcfg->FindI(PACKAGE "::UI::DownloadCache::DiskSize", 10 * 1024 * 1024);
-
       try
 	{
 	  download_cache = aptitude::util::file_cache::create(download_cache_file_name,
