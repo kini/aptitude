@@ -645,7 +645,7 @@ fi
 dnl Check for header files only if compiling the program.
   ])
 
-WERROR="-Werror"
+WERROR=""
 
 AC_ARG_ENABLE(private-glade-file,
 	AS_HELP_STRING([--disable-private-glade-file], [Always read the .glade file from \$datadir instead of reading one in ".".  This can be useful when installing aptitude globally, to avoid accidentally picking up the wrong version of the .glade file.]),
@@ -664,10 +664,10 @@ AC_ARG_ENABLE(dynamic-backtrace,
 	fi]
 	)
 AC_ARG_ENABLE(werror,
-	AS_HELP_STRING([--disable-werror], [do not compile with -Werror]),
-	if test x$enableval = xno
+	AS_HELP_STRING([--enable-werror], [compile with -Werror]),
+	if test x$enableval = xyes
 	then
-	  WERROR=""
+	  WERROR="-Werror"
 	fi
 	)
 AC_ARG_ENABLE(period-beep,
