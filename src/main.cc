@@ -354,16 +354,6 @@ const char *argv0;
 
 namespace
 {
-  bool strncase_eq_with_translation(const std::string &s1, const char *s2)
-  {
-    if(strcasecmp(s1.c_str(), s2) == 0)
-      return true;
-    else if(strcasecmp(s1.c_str(), _(s2)) == 0)
-      return true;
-    else
-      return false;
-  }
-
   class log_level_map
   {
     std::map<std::string, log_level> levels;
