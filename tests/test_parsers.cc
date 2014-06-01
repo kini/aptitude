@@ -62,6 +62,7 @@ std::ostream &operator<<(std::ostream &out, const std::vector<T> &v)
 // Used to make it easier to compare results that are vectors.
 class strip_shared_ptrs_result
 {
+public:
   template<typename T>
   struct apply
   {
