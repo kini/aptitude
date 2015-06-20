@@ -161,7 +161,7 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
 	  pkgCache::VerIterator inst_ver=(*apt_cache_file)[pkg].InstVerIter(*apt_cache_file);
 
 	  // TODO: move this to a generic file (common with cmdline.cc)
-	  int dsize=(inst_ver.end()?0:inst_ver->InstalledSize)
+	  long long dsize=(inst_ver.end()?0:inst_ver->InstalledSize)
 	    -(pkg.CurrentVer().end()?0:pkg.CurrentVer()->InstalledSize);
 
 	  if(dsize==0)

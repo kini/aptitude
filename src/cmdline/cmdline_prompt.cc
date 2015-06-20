@@ -352,7 +352,7 @@ static void cmdline_show_instinfo(pkgvector &items,
       // Show the change in size between the versions.
       if(showsize)
 	{
-	  int dsize=(instver.end()?0:instver->InstalledSize)
+	  long long dsize=(instver.end()?0:instver->InstalledSize)
 	    -(i->CurrentVer().end()?0:i->CurrentVer()->InstalledSize);
 
 	  if(dsize>0)
