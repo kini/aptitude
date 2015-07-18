@@ -34,7 +34,7 @@ namespace aptitude
         // failing.
         bool wrote_time_error;
 
-        static const double update_interval = 0.7;
+        static constexpr double update_interval = 0.7;
 
         void write_time_error(int errnum);
 
@@ -50,7 +50,7 @@ namespace aptitude
         void reset_timer();
       };
 
-      const double throttle_impl::update_interval;
+      constexpr double throttle_impl::update_interval;
 
       void throttle_impl::write_time_error(int errnum)
       {
