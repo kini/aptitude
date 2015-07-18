@@ -199,7 +199,7 @@ namespace temp
 	std::string err = sstrerror(errnum);
 	LOG_ERROR(Loggers::getAptitudeTemp(),
 		  boost::format(_("Unable to create temporary directory from template \"%s\": %s"))
-		  % tmpl % err);
+		  % tmpl.get() % err);
 
 	return;
       }
