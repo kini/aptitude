@@ -12,6 +12,14 @@ UNRELEASED
 
 - Internal changes:
 
+  * Remove forward declaration of STL templated classes and containers
+    (basic_string, pair, vector...), use regular includes instead.  Due to
+    internal changes of GCC-5 or libsdtc++ related with C++11 compatibility
+    (std::string and std::list had to change), the code failed to compile, and
+    there is not enough justification to "forward-include" in this case (it has
+    to be done copying declarations by hand, it's prone to errors when things
+    are updated in the backstage and not very elegant).
+
 - Documentation:
 
 - Translation updates:

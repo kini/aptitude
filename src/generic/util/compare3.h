@@ -21,39 +21,14 @@
 #ifndef COMPARE3_H
 #define COMPARE3_H
 
-// Forward-declare STL templates to avoid pulling the whole STL in.
-namespace std
-{
-  template<typename Iterator>
-  class iterator_traits;
+#include <deque>
+#include <list>
+#include <map>
+#include <set>
+#include <string>
+#include <utility>
+#include <vector>
 
-  template<typename T1, typename T2>
-  class pair;
-
-  template<typename T, typename Alloc>
-  class list;
-
-  template<typename T, typename Alloc>
-  class vector;
-
-  template<typename T, typename Alloc>
-  class deque;
-
-  template<typename T, typename Compare, typename Alloc>
-  class set;
-
-  template<typename Key, typename Val, typename Compare, typename Alloc>
-  class map;
-
-  template<typename T, typename Compare, typename Alloc>
-  class multiset;
-
-  template<typename Key, typename Val, typename Compare, typename Alloc>
-  class multimap;
-
-  template<typename charT, typename traits, typename Alloc>
-  class basic_string;
-}
 
 // Forward-declare ref_ptrs.
 namespace cwidget
