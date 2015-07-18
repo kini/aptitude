@@ -15,9 +15,7 @@
 #include <sys/time.h>
 
 using aptitude::Loggers;
-using boost::make_shared;
 using boost::optional;
-using boost::shared_ptr;
 using logging::LoggerPtr;
 
 namespace aptitude
@@ -115,9 +113,9 @@ namespace aptitude
     {
     }
 
-    shared_ptr<throttle> create_throttle()
+    boost::shared_ptr<throttle> create_throttle()
     {
-      return make_shared<throttle_impl>();
+      return boost::make_shared<throttle_impl>();
     }
   }
 }

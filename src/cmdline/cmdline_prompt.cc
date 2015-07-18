@@ -62,7 +62,7 @@ namespace cw = cwidget;
 using aptitude::cmdline::terminal_metrics;
 using aptitude::why::make_cmdline_why_callbacks;
 using aptitude::why::why_callbacks;
-using boost::shared_ptr;
+
 
 struct fetchinfo
 {
@@ -150,7 +150,7 @@ namespace
 
   std::string roots_string(const pkgCache::PkgIterator &pkg,
 			   int verbose,
-                           const shared_ptr<terminal_metrics> &term_metrics)
+                           const boost::shared_ptr<terminal_metrics> &term_metrics)
   {
     using namespace aptitude::matching;
     using cw::util::ref_ptr;
@@ -256,7 +256,7 @@ static void cmdline_show_instinfo(pkgvector &items,
 				  bool showsize,
 				  bool showpurge,
 				  bool showwhy,
-                                  const shared_ptr<terminal_metrics> &term_metrics)
+                                  const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   sort(items.begin(), items.end(), pkg_name_lt());
   strvector output;
@@ -432,7 +432,7 @@ string prompt_string(const string &prompt)
  *  fat warning message about them.  Returns false if the user doesn't
  *  want to continue.
  */
-static bool prompt_essential(const shared_ptr<terminal_metrics> &term_metrics)
+static bool prompt_essential(const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   pkgvector todelete, whatsbroken;
   bool ok=true;
@@ -501,7 +501,7 @@ static bool prompt_essential(const shared_ptr<terminal_metrics> &term_metrics)
  *
  *  \return true if everything is OK or the user overrode the warning.
  */
-static bool prompt_trust(const shared_ptr<terminal_metrics> &term_metrics)
+static bool prompt_trust(const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   pkgvector untrusted;
 
@@ -612,7 +612,7 @@ bool cmdline_show_preview(bool as_upgrade, pkgset &to_install,
 			  bool showvers, bool showdeps,
 			  bool showsize, bool showwhy,
 			  int verbose,
-                          const shared_ptr<terminal_metrics> &term_metrics)
+                          const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   const int quiet = aptcfg->FindI("Quiet", 0);
 
@@ -761,7 +761,7 @@ bool cmdline_show_preview(bool as_upgrade, pkgset &to_install,
 
 static void cmdline_parse_show(string response,
 			       int verbose,
-                               const shared_ptr<terminal_metrics> &term_metrics)
+                               const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   // assume response[0]=='i'
   std::vector<std::string> packages;
@@ -778,7 +778,7 @@ static void cmdline_parse_show(string response,
 }
 
 // Erm.  Merge w/ above?
-static void cmdline_parse_changelog(string response, const shared_ptr<terminal_metrics> &term_metrics)
+static void cmdline_parse_changelog(string response, const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   vector<string> packages;
   // assume response[0]=='c'
@@ -793,7 +793,7 @@ static void cmdline_parse_changelog(string response, const shared_ptr<terminal_m
 }
 
 static void cmdline_parse_why(string response,
-                              const shared_ptr<terminal_metrics> &term_metrics)
+                              const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   vector<string> arguments;
   // assume response[0]=='w'
@@ -806,7 +806,7 @@ static void cmdline_parse_why(string response,
       bool success;
       string root = arguments.back();
       arguments.pop_back();
-      const shared_ptr<why_callbacks> callbacks =
+      const boost::shared_ptr<why_callbacks> callbacks =
         make_cmdline_why_callbacks(0, term_metrics);
       std::auto_ptr<cw::fragment> frag(do_why(arguments, root,
 					      aptitude::why::no_summary,
@@ -829,7 +829,7 @@ static inline cw::fragment *flowindentbox(int i1, int irest, cw::fragment *f)
 
 static void prompt_help(ostream &out,
                         bool show_resolver_key,
-                        const shared_ptr<terminal_metrics> &term_metrics)
+                        const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   std::vector<cw::fragment *> fragments;
 
@@ -937,7 +937,7 @@ bool cmdline_do_prompt(bool as_upgrade,
 		       bool force_no_change,
 		       pkgPolicy &policy,
 		       bool arch_only,
-                       const shared_ptr<terminal_metrics> &term_metrics)
+                       const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   bool exit=false;
   bool rval=true;

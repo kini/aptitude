@@ -33,12 +33,11 @@ using aptitude::cmdline::create_terminal;
 using aptitude::cmdline::make_text_progress;
 using aptitude::cmdline::terminal_io;
 using aptitude::cmdline::terminal_locale;
-using boost::shared_ptr;
 
 // Download stuff to the current directory
 int cmdline_download(int argc, char *argv[])
 {
-  shared_ptr<terminal_io> term = create_terminal();
+  boost::shared_ptr<terminal_io> term = create_terminal();
 
   if(argc<=1)
     {
@@ -48,7 +47,7 @@ int cmdline_download(int argc, char *argv[])
 
   _error->DumpErrors();
 
-  shared_ptr<OpProgress> progress = make_text_progress(false, term, term, term);
+  boost::shared_ptr<OpProgress> progress = make_text_progress(false, term, term, term);
   apt_init(progress.get(), false);
 
   if(_error->PendingError())

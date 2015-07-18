@@ -31,8 +31,6 @@
 
 #include <sigc++/bind.h>
 
-using boost::make_shared;
-using boost::shared_ptr;
 
 namespace aptitude
 {
@@ -53,8 +51,8 @@ namespace aptitude
     class acquire_download_progress::impl : public acquire_download_progress,
                                             public sigc::trackable
     {
-      friend shared_ptr<impl>
-      make_shared<impl>();
+      friend boost::shared_ptr<impl>
+      boost::make_shared<impl>();
 
       void media_change(const std::string &media,
                         const std::string &drive,
@@ -76,18 +74,18 @@ namespace aptitude
       // Keeps track of the next ID to assign to a download item.
       unsigned long id;
 
-      shared_ptr<views::download_progress> view;
+      boost::shared_ptr<views::download_progress> view;
 
-      shared_ptr<views::download_progress::status>
+      boost::shared_ptr<views::download_progress::status>
       get_current_status(pkgAcquire *owner, download_signal_log &manager);
 
     public:
       impl(download_signal_log *log,
-           const shared_ptr<views::download_progress> &_view);
+           const boost::shared_ptr<views::download_progress> &_view);
     };
 
     acquire_download_progress::impl::impl(download_signal_log *log,
-                                          const shared_ptr<views::download_progress> &_view)
+                                          const boost::shared_ptr<views::download_progress> &_view)
       : id(1),
         view(_view)
     {
@@ -130,7 +128,7 @@ namespace aptitude
                                     k));
     }
 
-    shared_ptr<views::download_progress::status>
+    boost::shared_ptr<views::download_progress::status>
     acquire_download_progress::impl::get_current_status(pkgAcquire *owner,
                                                         download_signal_log &manager)
     {
@@ -260,7 +258,7 @@ namespace aptitude
                                                 download_signal_log &manager,
                                                 const sigc::slot1<void, bool> &k)
     {
-      const shared_ptr<views::download_progress::status> status =
+      const boost::shared_ptr<views::download_progress::status> status =
         get_current_status(owner, manager);
 
       manager.set_update(false);
@@ -276,11 +274,11 @@ namespace aptitude
     {
     }
 
-    shared_ptr<acquire_download_progress>
+    boost::shared_ptr<acquire_download_progress>
     create_acquire_download_progress(download_signal_log *log,
-                                     const shared_ptr<views::download_progress> &view)
+                                     const boost::shared_ptr<views::download_progress> &view)
     {
-      return make_shared<acquire_download_progress::impl>(log, view);
+      return boost::make_shared<acquire_download_progress::impl>(log, view);
     }
   }
 }

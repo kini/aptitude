@@ -37,7 +37,6 @@
 
 using aptitude::cmdline::create_terminal;
 using aptitude::cmdline::terminal_io;
-using boost::shared_ptr;
 
 void print_autoclean_msg()
 {
@@ -46,7 +45,7 @@ void print_autoclean_msg()
 
 int cmdline_update(int argc, char *argv[], int verbose)
 {
-  shared_ptr<terminal_io> term = create_terminal();
+  boost::shared_ptr<terminal_io> term = create_terminal();
 
   _error->DumpErrors();
 

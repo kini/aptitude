@@ -24,8 +24,6 @@
 // System includes:
 #include <boost/make_shared.hpp>
 
-using boost::make_shared;
-using boost::shared_ptr;
 using testing::AnyNumber;
 using testing::Invoke;
 using testing::NiceMock;
@@ -63,7 +61,7 @@ namespace aptitude
 
       class combining_terminal_output::impl : public combining_terminal_output
       {
-        friend shared_ptr<impl> make_shared<impl>();
+        friend boost::shared_ptr<impl> boost::make_shared<impl>();
         impl();
 
         std::wstring pending_writes;
@@ -78,9 +76,9 @@ namespace aptitude
         void move_to_beginning_of_line();
         void flush();
 
-        static shared_ptr<impl> create_default();
-        static shared_ptr<impl> create_nice();
-        static shared_ptr<impl> create_strict();
+        static boost::shared_ptr<impl> create_default();
+        static boost::shared_ptr<impl> create_nice();
+        static boost::shared_ptr<impl> create_strict();
       };
 
       combining_terminal_output::impl::impl()
@@ -134,32 +132,32 @@ namespace aptitude
       {
       }
 
-      shared_ptr<combining_terminal_output::impl> combining_terminal_output::impl::create_default()
+      boost::shared_ptr<combining_terminal_output::impl> combining_terminal_output::impl::create_default()
       {
-        return make_shared<combining_terminal_output::impl>();
+        return boost::make_shared<combining_terminal_output::impl>();
       }
 
-      shared_ptr<combining_terminal_output::impl> combining_terminal_output::impl::create_nice()
+      boost::shared_ptr<combining_terminal_output::impl> combining_terminal_output::impl::create_nice()
       {
-        return make_shared<NiceMock<combining_terminal_output::impl> >();
+        return boost::make_shared<NiceMock<combining_terminal_output::impl> >();
       }
 
-      shared_ptr<combining_terminal_output::impl> combining_terminal_output::impl::create_strict()
+      boost::shared_ptr<combining_terminal_output::impl> combining_terminal_output::impl::create_strict()
       {
-        return make_shared<StrictMock<combining_terminal_output::impl> >();
+        return boost::make_shared<StrictMock<combining_terminal_output::impl> >();
       }
 
-      shared_ptr<combining_terminal_output> combining_terminal_output::create_default()
+      boost::shared_ptr<combining_terminal_output> combining_terminal_output::create_default()
       {
         return impl::create_default();
       }
 
-      shared_ptr<combining_terminal_output> combining_terminal_output::create_nice()
+      boost::shared_ptr<combining_terminal_output> combining_terminal_output::create_nice()
       {
         return impl::create_nice();
       }
 
-      shared_ptr<combining_terminal_output> combining_terminal_output::create_strict()
+      boost::shared_ptr<combining_terminal_output> combining_terminal_output::create_strict()
       {
         return impl::create_strict();
       }

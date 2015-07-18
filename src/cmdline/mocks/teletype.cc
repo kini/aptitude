@@ -25,8 +25,6 @@
 // System includes:
 #include <boost/make_shared.hpp>
 
-using boost::make_shared;
-using boost::shared_ptr;
 using testing::AnyNumber;
 using testing::Invoke;
 using testing::NiceMock;
@@ -53,9 +51,9 @@ namespace aptitude
           // The character cell containing the cursor:
           unsigned int cursor_position;
 
-          const shared_ptr<terminal_locale> term_locale;
-          const shared_ptr<terminal_metrics> term_metrics;
-          const shared_ptr<terminal_with_combined_output> term_output;
+          const boost::shared_ptr<terminal_locale> term_locale;
+          const boost::shared_ptr<terminal_metrics> term_metrics;
+          const boost::shared_ptr<terminal_with_combined_output> term_output;
 
           void scroll_line(std::wstring &new_last_line);
           void do_set_last_line(const std::wstring &new_last_line);
@@ -76,9 +74,9 @@ namespace aptitude
           }
 
         public:
-          teletype_with_terminal(const shared_ptr<terminal_locale> &_term_locale,
-                                 const shared_ptr<terminal_metrics> &_term_metrics,
-                                 const shared_ptr<terminal_with_combined_output> &_term_output)
+          teletype_with_terminal(const boost::shared_ptr<terminal_locale> &_term_locale,
+                                 const boost::shared_ptr<terminal_metrics> &_term_metrics,
+                                 const boost::shared_ptr<terminal_with_combined_output> &_term_output)
             : cursor_idx(0),
               cursor_position(0),
               term_locale(_term_locale),
@@ -210,34 +208,34 @@ namespace aptitude
         }
       }
 
-      shared_ptr<teletype>
-      create_default_teletype(const shared_ptr<terminal_locale> &term_locale,
-                              const shared_ptr<terminal_metrics> &term_metrics,
+      boost::shared_ptr<teletype>
+      create_default_teletype(const boost::shared_ptr<terminal_locale> &term_locale,
+                              const boost::shared_ptr<terminal_metrics> &term_metrics,
                               const boost::shared_ptr<terminal_with_combined_output> &term_output)
       {
-        return make_shared<teletype_with_terminal>(term_locale,
-                                                   term_metrics,
-                                                   term_output);
+        return boost::make_shared<teletype_with_terminal>(term_locale,
+                                                          term_metrics,
+                                                          term_output);
       }
 
-      shared_ptr<teletype>
-      create_nice_teletype(const shared_ptr<terminal_locale> &term_locale,
-                           const shared_ptr<terminal_metrics> &term_metrics,
+      boost::shared_ptr<teletype>
+      create_nice_teletype(const boost::shared_ptr<terminal_locale> &term_locale,
+                           const boost::shared_ptr<terminal_metrics> &term_metrics,
                            const boost::shared_ptr<terminal_with_combined_output> &term_output)
       {
-        return make_shared<NiceMock<teletype_with_terminal> >(term_locale,
-                                                              term_metrics,
-                                                              term_output);
+        return boost::make_shared<NiceMock<teletype_with_terminal> >(term_locale,
+                                                                     term_metrics,
+                                                                     term_output);
       }
 
-      shared_ptr<teletype>
-      create_strict_teletype(const shared_ptr<terminal_locale> &term_locale,
-                             const shared_ptr<terminal_metrics> &term_metrics,
+      boost::shared_ptr<teletype>
+      create_strict_teletype(const boost::shared_ptr<terminal_locale> &term_locale,
+                             const boost::shared_ptr<terminal_metrics> &term_metrics,
                              const boost::shared_ptr<terminal_with_combined_output> &term_output)
       {
-        return make_shared<StrictMock<teletype_with_terminal> >(term_locale,
-                                                                term_metrics,
-                                                                term_output);
+        return boost::make_shared<StrictMock<teletype_with_terminal> >(term_locale,
+                                                                       term_metrics,
+                                                                       term_output);
       }
     }
   }

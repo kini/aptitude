@@ -41,17 +41,16 @@
 using aptitude::cmdline::download_status_display;
 using aptitude::controllers::acquire_download_progress;
 using aptitude::controllers::create_acquire_download_progress;
-using boost::shared_ptr;
 
 namespace aptitude
 {
   namespace cmdline
   {
-    std::pair<download_signal_log *, shared_ptr<acquire_download_progress> >
-    create_cmdline_download_progress(const shared_ptr<terminal_input> &term_input,
-                                     const shared_ptr<terminal_locale> &term_locale,
-                                     const shared_ptr<terminal_metrics> &term_metrics,
-                                     const shared_ptr<terminal_output> &term_output)
+    std::pair<download_signal_log *, boost::shared_ptr<acquire_download_progress> >
+    create_cmdline_download_progress(const boost::shared_ptr<terminal_input> &term_input,
+                                     const boost::shared_ptr<terminal_locale> &term_locale,
+                                     const boost::shared_ptr<terminal_metrics> &term_metrics,
+                                     const boost::shared_ptr<terminal_output> &term_output)
     {
       download_signal_log * const log = new download_signal_log;
 
@@ -59,22 +58,22 @@ namespace aptitude
       const bool display_messages = quiet <= 1;
       const bool hide_status = quiet > 0;
 
-      const shared_ptr<transient_message> message =
+      const boost::shared_ptr<transient_message> message =
         create_transient_message(term_locale, term_metrics, term_output);
 
-      const shared_ptr<download_status_display> download_status =
+      const boost::shared_ptr<download_status_display> download_status =
         create_cmdline_download_status_display(message,
                                                term_locale,
                                                term_metrics,
                                                hide_status);
 
-      const shared_ptr<views::download_progress> download_progress =
+      const boost::shared_ptr<views::download_progress> download_progress =
         create_download_progress_display(message,
                                          download_status,
                                          term_input,
                                          display_messages);
 
-      const shared_ptr<acquire_download_progress> controller =
+      const boost::shared_ptr<acquire_download_progress> controller =
         create_acquire_download_progress(log, download_progress);
 
       return std::make_pair(log, controller);

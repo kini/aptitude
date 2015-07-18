@@ -63,7 +63,6 @@
 using namespace std;
 
 using aptitude::cmdline::terminal_metrics;
-using boost::shared_ptr;
 
 typedef generic_solution<aptitude_universe> aptitude_solution;
 typedef generic_choice<aptitude_universe> choice;
@@ -216,7 +215,7 @@ static inline cw::fragment *flowindentbox(int i1, int irest, cw::fragment *f)
 }
 
 static void resolver_help(ostream &out,
-                          const shared_ptr<terminal_metrics> &term_metrics)
+                          const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   cw::fragment *f=indentbox(2, 2,
 			cw::fragf(_("y: %F"
@@ -527,7 +526,7 @@ static void reject_or_mandate_version(const string &s,
 
 void cmdline_resolver_show_choice(const choice &c,
 				  const std::string &tag,
-                                  const shared_ptr<terminal_metrics> &term_metrics)
+                                  const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   cw::fragment *info_fragment = NULL;
   bool is_rejected = false;
@@ -806,7 +805,7 @@ static aptitude_solution wait_for_solution(cwidget::threads::box<cmdline_resolve
 }
 
 aptitude_solution calculate_current_solution(bool suppress_message,
-                                             const shared_ptr<terminal_metrics> &term_metrics)
+                                             const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   const int step_limit = aptcfg->FindI(PACKAGE "::ProblemResolver::StepLimit", 5000);
   if(step_limit <= 0)
@@ -856,7 +855,7 @@ cmdline_resolve_deps(pkgset &to_install,
 		     int verbose,
 		     pkgPolicy &policy,
 		     bool arch_only,
-                     const shared_ptr<terminal_metrics> &term_metrics)
+                     const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   bool story_is_default = aptcfg->FindB(PACKAGE "::CmdLine::Resolver-Show-Steps", false);
 
@@ -1140,7 +1139,7 @@ namespace aptitude
   {
     // Implements the --show-resolver-actions command-line parameters.
     void show_resolver_actions(const generic_solution<aptitude_universe> &solution,
-                               const shared_ptr<terminal_metrics> &term_metrics)
+                               const boost::shared_ptr<terminal_metrics> &term_metrics)
     {
       if(solution.get_choices().size() > 0)
 	{
@@ -1159,7 +1158,7 @@ namespace aptitude
                            bool no_new_installs,
                            bool no_new_upgrades,
                            bool show_story,
-                           const shared_ptr<terminal_metrics> &term_metrics)
+                           const boost::shared_ptr<terminal_metrics> &term_metrics)
     {
       if(!resman->resolver_exists())
 	return true;

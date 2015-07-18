@@ -55,7 +55,6 @@ using aptitude::cmdline::create_terminal;
 using aptitude::cmdline::make_text_progress;
 using aptitude::cmdline::terminal_io;
 using aptitude::cmdline::terminal_metrics;
-using boost::shared_ptr;
 using cwidget::fragf;
 using cwidget::fragment;
 using namespace std;
@@ -370,7 +369,7 @@ static cwidget::fragment *state_fragment(pkgCache::PkgIterator pkg, pkgCache::Ve
 
 /** \brief Shows information about a package. */
 static void show_package(pkgCache::PkgIterator pkg, int verbose,
-                         const shared_ptr<terminal_metrics> &term_metrics)
+                         const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   vector<cw::fragment *> fragments;
 
@@ -490,7 +489,7 @@ cw::fragment *version_file_fragment(const pkgCache::VerIterator &ver,
 }
 
 static void show_version(pkgCache::VerIterator ver, int verbose,
-                         const shared_ptr<terminal_metrics> &term_metrics)
+                         const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   if(ver.FileList().end())
     {
@@ -525,7 +524,7 @@ bool do_cmdline_show_target(const pkgCache::PkgIterator &pkg,
 			    const string &sourcestr,
 			    int verbose,
 			    bool has_explicit_source,
-                            const shared_ptr<terminal_metrics> &term_metrics)
+                            const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   if(verbose == 0 || has_explicit_source)
     {
@@ -552,7 +551,7 @@ bool do_cmdline_show_target(const pkgCache::PkgIterator &pkg,
   return true;
 }
 
-bool do_cmdline_show(string s, int verbose, const shared_ptr<terminal_metrics> &term_metrics)
+bool do_cmdline_show(string s, int verbose, const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   cmdline_version_source source;
   string name, sourcestr;
@@ -627,11 +626,11 @@ bool do_cmdline_show(string s, int verbose, const shared_ptr<terminal_metrics> &
 
 int cmdline_show(int argc, char *argv[], int verbose)
 {
-  shared_ptr<terminal_io> term = create_terminal();
+  boost::shared_ptr<terminal_io> term = create_terminal();
 
   _error->DumpErrors();
 
-  shared_ptr<OpProgress> progress = make_text_progress(true, term, term, term);
+  boost::shared_ptr<OpProgress> progress = make_text_progress(true, term, term, term);
   apt_init(progress.get(), false);
 
   if(_error->PendingError())

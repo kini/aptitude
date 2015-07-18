@@ -28,10 +28,9 @@
 #include <iostream>
 
 using aptitude::cmdline::terminal_metrics;
-using boost::shared_ptr;
 
 cmdline_spinner::cmdline_spinner(int _quiet_level,
-                                 const shared_ptr<terminal_metrics> &_term_metrics)
+                                 const boost::shared_ptr<terminal_metrics> &_term_metrics)
   : count(0),
     quiet_level(_quiet_level),
     term_metrics(_term_metrics)

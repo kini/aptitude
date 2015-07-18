@@ -66,7 +66,6 @@ using aptitude::cmdline::terminal_locale;
 using aptitude::cmdline::terminal_metrics;
 using aptitude::cmdline::terminal_output;
 using aptitude::controllers::acquire_download_progress;
-using boost::shared_ptr;
 
 namespace
 {
@@ -113,7 +112,7 @@ void ui_solution_screen()
 }
 
 void cmdline_show_stringlist(strvector &items,
-                             const shared_ptr<terminal_metrics> &term_metrics)
+                             const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   const unsigned int screen_width = term_metrics->get_screen_width();
 
@@ -137,7 +136,7 @@ void cmdline_show_stringlist(strvector &items,
 }
 
 void cmdline_show_pkglist(pkgvector &items,
-                          const shared_ptr<terminal_metrics> &term_metrics)
+                          const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   strvector tmp;
 
@@ -346,7 +345,7 @@ namespace
   void show_stats_change(stats initial, stats final,
 			 bool show_all,
 			 bool show_unchanged,
-                         const shared_ptr<terminal_metrics> &term_metrics)
+                         const boost::shared_ptr<terminal_metrics> &term_metrics)
   {
     using cw::fragf;
     using cw::util::ssprintf;
@@ -449,13 +448,13 @@ namespace
 
 download_manager::result cmdline_do_download(download_manager *m,
 					     int verbose,
-                                             const shared_ptr<terminal_input> &term_input,
-                                             const shared_ptr<terminal_locale> &term_locale,
-                                             const shared_ptr<terminal_metrics> &term_metrics,
-                                             const shared_ptr<terminal_output> &term_output)
+                                             const boost::shared_ptr<terminal_input> &term_input,
+                                             const boost::shared_ptr<terminal_locale> &term_locale,
+                                             const boost::shared_ptr<terminal_metrics> &term_metrics,
+                                             const boost::shared_ptr<terminal_output> &term_output)
 {
   stats initial_stats(0, 0, 0, std::set<std::string>());
-  shared_ptr<OpProgress> progress = make_text_progress(false, term_locale, term_metrics, term_output);
+  boost::shared_ptr<OpProgress> progress = make_text_progress(false, term_locale, term_metrics, term_output);
 
   if(aptcfg->FindI("Quiet", 0) == 0)
     {

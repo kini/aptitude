@@ -38,8 +38,6 @@ using aptitude::util::progress_type_bar;
 using aptitude::util::progress_type_none;
 using aptitude::util::progress_type_pulse;
 using boost::format;
-using boost::make_shared;
-using boost::shared_ptr;
 using cwidget::util::ref_ptr;
 
 namespace util = aptitude::util;
@@ -52,13 +50,13 @@ namespace aptitude
     {
       class search_progress : public views::progress
       {
-        shared_ptr<views::progress> display;
-        shared_ptr<util::throttle> throttle;
+        boost::shared_ptr<views::progress> display;
+        boost::shared_ptr<util::throttle> throttle;
         std::string pattern;
 
       public:
-        search_progress(const shared_ptr<views::progress> &_display,
-                        const shared_ptr<util::throttle> &_throttle,
+        search_progress(const boost::shared_ptr<views::progress> &_display,
+                        const boost::shared_ptr<util::throttle> &_throttle,
                         const std::string &_pattern)
           : display(_display),
             throttle(_throttle),
@@ -111,14 +109,14 @@ namespace aptitude
       }
     }
 
-    shared_ptr<views::progress>
+    boost::shared_ptr<views::progress>
     create_search_progress(const std::string &pattern,
-                           const shared_ptr<views::progress> &display,
-                           const shared_ptr<util::throttle> &throttle)
+                           const boost::shared_ptr<views::progress> &display,
+                           const boost::shared_ptr<util::throttle> &throttle)
     {
-      return make_shared<search_progress>(display,
-                                          throttle,
-                                          pattern);
+      return boost::make_shared<search_progress>(display,
+                                                 throttle,
+                                                 pattern);
     }
   }
 }

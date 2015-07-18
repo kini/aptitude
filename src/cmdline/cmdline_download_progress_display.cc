@@ -40,10 +40,13 @@
 
 using boost::algorithm::join;
 using boost::format;
-using boost::make_shared;
-using boost::shared_ptr;
 using boost::wformat;
 using cwidget::util::transcode;
+using aptitude::cmdline::transient_message;
+using aptitude::cmdline::download_status_display;
+using aptitude::cmdline::terminal_input;
+using aptitude::cmdline::terminal_metrics;
+using aptitude::cmdline::terminal_locale;
 
 namespace aptitude
 {
@@ -54,20 +57,20 @@ namespace aptitude
       class download_progress : public views::download_progress
       {
         bool display_messages;
-        shared_ptr<transient_message> message;
-        shared_ptr<download_status_display> status_display;
-        shared_ptr<terminal_input> term_input;
+        boost::shared_ptr<transient_message> message;
+        boost::shared_ptr<download_status_display> status_display;
+        boost::shared_ptr<terminal_input> term_input;
 
         download_progress(bool _display_messages,
-                          const shared_ptr<transient_message> &_message,
-                          const shared_ptr<download_status_display> &_status_display,
-                          const shared_ptr<terminal_input> &_term_input);
+                          const boost::shared_ptr<transient_message> &_message,
+                          const boost::shared_ptr<download_status_display> &_status_display,
+                          const boost::shared_ptr<terminal_input> &_term_input);
 
-        friend shared_ptr<download_progress>
-        make_shared<download_progress>(const bool &,
-                                       const shared_ptr<transient_message> &,
-                                       const shared_ptr<download_status_display> &,
-                                       const shared_ptr<terminal_input> &);
+        friend boost::shared_ptr<download_progress>
+        boost::make_shared<download_progress>(bool &,
+                                              const boost::shared_ptr<transient_message> &,
+                                              const boost::shared_ptr<download_status_display> &,
+                                              const boost::shared_ptr<terminal_input> &);
 
       public:
         bool update_progress(const status &current_status);
@@ -102,9 +105,9 @@ namespace aptitude
       };
 
       download_progress::download_progress(bool _display_messages,
-                                           const shared_ptr<transient_message> &_message,
-                                           const shared_ptr<download_status_display> &_status_display,
-                                           const shared_ptr<terminal_input> &_term_input)
+                                           const boost::shared_ptr<transient_message> &_message,
+                                           const boost::shared_ptr<download_status_display> &_status_display,
+                                           const boost::shared_ptr<terminal_input> &_term_input)
         : display_messages(_display_messages),
           message(_message),
           status_display(_status_display),
@@ -254,8 +257,8 @@ namespace aptitude
       {
         dummy_status_display();
 
-        friend shared_ptr<dummy_status_display>
-        make_shared<dummy_status_display>();
+        friend boost::shared_ptr<dummy_status_display>
+        boost::make_shared<dummy_status_display>();
 
       public:
         void display_status(const download_progress::status &status);
@@ -271,26 +274,26 @@ namespace aptitude
 
       class download_status_display_impl : public download_status_display
       {
-        shared_ptr<transient_message> message;
-        shared_ptr<terminal_locale> term_locale;
-        shared_ptr<terminal_metrics> term_metrics;
+        boost::shared_ptr<transient_message> message;
+        boost::shared_ptr<terminal_locale> term_locale;
+        boost::shared_ptr<terminal_metrics> term_metrics;
 
-        download_status_display_impl(const shared_ptr<transient_message> &_message,
-                                     const shared_ptr<terminal_locale> &_term_locale,
-                                     const shared_ptr<terminal_metrics> &_term_metrics);
+        download_status_display_impl(const boost::shared_ptr<transient_message> &_message,
+                                     const boost::shared_ptr<terminal_locale> &_term_locale,
+                                     const boost::shared_ptr<terminal_metrics> &_term_metrics);
 
-        friend shared_ptr<download_status_display_impl>
-        make_shared<download_status_display_impl>(const shared_ptr<transient_message> &,
-                                                  const shared_ptr<terminal_locale> &,
-                                                  const shared_ptr<terminal_metrics> &);
+        friend boost::shared_ptr<download_status_display_impl>
+        boost::make_shared<download_status_display_impl>(const boost::shared_ptr<transient_message> &,
+                                                         const boost::shared_ptr<terminal_locale> &,
+                                                         const boost::shared_ptr<terminal_metrics> &);
 
       public:
         void display_status(const download_progress::status &status);
       };
 
-      download_status_display_impl::download_status_display_impl(const shared_ptr<transient_message> &_message,
-                                                                 const shared_ptr<terminal_locale> &_term_locale,
-                                                                 const shared_ptr<terminal_metrics> &_term_metrics)
+      download_status_display_impl::download_status_display_impl(const boost::shared_ptr<transient_message> &_message,
+                                                                 const boost::shared_ptr<terminal_locale> &_term_locale,
+                                                                 const boost::shared_ptr<terminal_metrics> &_term_metrics)
         : message(_message),
           term_locale(_term_locale),
           term_metrics(_term_metrics)
@@ -391,7 +394,7 @@ namespace aptitude
        */
       void find_column_index(const std::wstring &s,
                              int target_column,
-                             const shared_ptr<terminal_locale> &term_locale,
+                             const boost::shared_ptr<terminal_locale> &term_locale,
                              int &result_index,
                              int &result_column)
       {
@@ -527,30 +530,30 @@ namespace aptitude
     {
     }
 
-    shared_ptr<views::download_progress>
+    boost::shared_ptr<views::download_progress>
     create_download_progress_display(const boost::shared_ptr<transient_message> &message,
                                      const boost::shared_ptr<download_status_display> &status_display,
                                      const boost::shared_ptr<terminal_input> &term_input,
                                      bool display_messages)
     {
-      return make_shared<download_progress>(display_messages,
-                                            message,
-                                            status_display,
-                                            term_input);
+      return boost::make_shared<download_progress>(display_messages,
+                                                   message,
+                                                   status_display,
+                                                   term_input);
     }
 
-    shared_ptr<download_status_display>
-    create_cmdline_download_status_display(const shared_ptr<transient_message> &message,
-                                           const shared_ptr<terminal_locale> &term_locale,
-                                           const shared_ptr<terminal_metrics> &term_metrics,
+    boost::shared_ptr<download_status_display>
+    create_cmdline_download_status_display(const boost::shared_ptr<transient_message> &message,
+                                           const boost::shared_ptr<terminal_locale> &term_locale,
+                                           const boost::shared_ptr<terminal_metrics> &term_metrics,
                                            bool hide_status)
     {
       if(hide_status)
-        return make_shared<dummy_status_display>();
+        return boost::make_shared<dummy_status_display>();
       else
-        return make_shared<download_status_display_impl>(message,
-                                                         term_locale,
-                                                         term_metrics);
+        return boost::make_shared<download_status_display_impl>(message,
+                                                                term_locale,
+                                                                term_metrics);
     }
   }
 }

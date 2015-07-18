@@ -68,7 +68,6 @@ namespace cwidget
 
 namespace matching = aptitude::matching;
 using aptitude::why::why_callbacks;
-using boost::shared_ptr;
 using cw::util::ref_ptr;
 
 class pkg_handling_label:public cw::label
@@ -209,7 +208,7 @@ public:
 			    aptitude::why::no_summary,
 			    false,
 			    false,
-                            shared_ptr<why_callbacks>(),
+                            boost::shared_ptr<why_callbacks>(),
 			    success));
       }
     catch(...)

@@ -44,8 +44,6 @@ using aptitude::util::progress_info;
 using aptitude::util::progress_type_bar;
 using aptitude::util::progress_type_none;
 using aptitude::util::progress_type_pulse;
-using boost::make_shared;
-using boost::shared_ptr;
 using boost::wformat;
 using cwidget::util::transcode;
 
@@ -69,7 +67,7 @@ namespace aptitude
         // display if the mode or the message changed.
         progress_info last_progress;
 
-        shared_ptr<transient_message> message;
+        boost::shared_ptr<transient_message> message;
 
         bool old_style_percentage;
         bool retain_completed;
@@ -79,7 +77,7 @@ namespace aptitude
         bool should_update(const progress_info &progress) const;
 
       public:
-        progress_display_impl(const shared_ptr<transient_message> &_message,
+        progress_display_impl(const boost::shared_ptr<transient_message> &_message,
                               bool _old_style_percentage,
                               bool _retain_completed);
 
@@ -87,7 +85,7 @@ namespace aptitude
         void done();
       };
 
-      progress_display_impl::progress_display_impl(const shared_ptr<transient_message> &_message,
+      progress_display_impl::progress_display_impl(const boost::shared_ptr<transient_message> &_message,
                                                    bool _old_style_percentage,
                                                    bool _retain_completed)
         : is_done(false),
@@ -182,22 +180,22 @@ namespace aptitude
       }
     }
 
-    shared_ptr<views::progress>
-    create_progress_display(const shared_ptr<transient_message> &message,
+    boost::shared_ptr<views::progress>
+    create_progress_display(const boost::shared_ptr<transient_message> &message,
                             bool old_style_percentage,
                             bool retain_completed)
     {
-      return make_shared<progress_display_impl>(message,
-                                                old_style_percentage,
-                                                retain_completed);
+      return boost::make_shared<progress_display_impl>(message,
+                                                       old_style_percentage,
+                                                       retain_completed);
     }
 
-    shared_ptr<views::progress>
-    create_progress_display(const shared_ptr<terminal_locale> &term_locale,
-                            const shared_ptr<terminal_metrics> &term_metrics,
-                            const shared_ptr<terminal_output> &term_output)
+    boost::shared_ptr<views::progress>
+    create_progress_display(const boost::shared_ptr<terminal_locale> &term_locale,
+                            const boost::shared_ptr<terminal_metrics> &term_metrics,
+                            const boost::shared_ptr<terminal_output> &term_output)
     {
-      const shared_ptr<transient_message> message =
+      const boost::shared_ptr<transient_message> message =
         create_transient_message(term_locale, term_metrics, term_output);
 
       const bool old_style_percentage =

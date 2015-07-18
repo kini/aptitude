@@ -29,7 +29,6 @@
 namespace cw = cwidget;
 
 using aptitude::cmdline::terminal_metrics;
-using boost::shared_ptr;
 
 namespace
 {
@@ -43,7 +42,7 @@ namespace
 				pkgset &to_remove, pkgset &to_purge,
 				int verbose,
 				bool allow_auto,
-                                const shared_ptr<terminal_metrics> &term_metrics)
+                                const boost::shared_ptr<terminal_metrics> &term_metrics)
   {
     aptitude::cmdline::source_package sourcepkg =
       aptitude::cmdline::find_source_package(pkg,
@@ -229,7 +228,7 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 			 pkgPolicy &policy,
 			 bool arch_only,
 			 bool allow_auto,
-                         const shared_ptr<terminal_metrics> &term_metrics)
+                         const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   // Handle virtual packages.
   if(!pkg.ProvidesList().end())
@@ -462,7 +461,7 @@ bool cmdline_applyaction(string s,
 			 int verbose,
 			 pkgPolicy &policy, bool arch_only,
 			 bool allow_auto,
-                         const shared_ptr<terminal_metrics> &term_metrics)
+                         const boost::shared_ptr<terminal_metrics> &term_metrics)
 {
   using namespace aptitude::matching;
 

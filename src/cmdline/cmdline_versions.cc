@@ -74,7 +74,6 @@ using aptitude::util::create_throttle;
 using aptitude::util::progress_info;
 using aptitude::util::throttle;
 using aptitude::views::progress;
-using boost::shared_ptr;
 
 namespace
 {
@@ -248,9 +247,9 @@ namespace
                          group_by_option group_by,
                          show_package_names_option show_package_names,
                          bool debug,
-                         const shared_ptr<terminal_locale> &term_locale,
-                         const shared_ptr<terminal_metrics> &term_metrics,
-                         const shared_ptr<terminal_output> &term_output)
+                         const boost::shared_ptr<terminal_locale> &term_locale,
+                         const boost::shared_ptr<terminal_metrics> &term_metrics,
+                         const boost::shared_ptr<terminal_output> &term_output)
   {
     // Set to -1 if any exact-name matches fail.  Also set to -1 if
     // there are no results at all.
@@ -259,9 +258,9 @@ namespace
     typedef std::vector<std::pair<pkgCache::VerIterator, cw::util::ref_ptr<m::structural_match> > >
       results_list;
 
-    const shared_ptr<progress> search_progress_display =
+    const boost::shared_ptr<progress> search_progress_display =
       create_progress_display(term_locale, term_metrics, term_output);
-    const shared_ptr<throttle> search_progress_throttle =
+    const boost::shared_ptr<throttle> search_progress_throttle =
       create_throttle();
 
     results_list output;
@@ -269,7 +268,7 @@ namespace
     for(std::vector<cw::util::ref_ptr<m::pattern> >::const_iterator pIt = patterns.begin();
         pIt != patterns.end(); ++pIt)
       {
-        const shared_ptr<progress> search_progress =
+        const boost::shared_ptr<progress> search_progress =
           create_search_progress(serialize_pattern(*pIt),
                                  search_progress_display,
                                  search_progress_throttle);
@@ -535,7 +534,7 @@ int cmdline_versions(int argc, char *argv[], const char *status_fname,
                      group_by_option group_by,
                      show_package_names_option show_package_names)
 {
-  shared_ptr<terminal_io> term = create_terminal();
+  boost::shared_ptr<terminal_io> term = create_terminal();
 
   int real_width=-1;
 

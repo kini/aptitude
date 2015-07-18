@@ -44,7 +44,6 @@
 using aptitude::cmdline::create_terminal;
 using aptitude::cmdline::make_text_progress;
 using aptitude::cmdline::terminal_io;
-using boost::shared_ptr;
 
 namespace aptitude
 {
@@ -58,7 +57,7 @@ namespace aptitude
 	  return -1;
 	}
 
-      const shared_ptr<terminal_io> term = create_terminal();
+      const boost::shared_ptr<terminal_io> term = create_terminal();
 
       std::string out_dir = argv[1];
 

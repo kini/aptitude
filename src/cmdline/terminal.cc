@@ -37,8 +37,6 @@
 
 #include <sys/ioctl.h>
 
-using boost::make_shared;
-using boost::shared_ptr;
 using cwidget::util::transcode;
 
 std::string StdinEOFException::errmsg() const
@@ -144,9 +142,9 @@ namespace aptitude
     {
     }
 
-    shared_ptr<terminal_io> create_terminal()
+    boost::shared_ptr<terminal_io> create_terminal()
     {
-      return make_shared<terminal_impl>();
+      return boost::make_shared<terminal_impl>();
     }
   }
 }
