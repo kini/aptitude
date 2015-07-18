@@ -22,7 +22,6 @@
 #include "aptitude.h"
 
 #include "desc_render.h"
-#include "edit_pkg_hier.h"
 #include "menu_redirect.h"
 #include "pkg_columnizer.h"
 #include "reason_fragment.h"
@@ -300,7 +299,6 @@ typedef cw::util::ref_ptr<pkg_description_widget> pkg_description_widget_ref;
 // This is still rather gross, and a better way would be nice.
 class info_area_multiplex:public cw::multiplex
 {
-  hier_editor_ref editor;
   pkg_description_widget_ref description;
   cw::table_ref description_table;
 
@@ -333,15 +331,13 @@ class info_area_multiplex:public cw::multiplex
   }
 
 protected:
-  info_area_multiplex(const hier_editor_ref &_editor,
-		      const pkg_description_widget_ref &_description,
+  info_area_multiplex(const pkg_description_widget_ref &_description,
 		      const cw::table_ref &_description_table,
 		      const pkg_why_widget_ref &_why,
 		      const cw::table_ref &_why_table,
 		      const cw::text_layout_ref &_reasons,
 		      const cw::table_ref &_reasons_table)
     :cw::multiplex(false),
-     editor(_editor),
      description(_description), description_table(_description_table),
      why(_why), why_table(_why_table),
      reasons(_reasons), reasons_table(_reasons_table),
@@ -355,8 +351,7 @@ protected:
 
 public:
   static cw::util::ref_ptr<info_area_multiplex>
-  create(const hier_editor_ref &editor,
-	 const pkg_description_widget_ref &description,
+  create(const pkg_description_widget_ref &description,
 	 const cw::table_ref &description_table,
 	 const pkg_why_widget_ref &why,
 	 const cw::table_ref &why_table,
@@ -364,7 +359,7 @@ public:
 	 const cw::table_ref &reasons_table)
   {
     cw::util::ref_ptr<info_area_multiplex>
-      rval(new info_area_multiplex(editor, description, description_table,
+      rval(new info_area_multiplex(description, description_table,
 				   why, why_table, reasons, reasons_table));
     rval->decref();
     return rval;
@@ -407,7 +402,6 @@ public:
 
     description->set_package(pkg, ver);
     reasons->set_fragment(reason_fragment(pkg, hasBreakage));
-    editor->set_package(pkg, ver);
     why->set_package(pkg, ver);
 
     // autoswitch if a package is newly broken, or if we have just
@@ -597,7 +591,6 @@ cw::widget_ref make_package_view(list<package_view_item> &format,
 	  break;
 	case PACKAGE_VIEW_DESCRIPTION:
 	  {
-	    hier_editor_ref e=hier_editor::create();
 	    pkg_description_widget_ref w=pkg_description_widget::create();
 	    pkg_why_widget_ref why = pkg_why_widget::create();
 	    cw::text_layout_ref l=cw::text_layout::create();
@@ -605,8 +598,7 @@ cw::widget_ref make_package_view(list<package_view_item> &format,
 	    cw::table_ref wt=cw::table::create();
 	    cw::table_ref lt=cw::table::create();
 	    cw::table_ref why_table = cw::table::create();
-	    info_area_multiplex_ref m=info_area_multiplex::create(e,
-								  w, wt,
+	    info_area_multiplex_ref m=info_area_multiplex::create(w, wt,
 								  why, why_table,
 								  l, lt);
 	    cw::scrollbar_ref ws=cw::scrollbar::create(cw::scrollbar::VERTICAL);
@@ -625,9 +617,6 @@ cw::widget_ref make_package_view(list<package_view_item> &format,
 
 	    why_table->add_widget_opts(why, 0, 0, 1, 1, cw::table::EXPAND | cw::table::FILL | cw::table::SHRINK, cw::table::EXPAND | cw::table::FILL | cw::table::SHRINK);
 	    why_table->add_widget_opts(why_scrollbar, 0, 1, 1, 1, cw::table::ALIGN_RIGHT, cw::table::EXPAND | cw::table::ALIGN_CENTER | cw::table::FILL);
-
-	    // HACK: speaks for itself
-	    cw::tree_ref thetree=mainwidget.dyn_downcast<cw::tree>();
 
 	    i->widget=m;
 
@@ -651,26 +640,9 @@ cw::widget_ref make_package_view(list<package_view_item> &format,
 	    mainwidget->connect_key("DescriptionCycle", &cw::config::global_bindings,
 				    sigc::mem_fun(*m.unsafe_get_ref(),
 						  &info_area_multiplex::cycle));
-	    mainwidget->connect_key("EditHier", &cw::config::global_bindings,
-				    sigc::mem_fun(*e.unsafe_get_ref(),
-						  &cw::widget::show));
-	    mainwidget->connect_key("EditHier", &cw::config::global_bindings,
-				    sigc::mem_fun(*m.unsafe_get_ref(),
-						  &cw::widget::show));
-	    mainwidget->connect_key("EditHier", &cw::config::global_bindings,
-				    sigc::bind(sigc::mem_fun(*rval.unsafe_get_ref(), &cw::table::focus_widget_bare),
-					       m.weak_ref()));
 
 	    package_cycle_information_enabled.connect(sigc::bind(sigc::ptr_fun(do_info_multiplex_cycle_information_active), rval.weak_ref()));
 	    package_cycle_information.connect(sigc::bind(sigc::ptr_fun(do_info_multiplex_cycle_information), rval.weak_ref(), m.weak_ref()));
-
-	    e->hidden_sig.connect(sigc::bind(sigc::mem_fun(*rval.unsafe_get_ref(), &cw::table::focus_widget_bare),
-					     mainwidget.weak_ref()));
-
-	    if(thetree.valid())
-	      e->commit_changes.connect(sigc::mem_fun(*thetree.unsafe_get_ref(), &cw::tree::line_down));
-
-	    m->add_widget(e, W_("Hierarchy Editor"));
 
 	    m->add_widget(wt, W_("Description"));
 	    wt->show_all();

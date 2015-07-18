@@ -52,8 +52,6 @@ aptitude_SOURCES= 	\
 	download_list.cc \
 	download_thread.h\
 	download_thread.cc\
-	edit_pkg_hier.h	\
-	edit_pkg_hier.cc\
 	load_config.cc	\
 	load_config.h	\
 	load_grouppolicy.cc\

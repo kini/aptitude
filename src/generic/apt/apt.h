@@ -52,7 +52,6 @@ namespace aptitude
 class OpProgress;
 class pkgRecords;
 class pkgSourceList;
-class pkg_hier;
 class signalling_config;
 class undo_list;
 class resolver_manager;
@@ -63,15 +62,6 @@ extern aptitudeCacheFile *apt_cache_file;
 extern resolver_manager *resman;
 extern pkgSourceList *apt_source_list;
 extern pkgRecords *apt_package_records;
-
-pkg_hier *get_user_pkg_hier();
-// Currently, package hierarchies are (by default) loaded using
-// DATADIR/aptitude/hier_groups and ~/.aptitude/pkgclass.  This is to
-// facilitate the editing of hierarchies.  user_pkg_hier contains the
-// information which is loaded in this way.  It is accessible only
-// through an accessor method in order to implement lazy loading (so
-// people who don't use the browser don't take the hit of having to
-// load in the (BIG) hierarchy info file)
 
 void apt_preinit(const char *rootdir);
 // Performs initialization of stuff that has to happen before apt_init is
@@ -133,10 +123,6 @@ extern sigc::signal0<void> cache_closed;
 // This means that anyone using it should immediately drop references to it.
 // Generally followed by cache_reloaded; always followed by cache_reloaded
 // or cache_reload_failed.
-extern sigc::signal0<void> hier_reloaded;
-// Announces that user_pkg_hier has been reloaded.  (it's necessary to
-// do this BEFORE cache_reloaded, as some things try to use the old
-// user_pkg_hier in cache_reloaded if we don't)
 extern sigc::signal0<void> cache_reloaded;
 // Announces that the cache has been reloaded
 extern sigc::signal0<void> cache_reload_failed;

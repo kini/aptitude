@@ -62,11 +62,6 @@ static void init_keybindings()
   cw::config::global_bindings.set("DpkgReconfigure", cw::config::key(L'R', false));
   cw::config::global_bindings.set("BugReport", cw::config::key(L'B', false));
 
-  // Hierarchy editor
-  cw::config::global_bindings.set("Commit", cw::config::key(L'N', false));
-  cw::config::global_bindings.set("SaveHier", cw::config::key(L'S', false));
-  cw::config::global_bindings.set("EditHier", cw::config::key(L'E', false));
-
   cw::config::global_bindings.set("SearchBroken", cw::config::key(L'b', false));
 
   cw::config::global_bindings.set("NextSolution", cw::config::key(L'.', false));
