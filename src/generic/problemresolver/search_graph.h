@@ -39,7 +39,6 @@
 #include <boost/flyweight/hashed_factory.hpp>
 #include <boost/functional/hash.hpp>
 #include <boost/optional.hpp>
-#include <boost/shared_ptr.hpp>
 
 // solver_information and dep_solvers are top-level declarations so
 // they can easily get an operator<< that works.
@@ -560,7 +559,7 @@ std::size_t hash_value(const generic_dep_solvers<PackageUniverse> &dep_solvers)
  *  the sum of the number of actions in all the previous promotions in
  *  the queue.  All entries but the last contain a promotion and a
  *  pointer to the next entry.  The nodes in the queue are
- *  reference-counted via boost::shared_ptr, so they can be cleaned up
+ *  reference-counted via std::shared_ptr, so they can be cleaned up
  *  after all steps have advanced past them.
  */
 template<typename PackageUniverse>
@@ -572,7 +571,7 @@ public:
 private:
   unsigned int action_sum;
   unsigned int index;
-  boost::optional<std::pair<promotion, boost::shared_ptr<generic_promotion_queue_entry> > > contents;
+  boost::optional<std::pair<promotion, std::shared_ptr<generic_promotion_queue_entry> > > contents;
 
 public:
   /** \brief Create a promotion queue entry with no successor link or
@@ -604,7 +603,8 @@ public:
     // Check that we don't have any contents yet.
     eassert(!contents);
 
-    contents = std::make_pair(p, new generic_promotion_queue_entry(action_sum + p.get_choices().size(), index + 1));
+    std::shared_ptr<generic_promotion_queue_entry> sp_gpqe = std::make_shared<generic_promotion_queue_entry>(generic_promotion_queue_entry(action_sum + p.get_choices().size(), index + 1));
+    contents = std::make_pair(p, sp_gpqe);
   }
 
   /** \brief Return \b true if this queue entry has a promotion and a
@@ -623,12 +623,12 @@ public:
    *
    *  If this is the last entry in the queue, returns a NULL pointer.
    */
-  boost::shared_ptr<generic_promotion_queue_entry> get_next() const
+  std::shared_ptr<generic_promotion_queue_entry> get_next() const
   {
     if(contents)
       return contents->second;
     else
-      return boost::shared_ptr<generic_promotion_queue_entry>();
+      return std::shared_ptr<generic_promotion_queue_entry>();
   }
 };
 
@@ -728,7 +728,7 @@ public:
      *  step was created or synchronized with the active promotion
      *  set.
      */
-    boost::shared_ptr<generic_promotion_queue_entry<PackageUniverse> > promotion_queue_location;
+    std::shared_ptr<generic_promotion_queue_entry<PackageUniverse> > promotion_queue_location;
 
     /** \brief Members used while searching promotions in existing
      *  steps.

@@ -66,7 +66,6 @@
 #include <generic/util/maybe.h>
 
 #include <boost/flyweight.hpp>
-#include <boost/make_shared.hpp>
 #include <boost/unordered_set.hpp>
 
 /** \brief Generic problem resolver
@@ -864,7 +863,7 @@ private:
    *  we'll just apply the individual promotions one at a time.  New
    *  promotions will be filled in here.
    */
-  boost::shared_ptr<promotion_queue_entry> promotion_queue_tail;
+  std::shared_ptr<promotion_queue_entry> promotion_queue_tail;
 
   /** The initial set of broken dependencies.
    */
@@ -3881,7 +3880,7 @@ public:
     finished=false;
     pending.clear();
     pending_future_solutions.clear();
-    promotion_queue_tail = boost::make_shared<promotion_queue_entry>(0, 0);
+    promotion_queue_tail = std::make_shared<promotion_queue_entry>(0, 0);
     graph.clear();
     closed.clear();
 
