@@ -20,19 +20,22 @@ UNRELEASED
     to be done copying declarations by hand, it's prone to errors when things
     are updated in the backstage and not very elegant).
 
-  * Convert all instances of boost::make_shared and boost::shared_ptr to be
-    explicitly prefixed by boost::, otherwise they clash with the new C++11
-    std::shared_ptr.
+  * Changes to allow to compile with C++11 compatibilty mode (prompted by
+    changes in the toolchain in Debian):
 
-  * Convert some instances of boost::shared_ptr and boost::make_shared to the
-    corresponding versions now in the standard library.  The reason for this is
-    that it failed to compile straight away with the version in unstable
-    (boost-1.55) in some sections of the code (e.g. problemresolver), and
-    because since it is now part of the standard, there is little reason to use
-    Boost for that.  The rest of cases not covered in this version shall be
-    converted later on.
+    * Convert all instances of boost::make_shared and boost::shared_ptr to be
+      explicitly prefixed by boost::, otherwise they clash with the new C++11
+      std::shared_ptr.
 
-  * Misc. changes to allow to compile with C++11.
+    * Convert some instances of boost::shared_ptr and boost::make_shared to the
+      corresponding versions now in the standard library.  The reason for this
+      is that it failed to compile straight away with the version in unstable
+      (boost-1.55) in some sections of the code (e.g. problemresolver, sqlite,
+      file_cache), and because since it is now part of the standard, there is
+      little reason to use Boost for that.  The rest of cases not covered in
+      this version shall be converted later on.
+
+    * Several other miscellaneous changes to allow to compile with C++11.
 
 - Documentation:
 

@@ -20,7 +20,7 @@
 
 #include "sqlite.h"
 
-#include <boost/make_shared.hpp>
+#include <memory>
 
 #include <string.h>
 
@@ -167,17 +167,17 @@ namespace aptitude
 
 	  index.erase(sql);
 
-	  return statement_proxy(boost::make_shared<statement_proxy_impl>(entry));
+	  return statement_proxy(std::make_shared<statement_proxy_impl>(entry));
 	}
       else
 	{
 	  // Prepare a new SQL statement and return a proxy to it.  It
 	  // won't be added to the cache until the caller is done with
 	  // it.
-	  boost::shared_ptr<statement> stmt(statement::prepare(*this, sql));
+	  std::shared_ptr<statement> stmt(statement::prepare(*this, sql));
 
 	  statement_cache_entry entry(sql, stmt);
-	  return statement_proxy(boost::make_shared<statement_proxy_impl>(entry));
+	  return statement_proxy(std::make_shared<statement_proxy_impl>(entry));
 	}
     }
 
@@ -210,7 +210,6 @@ namespace aptitude
     }
 
 
-
     statement::statement(db &_parent, sqlite3_stmt *_handle)
       : parent(_parent),
 	handle(_handle),
@@ -226,7 +225,7 @@ namespace aptitude
       parent.active_statements.erase(this);
     }
 
-    boost::shared_ptr<statement>
+    std::shared_ptr<statement>
     statement::prepare(db &parent,
 		       const std::string &sql)
     {
@@ -252,10 +251,14 @@ namespace aptitude
 	  throw exception(parent.get_error(), result);
 	}
       else
-	return boost::make_shared<statement>(boost::ref(parent), handle);
+        {
+          // could use make_shared, but it is a private constructor and the
+          // workarounds are complicated/ugly
+          return std::shared_ptr<statement>(new statement(parent, handle));
+	}
     }
 
-    boost::shared_ptr<statement>
+    std::shared_ptr<statement>
     statement::prepare(db &parent,
 		       const char *sql)
     {
@@ -281,7 +284,11 @@ namespace aptitude
 	  throw exception(parent.get_error(), result);
 	}
       else
-	return boost::make_shared<statement>(boost::ref(parent), handle);
+        {
+          // could use make_shared, but it is a private constructor and the
+          // workarounds are complicated/ugly
+          return std::shared_ptr<statement>(new statement(parent, handle));
+	}
     }
 
     void statement::reset()
@@ -428,7 +435,7 @@ namespace aptitude
       parent.active_blobs.insert(this);
     }
 
-    boost::shared_ptr<blob>
+    std::shared_ptr<blob>
     blob::open(db &parent,
 	       const std::string &databaseName,
 	       const std::string &table,
@@ -457,7 +464,11 @@ namespace aptitude
 	  throw exception(msg, result);
 	}
       else
-	return boost::make_shared<blob>(boost::ref(parent), handle);
+        {
+          // could use make_shared, but it is a private constructor and the
+          // workarounds are complicated/ugly
+          return std::shared_ptr<blob>(new blob(parent, handle));
+	}
     }
 
     blob::~blob()

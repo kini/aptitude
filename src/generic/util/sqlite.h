@@ -29,13 +29,13 @@
 
 #include <sqlite3.h>
 
-#include <boost/make_shared.hpp>
 #include <boost/multi_index_container.hpp>
 #include <boost/multi_index/hashed_index.hpp>
 #include <boost/multi_index/sequenced_index.hpp>
 #include <boost/multi_index/member.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/unordered_set.hpp>
+
+#include <memory>
 
 // C++ wrapper for sqlite to handle tracking and releasing resources.
 
@@ -98,10 +98,10 @@ namespace aptitude
       struct statement_cache_entry
       {
 	std::string sql;
-	boost::shared_ptr<statement> stmt;
+	std::shared_ptr<statement> stmt;
 
 	statement_cache_entry(const std::string &_sql,
-			      const boost::shared_ptr<statement> &_stmt)
+			      const std::shared_ptr<statement> &_stmt)
 	  : sql(_sql), stmt(_stmt)
 	{
 	}
@@ -159,7 +159,7 @@ namespace aptitude
 	{
 	}
 
-	const boost::shared_ptr<statement> &get_statement() const { return entry.stmt; }
+	const std::shared_ptr<statement> &get_statement() const { return entry.stmt; }
 	const statement_cache_entry &get_entry() const { return entry; }
 
 	~statement_proxy_impl();
@@ -192,12 +192,12 @@ namespace aptitude
        *
        *  See the sqlite3_open documentation for details.
        */
-      static boost::shared_ptr<db>
+      static std::shared_ptr<db>
       create(const std::string &filename,
 	     int flags = SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE,
 	     const char *vfs = NULL)
       {
-	return boost::shared_ptr<db>(new db(filename, flags, vfs));
+	return std::shared_ptr<db>(new db(filename, flags, vfs));
       }
 
       /** \brief Close the encapsulated database. */
@@ -256,11 +256,11 @@ namespace aptitude
        */
       class statement_proxy
       {
-	boost::shared_ptr<statement_proxy_impl> impl;
+	std::shared_ptr<statement_proxy_impl> impl;
 
 	friend class db;
 
-	statement_proxy(const boost::shared_ptr<statement_proxy_impl> &_impl)
+	statement_proxy(const std::shared_ptr<statement_proxy_impl> &_impl)
 	  : impl(_impl)
 	{
 	}
@@ -376,15 +376,6 @@ namespace aptitude
       friend class db::statement_proxy_impl;
 
       statement(db &_parent, sqlite3_stmt *_handle);
-#if defined(BOOST_MAKE_SHARED_SHARED_PTR)
-      template<typename A, typename B, typename C>
-      friend boost::shared_ptr<A> boost::make_shared(const B &, const C &);
-#elif defined(BOOST_MAKE_SHARED_SP_IF_NOT_ARRAY_TYPE)
-      // FIXME: Ouch.  Boost 1.53 requires this mess or something else
-      // I haven't worked out yet.
-      template<typename A, typename B, typename C>
-      friend typename boost::detail::sp_if_not_array<A>::type boost::make_shared(const B &, const C &);
-#endif
 
       /** \brief Throw an exception if there isn't result data ready
        *  to be read.
@@ -412,13 +403,13 @@ namespace aptitude
 
       /** \brief Prepare an SQL statement.
        */
-      static boost::shared_ptr<statement>
+      static std::shared_ptr<statement>
       prepare(db &parent,
 	      const std::string &sql);
 
       /** \brief Prepare an SQL statement.
        */
-      static boost::shared_ptr<statement>
+      static std::shared_ptr<statement>
       prepare(db &parent,
 	      const char *sql);
 
@@ -461,7 +452,6 @@ namespace aptitude
        *  \param value  The value to bind to this parameter.
        */
       void bind_int(int parameter_idx, int value);
-
 
       /** \brief Bind a 64-bit integer to a parameter.
        *
@@ -576,14 +566,6 @@ namespace aptitude
       friend class db;
 
       blob(db &_parent, sqlite3_blob *_handle);
-#if defined(BOOST_MAKE_SHARED_SHARED_PTR)
-      template<typename A, typename B, typename C>
-      friend boost::shared_ptr<A> boost::make_shared(const B &, const C &);
-#elif defined(BOOST_MAKE_SHARED_SP_IF_NOT_ARRAY_TYPE)
-      // FIXME: Ouch.  Again.
-      template<typename A, typename B, typename C>
-      friend typename boost::detail::sp_if_not_array<A>::type boost::make_shared(const B &, const C &);
-#endif
 
     public:
       /** \brief Open an existing BLOB.
@@ -598,7 +580,7 @@ namespace aptitude
        *                      read-only; otherwise it will be opened
        *                      read-write.
        */
-      static boost::shared_ptr<blob>
+      static std::shared_ptr<blob>
       open(db &parent,
 	   const std::string &databaseName,
 	   const std::string &table,

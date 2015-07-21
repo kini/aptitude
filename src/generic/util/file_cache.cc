@@ -43,6 +43,8 @@
 
 #include <loggers.h>
 
+#include <memory>
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -67,14 +69,14 @@ namespace aptitude
 	// Version 3 added the ModificationTime column to the cache,
 	// which is the time of the item's last modification in
 	// seconds-since-the-epoch.
-	void version_2_to_version_3(const boost::shared_ptr<db> &store)
+	void version_2_to_version_3(const std::shared_ptr<db> &store)
 	{
 	  LOG_INFO(Loggers::getAptitudeDownloadCache(),
 		   "Upgrading the cache from version 2 to version 3.");
 
 	  store->exec("savepoint upgrade23");
 
-	  boost::shared_ptr<statement> get_version_statement =
+	  std::shared_ptr<statement> get_version_statement =
 	    statement::prepare(*store, "select version from format");
 	  {
 	    statement::execution get_version_execution(*get_version_statement);
@@ -123,7 +125,7 @@ release upgrade23;							\
        */
       class file_cache_sqlite : public file_cache
       {
-	boost::shared_ptr<db> store;
+	std::shared_ptr<db> store;
 	std::string filename; // Used to report errors.
 	/** \brief The maximum size of the cache, in bytes.
 	 *
@@ -224,7 +226,7 @@ insert into globals(TotalBlobSize) values(0);				\
 
 	  try
 	    {
-	      boost::shared_ptr<statement> set_version_statement =
+	      std::shared_ptr<statement> set_version_statement =
 		statement::prepare(*store, "insert into format(version) values(?)");
 
 	      set_version_statement->bind_int(1, current_version_number);
@@ -258,7 +260,7 @@ insert into globals(TotalBlobSize) values(0);				\
 		{
 		  // Check the version number, transparently upgrading
 		  // the database if we know how to.
-		  boost::shared_ptr<statement> get_version_statement =
+		  std::shared_ptr<statement> get_version_statement =
 		    statement::prepare(*store, "select version from format");
 		  {
 		    statement::execution get_version_execution(*get_version_statement);
@@ -294,7 +296,7 @@ insert into globals(TotalBlobSize) values(0);				\
 		      }
 		  }
 
-		  boost::shared_ptr<statement> get_total_size_statement =
+		  std::shared_ptr<statement> get_total_size_statement =
 		    statement::prepare(*store, "select TotalBlobSize from globals");
 		  sqlite3_int64 total_size = -1;
 
@@ -305,7 +307,7 @@ insert into globals(TotalBlobSize) values(0);				\
 		    total_size = get_total_size_statement->get_int64(0);
 		  }
 
-		  boost::shared_ptr<statement> compute_total_size_statement =
+		  std::shared_ptr<statement> compute_total_size_statement =
 		    statement::prepare(*store, "select sum(BlobSize) from cache");
 		  sqlite3_int64 computed_total_size = -1;
 
@@ -322,7 +324,7 @@ insert into globals(TotalBlobSize) values(0);				\
 			       boost::format("Inconsistent cache state: the stored total size %d does not match the actual total size %d.  Fixing it.")
 			       % total_size % computed_total_size);
 
-		      boost::shared_ptr<statement> fix_total_size_statement =
+		      std::shared_ptr<statement> fix_total_size_statement =
 			statement::prepare(*store, "update globals set TotalSize = ?");
 		      fix_total_size_statement->bind_int64(1, computed_total_size);
 		      fix_total_size_statement->exec();
@@ -585,7 +587,7 @@ insert into globals(TotalBlobSize) values(0);				\
 		      insert_cache_statement->exec();
 		    }
 
-		    boost::shared_ptr<blob> blob_data =
+		    std::shared_ptr<blob> blob_data =
 		      sqlite::blob::open(*store,
 					 "main",
 					 "blobs",
@@ -735,7 +737,7 @@ insert into globals(TotalBlobSize) values(0);				\
 		      throw FileCacheException(((boost::format("Can't open \"%s\" for writing"))
 						% rval.get_name()).str());
 
-		    boost::shared_ptr<sqlite::blob> blob_data =
+		    std::shared_ptr<sqlite::blob> blob_data =
 		      sqlite::blob::open(*store,
 					 "main",
 					 "blobs",
@@ -825,14 +827,14 @@ insert into globals(TotalBlobSize) values(0);				\
        */
       class file_cache_multilevel : public file_cache
       {
-	std::vector<boost::shared_ptr<file_cache> > caches;
+	std::vector<std::shared_ptr<file_cache> > caches;
 
       public:
 	file_cache_multilevel()
 	{
 	}
 
-	void push_back(const boost::shared_ptr<file_cache> &cache)
+	void push_back(const std::shared_ptr<file_cache> &cache)
 	{
 	  caches.push_back(cache);
 	}
@@ -841,14 +843,14 @@ insert into globals(TotalBlobSize) values(0);				\
 	void putItem(const std::string &key, const std::string &path,
 		     time_t mtime)
 	{
-	  for(std::vector<boost::shared_ptr<file_cache> >::const_iterator
+	  for(std::vector<std::shared_ptr<file_cache> >::const_iterator
 		it = caches.begin(); it != caches.end(); ++it)
 	    (*it)->putItem(key, path, mtime);
 	}
 
 	temp::name getItem(const std::string &key, time_t &mtime)
 	{
-	  for(std::vector<boost::shared_ptr<file_cache> >::const_iterator
+	  for(std::vector<std::shared_ptr<file_cache> >::const_iterator
 		it = caches.begin(); it != caches.end(); ++it)
 	    {
 	      temp::name found = (*it)->getItem(key, mtime);
@@ -874,7 +876,7 @@ insert into globals(TotalBlobSize) values(0);				\
 	      // \note A boost::multi_index_container might be more
 	      // efficient for the in-memory cache.  OTOH, it would
 	      // require more code.
-	      rval->push_back(boost::make_shared<file_cache_sqlite>(":memory:", memory_size));
+	      rval->push_back(std::make_shared<file_cache_sqlite>(":memory:", memory_size));
 	    }
 	  catch(const cw::util::Exception &ex)
 	    {
@@ -891,7 +893,7 @@ insert into globals(TotalBlobSize) values(0);				\
 	{
 	  try
 	    {
-	      rval->push_back(boost::make_shared<file_cache_sqlite>(filename, disk_size));
+	      rval->push_back(std::make_shared<file_cache_sqlite>(filename, disk_size));
 	    }
 	  catch(const cw::util::Exception &ex)
 	    {
