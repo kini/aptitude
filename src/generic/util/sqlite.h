@@ -407,12 +407,6 @@ namespace aptitude
       prepare(db &parent,
 	      const std::string &sql);
 
-      /** \brief Prepare an SQL statement.
-       */
-      static std::shared_ptr<statement>
-      prepare(db &parent,
-	      const char *sql);
-
       /** \brief Return to the beginning of the statement's result set
        *  and discard parameter bindings.
        */

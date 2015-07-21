@@ -258,39 +258,6 @@ namespace aptitude
 	}
     }
 
-    std::shared_ptr<statement>
-    statement::prepare(db &parent,
-		       const char *sql)
-    {
-      sqlite3_stmt *handle = NULL;
-
-      // Serialize access to the database for this call.
-      db::lock l(parent);
-
-      const int result =
-	sqlite3_prepare_v2(parent.handle,
-			   sql,
-			   -1,
-			   &handle,
-			   NULL);
-
-      if(result != SQLITE_OK)
-	{
-	  // Paranoia: the docs say that "handle" is now NULL, but
-	  // just in case...
-	  if(handle != NULL)
-	    sqlite3_finalize(handle);
-
-	  throw exception(parent.get_error(), result);
-	}
-      else
-        {
-          // could use make_shared, but it is a private constructor and the
-          // workarounds are complicated/ugly
-          return std::shared_ptr<statement>(new statement(parent, handle));
-	}
-    }
-
     void statement::reset()
     {
       sqlite3_reset(handle);

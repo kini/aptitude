@@ -35,7 +35,14 @@ UNRELEASED
       little reason to use Boost for that.  The rest of cases not covered in
       this version shall be converted later on.
 
-    * Several other miscellaneous changes to allow to compile with C++11.
+    * Several other minor changes to allow to compile with C++11.
+
+  * Remove duplicated method in sqlite.* files (below).  There is another method
+    with the same signature but with "const std::string&", and "const char*"
+    implicitly converts to use that one if there is not one available of the
+    same type.
+
+      std::shared_ptr<statement> statement::prepare(db &parent, const char *sql)
 
 - Documentation:
 
