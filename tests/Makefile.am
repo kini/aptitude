@@ -1,5 +1,8 @@
 MAINTAINERCLEANFILES = Makefile.in
 
+# Make "but option 'subdir-objects' is disabled" go away
+AUTOMAKE_OPTIONS=subdir-objects
+
 BOOST_TEST_LDFLAGS = @BOOST_UNIT_TEST_LIBS@
 AM_CPPFLAGS = -I$(top_builddir) -I$(top_srcdir) -I$(top_srcdir)/src -I$(srcdir) \
               -DBOOST_TEST_DYN_LINK -DSRCDIR=\"$(srcdir)\"

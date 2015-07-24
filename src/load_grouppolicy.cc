@@ -26,7 +26,6 @@
 
 #include <generic/apt/matching/parse.h>
 #include <generic/apt/matching/pattern.h>
-#include <generic/apt/pkg_hier.h>
 
 #include <generic/util/util.h>
 
@@ -580,26 +579,6 @@ class priority_policy_parser : public string_policy_parser
   }
 };
 
-class hier_policy_parser : public string_policy_parser
-{
-  group_policy_parse_node *create_node(const vector<string> &args)
-  {
-    if(!args.empty())
-      {
-	// FIXME: who deletes this??
-	pkg_hier *hier=new pkg_hier;
-
-	for(vector<string>::const_iterator i = args.begin();
-	    i != args.end(); ++i)
-	  hier->input_file(*i);
-
-	return new policy_node2<pkg_grouppolicy_hier_factory, pkg_hier *, bool>(hier, true);
-      }
-    else
-      return new policy_node2<pkg_grouppolicy_hier_factory, pkg_hier *, bool>(get_user_pkg_hier(), false);
-  }
-};
-
 class task_policy_parser : public string_policy_parser
 {
   group_policy_parse_node *create_node(const vector<string> &args)
@@ -786,7 +765,6 @@ static void init_parse_types()
       parse_types["versions"]=new ver_policy_parser;
       parse_types["deps"]=new dep_policy_parser;
       parse_types["priority"]=new priority_policy_parser;
-      parse_types["hier"]=new hier_policy_parser;
       parse_types["task"]=new task_policy_parser;
       parse_types["tag"]=new tag_policy_parser;
 

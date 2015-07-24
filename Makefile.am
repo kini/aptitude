@@ -19,8 +19,7 @@ TLDEFAULTS = $(wildcard $(srcdir)/aptitude-defaults.??) $(wildcard $(srcdir)/apt
 EXTRA_DIST = config.rpath  ChangeLog.SVN Doxyfile.in aclocal.m4 \
 	FAQ README.BOOST README.CWIDGET README.i18n README.INTERFACES README.NAMING \
 	README.SMART-POINTERS README.THREADS aptitude-hackers-guide.txt \
-	function_groups function_pkgs aptitude-defaults \
-	section-descriptions \
+	aptitude-defaults section-descriptions \
 	$(TLDEFAULTS) \
 	$(TLMANPAGES) $(TLHELPTXTS)
 

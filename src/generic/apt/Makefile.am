@@ -7,10 +7,7 @@ AM_CPPFLAGS = -I$(top_builddir) -I$(srcdir) -I$(top_srcdir) -I$(top_srcdir)/src
 DEFS = -DLOCALEDIR=\"$(localedir)\" @DEFS@
 LDADD = @LIBINTL@
 
-EXTRA_DIST = README.hier
-
 noinst_LIBRARIES = libgeneric-apt.a
-noinst_PROGRAMS  = pkg_hier_dump
 
 libgeneric_apt_a_SOURCES = \
         aptcache.cc         \
@@ -62,8 +59,6 @@ libgeneric_apt_a_SOURCES = \
         pkg_acqfile.h       \
         pkg_changelog.cc    \
         pkg_changelog.h     \
-        pkg_hier.cc         \
-        pkg_hier.h          \
         resolver_manager.cc \
         resolver_manager.h  \
         rev_dep_iterator.h  \
@@ -73,6 +68,3 @@ libgeneric_apt_a_SOURCES = \
         tags.h              \
         tasks.cc            \
         tasks.h
-
-pkg_hier_dump_SOURCES = pkg_hier_dump.cc
-pkg_hier_dump_LDADD = $(top_builddir)/src/generic/util/libgeneric-util.a libgeneric-apt.a

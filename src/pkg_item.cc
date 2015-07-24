@@ -28,7 +28,6 @@
 #include <cwidget/generic/util/transcode.h>
 #include <cwidget/toplevel.h>
 
-#include "edit_pkg_hier.h"
 #include "pkg_columnizer.h"
 #include "pkg_item.h"
 #include "ui.h"
@@ -418,17 +417,6 @@ bool pkg_item::dispatch_key(const cw::config::key &k, cw::tree *owner)
 	  apt_reload_cache(p->get_progress().unsafe_get_ref(), true);
 	  p->destroy();
 	}
-    }
-  else if(bindings->key_matches(k, "EditHier"))
-    {
-      hier_editor_ref e=hier_editor::create();
-      e->set_package(package, visible_version());
-
-      // FIXME: better title
-      add_main_widget(e, _("Hierarchy Editor"), "", _("Hierarchy Editor"));
-
-      e->connect_key("Quit", &cw::config::global_bindings,
-		     sigc::mem_fun(*e.unsafe_get_ref(), &cw::widget::destroy));
     }
   else
     return pkg_tree_node::dispatch_key(k, owner);

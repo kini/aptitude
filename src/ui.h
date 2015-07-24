@@ -34,20 +34,6 @@ namespace cwidget
 {
   class fragment;
 }
-class pkg_hier;
-namespace cwidget
-{
-  namespace util
-  {
-    template<class T> class ref_ptr;
-  }
-  namespace widgets
-  {
-    class widget;
-
-    typedef util::ref_ptr<widget> widget_ref;
-  }
-}
 
 class download_list;
 typedef cwidget::util::ref_ptr<download_list> download_list_ref;
