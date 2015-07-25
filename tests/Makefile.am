@@ -40,7 +40,11 @@ if BUILD_LOCAL_GMOCK
 noinst_LIBRARIES = libgmock.a
 
 GMOCK_LDFLAGS = $(builddir)/libgmock.a
-nodist_libgmock_a_SOURCES = /usr/src/gtest/src/gtest-all.cc /usr/src/gmock/src/gmock-all.cc
+# Copied/linked in configure.ac from /usr/src/gtest/src/gtest-all.cc
+# /usr/src/gmock/src/gmock-all.cc to this directory -- otherwise, automake (with
+# subdir-objects option recently added) tried to build in /usr/src/gtest/ and
+# /gmock/, and then failed to link
+nodist_libgmock_a_SOURCES = gtest-all.cc gmock-all.cc
 libgmock_a_CPPFLAGS = -I/usr/src/gtest -I/usr/src/gmock
 else
 GMOCK_LDFLAGS = -lgmock -lgtest

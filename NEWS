@@ -25,6 +25,11 @@ UNRELEASED
   * Use automake option subdir-objects to be able to use current
     automake versions.
 
+    * Copied/linked in configure.ac from /usr/src/gtest/src/gtest-all.cc
+      /usr/src/gmock/src/gmock-all.cc to subdir tests/ -- otherwise, automake
+      (with subdir-objects option recently added) tried to build in
+      /usr/src/gtest/ and /gmock/, and then failed to link
+
   * Remove forward declaration of STL templated classes and containers
     (basic_string, pair, vector...), use regular includes instead.  Due to
     internal changes of GCC-5 or libsdtc++ related with C++11 compatibility
