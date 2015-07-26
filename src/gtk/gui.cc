@@ -76,6 +76,7 @@ using aptitude::Loggers;
 
 namespace gui
 {
+  // Ensure help.txt and doc/ is kept in synchronisation with the below states
   // \todo Some of these icon choices suck.
   const entity_state_info not_installed_columns("p", N_("Not installed"), Gtk::StockID());
   const entity_state_info virtual_columns("p", N_("Virtual"), Gtk::StockID());
