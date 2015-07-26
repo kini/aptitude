@@ -26,7 +26,7 @@ EXTRA_DIST = config.rpath  ChangeLog.SVN Doxyfile.in aclocal.m4 \
 pkgdatadir=$(datadir)/$(PACKAGE)
 
 pkgdata_DATA = $(TLHELPTXTS) COPYING NEWS FAQ \
-	function_groups function_pkgs aptitude-defaults section-descriptions \
+	aptitude-defaults section-descriptions \
 	$(TLDEFAULTS)
 
 dist_check_SCRIPTS = check_boost.sh
