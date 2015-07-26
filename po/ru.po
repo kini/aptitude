@@ -7,13 +7,13 @@
 # Dmitry Beloglazov <dm-guest@alioth.debian.org>, 2004.
 # Max Kosmach <max@tcen.ru>, 2008.
 # Yuri Kozlov <yuray@komyakino.ru>, 2004, 2005, 2006, 2007, 2008.
-# Yuri Kozlov <yuray@komyakino.ru>, 2009, 2012, 2013.
+# Yuri Kozlov <yuray@komyakino.ru>, 2009, 2012, 2013, 2014.
 msgid ""
 msgstr ""
-"Project-Id-Version: aptitude 0.6.8.2\n"
+"Project-Id-Version: aptitude 0.6.11-1\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2014-03-22 14:12+0800\n"
-"PO-Revision-Date: 2013-10-03 19:29+0400\n"
+"POT-Creation-Date: 2014-06-02 13:36+0800\n"
+"PO-Revision-Date: 2014-09-08 08:12+0400\n"
 "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "Language: ru\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 1.4\n"
+"X-Generator: Lokalize 1.5\n"
 
 #. TRANSLATORS: These strings describing config items
 #. should be the same width.
@@ -958,7 +958,7 @@ msgstr ""
 "параметром --full-resolver.\n"
 
 #: src/cmdline/cmdline_do_action.cc:385 src/cmdline/cmdline_simulate.cc:60
-#: src/main.cc:1233
+#: src/main.cc:1223
 #, c-format
 msgid "Abort.\n"
 msgstr "Прервать.\n"
@@ -1614,7 +1614,7 @@ msgstr ""
 "\n"
 
 #: src/cmdline/cmdline_resolver.cc:149 src/cmdline/cmdline_resolver.cc:1002
-#: src/generic/apt/apt.cc:288
+#: src/generic/apt/apt.cc:289
 #, c-format
 msgid "Unable to open %s for writing"
 msgstr "Не удаётся открыть %s для записи"
@@ -2797,23 +2797,23 @@ msgstr ""
 #. indicated by translating "Localized defaults|" below to
 #. "aptitude-defaults.ww".  If you use this mechanism, you should
 #. also add your defaults file to pkgdata_DATA in Makefile.am.
-#: src/generic/apt/apt.cc:187
+#: src/generic/apt/apt.cc:188
 msgid "Localized defaults|"
 msgstr "aptitude-defaults.ru"
 
-#: src/generic/apt/apt.cc:260
+#: src/generic/apt/apt.cc:261
 #, c-format
 msgid "%s is readable but not writable; unable to write configuration file."
 msgstr ""
 "%s доступен для чтения, но не для записи; невозможно сохранить файл "
 "настройки."
 
-#: src/generic/apt/apt.cc:305
+#: src/generic/apt/apt.cc:306
 #, c-format
 msgid "Unable to replace %s with new configuration file"
 msgstr "Не удаётся заменить %s новым файлом настройки"
 
-#: src/generic/apt/apt.cc:456
+#: src/generic/apt/apt.cc:457
 msgid ""
 "Could not lock the cache file; this usually means that dpkg or another apt "
 "tool is already installing packages.  Opening in read-only mode; any changes "
@@ -2823,31 +2823,31 @@ msgstr ""
 "от утилита apt уже выполняет установку пакета. Выполняется открытие в режиме "
 "только для чтения; любые изменения состояний пакетов сохранены НЕ БУДУТ!"
 
-#: src/generic/apt/apt.cc:1286
+#: src/generic/apt/apt.cc:1269
 msgid "foreign"
 msgstr "сторонняя"
 
-#: src/generic/apt/apt.cc:1288
+#: src/generic/apt/apt.cc:1271
 msgid "same"
 msgstr "такая же"
 
-#: src/generic/apt/apt.cc:1291
+#: src/generic/apt/apt.cc:1274
 msgid "allowed"
 msgstr "allowed"
 
-#: src/generic/apt/apt.cc:1380
+#: src/generic/apt/apt.cc:1363
 msgid "main"
 msgstr "main"
 
-#: src/generic/apt/apt.cc:1380
+#: src/generic/apt/apt.cc:1363
 msgid "contrib"
 msgstr "contrib"
 
-#: src/generic/apt/apt.cc:1380
+#: src/generic/apt/apt.cc:1363
 msgid "non-free"
 msgstr "non-free"
 
-#: src/generic/apt/apt.cc:1380
+#: src/generic/apt/apt.cc:1363
 msgid "non-US"
 msgstr "non-US"
 
@@ -2948,6 +2948,7 @@ msgstr "Не удалось скорректировать недоступно�
 #: src/generic/apt/download_install_manager.cc:175
 msgid "Failed to perform requested operation on package.  Trying to recover:"
 msgstr ""
+"Ошибка при выполнении запрошенной операции с пакетом. Попытка восстановить:"
 
 #: src/generic/apt/download_install_manager.cc:219
 msgid ""
@@ -3105,11 +3106,13 @@ msgstr "[%s] %s\n"
 #: src/generic/apt/log.cc:145
 #, c-format
 msgid ""
-"===============================================================================\n"
+"=============================================================================="
+"=\n"
 "\n"
 "Log complete.\n"
 msgstr ""
-"===============================================================================\n"
+"=============================================================================="
+"=\n"
 "\n"
 "Конец журнала.\n"
 
@@ -5053,12 +5056,11 @@ msgid "To view a solution, select it from the list to the right."
 msgstr "Чтобы посмотреть решение, выберите его из списка справа."
 
 #: src/gtk/resolver.cc:2079
-#, fuzzy, c-format
-#| msgid "%u solutions."
+#, c-format
 msgid "%u solution."
 msgid_plural "%u solutions."
-msgstr[0] "%u решений."
-msgstr[1] "%u решений."
+msgstr[0] "%u решение."
+msgstr[1] "%u решения."
 msgstr[2] "%u решений."
 
 #: src/gtk/resolver.cc:2111
@@ -5690,49 +5692,49 @@ msgstr "                  Эта версия aptitude не имеет коро�
 
 #. TRANSLATORS: This is a log level that the user can pass on
 #. the command-line or set in the configuration file.
-#: src/main.cc:387
+#: src/main.cc:377
 msgid "trace"
 msgstr "trace"
 
 #. TRANSLATORS: This is a log level that the user can pass on
 #. the command-line or set in the configuration file.
-#: src/main.cc:390
+#: src/main.cc:380
 msgid "debug"
 msgstr "debug"
 
 #. TRANSLATORS: This is a log level that the user can pass on
 #. the command-line or set in the configuration file.
-#: src/main.cc:393
+#: src/main.cc:383
 msgid "info"
 msgstr "info"
 
 #. TRANSLATORS: This is a log level that the user can pass on
 #. the command-line or set in the configuration file.
-#: src/main.cc:396
+#: src/main.cc:386
 msgid "warn"
 msgstr "warn"
 
 #. TRANSLATORS: This is a log level that the user can pass on
 #. the command-line or set in the configuration file.
-#: src/main.cc:399
+#: src/main.cc:389
 msgid "error"
 msgstr "error"
 
 #. TRANSLATORS: This is a log level that the user can pass on
 #. the command-line or set in the configuration file.
-#: src/main.cc:402
+#: src/main.cc:392
 msgid "fatal"
 msgstr "fatal"
 
 #. TRANSLATORS: This is a log level that the user can pass on
 #. the command-line or set in the configuration file.
-#: src/main.cc:405
+#: src/main.cc:395
 msgid "off"
 msgstr "off"
 
 #. TRANSLATORS: both the translated and the untranslated
 #. log level names are accepted here.
-#: src/main.cc:473
+#: src/main.cc:463
 #, c-format
 msgid ""
 "Unknown log level name \"%s\" (expected \"trace\", \"debug\", \"info\", "
@@ -5755,48 +5757,48 @@ msgstr ""
 #. * levels for different categories (e.g. level 'warn' for
 #. * 'aptitude.changelog', debug for 'aptitude.why'), etc.
 #.
-#: src/main.cc:496
+#: src/main.cc:486
 #, c-format
 msgid "Invalid logger name \"%s\"."
 msgstr "Неверное имя команды ведения протокола «%s»."
 
-#: src/main.cc:773
+#: src/main.cc:763
 #, c-format
 msgid "Expected a number after -q=\n"
 msgstr "Ожидается число после -q=\n"
 
-#: src/main.cc:782
+#: src/main.cc:772
 #, c-format
 msgid "Expected a number after -q=, got %s\n"
 msgstr "Ожидается число после -q=, получен %s\n"
 
-#: src/main.cc:806
+#: src/main.cc:796
 #, c-format
 msgid "-o requires an argument of the form key=value, got %s\n"
 msgstr "-o требуется параметр в виде ключ=значение, получен %s\n"
 
-#: src/main.cc:896
+#: src/main.cc:886
 #, c-format
 msgid "No comma following tag name \"%s\".\n"
 msgstr "Не указана запятая после имени метки «%s».\n"
 
-#: src/main.cc:988 src/main.cc:998
+#: src/main.cc:978 src/main.cc:988
 msgid "WEIRDNESS: unknown option code received\n"
 msgstr "СТРАННОСТЬ: получен неизвестный код параметра\n"
 
-#: src/main.cc:1016
+#: src/main.cc:1006
 msgid "--show-package-names|never"
 msgstr "--show-package-names|never"
 
-#: src/main.cc:1019
+#: src/main.cc:1009
 msgid "--show-package-names|auto"
 msgstr "--show-package-names|auto"
 
-#: src/main.cc:1022
+#: src/main.cc:1012
 msgid "--show-package-names|always"
 msgstr "--show-package-names|always"
 
-#: src/main.cc:1027
+#: src/main.cc:1017
 #, c-format
 msgid ""
 "Invalid package names display mode \"%s\" (should be \"never\", \"auto\", or "
@@ -5805,30 +5807,30 @@ msgstr ""
 "Некорректный режим отображения имён пакетов «%s» (должно быть «never», "
 "«auto» или «always»)."
 
-#: src/main.cc:1033
+#: src/main.cc:1023
 msgid "no-summary"
 msgstr "no-summary"
 
-#: src/main.cc:1035
+#: src/main.cc:1025
 msgid "first-package"
 msgstr "first-package"
 
-#: src/main.cc:1037
+#: src/main.cc:1027
 msgid "first-package-and-type"
 msgstr "first-package-and-type"
 
-#: src/main.cc:1039
+#: src/main.cc:1029
 msgid "all-packages"
 msgstr "all-packages"
 
-#: src/main.cc:1041
+#: src/main.cc:1031
 msgid "all-packages-with-dep-versions"
 msgstr "all-packages-with-dep-versions"
 
 #. TRANSLATORS: "why" here is the aptitude command name and should not
 #. be translated.  Both the translated and the untranslated log level
 #. names are accepted here.
-#: src/main.cc:1048
+#: src/main.cc:1038
 #, c-format
 msgid ""
 "Invalid \"why\" summary mode \"%s\": expected \"no-summary\", \"first-package"
@@ -5839,7 +5841,7 @@ msgstr ""
 "package», «first-package-and-type», «all-packages» или «all-packages-with-"
 "dep-versions»."
 
-#: src/main.cc:1089
+#: src/main.cc:1079
 msgid ""
 "Only one of --auto-clean-on-startup, --clean-on-startup, -i, and -u may be "
 "specified\n"
@@ -5847,7 +5849,7 @@ msgstr ""
 "Можно указать только одно из: --auto-clean-on-startup, --clean-on-startup, -"
 "i и -u\n"
 
-#: src/main.cc:1098
+#: src/main.cc:1088
 msgid ""
 "-u, -i, and --clean-on-startup may not be specified in command-line mode "
 "(eg, with 'install')"
@@ -5855,21 +5857,21 @@ msgstr ""
 "-u, -i и --clean-on-startup не могут быть заданы в режиме командной строки "
 "(например, с «install»)"
 
-#: src/main.cc:1115
+#: src/main.cc:1105
 msgid "-u, -i, and --clean-on-startup may not be specified with a command"
 msgstr "-u, -i и --clean-on-startup не могут быть заданы с командой"
 
-#: src/main.cc:1226
+#: src/main.cc:1216
 #, c-format
 msgid "Unknown command \"%s\"\n"
 msgstr "Неизвестная команда «%s»\n"
 
-#: src/main.cc:1238 src/main.cc:1323
+#: src/main.cc:1228 src/main.cc:1313
 #, c-format
 msgid "Uncaught exception: %s\n"
 msgstr "Необработанное исключение: %s\n"
 
-#: src/main.cc:1242 src/main.cc:1327
+#: src/main.cc:1232 src/main.cc:1317
 #, c-format
 msgid ""
 "Backtrace:\n"
@@ -6482,7 +6484,7 @@ msgid ""
 "database is not present (installing debtags may correct this problem)."
 msgstr ""
 "\n"
-" Эти пакеты ещё не отнесены к определенным категориям в debtags, или база "
+" Эти пакеты ещё не отнесены к определённым категориям в debtags, или база "
 "данных debtags не существует (проблема может быть решена установкой debtags)."
 
 #: src/pkg_info_screen.cc:140
@@ -7073,7 +7075,7 @@ msgstr ""
 msgid "Invalid Get-Root-Command; it should start with su: or sudo:, not %s:"
 msgstr ""
 "Неверная команда в Get-Root-Command; она должна начинаться с su: или sudo: "
-"а, не c %s:"
+"а, не с %s:"
 
 #: src/ui.cc:476
 #, c-format
@@ -7503,16 +7505,12 @@ msgid "Flag the currently selected package for installation or upgrade"
 msgstr "Пометить выделенный пакет для установки или обновления"
 
 #: src/ui.cc:2412
-#, fuzzy
-#| msgid "Reinstall"
 msgid "R^einstall"
-msgstr "Переустановить"
+msgstr "Пе^реустановить"
 
 #: src/ui.cc:2413
-#, fuzzy
-#| msgid "Flag the currently selected package for installation or upgrade"
 msgid "Flag the currently selected package for reinstallation"
-msgstr "Пометить выделенный пакет для установки или обновления"
+msgstr "Пометить выделенный пакет для переустановки"
 
 #: src/ui.cc:2416
 msgid "^Remove"
@@ -7964,212 +7962,3 @@ msgstr "Скачивается список изменений %s"
 msgid "You can only view changelogs of official Debian packages."
 msgstr "Списки изменений можно посмотреть только у официальных пакетов Debian."
 
-#~ msgid "No tag descriptions are available."
-#~ msgstr "Метки описаний недоступны."
-
-#~ msgid "No description available for %s."
-#~ msgstr "Недоступно описание для %s."
-
-#~ msgid "  Ept support enabled.\n"
-#~ msgstr "  Поддержка ept включена.\n"
-
-#~ msgid "  Ept support disabled.\n"
-#~ msgstr "  Поддержка ept выключена.\n"
-
-#~ msgid "MISSING TAG"
-#~ msgstr "МЕТКА ОТСУТСТВУЕТ"
-
-#~ msgid "A package failed to install.  Trying to recover:"
-#~ msgstr "Не удалось установить пакет. Попытка восстановить:"
-
-#~ msgid "Dummy label (will be replaced at runtime)."
-#~ msgstr "Пустая метка (будет заменено при запуске)."
-
-#~ msgid ""
-#~ "Label explaining the upgrade.  This text will not appear in the program "
-#~ "at runtime."
-#~ msgstr ""
-#~ "Поле, объясняющее обновление. Этот текст не появится при выполнении "
-#~ "программы."
-
-#~ msgid "Err "
-#~ msgstr "Ош "
-
-#~ msgid "Unable to open /usr/share/tasksel/debian-tasks.desc"
-#~ msgstr "Не удаётся открыть /usr/share/tasksel/debian-tasks.desc"
-
-#~ msgid "Press return to continue.\n"
-#~ msgstr "Нажмите Ввод для продолжения.\n"
-
-#~ msgid "Hierarchy editor"
-#~ msgstr "Редактор иерархии"
-
-#~ msgid "Leave the following dependencies unresolved:%n"
-#~ msgstr "Оставить следующие зависимости неразрешёнными:%n"
-
-#~ msgid "File to which the resolver state should be dumped: "
-#~ msgstr "Файл, в который будет сброшено состояние решателя: "
-
-#~ msgid "Couldn't lock list directory..are you root?"
-#~ msgstr "Не удалось заблокировать каталог list. Вы суперпользователь?"
-
-#~ msgid "Unterminated quoted string in command: %s"
-#~ msgstr "Отсутствует закрывающая строку кавычка в команде: %s"
-
-#~ msgid "fork() failed: %s"
-#~ msgstr "вызов fork() завершился неудачно: %s"
-
-#~ msgid "waitpid() failed: %s"
-#~ msgstr "вызов waitpid() завершился неудачно: %s"
-
-#~ msgid "The debtags command must not be an empty string."
-#~ msgstr "Команда debtags не должна быть пустой строкой."
-
-#~ msgid "The debtags command must be an absolute path."
-#~ msgstr "Команда debtags должна быть указана абсолютным путём."
-
-#~ msgid "The debtags command (%s) cannot be executed: %s"
-#~ msgstr "Команда debtags (%s) не может быть выполнена: %s"
-
-#~ msgid "Updating debtags database"
-#~ msgstr "Обновление базы данных debtags"
-
-#~ msgid "(core dumped)"
-#~ msgstr "(создан файл core)"
-
-#~ msgid "The debtags update process (%s update %s) was killed by signal %d%s."
-#~ msgstr "Процесс обновления debtags (%s update %s) завершён по сигналу %d%s."
-
-#~ msgid ""
-#~ "The debtags update process (%s update %s) exited abnormally (code %d)."
-#~ msgstr ""
-#~ "Процесс обновления debtags (%s update %s) завершён аварийно (код %d)."
-
-#~ msgid ""
-#~ "The debtags update process (%s update %s) exited in an unexpected way "
-#~ "(status %d)."
-#~ msgstr ""
-#~ "Процесс обновления debtags (%s update %s) завершён неожиданным путём "
-#~ "(статус %d)."
-
-#~ msgid ""
-#~ "Updating the debtags database (%s update %s) failed (perhaps debtags is "
-#~ "not installed?): %s"
-#~ msgstr ""
-#~ "Обновление базы данных debtags (%s update %s) завершилось неудачно "
-#~ "(возможно, не установлен пакет debtags?): %s"
-
-#~ msgid "Invalid command-line option '%s'"
-#~ msgstr "Некорректный параметр командной строки «%s»"
-
-#~ msgid "Too many arguments to by-section grouping policy"
-#~ msgstr "Слишком много аргументов для группирующего правила by-section"
-
-#~ msgid "By-status grouping policies take no arguments"
-#~ msgstr "Группирующему правилу By-status не нужно аргументов"
-
-#~ msgid "By-mode grouping policies take no arguments"
-#~ msgstr "Группирующим правилам By-mode не нужно аргументов"
-
-#~ msgid "First-character grouping policies take no arguments"
-#~ msgstr "Группирующим правилам First-character не нужно аргументов"
-
-#~ msgid "Version-generating grouping policies take no arguments"
-#~ msgstr "Группирующим правилам Version-generating не нужно аргументов"
-
-#~ msgid "Dep-generating grouping policies take no arguments"
-#~ msgstr "Группирующим правилам Dep-generating не нужно аргументов"
-
-#~ msgid "By-priority grouping policies take no arguments"
-#~ msgstr "Группирующим правилам By-priority не нужно аргументов"
-
-#~ msgid "Expected no more than one argument to a tag grouping policy"
-#~ msgstr ""
-#~ "Должно быть не более одного параметра группирующего правила по меткам"
-
-#~ msgid "Expected '(' after 'pattern'"
-#~ msgstr "После «pattern» ожидается «(»"
-
-#~ msgid "Missing arguments to 'pattern'"
-#~ msgstr "Пропущен параметр для «pattern»"
-
-#~ msgid "By-version sorting policies take no arguments"
-#~ msgstr "Сортирующим правилам By-version не нужно аргументов"
-
-#~ msgid "By-installed size sorting policies take no arguments"
-#~ msgstr "Сортирующим по размеру правилам By-installed не нужно аргументов"
-
-#~ msgid "By-priority sorting policies take no arguments"
-#~ msgstr "Сортирующим правилам By-priority не нужно аргументов"
-
-#~ msgid ""
-#~ "%BOption:%b  %s\n"
-#~ "%BDefault:%b %s\n"
-#~ "%BValue:%b   %s\n"
-#~ msgstr ""
-#~ "%BПараметр:%b     %s\n"
-#~ "%BПо умолчанию:%b %s\n"
-#~ "%BЗначение:%b     %s\n"
-
-#~ msgid "Press Return to continue"
-#~ msgstr "Нажмите Ввод для продолжения"
-
-#~ msgid "Search for:"
-#~ msgstr "Поиск:"
-
-#~ msgid ""
-#~ "Unable to resolve dependencies for the upgrade (the resolver timed out)."
-#~ msgstr ""
-#~ "Не удалось разрешить зависимости для обновления (вышло время решателя)."
-
-#~ msgid "Safe actions"
-#~ msgstr "Безопасные действия"
-
-#~ msgid "Cancel all user actions"
-#~ msgstr "Отменить все действия пользователя"
-
-#~ msgid "Remove packages"
-#~ msgstr "Удалить пакеты"
-
-#~ msgid "Modify held packages"
-#~ msgstr "Изменить фиксированные пакеты"
-
-#~ msgid "Install versions from non-default sources"
-#~ msgstr "Установить версии из источников не по умолчанию"
-
-#~ msgid "Remove essential packages"
-#~ msgstr "Удалить пакеты первой необходимости"
-
-#~ msgid ""
-#~ "The tier \"%s\", configured in %s::ProblemResolver::Tier-Names, is "
-#~ "missing a Tier entry."
-#~ msgstr ""
-#~ "Уровень \"%s\", настроенный в %s::ProblemResolver::Tier-Names, не имеет "
-#~ "элемента Tier."
-
-#~ msgid ""
-#~ "The tier %d, configured in %s::ProblemResolver::Tier-Names, is missing a "
-#~ "Name entry."
-#~ msgstr ""
-#~ "Уровень %d, настроенный в %s::ProblemResolver::Tier-Names, не имеет "
-#~ "элемента Name."
-
-#~| msgid "No resolution found."
-#~ msgid "No changelog found."
-#~ msgstr "Changelog не найден."
-
-#~| msgid "Cannot open package hierarchy file %s"
-#~ msgid "Can't create a temporary file: %s"
-#~ msgstr "Не удалось создать временный файл: %s"
-
-#~ msgid "Unknown error"
-#~ msgstr "Неизвестная ошибка"
-
-#~ msgid "Tier: %s"
-#~ msgstr "Уровень: %s"
-
-#~ msgid "Downloading Changelog"
-#~ msgstr "Скачивается Changelog"
-
-#~ msgid "Download Changelog"
-#~ msgstr "Скачать Changelog"
