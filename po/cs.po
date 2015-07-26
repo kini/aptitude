@@ -1,13 +1,13 @@
 # Czech translation of Aptitude.
 # This file is distributed under the same license as the Aptitude package.
-# Miroslav Kure <kurem@debian.cz>, 2004-2012.
+# Miroslav Kure <kurem@debian.cz>, 2004-2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: aptitude\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2014-03-22 14:12+0800\n"
-"PO-Revision-Date: 2012-07-15 18:59+0200\n"
+"POT-Creation-Date: 2014-08-15 15:57+0200\n"
+"PO-Revision-Date: 2014-08-15 16:37+0200\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
 "Language: cs\n"
@@ -368,18 +368,13 @@ msgid "URL to use to download changelogs"
 msgstr "URL pro stahování záznamů o změnách"
 
 #: src/apt_options.cc:294
-#, fuzzy
-#| msgid ""
-#| "This option controls the template that's used to download changelogs from "
-#| "the Debian Web site.  You should only need to change this if the "
-#| "changelogs move to a different URL."
 msgid ""
 "This option controls the server used to download changelogs.  You should "
 "only need to change this if the changelogs move to a different URL."
 msgstr ""
-"Tato volba určuje šablonu, která se použije pro stažení seznamů změn ze "
-"stránek Debianu. Tuto volbu byste měli měnit jen v případě, že se změní URL "
-"s archivem změn."
+"Tato volba určuje server, který se použije pro stažení seznamů změn. Tuto "
+"volbu byste měli měnit jen v případě, že se seznamy změn přesunou na jiné "
+"URL."
 
 #: src/apt_options.cc:300
 msgid "Display a preview of what will be done before doing it"
@@ -631,7 +626,7 @@ msgstr "Fatální chyba v řešiteli"
 #: src/broken_indicator.cc:277
 #, c-format
 msgid "[%d(%d)/...] Resolving dependencies"
-msgstr "[%d(%d)/...] Řeším závislosti"
+msgstr "[%d(%d)/...] Řešení závislostí"
 
 #: src/broken_indicator.cc:313 src/gtk/resolver.cc:1294
 #: src/gtk/resolver.cc:1462 src/solution_dialog.cc:140
@@ -848,48 +843,6 @@ msgstr ""
 msgid "Bad action character '%c'\n"
 msgstr "Chybná akce „%c“\n"
 
-#: src/cmdline/cmdline_changelog.cc:134
-#: src/cmdline/cmdline_download_progress_display.cc:131
-msgid "Get:"
-msgstr "Mám:"
-
-#. TRANSLATORS: this stands for "error" and should be the
-#. same width as the translation of "Ign".
-#: src/cmdline/cmdline_changelog.cc:144
-#: src/cmdline/cmdline_download_progress_display.cc:185
-msgid "Err"
-msgstr "Err"
-
-#: src/cmdline/cmdline_changelog.cc:177
-#, c-format
-msgid "Changelog download failed: %s"
-msgstr "Stažení seznamu změn selhalo: %s"
-
-#: src/cmdline/cmdline_changelog.cc:198 src/generic/apt/pkg_changelog.cc:442
-#: src/generic/apt/pkg_changelog.cc:596 src/view_changelog.cc:272
-#, c-format
-msgid "Changelog of %s"
-msgstr "Soubor změn %s"
-
-#: src/cmdline/cmdline_changelog.cc:296
-msgid "Can't execute sensible-pager, is this a working Debian system?"
-msgstr "Nelze spustit sensible-pager - je tento Debian vůbec funkční?"
-
-#: src/cmdline/cmdline_changelog.cc:347
-#, c-format
-msgid "%s is not an official Debian package, cannot display its changelog."
-msgstr "%s není oficiální debianí balík, nemohu zobrazit jeho seznam změn."
-
-#: src/cmdline/cmdline_changelog.cc:408
-#, c-format
-msgid "Couldn't find a changelog for %s"
-msgstr "Nelze nalézt seznam změn balíku %s"
-
-#: src/cmdline/cmdline_changelog.cc:412
-#, c-format
-msgid "Couldn't run pager %s"
-msgstr "Nelze spustit stránkovač %s"
-
 #: src/cmdline/cmdline_clean.cc:60
 #, c-format
 msgid "E: The clean command takes no arguments\n"
@@ -941,7 +894,7 @@ msgid ""
 msgstr "Nelze vyřešit závislosti, zkuste parametr --full-resolver.\n"
 
 #: src/cmdline/cmdline_do_action.cc:385 src/cmdline/cmdline_simulate.cc:60
-#: src/main.cc:1233
+#: src/main.cc:1223
 #, c-format
 msgid "Abort.\n"
 msgstr "Přerušeno.\n"
@@ -970,6 +923,11 @@ msgstr ""
 "Balík %s verze %s se nedá stáhnout. Pravděpodobně se jedná o lokální nebo "
 "zastaralý balík?"
 
+#: src/cmdline/cmdline_download_progress_display.cc:131
+#: src/cmdline/cmdline_changelog.cc:134
+msgid "Get:"
+msgstr "Mám:"
+
 #: src/cmdline/cmdline_download_progress_display.cc:154
 msgid "Hit"
 msgstr "Cíl"
@@ -979,6 +937,13 @@ msgstr "Cíl"
 #: src/cmdline/cmdline_download_progress_display.cc:181
 msgid "Ign"
 msgstr "Ign"
+
+#. TRANSLATORS: this stands for "error" and should be the
+#. same width as the translation of "Ign".
+#: src/cmdline/cmdline_download_progress_display.cc:185
+#: src/cmdline/cmdline_changelog.cc:144
+msgid "Err"
+msgstr "Err"
 
 #: src/cmdline/cmdline_download_progress_display.cc:211
 #, c-format
@@ -1027,6 +992,36 @@ msgstr "E: Příkaz forget-new neakceptuje žádné argumenty\n"
 #, c-format
 msgid "Would forget what packages are new\n"
 msgstr "Teoreticky by zapomněl, které balíky jsou nové\n"
+
+#: src/cmdline/cmdline_changelog.cc:177
+#, c-format
+msgid "Changelog download failed: %s"
+msgstr "Stažení seznamu změn selhalo: %s"
+
+#: src/cmdline/cmdline_changelog.cc:198 src/generic/apt/pkg_changelog.cc:442
+#: src/generic/apt/pkg_changelog.cc:596 src/view_changelog.cc:272
+#, c-format
+msgid "Changelog of %s"
+msgstr "Soubor změn %s"
+
+#: src/cmdline/cmdline_changelog.cc:296
+msgid "Can't execute sensible-pager, is this a working Debian system?"
+msgstr "Nelze spustit sensible-pager - je tento Debian vůbec funkční?"
+
+#: src/cmdline/cmdline_changelog.cc:347
+#, c-format
+msgid "%s is not an official Debian package, cannot display its changelog."
+msgstr "%s není oficiální debianí balík, nemohu zobrazit jeho seznam změn."
+
+#: src/cmdline/cmdline_changelog.cc:408
+#, c-format
+msgid "Couldn't find a changelog for %s"
+msgstr "Nelze nalézt seznam změn balíku %s"
+
+#: src/cmdline/cmdline_changelog.cc:412
+#, c-format
+msgid "Couldn't run pager %s"
+msgstr "Nelze spustit stránkovač %s"
 
 #: src/cmdline/cmdline_moo.cc:16
 #, c-format
@@ -1266,12 +1261,12 @@ msgstr "%lu k odstranění a %lu neaktualizováno.\n"
 #: src/cmdline/cmdline_prompt.cc:736
 #, c-format
 msgid "Need to get %sB/%sB of archives. "
-msgstr "Potřebuji stáhnout %sB/%sB archivů. "
+msgstr "Je třeba stáhnout %sB/%sB archivů. "
 
 #: src/cmdline/cmdline_prompt.cc:739
 #, c-format
 msgid "Need to get %sB of archives. "
-msgstr "Potřebuji stáhnout %sB archivů. "
+msgstr "Je třeba stáhnout %sB archivů. "
 
 #: src/cmdline/cmdline_prompt.cc:746
 #, c-format
@@ -1584,7 +1579,7 @@ msgstr ""
 "\n"
 
 #: src/cmdline/cmdline_resolver.cc:149 src/cmdline/cmdline_resolver.cc:1002
-#: src/generic/apt/apt.cc:288
+#: src/generic/apt/apt.cc:289
 #, c-format
 msgid "Unable to open %s for writing"
 msgstr "Nelze otevřít %s pro zápis"
@@ -1604,8 +1599,8 @@ msgid ""
 "y: %Fn: %Fq: %F.: %F,: %Fo: %Fe: %Fx: %Fr (ID|pkg ver) ...: %F%na (ID|pkg "
 "ver) ...: %F%n<ID>: %F%n<ACTION> pkg... : %F%n%F%F%F%F%F%F%F%F"
 msgstr ""
-"y: %Fn: %Fq: %F.: %F,: %Fo: %Fe: %Fx: %Fr (ID|balík verze) ...: %F%na (ID|"
-"balík verze) ...: %F%n<ID>: %F%n<AKCE> pkg... : %F%n%F%F%F%F%F%F%F%F"
+"y: %Fn: %Fq: %F.: %F,: %Fo: %Fe: %Fx: %Fr (ID|balík verze) …: %F%na (ID|"
+"balík verze) …: %F%n<ID>: %F%n<AKCE> pkg… : %F%n%F%F%F%F%F%F%F%F"
 
 #: src/cmdline/cmdline_resolver.cc:243
 msgid "accept the proposed changes"
@@ -1715,22 +1710,22 @@ msgstr "%s nemá verzi „%s“"
 #: src/cmdline/cmdline_resolver.cc:403
 #, c-format
 msgid "Allowing the removal of %s"
-msgstr "Povoluji odstranění %s"
+msgstr "Povoluje se odstranění %s"
 
 #: src/cmdline/cmdline_resolver.cc:406
 #, c-format
 msgid "Allowing the installation of %s version %s (%s)"
-msgstr "Povoluji instalaci balíku %s verze %s (%s)"
+msgstr "Povoluje se instalace balíku %s verze %s (%s)"
 
 #: src/cmdline/cmdline_resolver.cc:416
 #, c-format
 msgid "Rejecting the removal of %s"
-msgstr "Zamítám odstranění balíku %s"
+msgstr "Zamítá se odstranění balíku %s"
 
 #: src/cmdline/cmdline_resolver.cc:419
 #, c-format
 msgid "Rejecting the installation of %s version %s (%s)"
-msgstr "Zamítám instalaci balíku %s verze %s (%s)"
+msgstr "Zamítá se instalace balíku %s verze %s (%s)"
 
 #: src/cmdline/cmdline_resolver.cc:432
 #, c-format
@@ -1770,7 +1765,7 @@ msgstr "Přestávám ignorovat toto doporučení: %s"
 #: src/cmdline/cmdline_resolver.cc:517
 #, c-format
 msgid "Ignoring this recommendation: %s"
-msgstr "Ignoruji doporučení: %s"
+msgstr "Ignoruje se doporučení: %s"
 
 #: src/cmdline/cmdline_resolver.cc:576
 #, c-format
@@ -1793,6 +1788,7 @@ msgstr "Tato akce je momentálně zamítnuta a neobjeví se v nových řešeníc
 msgid ""
 "This action is currently approved; it will be selected whenever possible."
 msgstr ""
+"Tato akce je momentálně povolena a bude vybírana, kdykoliv to bude možné."
 
 #. TRANSLATORS: the "r" here is
 #. for "reject", but should not be
@@ -1861,7 +1857,7 @@ msgstr "Chci řešit závislosti, ale žádný řešitel závislostí nebyl vytv
 #: src/gtk/resolver.cc:2058 src/solution_dialog.cc:127
 #: src/solution_screen.cc:546
 msgid "Resolving dependencies..."
-msgstr "Řeším závislosti..."
+msgstr "Řeší se závislosti…"
 
 #: src/cmdline/cmdline_resolver.cc:897
 msgid "The following actions will resolve these dependencies:"
@@ -1903,7 +1899,7 @@ msgstr "Chybná odpověď; zadejte „y“ nebo „n“."
 
 #: src/cmdline/cmdline_resolver.cc:1089
 msgid "Unable to resolve dependencies!  Giving up..."
-msgstr "Nemohu vyřešit závislosti! Vzdávám se..."
+msgstr "Nemohu vyřešit závislosti! Vzdávám se…"
 
 #: src/cmdline/cmdline_resolver.cc:1095
 msgid "*** No more solutions available ***"
@@ -2301,10 +2297,9 @@ msgid "You cannot specify both an archive and a version for a package\n"
 msgstr "Nemůžete současně zadat archiv a verzi balíku\n"
 
 #: src/cmdline/cmdline_util.cc:273
-#, fuzzy, c-format
-#| msgid "Couldn't find a changelog for %s"
+#, c-format
 msgid "Couldn't find task '%s'"
-msgstr "Nemohu nalézt seznam změn balíku %s"
+msgstr "Nelze najít úlohu „%s“"
 
 #: src/cmdline/cmdline_util.cc:361
 #, c-format
@@ -2511,7 +2506,7 @@ msgstr "    ++   --> ZAŘAZUJI %s DO FRONTY, poskytuje %s\n"
 #: src/cmdline/cmdline_why.cc:1138
 #, c-format
 msgid "Starting search with parameters %ls\n"
-msgstr "Zahajuji hledání s parametry %ls\n"
+msgstr "Zahajuje se hledání s parametry %ls\n"
 
 #: src/cmdline/cmdline_why.cc:1194
 #, c-format
@@ -2627,7 +2622,7 @@ msgstr " [ %i%% ]"
 
 #: src/download_list.cc:265
 msgid "Downloading... "
-msgstr "Stahuji... "
+msgstr "Stahuje se… "
 
 #: src/download_list.cc:341 src/gtk/download.cc:441
 #, c-format
@@ -2684,12 +2679,12 @@ msgstr "Nelze otevřít rozšířený stavový soubor programu Aptitude"
 #: src/generic/apt/aptcache.cc:406 src/generic/apt/aptcache.cc:501
 #: src/generic/apt/aptcache.cc:503
 msgid "Reading extended state information"
-msgstr "Čtu rozšířené stavové informace"
+msgstr "Čtou se rozšířené stavové informace"
 
 #: src/generic/apt/aptcache.cc:509 src/generic/apt/aptcache.cc:591
 #: src/generic/apt/aptcache.cc:594
 msgid "Initializing package states"
-msgstr "Inicializuji stavy balíků"
+msgstr "Inicializují se stavy balíků"
 
 #: src/generic/apt/aptcache.cc:752
 msgid "Cannot open Aptitude state file"
@@ -2698,7 +2693,7 @@ msgstr "Nelze otevřít stavový soubor programu Aptitude"
 #: src/generic/apt/aptcache.cc:756 src/generic/apt/aptcache.cc:863
 #: src/generic/apt/aptcache.cc:866
 msgid "Writing extended state information"
-msgstr "Zapisuji rozšířené stavové informace"
+msgstr "Zapisují se rozšířené stavové informace"
 
 #: src/generic/apt/aptcache.cc:854
 msgid "Couldn't write state file"
@@ -2749,21 +2744,21 @@ msgstr "Pro opravení chybějících souborů zkuste aktualizovat seznamy balík
 #. indicated by translating "Localized defaults|" below to
 #. "aptitude-defaults.ww".  If you use this mechanism, you should
 #. also add your defaults file to pkgdata_DATA in Makefile.am.
-#: src/generic/apt/apt.cc:187
+#: src/generic/apt/apt.cc:188
 msgid "Localized defaults|"
 msgstr "aptitude-defaults.cs"
 
-#: src/generic/apt/apt.cc:260
+#: src/generic/apt/apt.cc:261
 #, c-format
 msgid "%s is readable but not writable; unable to write configuration file."
 msgstr "%s se dá číst, ale ne zapisovat; nelze zapsat konfigurační soubor."
 
-#: src/generic/apt/apt.cc:305
+#: src/generic/apt/apt.cc:306
 #, c-format
 msgid "Unable to replace %s with new configuration file"
 msgstr "Nelze nahradit %s novým konfiguračním souborem"
 
-#: src/generic/apt/apt.cc:456
+#: src/generic/apt/apt.cc:457
 msgid ""
 "Could not lock the cache file; this usually means that dpkg or another apt "
 "tool is already installing packages.  Opening in read-only mode; any changes "
@@ -2773,31 +2768,31 @@ msgstr ""
 "apt nástroj. Otevírám v režimu pouze pro čtení. Změny, které provedete se "
 "stavem balíků, NEBUDOU uloženy!"
 
-#: src/generic/apt/apt.cc:1286
+#: src/generic/apt/apt.cc:1269
 msgid "foreign"
 msgstr "cizí"
 
-#: src/generic/apt/apt.cc:1288
+#: src/generic/apt/apt.cc:1271
 msgid "same"
 msgstr "stejná"
 
-#: src/generic/apt/apt.cc:1291
+#: src/generic/apt/apt.cc:1274
 msgid "allowed"
 msgstr "povolená"
 
-#: src/generic/apt/apt.cc:1380
+#: src/generic/apt/apt.cc:1363
 msgid "main"
 msgstr "hlavní"
 
-#: src/generic/apt/apt.cc:1380
+#: src/generic/apt/apt.cc:1363
 msgid "contrib"
 msgstr "contrib"
 
-#: src/generic/apt/apt.cc:1380
+#: src/generic/apt/apt.cc:1363
 msgid "non-free"
 msgstr "non-free"
 
-#: src/generic/apt/apt.cc:1380
+#: src/generic/apt/apt.cc:1363
 msgid "non-US"
 msgstr "non-US"
 
@@ -2896,7 +2891,7 @@ msgstr "Nelze opravit kvůli nedostupným balíkům"
 
 #: src/generic/apt/download_install_manager.cc:175
 msgid "Failed to perform requested operation on package.  Trying to recover:"
-msgstr ""
+msgstr "Provedení požadované operace na balíku selhalo. Pokus o obnovu:"
 
 #: src/generic/apt/download_install_manager.cc:219
 msgid ""
@@ -2925,15 +2920,14 @@ msgid "Couldn't rebuild package cache"
 msgstr "Nelze vytvořit vyrovnávací paměť pro balíky"
 
 #: src/generic/apt/dpkg.cc:102
-#, fuzzy, c-format
-#| msgid "Couldn't find a changelog for %s"
+#, c-format
 msgid "Couldn't chroot into %s for %s"
-msgstr "Nemohu nalézt seznam změn balíku %s"
+msgstr "Nelze změnit root na %s pro příkaz %s"
 
 #: src/generic/apt/dpkg.cc:124
 #, c-format
 msgid "Waited for %s but it wasn't there"
-msgstr ""
+msgstr "Čekali jsme na %s, který tam nebyl"
 
 #: src/generic/apt/dump_packages.cc:539 src/generic/apt/dump_packages.cc:629
 #, c-format
@@ -3063,12 +3057,12 @@ msgstr ""
 #: src/generic/apt/matching/match.cc:3054
 #: src/generic/apt/matching/match.cc:3171
 msgid "Accessing index"
-msgstr "Přistupuji k indexu"
+msgstr "Přistupuje se k indexu"
 
 #: src/generic/apt/matching/match.cc:3064
 #: src/generic/apt/matching/match.cc:3178
 msgid "Filtering packages"
-msgstr "Filtruji balíky"
+msgstr "Filtrují se balíky"
 
 #: src/generic/apt/matching/parse.cc:315
 #, c-format
@@ -3177,15 +3171,6 @@ msgid ""
 msgstr ""
 "Soubory s indexy balíků jsou poškozeny. Chybí pole Filename: pro balík %s."
 
-#: src/generic/apt/pkg_changelog.cc:572 src/generic/apt/pkg_changelog.cc:577
-#, c-format
-msgid "Failed to download changelogs: %s"
-msgstr "Nepodařilo se stáhnout seznamy změn: %s"
-
-#: src/generic/apt/pkg_changelog.cc:582
-msgid "Failed to download changelogs: unexpected exception."
-msgstr "Nepodařilo se stáhnout seznamy změn: neočekávaná výjimka"
-
 #: src/generic/apt/pkg_hier.cc:28 src/generic/apt/pkg_hier.cc:49
 #, c-format
 msgid "Warning: group %s is involved in a cycle"
@@ -3213,6 +3198,15 @@ msgstr "Zaznamenán špatný záznam (balík=%s, skupina=%s), přeskakuji"
 #, c-format
 msgid "Multiple descriptions found for group %s, ignoring one"
 msgstr "Pro skupinu %s existuje více popisů, některé ignoruji"
+
+#: src/generic/apt/pkg_changelog.cc:572 src/generic/apt/pkg_changelog.cc:577
+#, c-format
+msgid "Failed to download changelogs: %s"
+msgstr "Nepodařilo se stáhnout seznamy změn: %s"
+
+#: src/generic/apt/pkg_changelog.cc:582
+msgid "Failed to download changelogs: unexpected exception."
+msgstr "Nepodařilo se stáhnout seznamy změn: neočekávaná výjimka"
 
 #: src/generic/apt/resolver_manager.cc:489
 #, c-format
@@ -3246,7 +3240,7 @@ msgstr "Nezpracované balíky v úloze %s: %s"
 
 #: src/generic/apt/tasks.cc:484
 msgid "Reading task descriptions"
-msgstr "Načítám popisy úloh"
+msgstr "Načítají se popisy úloh"
 
 #: src/generic/controllers/search_input.cc:110 src/gtk/packagestab.cc:60
 msgid "Parse error"
@@ -3487,7 +3481,7 @@ msgstr "Instalovat/Odstranit"
 
 #: src/gtk/aptitude.glade:583
 msgid "Edit Columns..."
-msgstr "Upravit sloupce..."
+msgstr "Upravit sloupce…"
 
 #: src/gtk/aptitude.glade:625
 msgid "Make this the default for new package lists."
@@ -3554,7 +3548,7 @@ msgstr "Ruční oprava aktualizace:"
 
 #: src/gtk/aptitude.glade:1138 src/gtk/dashboardtab.cc:526
 msgid "Calculating upgrade..."
-msgstr "Počítám aktualizaci..."
+msgstr "Počítá se aktualizace…"
 
 #: src/gtk/aptitude.glade:1186
 msgid "<b>Solutions</b>"
@@ -3716,63 +3710,6 @@ msgstr "Předvolby"
 #: src/gtk/areas.cc:85
 msgid "Configure aptitude."
 msgstr "Nastaví aptitude."
-
-#: src/gtk/changelog.cc:284
-msgid "The changelog is empty."
-msgstr "Seznam změn je prázdný."
-
-#: src/gtk/changelog.cc:286
-msgid ""
-"No new changelog entries; it looks like you installed a locally compiled "
-"version of this package."
-msgstr ""
-"Žádné nové změny; zdá se, že jste nainstalovali lokálně vytvořenou verzi "
-"balíku."
-
-#: src/gtk/changelog.cc:288
-msgid ""
-"No new changelog entries; this is likely due to a binary-only upload of this "
-"package."
-msgstr ""
-"Žádné nové změny; to je nejspíš kvůli tomu, že správce nahrál pouze binární "
-"verzi balíku."
-
-#: src/gtk/changelog.cc:390
-#, c-format
-msgid "Failed to download the changelog: %s"
-msgstr "Nepodařilo se stáhnout seznam změn: %s"
-
-#: src/gtk/changelog.cc:554 src/gtk/changelog.cc:692
-#, c-format
-msgid "Parsing the changelog of %s version %s..."
-msgstr "Zpracovává se seznam změn balíku %s verze %s..."
-
-#: src/gtk/changelog.cc:659
-#, c-format
-msgid ""
-"You can only view changelogs of official Debian packages; the origin of %s "
-"is unknown."
-msgstr ""
-"Seznamy změn můžete prohlížet pouze u oficiálních debianích balíků; původ %s "
-"je neznámý."
-
-#: src/gtk/changelog.cc:663
-#, c-format
-msgid ""
-"You can only view changelogs of official Debian packages; %s is from %s."
-msgstr ""
-"Seznamy změn můžete prohlížet pouze u oficiálních debianích balíků; %s "
-"pochází z %s."
-
-#: src/gtk/changelog.cc:739
-#, c-format
-msgid "Downloading the changelog of %s version %s..."
-msgstr "Stahuje se seznam změn balíku %s verze %s..."
-
-#: src/gtk/changelog.cc:931
-#, c-format
-msgid "Preparing to download the changelog of %s version %s."
-msgstr "Připravuje se stažení seznamu změn balíku %s verze %s."
 
 #: src/gtk/dashboardtab.cc:215
 msgid "Resolve Upgrade Manually"
@@ -3966,7 +3903,7 @@ msgstr "%s: Nelze přijmout spojení: %s"
 #: src/gtk/dpkg_terminal.cc:532
 #, c-format
 msgid "[%s] dpkg process starting...\n"
-msgstr "[%s] spouští se proces dpkg...\n"
+msgstr "[%s] spouští se proces dpkg…\n"
 
 #: src/gtk/dpkg_terminal.cc:565
 #, c-format
@@ -4071,7 +4008,7 @@ msgstr "%s je virtuální balík poskytovaný:\n"
 
 #: src/gtk/entitysummary.cc:343 src/gtk/previewtab.cc:215
 msgid "(more info...)"
-msgstr "(více...)"
+msgstr "(více…)"
 
 #: src/gtk/entitysummary.cc:375
 msgid "Source: "
@@ -4199,7 +4136,7 @@ msgstr "Nesplněné závislosti"
 
 #: src/gtk/gui.cc:269
 msgid "Checking for updates"
-msgstr "Hledám aktualizace"
+msgstr "Hledají se aktualizace"
 
 #: src/gtk/gui.cc:287
 msgid "Insufficient privileges."
@@ -4247,7 +4184,7 @@ msgstr ""
 #: src/gtk/gui.cc:417
 #, c-format
 msgid "Comparing %s to %s..."
-msgstr "Porovnání %s vůči %s..."
+msgstr "Porovnání %s vůči %s…"
 
 #: src/gtk/gui.cc:738
 msgid ""
@@ -4263,7 +4200,7 @@ msgstr "Změny provedeny!"
 
 #: src/gtk/gui.cc:823
 msgid "Applying changes..."
-msgstr "Provádím změny..."
+msgstr "Provádí se změny…"
 
 #: src/gtk/gui.cc:875
 #, c-format
@@ -4282,7 +4219,7 @@ msgstr "Dotazuji se, zda nahradit konfigurační soubor %s"
 
 #: src/gtk/gui.cc:962 src/ui.cc:1267
 msgid "Downloading packages"
-msgstr "Stahuji balíky"
+msgstr "Stahují se balíky"
 
 #: src/gtk/gui.cc:1038
 msgid "Broken packages"
@@ -4387,6 +4324,63 @@ msgstr ""
 "Nepodařilo se nahrát soubor s definicí uživatelského rozhraní %s/aptitude."
 "glade."
 
+#: src/gtk/changelog.cc:284
+msgid "The changelog is empty."
+msgstr "Seznam změn je prázdný."
+
+#: src/gtk/changelog.cc:286
+msgid ""
+"No new changelog entries; it looks like you installed a locally compiled "
+"version of this package."
+msgstr ""
+"Žádné nové změny; zdá se, že jste nainstalovali lokálně vytvořenou verzi "
+"balíku."
+
+#: src/gtk/changelog.cc:288
+msgid ""
+"No new changelog entries; this is likely due to a binary-only upload of this "
+"package."
+msgstr ""
+"Žádné nové změny; to je nejspíš kvůli tomu, že správce nahrál pouze binární "
+"verzi balíku."
+
+#: src/gtk/changelog.cc:390
+#, c-format
+msgid "Failed to download the changelog: %s"
+msgstr "Nepodařilo se stáhnout seznam změn: %s"
+
+#: src/gtk/changelog.cc:554 src/gtk/changelog.cc:692
+#, c-format
+msgid "Parsing the changelog of %s version %s..."
+msgstr "Zpracovává se seznam změn balíku %s verze %s…"
+
+#: src/gtk/changelog.cc:659
+#, c-format
+msgid ""
+"You can only view changelogs of official Debian packages; the origin of %s "
+"is unknown."
+msgstr ""
+"Seznamy změn můžete prohlížet pouze u oficiálních debianích balíků; původ %s "
+"je neznámý."
+
+#: src/gtk/changelog.cc:663
+#, c-format
+msgid ""
+"You can only view changelogs of official Debian packages; %s is from %s."
+msgstr ""
+"Seznamy změn můžete prohlížet pouze u oficiálních debianích balíků; %s "
+"pochází z %s."
+
+#: src/gtk/changelog.cc:739
+#, c-format
+msgid "Downloading the changelog of %s version %s..."
+msgstr "Stahuje se seznam změn balíku %s verze %s…"
+
+#: src/gtk/changelog.cc:931
+#, c-format
+msgid "Preparing to download the changelog of %s version %s."
+msgstr "Připravuje se stažení seznamu změn balíku %s verze %s."
+
 #: src/gtk/info.cc:161 src/gtk/pkgview.cc:169
 msgid "Current status"
 msgstr "Aktuální stav"
@@ -4409,7 +4403,7 @@ msgstr "Informace o balíku: seznam závislostí"
 
 #: src/gtk/info.cc:597
 msgid "Please wait; reloading cache..."
-msgstr "Čekejte prosím, nahrává se cache..."
+msgstr "Čekejte prosím, nahrává se cache…"
 
 #: src/gtk/info.cc:779
 msgid "Info"
@@ -4459,20 +4453,20 @@ msgstr "%s je instalován ručně"
 
 #: src/gtk/pkgview.cc:401
 msgid "Cache reloading, please wait..."
-msgstr "Cache se nahrává, čekejte prosím..."
+msgstr "Cache se nahrává, čekejte prosím…"
 
 #: src/gtk/pkgview.cc:607
 msgid "Searching..."
-msgstr "Hledám..."
+msgstr "Hledá se…"
 
 #: src/gtk/pkgview.cc:718
 msgid "Finalizing view"
-msgstr "Dokončuji pohled"
+msgstr "Dokončuje se pohled"
 
 #: src/gtk/pkgview.cc:718 src/pkg_tree.cc:204 src/pkg_tree.cc:215
 #: src/pkg_tree.cc:226 src/pkg_tree.cc:238
 msgid "Building view"
-msgstr "Sestavuji pohled"
+msgstr "Sestavuje se pohled"
 
 #: src/gtk/previewtab.cc:97 src/pkg_grouppolicy.cc:677
 msgid ""
@@ -5005,8 +4999,7 @@ msgid "To view a solution, select it from the list to the right."
 msgstr "Pro zobrazení řešení jej vyberte ze seznamu na pravé straně."
 
 #: src/gtk/resolver.cc:2079
-#, fuzzy, c-format
-#| msgid "%u solutions."
+#, c-format
 msgid "%u solution."
 msgid_plural "%u solutions."
 msgstr[0] "%u řešení."
@@ -5311,7 +5304,7 @@ msgstr "Použití: aptitude [-S názsoub] [-u|-i]"
 #: src/main.cc:189
 #, c-format
 msgid "       aptitude [options] <action> ..."
-msgstr "       aptitude [volby] <akce> ..."
+msgstr "       aptitude [volby] <akce> …"
 
 #: src/main.cc:191
 #, c-format
@@ -5621,49 +5614,49 @@ msgstr "                  Tato aptitude nemá schopnosti svaté krávy.\n"
 
 #. TRANSLATORS: This is a log level that the user can pass on
 #. the command-line or set in the configuration file.
-#: src/main.cc:387
+#: src/main.cc:377
 msgid "trace"
 msgstr "trace"
 
 #. TRANSLATORS: This is a log level that the user can pass on
 #. the command-line or set in the configuration file.
-#: src/main.cc:390
+#: src/main.cc:380
 msgid "debug"
 msgstr "debug"
 
 #. TRANSLATORS: This is a log level that the user can pass on
 #. the command-line or set in the configuration file.
-#: src/main.cc:393
+#: src/main.cc:383
 msgid "info"
 msgstr "info"
 
 #. TRANSLATORS: This is a log level that the user can pass on
 #. the command-line or set in the configuration file.
-#: src/main.cc:396
+#: src/main.cc:386
 msgid "warn"
 msgstr "warn"
 
 #. TRANSLATORS: This is a log level that the user can pass on
 #. the command-line or set in the configuration file.
-#: src/main.cc:399
+#: src/main.cc:389
 msgid "error"
 msgstr "error"
 
 #. TRANSLATORS: This is a log level that the user can pass on
 #. the command-line or set in the configuration file.
-#: src/main.cc:402
+#: src/main.cc:392
 msgid "fatal"
 msgstr "fatal"
 
 #. TRANSLATORS: This is a log level that the user can pass on
 #. the command-line or set in the configuration file.
-#: src/main.cc:405
+#: src/main.cc:395
 msgid "off"
 msgstr "off"
 
 #. TRANSLATORS: both the translated and the untranslated
 #. log level names are accepted here.
-#: src/main.cc:473
+#: src/main.cc:463
 #, c-format
 msgid ""
 "Unknown log level name \"%s\" (expected \"trace\", \"debug\", \"info\", "
@@ -5686,48 +5679,48 @@ msgstr ""
 #. * levels for different categories (e.g. level 'warn' for
 #. * 'aptitude.changelog', debug for 'aptitude.why'), etc.
 #.
-#: src/main.cc:496
+#: src/main.cc:486
 #, c-format
 msgid "Invalid logger name \"%s\"."
 msgstr "Neplatné jméno pro logování „%s“"
 
-#: src/main.cc:773
+#: src/main.cc:763
 #, c-format
 msgid "Expected a number after -q=\n"
 msgstr "Za -q= je očekáváno číslo\n"
 
-#: src/main.cc:782
+#: src/main.cc:772
 #, c-format
 msgid "Expected a number after -q=, got %s\n"
 msgstr "Za -q= je očekáváno číslo, zadáno %s\n"
 
-#: src/main.cc:806
+#: src/main.cc:796
 #, c-format
 msgid "-o requires an argument of the form key=value, got %s\n"
 msgstr "-o vyžaduje argument ve tvaru klíč=hodnota, zadáno %s\n"
 
-#: src/main.cc:896
+#: src/main.cc:886
 #, c-format
 msgid "No comma following tag name \"%s\".\n"
 msgstr "Název štítku „%s“ nenásleduje čárka.\n"
 
-#: src/main.cc:988 src/main.cc:998
+#: src/main.cc:978 src/main.cc:988
 msgid "WEIRDNESS: unknown option code received\n"
 msgstr "PODIVNÉ: obdržen kód neznámé volby\n"
 
-#: src/main.cc:1016
+#: src/main.cc:1006
 msgid "--show-package-names|never"
 msgstr "--show-package-names|never"
 
-#: src/main.cc:1019
+#: src/main.cc:1009
 msgid "--show-package-names|auto"
 msgstr "--show-package-names|auto"
 
-#: src/main.cc:1022
+#: src/main.cc:1012
 msgid "--show-package-names|always"
 msgstr "--show-package-names|always"
 
-#: src/main.cc:1027
+#: src/main.cc:1017
 #, c-format
 msgid ""
 "Invalid package names display mode \"%s\" (should be \"never\", \"auto\", or "
@@ -5736,30 +5729,30 @@ msgstr ""
 "Neplatný způsob zobrazení balíků „%s“ (měl by být „never“, „auto“ nebo "
 "„always“)."
 
-#: src/main.cc:1033
+#: src/main.cc:1023
 msgid "no-summary"
 msgstr "no-summary"
 
-#: src/main.cc:1035
+#: src/main.cc:1025
 msgid "first-package"
 msgstr "first-package"
 
-#: src/main.cc:1037
+#: src/main.cc:1027
 msgid "first-package-and-type"
 msgstr "first-package-and-type"
 
-#: src/main.cc:1039
+#: src/main.cc:1029
 msgid "all-packages"
 msgstr "all-packages"
 
-#: src/main.cc:1041
+#: src/main.cc:1031
 msgid "all-packages-with-dep-versions"
 msgstr "all-packages-with-dep-versions"
 
 #. TRANSLATORS: "why" here is the aptitude command name and should not
 #. be translated.  Both the translated and the untranslated log level
 #. names are accepted here.
-#: src/main.cc:1048
+#: src/main.cc:1038
 #, c-format
 msgid ""
 "Invalid \"why\" summary mode \"%s\": expected \"no-summary\", \"first-package"
@@ -5770,40 +5763,37 @@ msgstr ""
 "package“, „first-package-and-type“, „all-packages“ nebo „all-packages-with-"
 "dep-versions“)."
 
-#: src/main.cc:1089
+#: src/main.cc:1079
 msgid ""
 "Only one of --auto-clean-on-startup, --clean-on-startup, -i, and -u may be "
 "specified\n"
 msgstr ""
 "Můžete zadat pouze jednu z voleb --auto-clean-on-startup, --clean-on-"
-"startup, -i a -u\n"
+"startup, -i nebo -u\n"
 
-#: src/main.cc:1098
-#, fuzzy
-#| msgid ""
-#| "-u and -i may not be specified in command-line mode (eg, with 'install')"
+#: src/main.cc:1088
 msgid ""
 "-u, -i, and --clean-on-startup may not be specified in command-line mode "
 "(eg, with 'install')"
-msgstr "-u a -i nemohou být použity v řádkovém módu (např. s „install“)"
+msgstr ""
+"-u, -i a --clean-on-startup nemohou být použity v řádkovém módu (např. s "
+"„install“)"
 
-#: src/main.cc:1115
-#, fuzzy
-#| msgid "-u and -i may not be specified with a command"
+#: src/main.cc:1105
 msgid "-u, -i, and --clean-on-startup may not be specified with a command"
-msgstr "-u a -i nemohou být použity společně s příkazem"
+msgstr "-u, -i a --clean-on-startup nemohou být použity společně s příkazem"
 
-#: src/main.cc:1226
+#: src/main.cc:1216
 #, c-format
 msgid "Unknown command \"%s\"\n"
 msgstr "Neznámý příkaz „%s“\n"
 
-#: src/main.cc:1238 src/main.cc:1323
+#: src/main.cc:1228 src/main.cc:1313
 #, c-format
 msgid "Uncaught exception: %s\n"
 msgstr "Neodchycená výjimka: %s\n"
 
-#: src/main.cc:1242 src/main.cc:1327
+#: src/main.cc:1232 src/main.cc:1317
 #, c-format
 msgid ""
 "Backtrace:\n"
@@ -6461,7 +6451,7 @@ msgstr ""
 #: src/pkg_item.cc:401
 #, c-format
 msgid "Reconfiguring %s\n"
-msgstr "Překonfigurovávám %s\n"
+msgstr "Překonfigurovává se %s\n"
 
 #: src/pkg_item.cc:428 src/pkg_view.cc:673
 msgid "Hierarchy Editor"
@@ -6841,12 +6831,12 @@ msgstr "%s koliduje s %s [poskytován %s %s]"
 #: src/solution_fragment.cc:181
 #, c-format
 msgid "Removing %s"
-msgstr "Odstraňuji %s"
+msgstr "Odstraňuje se %s"
 
 #: src/solution_fragment.cc:183
 #, c-format
 msgid "Installing %s %s (%s)"
-msgstr "Instaluji %s %s (%s)"
+msgstr "Instaluje se %s %s (%s)"
 
 #: src/solution_fragment.cc:189
 #, c-format
@@ -6973,7 +6963,7 @@ msgid ""
 "subsequent changes will not be saved unless you stop all other running apt-"
 "based programs and select \"Become root\" from the Actions menu."
 msgstr ""
-"VAROVÁNÍ: cache balíčků je otevřena v režimu pouze pro čtení! Tato a všechny "
+"VAROVÁNÍ: cache balíků je otevřena v režimu pouze pro čtení! Tato a všechny "
 "následující změny nebudou uloženy dokud neukončíte všechny ostatní programy "
 "založené na APT a z menu Akce nevyberete položku „Stát se rootem“."
 
@@ -6984,7 +6974,7 @@ msgstr "Tuto hlášku již příště nezobrazovat."
 #: src/ui.cc:394
 msgid ""
 "You may not modify the state of any package while a download is underway."
-msgstr "Během stahování nemůžete měnit stav žádného balíčku."
+msgstr "Během stahování nemůžete měnit stav žádného balíku."
 
 #: src/ui.cc:425
 msgid "You already are root!"
@@ -7011,7 +7001,7 @@ msgstr "Podproces skončil chybou -- zadali jste správné heslo?"
 
 #: src/ui.cc:619
 msgid "Loading cache"
-msgstr "Nahrávám cache"
+msgstr "Nahrává se cache"
 
 #: src/ui.cc:661
 msgid "Really quit Aptitude?"
@@ -7277,7 +7267,7 @@ msgstr ""
 
 #: src/ui.cc:1729
 msgid "Updating package lists"
-msgstr "Aktualizuji seznamy balíků"
+msgstr "Aktualizují se seznamy balíků"
 
 #: src/ui.cc:1730
 msgid "View the progress of the package list update"
@@ -7424,16 +7414,12 @@ msgid "Flag the currently selected package for installation or upgrade"
 msgstr "Označí aktuálně vybraný balík pro instalaci nebo aktualizaci"
 
 #: src/ui.cc:2412
-#, fuzzy
-#| msgid "Reinstall"
 msgid "R^einstall"
-msgstr "Přeinstalovat"
+msgstr "Př^einstalovat"
 
 #: src/ui.cc:2413
-#, fuzzy
-#| msgid "Flag the currently selected package for installation or upgrade"
 msgid "Flag the currently selected package for reinstallation"
-msgstr "Označí aktuálně vybraný balík pro instalaci nebo aktualizaci"
+msgstr "Označí aktuálně vybraný balík pro přeinstalování"
 
 #: src/ui.cc:2416
 msgid "^Remove"
@@ -7610,7 +7596,7 @@ msgstr "Zobrazit cíl"
 
 #: src/ui.cc:2499
 msgid "View the package which will be affected by the selected action"
-msgstr "Zobrazí balíček, který bude ovlivněn vybranou akcí."
+msgstr "Zobrazí balík, který bude ovlivněn vybranou akcí."
 
 #: src/ui.cc:2505
 msgid "Reject Breaking ^Holds"
@@ -8077,17 +8063,13 @@ msgstr "Můžete prohlížet seznamy změn pouze u oficiálních debianích bal�
 #~ msgstr "Úroveň: %s"
 
 #~ msgid "Downloading Changelog"
-#~ msgstr "Stahuji Changelog"
+#~ msgstr "Stahuje se Changelog"
 
-#, fuzzy
-#~| msgid "No resolution found."
 #~ msgid "No changelog found."
-#~ msgstr "Žádné řešení nebylo nalezeno."
+#~ msgstr "Žádný seznam změn nebyl nalezen."
 
-#, fuzzy
-#~| msgid "Cannot open package hierarchy file %s"
 #~ msgid "Can't create a temporary file: %s"
-#~ msgstr "Nemohu otevřít soubor s hierarchií balíků %s"
+#~ msgstr "Nelze vytvořit dočasný soubor: %s"
 
 #~ msgid "Download Changelog"
 #~ msgstr "Stáhnout Changelog"
