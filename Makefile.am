@@ -46,5 +46,8 @@ install-data-local:
 #rm -fr $(DESTDIR)$(STATEDIR)
 # Is -r a good idea here?
 
+update-po:
+	$(MAKE) -C po  update-po
+	$(MAKE) -C doc update-po
 
 ACLOCAL_AMFLAGS = -I m4
