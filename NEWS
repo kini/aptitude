@@ -37,10 +37,10 @@ UNRELEASED (designated 0.7)
   * Use automake option subdir-objects to be able to use current
     automake versions.
 
-    * Copied/linked in configure.ac from /usr/src/gtest/src/gtest-all.cc
+    * Copy in configure.ac from /usr/src/gtest/src/gtest-all.cc and
       /usr/src/gmock/src/gmock-all.cc to subdir tests/ -- otherwise, automake
       (with subdir-objects option recently added) tried to build in
-      /usr/src/gtest/ and /gmock/, and then failed to link
+      /usr/src/gtest/ and ../gmock/, and then failed to link
 
   * Remove forward declaration of STL templated classes and containers
     (basic_string, pair, vector...), use regular includes instead.  Due to
