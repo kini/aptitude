@@ -94,23 +94,6 @@ namespace aptitude
 	out.put(')');
       }
 
-      void serialize_pattern_list(const std::vector<ref_ptr<pattern> > &patterns,
-				  std::ostream &out,
-				  std::vector<std::string> &variable_name_stack)
-      {
-	bool first = true;
-	for(std::vector<ref_ptr<pattern> >::const_iterator it =
-	      patterns.begin(); it != patterns.end(); ++it)
-	  {
-	    if(first)
-	      first = false;
-	    else
-	      out << ", ";
-
-	    serialize_pattern(*it, out, variable_name_stack);
-	  }
-      }
-
       void serialize_deptype(pkgCache::Dep::DepType deptype,
 			     std::ostream &out)
       {
