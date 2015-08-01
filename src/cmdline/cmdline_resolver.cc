@@ -1146,7 +1146,7 @@ namespace aptitude
 	  // The previous line will say "resolving dependencies...";
 	  // separate the solution from this message..
 	  std::cout << std::endl;
-	  std::auto_ptr<cw::fragment> story(solution_story(solution, NULL));
+	  std::unique_ptr<cw::fragment> story(solution_story(solution, NULL));
           const unsigned int screen_width = term_metrics->get_screen_width();
 	  std::cout << story->layout(screen_width, screen_width, cwidget::style());
 	}

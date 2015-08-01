@@ -264,7 +264,7 @@ public:
 				 const string::const_iterator &end)
   {
     string name;
-    auto_ptr<group_policy_parse_node> rval(NULL);
+    unique_ptr<group_policy_parse_node> rval(nullptr);
 
     while(begin != end)
       {
@@ -317,24 +317,24 @@ public:
 					name.c_str());
 	    else
 	      {
-		auto_ptr<group_policy_parse_node> curr(found->second->parse(begin, end));
+		unique_ptr<group_policy_parse_node> curr(found->second->parse(begin, end));
 
-		if(rval.get() != NULL && rval.get()->terminal())
+		if(rval.get() != nullptr && rval.get()->terminal())
 		  throw GroupParseException(_("Terminal policy '%s' should be the last policy in the list"), last.c_str());
 
 
-		if(rval.get() == NULL)
-		  rval = curr;
+		if(rval.get() == nullptr)
+		  rval.swap(curr);
 		else
-		  rval = auto_ptr<group_policy_parse_node>(new group_policy_pair_node(rval.release(), curr.release()));
+		  rval = unique_ptr<group_policy_parse_node>(new group_policy_pair_node(rval.release(), curr.release()));
 	      }
 	  }
       }
 
-    if(rval.get() == NULL)
-      rval = auto_ptr<group_policy_parse_node>(new group_policy_end_node);
+    if(rval.get() == nullptr)
+      rval = unique_ptr<group_policy_parse_node>(new group_policy_end_node);
     else if(!rval->terminal())
-      rval = auto_ptr<group_policy_parse_node>(new group_policy_pair_node(rval.release(), new group_policy_end_node));
+      rval = unique_ptr<group_policy_parse_node>(new group_policy_pair_node(rval.release(), new group_policy_end_node));
 
     eassert(rval->terminal());
     return rval.release();
@@ -640,7 +640,7 @@ class pattern_policy_parser : public group_policy_parser
 								     true, false, false));
 
 	bool passthrough = false;
-	std::auto_ptr<pkg_grouppolicy_factory> chain;
+	std::unique_ptr<pkg_grouppolicy_factory> chain;
 
 	if(!pattern.valid())
 	  throw GroupParseException(_("Unable to parse pattern after \"%s\""),
@@ -713,7 +713,7 @@ class pattern_policy_parser : public group_policy_parser
 
 	    list_policy_parser subpolicy_tail_parser(parse_types, '}');
 
-	    std::auto_ptr<group_policy_parse_node>
+	    std::unique_ptr<group_policy_parse_node>
 	      sub_parse_node(subpolicy_tail_parser.parse(begin, end));
 
 	    chain.reset(sub_parse_node->instantiate(NULL));
@@ -782,7 +782,7 @@ pkg_grouppolicy_factory *parse_grouppolicy(const string &s)
 
   try
     {
-      auto_ptr<group_policy_parse_node> node(list_policy_parser(parse_types).parse(begin, s.end()));
+      unique_ptr<group_policy_parse_node> node(list_policy_parser(parse_types).parse(begin, s.end()));
 
       eassert(begin == s.end());
 

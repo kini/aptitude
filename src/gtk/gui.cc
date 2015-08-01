@@ -988,7 +988,7 @@ namespace gui
 
   void do_keep_all()
   {
-    std::auto_ptr<undo_group> undo(new apt_undo_group);
+    std::unique_ptr<undo_group> undo(new apt_undo_group);
     aptitudeDepCache::action_group group(*apt_cache_file, undo.get());
 
     for(pkgCache::PkgIterator i=(*apt_cache_file)->PkgBegin();

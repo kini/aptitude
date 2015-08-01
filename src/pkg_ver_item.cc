@@ -450,7 +450,7 @@ void setup_package_versions(const pkgCache::PkgIterator &pkg, pkg_vertree *tree,
   for(pkgCache::PrvIterator i=pkg.ProvidesList(); !i.end(); i++)
     tree->add_child(new pkg_ver_item(i.OwnerVer(), sig, true));
 
-  std::auto_ptr<pkg_sortpolicy> sorter(pkg_sortpolicy_ver(0, false));
+  std::unique_ptr<pkg_sortpolicy> sorter(pkg_sortpolicy_ver(0, false));
   pkg_sortpolicy_wrapper wrap(sorter.get());
   tree->sort(wrap);
 }
@@ -469,7 +469,7 @@ void setup_package_versions(const pkgCache::PkgIterator &pkg, pkg_vertree_generi
       tree->inc_num_versions();
     }
 
-  std::auto_ptr<pkg_sortpolicy> sorter(pkg_sortpolicy_ver(0, false));
+  std::unique_ptr<pkg_sortpolicy> sorter(pkg_sortpolicy_ver(0, false));
   pkg_sortpolicy_wrapper wrap(sorter.get());
   tree->sort(wrap);
 }

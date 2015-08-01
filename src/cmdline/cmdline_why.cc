@@ -1069,7 +1069,7 @@ namespace aptitude
         {
           if(verbosity > 1)
             {
-              std::auto_ptr<cw::fragment> tmp(cw::fragf(_("    ++ Examining %F\n"), print_dep(dep)));
+              std::unique_ptr<cw::fragment> tmp(cw::fragf(_("    ++ Examining %F\n"), print_dep(dep)));
               std::cout << tmp->layout(screen_width, screen_width, cw::style());
             }
         }
@@ -1142,9 +1142,9 @@ namespace aptitude
         {
           if(verbosity > 1)
             {
-              std::auto_ptr<cw::fragment> desc(justification_description(target, actions));
+              std::unique_ptr<cw::fragment> desc(justification_description(target, actions));
 
-              std::auto_ptr<cw::fragment> f(cw::fragf("Search for %F\n",
+              std::unique_ptr<cw::fragment> f(cw::fragf("Search for %F\n",
                                                       desc.release()));
               std::cout << f->layout(screen_width,
                                      screen_width,
@@ -1251,10 +1251,10 @@ int do_why(const std::vector<cwidget::util::ref_ptr<pattern> > &leaves,
   bool success = false;
   const boost::shared_ptr<why_callbacks> callbacks =
     make_cmdline_why_callbacks(verbosity, term_metrics);
-  std::auto_ptr<cw::fragment> f(do_why(leaves, root, display_mode,
-				       verbosity, root_is_removal,
-				       callbacks,
-                                       success));
+  std::unique_ptr<cw::fragment> f(do_why(leaves, root, display_mode,
+					 verbosity, root_is_removal,
+					 callbacks,
+					 success));
   const unsigned int screen_width = term_metrics->get_screen_width();
   // TODO: display each result as we find it.
   std::cout << f->layout(screen_width, screen_width, cw::style());

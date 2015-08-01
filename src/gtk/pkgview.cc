@@ -510,7 +510,7 @@ namespace gui
 
     LOG_TRACE(logger, "PkgView build thread: telling main thread to continue.");
 
-    std::auto_ptr<PkgTreeModelGenerator> generator(generatorK(columns));
+    std::unique_ptr<PkgTreeModelGenerator> generator(generatorK(columns));
 
     bool limited = limit.valid();
 

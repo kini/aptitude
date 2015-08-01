@@ -740,7 +740,7 @@ namespace gui
         iter_list.push_back(model->get_iter(*path));
       }
 
-      std::auto_ptr<undo_group> undo(new undo_group);
+      std::unique_ptr<undo_group> undo(new undo_group);
       {
 	aptitudeDepCache::action_group group(*apt_cache_file, undo.get());
 	for(int pass = 0; pass < 2; ++pass)

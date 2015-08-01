@@ -1460,7 +1460,7 @@ void resolver_manager::reject_break_holds()
   cwidget::threads::mutex::lock l(mutex);
   background_suspender bs(*this);
 
-  std::auto_ptr<undo_group> undo(new undo_group);
+  std::unique_ptr<undo_group> undo(new undo_group);
 
   for(aptitude_universe::package_iterator pi = resolver->get_universe().packages_begin();
       !pi.end(); ++pi)

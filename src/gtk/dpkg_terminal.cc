@@ -364,7 +364,7 @@ namespace gui
   {
     temp::name name;
 
-    std::auto_ptr<FileFd> listen_sock;
+    std::unique_ptr<FileFd> listen_sock;
     struct sockaddr_un addr;
 
   public:
@@ -378,7 +378,7 @@ namespace gui
       LOG_TRACE(Loggers::getAptitudeDpkgTerminal(),
 		"Listening on the temporary socket \"" << name.get_name() << "\".");
 
-      listen_sock = std::auto_ptr<FileFd>(new FileFd(fd));
+      listen_sock = std::unique_ptr<FileFd>(new FileFd(fd));
 
       const size_t max_socket_name = sizeof(addr.sun_path);
 
@@ -447,7 +447,7 @@ namespace gui
 
     struct sockaddr_un addr;
 
-    std::auto_ptr<FileFd> fd;
+    std::unique_ptr<FileFd> fd;
 
   public:
     temporary_client_socket(const temp::name &_name)
@@ -470,7 +470,7 @@ namespace gui
       addr.sun_family = AF_UNIX;
       strncpy(addr.sun_path, name.get_name().c_str(), max_socket_name);
 
-      fd = std::auto_ptr<FileFd>(new FileFd(open_unix_socket()));
+      fd = std::unique_ptr<FileFd>(new FileFd(open_unix_socket()));
 
 
       if(connect(fd->Fd(), (struct sockaddr *)&addr, sizeof(addr)) != 0)
@@ -509,10 +509,10 @@ namespace gui
     // fixed so that I could just make an internal pipe. :-(
     LOG_TRACE(logger, "Opening sockets to parent process.");
 
-    std::auto_ptr<temporary_client_socket> dpkg_sock;
+    std::unique_ptr<temporary_client_socket> dpkg_sock;
     try
       {
-	dpkg_sock = std::auto_ptr<temporary_client_socket>(new temporary_client_socket(dpkg_socket_name));
+	dpkg_sock = std::unique_ptr<temporary_client_socket>(new temporary_client_socket(dpkg_socket_name));
       }
     catch(TemporarySocketFail &ex)
       {
@@ -588,13 +588,13 @@ namespace gui
 
     // To avoid races, we bind the receive end of the socket first and
     // start accepting connections.
-    std::auto_ptr<temporary_listen_socket> listen_sock;
+    std::unique_ptr<temporary_listen_socket> listen_sock;
 
     try
       {
         // TODO: now that I control the fork() call, I can probably
         // use pipes instead of a socket.
-	listen_sock = std::auto_ptr<temporary_listen_socket>(new temporary_listen_socket(dpkg_socket_name, 1));
+	listen_sock = std::unique_ptr<temporary_listen_socket>(new temporary_listen_socket(dpkg_socket_name, 1));
       }
     catch(TemporarySocketFail &ex)
       {

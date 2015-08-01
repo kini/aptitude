@@ -1382,7 +1382,7 @@ static void do_keep_all()
   if(apt_cache_file == NULL)
     return;
 
-  auto_ptr<undo_group> undo(new apt_undo_group);
+  unique_ptr<undo_group> undo(new apt_undo_group);
 
   aptitudeDepCache::action_group group(*apt_cache_file, undo.get());
 

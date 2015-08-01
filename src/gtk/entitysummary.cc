@@ -54,7 +54,7 @@ namespace gui
 
       void do_dispatch_action(PackagesAction action)
       {
-	std::auto_ptr<undo_group> undo(new undo_group);
+	std::unique_ptr<undo_group> undo(new undo_group);
 	{
 	  aptitudeDepCache::action_group group(*apt_cache_file, undo.get());
 	  e->dispatch_action(action, true);

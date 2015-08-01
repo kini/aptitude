@@ -474,7 +474,7 @@ download_manager::result cmdline_do_download(download_manager *m,
                                                         term_metrics,
                                                         term_output);
 
-  std::auto_ptr<download_signal_log> log(progress_display.first);
+  std::unique_ptr<download_signal_log> log(progress_display.first);
 
   // Dump errors here because prepare() might check for pending errors
   // and think something failed.
@@ -593,7 +593,7 @@ namespace aptitude
 	  for(vector<pkgIndexFile *>::const_iterator j = indexes->begin();
 	      j != indexes->end(); ++j)
 	    {
-	      std::auto_ptr<pkgSrcRecords::Parser> p((*j)->CreateSrcParser());
+	      std::unique_ptr<pkgSrcRecords::Parser> p((*j)->CreateSrcParser());
 
 	      if(_error->PendingError())
 		return source_package();

@@ -808,11 +808,11 @@ static void cmdline_parse_why(string response,
       arguments.pop_back();
       const boost::shared_ptr<why_callbacks> callbacks =
         make_cmdline_why_callbacks(0, term_metrics);
-      std::auto_ptr<cw::fragment> frag(do_why(arguments, root,
-					      aptitude::why::no_summary,
-					      false, false,
-                                              callbacks,
-                                              success));
+      std::unique_ptr<cw::fragment> frag(do_why(arguments, root,
+						aptitude::why::no_summary,
+						false, false,
+						callbacks,
+						success));
       if(frag.get() != NULL)
         {
           const unsigned int screen_width = term_metrics->get_screen_width();
