@@ -106,11 +106,6 @@ bool strempty(const char *s)
   return s == NULL || strcmp(s, "") == 0;
 }
 
-bool wcsempty(const wchar_t *s)
-{
-  return s == NULL || wcscmp(s, L"") == 0;
-}
-
 string ssprintf(const char *format, ...)
 {
   va_list ap;
