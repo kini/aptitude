@@ -39,7 +39,6 @@ using aptitude::apt::get_tags;
 using aptitude::apt::tag;
 using aptitude::description_element_ref;
 using aptitude::parse_desc;
-using boost::make_shared;
 using cw::util::transcode;
 
 namespace aptitude
@@ -50,7 +49,7 @@ namespace aptitude
     {
       package_ptr package::create(const pkgCache::PkgIterator &pkg)
       {
-        return make_shared<package>(pkg);
+	return boost::make_shared<package>(pkg);
       }
 
       package::package(const pkgCache::PkgIterator &_pkg)

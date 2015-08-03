@@ -37,7 +37,6 @@
 #include <vector>
 
 using aptitude::description_element_ref;
-using boost::make_shared;
 using boost::optional;
 
 namespace aptitude
@@ -58,7 +57,7 @@ namespace aptitude
        */
       class version : boost::noncopyable
       {
-        friend boost::shared_ptr<version> make_shared<version>(const pkgCache::VerIterator &);
+	friend boost::shared_ptr<version> boost::make_shared<version>(const pkgCache::VerIterator &);
 
         const pkgCache::VerIterator ver;
 

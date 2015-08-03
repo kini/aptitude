@@ -36,8 +36,6 @@
 
 using aptitude::cmdline::create_progress_display;
 using aptitude::util::progress_info;
-using boost::make_shared;
-using boost::shared_ptr;
 using testing::AnyNumber;
 using testing::AtMost;
 using testing::Expectation;
@@ -85,8 +83,8 @@ namespace
   struct CmdlineProgressDisplayTest
     : public TestWithParam<CmdlineProgressDisplayParams>
   {
-    shared_ptr<mocks::transient_message> msg;
-    shared_ptr<views::progress> progress;
+    boost::shared_ptr<mocks::transient_message> msg;
+    boost::shared_ptr<views::progress> progress;
 
     bool get_old_style_percentage() const
     {

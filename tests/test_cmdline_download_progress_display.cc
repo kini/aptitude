@@ -36,9 +36,7 @@
 
 using aptitude::cmdline::create_download_progress_display;
 using aptitude::views::download_progress;
-using boost::make_shared;
 using boost::optional;
-using boost::shared_ptr;
 using testing::InSequence;
 using testing::Mock;
 using testing::Return;
@@ -61,11 +59,11 @@ namespace
   // The test parameter controls whether messages are to be displayed.
   struct CmdlineDownloadProgressDisplayTest : public TestWithParam<bool>
   {
-    shared_ptr<mocks::transient_message> msg;
-    shared_ptr<mocks::download_status_display> status_display;
-    shared_ptr<mocks::terminal_input> term_input;
+    boost::shared_ptr<mocks::transient_message> msg;
+    boost::shared_ptr<mocks::download_status_display> status_display;
+    boost::shared_ptr<mocks::terminal_input> term_input;
 
-    shared_ptr<views::download_progress> progress;
+    boost::shared_ptr<views::download_progress> progress;
 
     typedef download_progress::file_progress file_progress;
     typedef download_progress::status status;

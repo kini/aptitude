@@ -46,7 +46,6 @@ using aptitude::util::dynamic_set_union;
 using aptitude::util::enumerator;
 using boost::lambda::_1;
 using boost::lambda::constructor;
-using boost::shared_ptr;
 using gui::toplevel::area_info;
 using gui::toplevel::area_list;
 using gui::toplevel::create_area_list;
@@ -73,19 +72,19 @@ namespace gui
                              "widget \"*.notebook_close_button\" style \"tiny-button-style\"");
     }
 
-    shared_ptr<view> create_main_view(const shared_ptr<area_list> &areas)
+    boost::shared_ptr<view> create_main_view(const boost::shared_ptr<area_list> &areas)
     {
-      shared_ptr<dynamic_set_union<shared_ptr<tab_info> > > all_tabs_set =
-        dynamic_set_union<shared_ptr<tab_info> >::create();
+      boost::shared_ptr<dynamic_set_union<boost::shared_ptr<tab_info> > > all_tabs_set =
+        dynamic_set_union<boost::shared_ptr<tab_info> >::create();
 
-      for(shared_ptr<enumerator<shared_ptr<area_info> > > e = areas->get_areas();
+      for(boost::shared_ptr<enumerator<boost::shared_ptr<area_info> > > e = areas->get_areas();
           e->advance(); )
         all_tabs_set->insert_set(e->get_current()->get_tabs());
 
 
-      typedef dynamic_set_transform<shared_ptr<tab_info>,
-        shared_ptr<tab_display_info> > upcast_set;
-      shared_ptr<dynamic_set<shared_ptr<tab_display_info> > > all_tabs_view_set =
+      typedef dynamic_set_transform<boost::shared_ptr<tab_info>,
+        boost::shared_ptr<tab_display_info> > upcast_set;
+      boost::shared_ptr<dynamic_set<boost::shared_ptr<tab_display_info> > > all_tabs_view_set =
         upcast_set::create(all_tabs_set,
                            constructor<boost::shared_ptr<tab_display_info> >());
 
@@ -158,10 +157,10 @@ namespace gui
     Glib::signal_idle().connect(sigc::bind_return(sigc::ptr_fun(&do_apt_init),
 						  false));
 
-    shared_ptr<areas> all_areas = create_areas();
+    boost::shared_ptr<areas> all_areas = create_areas();
 
-    shared_ptr<view> main_win_view = create_main_view(all_areas->get_areas());
-    shared_ptr<main_window> main = create_mainwindow(glade, main_win_view, all_areas);
+    boost::shared_ptr<view> main_win_view = create_main_view(all_areas->get_areas());
+    boost::shared_ptr<main_window> main = create_mainwindow(glade, main_win_view, all_areas);
     main->get_window()->signal_unmap().connect(sigc::ptr_fun(&globals::main_quit));
     main->get_window()->show();
 

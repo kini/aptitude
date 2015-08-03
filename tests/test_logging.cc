@@ -36,7 +36,6 @@ using aptitude::util::logging::TRACE_LEVEL;
 using aptitude::util::logging::WARN_LEVEL;
 using aptitude::util::logging::createLoggingSystem;
 using aptitude::util::logging::log_level;
-using boost::shared_ptr;
 using testing::Exactly;
 using testing::InSequence;
 using testing::StrictMock;
@@ -67,7 +66,7 @@ namespace
 
   struct LoggingTest : public Test
   {
-    shared_ptr<LoggingSystem> loggingSystem;
+    boost::shared_ptr<LoggingSystem> loggingSystem;
 
     static const char *sourceFilename1;
     static const int sourceLineNumber1 = 100;

@@ -7,6 +7,11 @@ Version 0.7.1 UNRELASED
 
     * Convert std::auto_ptr (deprecated in C++11) to unique_ptr
 
+    * Convert instances of boost::shared_ptr, make_shared, and weak_ptr to be
+      explicitly prefixed by boost::, otherwise they clash or have problems
+      compiling with the new C++11 std::shared_ptr and analogues (many were not
+      converted in the previous version).
+
     * Remove unused function serialize_pattern_list()
 
     * Remove unused function wcsempty()

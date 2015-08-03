@@ -32,7 +32,6 @@
 #include <iostream>
 
 using boost::enable_shared_from_this;
-using boost::make_shared;
 using boost::multi_index_container;
 using boost::multi_index::const_mem_fun;
 using boost::multi_index::hashed_non_unique;
@@ -40,7 +39,6 @@ using boost::multi_index::hashed_unique;
 using boost::multi_index::indexed_by;
 using boost::multi_index::tag;
 using boost::optional;
-using boost::weak_ptr;
 using cwidget::threads::mutex;
 
 namespace aptitude
@@ -77,7 +75,7 @@ namespace aptitude
         // We carry a weak pointer to the parent logging system, so
         // that we can call back into it even if it's not the global
         // instance.
-        const weak_ptr<LoggingSystem::Impl> loggingSystemWeak;
+        const boost::weak_ptr<LoggingSystem::Impl> loggingSystemWeak;
 
         sigc::signal<void, const char *, int, log_level, LoggerPtr, std::string>
         signal_message_logged;
@@ -270,11 +268,11 @@ namespace aptitude
           // destructors ran, which has all sorts of nasty
           // possibilities.
           //
-          // Needs to be a shared_ptr so enable_shared_from_this()
+          // Needs to be a boost::shared_ptr so enable_shared_from_this()
           // works (which allows loggers to take weak references to
           // the logging system).
           static boost::shared_ptr<Impl> *system =
-            new boost::shared_ptr<Impl>(make_shared<Impl>());
+            new boost::shared_ptr<Impl>(boost::make_shared<Impl>());
 
           return **system;
         }
@@ -282,7 +280,7 @@ namespace aptitude
         /** \brief Create a new logging system. */
         static boost::shared_ptr<Impl> create()
         {
-          return make_shared<Impl>();
+          return boost::make_shared<Impl>();
         }
       };
 
@@ -351,7 +349,7 @@ namespace aptitude
           }
 
         boost::shared_ptr<Logger::Impl> rval =
-          make_shared<Logger::Impl>(category, parent, shared_from_this());
+          boost::make_shared<Logger::Impl>(category, parent, shared_from_this());
 
         loggers.insert(rval);
 

@@ -32,8 +32,6 @@
 #include <libglademm.h>
 
 using aptitude::Loggers;
-using boost::make_shared;
-using boost::shared_ptr;
 
 namespace gui
 {
@@ -57,7 +55,7 @@ namespace gui
        *
        *  Must be invoked exactly once.
        */
-      void set_view(const shared_ptr<toplevel::view> &view)
+      void set_view(const boost::shared_ptr<toplevel::view> &view)
       {
         if(main_bin->get_child() != NULL)
           LOG_ERROR(logger, "Two views added to the main window, discarding the second one.");
@@ -73,18 +71,18 @@ namespace gui
     class main_window_impl : public main_window
     {
       Gtk::Window *w;
-      shared_ptr<areas> all_areas;
+      boost::shared_ptr<areas> all_areas;
 
     public:
       main_window_impl(window *_w,
-                       const shared_ptr<areas> &_all_areas)
+                       const boost::shared_ptr<areas> &_all_areas)
         : w(_w),
           all_areas(_all_areas)
       {
       }
 
       Gtk::Window *get_window() { return w; }
-      shared_ptr<areas> get_areas() { return all_areas; }
+      boost::shared_ptr<areas> get_areas() { return all_areas; }
     };
   }
 
@@ -92,15 +90,15 @@ namespace gui
   {
   }
 
-  shared_ptr<main_window>
+  boost::shared_ptr<main_window>
   create_mainwindow(const Glib::RefPtr<Gnome::Glade::Xml> &glade,
-                    const shared_ptr<toplevel::view> &view,
-                    const shared_ptr<areas> &all_areas)
+                    const boost::shared_ptr<toplevel::view> &view,
+                    const boost::shared_ptr<areas> &all_areas)
   {
     window *w;
     glade->get_widget_derived("main_window_2", w);
     w->set_view(view);
 
-    return make_shared<main_window_impl>(w, all_areas);
+    return boost::make_shared<main_window_impl>(w, all_areas);
   }
 }

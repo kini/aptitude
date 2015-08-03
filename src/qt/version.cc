@@ -47,7 +47,7 @@ namespace aptitude
     {
       version_ptr version::create(const pkgCache::VerIterator &ver)
       {
-        return make_shared<version>(ver);
+	return boost::make_shared<version>(ver);
       }
 
       version::version(const pkgCache::VerIterator &_ver)

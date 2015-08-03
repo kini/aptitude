@@ -36,9 +36,7 @@
 using aptitude::cmdline::create_cmdline_download_status_display;
 using aptitude::cmdline::download_status_display;
 using aptitude::views::download_progress;
-using boost::make_shared;
 using boost::optional;
-using boost::shared_ptr;
 using testing::Return;
 using testing::StrEq;
 using testing::TestWithParam;
@@ -73,11 +71,11 @@ namespace
   // verify that suppressing messages actually works.
   struct CmdlineDownloadStatusDisplayTest : public TestWithParam<bool>
   {
-    shared_ptr<mocks::transient_message> msg;
-    shared_ptr<mocks::terminal_locale> term_locale;
-    shared_ptr<mocks::terminal_metrics> term_metrics;
+    boost::shared_ptr<mocks::transient_message> msg;
+    boost::shared_ptr<mocks::terminal_locale> term_locale;
+    boost::shared_ptr<mocks::terminal_metrics> term_metrics;
 
-    shared_ptr<download_status_display> status_display;
+    boost::shared_ptr<download_status_display> status_display;
 
     std::wstring widechstr;
 
@@ -102,7 +100,7 @@ namespace
     file_progress no_progress_out_of_zero_with_mode;
 
     CmdlineDownloadStatusDisplayTest()
-      : msg(make_shared<mocks::transient_message>()),
+      : msg(boost::make_shared<mocks::transient_message>()),
         term_locale(mocks::terminal_locale::create_strict()),
         term_metrics(mocks::terminal_metrics::create_strict()),
         no_progress(0, 10, false, "no progress", optional<unsigned long>(), ""),

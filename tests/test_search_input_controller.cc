@@ -34,8 +34,6 @@ namespace mocks = aptitude::views::mocks;
 
 using aptitude::matching::compare_patterns;
 using aptitude::matching::pattern;
-using boost::make_shared;
-using boost::shared_ptr;
 using cwidget::util::ref_ptr;
 using testing::AnyNumber;
 using testing::Expectation;
@@ -113,9 +111,9 @@ namespace
     }
 
     SearchInputTest()
-      : view(make_shared<mocks::search_input>()),
-        viewNice(make_shared<NiceMock<mocks::search_input> >()),
-        viewStrict(make_shared<StrictMock<mocks::search_input> >())
+      : view(boost::make_shared<mocks::search_input>()),
+        viewNice(boost::make_shared<NiceMock<mocks::search_input> >()),
+        viewStrict(boost::make_shared<StrictMock<mocks::search_input> >())
     {
     }
   };

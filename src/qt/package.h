@@ -48,7 +48,6 @@
 #endif
 
 using aptitude::apt::tag;
-using boost::make_shared;
 using boost::optional;
 
 namespace aptitude
@@ -70,7 +69,7 @@ namespace aptitude
        */
       class package : boost::noncopyable
       {
-        friend boost::shared_ptr<package> make_shared<package>(const pkgCache::PkgIterator &);
+        friend boost::shared_ptr<package> boost::make_shared<package>(const pkgCache::PkgIterator &);
 
         const pkgCache::PkgIterator pkg;
         mutable boost::optional<version_ptr> candidate_ver;

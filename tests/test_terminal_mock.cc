@@ -23,7 +23,6 @@
 
 namespace mocks = aptitude::cmdline::mocks;
 
-using boost::shared_ptr;
 using testing::InSequence;
 using testing::StrEq;
 using testing::Test;

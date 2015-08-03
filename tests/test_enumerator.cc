@@ -27,7 +27,6 @@
 using aptitude::util::enumerator;
 using aptitude::util::iterator_enumerator;
 using aptitude::util::iterator_enumerator_with_keepalive;
-using boost::weak_ptr;
 
 struct fourNumbers
 {
@@ -149,7 +148,7 @@ BOOST_FIXTURE_TEST_CASE(iteratorEnumeratorKeepaliveAdvance, fourNumbers)
 
 BOOST_FIXTURE_TEST_CASE(iteratorEnumeratorKeepalive, fourNumbers)
 {
-  weak_ptr<std::vector<int> > numbersWeak(numbersShared);
+  boost::weak_ptr<std::vector<int> > numbersWeak(numbersShared);
 
   {
     int_keepalive_enum e(numbersShared->begin(),

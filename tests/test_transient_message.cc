@@ -33,7 +33,6 @@ namespace mocks = aptitude::cmdline::mocks;
 using aptitude::cmdline::create_transient_message;
 using aptitude::cmdline::mocks::StrTrimmedRightEq;
 using aptitude::cmdline::transient_message;
-using boost::shared_ptr;
 using testing::InSequence;
 using testing::Return;
 using testing::StrEq;
@@ -47,19 +46,19 @@ namespace
 
   struct TransientMessage : public Test
   {
-    shared_ptr<mocks::terminal_locale> term_locale;
-    shared_ptr<mocks::terminal_metrics> term_metrics;
-    shared_ptr<mocks::combining_terminal_output> term_output;
-    shared_ptr<mocks::teletype> teletype;
-    shared_ptr<transient_message> message;
+    boost::shared_ptr<mocks::terminal_locale> term_locale;
+    boost::shared_ptr<mocks::terminal_metrics> term_metrics;
+    boost::shared_ptr<mocks::combining_terminal_output> term_output;
+    boost::shared_ptr<mocks::teletype> teletype;
+    boost::shared_ptr<transient_message> message;
     std::wstring widechar;
 
     // I need to set up expectations on the terminal during member
     // initialization, since some of the other member initializers
     // cause methods to be invoked on it.
-    static shared_ptr<mocks::combining_terminal_output> create_terminal_output()
+    static boost::shared_ptr<mocks::combining_terminal_output> create_terminal_output()
     {
-      shared_ptr<mocks::combining_terminal_output> rval =
+      boost::shared_ptr<mocks::combining_terminal_output> rval =
         mocks::combining_terminal_output::create_strict();
 
       EXPECT_CALL(*rval, output_is_a_terminal())
@@ -68,9 +67,9 @@ namespace
       return rval;
     }
 
-    static shared_ptr<mocks::terminal_metrics> create_terminal_metrics()
+    static boost::shared_ptr<mocks::terminal_metrics> create_terminal_metrics()
     {
-      shared_ptr<mocks::terminal_metrics> rval =
+      boost::shared_ptr<mocks::terminal_metrics> rval =
         mocks::terminal_metrics::create_strict();
 
       EXPECT_CALL(*rval, get_screen_width())
@@ -163,7 +162,7 @@ TEST_F(TransientMessage, DisplayAndAdvanceWithoutTerminal)
 
   // Need to create a new message object since it reads and caches the
   // value of output_is_a_terminal() when it's created.
-  const shared_ptr<transient_message> requiring_message =
+  const boost::shared_ptr<transient_message> requiring_message =
     create_transient_message(term_locale, term_metrics, term_output);
 
   requiring_message->display_and_advance(L"xyzwabcd");
@@ -352,7 +351,7 @@ TEST_F(TransientMessage, RequireTtyDecorationsWithTty)
 
   // Need to create a new message object since it reads and caches the
   // value of output_is_a_terminal() when it's created.
-  const shared_ptr<transient_message> requiring_message =
+  const boost::shared_ptr<transient_message> requiring_message =
     create_transient_message(term_locale, term_metrics, term_output);
 
   requiring_message->set_text(L"abc");
@@ -369,7 +368,7 @@ TEST_F(TransientMessage, RequireTtyDecorationsWithoutTty)
 
   // Need to create a new message object since it reads and caches the
   // value of output_is_a_terminal() when it's created.
-  const shared_ptr<transient_message> requiring_message =
+  const boost::shared_ptr<transient_message> requiring_message =
     create_transient_message(term_locale, term_metrics, term_output);
 
   requiring_message->set_text(L"abc");

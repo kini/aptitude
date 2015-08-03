@@ -21,9 +21,6 @@
 // Local includes:
 #include "download_progress.h"
 
-using boost::make_shared;
-using boost::shared_ptr;
-
 namespace aptitude
 {
   namespace views
