@@ -3,6 +3,11 @@ Version 0.7.1 UNRELASED
 
 - Internal changes:
 
+  * search_graph.h, fix problem with code which was working for many years (with
+    boost 1.55 and many versions before), but now the straightforward option to
+    convert boost::optional to bool does not work with gcc-5.2 and boost-1.58,
+    so use .is_initialized() instead.
+
   * Improving C++11 compatibilty mode:
 
     * Convert std::auto_ptr (deprecated in C++11) to unique_ptr

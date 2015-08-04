@@ -610,7 +610,15 @@ public:
   /** \brief Return \b true if this queue entry has a promotion and a
    *  successor.
    */
-  bool get_has_contents() const { return contents; }
+  bool get_has_contents() const {
+    // this code was working for many years (with boost 1.55 and many versions
+    // before), but now the straightforward option to convert boost::optional to
+    // bool does not work with gcc-5.2 and boost-1.58, so use .is_initialized()
+    // instead.
+
+    //return contents;
+    return contents.is_initialized();
+  }
 
   /** \brief Retrieve the promotion associated with this queue entry.
    */
