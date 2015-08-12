@@ -434,7 +434,10 @@ void solution_act_item_bare::paint(cw::tree *win, int y, bool hierarchical, cons
 
   aptitude_universe::version ver = get_ver();
 
-  const char *name = ver.get_pkg().FullName(true).c_str();
+  // copy string, cannot rely on this being available during the whole lifetime
+  // that we need it
+  std::string name_copy = ver.get_pkg().FullName(true);
+  const char *name = name_copy.c_str();
   while(x < width && *name)
     {
       win->addch(*name);

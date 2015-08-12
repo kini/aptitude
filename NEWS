@@ -8,6 +8,11 @@ Version 0.7.1 UNRELASED
     convert boost::optional to bool does not work with gcc-5.2 and boost-1.58,
     so use .is_initialized() instead.
 
+  * solution_item.cc, copy string of package name coming from libapt because it
+    does not guarantee that the string is valid for all of the time span that we
+    need it, to not show garbage that it happens sometimes
+    (Closes: #795150, #795028)
+
   * Improving C++11 compatibilty mode:
 
     * Convert std::auto_ptr (deprecated in C++11) to unique_ptr
