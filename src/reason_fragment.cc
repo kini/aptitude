@@ -206,11 +206,18 @@ cw::fragment *dep_singlefrag(pkgCache::PkgIterator pkg,
 
   // Display a note if the package that is depended upon is not in
   // main and is not the package being displayed.
-  string sec=dep.TargetPkg().Section()?dep.TargetPkg().Section():"";
-  if(sec.find('/')==sec.npos || dep.TargetPkg()==pkg)
-    sec="";
-  else
-    sec=string(sec, 0, sec.find('/'));
+  string sec = "";
+  for (auto it = dep.TargetPkg().VersionList(); !it.end(); ++it) {
+    if (_system->VS->CheckDep(it.VerStr(), dep->CompareOp, dep.TargetVer())) {
+      sec = it.Section() ? it.Section() : "";
+      if (sec.find('/') == sec.npos || dep.TargetPkg() == pkg) {
+        sec = "";
+      }
+      else {
+	sec = std::string(sec, 0, sec.find('/'));
+      }
+    }
+  }
 
   bool available=false;
 

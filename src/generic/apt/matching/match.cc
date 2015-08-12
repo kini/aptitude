@@ -1492,18 +1492,9 @@ namespace aptitude
 		  }
 	      }
 
-	    {
-	      pkgCache::PkgIterator pkg(target.get_package_iterator(cache));
-	      const char *pkg_section = pkg.Section();
+	    // return null as last resort
+	    return NULL;
 
-	      if(pkg_section != NULL)
-		return evaluate_regexp(p,
-				       p->get_section_regex_info(),
-				       pkg_section,
-				       debug);
-	      else
-		return NULL;
-	    }
 	    break;
 
 	  case pattern::source_package:

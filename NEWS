@@ -13,6 +13,11 @@ Version 0.7.1 UNRELASED
     need it, to not show garbage that it happens sometimes
     (Closes: #795150, #795028)
 
+  * match.cc, pkg_info_screen.cc, reason_fragment.cc: remove and modify code
+    relying on pkg.Section() (from apt PkgIterator), it is deprecated code and
+    it will get removed soon according to the apt team (Versions have Sections,
+    Package in abstract doesn't have unique Sections)
+
   * Improving C++11 compatibilty mode:
 
     * Convert std::auto_ptr (deprecated in C++11) to unique_ptr
