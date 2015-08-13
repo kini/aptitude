@@ -259,7 +259,11 @@ namespace aptitude
 	delete this;
       }
 
-      void Failed(std::string Message, pkgAcquire::MethodConfig *Cnf)
+#if APT_PKG_MAJOR >= 5
+      void Failed(std::string const & Message, pkgAcquire::MethodConfig const * const Cnf) override
+#else
+      void Failed(std::string Message, pkgAcquire::MethodConfig *Cnf) override
+#endif
       {
 	pkgAcqFile::Failed(Message, Cnf);
 
@@ -283,12 +287,23 @@ namespace aptitude
 	job_copy->mark_finished();
       }
 
+#if APT_PKG_MAJOR >= 5
+      void Done(std::string const &Message,
+		HashStringList const &CalcHashes,
+		pkgAcquire::MethodConfig const *Cnf) override
+#else
       void Done(std::string Message,
 		unsigned long long Size,
 		std::string CalcHash,
-		pkgAcquire::MethodConfig *Cnf)
+		pkgAcquire::MethodConfig *Cnf) override
+#endif
       {
+#if APT_PKG_MAJOR >= 5
+	pkgAcqFile::Done(Message, CalcHashes, Cnf);
+	unsigned long long Size = CalcHashes.FileSize();
+#else
 	pkgAcqFile::Done(Message, Size, CalcHash, Cnf);
+#endif
 
 	if(job.get() == NULL)
 	  {
@@ -568,7 +583,7 @@ namespace aptitude
       {
 	// Invoked when the cached item for a job is confirmed to be
 	// up-to-date.
-	void IMSHit(pkgAcquire::ItemDesc &item)
+	void IMSHit(pkgAcquire::ItemDesc &item) override
 	{
 	  // apt doesn't invoke any methods on the item itself in this
 	  // case, so we have to signal the hit manually.
@@ -584,7 +599,7 @@ namespace aptitude
 	    }
 	}
 
-	bool Pulse(pkgAcquire *Owner)
+	bool Pulse(pkgAcquire *Owner) override
 	{
 	  cw::threads::mutex::lock l(state_mutex);
 
@@ -641,7 +656,7 @@ namespace aptitude
 	  return true;
 	}
 
-	bool MediaChange(std::string, std::string)
+	bool MediaChange(std::string, std::string) override
 	{
 	  // Media changes will always abort.
 	  return false;
