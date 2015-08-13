@@ -1077,8 +1077,8 @@ void aptitude_resolver::add_default_resolution_score(const pkgCache::DepIterator
   // package authors expect.  We look at all the targets of the dep
   // (AllTargets() doesn't walk ORs, so we just get the first entry)
   // and pick the one from the highest-priority source.
-  SPtrArray<pkgCache::Version *> list = const_cast<pkgCache::DepIterator &>(dep).AllTargets();
-  pkgCache::Version ** curr = list;
+  std::unique_ptr<pkgCache::Version *[]> list(const_cast<pkgCache::DepIterator &>(dep).AllTargets());
+  pkgCache::Version ** curr = list.get();
   pkgCache::PkgIterator p = const_cast<pkgCache::DepIterator &>(dep).TargetPkg();
   aptitudeDepCache *cache(get_universe().get_cache());
   pkgCache::VerIterator instVer(*cache, NULL);
