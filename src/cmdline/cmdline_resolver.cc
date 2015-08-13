@@ -480,7 +480,7 @@ static void reject_or_mandate_version(const string &s,
 		    else
 		      dep_rendering_stream << " | ";
 
-		    dep_rendering_stream << start.TargetPkg().FullName(true).c_str()
+		    dep_rendering_stream << start.TargetPkg().FullName(true)
 					 << " "
 					 << start.TargetVer();
 
