@@ -414,7 +414,7 @@ public:
   {
     eassert(cache!=0);
     eassert(dep != NULL);
-    if(!is_conflict(dep->Type))
+    if(!is_conflict(get_dep(dep)->Type))
       {
 	// If it's not a conflict, back up to the start of the OR.
 	pkgCache::DepIterator new_start, end;
@@ -437,14 +437,14 @@ public:
    */
   bool is_soft() const
   {
-    return start->Type == pkgCache::Dep::Recommends;
+    return get_dep(start)->Type == pkgCache::Dep::Recommends;
   }
 
   std::size_t get_hash_value() const
   {
     std::size_t rval = 0;
     boost::hash_combine(rval, start);
-    if(is_conflict(start->Type))
+    if(is_conflict(get_dep(start)->Type))
       boost::hash_combine(rval, prv);
 
     return rval;
@@ -454,14 +454,14 @@ public:
   bool operator==(const aptitude_resolver_dep &other) const
   {
     return start == other.start &&
-      (!is_conflict(start->Type) || prv == other.prv);
+      (!is_conflict(get_dep(start)->Type) || prv == other.prv);
   }
 
   /** \brief Compare two dependencies for equality. */
   bool operator!=(const aptitude_resolver_dep &other) const
   {
     return start != other.start ||
-      (is_conflict(start->Type) && prv != other.prv);
+      (is_conflict(get_dep(start)->Type) && prv != other.prv);
   }
 
   /** \brief Orders dependencies according to their memory
@@ -473,7 +473,7 @@ public:
       return true;
     else if(start > other.start)
       return false;
-    else if(!is_conflict(start->Type))
+    else if(!is_conflict(get_dep(start)->Type))
       return false;
     else if(prv < other.prv)
       return true;
@@ -493,12 +493,14 @@ public:
   bool broken_under(const InstallationType &I) const;
 
   /** \return The APT dependency associated with this abstract dependency. */
-  pkgCache::DepIterator get_dep() const
+  pkgCache::DepIterator get_dep(const pkgCache::Dependency *dep = nullptr) const
   {
+    if (dep == nullptr)
+      dep = start;
     if(cache == NULL)
       return pkgCache::DepIterator();
     else
-      return pkgCache::DepIterator(cache->GetCache(), const_cast<pkgCache::Dependency *>(start));
+      return pkgCache::DepIterator(cache->GetCache(), const_cast<pkgCache::Dependency *>(dep));
   }
 
   /** \return The APT Provides relationship associated with this
@@ -905,7 +907,7 @@ public:
   {
     if(!dep_lst.end())
       {
-	eassert(is_conflict(d->Type));
+	eassert(is_conflict(pkgCache::DepIterator(_cache->GetCache(), const_cast<pkgCache::Dependency*>(d))->Type));
 	// Either we're looking at all versions of the named dep, or
 	// at all versions of the providing package.
 	if(prv_lst.end())
@@ -962,7 +964,7 @@ public:
 
 inline aptitude_resolver_dep::solver_iterator aptitude_resolver_dep::solvers_begin() const
 {
-  if(!is_conflict(start->Type))
+  if(!is_conflict(get_dep(start)->Type))
     return solver_iterator(start, cache);
   else
     return solver_iterator(start, prv, cache);
@@ -976,7 +978,7 @@ bool aptitude_resolver_dep::broken_under(const InstallationType &I) const
   if(start_iter.ParentVer() != I.version_of(aptitude_resolver_package(start_iter.ParentPkg(), cache)).get_ver())
     return false;
 
-  if(!is_conflict(start->Type))
+  if(!is_conflict(get_dep(start)->Type))
     {
       pkgCache::DepIterator dep = start_iter;
 
@@ -988,7 +990,7 @@ bool aptitude_resolver_dep::broken_under(const InstallationType &I) const
               const pkgCache::VerIterator direct_ver = I.version_of(pkg).get_ver();
               if((direct_ver.end() == false)
                  && (_system->VS->CheckDep(direct_ver.VerStr(),
-                                           dep->CompareOp,
+                                           get_dep(dep)->CompareOp,
                                            dep.TargetVer()) == true))
                 return false;
             }
@@ -1000,7 +1002,7 @@ bool aptitude_resolver_dep::broken_under(const InstallationType &I) const
                 continue;
 
               if(_system->VS->CheckDep(prv.ProvideVersion(),
-                                       dep->CompareOp,
+                                       get_dep(dep)->CompareOp,
                                        dep.TargetVer()) == false)
                 continue;
 
@@ -1009,7 +1011,7 @@ bool aptitude_resolver_dep::broken_under(const InstallationType &I) const
                 return false;
             }
 
-	  if(!(dep->CompareOp & pkgCache::Dep::Or))
+	  if(!(get_dep(dep)->CompareOp & pkgCache::Dep::Or))
 	    break;
 	  ++dep;
 	}
@@ -1035,7 +1037,7 @@ bool aptitude_resolver_dep::broken_under(const InstallationType &I) const
 
 	  if(!direct_ver.end() &&
 	     _system->VS->CheckDep(direct_ver.VerStr(),
-				   start->CompareOp,
+				   get_dep(start)->CompareOp,
 				   start_iter.TargetVer()))
 	    return true;
 	  else

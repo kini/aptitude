@@ -432,7 +432,7 @@ bool aptitude_resolver_dep::solved_by(const aptitude_resolver_version &v) const
   // Now check each of the members of the OR group.
   pkgCache::DepIterator d = start_iter;
 
-  if(!is_conflict(start->Type))
+  if(!is_conflict(start_iter->Type))
     {
       // Of course, installing an end version never fixes a
       // non-conflict unless it removes the source (tested for above).
