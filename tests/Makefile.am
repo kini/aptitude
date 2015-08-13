@@ -1,4 +1,4 @@
-MAINTAINERCLEANFILES = Makefile.in
+MAINTAINERCLEANFILES = Makefile.in gmock-all.cc gtest-all.cc
 
 # Make "but option 'subdir-objects' is disabled" go away
 AUTOMAKE_OPTIONS=subdir-objects

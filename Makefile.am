@@ -1,4 +1,4 @@
-MAINTAINERCLEANFILES=Makefile.in aclocal.m4 config.h.in
+MAINTAINERCLEANFILES=Makefile.in aclocal.m4 config.h.in compile test-driver
 
 # Do this the simple way -- it means "make dist" will fail if you
 # disable stuff, and has other ugliness, but it is much easier and
