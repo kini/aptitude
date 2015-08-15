@@ -54,11 +54,11 @@
 #include <apt-pkg/strutl.h>
 
 #include <boost/format.hpp>
-#include <boost/scoped_ptr.hpp>
 
 #include <sigc++/bind.h>
 
 #include <algorithm>
+#include <memory>
 
 using namespace std;
 namespace cw = cwidget;
@@ -199,7 +199,7 @@ int cmdline_search(int argc, char *argv[], const char *status_fname,
       return -1;
     }
 
-  boost::scoped_ptr<column_definition_list> columns;
+  std::unique_ptr<column_definition_list> columns;
   columns.reset(parse_columns(wdisplay_format,
                               pkg_item::pkg_columnizer::parse_column_type,
                               pkg_item::pkg_columnizer::defaults));

@@ -44,7 +44,6 @@
 
 #include <boost/format.hpp>
 #include <boost/make_shared.hpp>
-#include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/unordered_map.hpp>
 
@@ -52,6 +51,7 @@
 
 #include <cwidget/generic/util/ref_ptr.h>
 
+#include <memory>
 #include <vector>
 
 namespace cw = cwidget;
@@ -224,7 +224,7 @@ namespace
     for(std::vector<std::pair<pkgCache::VerIterator, cw::util::ref_ptr<m::structural_match> > >::const_iterator it = output.begin();
         it != output.end(); ++it)
       {
-        boost::scoped_ptr<cw::config::column_parameters> p(new search_result_column_parameters(it->second));
+        std::unique_ptr<cw::config::column_parameters> p(new search_result_column_parameters(it->second));
         pkg_ver_columnizer columnizer(it->first,
                                       show_package_names,
                                       columns,
@@ -567,7 +567,7 @@ int cmdline_versions(int argc, char *argv[], const char *status_fname,
       return -1;
     }
 
-  boost::scoped_ptr<cw::config::column_definition_list> columns;
+  std::unique_ptr<cw::config::column_definition_list> columns;
   columns.reset(parse_columns(wdisplay_format,
                               pkg_item::pkg_columnizer::parse_column_type,
                               pkg_item::pkg_columnizer::defaults));

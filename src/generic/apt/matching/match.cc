@@ -37,13 +37,13 @@
 
 #include <xapian.h>
 
-#include <algorithm>
-
-#include <boost/scoped_ptr.hpp>
 #include <boost/unordered_map.hpp>
 
 #include "serialize.h"
 #include "../config_signal.h"
+
+#include <algorithm>
+#include <memory>
 
 using aptitude::util::progress_info;
 using boost::unordered_map;
@@ -173,7 +173,7 @@ namespace aptitude
 	 *  matched by this pattern.
 	 */
 	bool maybe_contains_package(const pkgCache::PkgIterator &pkg,
-				    const boost::scoped_ptr<debtags_db> &db) const
+				    const std::unique_ptr<debtags_db> &db) const
 	{
 	  if(!matched_packages_valid || !db)
 	    return true;
@@ -306,7 +306,7 @@ namespace aptitude
 
       // Either a pointer to the debtags database, or NULL if it
       // couldn't be initialized.
-      boost::scoped_ptr<debtags_db> db;
+      std::unique_ptr<debtags_db> db;
 
       // Maps "top-level" patterns to their Xapian information (that
       // is, the corresponding query and/or query results).  Term hit
@@ -392,7 +392,7 @@ namespace aptitude
 	  }
       }
 
-      const boost::scoped_ptr<debtags_db> &get_db() const
+      const std::unique_ptr<debtags_db> &get_db() const
       {
 	return db;
       }
