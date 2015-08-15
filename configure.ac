@@ -84,7 +84,6 @@ AC_CHECK_HEADERS( dnl
 boost/algorithm/string.hpp dnl
 boost/algorithm/string/join.hpp dnl
 boost/compressed_pair.hpp dnl
-boost/enable_shared_from_this.hpp dnl
 boost/flyweight/hashed_factory.hpp dnl
 boost/flyweight.hpp dnl
 boost/format.hpp dnl
