@@ -13,6 +13,7 @@
 #include <apt-pkg/fileutl.h>
 
 #include <fstream>
+#include <memory>
 
 #include <libgen.h>
 
@@ -49,7 +50,7 @@ BOOST_FIXTURE_TEST_CASE(createFileCache, usingTemp)
     BOOST_CHECK(!exists(tn.get_name()));
 
     {
-      boost::shared_ptr<file_cache> cache(file_cache::create(tn.get_name(), 10000, 10000));
+      std::shared_ptr<file_cache> cache(file_cache::create(tn.get_name(), 10000, 10000));
       BOOST_CHECK(exists(tn.get_name()));
     }
   }
@@ -58,7 +59,7 @@ BOOST_FIXTURE_TEST_CASE(createFileCache, usingTemp)
     temp::name tn("cache");
 
     {
-      boost::shared_ptr<file_cache> cache(file_cache::create(tn.get_name(), 0, 10000));
+      std::shared_ptr<file_cache> cache(file_cache::create(tn.get_name(), 0, 10000));
       BOOST_CHECK(exists(tn.get_name()));
     }
   }
@@ -67,7 +68,7 @@ BOOST_FIXTURE_TEST_CASE(createFileCache, usingTemp)
     temp::name tn("cache");
 
     {
-      boost::shared_ptr<file_cache> cache(file_cache::create(tn.get_name(), 10000, 0));
+      std::shared_ptr<file_cache> cache(file_cache::create(tn.get_name(), 10000, 0));
       BOOST_CHECK(!exists(tn.get_name()));
     }
   }
@@ -168,7 +169,7 @@ struct fileCacheTestInfo
 };
 
 // Creates a file cache containing three files whose sizes add up to 1,000 bytes.
-void setupFileCacheTest(const boost::shared_ptr<file_cache> cache,
+void setupFileCacheTest(const std::shared_ptr<file_cache> cache,
 			fileCacheTestInfo &testInfo)
 {
   // Store three files whose sizes add up to 1,000 bytes.
@@ -253,7 +254,7 @@ BOOST_FIXTURE_TEST_CASE(fileCacheStoreDisk, usingTemp)
 {
   temp::name tn("cache");
 
-  boost::shared_ptr<file_cache> cache(file_cache::create(tn.get_name(), 0, 1000));
+  std::shared_ptr<file_cache> cache(file_cache::create(tn.get_name(), 0, 1000));
   BOOST_CHECK(exists(tn.get_name()));
 
   fileCacheTestInfo testInfo;
@@ -264,7 +265,7 @@ BOOST_FIXTURE_TEST_CASE(fileCacheStoreMemory, usingTemp)
 {
   temp::name tn("cache");
 
-  boost::shared_ptr<file_cache> cache(file_cache::create(tn.get_name(), 1000, 0));
+  std::shared_ptr<file_cache> cache(file_cache::create(tn.get_name(), 1000, 0));
 
   fileCacheTestInfo testInfo;
   setupFileCacheTest(cache, testInfo);
@@ -274,7 +275,7 @@ BOOST_FIXTURE_TEST_CASE(fileCacheStoreDiskAndMemory, usingTemp)
 {
   temp::name tn("cache");
 
-  boost::shared_ptr<file_cache> cache(file_cache::create(tn.get_name(), 333, 1000));
+  std::shared_ptr<file_cache> cache(file_cache::create(tn.get_name(), 333, 1000));
   BOOST_CHECK(exists(tn.get_name()));
 
   fileCacheTestInfo testInfo;
@@ -285,7 +286,7 @@ BOOST_FIXTURE_TEST_CASE(fileCacheModifiedTime, usingTemp)
 {
   temp::name tn("cache");
 
-  boost::shared_ptr<file_cache> cache(file_cache::create(tn.get_name(), 333, 1000));
+  std::shared_ptr<file_cache> cache(file_cache::create(tn.get_name(), 333, 1000));
   BOOST_CHECK(exists(tn.get_name()));
 
   fileCacheTestInfo testInfo;
@@ -303,7 +304,7 @@ BOOST_FIXTURE_TEST_CASE(fileCacheModifiedTime, usingTemp)
   BOOST_CHECK_EQUAL(mtime3, testInfo.time3);
 }
 
-void runDropLeastRecentlyUsedTest(const boost::function<boost::shared_ptr<file_cache> (std::string)> &cache_k)
+void runDropLeastRecentlyUsedTest(const boost::function<std::shared_ptr<file_cache> (std::string)> &cache_k)
 {
   // Check that we can control which of the three entries is dropped
   // when we add a fourth entry.
@@ -312,7 +313,7 @@ void runDropLeastRecentlyUsedTest(const boost::function<boost::shared_ptr<file_c
   // Drop key3.
   {
     temp::name tn("cache");
-    boost::shared_ptr<file_cache> cache(cache_k(tn.get_name()));
+    std::shared_ptr<file_cache> cache(cache_k(tn.get_name()));
 
     fileCacheTestInfo testInfo;
     setupFileCacheTest(cache, testInfo);
@@ -334,7 +335,7 @@ void runDropLeastRecentlyUsedTest(const boost::function<boost::shared_ptr<file_c
   // Drop key2.
   {
     temp::name tn("cache");
-    boost::shared_ptr<file_cache> cache(cache_k(tn.get_name()));
+    std::shared_ptr<file_cache> cache(cache_k(tn.get_name()));
 
     fileCacheTestInfo testInfo;
     setupFileCacheTest(cache, testInfo);
@@ -356,7 +357,7 @@ void runDropLeastRecentlyUsedTest(const boost::function<boost::shared_ptr<file_c
   // Drop key1.
   {
     temp::name tn("cache");
-    boost::shared_ptr<file_cache> cache(cache_k(tn.get_name()));
+    std::shared_ptr<file_cache> cache(cache_k(tn.get_name()));
 
     fileCacheTestInfo testInfo;
     setupFileCacheTest(cache, testInfo);
@@ -467,7 +468,7 @@ void testCacheUpgradeFrom(int version)
     BOOST_REQUIRE_GT(copySize, 0);
   }
 
-  boost::shared_ptr<file_cache> cache(file_cache::create(tn.get_name(), 333, 1000));
+  std::shared_ptr<file_cache> cache(file_cache::create(tn.get_name(), 333, 1000));
 
   temp::name found(cache->getItem("delta-changelog://zenity/2.26.0-2/2.28.0-1"));
 

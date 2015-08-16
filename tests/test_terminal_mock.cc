@@ -21,6 +21,8 @@
 #include <cmdline/mocks/terminal.h>
 #include <cmdline/terminal.h>
 
+#include <memory>
+
 namespace mocks = aptitude::cmdline::mocks;
 
 using testing::InSequence;
@@ -32,7 +34,7 @@ namespace
 {
   struct TerminalMock : public Test
   {
-    boost::shared_ptr<mocks::combining_terminal_output> terminal;
+    std::shared_ptr<mocks::combining_terminal_output> terminal;
 
   public:
     TerminalMock()

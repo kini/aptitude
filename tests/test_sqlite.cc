@@ -2,12 +2,14 @@
 
 #include <generic/util/sqlite.h>
 
+#include <memory>
+
 using namespace aptitude::sqlite;
 
 // Allocates a database in memory for testing purposes.
 struct memory_db_fixture
 {
-  boost::shared_ptr<db> tmpdb;
+  std::shared_ptr<db> tmpdb;
 
   memory_db_fixture()
     : tmpdb(db::create(":memory:"))
@@ -69,7 +71,7 @@ BOOST_FIXTURE_TEST_CASE(testSetupDb, test_db_fixture)
 
 BOOST_FIXTURE_TEST_CASE(testGetBlob, test_db_fixture)
 {
-  boost::shared_ptr<statement> stmt =
+  std::shared_ptr<statement> stmt =
     statement::prepare(*tmpdb, "select A, B, C from test where A = 52");
 
   {
@@ -108,7 +110,7 @@ BOOST_FIXTURE_TEST_CASE(testGetBlob, test_db_fixture)
 
 BOOST_FIXTURE_TEST_CASE(testGetDouble, test_db_fixture)
 {
-  boost::shared_ptr<statement> stmt =
+  std::shared_ptr<statement> stmt =
     statement::prepare(*tmpdb, "select C from test where A = 51");
 
   {
@@ -125,7 +127,7 @@ BOOST_FIXTURE_TEST_CASE(testGetDouble, test_db_fixture)
 
 BOOST_FIXTURE_TEST_CASE(testGetInt, test_db_fixture)
 {
-  boost::shared_ptr<statement> stmt =
+  std::shared_ptr<statement> stmt =
     statement::prepare(*tmpdb, "select A from test where A <> 51 order by A");
 
   {
@@ -146,7 +148,7 @@ BOOST_FIXTURE_TEST_CASE(testGetInt, test_db_fixture)
 
 BOOST_FIXTURE_TEST_CASE(testGetInt64, test_db_fixture)
 {
-  boost::shared_ptr<statement> stmt =
+  std::shared_ptr<statement> stmt =
     statement::prepare(*tmpdb, "select A from test where A <> 51 order by A");
 
   {
@@ -165,7 +167,7 @@ BOOST_FIXTURE_TEST_CASE(testGetInt64, test_db_fixture)
 
 BOOST_FIXTURE_TEST_CASE(testGetString, test_db_fixture)
 {
-  boost::shared_ptr<statement> stmt =
+  std::shared_ptr<statement> stmt =
     statement::prepare(*tmpdb, "select B from test where C = -5 order by A");
 
   {
@@ -232,8 +234,8 @@ BOOST_FIXTURE_TEST_CASE(getCachedStatementFail, memory_db_fixture)
 
 struct parameter_binding_test : public test_db_fixture
 {
-  boost::shared_ptr<statement> get_C_statement;
-  boost::shared_ptr<statement> put_statement;
+  std::shared_ptr<statement> get_C_statement;
+  std::shared_ptr<statement> put_statement;
   static const int test_A = 10;
 
   parameter_binding_test()
@@ -424,7 +426,7 @@ struct test_blob_fixture : public test_db_fixture
 
   test_blob_fixture()
   {
-    boost::shared_ptr<statement> s(statement::prepare(*tmpdb, "select ROWID from test where A = 52"));
+    std::shared_ptr<statement> s(statement::prepare(*tmpdb, "select ROWID from test where A = 52"));
 
     {
       statement::execution ex(*s);
@@ -473,22 +475,22 @@ BOOST_FIXTURE_TEST_CASE(testOpenBlob, test_blob_fixture)
 
 BOOST_FIXTURE_TEST_CASE(testBlobSize, test_blob_fixture)
 {
-  boost::shared_ptr<blob> b = blob::open(*tmpdb,
-					 "main",
-					 "test",
-					 "C",
-					 blob_rowid);
+  std::shared_ptr<blob> b = blob::open(*tmpdb,
+				       "main",
+				       "test",
+				       "C",
+				       blob_rowid);
 
   BOOST_CHECK_EQUAL(b->size(), 2);
 }
 
 BOOST_FIXTURE_TEST_CASE(testBlobRead, test_blob_fixture)
 {
-  boost::shared_ptr<blob> b = blob::open(*tmpdb,
-					 "main",
-					 "test",
-					 "C",
-					 blob_rowid);
+  std::shared_ptr<blob> b = blob::open(*tmpdb,
+				       "main",
+				       "test",
+				       "C",
+				       blob_rowid);
 
   char contents[3];
   const char expected[] = { 0x54, 0x12 };
@@ -506,17 +508,17 @@ BOOST_FIXTURE_TEST_CASE(testBlobWrite, test_blob_fixture)
 {
   const char data[2] = { 0x54, 0x11 };
   {
-    boost::shared_ptr<blob> b = blob::open(*tmpdb,
-					   "main",
-					   "test",
-					   "C",
-					   blob_rowid);
+    std::shared_ptr<blob> b = blob::open(*tmpdb,
+					 "main",
+					 "test",
+					 "C",
+					 blob_rowid);
 
     b->write(1, data + 1, 1);
     BOOST_CHECK_THROW(b->write(1, data, 2), exception);
   }
 
-  boost::shared_ptr<statement> stmt =
+  std::shared_ptr<statement> stmt =
     statement::prepare(*tmpdb, "select C from test where rowid = ?");
   stmt->bind_int64(1, blob_rowid);
   {

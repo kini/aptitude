@@ -24,14 +24,12 @@
 
 #include <generic/views/download_progress.h>
 
-// System includes:
-#include <boost/make_shared.hpp>
-#include <boost/shared_ptr.hpp>
-
 #include <cwidget/generic/util/transcode.h>
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
+
+#include <memory>
 
 using aptitude::cmdline::create_cmdline_download_status_display;
 using aptitude::cmdline::download_status_display;
@@ -71,11 +69,11 @@ namespace
   // verify that suppressing messages actually works.
   struct CmdlineDownloadStatusDisplayTest : public TestWithParam<bool>
   {
-    boost::shared_ptr<mocks::transient_message> msg;
-    boost::shared_ptr<mocks::terminal_locale> term_locale;
-    boost::shared_ptr<mocks::terminal_metrics> term_metrics;
+    std::shared_ptr<mocks::transient_message> msg;
+    std::shared_ptr<mocks::terminal_locale> term_locale;
+    std::shared_ptr<mocks::terminal_metrics> term_metrics;
 
-    boost::shared_ptr<download_status_display> status_display;
+    std::shared_ptr<download_status_display> status_display;
 
     std::wstring widechstr;
 
@@ -100,7 +98,7 @@ namespace
     file_progress no_progress_out_of_zero_with_mode;
 
     CmdlineDownloadStatusDisplayTest()
-      : msg(boost::make_shared<mocks::transient_message>()),
+      : msg(std::make_shared<mocks::transient_message>()),
         term_locale(mocks::terminal_locale::create_strict()),
         term_metrics(mocks::terminal_metrics::create_strict()),
         no_progress(0, 10, false, "no progress", optional<unsigned long>(), ""),

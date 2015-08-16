@@ -287,7 +287,7 @@ namespace
 
   struct list_test
   {
-    boost::shared_ptr<dynamic_list_impl<int> > valuesPtr;
+    std::shared_ptr<dynamic_list_impl<int> > valuesPtr;
     dynamic_list_impl<int> &values;
     dynamic_list_signals<int> signals;
 
@@ -378,7 +378,7 @@ BOOST_AUTO_TEST_CASE(listSignalsAttach)
 // Tests that a few operations change the size as expected.
 BOOST_AUTO_TEST_CASE(dynamicListSize)
 {
-  boost::shared_ptr<writable_dynamic_list<int> > list = dynamic_list_impl<int>::create();
+  std::shared_ptr<writable_dynamic_list<int> > list = dynamic_list_impl<int>::create();
 
   BOOST_CHECK_EQUAL(0, list->size());
 
@@ -726,8 +726,8 @@ BOOST_FIXTURE_TEST_CASE(dynamicListMoveFrontToLast, list_test)
 
 struct list_collection_test
 {
-  boost::shared_ptr<writable_dynamic_list<int> > list1, list2, list3;
-  boost::shared_ptr<dynamic_list_collection<int> > collection;
+  std::shared_ptr<writable_dynamic_list<int> > list1, list2, list3;
+  std::shared_ptr<dynamic_list_collection<int> > collection;
 
   dynamic_list_signals<int> signals, expected;
 

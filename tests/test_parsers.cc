@@ -25,6 +25,8 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/numeric/conversion/cast.hpp>
 
+#include <memory>
+
 using namespace parsers;
 
 typedef std::string::const_iterator::difference_type iter_difftype;
@@ -70,7 +72,7 @@ public:
   };
 
   template<typename T>
-  struct apply<boost::shared_ptr<T> >
+  struct apply<std::shared_ptr<T> >
   {
     typedef typename apply<T>::type type;
   };
@@ -83,7 +85,7 @@ public:
 };
 
 BOOST_STATIC_ASSERT( (boost::is_same<std::vector<std::vector<int> >,
-                      strip_shared_ptrs_result::apply<boost::shared_ptr<std::vector<std::vector<boost::shared_ptr<int> > > > >::type>::value) );
+                      strip_shared_ptrs_result::apply<std::shared_ptr<std::vector<std::vector<std::shared_ptr<int> > > > >::type>::value) );
 
 template<typename T>
 T strip_shared_ptrs(const T &t)
@@ -101,7 +103,7 @@ strip_shared_ptrs(const std::vector<T> &v);
 
 template<typename T>
 typename strip_shared_ptrs_result::apply<T>::type
-strip_shared_ptrs(const boost::shared_ptr<T> &t)
+strip_shared_ptrs(const std::shared_ptr<T> &t)
 {
   return strip_shared_ptrs(*t);
 }
@@ -417,7 +419,7 @@ public:
     boost::optional<ParseException> thrown;
     try
       {
-        ( (maybe(str("def")) >> fail("This is an ex-parser") >> val(boost::shared_ptr<std::vector<boost::shared_ptr<std::string> > >()))
+        ( (maybe(str("def")) >> fail("This is an ex-parser") >> val(std::shared_ptr<std::vector<std::shared_ptr<std::string> > >()))
           | many(lexeme(container(std::string(), many(alpha()))))).parse(begin, end);
       }
     catch(ParseException &ex)
@@ -862,7 +864,7 @@ public:
     std::string input = "   abcde   ";
     std::string::const_iterator begin = input.begin(), end = input.end();
 
-    boost::shared_ptr<std::string> result = (container(std::string(), many(letter))).parse(begin, end);
+    std::shared_ptr<std::string> result = (container(std::string(), many(letter))).parse(begin, end);
 
     CPPUNIT_ASSERT_EQUAL(std::string(""), *result);
     CPPUNIT_ASSERT_EQUAL((iter_difftype)0, begin - input.begin());
@@ -875,7 +877,7 @@ public:
     std::string input = "";
     std::string::const_iterator begin = input.begin(), end = input.end();
 
-    boost::shared_ptr<std::string> result = (container(std::string(), many(letter))).parse(begin, end);
+    std::shared_ptr<std::string> result = (container(std::string(), many(letter))).parse(begin, end);
 
     CPPUNIT_ASSERT_EQUAL(std::string(""), *result);
     CPPUNIT_ASSERT_EQUAL((iter_difftype)0, begin - input.begin());
@@ -888,7 +890,7 @@ public:
     std::string input = "abcde   ";
     std::string::const_iterator begin = input.begin(), end = input.end();
 
-    boost::shared_ptr<std::string> result = (container(std::string(), many(letter))).parse(begin, end);
+    std::shared_ptr<std::string> result = (container(std::string(), many(letter))).parse(begin, end);
 
     CPPUNIT_ASSERT_EQUAL(std::string("abcde"), *result);
     CPPUNIT_ASSERT_EQUAL((iter_difftype)5, begin - input.begin());
@@ -901,7 +903,7 @@ public:
     std::string input = "abcde";
     std::string::const_iterator begin = input.begin(), end = input.end();
 
-    boost::shared_ptr<std::string> result = (container(std::string(), many(letter))).parse(begin, end);
+    std::shared_ptr<std::string> result = (container(std::string(), many(letter))).parse(begin, end);
 
     CPPUNIT_ASSERT_EQUAL(std::string("abcde"), *result);
     CPPUNIT_ASSERT_EQUAL((iter_difftype)5, begin - input.begin());
@@ -1319,7 +1321,7 @@ public:
       std::string input("57482adfb");
       std::string::const_iterator begin = input.begin(), end = input.end();
 
-      boost::shared_ptr<std::string> ptr;
+      std::shared_ptr<std::string> ptr;
       CPPUNIT_ASSERT_NO_THROW(ptr = (container(std::string(), manyPlus(digit()))).parse(begin, end));
       CPPUNIT_ASSERT_EQUAL(std::string("57482"), *ptr);
       CPPUNIT_ASSERT_EQUAL((iter_difftype)5, begin - input.begin());
@@ -1336,7 +1338,7 @@ public:
       expected.push_back(charint_vector('b', 15));
       expected.push_back(charint_vector('c', 999));
 
-      boost::shared_ptr<result_type> result;
+      std::shared_ptr<result_type> result;
       CPPUNIT_ASSERT_NO_THROW(result = manyPlus( (anychar(), integer()) ).parse(begin, end));
       CPPUNIT_ASSERT_EQUAL((iter_difftype)10, begin - input.begin());
 
@@ -1411,7 +1413,7 @@ public:
       std::string input = "abcde";
       std::string::const_iterator begin = input.begin(), end = input.end();
 
-      boost::shared_ptr<std::vector<int> > result;
+      std::shared_ptr<std::vector<int> > result;
       CPPUNIT_ASSERT_NO_THROW(result = sepBy(str(","), integer()).parse(begin, end));
       CPPUNIT_ASSERT_EQUAL(0, (int)result->size());
       CPPUNIT_ASSERT_EQUAL((iter_difftype)0, begin - input.begin());
@@ -1424,7 +1426,7 @@ public:
       std::string input = "3094,124498,34saflk";
       std::string::const_iterator begin = input.begin(), end = input.end();
 
-      boost::shared_ptr<std::vector<int> > result;
+      std::shared_ptr<std::vector<int> > result;
       CPPUNIT_ASSERT_NO_THROW(result = sepBy(str(","), integer()).parse(begin, end));
       CPPUNIT_ASSERT_EQUAL(3, (int)result->size());
       CPPUNIT_ASSERT_EQUAL(3094, (*result)[0]);
@@ -1487,7 +1489,7 @@ public:
       std::string input = "abcd    ef";
       std::string::const_iterator begin = input.begin(), end = input.end();
 
-      boost::shared_ptr<std::string> result;
+      std::shared_ptr<std::string> result;
       CPPUNIT_ASSERT_NO_THROW(result = lexeme(container(std::string(), many(alpha()))).parse(begin, end));
       CPPUNIT_ASSERT_EQUAL(std::string("abcd"), *result);
       // Unlike in many parsers, this test is NOT purely cosmetic; it
@@ -1566,7 +1568,7 @@ public:
     {
       std::string input = "123,abc";
 
-      boost::variant<boost::shared_ptr<std::vector<int> >, ParseException>
+      boost::variant<std::shared_ptr<std::vector<int> >, ParseException>
         result = parse(input, sepBy(ch(','), integer()));
 
       ParseException *ex = boost::get<ParseException>(&result);
@@ -1579,7 +1581,7 @@ public:
     {
       std::string input = "123  \n  ,  456  \n\n\n\n\n,\n  abc";
 
-      boost::variant<boost::shared_ptr<std::vector<int> >, ParseException>
+      boost::variant<std::shared_ptr<std::vector<int> >, ParseException>
         result = parse(input, sepBy(lexeme(ch(',')), lexeme(integer())));
 
       ParseException *ex = boost::get<ParseException>(&result);

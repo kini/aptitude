@@ -27,12 +27,10 @@
 #include <generic/util/progress_info.h>
 #include <generic/views/progress.h>
 
-// System includes:
-#include <boost/make_shared.hpp>
-#include <boost/shared_ptr.hpp>
-
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
+
+#include <memory>
 
 using aptitude::cmdline::create_progress_display;
 using aptitude::util::progress_info;
@@ -83,8 +81,8 @@ namespace
   struct CmdlineProgressDisplayTest
     : public TestWithParam<CmdlineProgressDisplayParams>
   {
-    boost::shared_ptr<mocks::transient_message> msg;
-    boost::shared_ptr<views::progress> progress;
+    std::shared_ptr<mocks::transient_message> msg;
+    std::shared_ptr<views::progress> progress;
 
     bool get_old_style_percentage() const
     {

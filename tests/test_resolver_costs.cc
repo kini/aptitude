@@ -47,8 +47,8 @@ public:
     // removals+cancels, aardvarks, removals
     //
     // where "aardvarks" is flagged as additive (for extra fun).
-    boost::shared_ptr<std::vector<cost_component_structure> > components =
-      boost::make_shared<std::vector<cost_component_structure> >();
+    std::shared_ptr<std::vector<cost_component_structure> > components =
+      std::make_shared<std::vector<cost_component_structure> >();
 
     std::vector<cost_component_structure::entry> c0;
     c0.push_back(cost_component_structure::entry("removals", 1));
@@ -95,8 +95,8 @@ public:
     // max(removals, cancels), aardvarks, removals
     //
     // where "aardvarks" is flagged as maximized (for extra fun).
-    boost::shared_ptr<std::vector<cost_component_structure> > components =
-      boost::make_shared<std::vector<cost_component_structure> >();
+    std::shared_ptr<std::vector<cost_component_structure> > components =
+      std::make_shared<std::vector<cost_component_structure> >();
 
 
     std::vector<cost_component_structure::entry> c0;
@@ -144,8 +144,8 @@ public:
     // max(removals, cancels), aardvarks, removals
     //
     // where "aardvarks" is flagged as additive (for extra fun).
-    boost::shared_ptr<std::vector<cost_component_structure> > components =
-      boost::make_shared<std::vector<cost_component_structure> >();
+    std::shared_ptr<std::vector<cost_component_structure> > components =
+      std::make_shared<std::vector<cost_component_structure> >();
 
 
     std::vector<cost_component_structure::entry> c0;
@@ -191,8 +191,8 @@ public:
   {
     // Construct a settings object for:
     // max(removals, cancels), aardvarks, removals
-    boost::shared_ptr<std::vector<cost_component_structure> > components =
-      boost::make_shared<std::vector<cost_component_structure> >();
+    std::shared_ptr<std::vector<cost_component_structure> > components =
+      std::make_shared<std::vector<cost_component_structure> >();
 
     std::vector<cost_component_structure::entry> c0;
     c0.push_back(cost_component_structure::entry("removals", 1));
@@ -244,7 +244,7 @@ public:
     const std::string input =
       "removals+ 2*cancels + aardvarks, max(2 *removals, aardvarks, cancels), aardvarks, 4*removals, max(cancels),max(2*cancels)";
 
-    boost::shared_ptr<std::vector<cost_component_structure> >
+    std::shared_ptr<std::vector<cost_component_structure> >
       parsed = parse_cost_settings(input);
 
     std::vector<cost_component_structure>
@@ -311,7 +311,7 @@ public:
       {
         bool threw = false;
 
-        boost::shared_ptr<std::vector<cost_component_structure> > components;
+        std::shared_ptr<std::vector<cost_component_structure> > components;
         CPPUNIT_ASSERT_NO_THROW(try
           {
             components = parse_cost_settings(fail_inputs[i]);
@@ -337,8 +337,8 @@ public:
     // max(removals, 2*cancels), 5*aardvarks + badgers, groundhogs, max(llamas)
     //
     // where "aardvarks" is flagged as additive (for extra fun).
-    boost::shared_ptr<std::vector<cost_component_structure> > components =
-      boost::make_shared<std::vector<cost_component_structure> >();
+    std::shared_ptr<std::vector<cost_component_structure> > components =
+      std::make_shared<std::vector<cost_component_structure> >();
 
     std::vector<cost_component_structure::entry> c0;
     c0.push_back(cost_component_structure::entry("removals", 1));

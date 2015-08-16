@@ -25,6 +25,8 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include <memory>
+
 using aptitude::util::logging::DEBUG_LEVEL;
 using aptitude::util::logging::ERROR_LEVEL;
 using aptitude::util::logging::FATAL_LEVEL;
@@ -66,7 +68,7 @@ namespace
 
   struct LoggingTest : public Test
   {
-    boost::shared_ptr<LoggingSystem> loggingSystem;
+    std::shared_ptr<LoggingSystem> loggingSystem;
 
     static const char *sourceFilename1;
     static const int sourceLineNumber1 = 100;

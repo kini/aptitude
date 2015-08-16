@@ -46,19 +46,19 @@ namespace
 
   struct TransientMessage : public Test
   {
-    boost::shared_ptr<mocks::terminal_locale> term_locale;
-    boost::shared_ptr<mocks::terminal_metrics> term_metrics;
-    boost::shared_ptr<mocks::combining_terminal_output> term_output;
-    boost::shared_ptr<mocks::teletype> teletype;
-    boost::shared_ptr<transient_message> message;
+    std::shared_ptr<mocks::terminal_locale> term_locale;
+    std::shared_ptr<mocks::terminal_metrics> term_metrics;
+    std::shared_ptr<mocks::combining_terminal_output> term_output;
+    std::shared_ptr<mocks::teletype> teletype;
+    std::shared_ptr<transient_message> message;
     std::wstring widechar;
 
     // I need to set up expectations on the terminal during member
     // initialization, since some of the other member initializers
     // cause methods to be invoked on it.
-    static boost::shared_ptr<mocks::combining_terminal_output> create_terminal_output()
+    static std::shared_ptr<mocks::combining_terminal_output> create_terminal_output()
     {
-      boost::shared_ptr<mocks::combining_terminal_output> rval =
+      std::shared_ptr<mocks::combining_terminal_output> rval =
         mocks::combining_terminal_output::create_strict();
 
       EXPECT_CALL(*rval, output_is_a_terminal())
@@ -67,9 +67,9 @@ namespace
       return rval;
     }
 
-    static boost::shared_ptr<mocks::terminal_metrics> create_terminal_metrics()
+    static std::shared_ptr<mocks::terminal_metrics> create_terminal_metrics()
     {
-      boost::shared_ptr<mocks::terminal_metrics> rval =
+      std::shared_ptr<mocks::terminal_metrics> rval =
         mocks::terminal_metrics::create_strict();
 
       EXPECT_CALL(*rval, get_screen_width())
@@ -162,7 +162,7 @@ TEST_F(TransientMessage, DisplayAndAdvanceWithoutTerminal)
 
   // Need to create a new message object since it reads and caches the
   // value of output_is_a_terminal() when it's created.
-  const boost::shared_ptr<transient_message> requiring_message =
+  const std::shared_ptr<transient_message> requiring_message =
     create_transient_message(term_locale, term_metrics, term_output);
 
   requiring_message->display_and_advance(L"xyzwabcd");
@@ -351,7 +351,7 @@ TEST_F(TransientMessage, RequireTtyDecorationsWithTty)
 
   // Need to create a new message object since it reads and caches the
   // value of output_is_a_terminal() when it's created.
-  const boost::shared_ptr<transient_message> requiring_message =
+  const std::shared_ptr<transient_message> requiring_message =
     create_transient_message(term_locale, term_metrics, term_output);
 
   requiring_message->set_text(L"abc");
@@ -368,7 +368,7 @@ TEST_F(TransientMessage, RequireTtyDecorationsWithoutTty)
 
   // Need to create a new message object since it reads and caches the
   // value of output_is_a_terminal() when it's created.
-  const boost::shared_ptr<transient_message> requiring_message =
+  const std::shared_ptr<transient_message> requiring_message =
     create_transient_message(term_locale, term_metrics, term_output);
 
   requiring_message->set_text(L"abc");
