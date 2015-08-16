@@ -26,9 +26,9 @@
 #include <gtkmm/eventbox.h>
 #include <gtkmm/image.h>
 
-#include <boost/shared_ptr.hpp>
-
 #include <generic/apt/screenshot.h>
+
+#include <memory>
 
 namespace gui
 {
@@ -48,7 +48,7 @@ namespace gui
     sigc::connection screenshot_updated_connection;
     sigc::connection screenshot_ready_connection;
 
-    boost::shared_ptr<cached_screenshot> screenshot;
+    std::shared_ptr<cached_screenshot> screenshot;
     // Set to true when the download succeeds; used to decide whether
     // cancel_download() should blank the image.
     bool download_complete : 1;

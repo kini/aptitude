@@ -24,7 +24,7 @@
 #include "model.h"
 #include "view.h"
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace gui
 {
@@ -37,10 +37,10 @@ namespace gui
      *  assumes that they have a floating reference and sinks that
      *  reference using manage().
      */
-    boost::shared_ptr<view>
-    create_tabs_notebook(const boost::shared_ptr<
+    std::shared_ptr<view>
+    create_tabs_notebook(const std::shared_ptr<
                            aptitude::util::dynamic_set<
-                             boost::shared_ptr<
+                             std::shared_ptr<
                                tab_display_info> > > &tabs);
   }
 }

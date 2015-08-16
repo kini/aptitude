@@ -33,6 +33,8 @@
 
 #include <cwidget/generic/util/ssprintf.h>
 
+#include <memory>
+
 namespace gui
 {
   // \todo let the user adjust the parameters of the search
@@ -273,7 +275,7 @@ namespace gui
 				 why::target::Install(target),
 				 false,
 				 0,
-                                 boost::shared_ptr<aptitude::why::why_callbacks>(),
+                                 std::shared_ptr<aptitude::why::why_callbacks>(),
 				 results);
     if(results.empty() || results.front().empty())
       {

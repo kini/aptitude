@@ -23,16 +23,14 @@
 
 #include <loggers.h>
 
-#include <boost/make_shared.hpp>
-#include <boost/ref.hpp>
-#include <boost/shared_ptr.hpp>
-
 #include <glibmm/init.h>
 #include <gtkmm/main.h>
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+
+#include <memory>
 
 using aptitude::Loggers;
 
@@ -43,7 +41,7 @@ namespace gui
     // The globals that have to be shared between several routines.
     namespace
     {
-      boost::shared_ptr<Gtk::Main> main_loop;
+      std::shared_ptr<Gtk::Main> main_loop;
       bool download_active;
     }
 
@@ -130,8 +128,8 @@ namespace gui
 
     void init_main_loop(int argc, char *argv[])
     {
-      main_loop = boost::make_shared<Gtk::Main>(boost::ref(argc),
-                                                boost::ref(argv));
+      main_loop = std::make_shared<Gtk::Main>(std::ref(argc),
+					      std::ref(argv));
     }
 
     void main_quit()

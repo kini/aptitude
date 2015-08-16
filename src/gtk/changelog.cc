@@ -49,7 +49,7 @@
 #include <gtk/gui.h>
 #include <gtk/progress.h>
 
-#include <boost/make_shared.hpp>
+#include <memory>
 
 using aptitude::Loggers;
 using aptitude::apt::get_changelog;
@@ -352,7 +352,7 @@ namespace gui
     // do_view_changelog_trampoline) when a changelog is finished
     // downloading.
     void finish_changelog_download(const cw::util::ref_ptr<aptitude::apt::changelog> &cl,
-				   const boost::shared_ptr<finish_changelog_download_info> &download_info)
+				   const std::shared_ptr<finish_changelog_download_info> &download_info)
     {
       LOG_TRACE(Loggers::getAptitudeGtkChangelog(),
                 "Finishing the download of "
@@ -378,7 +378,7 @@ namespace gui
     }
 
     void changelog_download_error(const std::string &error,
-				  const boost::shared_ptr<finish_changelog_download_info> download_info)
+				  const std::shared_ptr<finish_changelog_download_info> download_info)
     {
       const Gtk::TextBuffer::iterator begin = download_info->text_buffer->get_iter_at_mark(download_info->begin);
       const Gtk::TextBuffer::iterator end = download_info->text_buffer->get_iter_at_mark(download_info->end);
@@ -419,8 +419,8 @@ namespace gui
 
       std::string binary_package_name;
 
-      boost::shared_ptr<aptitude::apt::changelog_info> target_info;
-      boost::shared_ptr<aptitude::apt::changelog_info> current_info;
+      std::shared_ptr<aptitude::apt::changelog_info> target_info;
+      std::shared_ptr<aptitude::apt::changelog_info> current_info;
 
       std::set<std::string> origins;
 
@@ -453,8 +453,8 @@ namespace gui
       //Gtk::TextView *get_text_view() const { return text_view; }
       bool get_only_new() const { return only_new; }
       const std::string &get_binary_package_name() const { return binary_package_name; }
-      const boost::shared_ptr<aptitude::apt::changelog_info> &get_target_info() const { return target_info; }
-      const boost::shared_ptr<aptitude::apt::changelog_info> &get_current_info() const { return current_info; }
+      const std::shared_ptr<aptitude::apt::changelog_info> &get_target_info() const { return target_info; }
+      const std::shared_ptr<aptitude::apt::changelog_info> &get_current_info() const { return current_info; }
       const std::set<std::string> &get_origins() const { return origins; }
 
       void add_child_at_anchor(Gtk::Widget &child,
@@ -506,7 +506,7 @@ namespace gui
     {
       // Information about the download that should eventually be
       // passed to finish_changelog_download.
-      boost::shared_ptr<finish_changelog_download_info> download_info;
+      std::shared_ptr<finish_changelog_download_info> download_info;
 
       // Information about the changelog that should be passed to the
       // parse thread.
@@ -518,15 +518,15 @@ namespace gui
       // package.
       std::string source_version;
 
-      boost::shared_ptr<Gtk::ProgressBar> progress_bar;
+      std::shared_ptr<Gtk::ProgressBar> progress_bar;
 
     public:
-      changelog_download_callbacks(const boost::shared_ptr<finish_changelog_download_info> &_download_info,
+      changelog_download_callbacks(const std::shared_ptr<finish_changelog_download_info> &_download_info,
 				   const std::string &_from,
 				   const std::string &_to,
 				   const std::string &_source_package,
 				   const std::string &_source_version,
-				   const boost::shared_ptr<Gtk::ProgressBar> &_progress_bar)
+				   const std::shared_ptr<Gtk::ProgressBar> &_progress_bar)
 	: download_info(_download_info),
 	  from(_from),
 	  to(_to),
@@ -557,13 +557,13 @@ namespace gui
 
 	Glib::RefPtr<Gtk::TextBuffer::Mark> end_mark = text_buffer->create_mark(end_iter);
 
-	boost::shared_ptr<finish_changelog_download_info>
-	  new_download_info = boost::make_shared<finish_changelog_download_info>(download_info->begin,
-										 end_mark,
-										 text_buffer,
-                                                                                 download_info->info,
-										 download_info->current_version,
-										 download_info->only_new);
+	std::shared_ptr<finish_changelog_download_info>
+	  new_download_info = std::make_shared<finish_changelog_download_info>(download_info->begin,
+									       end_mark,
+									       text_buffer,
+									       download_info->info,
+									       download_info->current_version,
+									       download_info->only_new);
 
 
 	const sigc::slot1<void, cw::util::ref_ptr<aptitude::apt::changelog> > finish_changelog_download_slot =
@@ -610,7 +610,7 @@ namespace gui
      *
      *  This function must be invoked in the main thread.
      */
-    void process_changelog_job(const boost::shared_ptr<preprocessed_changelog_job> &entry,
+    void process_changelog_job(const std::shared_ptr<preprocessed_changelog_job> &entry,
 			       const temp::name &digested_file)
     {
       logging::LoggerPtr logger = aptitude::Loggers::getAptitudeGtkChangelog();
@@ -632,8 +632,8 @@ namespace gui
 
 
       const std::string &binary_package_name(entry->get_binary_package_name());
-      const boost::shared_ptr<aptitude::apt::changelog_info> &target_info(entry->get_target_info());
-      const boost::shared_ptr<aptitude::apt::changelog_info> &current_info(entry->get_current_info());
+      const std::shared_ptr<aptitude::apt::changelog_info> &target_info(entry->get_target_info());
+      const std::shared_ptr<aptitude::apt::changelog_info> &current_info(entry->get_current_info());
       const std::set<std::string> &origins(entry->get_origins());
 
       if(origins.find("Debian") == origins.end())
@@ -704,11 +704,11 @@ namespace gui
 	      // thread, so we need to safely wrap it and post it to the
 	      // main thread.
 	      const bool only_new = entry->get_only_new();
-	      boost::shared_ptr<finish_changelog_download_info> download_info =
-		boost::make_shared<finish_changelog_download_info>(beginMark, endMark, textBuffer,
-                                                                   *current_info,
-								   only_new ? current_info->get_source_version() : "",
-								   only_new);
+	      std::shared_ptr<finish_changelog_download_info> download_info =
+		std::make_shared<finish_changelog_download_info>(beginMark, endMark, textBuffer,
+								 *current_info,
+								 only_new ? current_info->get_source_version() : "",
+								 only_new);
 
 	      const sigc::slot1<void, cw::util::ref_ptr<aptitude::apt::changelog> > finish_changelog_download_slot =
 		sigc::bind(sigc::ptr_fun(&finish_changelog_download),
@@ -749,7 +749,7 @@ namespace gui
 		endMark = textBuffer->create_mark(end_iter);
 	      }
 
-	      // A boost::shared_ptr is used here instead of manage()
+	      // A std::shared_ptr is used here instead of manage()
 	      // because I want to ensure that the C++ object is
 	      // destroyed when it runs out of references.  In
 	      // particular: if there is no text view any more, we
@@ -758,25 +758,25 @@ namespace gui
 	      // This way, the progress bar will be valid as long as I
 	      // need it, then get deleted.  (at least, I hope that's
 	      // what will happen)
-	      boost::shared_ptr<Gtk::ProgressBar> progressBar(boost::make_shared<Gtk::ProgressBar>());
+	      std::shared_ptr<Gtk::ProgressBar> progressBar(std::make_shared<Gtk::ProgressBar>());
 
 	      entry->add_child_at_anchor(*progressBar, anchor);
 	      progressBar->show();
 
 	      const bool only_new = entry->get_only_new();
-	      boost::shared_ptr<finish_changelog_download_info> download_info =
-		boost::make_shared<finish_changelog_download_info>(beginMark, endMark, textBuffer,
-                                                                   *current_info,
-								   only_new ? current_info->get_source_version() : "",
-								   only_new);
-
-	      boost::shared_ptr<changelog_download_callbacks> callbacks =
-		boost::make_shared<changelog_download_callbacks>(download_info,
+	      std::shared_ptr<finish_changelog_download_info> download_info =
+		std::make_shared<finish_changelog_download_info>(beginMark, endMark, textBuffer,
+								 *current_info,
 								 only_new ? current_info->get_source_version() : "",
-								 target_info->get_source_version(),
-								 target_info->get_source_package(),
-								 target_info->get_source_version(),
-								 progressBar);
+								 only_new);
+
+	      std::shared_ptr<changelog_download_callbacks> callbacks =
+		std::make_shared<changelog_download_callbacks>(download_info,
+							       only_new ? current_info->get_source_version() : "",
+							       target_info->get_source_version(),
+							       target_info->get_source_package(),
+							       target_info->get_source_version(),
+							       progressBar);
 
 	      aptitude::apt::get_changelog(target_info, callbacks, &post_thunk);
 	    }
@@ -794,15 +794,15 @@ namespace gui
 
     class check_cache_for_parsed_changelogs_job
     {
-      boost::shared_ptr<preprocessed_changelog_job> request;
+      std::shared_ptr<preprocessed_changelog_job> request;
 
     public:
-      check_cache_for_parsed_changelogs_job(const boost::shared_ptr<preprocessed_changelog_job> &_request)
+      check_cache_for_parsed_changelogs_job(const std::shared_ptr<preprocessed_changelog_job> &_request)
 	: request(_request)
       {
       }
 
-      const boost::shared_ptr<preprocessed_changelog_job> &get_request() const { return request; }
+      const std::shared_ptr<preprocessed_changelog_job> &get_request() const { return request; }
     };
 
     // TODO: show the individual requests.
@@ -841,7 +841,7 @@ namespace gui
       {
 	logging::LoggerPtr logger(get_log_category());
 
-	const boost::shared_ptr<preprocessed_changelog_job> &req = job.get_request();
+	const std::shared_ptr<preprocessed_changelog_job> &req = job.get_request();
 
 	temp::name predigested_file;
 
@@ -871,7 +871,7 @@ namespace gui
 		    << " " << req->get_target_info()->get_source_version()
 		    << " in the file " << predigested_file.get_name());
 
-	sigc::slot<void, boost::shared_ptr<preprocessed_changelog_job>, temp::name>
+	sigc::slot<void, std::shared_ptr<preprocessed_changelog_job>, temp::name>
 	  process_changelog_job_slot = sigc::ptr_fun(&process_changelog_job);
 
 	post_event(safe_bind(make_safe_slot(process_changelog_job_slot),
@@ -937,10 +937,10 @@ namespace gui
     sigc::slot<void, Gtk::Widget &, Glib::RefPtr<Gtk::TextBuffer::ChildAnchor> > text_view_add_child_at_anchor =
       sigc::mem_fun(*text_view, &Gtk::TextView::add_child_at_anchor);
 
-    boost::shared_ptr<preprocessed_changelog_job> preprocessed =
-      boost::make_shared<preprocessed_changelog_job>(begin_mark, end_mark, text_buffer,
-						     text_view_add_child_at_anchor,
-						     ver, only_new);
+    std::shared_ptr<preprocessed_changelog_job> preprocessed =
+      std::make_shared<preprocessed_changelog_job>(begin_mark, end_mark, text_buffer,
+						   text_view_add_child_at_anchor,
+						   ver, only_new);
 
     check_cache_for_parsed_changelogs_job job(preprocessed);
     check_cache_for_parsed_changelogs_thread::add_job(job);

@@ -21,7 +21,7 @@
 #ifndef APTITUDE_GTK_AREAS_H
 #define APTITUDE_GTK_AREAS_H
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace gui
 {
@@ -45,27 +45,27 @@ namespace gui
     virtual ~areas();
 
     /** \brief Get a list of all the areas. */
-    virtual boost::shared_ptr<toplevel::area_list> get_areas() = 0;
+    virtual std::shared_ptr<toplevel::area_list> get_areas() = 0;
 
     /** \brief The Browse area. */
-    virtual boost::shared_ptr<toplevel::area_info> get_browse() = 0;
+    virtual std::shared_ptr<toplevel::area_info> get_browse() = 0;
 
     /** \brief The Go area. */
-    virtual boost::shared_ptr<toplevel::area_info> get_go() = 0;
+    virtual std::shared_ptr<toplevel::area_info> get_go() = 0;
 
     /** \brief The Preferences area. */
-    virtual boost::shared_ptr<toplevel::area_info> get_preferences() = 0;
+    virtual std::shared_ptr<toplevel::area_info> get_preferences() = 0;
 
     /** \brief The Search area. */
-    virtual boost::shared_ptr<toplevel::area_info> get_search() = 0;
+    virtual std::shared_ptr<toplevel::area_info> get_search() = 0;
 
     /** \brief The Upgrade area. */
-    virtual boost::shared_ptr<toplevel::area_info> get_upgrade() = 0;
+    virtual std::shared_ptr<toplevel::area_info> get_upgrade() = 0;
   };
 
 
   /** \brief Create a new standard area list with no tabs. */
-  boost::shared_ptr<areas> create_areas();
+  std::shared_ptr<areas> create_areas();
 }
 
 #endif // APTITUDE_GTK_AREAS_H

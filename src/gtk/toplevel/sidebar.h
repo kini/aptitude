@@ -41,7 +41,7 @@ namespace gui
        *  \param The list of areas whose contents will appear in this
        *  sidebar.
        */
-      sidebar(const boost::shared_ptr<area_list> &areas);
+      sidebar(const std::shared_ptr<area_list> &areas);
     };
   }
 }

@@ -24,9 +24,6 @@
 #include <generic/util/enumerator.h>
 #include <generic/util/progress_info.h>
 
-#include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
-
 #include <cwidget/generic/util/bool_accumulate.h>
 
 #include <gtkmm/image.h>
@@ -88,17 +85,17 @@ namespace gui
 
       virtual int get_size() = 0;
 
-      typedef aptitude::util::enumerator<boost::shared_ptr<area_info> >
+      typedef aptitude::util::enumerator<std::shared_ptr<area_info> >
       areas_enumerator;
 
       /** \brief Enumerate the list areas contained in this list. */
-      virtual boost::shared_ptr<areas_enumerator> get_areas() = 0;
+      virtual std::shared_ptr<areas_enumerator> get_areas() = 0;
     };
 
     /** \brief Create an immutable area list from an STL vector of
      *  areas.
      */
-    boost::shared_ptr<area_list> create_area_list(const std::vector<boost::shared_ptr<area_info> > &areas);
+    std::shared_ptr<area_list> create_area_list(const std::vector<std::shared_ptr<area_info> > &areas);
 
     /** \brief The abstract description of an area. */
     class area_info : public sigc::trackable
@@ -118,19 +115,19 @@ namespace gui
       virtual Glib::RefPtr<Gdk::Pixbuf> get_icon() = 0;
 
     public:
-      typedef aptitude::util::writable_dynamic_set<boost::shared_ptr<tab_info> >
+      typedef aptitude::util::writable_dynamic_set<std::shared_ptr<tab_info> >
       tabs_set;
 
-      typedef aptitude::util::writable_dynamic_set<boost::shared_ptr<notification_info> >
+      typedef aptitude::util::writable_dynamic_set<std::shared_ptr<notification_info> >
       notifications_set;
 
       /** \brief Get the tabs associated with this area. */
-      virtual boost::shared_ptr<tabs_set> get_tabs() = 0;
+      virtual std::shared_ptr<tabs_set> get_tabs() = 0;
       /** \brief Get the notifications associated with this area. */
-      virtual boost::shared_ptr<notifications_set> get_notifications() = 0;
+      virtual std::shared_ptr<notifications_set> get_notifications() = 0;
     };
 
-    boost::shared_ptr<area_info> create_area_info(const std::string &name,
+    std::shared_ptr<area_info> create_area_info(const std::string &name,
                                                   const std::string &description,
                                                   const Glib::RefPtr<Gdk::Pixbuf> &icon);
 
@@ -216,21 +213,21 @@ namespace gui
        *  information changes.
        */
       virtual sigc::connection
-      connect_tooltip_changed(const sigc::slot<void, boost::shared_ptr<tab_info>, std::string, Gtk::Window *> &
+      connect_tooltip_changed(const sigc::slot<void, std::shared_ptr<tab_info>, std::string, Gtk::Window *> &
                               slot) = 0;
 
       /** \brief Register a slot to be invoked when the progress
        *  information changes.
        */
       virtual sigc::connection
-      connect_progress_changed(const sigc::slot<void, boost::shared_ptr<tab_info>, aptitude::util::progress_info> &
+      connect_progress_changed(const sigc::slot<void, std::shared_ptr<tab_info>, aptitude::util::progress_info> &
                                slot) = 0;
 
       /** \brief Register a slot to be invoked when something asks for a
        *  tab to be made the currently visible tab by invoking activate().
        */
       virtual sigc::connection
-      connect_activate_tab(const sigc::slot<void, boost::shared_ptr<tab_info> > &slot) = 0;
+      connect_activate_tab(const sigc::slot<void, std::shared_ptr<tab_info> > &slot) = 0;
 
       // @}
     };
@@ -282,7 +279,7 @@ namespace gui
        *
        *  If no parent area is stored, logs an error and does nothing.
        */
-      virtual void add_sibling(const boost::shared_ptr<tab_info> &sibling) = 0;
+      virtual void add_sibling(const std::shared_ptr<tab_info> &sibling) = 0;
 
       /** \brief Signals */
       // @{
@@ -326,7 +323,7 @@ namespace gui
        *  conceptually cleaner to me and a bit less error-prone.
        */
       virtual sigc::connection
-      connect_closed(const sigc::slot<void, boost::shared_ptr<tab_info> > &slot) = 0;
+      connect_closed(const sigc::slot<void, std::shared_ptr<tab_info> > &slot) = 0;
 
       /** \brief Set the area that this tab is stored in.
        *
@@ -334,7 +331,7 @@ namespace gui
        *  a non-NULL value when it already has a non-NULL value, the
        *  new setting is discarded and an error is logged.
        */
-      virtual void set_parent_area(const boost::shared_ptr<area_info> &area) = 0;
+      virtual void set_parent_area(const std::shared_ptr<area_info> &area) = 0;
     };
 
     /** \brief Create a new tab_info.
@@ -343,7 +340,7 @@ namespace gui
      *  \param icon   The icon to display for the tab.
      *  \param widget The main widget of the tab.
      */
-    boost::shared_ptr<tab_info> create_tab(const std::string &name,
+    std::shared_ptr<tab_info> create_tab(const std::string &name,
                                            const Glib::RefPtr<Gdk::Pixbuf> &icon,
                                            Gtk::Widget *widget);
 
@@ -395,7 +392,7 @@ namespace gui
       // @}
     };
 
-    boost::shared_ptr<notification_info>
+    std::shared_ptr<notification_info>
     create_notification(const std::string &name,
                         const std::string &description,
                         const Glib::RefPtr<Gdk::Pixbuf> &icon);

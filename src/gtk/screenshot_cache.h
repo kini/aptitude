@@ -27,6 +27,8 @@
 
 #include <generic/apt/screenshot.h>
 
+#include <memory>
+
 namespace gui
 {
   // An abstract base class is qused here to simplify the header
@@ -101,7 +103,7 @@ namespace gui
   };
 
   /** \brief Retrieve the given screenshot. */
-  boost::shared_ptr<cached_screenshot> get_screenshot(const aptitude::screenshot_key &key);
+  std::shared_ptr<cached_screenshot> get_screenshot(const aptitude::screenshot_key &key);
 }
 
 #endif // GTK_SCREENSHOT_CACHE_H

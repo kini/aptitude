@@ -20,9 +20,9 @@
 #ifndef APTITUDE_MAINWINDOW_H
 #define APTITUDE_MAINWINDOW_H
 
-#include <boost/shared_ptr.hpp>
-
 #include <glibmm/refptr.h>
+
+#include <memory>
 
 namespace Gtk
 {
@@ -60,7 +60,7 @@ namespace gui
     virtual Gtk::Window *get_window() = 0;
 
     /** \brief Retrieve the window's model. */
-    virtual boost::shared_ptr<areas> get_areas() = 0;
+    virtual std::shared_ptr<areas> get_areas() = 0;
   };
 
   /** \brief Create a main-window object.
@@ -71,10 +71,10 @@ namespace gui
    *                 shared with any other main window; should be
    *                 shared with the view.
    */
-  boost::shared_ptr<main_window>
+  std::shared_ptr<main_window>
   create_mainwindow(const Glib::RefPtr<Gnome::Glade::Xml> &glade,
-                    const boost::shared_ptr<toplevel::view> &view,
-                    const boost::shared_ptr<areas> &areas);
+                    const std::shared_ptr<toplevel::view> &view,
+                    const std::shared_ptr<areas> &areas);
 }
 
 #endif // APTITUDE_MAINWINDOW_H

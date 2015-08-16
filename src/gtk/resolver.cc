@@ -31,8 +31,6 @@
 
 #include <apt-pkg/error.h>
 
-#include <boost/make_shared.hpp>
-
 #include <loggers.h>
 #include <solution_fragment.h> // For archives_text.
 #include <solution_item.h> // For action_type.
@@ -42,6 +40,8 @@
 #include <generic/problemresolver/solution.h>
 
 #include <cwidget/generic/util/ssprintf.h>
+
+#include <memory>
 
 using aptitude::Loggers;
 
@@ -142,8 +142,8 @@ namespace gui
     {
       LOG_TRACE(Loggers::getAptitudeGtkResolver(),
 		"Restarting the resolver thread if necessary.");
-      boost::shared_ptr<gui_resolver_continuation> k =
-	boost::make_shared<gui_resolver_continuation>(resolver);
+      std::shared_ptr<gui_resolver_continuation> k =
+	std::make_shared<gui_resolver_continuation>(resolver);
       resolver->maybe_start_solution_calculation(k, post_thunk);
     }
 
@@ -160,8 +160,8 @@ namespace gui
 	  // generated).
 	  LOG_TRACE(Loggers::getAptitudeGtkResolver(),
 		    "Making sure the first solution is computed.");
-	  boost::shared_ptr<gui_resolver_continuation> k =
-	    boost::make_shared<gui_resolver_continuation>(resolver);
+	  std::shared_ptr<gui_resolver_continuation> k =
+	    std::make_shared<gui_resolver_continuation>(resolver);
 	  resolver->maybe_start_solution_calculation(k,
 						     post_thunk);
 	}
@@ -2218,8 +2218,8 @@ namespace gui
 
 	get_widget()->set_sensitive(true);
 
-	boost::shared_ptr<gui_resolver_continuation> k =
-	  boost::make_shared<gui_resolver_continuation>(manager);
+	std::shared_ptr<gui_resolver_continuation> k =
+	  std::make_shared<gui_resolver_continuation>(manager);
 	manager->maybe_start_solution_calculation(k, post_thunk);
 
 	resolver_fixing_upgrade_label->show();

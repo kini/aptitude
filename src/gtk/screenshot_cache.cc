@@ -20,13 +20,11 @@
 
 #include "screenshot_cache.h"
 
-#include <boost/enable_shared_from_this.hpp>
 #include <boost/multi_index_container.hpp>
 #include <boost/multi_index/hashed_index.hpp>
 #include <boost/multi_index/member.hpp>
 #include <boost/multi_index/mem_fun.hpp>
 #include <boost/multi_index/sequenced_index.hpp>
-#include <boost/weak_ptr.hpp>
 
 #include <cwidget/generic/util/ssprintf.h>
 
@@ -39,6 +37,8 @@
 #include <generic/util/job_queue_thread.h>
 
 #include <sigc++/trackable.h>
+
+#include <memory>
 
 #include <fcntl.h>
 #include <sys/stat.h>
@@ -64,18 +64,18 @@ namespace gui
     class load_screenshot_job
     {
       temp::name filename;
-      boost::shared_ptr<screenshot_cache_entry> cache_entry;
+      std::shared_ptr<screenshot_cache_entry> cache_entry;
 
     public:
       load_screenshot_job(const temp::name &_filename,
-			  const boost::shared_ptr<screenshot_cache_entry> &_cache_entry)
+			  const std::shared_ptr<screenshot_cache_entry> &_cache_entry)
 	: filename(_filename),
 	  cache_entry(_cache_entry)
       {
       }
 
       const temp::name &get_filename() const { return filename; }
-      const boost::shared_ptr<screenshot_cache_entry> &get_cache_entry() const { return cache_entry; }
+      const std::shared_ptr<screenshot_cache_entry> &get_cache_entry() const { return cache_entry; }
     };
 
     // Needed for job_queue_thread.
@@ -106,7 +106,7 @@ namespace gui
      *  being used to read in the screenshot.
      */
     class screenshot_cache_entry : public cached_screenshot, public download_callbacks,
-				   public boost::enable_shared_from_this<screenshot_cache_entry>,
+				   public std::enable_shared_from_this<screenshot_cache_entry>,
 				   public sigc::trackable
     {
       // This is NULL until we get the first partial-load message.  If
@@ -128,7 +128,7 @@ namespace gui
       // This is discarded when the pixbuf is finished loading.  No
       // strong reference loop here because download_request only uses
       // weak references.
-      boost::shared_ptr<download_request> request;
+      std::shared_ptr<download_request> request;
 
       // Tracks how much space the cache thinks this screenshot takes
       // up; used to ensure that the total cache size is correctly
@@ -153,7 +153,7 @@ namespace gui
       {
 	// Take a strong reference to "this" in case a callback drops
 	// a reference.
-	boost::shared_ptr<screenshot_cache_entry> strong_this(shared_from_this());
+	std::shared_ptr<screenshot_cache_entry> strong_this(shared_from_this());
 
 	int fdnum = open(name.get_name().c_str(), O_RDONLY);
 	if(fdnum < 0)
@@ -231,7 +231,7 @@ namespace gui
       {
 	// Take a strong reference to "this" in case a callback drops
 	// a reference.
-	boost::shared_ptr<screenshot_cache_entry> strong_this(shared_from_this());
+	std::shared_ptr<screenshot_cache_entry> strong_this(shared_from_this());
 
 	image = loader->get_pixbuf();
 
@@ -315,7 +315,7 @@ namespace gui
       {
 	// Take a strong reference to "this" in case a callback drops
 	// a reference.
-	boost::shared_ptr<screenshot_cache_entry> strong_this(shared_from_this());
+	std::shared_ptr<screenshot_cache_entry> strong_this(shared_from_this());
 
 
 	LOG_TRACE(Loggers::getAptitudeGtkScreenshotCache(),
@@ -350,7 +350,7 @@ namespace gui
       {
 	// Take a strong reference to "this" in case a callback drops
 	// a reference.
-	boost::shared_ptr<screenshot_cache_entry> strong_this(shared_from_this());
+	std::shared_ptr<screenshot_cache_entry> strong_this(shared_from_this());
 
 
 	LOG_TRACE(Loggers::getAptitudeGtkScreenshotCache(),
@@ -411,7 +411,7 @@ namespace gui
       {
 	// Take a strong reference to "this" in case a callback drops
 	// a reference.
-	boost::shared_ptr<screenshot_cache_entry> strong_this(shared_from_this());
+	std::shared_ptr<screenshot_cache_entry> strong_this(shared_from_this());
 
 
 	LOG_WARN(Loggers::getAptitudeGtkScreenshotCache(),
@@ -427,7 +427,7 @@ namespace gui
       {
 	// Take a strong reference to "this" in case a callback drops
 	// a reference.
-	boost::shared_ptr<screenshot_cache_entry> strong_this(shared_from_this());
+	std::shared_ptr<screenshot_cache_entry> strong_this(shared_from_this());
 
 
 	LOG_TRACE(Loggers::getAptitudeGtkScreenshotCache(),
@@ -486,7 +486,7 @@ namespace gui
       class by_screenshot_tag;
 
       typedef multi_index_container<
-	boost::shared_ptr<screenshot_cache_entry>,
+	std::shared_ptr<screenshot_cache_entry>,
 	indexed_by<
 	  hashed_unique<tag<by_screenshot_tag>,
 			const_mem_fun<screenshot_cache_entry,
@@ -504,7 +504,7 @@ namespace gui
 
       // Store references to stuff that's been ejected from the cache,
       // to avoid wasting memory by loading it again.
-      typedef std::pair<screenshot_key, boost::weak_ptr<screenshot_cache_entry> > weak_screenshot_pair;
+      typedef std::pair<screenshot_key, std::weak_ptr<screenshot_cache_entry> > weak_screenshot_pair;
       typedef multi_index_container<
 	weak_screenshot_pair,
 	indexed_by<
@@ -519,7 +519,7 @@ namespace gui
       /** \brief Retrieve the given screenshot from the weak cache, or
        *  an invalid pointer if it expired or isn't present.
        */
-      static boost::shared_ptr<screenshot_cache_entry> get_from_weak_cache(const screenshot_key &key)
+      static std::shared_ptr<screenshot_cache_entry> get_from_weak_cache(const screenshot_key &key)
       {
 	weak_cache_map::iterator found =
 	  weak_cache.find(key);
@@ -528,11 +528,11 @@ namespace gui
 	  {
 	    LOG_TRACE(Loggers::getAptitudeGtkScreenshotCache(),
 		      "No entry for " << key << " in the weak screenshot cache.");
-	    return boost::shared_ptr<screenshot_cache_entry>();
+	    return std::shared_ptr<screenshot_cache_entry>();
 	  }
 	else
 	  {
-	    boost::shared_ptr<screenshot_cache_entry> rval(found->second.lock());
+	    std::shared_ptr<screenshot_cache_entry> rval(found->second.lock());
 
 	    if(rval.get() == NULL)
 	      {
@@ -550,7 +550,7 @@ namespace gui
        *
        *  Existing entries are silently overwritten.
        */
-      static void add_to_weak_cache(const boost::shared_ptr<screenshot_cache_entry> &entry)
+      static void add_to_weak_cache(const std::shared_ptr<screenshot_cache_entry> &entry)
       {
 	LOG_TRACE(Loggers::getAptitudeGtkScreenshotCache(),
 		  "Adding " << entry->get_key()
@@ -605,7 +605,7 @@ namespace gui
 	      }
 	    else
 	      {
-		boost::shared_ptr<screenshot_cache_entry> victim =
+		std::shared_ptr<screenshot_cache_entry> victim =
 		  ordered.front();
 
 		LOG_INFO(Loggers::getAptitudeGtkScreenshotCache(),
@@ -621,7 +621,7 @@ namespace gui
       }
 
       // Update the cache's stored knowledge of the entry's size.
-      static void update_entry_size(const boost::shared_ptr<screenshot_cache_entry> &entry,
+      static void update_entry_size(const std::shared_ptr<screenshot_cache_entry> &entry,
 				    int new_size)
       {
 	const int new_cache_size = cache_size - entry->get_size() + new_size;
@@ -644,18 +644,18 @@ namespace gui
 	update_cache_size(new_cache_size);
       }
 
-      static void screenshot_size_computed(const boost::weak_ptr<screenshot_cache_entry> &entryWeak)
+      static void screenshot_size_computed(const std::weak_ptr<screenshot_cache_entry> &entryWeak)
       {
-	boost::shared_ptr<screenshot_cache_entry> entry(entryWeak.lock());
+	std::shared_ptr<screenshot_cache_entry> entry(entryWeak.lock());
 
 	if(entry.get() != NULL)
 	  update_entry_size(entry, get_entry_size(*entry));
       }
 
       static void download_failed(const std::string &msg,
-				  const boost::weak_ptr<screenshot_cache_entry> &entryWeak)
+				  const std::weak_ptr<screenshot_cache_entry> &entryWeak)
       {
-	boost::shared_ptr<screenshot_cache_entry> entry(entryWeak.lock());
+	std::shared_ptr<screenshot_cache_entry> entry(entryWeak.lock());
 
 	if(entry.get() != NULL)
 	  {
@@ -685,7 +685,7 @@ namespace gui
 	  }
       }
 
-      static void add_entry(const boost::shared_ptr<screenshot_cache_entry> &entry)
+      static void add_entry(const std::shared_ptr<screenshot_cache_entry> &entry)
       {
 	LOG_INFO(Loggers::getAptitudeGtkScreenshotCache(),
 		 "Adding " << entry->get_key() << " to the cache ("
@@ -722,11 +722,11 @@ namespace gui
       }
 
     public:
-      static boost::shared_ptr<screenshot_cache_entry>
+      static std::shared_ptr<screenshot_cache_entry>
       find(const screenshot_key &key)
       {
-	boost::shared_ptr<screenshot_cache_entry> rval =
-	  boost::make_shared<screenshot_cache_entry>(key);
+	std::shared_ptr<screenshot_cache_entry> rval =
+	  std::make_shared<screenshot_cache_entry>(key);
 
 	LOG_TRACE(Loggers::getAptitudeGtkScreenshotCache(),
 		  "Looking for " << rval->get_key()
@@ -741,7 +741,7 @@ namespace gui
 		      "Returning an existing screenshot cache entry for " << rval->get_key());
 
 	    // Save a strong pointer, for paranoia's sake.
-	    boost::shared_ptr<screenshot_cache_entry> rval(*found);
+	    std::shared_ptr<screenshot_cache_entry> rval(*found);
 
 	    // Move the screenshot to the end of the
 	    // least-recently-used list.
@@ -755,7 +755,7 @@ namespace gui
 	else
 	  {
 	    // Check the weak cache.
-	    boost::shared_ptr<screenshot_cache_entry>
+	    std::shared_ptr<screenshot_cache_entry>
 	      rval_from_weak_cache = get_from_weak_cache(key);
 	    if(rval_from_weak_cache.get() != NULL)
 	      {
@@ -780,7 +780,7 @@ namespace gui
 
 	    add_entry(rval);
 
-	    boost::weak_ptr<screenshot_cache_entry> rvalWeak(rval);
+	    std::weak_ptr<screenshot_cache_entry> rvalWeak(rval);
 
 	    rval->get_signal_failed().connect(sigc::bind(sigc::ptr_fun(&screenshot_cache::download_failed),
 							 rvalWeak));
@@ -797,7 +797,7 @@ namespace gui
 	  }
       }
 
-      static void canceled(const boost::shared_ptr<screenshot_cache_entry> &entry)
+      static void canceled(const std::shared_ptr<screenshot_cache_entry> &entry)
       {
 	by_screenshot_index &by_screenshot(cache.get<by_screenshot_tag>());
 
@@ -828,7 +828,7 @@ namespace gui
 
     // Used to avoid accessing the signal, even to make_slot(), from a
     // background thread.
-    void emit_failed(const boost::shared_ptr<screenshot_cache_entry> &job,
+    void emit_failed(const std::shared_ptr<screenshot_cache_entry> &job,
 		     const std::string &msg)
     {
       job->get_signal_failed()(msg);
@@ -869,7 +869,7 @@ namespace gui
   {
   }
 
-  boost::shared_ptr<cached_screenshot> get_screenshot(const screenshot_key &key)
+  std::shared_ptr<cached_screenshot> get_screenshot(const screenshot_key &key)
   {
     return screenshot_cache::find(key);
   }

@@ -20,11 +20,11 @@
 #ifndef APTITUDE_GTK_VIEW_IMPLS_SEARCH_INPUT_ENTRY_H
 #define APTITUDE_GTK_VIEW_IMPLS_SEARCH_INPUT_ENTRY_H
 
-#include <boost/shared_ptr.hpp>
-
 #include <gtkmm/button.h>
 #include <gtkmm/entry.h>
 #include <gtkmm/label.h>
+
+#include <memory>
 
 namespace aptitude
 {
@@ -45,7 +45,7 @@ namespace gui
      *  \param error_label                The label in which to display error messages.
      *  \param find_button                A button that the user can use to perform a search.
      */
-    boost::shared_ptr<aptitude::views::search_input>
+    std::shared_ptr<aptitude::views::search_input>
     create_search_input_entry(Gtk::Entry *search_entry,
                               Gtk::Label *error_label,
                               Gtk::Button *find_button);

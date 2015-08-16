@@ -23,9 +23,9 @@
 
 #include "model.h"
 
-#include <boost/shared_ptr.hpp>
-
 #include <sigc++/slot.h>
+
+#include <memory>
 
 namespace Gtk
 {
@@ -57,7 +57,7 @@ namespace gui
        *  \return the currently displayed tab, or \b NULL if no tab is
        *  being displayed.
        */
-      virtual boost::shared_ptr<tab_display_info> get_active_tab() = 0;
+      virtual std::shared_ptr<tab_display_info> get_active_tab() = 0;
 
       /** \brief Register a slot to be invoked when the currently
        *  displayed tab changes.
@@ -65,7 +65,7 @@ namespace gui
        *  The tab_info passed to the slot is the newly active tab, or
        *  \b NULL if no tab is being shown now.
        */
-      virtual sigc::connection connect_active_tab_changed(const sigc::slot<void, boost::shared_ptr<tab_display_info> > &slot) = 0;
+      virtual sigc::connection connect_active_tab_changed(const sigc::slot<void, std::shared_ptr<tab_display_info> > &slot) = 0;
     };
   }
 }

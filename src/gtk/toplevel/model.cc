@@ -23,13 +23,11 @@
 
 #include <cwidget/generic/util/bool_accumulate.h>
 
-#include <boost/enable_shared_from_this.hpp>
-#include <boost/make_shared.hpp>
-#include <boost/weak_ptr.hpp>
-
 #include <generic/util/dynamic_set_impl.h>
 
 #include <gtkmm/window.h>
+
+#include <memory>
 
 using aptitude::Loggers;
 using aptitude::util::dynamic_set;
@@ -49,12 +47,12 @@ namespace gui
 
 
     /** \brief Implements the static area list. */
-    class area_list_impl : public area_list, public boost::enable_shared_from_this<area_list_impl>
+    class area_list_impl : public area_list, public std::enable_shared_from_this<area_list_impl>
     {
-      std::vector<boost::shared_ptr<area_info> > areas;
+      std::vector<std::shared_ptr<area_info> > areas;
 
     public:
-      area_list_impl(const std::vector<boost::shared_ptr<area_info> > &_areas)
+      area_list_impl(const std::vector<std::shared_ptr<area_info> > &_areas)
         : areas(_areas)
       {
       }
@@ -64,45 +62,45 @@ namespace gui
         return static_cast<int>(areas.size());
       }
 
-      typedef enumerator<boost::shared_ptr<area_info> >
+      typedef enumerator<std::shared_ptr<area_info> >
       area_enumerator;
 
-      boost::shared_ptr<area_enumerator> get_areas();
+      std::shared_ptr<area_enumerator> get_areas();
     };
 
-    boost::shared_ptr<area_list_impl::area_enumerator>
+    std::shared_ptr<area_list_impl::area_enumerator>
     area_list_impl::get_areas()
     {
       typedef iterator_enumerator_with_keepalive<std::vector<
-      boost::shared_ptr<area_info> >::const_iterator, area_list_impl>
+      std::shared_ptr<area_info> >::const_iterator, area_list_impl>
         real_area_enumerator;
 
-      return boost::make_shared<real_area_enumerator>(areas.begin(), areas.end(), shared_from_this());
+      return std::make_shared<real_area_enumerator>(areas.begin(), areas.end(), shared_from_this());
     }
 
 
-    boost::shared_ptr<area_list> create_area_list(const std::vector<boost::shared_ptr<area_info> > &areas)
+    std::shared_ptr<area_list> create_area_list(const std::vector<std::shared_ptr<area_info> > &areas)
     {
-      return boost::make_shared<area_list_impl>(areas);
+      return std::make_shared<area_list_impl>(areas);
     }
 
-    class area_info_impl : public area_info, public boost::enable_shared_from_this<area_info_impl>
+    class area_info_impl : public area_info, public std::enable_shared_from_this<area_info_impl>
     {
       std::string name;
       std::string description;
       Glib::RefPtr<Gdk::Pixbuf> icon;
 
-      typedef dynamic_set_impl<boost::shared_ptr<tab_info> > tabs_set_impl;
-      typedef dynamic_set_impl<boost::shared_ptr<notification_info> > notifications_set_impl;
+      typedef dynamic_set_impl<std::shared_ptr<tab_info> > tabs_set_impl;
+      typedef dynamic_set_impl<std::shared_ptr<notification_info> > notifications_set_impl;
 
       // We need to write to the tab set so that we can remove each tab
       // from this area when it's closed.
-      typedef writable_dynamic_set<boost::shared_ptr<tab_info> > writable_tabs_set;
+      typedef writable_dynamic_set<std::shared_ptr<tab_info> > writable_tabs_set;
 
-      boost::shared_ptr<writable_tabs_set> tabs;
-      boost::shared_ptr<notifications_set> notifications;
+      std::shared_ptr<writable_tabs_set> tabs;
+      std::shared_ptr<notifications_set> notifications;
 
-      void tab_inserted(const boost::shared_ptr<tab_info> &tab)
+      void tab_inserted(const std::shared_ptr<tab_info> &tab)
       {
         // Arrange for the tab to be dropped from the set when it's
         // closed.
@@ -111,12 +109,12 @@ namespace gui
         tab->set_parent_area(shared_from_this());
       }
 
-      void tab_removed(const boost::shared_ptr<tab_info> &tab)
+      void tab_removed(const std::shared_ptr<tab_info> &tab)
       {
-        tab->set_parent_area(boost::shared_ptr<area_info>());
+        tab->set_parent_area(std::shared_ptr<area_info>());
       }
 
-      void tab_closed(const boost::shared_ptr<tab_info> &tab)
+      void tab_closed(const std::shared_ptr<tab_info> &tab)
       {
         tabs->remove(tab);
       }
@@ -141,19 +139,19 @@ namespace gui
       std::string get_name() { return name; }
       std::string get_description() { return description; }
       Glib::RefPtr<Gdk::Pixbuf> get_icon() { return icon; }
-      boost::shared_ptr<tabs_set> get_tabs() { return tabs; }
-      boost::shared_ptr<notifications_set> get_notifications() { return notifications; }
+      std::shared_ptr<tabs_set> get_tabs() { return tabs; }
+      std::shared_ptr<notifications_set> get_notifications() { return notifications; }
     };
 
-    boost::shared_ptr<area_info> create_area_info(const std::string &name,
+    std::shared_ptr<area_info> create_area_info(const std::string &name,
                                                   const std::string &description,
                                                   const Glib::RefPtr<Gdk::Pixbuf> &icon)
     {
-      return boost::make_shared<area_info_impl>(name, description, icon);
+      return std::make_shared<area_info_impl>(name, description, icon);
     }
 
     class tab_info_impl : public tab_info,
-                          public boost::enable_shared_from_this<tab_info_impl>
+                          public std::enable_shared_from_this<tab_info_impl>
     {
       std::string name;
       Glib::RefPtr<Gdk::Pixbuf> icon;
@@ -167,14 +165,14 @@ namespace gui
 
       bool active;
 
-      boost::weak_ptr<area_info> parent_area_weak;
+      std::weak_ptr<area_info> parent_area_weak;
 
-      sigc::signal<void, boost::shared_ptr<tab_info>, std::string, Gtk::Window *> signal_tooltip_changed;
-      sigc::signal<void, boost::shared_ptr<tab_info>, aptitude::util::progress_info> signal_progress_changed;
-      sigc::signal<void, boost::shared_ptr<tab_info> > signal_activate_tab;
+      sigc::signal<void, std::shared_ptr<tab_info>, std::string, Gtk::Window *> signal_tooltip_changed;
+      sigc::signal<void, std::shared_ptr<tab_info>, aptitude::util::progress_info> signal_progress_changed;
+      sigc::signal<void, std::shared_ptr<tab_info> > signal_activate_tab;
       sigc::signal<void, bool> signal_active_changed;
       sigc::signal<bool>::accumulated<cwidget::util::accumulate_and> signal_request_close;
-      sigc::signal<void, boost::shared_ptr<tab_info> > signal_closed;
+      sigc::signal<void, std::shared_ptr<tab_info> > signal_closed;
 
     public:
       tab_info_impl(const std::string &_name,
@@ -194,7 +192,7 @@ namespace gui
         delete tooltip_window;
       }
 
-      void set_parent_area(const boost::shared_ptr<area_info> &parent_area)
+      void set_parent_area(const std::shared_ptr<area_info> &parent_area)
       {
         if(parent_area_weak.lock().get() != NULL &&
            parent_area.get() != NULL)
@@ -204,9 +202,9 @@ namespace gui
           parent_area_weak = parent_area;
       }
 
-      void add_sibling(const boost::shared_ptr<tab_info> &sibling)
+      void add_sibling(const std::shared_ptr<tab_info> &sibling)
       {
-        boost::shared_ptr<area_info> parent_area = parent_area_weak.lock();
+        std::shared_ptr<area_info> parent_area = parent_area_weak.lock();
 
         if(parent_area.get() != NULL)
           parent_area->get_tabs()->insert(sibling);
@@ -226,7 +224,7 @@ namespace gui
 
       void set_tooltip(const std::string &new_tooltip_text)
       {
-        const boost::shared_ptr<tab_info> this_ptr = shared_from_this();
+        const std::shared_ptr<tab_info> this_ptr = shared_from_this();
 
         delete tooltip_window;
         tooltip_window = NULL;
@@ -237,7 +235,7 @@ namespace gui
 
       void set_tooltip(Gtk::Window *new_tooltip_window)
       {
-        const boost::shared_ptr<tab_info> this_ptr = shared_from_this();
+        const std::shared_ptr<tab_info> this_ptr = shared_from_this();
 
         tooltip_text.clear();
 
@@ -253,7 +251,7 @@ namespace gui
 
       void set_progress(const progress_info &info)
       {
-        const boost::shared_ptr<tab_info> this_ptr = shared_from_this();
+        const std::shared_ptr<tab_info> this_ptr = shared_from_this();
 
         progress = info;
         signal_progress_changed(this_ptr, progress);
@@ -273,7 +271,7 @@ namespace gui
       }
 
       sigc::connection
-      connect_tooltip_changed(const sigc::slot<void, boost::shared_ptr<tab_info>,
+      connect_tooltip_changed(const sigc::slot<void, std::shared_ptr<tab_info>,
                               std::string, Gtk::Window *> &
                               slot)
       {
@@ -282,7 +280,7 @@ namespace gui
 
       sigc::connection
       connect_progress_changed(const sigc::slot<void,
-                               boost::shared_ptr<tab_info>,
+                               std::shared_ptr<tab_info>,
                                aptitude::util::progress_info> &
                                slot)
       {
@@ -290,13 +288,13 @@ namespace gui
       }
 
       sigc::connection
-      connect_activate_tab(const sigc::slot<void, boost::shared_ptr<tab_info> > &
+      connect_activate_tab(const sigc::slot<void, std::shared_ptr<tab_info> > &
                            slot)
       {
         return signal_activate_tab.connect(slot);
       }
 
-      sigc::connection connect_closed(const sigc::slot<void, boost::shared_ptr<tab_info> > &slot)
+      sigc::connection connect_closed(const sigc::slot<void, std::shared_ptr<tab_info> > &slot)
       {
         return signal_closed.connect(slot);
       }
@@ -316,7 +314,7 @@ namespace gui
 
       void activate()
       {
-        const boost::shared_ptr<tab_info> this_ptr = shared_from_this();
+        const std::shared_ptr<tab_info> this_ptr = shared_from_this();
         signal_activate_tab(this_ptr);
       }
 
@@ -330,17 +328,17 @@ namespace gui
       {
         // Give the pointer an explicit scope to avoid surprises in case
         // it ends up being the last reference.
-        const boost::shared_ptr<tab_info> this_ptr = shared_from_this();
+        const std::shared_ptr<tab_info> this_ptr = shared_from_this();
 
         signal_closed(this_ptr);
       }
     };
 
-    boost::shared_ptr<tab_info> create_tab(const std::string &name,
+    std::shared_ptr<tab_info> create_tab(const std::string &name,
                                            const Glib::RefPtr<Gdk::Pixbuf> &icon,
                                            Gtk::Widget *widget)
     {
-      return boost::make_shared<tab_info_impl>(name, icon, widget);
+      return std::make_shared<tab_info_impl>(name, icon, widget);
     }
 
     class notification_info_impl : public notification_info
@@ -389,12 +387,12 @@ namespace gui
       }
     };
 
-    boost::shared_ptr<notification_info>
+    std::shared_ptr<notification_info>
     create_notification(const std::string &name,
                         const std::string &description,
                         const Glib::RefPtr<Gdk::Pixbuf> &icon)
     {
-      return boost::make_shared<notification_info_impl>(name,
+      return std::make_shared<notification_info_impl>(name,
                                                         description,
                                                         icon);
     }

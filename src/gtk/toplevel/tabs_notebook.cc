@@ -24,10 +24,9 @@
 #include <loggers.h>
 #include <gtk/util/property.h>
 
-#include <boost/make_shared.hpp>
-#include <boost/weak_ptr.hpp>
-
 #include <gtkmm.h>
+
+#include <memory>
 
 using aptitude::Loggers;
 using aptitude::util::dynamic_set;
@@ -39,7 +38,7 @@ namespace gui
   {
     namespace
     {
-      std::string safe_get_name(const boost::shared_ptr<tab_display_info> &tab)
+      std::string safe_get_name(const std::shared_ptr<tab_display_info> &tab)
       {
         if(tab.get() == NULL)
           return "(null)";
@@ -50,7 +49,7 @@ namespace gui
       // This property is attached to the widget stored in each tab,
       // to allow it to be traced back to the corresponding
       // tab_display_info object.
-      property<boost::weak_ptr<tab_display_info> > tab_property("aptitude-tabs-notebook-tab-info");
+      property<std::weak_ptr<tab_display_info> > tab_property("aptitude-tabs-notebook-tab-info");
 
       // \note I'd like to find a way to hide the fact that this is a
       // Notebook; right now a savvy client could use a legal downcast
@@ -61,13 +60,13 @@ namespace gui
       // affect layout?  Unsure).
       class tabs_notebook : public Gtk::Notebook
       {
-        boost::shared_ptr<dynamic_set<boost::shared_ptr<tab_display_info> > > tabs;
+        std::shared_ptr<dynamic_set<std::shared_ptr<tab_display_info> > > tabs;
         logging::LoggerPtr logger;
         // Used to know which page we're switching away from when we
         // switch.
-        boost::shared_ptr<tab_display_info> last_active_tab;
+        std::shared_ptr<tab_display_info> last_active_tab;
 
-        sigc::signal<void, boost::shared_ptr<tab_display_info> > signal_active_tab_changed;
+        sigc::signal<void, std::shared_ptr<tab_display_info> > signal_active_tab_changed;
 
       public:
         tabs_notebook();
@@ -76,24 +75,24 @@ namespace gui
          *  displayed tab changes.
          */
         sigc::connection
-        connect_active_tab_changed(const sigc::slot<void, boost::shared_ptr<tab_display_info> > &slot);
+        connect_active_tab_changed(const sigc::slot<void, std::shared_ptr<tab_display_info> > &slot);
 
         /** \brief Set the tabs shown by this tab object.
          *
          *  Closes all the tabs currently displayed, then adds the new
          *  ones.
          */
-        void set_tabs(const boost::shared_ptr<dynamic_set<boost::shared_ptr<tab_display_info> > > &tabs);
+        void set_tabs(const std::shared_ptr<dynamic_set<std::shared_ptr<tab_display_info> > > &tabs);
 
         /** \brief Get the tab of the currently selected page, or NULL
          *  if nothing is selected (or if the selected page has no
          *  tab, but that should be impossible).
          */
-        boost::shared_ptr<tab_display_info> get_current_tab();
+        std::shared_ptr<tab_display_info> get_current_tab();
 
       private:
-        void handle_inserted(const boost::shared_ptr<tab_display_info> &tab);
-        void handle_removed(const boost::shared_ptr<tab_display_info> &tab);
+        void handle_inserted(const std::shared_ptr<tab_display_info> &tab);
+        void handle_removed(const std::shared_ptr<tab_display_info> &tab);
         void handle_switch_page(GtkNotebookPage *page,
                                 guint page_num);
       };
@@ -105,7 +104,7 @@ namespace gui
                                                    &tabs_notebook::handle_switch_page));
       }
 
-      void tabs_notebook::set_tabs(const boost::shared_ptr<dynamic_set<boost::shared_ptr<tab_display_info> > > &new_tabs)
+      void tabs_notebook::set_tabs(const std::shared_ptr<dynamic_set<std::shared_ptr<tab_display_info> > > &new_tabs)
       {
         LOG_TRACE(logger, "Attaching to the tabs set at " << new_tabs
                   << " with " << new_tabs->size() << " initial entries.");
@@ -120,12 +119,12 @@ namespace gui
             // it actually causes the tab to be removed from the set, and
             // that doing so triggers this object's removed() routine.
 
-            std::vector<boost::shared_ptr<tab_display_info> > tabs_copy;
-            for(boost::shared_ptr<enumerator<boost::shared_ptr<tab_display_info> > > e
+            std::vector<std::shared_ptr<tab_display_info> > tabs_copy;
+            for(std::shared_ptr<enumerator<std::shared_ptr<tab_display_info> > > e
                   = tabs->enumerate(); e->advance(); )
               tabs_copy.push_back(e->get_current());
 
-            for(std::vector<boost::shared_ptr<tab_display_info> >::const_iterator it =
+            for(std::vector<std::shared_ptr<tab_display_info> >::const_iterator it =
                   tabs_copy.begin(); it != tabs_copy.end(); ++it)
               (*it)->force_close();
 
@@ -135,10 +134,10 @@ namespace gui
             // remaining tabs.  Any tabs that are left represent a bug in
             // the program.
             tabs_copy.clear();
-            for(boost::shared_ptr<enumerator<boost::shared_ptr<tab_display_info> > > e
+            for(std::shared_ptr<enumerator<std::shared_ptr<tab_display_info> > > e
                   = tabs->enumerate(); e->advance(); )
               {
-                boost::shared_ptr<tab_display_info> tab = e->get_current();
+                std::shared_ptr<tab_display_info> tab = e->get_current();
 
                 if(tab.get() == NULL)
                   {
@@ -163,7 +162,7 @@ namespace gui
 
         // Now inject the new tabs:
         tabs = new_tabs;
-        for(boost::shared_ptr<enumerator<boost::shared_ptr<tab_display_info> > > e = tabs->enumerate();
+        for(std::shared_ptr<enumerator<std::shared_ptr<tab_display_info> > > e = tabs->enumerate();
             e->advance(); )
           handle_inserted(e->get_current());
 
@@ -174,7 +173,7 @@ namespace gui
                                             &tabs_notebook::handle_removed));
       }
 
-      void tabs_notebook::handle_inserted(const boost::shared_ptr<tab_display_info> &tab)
+      void tabs_notebook::handle_inserted(const std::shared_ptr<tab_display_info> &tab)
       {
         if(tab.get() == NULL)
           {
@@ -194,7 +193,7 @@ namespace gui
             return;
           }
 
-        boost::weak_ptr<tab_display_info> tab_weak(tab);
+        std::weak_ptr<tab_display_info> tab_weak(tab);
 
         // Backlink the widget to its tab, and start listening for
         // signals on the tab.  Note that the backlink must be weak,
@@ -204,7 +203,7 @@ namespace gui
         append_page(*manage(tab->get_widget()));
       }
 
-      void tabs_notebook::handle_removed(const boost::shared_ptr<tab_display_info> &tab)
+      void tabs_notebook::handle_removed(const std::shared_ptr<tab_display_info> &tab)
       {
         if(tab.get() == NULL)
           {
@@ -229,11 +228,11 @@ namespace gui
           last_active_tab->set_active(true);
       }
 
-      boost::shared_ptr<tab_display_info> tabs_notebook::get_current_tab()
+      std::shared_ptr<tab_display_info> tabs_notebook::get_current_tab()
       {
         int page = get_current_page();
         if(page == -1)
-          return boost::shared_ptr<tab_display_info>();
+          return std::shared_ptr<tab_display_info>();
         else
           {
             Gtk::Widget * const widget = get_nth_page(page);
@@ -243,13 +242,13 @@ namespace gui
                 LOG_ERROR(logger,
                           "Page " << page <<
                           " has no associated widget.");
-                return boost::shared_ptr<tab_display_info>();
+                return std::shared_ptr<tab_display_info>();
               }
             else
               {
-                boost::shared_ptr<tab_display_info> rval =
+                std::shared_ptr<tab_display_info> rval =
                   tab_property.get_from(widget,
-                                        boost::weak_ptr<tab_display_info>()).lock();
+                                        std::weak_ptr<tab_display_info>()).lock();
 
                 if(rval.get() == NULL)
                   LOG_ERROR(logger,
@@ -264,7 +263,7 @@ namespace gui
       void tabs_notebook::handle_switch_page(GtkNotebookPage *page,
                                              guint page_num)
       {
-        boost::shared_ptr<tab_display_info> new_tab = get_current_tab();
+        std::shared_ptr<tab_display_info> new_tab = get_current_tab();
         LOG_TRACE(logger, "Switching from "
                   << safe_get_name(last_active_tab) << "("
                   << last_active_tab << ") to "
@@ -280,7 +279,7 @@ namespace gui
       }
 
       sigc::connection
-      tabs_notebook::connect_active_tab_changed(const sigc::slot<void, boost::shared_ptr<tab_display_info> > &slot)
+      tabs_notebook::connect_active_tab_changed(const sigc::slot<void, std::shared_ptr<tab_display_info> > &slot)
       {
         return signal_active_tab_changed.connect(slot);
       }
@@ -299,20 +298,20 @@ namespace gui
       }
 
       Gtk::Widget *get_widget() { return notebook; }
-      boost::shared_ptr<tab_display_info> get_active_tab() { return notebook->get_current_tab(); }
+      std::shared_ptr<tab_display_info> get_active_tab() { return notebook->get_current_tab(); }
       sigc::connection
-      connect_active_tab_changed(const sigc::slot<void, boost::shared_ptr<tab_display_info> > &slot)
+      connect_active_tab_changed(const sigc::slot<void, std::shared_ptr<tab_display_info> > &slot)
       {
         return notebook->connect_active_tab_changed(slot);
       }
     };
 
-    boost::shared_ptr<view>
-    create_tabs_notebook(const boost::shared_ptr<dynamic_set<boost::shared_ptr<tab_display_info> > > &tabs)
+    std::shared_ptr<view>
+    create_tabs_notebook(const std::shared_ptr<dynamic_set<std::shared_ptr<tab_display_info> > > &tabs)
     {
       tabs_notebook *rval = new tabs_notebook;
       rval->set_tabs(tabs);
-      return boost::make_shared<tabs_notebook_view>(rval);
+      return std::make_shared<tabs_notebook_view>(rval);
     }
   }
 }

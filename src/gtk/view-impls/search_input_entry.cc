@@ -23,10 +23,9 @@
 
 #include <generic/views/search_input.h>
 
-// System includes:
-#include <boost/make_shared.hpp>
-
 #include <cwidget/generic/util/transcode.h>
+
+#include <memory>
 
 using cwidget::util::transcode;
 
@@ -59,7 +58,7 @@ namespace gui
          *
          *  \return The new search input entry view.
          */
-        static boost::shared_ptr<search_input_entry_impl>
+        static std::shared_ptr<search_input_entry_impl>
         create(Gtk::Entry *search_entry,
                Gtk::Label *error_label,
                Gtk::Button *find_button);
@@ -89,14 +88,14 @@ namespace gui
       {
       }
 
-      boost::shared_ptr<search_input_entry_impl>
+      std::shared_ptr<search_input_entry_impl>
       search_input_entry_impl::create(Gtk::Entry *search_entry,
                                       Gtk::Label *error_label,
                                       Gtk::Button *find_button)
       {
-        return boost::make_shared<search_input_entry_impl>(search_entry,
-                                                           error_label,
-                                                           find_button);
+        return std::make_shared<search_input_entry_impl>(search_entry,
+							 error_label,
+							 find_button);
       }
 
       std::wstring search_input_entry_impl::get_search_text()

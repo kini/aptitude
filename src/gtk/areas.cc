@@ -6,9 +6,6 @@
 
 #include <gtk/toplevel/model.h>
 
-#include <boost/make_shared.hpp>
-#include <boost/shared_ptr.hpp>
-
 #include <gtkmm/stock.h>
 
 using gui::toplevel::area_info;
@@ -26,20 +23,20 @@ namespace gui
   {
     class areas_impl : public areas
     {
-      boost::shared_ptr<area_info> upgrade;
-      boost::shared_ptr<area_info> browse;
-      boost::shared_ptr<area_info> search;
-      boost::shared_ptr<area_info> go;
-      boost::shared_ptr<area_info> preferences;
+      std::shared_ptr<area_info> upgrade;
+      std::shared_ptr<area_info> browse;
+      std::shared_ptr<area_info> search;
+      std::shared_ptr<area_info> go;
+      std::shared_ptr<area_info> preferences;
 
-      boost::shared_ptr<area_list> all_areas;
+      std::shared_ptr<area_list> all_areas;
 
       // Handle the wonky protocol for getting a pixbuf from a stock
       // ID.
       static Glib::RefPtr<Gdk::Pixbuf>
       get_stock_icon(const Gtk::BuiltinStockID &stock)
       {
-        boost::shared_ptr<Gtk::Image>
+        std::shared_ptr<Gtk::Image>
           img(new Gtk::Image(stock,
                              Gtk::ICON_SIZE_BUTTON));
 
@@ -47,14 +44,14 @@ namespace gui
       }
 
       // Support constructing all_areas from the rest of the members.
-      static boost::shared_ptr<area_list>
-      make_all_areas(const boost::shared_ptr<area_info> &upgrade,
-                     const boost::shared_ptr<area_info> &browse,
-                     const boost::shared_ptr<area_info> &search,
-                     const boost::shared_ptr<area_info> &go,
-                     const boost::shared_ptr<area_info> &preferences)
+      static std::shared_ptr<area_list>
+      make_all_areas(const std::shared_ptr<area_info> &upgrade,
+                     const std::shared_ptr<area_info> &browse,
+                     const std::shared_ptr<area_info> &search,
+                     const std::shared_ptr<area_info> &go,
+                     const std::shared_ptr<area_info> &preferences)
       {
-        std::vector<boost::shared_ptr<area_info> > all_areas;
+        std::vector<std::shared_ptr<area_info> > all_areas;
 
         all_areas.push_back(upgrade);
         all_areas.push_back(browse);
@@ -87,17 +84,17 @@ namespace gui
       {
       }
 
-      boost::shared_ptr<area_list> get_areas() { return all_areas; }
-      boost::shared_ptr<area_info> get_browse() { return browse; }
-      boost::shared_ptr<area_info> get_go() { return go; }
-      boost::shared_ptr<area_info> get_preferences() { return preferences; }
-      boost::shared_ptr<area_info> get_search() { return search; }
-      boost::shared_ptr<area_info> get_upgrade() { return upgrade; }
+      std::shared_ptr<area_list> get_areas() { return all_areas; }
+      std::shared_ptr<area_info> get_browse() { return browse; }
+      std::shared_ptr<area_info> get_go() { return go; }
+      std::shared_ptr<area_info> get_preferences() { return preferences; }
+      std::shared_ptr<area_info> get_search() { return search; }
+      std::shared_ptr<area_info> get_upgrade() { return upgrade; }
     };
   }
 
-  boost::shared_ptr<areas> create_areas()
+  std::shared_ptr<areas> create_areas()
   {
-    return boost::make_shared<areas_impl>();
+    return std::make_shared<areas_impl>();
   }
 }
