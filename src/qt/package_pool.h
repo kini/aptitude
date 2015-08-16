@@ -20,12 +20,10 @@
 #ifndef APTITUDE_QT_PACKAGE_POOL_H
 #define APTITUDE_QT_PACKAGE_POOL_H
 
-// System includes
-#include <boost/shared_ptr.hpp>
-
 #include <sigc++/connection.h>
 #include <sigc++/slot.h>
 
+#include <memory>
 #include <vector>
 
 namespace aptitude
@@ -35,7 +33,7 @@ namespace aptitude
     namespace qt
     {
       class package;
-      typedef boost::shared_ptr<package> package_ptr;
+      typedef std::shared_ptr<package> package_ptr;
 
       /** \brief A global pool of package objects.
        *

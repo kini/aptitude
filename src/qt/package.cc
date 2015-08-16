@@ -49,7 +49,10 @@ namespace aptitude
     {
       package_ptr package::create(const pkgCache::PkgIterator &pkg)
       {
-	return boost::make_shared<package>(pkg);
+	// friend declaration not working properly, using this as substite --
+	// maybe the constructor should be public
+        struct make_shared_enabler : public package { make_shared_enabler(const pkgCache::PkgIterator &pkg) : package{pkg} {} };
+	return std::make_shared<make_shared_enabler>(pkg);
       }
 
       package::package(const pkgCache::PkgIterator &_pkg)

@@ -35,11 +35,10 @@
 // System includes
 #include <apt-pkg/pkgcache.h>
 
-#include <boost/make_shared.hpp>
 #include <boost/optional.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/utility.hpp>
 
+#include <memory>
 #include <set>
 #include <vector>
 
@@ -57,7 +56,7 @@ namespace aptitude
     namespace qt
     {
       class package;
-      typedef boost::shared_ptr<package> package_ptr;
+      typedef std::shared_ptr<package> package_ptr;
 
       /** \brief An object representing a displayable package.
        *
@@ -69,7 +68,7 @@ namespace aptitude
        */
       class package : boost::noncopyable
       {
-        friend boost::shared_ptr<package> boost::make_shared<package>(const pkgCache::PkgIterator &);
+        friend std::shared_ptr<package> std::make_shared<package>(const pkgCache::PkgIterator &);
 
         const pkgCache::PkgIterator pkg;
         mutable boost::optional<version_ptr> candidate_ver;
