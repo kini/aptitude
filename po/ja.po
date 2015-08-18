@@ -186,7 +186,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2015-08-05 23:02+0200\n"
+"POT-Creation-Date: 2015-08-18 14:34+0200\n"
 "PO-Revision-Date: 2012-11-04 20:55+0900\n"
 "Last-Translator: Kenshi Muto <kmuto@debian.org>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
@@ -2800,7 +2800,7 @@ msgstr "[ ERR] %s"
 msgid "UNSATISFIED"
 msgstr "依存関係未解決"
 
-#: src/dep_item.cc:151 src/reason_fragment.cc:234
+#: src/dep_item.cc:151 src/reason_fragment.cc:241
 msgid "UNAVAILABLE"
 msgstr "入手不可能"
 
@@ -3320,14 +3320,14 @@ msgstr ""
 "\n"
 "ログ完了。\n"
 
-#: src/generic/apt/matching/match.cc:3054
-#: src/generic/apt/matching/match.cc:3171
+#: src/generic/apt/matching/match.cc:3045
+#: src/generic/apt/matching/match.cc:3162
 msgid "Accessing index"
 msgstr "インデックスにアクセスしています"
 
 # * Message used as 'title' for the ui_download_manager.
-#: src/generic/apt/matching/match.cc:3064
-#: src/generic/apt/matching/match.cc:3178
+#: src/generic/apt/matching/match.cc:3055
+#: src/generic/apt/matching/match.cc:3169
 msgid "Filtering packages"
 msgstr "パッケージをふるい分けしています"
 
@@ -5017,7 +5017,7 @@ msgid "%s suggests %s"
 msgstr "%s が %s を提案"
 
 #: src/gtk/resolver.cc:1249 src/solution_fragment.cc:136
-#: src/solution_item.cc:599
+#: src/solution_item.cc:602
 #, c-format
 msgid "%s recommends %s"
 msgstr "%s が %s を推奨"
@@ -6946,12 +6946,12 @@ msgid " (provided by %F)"
 msgstr " (%F で提供)"
 
 # * Example: '%F%s depends on %F'
-#: src/reason_fragment.cc:265
+#: src/reason_fragment.cc:272
 #, c-format
 msgid "%F%s %F %F"
 msgstr "%1$F%2$s %4$F %3$F"
 
-#: src/reason_fragment.cc:314
+#: src/reason_fragment.cc:321
 msgid ""
 "If you select a package, an explanation of its current state will appear in "
 "this space."
@@ -6959,7 +6959,7 @@ msgstr ""
 "パッケージを選択すると、そのパッケージの現在の状態に関する説明がこの欄に表示"
 "されます。"
 
-#: src/reason_fragment.cc:348
+#: src/reason_fragment.cc:355
 msgid ""
 "%B%s%b was installed automatically;  it is being removed because all of the "
 "packages which depend upon it are being removed:"
@@ -6968,17 +6968,17 @@ msgstr ""
 "パッケージがすべて削除予定とされているため、このパッケージも削除が予定されて"
 "います:"
 
-#: src/reason_fragment.cc:352
+#: src/reason_fragment.cc:359
 msgid "%B%s%b will be automatically removed because of dependency errors:"
 msgstr "%B%s%b は、依存関係の間違いのため自動的に削除される予定です:"
 
-#: src/reason_fragment.cc:356
+#: src/reason_fragment.cc:363
 msgid ""
 "%B%s%b will be automatically installed to satisfy the following dependencies:"
 msgstr ""
 "%B%s%b は、以下の依存関係を満たすために自動的にインストールされる予定です:"
 
-#: src/reason_fragment.cc:362 src/reason_fragment.cc:374
+#: src/reason_fragment.cc:369 src/reason_fragment.cc:381
 msgid ""
 "%B%s%b cannot be upgraded now, but if it could be, it would still be held at "
 "version %B%s%b."
@@ -6986,7 +6986,7 @@ msgstr ""
 "%B%s%b は現在更新できません。たとえできたとしても、バージョン %B%s%b で固定さ"
 "れるでしょう。"
 
-#: src/reason_fragment.cc:365
+#: src/reason_fragment.cc:372
 msgid ""
 "%B%s%b will not be upgraded to version %B%s%b, to avoid breaking the "
 "following dependencies:"
@@ -6994,27 +6994,27 @@ msgstr ""
 "%B%s%b はバージョン %B%s%b に更新されません。以下の依存関係を壊すのを防ぐため"
 "です:"
 
-#: src/reason_fragment.cc:377
+#: src/reason_fragment.cc:384
 msgid "%B%s%b is currently installed."
 msgstr "%B%s%b は現在インストールされています。"
 
-#: src/reason_fragment.cc:383
+#: src/reason_fragment.cc:390
 msgid "%B%s%b is not currently installed."
 msgstr "%B%s%b は現在インストールされていません。"
 
-#: src/reason_fragment.cc:391
+#: src/reason_fragment.cc:398
 msgid "Some dependencies of %B%s%b are not satisfied:"
 msgstr "%B%s%b の依存関係のいくつかが満たされていません:"
 
-#: src/reason_fragment.cc:395
+#: src/reason_fragment.cc:402
 msgid "%B%s%b will be downgraded."
 msgstr "%B%s%b がダウングレードされます。"
 
-#: src/reason_fragment.cc:402
+#: src/reason_fragment.cc:409
 msgid "%B%s%b will not be upgraded to the forbidden version %B%s%b."
 msgstr "%B%s%b は、禁止されているバージョン %B%s%b には更新されません。"
 
-#: src/reason_fragment.cc:406
+#: src/reason_fragment.cc:413
 msgid ""
 "%B%s%b could be upgraded to version %B%s%b, but it is being held at version "
 "%B%s%b."
@@ -7022,41 +7022,41 @@ msgstr ""
 "%B%s%b はバージョン %B%s%b に更新可能ですが、バージョン %B%s%b で固定されてい"
 "ます。"
 
-#: src/reason_fragment.cc:413
+#: src/reason_fragment.cc:420
 msgid "%B%s%b will be re-installed."
 msgstr "%B%s%b が再インストールされます。"
 
-#: src/reason_fragment.cc:417
+#: src/reason_fragment.cc:424
 msgid "%B%s%b will be installed."
 msgstr "%B%s%b がインストールされます。"
 
-#: src/reason_fragment.cc:421
+#: src/reason_fragment.cc:428
 msgid "%B%s%b will be removed."
 msgstr "%B%s%b が削除されます。"
 
-#: src/reason_fragment.cc:426
+#: src/reason_fragment.cc:433
 msgid "%B%s%b will be upgraded from version %B%s%b to version %B%s%b."
 msgstr "%B%s%b がバージョン %B%s%b からバージョン %B%s%b に更新されます。"
 
 # TRANSLATION-FIMXE: "partly installed" -> "partially installed"?
-#: src/reason_fragment.cc:433
+#: src/reason_fragment.cc:440
 msgid "%B%s%b is only partly installed; its installation will be completed."
 msgstr ""
 "%B%s%b はまだインストールが完了していません。インストールの完了を試みる予定で"
 "す。"
 
-#: src/reason_fragment.cc:465
+#: src/reason_fragment.cc:472
 msgid ""
 "The following packages depend on %B%s%b and will be broken by its removal:"
 msgstr ""
 "以下のパッケージが %B%s%b に依存しているため、それを削除すると依存関係が壊れ"
 "ます:"
 
-#: src/reason_fragment.cc:468
+#: src/reason_fragment.cc:475
 msgid "The following packages depend on %B%s%b and are broken:"
 msgstr "以下のパッケージが %B%s%b に依存しており、依存関係が壊れています:"
 
-#: src/reason_fragment.cc:475
+#: src/reason_fragment.cc:482
 msgid ""
 "The following packages conflict with %B%s%b and will be broken by its "
 "installation:"
@@ -7064,7 +7064,7 @@ msgstr ""
 "以下のパッケージが %B%s%b と競合しているため、それをインストールすると依存関"
 "係が壊れるでしょう:"
 
-#: src/reason_fragment.cc:508
+#: src/reason_fragment.cc:515
 msgid ""
 "The following packages depend on a version of %B%s%b other than the "
 "currently installed version of %B%s%b, or conflict with the currently "
@@ -7074,7 +7074,7 @@ msgstr ""
 "外のものに依存しているか、または現在インストールされているバージョンと競合し"
 "ています:"
 
-#: src/reason_fragment.cc:512
+#: src/reason_fragment.cc:519
 msgid ""
 "The following packages conflict with %B%s%b, or depend on a version of it "
 "which is not going to be installed."
@@ -7082,11 +7082,11 @@ msgstr ""
 "以下のパッケージは %B%s%b と競合するか、またはその、インストール予定にない"
 "バージョンに依存しています"
 
-#: src/reason_fragment.cc:516
+#: src/reason_fragment.cc:523
 msgid "The following packages conflict with %B%s%b:"
 msgstr "以下のパッケージが %B%s%b と競合しています:"
 
-#: src/reason_fragment.cc:521
+#: src/reason_fragment.cc:528
 msgid ""
 "The following packages depend on a version of %B%s%b other than the "
 "currently installed version of %B%s%b:"
@@ -7094,7 +7094,7 @@ msgstr ""
 "以下のパッケージは、%B%s%b の、現在インストールされているバージョン %B%s%b 以"
 "外のものに依存しています:"
 
-#: src/reason_fragment.cc:525
+#: src/reason_fragment.cc:532
 msgid ""
 "The following packages depend on a version of %B%s%b which is not going to "
 "be installed."
@@ -7102,11 +7102,11 @@ msgstr ""
 "以下のパッケージは、%B%s%b の、インストール予定にないバージョンに依存していま"
 "す。"
 
-#: src/reason_fragment.cc:531
+#: src/reason_fragment.cc:538
 msgid "upgraded"
 msgstr "更新される"
 
-#: src/reason_fragment.cc:531
+#: src/reason_fragment.cc:538
 msgid "downgraded"
 msgstr "ダウングレードされる"
 
@@ -7114,7 +7114,7 @@ msgstr "ダウングレードされる"
 #  factoring out upgraded/downgraded in its two senses
 #  would be a royal pain even if gettext supported it.
 # * 'upgraded' and 'downgraded' are inserted to non-bold %s-s.
-#: src/reason_fragment.cc:537
+#: src/reason_fragment.cc:544
 msgid ""
 "The following packages depend on the currently installed version of %B%s%b "
 "(%B%s%b), or conflict with the version it will be %s to (%B%s%b), and will "
@@ -7125,7 +7125,7 @@ msgstr ""
 "係が壊れます。"
 
 # * 'upgraded' and 'downgraded' are inserted to an non-bold %s.
-#: src/reason_fragment.cc:544
+#: src/reason_fragment.cc:551
 msgid ""
 "The following packages conflict with version %B%s%b of %B%s%b, and will be "
 "broken if it is %s."
@@ -7134,7 +7134,7 @@ msgstr ""
 "依存関係が壊れます。"
 
 # * 'upgraded' and 'downgraded' are inserted to an non-bold %s.
-#: src/reason_fragment.cc:549
+#: src/reason_fragment.cc:556
 msgid ""
 "The following packages depend on version %B%s%b of %B%s%b, and will be "
 "broken if it is %s."
@@ -7245,7 +7245,7 @@ msgstr "%F を更新する [%s (%s) -> %s (%s)]"
 msgid "Downgrade %F [%s (%s) -> %s (%s)]"
 msgstr "%F をダウングレードする [%s (%s) -> %s (%s)]"
 
-#: src/solution_item.cc:603
+#: src/solution_item.cc:606
 #, c-format
 msgid "-> Leave the dependency \"%s recommends %s\" unresolved."
 msgstr "→ 依存関係「%s が %s を推奨」を未解決のままにします。"
