@@ -25,6 +25,8 @@
 
 #include <generic/util/mocks/mock_util.h>
 
+#include <memory>
+
 namespace aptitude
 {
   namespace cmdline
@@ -35,8 +37,7 @@ namespace aptitude
                                       public util::mocks::Mock<download_status_display>
       {
         download_status_display();
-        friend boost::shared_ptr<download_status_display>
-        boost::make_shared<download_status_display>();
+        friend std::shared_ptr<download_status_display> std::make_shared<download_status_display>();
 
         MOCK_FRIENDS();
 

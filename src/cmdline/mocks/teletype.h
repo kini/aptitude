@@ -25,9 +25,10 @@
 
 // System includes:
 #include <boost/algorithm/string.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include <gmock/gmock.h>
+
+#include <memory>
 
 namespace aptitude
 {
@@ -93,26 +94,26 @@ namespace aptitude
       /** \brief Create a default teletype mock specialized to process
        *  the output from the given terminal.
        */
-      boost::shared_ptr<teletype>
-      create_default_teletype(const boost::shared_ptr<terminal_locale> &term_locale,
-                              const boost::shared_ptr<terminal_metrics> &term_metrics,
-                              const boost::shared_ptr<terminal_with_combined_output> &term_output);
+      std::shared_ptr<teletype>
+      create_default_teletype(const std::shared_ptr<terminal_locale> &term_locale,
+                              const std::shared_ptr<terminal_metrics> &term_metrics,
+                              const std::shared_ptr<terminal_with_combined_output> &term_output);
 
       /** \brief Create a strict teletype mock specialized to process
        *  the output from the given terminal.
        */
-      boost::shared_ptr<teletype>
-      create_strict_teletype(const boost::shared_ptr<terminal_locale> &term_locale,
-                             const boost::shared_ptr<terminal_metrics> &term_metrics,
-                             const boost::shared_ptr<terminal_with_combined_output> &term_output);
+      std::shared_ptr<teletype>
+      create_strict_teletype(const std::shared_ptr<terminal_locale> &term_locale,
+                             const std::shared_ptr<terminal_metrics> &term_metrics,
+                             const std::shared_ptr<terminal_with_combined_output> &term_output);
 
       /** \brief Create a nice teletype mock specialized to process
        *  the output from the given terminal.
        */
-      boost::shared_ptr<teletype>
-      create_nice_teletype(const boost::shared_ptr<terminal_locale> &term_locale,
-                           const boost::shared_ptr<terminal_metrics> &term_metrics,
-                           const boost::shared_ptr<terminal_with_combined_output> &term_output);
+      std::shared_ptr<teletype>
+      create_nice_teletype(const std::shared_ptr<terminal_locale> &term_locale,
+                           const std::shared_ptr<terminal_metrics> &term_metrics,
+                           const std::shared_ptr<terminal_with_combined_output> &term_output);
     }
   }
 }

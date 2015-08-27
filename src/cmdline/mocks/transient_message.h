@@ -29,6 +29,8 @@
 // System includes:
 #include <gmock/gmock.h>
 
+#include <memory>
+
 namespace aptitude
 {
   namespace cmdline
@@ -38,8 +40,7 @@ namespace aptitude
       class transient_message : public cmdline::transient_message,
                                 public aptitude::util::mocks::Mock<transient_message>
       {
-        friend boost::shared_ptr<transient_message>
-        boost::make_shared<transient_message>();
+        friend std::shared_ptr<transient_message> std::make_shared<transient_message>();
 
         MOCK_FRIENDS();
 

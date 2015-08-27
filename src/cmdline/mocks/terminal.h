@@ -25,11 +25,9 @@
 
 #include <generic/util/mocks/mock_util.h>
 
-// System includes:
-#include <boost/shared_ptr.hpp>
-#include <boost/make_shared.hpp>
-
 #include <gmock/gmock.h>
+
+#include <memory>
 
 namespace aptitude
 {
@@ -48,8 +46,7 @@ namespace aptitude
       class terminal_output : public aptitude::cmdline::terminal_output,
                               public aptitude::util::mocks::Mock<terminal_output>
       {
-        friend boost::shared_ptr<terminal_output>
-        boost::make_shared<terminal_output>();
+        friend std::shared_ptr<terminal_output> std::make_shared<terminal_output>();
 
         MOCK_FRIENDS();
 
@@ -65,8 +62,7 @@ namespace aptitude
       class terminal_input : public aptitude::cmdline::terminal_input,
                              public aptitude::util::mocks::Mock<terminal_input>
       {
-        friend boost::shared_ptr<terminal_input>
-        boost::make_shared<terminal_input>();
+        friend std::shared_ptr<terminal_input> std::make_shared<terminal_input>();
 
         MOCK_FRIENDS();
 
@@ -79,8 +75,7 @@ namespace aptitude
       class terminal_metrics : public aptitude::cmdline::terminal_metrics,
                                public aptitude::util::mocks::Mock<terminal_metrics>
       {
-        friend boost::shared_ptr<terminal_metrics>
-        boost::make_shared<terminal_metrics>();
+        friend std::shared_ptr<terminal_metrics> std::make_shared<terminal_metrics>();
 
         MOCK_FRIENDS();
 
@@ -98,8 +93,7 @@ namespace aptitude
       class terminal_locale : public aptitude::cmdline::terminal_locale,
                               public aptitude::util::mocks::Mock<terminal_locale>
       {
-        friend boost::shared_ptr<terminal_locale>
-        boost::make_shared<terminal_locale>();
+        friend std::shared_ptr<terminal_locale> std::make_shared<terminal_locale>();
 
         MOCK_FRIENDS();
 
@@ -118,8 +112,7 @@ namespace aptitude
 
         friend class combining_terminal_output;
 
-        friend boost::shared_ptr<terminal_with_combined_output>
-        boost::make_shared<terminal_with_combined_output>();
+        friend std::shared_ptr<terminal_with_combined_output> std::make_shared<terminal_with_combined_output>();
 
         MOCK_FRIENDS();
 
@@ -151,7 +144,7 @@ namespace aptitude
         class impl;
         friend class impl;
 
-        friend boost::shared_ptr<combining_terminal_output>
+        friend std::shared_ptr<combining_terminal_output>
         create_combining_terminal_output();
 
         combining_terminal_output();
@@ -161,13 +154,13 @@ namespace aptitude
         MOCK_METHOD0(output_is_a_terminal, bool());
 
         /** \brief Create a default-style mock. */
-        static boost::shared_ptr<combining_terminal_output> create_default();
+        static std::shared_ptr<combining_terminal_output> create_default();
 
         /** \brief Create a nice mock. */
-        static boost::shared_ptr<combining_terminal_output> create_nice();
+        static std::shared_ptr<combining_terminal_output> create_nice();
 
         /** \brief Create a strict mock. */
-        static boost::shared_ptr<combining_terminal_output> create_strict();
+        static std::shared_ptr<combining_terminal_output> create_strict();
       };
     }
   }
