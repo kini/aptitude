@@ -26,10 +26,6 @@
 #include <sigc++/functors/ptr_fun.h>
 #include <sigc++/functors/mem_fun.h>
 
-#include <boost/make_shared.hpp>
-#include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
-
 #include <apt-pkg/acquire.h>
 #include <apt-pkg/clean.h>
 #include <apt-pkg/configuration.h>
@@ -45,6 +41,7 @@
 #include <fstream>
 #include <sstream>
 #include <utility>
+#include <memory>
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -1228,8 +1225,8 @@ namespace
 
 void install_or_remove_packages()
 {
-  boost::shared_ptr<download_install_manager> m =
-    boost::make_shared<download_install_manager>(false, sigc::ptr_fun(&run_dpkg_with_cwidget_suspended));
+  std::shared_ptr<download_install_manager> m =
+    std::make_shared<download_install_manager>(false, sigc::ptr_fun(&run_dpkg_with_cwidget_suspended));
 
   m->post_forget_new_hook.connect(package_states_changed.make_slot());
 
@@ -1673,9 +1670,9 @@ void do_package_run()
     }
 }
 
-static void lists_autoclean_msg(boost::weak_ptr<download_update_manager> m_weak)
+static void lists_autoclean_msg(std::weak_ptr<download_update_manager> m_weak)
 {
-  boost::shared_ptr<download_update_manager> m(m_weak);
+  std::shared_ptr<download_update_manager> m(m_weak);
 
   if(m.get() == NULL)
     return;
@@ -1690,9 +1687,9 @@ static void lists_autoclean_msg(boost::weak_ptr<download_update_manager> m_weak)
 
 void really_do_update_lists()
 {
-  boost::shared_ptr<download_update_manager> m = boost::make_shared<download_update_manager>();
+  std::shared_ptr<download_update_manager> m = std::make_shared<download_update_manager>();
   m->pre_autoclean_hook.connect(sigc::bind(sigc::ptr_fun(lists_autoclean_msg),
-					   boost::weak_ptr<download_update_manager>(m)));
+					   std::weak_ptr<download_update_manager>(m)));
   m->post_forget_new_hook.connect(package_states_changed.make_slot());
 
   std::pair<download_signal_log *, download_list_ref>
@@ -2051,7 +2048,7 @@ void cwidget_resolver_trampoline(const sigc::slot<void> &f)
 // list, queue up a calculation for it in the background thread.
 static void start_solution_calculation()
 {
-  resman->maybe_start_solution_calculation(boost::make_shared<interactive_continuation>(resman),
+  resman->maybe_start_solution_calculation(std::make_shared<interactive_continuation>(resman),
 					   &cwidget_resolver_trampoline);
 }
 

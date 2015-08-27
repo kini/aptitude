@@ -55,6 +55,7 @@
 
 #include <ctype.h>
 
+#include <memory>
 #include <string>
 
 using namespace std;
@@ -207,7 +208,7 @@ public:
 			    aptitude::why::no_summary,
 			    false,
 			    false,
-                            boost::shared_ptr<why_callbacks>(),
+                            std::shared_ptr<why_callbacks>(),
 			    success));
       }
     catch(...)

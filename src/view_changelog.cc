@@ -48,7 +48,7 @@
 #include <apt-pkg/pkgsystem.h>
 #include <apt-pkg/version.h>
 
-#include <boost/make_shared.hpp>
+#include <memory>
 
 using namespace std;
 
@@ -417,10 +417,10 @@ void view_changelog(pkgCache::VerIterator ver)
       return;
     }
 
-  boost::shared_ptr<changelog_callbacks> callbacks =
-    boost::make_shared<changelog_callbacks>(ver.ParentPkg().Name(),
+  std::shared_ptr<changelog_callbacks> callbacks =
+    std::make_shared<changelog_callbacks>(ver.ParentPkg().Name(),
 					    current_source_ver);
-  boost::shared_ptr<aptitude::apt::changelog_info> info =
+  std::shared_ptr<aptitude::apt::changelog_info> info =
     aptitude::apt::changelog_info::create(ver);
   aptitude::apt::get_changelog(info, callbacks, do_post_thunk);
 }

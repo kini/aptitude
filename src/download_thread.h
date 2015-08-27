@@ -31,7 +31,7 @@
 
 #include <sigc++/slot.h>
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 /** \file download_thread.h
  */
@@ -103,7 +103,7 @@ class download_thread
    *  should join() this thread before deleting it.  (it is also OK
    *  to join() the thread first thing in the object's destructor)
    */
-  boost::shared_ptr<download_manager> m;
+  std::shared_ptr<download_manager> m;
 
   /** The continuation of this download, invoked in the main thread
    *  with this thread and the result of the run as parameters.  The
@@ -117,7 +117,7 @@ class download_thread
   download_thread(const download_thread &other);
   download_thread &operator=(const download_thread &other);
 public:
-  download_thread(const boost::shared_ptr<download_manager> &manager,
+  download_thread(const std::shared_ptr<download_manager> &manager,
 		  post_thunk_func _post_thunk,
 		  const safe_slot2<void, download_thread *, pkgAcquire::RunResult> &_continuation)
     : cancelled(false), post_thunk(_post_thunk),
