@@ -20,8 +20,7 @@
 #ifndef APTITUDE_CMDLINE_PROGRESS_DISPLAY_H
 #define APTITUDE_CMDLINE_PROGRESS_DISPLAY_H
 
-// System includes:
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace aptitude
 {
@@ -48,8 +47,8 @@ namespace aptitude
      *  \param retain_completed If \b true, completed messages will be
      *                          retained instead of being deleted.
      */
-    boost::shared_ptr<views::progress>
-    create_progress_display(const boost::shared_ptr<transient_message> &message,
+    std::shared_ptr<views::progress>
+    create_progress_display(const std::shared_ptr<transient_message> &message,
                             bool old_style_percentage,
                             bool retain_completed);
 
@@ -58,10 +57,10 @@ namespace aptitude
      *  This is a convenience routine, equivalent to creating a new
      *  transient message with the given terminal objects.
      */
-    boost::shared_ptr<views::progress>
-    create_progress_display(const boost::shared_ptr<terminal_locale> &term_locale,
-                            const boost::shared_ptr<terminal_metrics> &term_metrics,
-                            const boost::shared_ptr<terminal_output> &term_output);
+    std::shared_ptr<views::progress>
+    create_progress_display(const std::shared_ptr<terminal_locale> &term_locale,
+                            const std::shared_ptr<terminal_metrics> &term_metrics,
+                            const std::shared_ptr<terminal_output> &term_output);
   }
 }
 

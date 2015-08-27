@@ -21,7 +21,7 @@
 #ifndef APTITUDE_CMDLINE_TRANSIENT_MESSAGE_H
 #define APTITUDE_CMDLINE_TRANSIENT_MESSAGE_H
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace aptitude
 {
@@ -63,10 +63,10 @@ namespace aptitude
      *  \param term_metrics The terminal metrics object to use.
      *  \param term_output  The terminal output object to use.
      */
-    boost::shared_ptr<transient_message>
-    create_transient_message(const boost::shared_ptr<terminal_locale> &term_locale,
-                             const boost::shared_ptr<terminal_metrics> &term_metrics,
-                             const boost::shared_ptr<terminal_output> &term_output);
+    std::shared_ptr<transient_message>
+    create_transient_message(const std::shared_ptr<terminal_locale> &term_locale,
+                             const std::shared_ptr<terminal_metrics> &term_metrics,
+                             const std::shared_ptr<terminal_output> &term_output);
   }
 }
 

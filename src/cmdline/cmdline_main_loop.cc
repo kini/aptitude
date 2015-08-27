@@ -19,12 +19,11 @@
 
 #include "cmdline_main_loop.h"
 
-#include <boost/make_shared.hpp>
-#include <boost/shared_ptr.hpp>
-
 #include <cwidget/generic/threads/threads.h>
 
 #include <generic/util/safe_slot.h>
+
+#include <memory>
 
 namespace aptitude
 {
@@ -34,7 +33,7 @@ namespace aptitude
     {
       class event_loop
       {
-	boost::shared_ptr<cwidget::threads::mutex> running_mutex;
+	std::shared_ptr<cwidget::threads::mutex> running_mutex;
 	bool running;
 
 	bool exited;
@@ -64,7 +63,7 @@ namespace aptitude
 
       public:
 	event_loop()
-	  : running_mutex(boost::make_shared<cwidget::threads::mutex>()),
+	  : running_mutex(std::make_shared<cwidget::threads::mutex>()),
 	    running(false),
 	    exited(false)
 	{

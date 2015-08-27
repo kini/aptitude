@@ -33,6 +33,8 @@
 // System includes:
 #include <apt-pkg/error.h>
 
+#include <memory>
+
 #include <stdio.h>
 
 using namespace std;
@@ -45,7 +47,7 @@ using aptitude::cmdline::terminal_io;
 int cmdline_forget_new(int argc, char *argv[],
 		       const char *status_fname, bool simulate)
 {
-  const boost::shared_ptr<terminal_io> term = create_terminal();
+  const std::shared_ptr<terminal_io> term = create_terminal();
 
   _error->DumpErrors();
 
@@ -57,7 +59,7 @@ int cmdline_forget_new(int argc, char *argv[],
       return -1;
     }  
 
-  boost::shared_ptr<OpProgress> progress = make_text_progress(false, term, term, term);
+  std::shared_ptr<OpProgress> progress = make_text_progress(false, term, term, term);
 
   apt_init(progress.get(), false, status_fname);
 
@@ -97,4 +99,3 @@ int cmdline_forget_new(int argc, char *argv[],
 
   return 0;
 }
-

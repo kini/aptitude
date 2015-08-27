@@ -21,8 +21,7 @@
 #ifndef CMDLINE_SPINNER_H
 #define CMDLINE_SPINNER_H
 
-#include <boost/shared_ptr.hpp>
-
+#include <memory>
 #include <string>
 
 /** \brief A generic spinner (for use with the background resolver)
@@ -49,11 +48,11 @@ class cmdline_spinner
   /** The quietness of this spinner. */
   int quiet_level;
 
-  boost::shared_ptr<aptitude::cmdline::terminal_metrics> term_metrics;
+  std::shared_ptr<aptitude::cmdline::terminal_metrics> term_metrics;
 
 public:
   cmdline_spinner(int _quiet_level,
-                  const boost::shared_ptr<aptitude::cmdline::terminal_metrics> &_term_metrics);
+                  const std::shared_ptr<aptitude::cmdline::terminal_metrics> &_term_metrics);
 
   /** Display the current spinner state, overwriting the current
    *  terminal line.

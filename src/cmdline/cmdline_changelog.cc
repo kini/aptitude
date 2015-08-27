@@ -44,8 +44,6 @@
 #include <apt-pkg/srcrecords.h>
 
 #include <boost/format.hpp>
-#include <boost/make_shared.hpp>
-#include <boost/ref.hpp>
 
 #include <sigc++/adaptors/bind.h>
 
@@ -72,12 +70,12 @@ namespace
   {
     std::string description;
     bool quiet;
-    boost::shared_ptr<terminal_metrics> term_metrics;
+    std::shared_ptr<terminal_metrics> term_metrics;
 
   public:
     single_download_progress(const std::string &_description,
 			     bool _quiet,
-                             const boost::shared_ptr<terminal_metrics> &_term_metrics)
+                             const std::shared_ptr<terminal_metrics> &_term_metrics)
       : description(_description),
         quiet(_quiet),
         term_metrics(_term_metrics)
@@ -152,7 +150,7 @@ namespace
   public:
     changelog_download_callbacks(temp::name &_out_changelog_file,
 				 const std::string &short_description,
-                                 const boost::shared_ptr<terminal_metrics> &term_metrics)
+                                 const std::shared_ptr<terminal_metrics> &term_metrics)
       : single_download_progress(short_description,
 				 aptcfg->FindI("Quiet", 0) > 0,
                                  term_metrics),
@@ -190,14 +188,14 @@ namespace
    *
    *  This routine exits once the download is complete.
    */
-  void get_changelog(const boost::shared_ptr<aptitude::apt::changelog_info>& info,
+  void get_changelog(const std::shared_ptr<aptitude::apt::changelog_info>& info,
 		     temp::name &out_changelog_file,
-		     const boost::shared_ptr<terminal_metrics> &term_metrics)
+		     const std::shared_ptr<terminal_metrics> &term_metrics)
   {
     const std::string short_description = cwidget::util::ssprintf(_("Changelog of %s"), info->get_display_name().c_str());
 
-    boost::shared_ptr<changelog_download_callbacks>
-      callbacks = boost::make_shared<changelog_download_callbacks>(boost::ref(out_changelog_file),
+    std::shared_ptr<changelog_download_callbacks>
+      callbacks = std::make_shared<changelog_download_callbacks>(std::ref(out_changelog_file),
 								   short_description,
                                                                    term_metrics);
 
@@ -216,9 +214,9 @@ namespace
    */
   void get_changelog(const pkgCache::VerIterator &ver,
 		     temp::name &out_changelog_file,
-                     const boost::shared_ptr<terminal_metrics> &term_metrics)
+                     const std::shared_ptr<terminal_metrics> &term_metrics)
   {
-    boost::shared_ptr<aptitude::apt::changelog_info> info =
+    std::shared_ptr<aptitude::apt::changelog_info> info =
       aptitude::apt::changelog_info::create(ver);
 
     get_changelog(info,
@@ -243,9 +241,9 @@ namespace
 				 const std::string &section,
 				 const std::string &name,
 				 temp::name &out_changelog_file,
-                                 const boost::shared_ptr<terminal_metrics> &term_metrics)
+                                 const std::shared_ptr<terminal_metrics> &term_metrics)
   {
-    boost::shared_ptr<aptitude::apt::changelog_info> info =
+    std::shared_ptr<aptitude::apt::changelog_info> info =
       aptitude::apt::changelog_info::create(srcpkg, ver, section, name);
 
     get_changelog(info,
@@ -259,7 +257,7 @@ namespace
  */
 temp::name changelog_by_version(const std::string &pkg,
 				const std::string &ver,
-                                const boost::shared_ptr<terminal_metrics> &term_metrics)
+                                const std::shared_ptr<terminal_metrics> &term_metrics)
 {
   // Try forcing the particular version that was
   // selected, using various sections.  FIXME: relies
@@ -286,7 +284,7 @@ temp::name changelog_by_version(const std::string &pkg,
 }
 
 void do_cmdline_changelog(const vector<string> &packages,
-                          const boost::shared_ptr<terminal_metrics> &term_metrics)
+                          const std::shared_ptr<terminal_metrics> &term_metrics)
 {
   const char *pager="/usr/bin/sensible-pager";
 
@@ -417,7 +415,7 @@ void do_cmdline_changelog(const vector<string> &packages,
 // TODO: fetch them all in one go.
 int cmdline_changelog(int argc, char *argv[])
 {
-  boost::shared_ptr<terminal_io> term = create_terminal();
+  std::shared_ptr<terminal_io> term = create_terminal();
 
   _error->DumpErrors();
 

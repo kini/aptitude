@@ -28,12 +28,12 @@
 
 // System includes:
 
-#include <boost/make_shared.hpp>
-#include <boost/shared_ptr.hpp>
-
 #include <cwidget/generic/util/transcode.h>
 
 #include <iostream>
+#include <memory>
+
+#include <unistd.h>
 
 #include <sys/ioctl.h>
 
@@ -142,9 +142,9 @@ namespace aptitude
     {
     }
 
-    boost::shared_ptr<terminal_io> create_terminal()
+    std::shared_ptr<terminal_io> create_terminal()
     {
-      return boost::make_shared<terminal_impl>();
+      return std::make_shared<terminal_impl>();
     }
   }
 }

@@ -23,9 +23,7 @@
 // Local includes:
 #include "cmdline_common.h"
 
-
-// System includes:
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 
 /** \file cmdline_action.h
@@ -111,7 +109,7 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 			 pkgPolicy &policy,
 			 bool arch_only,
 			 bool allow_auto,
-                         const boost::shared_ptr<aptitude::cmdline::terminal_metrics> &term);
+                         const std::shared_ptr<aptitude::cmdline::terminal_metrics> &term);
 
 /** \brief Apply the given command-line action to the given package,
  *  updating the command-line state appropriately.
@@ -172,7 +170,7 @@ bool cmdline_applyaction(string s,
 			 int verbose,
 			 pkgPolicy &policy, bool arch_only,
 			 bool allow_auto,
-                         const boost::shared_ptr<aptitude::cmdline::terminal_metrics> &term);
+                         const std::shared_ptr<aptitude::cmdline::terminal_metrics> &term);
 
 /** \brief Parses a list of actions and executes them.
  *
@@ -229,6 +227,6 @@ void cmdline_parse_action(string s,
 			  int verbose,
 			  pkgPolicy &policy, bool arch_only,
 			  bool allow_auto,
-                          const boost::shared_ptr<aptitude::cmdline::terminal_metrics> &term);
+                          const std::shared_ptr<aptitude::cmdline::terminal_metrics> &term);
 
 #endif // CMDLINE_ACTION_H

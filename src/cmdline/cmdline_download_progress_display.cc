@@ -32,7 +32,6 @@
 
 #include <boost/algorithm/string/join.hpp>
 #include <boost/format.hpp>
-#include <boost/make_shared.hpp>
 
 #include <cwidget/generic/util/transcode.h>
 
@@ -57,20 +56,20 @@ namespace aptitude
       class download_progress : public views::download_progress
       {
         bool display_messages;
-        boost::shared_ptr<transient_message> message;
-        boost::shared_ptr<download_status_display> status_display;
-        boost::shared_ptr<terminal_input> term_input;
+        std::shared_ptr<transient_message> message;
+        std::shared_ptr<download_status_display> status_display;
+        std::shared_ptr<terminal_input> term_input;
 
         download_progress(bool _display_messages,
-                          const boost::shared_ptr<transient_message> &_message,
-                          const boost::shared_ptr<download_status_display> &_status_display,
-                          const boost::shared_ptr<terminal_input> &_term_input);
+                          const std::shared_ptr<transient_message> &_message,
+                          const std::shared_ptr<download_status_display> &_status_display,
+                          const std::shared_ptr<terminal_input> &_term_input);
 
-        friend boost::shared_ptr<download_progress>
-        boost::make_shared<download_progress>(bool &,
-                                              const boost::shared_ptr<transient_message> &,
-                                              const boost::shared_ptr<download_status_display> &,
-                                              const boost::shared_ptr<terminal_input> &);
+        friend std::shared_ptr<download_progress>
+        std::make_shared<download_progress>(bool &,
+					    const std::shared_ptr<transient_message> &,
+					    const std::shared_ptr<download_status_display> &,
+					    const std::shared_ptr<terminal_input> &);
 
       public:
         bool update_progress(const status &current_status);
@@ -102,12 +101,17 @@ namespace aptitude
         virtual void complete(unsigned long long fetched_bytes,
                               unsigned long long elapsed_time,
                               unsigned long long latest_download_rate);
+
+        static std::shared_ptr<views::download_progress> create(bool _display_messages,
+								const std::shared_ptr<transient_message> &_message,
+								const std::shared_ptr<download_status_display> &_status_display,
+								const std::shared_ptr<terminal_input> &_term_input);
       };
 
       download_progress::download_progress(bool _display_messages,
-                                           const boost::shared_ptr<transient_message> &_message,
-                                           const boost::shared_ptr<download_status_display> &_status_display,
-                                           const boost::shared_ptr<terminal_input> &_term_input)
+                                           const std::shared_ptr<transient_message> &_message,
+                                           const std::shared_ptr<download_status_display> &_status_display,
+                                           const std::shared_ptr<terminal_input> &_term_input)
         : display_messages(_display_messages),
           message(_message),
           status_display(_status_display),
@@ -253,15 +257,34 @@ namespace aptitude
       {
       }
 
+      std::shared_ptr<views::download_progress> download_progress::create(bool _display_messages,
+									  const std::shared_ptr<transient_message> &_message,
+									  const std::shared_ptr<download_status_display> &_status_display,
+									  const std::shared_ptr<terminal_input> &_term_input)
+      {
+	// friend declaration not working properly, using this as substite --
+	// maybe the constructor should be public
+        struct make_shared_enabler : public download_progress {
+	  make_shared_enabler(bool _display_messages,
+			      const std::shared_ptr<transient_message> &_message,
+			      const std::shared_ptr<download_status_display> &_status_display,
+			      const std::shared_ptr<terminal_input> &_term_input) :
+  	    download_progress{_display_messages, _message, _status_display, _term_input} {}
+	};
+	return std::make_shared<make_shared_enabler>(_display_messages, _message, _status_display, _term_input);
+      }
+
       class dummy_status_display : public download_status_display
       {
         dummy_status_display();
 
-        friend boost::shared_ptr<dummy_status_display>
-        boost::make_shared<dummy_status_display>();
+	// does not work with gcc-5
+        friend std::shared_ptr<dummy_status_display>
+        std::make_shared<dummy_status_display>();
 
       public:
         void display_status(const download_progress::status &status);
+        static std::shared_ptr<dummy_status_display> create();
       };
 
       dummy_status_display::dummy_status_display()
@@ -272,32 +295,61 @@ namespace aptitude
       {
       }
 
+      std::shared_ptr<dummy_status_display> dummy_status_display::create()
+      {
+	// friend declaration not working properly, using this as substite --
+	// maybe the constructor should be public
+        struct make_shared_enabler : public dummy_status_display {
+	  make_shared_enabler() : dummy_status_display{} {}
+	};
+	return std::make_shared<make_shared_enabler>();
+      }
+
       class download_status_display_impl : public download_status_display
       {
-        boost::shared_ptr<transient_message> message;
-        boost::shared_ptr<terminal_locale> term_locale;
-        boost::shared_ptr<terminal_metrics> term_metrics;
+        std::shared_ptr<transient_message> message;
+        std::shared_ptr<terminal_locale> term_locale;
+        std::shared_ptr<terminal_metrics> term_metrics;
 
-        download_status_display_impl(const boost::shared_ptr<transient_message> &_message,
-                                     const boost::shared_ptr<terminal_locale> &_term_locale,
-                                     const boost::shared_ptr<terminal_metrics> &_term_metrics);
+        download_status_display_impl(const std::shared_ptr<transient_message> &_message,
+                                     const std::shared_ptr<terminal_locale> &_term_locale,
+                                     const std::shared_ptr<terminal_metrics> &_term_metrics);
 
-        friend boost::shared_ptr<download_status_display_impl>
-        boost::make_shared<download_status_display_impl>(const boost::shared_ptr<transient_message> &,
-                                                         const boost::shared_ptr<terminal_locale> &,
-                                                         const boost::shared_ptr<terminal_metrics> &);
+	// does not work with gcc-5
+        friend std::shared_ptr<download_status_display_impl>
+        std::make_shared<download_status_display_impl>(const std::shared_ptr<transient_message> &,
+						       const std::shared_ptr<terminal_locale> &,
+						       const std::shared_ptr<terminal_metrics> &);
 
       public:
         void display_status(const download_progress::status &status);
+	static std::shared_ptr<download_status_display_impl> create(const std::shared_ptr<transient_message> &_message,
+								    const std::shared_ptr<terminal_locale> &_term_locale,
+								    const std::shared_ptr<terminal_metrics> &_term_metrics);
       };
 
-      download_status_display_impl::download_status_display_impl(const boost::shared_ptr<transient_message> &_message,
-                                                                 const boost::shared_ptr<terminal_locale> &_term_locale,
-                                                                 const boost::shared_ptr<terminal_metrics> &_term_metrics)
+      download_status_display_impl::download_status_display_impl(const std::shared_ptr<transient_message> &_message,
+                                                                 const std::shared_ptr<terminal_locale> &_term_locale,
+                                                                 const std::shared_ptr<terminal_metrics> &_term_metrics)
         : message(_message),
           term_locale(_term_locale),
           term_metrics(_term_metrics)
       {
+      }
+
+      std::shared_ptr<download_status_display_impl> download_status_display_impl::create(const std::shared_ptr<transient_message> &_message,
+											 const std::shared_ptr<terminal_locale> &_term_locale,
+											 const std::shared_ptr<terminal_metrics> &_term_metrics)
+      {
+	// friend declaration not working properly, using this as substite --
+	// maybe the constructor should be public
+        struct make_shared_enabler : public download_status_display_impl {
+	  make_shared_enabler(const std::shared_ptr<transient_message> &_message,
+			      const std::shared_ptr<terminal_locale> &_term_locale,
+			      const std::shared_ptr<terminal_metrics> &_term_metrics) :
+            download_status_display_impl{_message, _term_locale, _term_metrics} {}
+	};
+	return std::make_shared<make_shared_enabler>(_message, _term_locale, _term_metrics);
       }
 
       // \todo This should be generic code:
@@ -394,7 +446,7 @@ namespace aptitude
        */
       void find_column_index(const std::wstring &s,
                              int target_column,
-                             const boost::shared_ptr<terminal_locale> &term_locale,
+                             const std::shared_ptr<terminal_locale> &term_locale,
                              int &result_index,
                              int &result_column)
       {
@@ -530,30 +582,30 @@ namespace aptitude
     {
     }
 
-    boost::shared_ptr<views::download_progress>
-    create_download_progress_display(const boost::shared_ptr<transient_message> &message,
-                                     const boost::shared_ptr<download_status_display> &status_display,
-                                     const boost::shared_ptr<terminal_input> &term_input,
+    std::shared_ptr<views::download_progress>
+    create_download_progress_display(const std::shared_ptr<transient_message> &message,
+                                     const std::shared_ptr<download_status_display> &status_display,
+                                     const std::shared_ptr<terminal_input> &term_input,
                                      bool display_messages)
     {
-      return boost::make_shared<download_progress>(display_messages,
-                                                   message,
-                                                   status_display,
-                                                   term_input);
+      return download_progress::create(display_messages,
+				       message,
+				       status_display,
+				       term_input);
     }
 
-    boost::shared_ptr<download_status_display>
-    create_cmdline_download_status_display(const boost::shared_ptr<transient_message> &message,
-                                           const boost::shared_ptr<terminal_locale> &term_locale,
-                                           const boost::shared_ptr<terminal_metrics> &term_metrics,
+    std::shared_ptr<download_status_display>
+    create_cmdline_download_status_display(const std::shared_ptr<transient_message> &message,
+                                           const std::shared_ptr<terminal_locale> &term_locale,
+                                           const std::shared_ptr<terminal_metrics> &term_metrics,
                                            bool hide_status)
     {
       if(hide_status)
-        return boost::make_shared<dummy_status_display>();
+	return dummy_status_display::create();
       else
-        return boost::make_shared<download_status_display_impl>(message,
-                                                                term_locale,
-                                                                term_metrics);
+	return download_status_display_impl::create(message,
+						    term_locale,
+						    term_metrics);
     }
   }
 }

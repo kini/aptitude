@@ -23,9 +23,7 @@
 // Local includes:
 #include "cmdline_common.h"
 
-
-// System includes:
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 /** \file cmdline_simulate.h
  */
@@ -73,7 +71,7 @@ int cmdline_simulate(bool as_upgrade,
 		     bool always_prompt, int verbose,
 		     bool assume_yes, bool force_no_change,
 		     pkgPolicy &policy, bool arch_only,
-                     const boost::shared_ptr<aptitude::cmdline::terminal_metrics> &term_metrics);
+                     const std::shared_ptr<aptitude::cmdline::terminal_metrics> &term_metrics);
 
 
 #endif // CMDLINE_SIMULATE_H

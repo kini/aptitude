@@ -30,7 +30,7 @@
 using aptitude::cmdline::terminal_metrics;
 
 cmdline_spinner::cmdline_spinner(int _quiet_level,
-                                 const boost::shared_ptr<terminal_metrics> &_term_metrics)
+                                 const std::shared_ptr<terminal_metrics> &_term_metrics)
   : count(0),
     quiet_level(_quiet_level),
     term_metrics(_term_metrics)

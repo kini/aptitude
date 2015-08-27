@@ -46,7 +46,7 @@ int cmdline_simulate(bool as_upgrade,
 		     bool always_prompt, int verbose,
 		     bool assume_yes, bool force_no_change,
 		     pkgPolicy &policy, bool arch_only,
-                     const boost::shared_ptr<terminal_metrics> &term_metrics)
+                     const std::shared_ptr<terminal_metrics> &term_metrics)
 {
   if(!cmdline_do_prompt(as_upgrade,
 			to_install, to_hold, to_remove, to_purge,

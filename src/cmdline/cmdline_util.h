@@ -34,12 +34,11 @@
 // System includes:
 #include <apt-pkg/srcrecords.h>
 
-#include <boost/shared_ptr.hpp>
-
 // Ew: for column_definition_list.
 #include <cwidget/config/column_definition.h>
 #include <cwidget/generic/util/ref_ptr.h>
 
+#include <memory>
 #include <string>
 
 /** \file cmdline_util.h
@@ -57,9 +56,9 @@ namespace aptitude
 }
 
 void cmdline_show_pkglist(pkgvector &items,
-                          const boost::shared_ptr<aptitude::cmdline::terminal_metrics> &term_metrics);
+                          const std::shared_ptr<aptitude::cmdline::terminal_metrics> &term_metrics);
 void cmdline_show_stringlist(strvector &items,
-                             const boost::shared_ptr<aptitude::cmdline::terminal_metrics> &term_metrics);
+                             const std::shared_ptr<aptitude::cmdline::terminal_metrics> &term_metrics);
 
 /** Finds a candidate version for the package using the given source.
  */
@@ -116,10 +115,10 @@ bool cmdline_parse_task(std::string pattern,
  */
 download_manager::result cmdline_do_download(download_manager *m,
 					     int verbose,
-                                             const boost::shared_ptr<aptitude::cmdline::terminal_input> &term_input,
-                                             const boost::shared_ptr<aptitude::cmdline::terminal_locale> &term_locale,
-                                             const boost::shared_ptr<aptitude::cmdline::terminal_metrics> &term_metrics,
-                                             const boost::shared_ptr<aptitude::cmdline::terminal_output> &term_output);
+                                             const std::shared_ptr<aptitude::cmdline::terminal_input> &term_input,
+                                             const std::shared_ptr<aptitude::cmdline::terminal_locale> &term_locale,
+                                             const std::shared_ptr<aptitude::cmdline::terminal_metrics> &term_metrics,
+                                             const std::shared_ptr<aptitude::cmdline::terminal_output> &term_output);
 
 namespace aptitude
 {

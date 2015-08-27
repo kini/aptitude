@@ -112,7 +112,7 @@ void ui_solution_screen()
 }
 
 void cmdline_show_stringlist(strvector &items,
-                             const boost::shared_ptr<terminal_metrics> &term_metrics)
+                             const std::shared_ptr<terminal_metrics> &term_metrics)
 {
   const unsigned int screen_width = term_metrics->get_screen_width();
 
@@ -136,7 +136,7 @@ void cmdline_show_stringlist(strvector &items,
 }
 
 void cmdline_show_pkglist(pkgvector &items,
-                          const boost::shared_ptr<terminal_metrics> &term_metrics)
+                          const std::shared_ptr<terminal_metrics> &term_metrics)
 {
   strvector tmp;
 
@@ -345,7 +345,7 @@ namespace
   void show_stats_change(stats initial, stats final,
 			 bool show_all,
 			 bool show_unchanged,
-                         const boost::shared_ptr<terminal_metrics> &term_metrics)
+                         const std::shared_ptr<terminal_metrics> &term_metrics)
   {
     using cw::fragf;
     using cw::util::ssprintf;
@@ -448,13 +448,13 @@ namespace
 
 download_manager::result cmdline_do_download(download_manager *m,
 					     int verbose,
-                                             const boost::shared_ptr<terminal_input> &term_input,
-                                             const boost::shared_ptr<terminal_locale> &term_locale,
-                                             const boost::shared_ptr<terminal_metrics> &term_metrics,
-                                             const boost::shared_ptr<terminal_output> &term_output)
+                                             const std::shared_ptr<terminal_input> &term_input,
+                                             const std::shared_ptr<terminal_locale> &term_locale,
+                                             const std::shared_ptr<terminal_metrics> &term_metrics,
+                                             const std::shared_ptr<terminal_output> &term_output)
 {
   stats initial_stats(0, 0, 0, std::set<std::string>());
-  boost::shared_ptr<OpProgress> progress = make_text_progress(false, term_locale, term_metrics, term_output);
+  std::shared_ptr<OpProgress> progress = make_text_progress(false, term_locale, term_metrics, term_output);
 
   if(aptcfg->FindI("Quiet", 0) == 0)
     {
@@ -468,7 +468,7 @@ download_manager::result cmdline_do_download(download_manager *m,
       initial_stats = compute_apt_stats();
     }
 
-  std::pair<download_signal_log *, boost::shared_ptr<acquire_download_progress> >
+  std::pair<download_signal_log *, std::shared_ptr<acquire_download_progress> >
     progress_display = create_cmdline_download_progress(term_input,
                                                         term_locale,
                                                         term_metrics,

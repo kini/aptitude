@@ -43,8 +43,6 @@
 #include <apt-pkg/aptconfiguration.h>
 
 #include <boost/format.hpp>
-#include <boost/make_shared.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/unordered_map.hpp>
 
 #include <sigc++/bind.h>
@@ -247,9 +245,9 @@ namespace
                          group_by_option group_by,
                          show_package_names_option show_package_names,
                          bool debug,
-                         const boost::shared_ptr<terminal_locale> &term_locale,
-                         const boost::shared_ptr<terminal_metrics> &term_metrics,
-                         const boost::shared_ptr<terminal_output> &term_output)
+                         const std::shared_ptr<terminal_locale> &term_locale,
+                         const std::shared_ptr<terminal_metrics> &term_metrics,
+                         const std::shared_ptr<terminal_output> &term_output)
   {
     // Set to -1 if any exact-name matches fail.  Also set to -1 if
     // there are no results at all.
@@ -258,9 +256,9 @@ namespace
     typedef std::vector<std::pair<pkgCache::VerIterator, cw::util::ref_ptr<m::structural_match> > >
       results_list;
 
-    const boost::shared_ptr<progress> search_progress_display =
+    const std::shared_ptr<progress> search_progress_display =
       create_progress_display(term_locale, term_metrics, term_output);
-    const boost::shared_ptr<throttle> search_progress_throttle =
+    const std::shared_ptr<throttle> search_progress_throttle =
       create_throttle();
 
     results_list output;
@@ -268,7 +266,7 @@ namespace
     for(std::vector<cw::util::ref_ptr<m::pattern> >::const_iterator pIt = patterns.begin();
         pIt != patterns.end(); ++pIt)
       {
-        const boost::shared_ptr<progress> search_progress =
+        const std::shared_ptr<progress> search_progress =
           create_search_progress(serialize_pattern(*pIt),
                                  search_progress_display,
                                  search_progress_throttle);
@@ -404,7 +402,7 @@ namespace
 
     if(group_by_policy != NULL)
       {
-        typedef boost::unordered_map<std::string, boost::shared_ptr<results_list> >
+        typedef boost::unordered_map<std::string, std::shared_ptr<results_list> >
           results_by_group_map;
 
         results_by_group_map by_groups;
@@ -432,7 +430,7 @@ namespace
                  results_by_group_map::iterator found = by_groups.find(group);
                  if(found == by_groups.end())
                    {
-                     boost::shared_ptr<results_list> cell = boost::make_shared<results_list>();
+                     std::shared_ptr<results_list> cell = std::make_shared<results_list>();
 
                      by_groups[group] = cell;
                      cell->push_back(*results_it);
@@ -443,7 +441,7 @@ namespace
            }
         }
 
-        typedef std::vector<std::pair<std::string, boost::shared_ptr<results_list> > >
+        typedef std::vector<std::pair<std::string, std::shared_ptr<results_list> > >
           results_by_group_list;
 
         results_by_group_list by_groups_list(by_groups.begin(), by_groups.end());
@@ -534,7 +532,7 @@ int cmdline_versions(int argc, char *argv[], const char *status_fname,
                      group_by_option group_by,
                      show_package_names_option show_package_names)
 {
-  boost::shared_ptr<terminal_io> term = create_terminal();
+  std::shared_ptr<terminal_io> term = create_terminal();
 
   int real_width=-1;
 

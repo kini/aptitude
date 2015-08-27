@@ -93,16 +93,16 @@ namespace
                          const unsigned int screen_width,
                          bool disable_columns,
                          bool debug,
-                         const boost::shared_ptr<terminal_locale> &term_locale,
-                         const boost::shared_ptr<terminal_metrics> &term_metrics,
-                         const boost::shared_ptr<terminal_output> &term_output)
+                         const std::shared_ptr<terminal_locale> &term_locale,
+                         const std::shared_ptr<terminal_metrics> &term_metrics,
+                         const std::shared_ptr<terminal_output> &term_output)
   {
     typedef std::vector<std::pair<pkgCache::PkgIterator, ref_ptr<structural_match> > >
       results_list;
 
-    const boost::shared_ptr<progress> search_progress_display =
+    const std::shared_ptr<progress> search_progress_display =
       create_progress_display(term_locale, term_metrics, term_output);
-    const boost::shared_ptr<throttle> search_progress_throttle =
+    const std::shared_ptr<throttle> search_progress_throttle =
       create_throttle();
 
     results_list output;
@@ -110,7 +110,7 @@ namespace
     for(std::vector<ref_ptr<pattern> >::const_iterator pIt = patterns.begin();
         pIt != patterns.end(); ++pIt)
       {
-        const boost::shared_ptr<progress> search_progress =
+        const std::shared_ptr<progress> search_progress =
           create_search_progress(serialize_pattern(*pIt),
                                  search_progress_display,
                                  search_progress_throttle);
@@ -166,7 +166,7 @@ int cmdline_search(int argc, char *argv[], const char *status_fname,
 		   string display_format, string width, string sort,
 		   bool disable_columns, bool debug)
 {
-  boost::shared_ptr<terminal_io> term = create_terminal();
+  std::shared_ptr<terminal_io> term = create_terminal();
 
   int real_width=-1;
 
@@ -216,7 +216,7 @@ int cmdline_search(int argc, char *argv[], const char *status_fname,
       return -1;
     }
 
-  boost::shared_ptr<OpProgress> progress =
+  std::shared_ptr<OpProgress> progress =
     make_text_progress(true, term, term, term);
 
   apt_init(progress.get(), true, status_fname);

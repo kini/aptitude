@@ -41,6 +41,8 @@
 
 #include <stdio.h>
 
+#include <memory>
+
 using aptitude::cmdline::create_terminal;
 using aptitude::cmdline::make_text_progress;
 using aptitude::cmdline::terminal_io;
@@ -57,11 +59,11 @@ namespace aptitude
 	  return -1;
 	}
 
-      const boost::shared_ptr<terminal_io> term = create_terminal();
+      const std::shared_ptr<terminal_io> term = create_terminal();
 
       std::string out_dir = argv[1];
 
-      boost::shared_ptr<OpProgress> progress = make_text_progress(false, term, term, term);
+      std::shared_ptr<OpProgress> progress = make_text_progress(false, term, term, term);
 
       apt_init(progress.get(), true);
       if(_error->PendingError())

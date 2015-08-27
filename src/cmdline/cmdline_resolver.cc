@@ -44,9 +44,6 @@
 
 // System includes:
 #include <boost/lexical_cast.hpp>
-#include <boost/make_shared.hpp>
-#include <boost/ref.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include <cwidget/fragment.h>
 #include <cwidget/generic/util/ssprintf.h>
@@ -54,11 +51,10 @@
 #include <apt-pkg/error.h>
 #include <apt-pkg/strutl.h>
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
-
 #include <algorithm>
+#include <fstream>
+#include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -215,7 +211,7 @@ static inline cw::fragment *flowindentbox(int i1, int irest, cw::fragment *f)
 }
 
 static void resolver_help(ostream &out,
-                          const boost::shared_ptr<terminal_metrics> &term_metrics)
+                          const std::shared_ptr<terminal_metrics> &term_metrics)
 {
   cw::fragment *f=indentbox(2, 2,
 			cw::fragf(_("y: %F"
@@ -526,7 +522,7 @@ static void reject_or_mandate_version(const string &s,
 
 void cmdline_resolver_show_choice(const choice &c,
 				  const std::string &tag,
-                                  const boost::shared_ptr<terminal_metrics> &term_metrics)
+                                  const std::shared_ptr<terminal_metrics> &term_metrics)
 {
   cw::fragment *info_fragment = NULL;
   bool is_rejected = false;
@@ -805,7 +801,7 @@ static aptitude_solution wait_for_solution(cwidget::threads::box<cmdline_resolve
 }
 
 aptitude_solution calculate_current_solution(bool suppress_message,
-                                             const boost::shared_ptr<terminal_metrics> &term_metrics)
+                                             const std::shared_ptr<terminal_metrics> &term_metrics)
 {
   const int step_limit = aptcfg->FindI(PACKAGE "::ProblemResolver::StepLimit", 5000);
   if(step_limit <= 0)
@@ -839,7 +835,7 @@ aptitude_solution calculate_current_solution(bool suppress_message,
 
   resman->get_solution_background(resman->generated_solution_count(),
 				  step_limit,
-				  boost::make_shared<cmdline_resolver_continuation>(boost::ref(retbox)),
+				  std::make_shared<cmdline_resolver_continuation>(std::ref(retbox)),
 				  cmdline_resolver_trampoline);
 
   return wait_for_solution(retbox, spin);
@@ -855,7 +851,7 @@ cmdline_resolve_deps(pkgset &to_install,
 		     int verbose,
 		     pkgPolicy &policy,
 		     bool arch_only,
-                     const boost::shared_ptr<terminal_metrics> &term_metrics)
+                     const std::shared_ptr<terminal_metrics> &term_metrics)
 {
   bool story_is_default = aptcfg->FindB(PACKAGE "::CmdLine::Resolver-Show-Steps", false);
 
@@ -1139,7 +1135,7 @@ namespace aptitude
   {
     // Implements the --show-resolver-actions command-line parameters.
     void show_resolver_actions(const generic_solution<aptitude_universe> &solution,
-                               const boost::shared_ptr<terminal_metrics> &term_metrics)
+                               const std::shared_ptr<terminal_metrics> &term_metrics)
     {
       if(solution.get_choices().size() > 0)
 	{
@@ -1158,7 +1154,7 @@ namespace aptitude
                            bool no_new_installs,
                            bool no_new_upgrades,
                            bool show_story,
-                           const boost::shared_ptr<terminal_metrics> &term_metrics)
+                           const std::shared_ptr<terminal_metrics> &term_metrics)
     {
       if(!resman->resolver_exists())
 	return true;
@@ -1170,7 +1166,7 @@ namespace aptitude
 	  cwidget::threads::box<cmdline_resolver_continuation::resolver_result> retbox;
 
 	  resman->safe_resolve_deps_background(no_new_installs, no_new_upgrades,
-					       boost::make_shared<cmdline_resolver_continuation>(boost::ref(retbox)),
+					       std::make_shared<cmdline_resolver_continuation>(std::ref(retbox)),
 					       cmdline_resolver_trampoline);
 
 	  cmdline_spinner spin(aptcfg->FindI("Quiet", 0), term_metrics);

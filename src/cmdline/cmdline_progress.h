@@ -25,7 +25,7 @@
 
 // System includes:
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 class download_signal_log;
 
@@ -52,11 +52,11 @@ namespace aptitude
      *  \return a pair containing the download signal log to use and a
      *  strong reference to the download progress complex of objects.
      */
-    std::pair<download_signal_log *, boost::shared_ptr<controllers::acquire_download_progress> >
-    create_cmdline_download_progress(const boost::shared_ptr<terminal_input> &term_input,
-                                     const boost::shared_ptr<terminal_locale> &term_locale,
-                                     const boost::shared_ptr<terminal_metrics> &term_metrics,
-                                     const boost::shared_ptr<terminal_output> &term_output);
+    std::pair<download_signal_log *, std::shared_ptr<controllers::acquire_download_progress> >
+    create_cmdline_download_progress(const std::shared_ptr<terminal_input> &term_input,
+                                     const std::shared_ptr<terminal_locale> &term_locale,
+                                     const std::shared_ptr<terminal_metrics> &term_metrics,
+                                     const std::shared_ptr<terminal_output> &term_output);
   }
 }
 

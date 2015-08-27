@@ -24,13 +24,10 @@
 #include "cmdline_common.h"
 #include "terminal.h"
 
-
-// System includes:
-#include <boost/make_shared.hpp>
-
 #include <cwidget/generic/util/transcode.h>
 
 #include <iostream>
+#include <memory>
 
 using cwidget::util::transcode;
 
@@ -49,10 +46,10 @@ namespace aptitude
        */
       class dummy_transient_message : public transient_message
       {
-        boost::shared_ptr<terminal_output> term_output;
+        std::shared_ptr<terminal_output> term_output;
 
       public:
-        explicit dummy_transient_message(const boost::shared_ptr<terminal_output> &_term_output)
+        explicit dummy_transient_message(const std::shared_ptr<terminal_output> &_term_output)
           : term_output(_term_output)
         {
         }
@@ -80,20 +77,20 @@ namespace aptitude
         std::wstring last_line;
 
         // The locale to be used with that terminal.
-        boost::shared_ptr<terminal_locale> term_locale;
+        std::shared_ptr<terminal_locale> term_locale;
 
         // The dimensions of the terminal.
-        boost::shared_ptr<terminal_metrics> term_metrics;
+        std::shared_ptr<terminal_metrics> term_metrics;
 
         // The terminal output object used to display this message.
-        boost::shared_ptr<terminal_output> term_output;
+        std::shared_ptr<terminal_output> term_output;
 
         void clear_last_line();
 
       public:
-        transient_message_impl(const boost::shared_ptr<terminal_locale> &_term_locale,
-                               const boost::shared_ptr<terminal_metrics> &_term_metrics,
-                               const boost::shared_ptr<terminal_output> &_term_output)
+        transient_message_impl(const std::shared_ptr<terminal_locale> &_term_locale,
+                               const std::shared_ptr<terminal_metrics> &_term_metrics,
+                               const std::shared_ptr<terminal_output> &_term_output)
           : last_line_len(0),
             term_locale(_term_locale),
             term_metrics(_term_metrics),
@@ -175,15 +172,15 @@ namespace aptitude
       }
     }
 
-    boost::shared_ptr<transient_message>
-    create_transient_message(const boost::shared_ptr<terminal_locale> &term_locale,
-                             const boost::shared_ptr<terminal_metrics> &term_metrics,
-                             const boost::shared_ptr<terminal_output> &term_output)
+    std::shared_ptr<transient_message>
+    create_transient_message(const std::shared_ptr<terminal_locale> &term_locale,
+                             const std::shared_ptr<terminal_metrics> &term_metrics,
+                             const std::shared_ptr<terminal_output> &term_output)
     {
       if(!term_output->output_is_a_terminal())
-        return boost::make_shared<dummy_transient_message>(term_output);
+        return std::make_shared<dummy_transient_message>(term_output);
       else
-        return boost::make_shared<transient_message_impl>(term_locale, term_metrics, term_output);
+        return std::make_shared<transient_message_impl>(term_locale, term_metrics, term_output);
     }
   }
 }

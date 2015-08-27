@@ -23,8 +23,7 @@
 // Local includes:
 #include <generic/views/download_progress.h>
 
-// System includes:
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace aptitude
 {
@@ -61,10 +60,10 @@ namespace aptitude
      *  \param display_messages If \b false, messages regarding download
      *                          events will be suppressed.
      */
-    boost::shared_ptr<views::download_progress>
-    create_download_progress_display(const boost::shared_ptr<transient_message> &message,
-                                     const boost::shared_ptr<download_status_display> &status_display,
-                                     const boost::shared_ptr<terminal_input> &term_input,
+    std::shared_ptr<views::download_progress>
+    create_download_progress_display(const std::shared_ptr<transient_message> &message,
+                                     const std::shared_ptr<download_status_display> &status_display,
+                                     const std::shared_ptr<terminal_input> &term_input,
                                      bool display_messages);
 
 
@@ -82,10 +81,10 @@ namespace aptitude
      *        it makes testing more effective; the callers of this code aren't
      *        currently testable.
      */
-    boost::shared_ptr<download_status_display>
-    create_cmdline_download_status_display(const boost::shared_ptr<transient_message> &message,
-                                           const boost::shared_ptr<terminal_locale> &term_locale,
-                                           const boost::shared_ptr<terminal_metrics> &term_metrics,
+    std::shared_ptr<download_status_display>
+    create_cmdline_download_status_display(const std::shared_ptr<transient_message> &message,
+                                           const std::shared_ptr<terminal_locale> &term_locale,
+                                           const std::shared_ptr<terminal_metrics> &term_metrics,
                                            bool hide_status);
   }
 }

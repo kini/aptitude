@@ -20,7 +20,7 @@
 #ifndef APTITUDE_CMDLINE_SEARCH_PROGRESS_H
 #define APTITUDE_CMDLINE_SEARCH_PROGRESS_H
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace aptitude
 {
@@ -47,10 +47,10 @@ namespace aptitude
      *  \param throttle Used to determine when the new object should
      *                  display messages.
      */
-    boost::shared_ptr<views::progress>
+    std::shared_ptr<views::progress>
     create_search_progress(const std::string &pattern,
-                           const boost::shared_ptr<views::progress> &display,
-                           const boost::shared_ptr<util::throttle> &throttle);
+                           const std::shared_ptr<views::progress> &display,
+                           const std::shared_ptr<util::throttle> &throttle);
   }
 }
 

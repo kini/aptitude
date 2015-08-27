@@ -38,6 +38,7 @@
 #include <cwidget/fragment.h>
 
 #include <deque>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -364,7 +365,7 @@ namespace aptitude
 			       std::deque<justification> &output,
 			       const search_params &params,
 			       int verbosity,
-                               const boost::shared_ptr<why_callbacks> &callbacks) const;
+                               const std::shared_ptr<why_callbacks> &callbacks) const;
     };
 
     /** \brief Represents one step in an explanation formed by the
@@ -495,9 +496,9 @@ namespace aptitude
      *  \param term        The terminal to which the debug output
      *                     should be directed.
      */
-    boost::shared_ptr<why_callbacks>
+    std::shared_ptr<why_callbacks>
     make_cmdline_why_callbacks(const int verbosity,
-                               const boost::shared_ptr<cmdline::terminal_metrics> &term_metrics);
+                               const std::shared_ptr<cmdline::terminal_metrics> &term_metrics);
 
     /** \brief Search for a justification for an action.
      *
@@ -516,7 +517,7 @@ namespace aptitude
 			    const std::vector<cwidget::util::ref_ptr<aptitude::matching::pattern> > leaves,
 			    const search_params &params,
 			    bool find_all,
-                            const boost::shared_ptr<why_callbacks> &callbacks,
+                            const std::shared_ptr<why_callbacks> &callbacks,
 			    std::vector<std::vector<action> > &output);
 
     /** \brief Find the shortest strongest justification for the given
@@ -538,7 +539,7 @@ namespace aptitude
 				 const target &goal,
 				 bool find_all,
 				 int verbosity,
-                                 const boost::shared_ptr<why_callbacks> &callbacks,
+                                 const std::shared_ptr<why_callbacks> &callbacks,
 				 std::vector<std::vector<action> > &output);
   }
 }
@@ -548,7 +549,7 @@ cwidget::fragment *do_why(const std::vector<cwidget::util::ref_ptr<aptitude::mat
 			  aptitude::why::roots_string_mode display_mode,
 			  bool find_all,
 			  bool root_is_removal,
-                          const boost::shared_ptr<aptitude::why::why_callbacks> &callbacks,
+                          const std::shared_ptr<aptitude::why::why_callbacks> &callbacks,
 			  bool &success);
 
 // Parses the leaves as if they were command-line arguments.
@@ -557,7 +558,7 @@ cwidget::fragment *do_why(const std::vector<std::string> &arguments,
 			  aptitude::why::roots_string_mode display_mode,
 			  bool find_all,
 			  bool root_is_removal,
-                          const boost::shared_ptr<aptitude::why::why_callbacks> &callbacks,
+                          const std::shared_ptr<aptitude::why::why_callbacks> &callbacks,
 			  bool &success);
 
 namespace aptitude

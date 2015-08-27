@@ -45,6 +45,7 @@
 #include <apt-pkg/progress.h>
 
 #include <stdio.h>
+#include <memory>
 
 using namespace std;
 
@@ -98,7 +99,7 @@ int cmdline_do_action(int argc, char *argv[],
 		      bool arch_only,
 		      bool queue_only, int verbose)
 {
-  boost::shared_ptr<terminal_io> term = create_terminal();
+  std::shared_ptr<terminal_io> term = create_terminal();
 
   _error->DumpErrors();
 
@@ -163,7 +164,7 @@ int cmdline_do_action(int argc, char *argv[],
   if(resolver_mode == resolver_mode_default)
     resolver_mode = resolver_mode_full;
 
-  boost::shared_ptr<OpProgress> progress = make_text_progress(false, term, term, term);
+  std::shared_ptr<OpProgress> progress = make_text_progress(false, term, term, term);
 
   aptcfg->SetNoUser(PACKAGE "::Auto-Upgrade", "false");
 

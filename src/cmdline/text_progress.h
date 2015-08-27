@@ -23,7 +23,7 @@
 
 #include <apt-pkg/progress.h>
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace aptitude
 {
@@ -54,9 +54,9 @@ namespace aptitude
      *  \param message A transient_message object used to display
      *                 output from this progress meter.
      */
-    boost::shared_ptr<OpProgress>
+    std::shared_ptr<OpProgress>
     make_text_progress(bool require_tty_decorations,
-                       const boost::shared_ptr<views::progress> &display);
+                       const std::shared_ptr<views::progress> &display);
 
     /** \brief Convenience routine to create a default text-progress
      *  object.
@@ -64,11 +64,11 @@ namespace aptitude
      *  Equivalent to constructing a standard progress display on the
      *  given terminal and passing it to make_text_progress().
      */
-    boost::shared_ptr<OpProgress>
+    std::shared_ptr<OpProgress>
     make_text_progress(bool require_tty_decorations,
-                       const boost::shared_ptr<terminal_locale> &term_locale,
-                       const boost::shared_ptr<terminal_metrics> &term_metrics,
-                       const boost::shared_ptr<terminal_output> &term_output);
+                       const std::shared_ptr<terminal_locale> &term_locale,
+                       const std::shared_ptr<terminal_metrics> &term_metrics,
+                       const std::shared_ptr<terminal_output> &term_output);
   }
 }
 

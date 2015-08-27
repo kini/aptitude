@@ -20,9 +20,7 @@
 #ifndef CMDLINE_CHANGELOG_H
 #define CMDLINE_CHANGELOG_H
 
-// System includes:
-#include <boost/shared_ptr.hpp>
-
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -43,7 +41,7 @@ namespace aptitude
  *  descriptors.  DumpErrors() is called after each changelog is displayed.
  */
 void do_cmdline_changelog(const std::vector<std::string> &packages,
-                          const boost::shared_ptr<aptitude::cmdline::terminal_metrics> &term_metrics);
+                          const std::shared_ptr<aptitude::cmdline::terminal_metrics> &term_metrics);
 
 int cmdline_changelog(int argc, char *argv[]);
 

@@ -35,7 +35,6 @@
 #include <apt-pkg/error.h>
 
 #include <boost/format.hpp>
-#include <boost/make_shared.hpp>
 
 #include <cwidget/generic/util/transcode.h>
 
@@ -64,11 +63,11 @@ namespace aptitude
         // indicator when the operation finishes.
         std::string last_op;
 
-        boost::shared_ptr<views::progress> display;
+        std::shared_ptr<views::progress> display;
 
       public:
         text_progress(bool _use_tty_decorations,
-                      const boost::shared_ptr<views::progress> &_display)
+                      const std::shared_ptr<views::progress> &_display)
           : use_tty_decorations(_use_tty_decorations),
             display(_display)
         {
@@ -127,9 +126,9 @@ namespace aptitude
       }
     }
 
-    boost::shared_ptr<OpProgress>
+    std::shared_ptr<OpProgress>
     make_text_progress(bool require_tty_decorations,
-                       const boost::shared_ptr<views::progress> &display)
+                       const std::shared_ptr<views::progress> &display)
     {
       bool hide_tty_decorations = false;
       bool hidden = false;
@@ -146,16 +145,16 @@ namespace aptitude
         hidden = true;
 
       if(hidden)
-        return boost::make_shared<OpProgress>();
+        return std::make_shared<OpProgress>();
       else
-        return boost::make_shared<text_progress>(!hide_tty_decorations, display);
+        return std::make_shared<text_progress>(!hide_tty_decorations, display);
     }
 
-    boost::shared_ptr<OpProgress>
+    std::shared_ptr<OpProgress>
     make_text_progress(bool require_tty_decorations,
-                       const boost::shared_ptr<terminal_locale> &term_locale,
-                       const boost::shared_ptr<terminal_metrics> &term_metrics,
-                       const boost::shared_ptr<terminal_output> &term_output)
+                       const std::shared_ptr<terminal_locale> &term_locale,
+                       const std::shared_ptr<terminal_metrics> &term_metrics,
+                       const std::shared_ptr<terminal_output> &term_output)
     {
       return make_text_progress(require_tty_decorations,
                                 create_progress_display(term_locale, term_metrics, term_output));

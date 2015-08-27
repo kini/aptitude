@@ -369,7 +369,7 @@ static cwidget::fragment *state_fragment(pkgCache::PkgIterator pkg, pkgCache::Ve
 
 /** \brief Shows information about a package. */
 static void show_package(pkgCache::PkgIterator pkg, int verbose,
-                         const boost::shared_ptr<terminal_metrics> &term_metrics)
+                         const std::shared_ptr<terminal_metrics> &term_metrics)
 {
   vector<cw::fragment *> fragments;
 
@@ -489,7 +489,7 @@ cw::fragment *version_file_fragment(const pkgCache::VerIterator &ver,
 }
 
 static void show_version(pkgCache::VerIterator ver, int verbose,
-                         const boost::shared_ptr<terminal_metrics> &term_metrics)
+                         const std::shared_ptr<terminal_metrics> &term_metrics)
 {
   if(ver.FileList().end())
     {
@@ -524,7 +524,7 @@ bool do_cmdline_show_target(const pkgCache::PkgIterator &pkg,
 			    const string &sourcestr,
 			    int verbose,
 			    bool has_explicit_source,
-                            const boost::shared_ptr<terminal_metrics> &term_metrics)
+                            const std::shared_ptr<terminal_metrics> &term_metrics)
 {
   if(verbose == 0 || has_explicit_source)
     {
@@ -551,7 +551,7 @@ bool do_cmdline_show_target(const pkgCache::PkgIterator &pkg,
   return true;
 }
 
-bool do_cmdline_show(string s, int verbose, const boost::shared_ptr<terminal_metrics> &term_metrics)
+bool do_cmdline_show(string s, int verbose, const std::shared_ptr<terminal_metrics> &term_metrics)
 {
   cmdline_version_source source;
   string name, sourcestr;
@@ -626,11 +626,11 @@ bool do_cmdline_show(string s, int verbose, const boost::shared_ptr<terminal_met
 
 int cmdline_show(int argc, char *argv[], int verbose)
 {
-  boost::shared_ptr<terminal_io> term = create_terminal();
+  std::shared_ptr<terminal_io> term = create_terminal();
 
   _error->DumpErrors();
 
-  boost::shared_ptr<OpProgress> progress = make_text_progress(true, term, term, term);
+  std::shared_ptr<OpProgress> progress = make_text_progress(true, term, term, term);
   apt_init(progress.get(), false);
 
   if(_error->PendingError())

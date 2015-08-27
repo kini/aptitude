@@ -32,8 +32,8 @@
 // System includes:
 #include <apt-pkg/error.h>
 
+#include <memory>
 #include <stdio.h>
-
 
 using aptitude::cmdline::create_terminal;
 using aptitude::cmdline::terminal_io;
@@ -45,7 +45,7 @@ void print_autoclean_msg()
 
 int cmdline_update(int argc, char *argv[], int verbose)
 {
-  boost::shared_ptr<terminal_io> term = create_terminal();
+  std::shared_ptr<terminal_io> term = create_terminal();
 
   _error->DumpErrors();
 

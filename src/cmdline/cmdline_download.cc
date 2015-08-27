@@ -26,6 +26,7 @@
 #include <apt-pkg/sourcelist.h>
 
 #include <stdio.h>
+#include <memory>
 
 using aptitude::controllers::acquire_download_progress;
 using aptitude::cmdline::create_cmdline_download_progress;
@@ -37,7 +38,7 @@ using aptitude::cmdline::terminal_locale;
 // Download stuff to the current directory
 int cmdline_download(int argc, char *argv[])
 {
-  boost::shared_ptr<terminal_io> term = create_terminal();
+  std::shared_ptr<terminal_io> term = create_terminal();
 
   if(argc<=1)
     {
@@ -47,7 +48,7 @@ int cmdline_download(int argc, char *argv[])
 
   _error->DumpErrors();
 
-  boost::shared_ptr<OpProgress> progress = make_text_progress(false, term, term, term);
+  std::shared_ptr<OpProgress> progress = make_text_progress(false, term, term, term);
   apt_init(progress.get(), false);
 
   if(_error->PendingError())
@@ -65,7 +66,7 @@ int cmdline_download(int argc, char *argv[])
       return -1;
     }
 
-  std::pair<download_signal_log *, boost::shared_ptr<acquire_download_progress> >
+  std::pair<download_signal_log *, std::shared_ptr<acquire_download_progress> >
     progress_display = create_cmdline_download_progress(term, term, term, term);
 
   pkgAcquire fetcher;

@@ -39,6 +39,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <memory>
+
 using aptitude::cmdline::create_terminal;
 using aptitude::cmdline::make_text_progress;
 using aptitude::cmdline::terminal_io;
@@ -82,7 +84,7 @@ namespace aptitude
 
     int cmdline_user_tag(int argc, char *argv[], int quiet, int verbose)
     {
-      const boost::shared_ptr<terminal_io> term = create_terminal();
+      const std::shared_ptr<terminal_io> term = create_terminal();
 
       user_tag_action action = (user_tag_action)-1;
 
@@ -162,7 +164,7 @@ namespace aptitude
 	    }
 	}
 
-      boost::shared_ptr<OpProgress> text_progress = make_text_progress(false, term, term, term);
+      std::shared_ptr<OpProgress> text_progress = make_text_progress(false, term, term, term);
       if(!(*apt_cache_file)->save_selection_list(*text_progress))
 	return 1;
 

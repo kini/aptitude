@@ -21,10 +21,10 @@
 #ifndef APTITUDE_CMDLINE_SCREEN_WIDTH_H
 #define APTITUDE_CMDLINE_SCREEN_WIDTH_H
 
-#include <boost/shared_ptr.hpp>
 #include <cwidget/generic/util/exception.h>
 
 #include <iosfwd>
+#include <memory>
 
 /** Thrown when we get EOF on stdin.  Should never be thrown
  *  to the cwidget::toplevel.
@@ -171,7 +171,7 @@ namespace aptitude
     /** \brief Create a terminal object attached to the standard I/O
      *  streams and using the system locale definitions.
      */
-    boost::shared_ptr<terminal_io> create_terminal();
+    std::shared_ptr<terminal_io> create_terminal();
   }
 }
 

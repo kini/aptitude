@@ -23,9 +23,8 @@
 // System includes:
 #include <apt-pkg/pkgcache.h>
 
-#include <boost/shared_ptr.hpp>
-
 #include <iosfwd>
+#include <memory>
 #include <string>
 
 /** \file cmdline_show.h
@@ -58,7 +57,7 @@ cwidget::fragment *version_file_fragment(const pkgCache::VerIterator &ver,
 
 /** Run the "show" operation on a single argument, presented as a string. */
 bool do_cmdline_show(std::string s, int verbose,
-                     const boost::shared_ptr<aptitude::cmdline::terminal_metrics> &term_metrics);
+                     const std::shared_ptr<aptitude::cmdline::terminal_metrics> &term_metrics);
 
 /** The "show" user command. */
 int cmdline_show(int argc, char *argv[], int verbose);

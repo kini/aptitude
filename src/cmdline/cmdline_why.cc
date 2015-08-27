@@ -45,8 +45,6 @@
 #include <apt-pkg/pkgsystem.h>
 #include <apt-pkg/version.h>
 
-#include <boost/make_shared.hpp>
-
 #include <cwidget/fragment.h>
 
 #include <algorithm>
@@ -139,7 +137,7 @@ namespace aptitude
       void generate_successors(std::deque<justification> &output,
 			       const search_params &params,
 			       int verbosity,
-                               const boost::shared_ptr<why_callbacks> &callbacks) const
+                               const std::shared_ptr<why_callbacks> &callbacks) const
       {
 	the_target.generate_successors(*this, output, params, verbosity, callbacks);
       }
@@ -391,7 +389,7 @@ namespace aptitude
 				   std::deque<justification> &output,
 				   const search_params &params,
 				   int verbosity,
-                                   const boost::shared_ptr<why_callbacks> &callbacks) const
+                                   const std::shared_ptr<why_callbacks> &callbacks) const
   {
     why_callbacks * const callbacks_bare = callbacks.get();
 
@@ -697,7 +695,7 @@ namespace aptitude
      *  \return true if a justification was found, false otherwise.
      */
     bool next(std::vector<action> &output,
-              const boost::shared_ptr<why_callbacks> &callbacks)
+              const std::shared_ptr<why_callbacks> &callbacks)
     {
       why_callbacks * const callbacks_bare = callbacks.get();
 
@@ -791,7 +789,7 @@ namespace aptitude
 			    const std::vector<cwidget::util::ref_ptr<pattern> > leaves,
 			    const search_params &params,
 			    bool find_all,
-                            const boost::shared_ptr<why_callbacks> &callbacks,
+                            const std::shared_ptr<why_callbacks> &callbacks,
 			    std::vector<std::vector<action> > &output)
     {
       justification_search search(leaves, target, params, 0);
@@ -821,7 +819,7 @@ namespace aptitude
 				 const target &goal,
 				 bool find_all,
 				 int verbosity,
-                                 const boost::shared_ptr<why_callbacks> &callbacks,
+                                 const std::shared_ptr<why_callbacks> &callbacks,
 				 std::vector<std::vector<action> > &output)
     {
       std::vector<search_params> searches;
@@ -1047,12 +1045,12 @@ namespace aptitude
     {
       class cmdline_why_callbacks : public why_callbacks
       {
-        const boost::shared_ptr<terminal_metrics> term_metrics;
+        const std::shared_ptr<terminal_metrics> term_metrics;
         const int verbosity;
         const unsigned int screen_width;
 
       public:
-        cmdline_why_callbacks(const boost::shared_ptr<terminal_metrics> &_term_metrics,
+        cmdline_why_callbacks(const std::shared_ptr<terminal_metrics> &_term_metrics,
                               const int _verbosity)
           : term_metrics(_term_metrics),
             verbosity(_verbosity),
@@ -1149,11 +1147,11 @@ namespace aptitude
       };
     }
 
-    boost::shared_ptr<why_callbacks>
+    std::shared_ptr<why_callbacks>
     make_cmdline_why_callbacks(const int verbosity,
-                               const boost::shared_ptr<terminal_metrics> &term_metrics)
+                               const std::shared_ptr<terminal_metrics> &term_metrics)
     {
-      return boost::make_shared<cmdline_why_callbacks>(term_metrics, verbosity);
+      return std::make_shared<cmdline_why_callbacks>(term_metrics, verbosity);
     }
   }
 }
@@ -1163,7 +1161,7 @@ cw::fragment *do_why(const std::vector<cwidget::util::ref_ptr<pattern> > &leaves
 		     aptitude::why::roots_string_mode display_mode,
 		 int verbosity,
 		 bool root_is_removal,
-                     const boost::shared_ptr<why_callbacks> &callbacks,
+                     const std::shared_ptr<why_callbacks> &callbacks,
 		 bool &success)
 {
   using namespace aptitude::why;
@@ -1241,10 +1239,10 @@ int do_why(const std::vector<cwidget::util::ref_ptr<pattern> > &leaves,
 	   aptitude::why::roots_string_mode display_mode,
 	   int verbosity,
 	   bool root_is_removal,
-           const boost::shared_ptr<terminal_metrics> &term_metrics)
+           const std::shared_ptr<terminal_metrics> &term_metrics)
 {
   bool success = false;
-  const boost::shared_ptr<why_callbacks> callbacks =
+  const std::shared_ptr<why_callbacks> callbacks =
     make_cmdline_why_callbacks(verbosity, term_metrics);
   std::unique_ptr<cw::fragment> f(do_why(leaves, root, display_mode,
 					 verbosity, root_is_removal,
@@ -1262,7 +1260,7 @@ cw::fragment *do_why(const std::vector<cwidget::util::ref_ptr<pattern> > &leaves
 		     aptitude::why::roots_string_mode display_mode,
 		 bool find_all,
 		 bool root_is_removal,
-                     const boost::shared_ptr<why_callbacks> &callbacks,
+                     const std::shared_ptr<why_callbacks> &callbacks,
 		 bool &success)
 {
   const int verbosity = find_all ? 1 : 0;
@@ -1310,7 +1308,7 @@ cw::fragment *do_why(const std::vector<std::string> &arguments,
 		     aptitude::why::roots_string_mode display_mode,
 		 int verbosity,
 		 bool root_is_removal,
-                     const boost::shared_ptr<why_callbacks> &callbacks,
+                     const std::shared_ptr<why_callbacks> &callbacks,
 		 bool &success)
 {
   success = false;
@@ -1336,7 +1334,7 @@ cw::fragment *do_why(const std::vector<std::string> &leaves,
 		     aptitude::why::roots_string_mode display_mode,
 		 bool find_all,
 		 bool root_is_removal,
-                     const boost::shared_ptr<why_callbacks> &callbacks,
+                     const std::shared_ptr<why_callbacks> &callbacks,
 		 bool &success)
 {
   return do_why(leaves, root, display_mode, find_all ? 1 : 0,
@@ -1350,7 +1348,7 @@ int cmdline_why(int argc, char *argv[],
 		aptitude::why::roots_string_mode display_mode,
 		bool is_why_not)
 {
-  const boost::shared_ptr<terminal_io> term = create_terminal();
+  const std::shared_ptr<terminal_io> term = create_terminal();
 
   _error->DumpErrors();
 
