@@ -123,7 +123,6 @@ dnl sanity-check of the config file:
 dnl boost/lambda/construct.hpp dnl
 boost/lambda/lambda.hpp dnl
 boost/lexical_cast.hpp dnl
-boost/make_shared.hpp dnl
 boost/mpl/begin.hpp dnl
 boost/mpl/fold.hpp dnl
 boost/mpl/front.hpp dnl
@@ -141,17 +140,13 @@ boost/preprocessor/repetition/enum_params.hpp dnl
 boost/preprocessor/repetition/repeat.hpp dnl
 boost/random.hpp dnl
 boost/range.hpp dnl
-boost/ref.hpp dnl
 boost/scoped_array.hpp dnl
-boost/scoped_ptr.hpp dnl
-boost/shared_ptr.hpp dnl
 boost/test/unit_test.hpp dnl
 boost/type_traits/is_same.hpp dnl
 boost/unordered_map.hpp dnl
 boost/unordered_set.hpp dnl
 boost/utility.hpp dnl
 boost/variant.hpp dnl
-boost/weak_ptr.hpp dnl
                   , []
                   , [AC_MSG_FAILURE([Boost install not found, too old, or incomplete; install libboost-dev.])])
 
