@@ -21,7 +21,7 @@
 #ifndef APTITUDE_CONTROLLERS_SEARCH_INPUT_H
 #define APTITUDE_CONTROLLERS_SEARCH_INPUT_H
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include <cwidget/generic/util/ref_ptr.h>
 
@@ -82,8 +82,8 @@ namespace aptitude
      *
      *  \return A search input controller attached to the given view.
      */
-    boost::shared_ptr<search_input>
-    create_search_input(const boost::shared_ptr<aptitude::views::search_input> &view);
+    std::shared_ptr<search_input>
+    create_search_input(const std::shared_ptr<aptitude::views::search_input> &view);
   }
 }
 

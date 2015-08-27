@@ -24,10 +24,9 @@
 #include <generic/util/mocks/mock_util.h>
 #include <generic/views/download_progress.h>
 
-// System includes:
-#include <boost/make_shared.hpp>
-
 #include <gmock/gmock.h>
+
+#include <memory>
 
 namespace aptitude
 {
@@ -39,7 +38,7 @@ namespace aptitude
                                 public aptitude::util::mocks::Mock<download_progress>
       {
         download_progress();
-        friend boost::shared_ptr<download_progress> boost::make_shared<download_progress>();
+        friend std::shared_ptr<download_progress> std::make_shared<download_progress>();
         MOCK_FRIENDS();
 
       public:

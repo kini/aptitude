@@ -30,7 +30,6 @@
 
 // System includes:
 #include <boost/format.hpp>
-#include <boost/make_shared.hpp>
 
 #include <cwidget/generic/util/transcode.h>
 
@@ -46,7 +45,7 @@ namespace aptitude
     {
       class search_input_impl : public search_input
       {
-        boost::shared_ptr<views::search_input> view;
+        std::shared_ptr<views::search_input> view;
 
         // Parse the current entry and emit the activated() signal if
         // it's valid (otherwise show the error).
@@ -60,7 +59,7 @@ namespace aptitude
 
       public:
         // Only public for make_shared.
-        search_input_impl(const boost::shared_ptr<views::search_input> &_view);
+        search_input_impl(const std::shared_ptr<views::search_input> &_view);
 
         /** \brief Create a new search_input_impl.
          *
@@ -69,8 +68,8 @@ namespace aptitude
          *  \return A reference-counting wrapper around the new package
          *  search entry.
          */
-        static boost::shared_ptr<search_input_impl>
-        create(const boost::shared_ptr<views::search_input> &view);
+        static std::shared_ptr<search_input_impl>
+        create(const std::shared_ptr<views::search_input> &view);
 
         std::wstring get_text() const;
 
@@ -83,16 +82,16 @@ namespace aptitude
         connect_activated(const sigc::slot<void, std::wstring, cwidget::util::ref_ptr<aptitude::matching::pattern> > &slot);
       };
 
-      search_input_impl::search_input_impl(const boost::shared_ptr<views::search_input> &_view)
+      search_input_impl::search_input_impl(const std::shared_ptr<views::search_input> &_view)
         : view(_view)
       {
       }
 
-      boost::shared_ptr<search_input_impl>
-      search_input_impl::create(const boost::shared_ptr<views::search_input> &
+      std::shared_ptr<search_input_impl>
+      search_input_impl::create(const std::shared_ptr<views::search_input> &
                                 view)
       {
-        return boost::make_shared<search_input_impl>(view);
+        return std::make_shared<search_input_impl>(view);
       }
 
       void search_input_impl::do_search()
@@ -151,8 +150,8 @@ namespace aptitude
     {
     }
 
-    boost::shared_ptr<search_input>
-    create_search_input(const boost::shared_ptr<views::search_input> &view)
+    std::shared_ptr<search_input>
+    create_search_input(const std::shared_ptr<views::search_input> &view)
     {
       return search_input_impl::create(view);
     }

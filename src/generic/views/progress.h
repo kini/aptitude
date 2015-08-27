@@ -20,9 +20,6 @@
 #ifndef APTITUDE_GENERIC_VIEWS_PROGRESS_H
 #define APTITUDE_GENERIC_VIEWS_PROGRESS_H
 
-// System includes:
-#include <boost/shared_ptr.hpp>
-
 namespace aptitude
 {
   namespace util

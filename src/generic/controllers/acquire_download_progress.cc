@@ -27,8 +27,6 @@
 #include <apt-pkg/acquire-item.h>
 #include <apt-pkg/acquire-worker.h>
 
-#include <boost/make_shared.hpp>
-
 #include <sigc++/bind.h>
 
 
@@ -51,8 +49,7 @@ namespace aptitude
     class acquire_download_progress::impl : public acquire_download_progress,
                                             public sigc::trackable
     {
-      friend boost::shared_ptr<impl>
-      boost::make_shared<impl>();
+      friend std::shared_ptr<impl> std::make_shared<impl>();
 
       void media_change(const std::string &media,
                         const std::string &drive,
@@ -74,18 +71,18 @@ namespace aptitude
       // Keeps track of the next ID to assign to a download item.
       unsigned long id;
 
-      boost::shared_ptr<views::download_progress> view;
+      std::shared_ptr<views::download_progress> view;
 
-      boost::shared_ptr<views::download_progress::status>
+      std::shared_ptr<views::download_progress::status>
       get_current_status(pkgAcquire *owner, download_signal_log &manager);
 
     public:
       impl(download_signal_log *log,
-           const boost::shared_ptr<views::download_progress> &_view);
+           const std::shared_ptr<views::download_progress> &_view);
     };
 
     acquire_download_progress::impl::impl(download_signal_log *log,
-                                          const boost::shared_ptr<views::download_progress> &_view)
+                                          const std::shared_ptr<views::download_progress> &_view)
       : id(1),
         view(_view)
     {
@@ -128,7 +125,7 @@ namespace aptitude
                                     k));
     }
 
-    boost::shared_ptr<views::download_progress::status>
+    std::shared_ptr<views::download_progress::status>
     acquire_download_progress::impl::get_current_status(pkgAcquire *owner,
                                                         download_signal_log &manager)
     {
@@ -178,10 +175,10 @@ namespace aptitude
           ? 0
           : ((unsigned long long) (total_bytes - current_bytes)) / download_rate;
 
-      return boost::make_shared<status>(manager.get_currentCPS(),
-                                        active_downloads,
-                                        fraction_complete,
-                                        time_remaining);
+      return std::make_shared<status>(manager.get_currentCPS(),
+				      active_downloads,
+				      fraction_complete,
+				      time_remaining);
     }
 
     void acquire_download_progress::impl::ims_hit(pkgAcquire::ItemDesc &item,
@@ -258,7 +255,7 @@ namespace aptitude
                                                 download_signal_log &manager,
                                                 const sigc::slot1<void, bool> &k)
     {
-      const boost::shared_ptr<views::download_progress::status> status =
+      const std::shared_ptr<views::download_progress::status> status =
         get_current_status(owner, manager);
 
       manager.set_update(false);
@@ -274,11 +271,11 @@ namespace aptitude
     {
     }
 
-    boost::shared_ptr<acquire_download_progress>
+    std::shared_ptr<acquire_download_progress>
     create_acquire_download_progress(download_signal_log *log,
-                                     const boost::shared_ptr<views::download_progress> &view)
+                                     const std::shared_ptr<views::download_progress> &view)
     {
-      return boost::make_shared<acquire_download_progress::impl>(log, view);
+      return std::make_shared<acquire_download_progress::impl>(log, view);
     }
   }
 }

@@ -23,7 +23,7 @@
 // System includes:
 #include <apt-pkg/acquire.h>
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 class download_signal_log;
 
@@ -53,9 +53,9 @@ namespace aptitude
       acquire_download_progress();
 
       friend class impl;
-      friend boost::shared_ptr<acquire_download_progress>
+      friend std::shared_ptr<acquire_download_progress>
       create_acquire_download_progress(download_signal_log *,
-                                       const boost::shared_ptr<views::download_progress> &);
+                                       const std::shared_ptr<views::download_progress> &);
 
     public:
       virtual ~acquire_download_progress() = 0;
@@ -72,9 +72,9 @@ namespace aptitude
      *  controller can be destroyed in any order, so long as they are
      *  not destroyed simultaneously in separate threads.
      */
-    boost::shared_ptr<acquire_download_progress>
+    std::shared_ptr<acquire_download_progress>
     create_acquire_download_progress(download_signal_log *log,
-                                     const boost::shared_ptr<views::download_progress> &view);
+                                     const std::shared_ptr<views::download_progress> &view);
   }
 }
 
