@@ -22,10 +22,7 @@
 
 #include "dynamic_list.h"
 
-#include <boost/enable_shared_from_this.hpp>
-#include <boost/make_shared.hpp>
-#include <boost/shared_ptr.hpp>
-
+#include <memory>
 #include <vector>
 
 namespace aptitude
@@ -36,7 +33,7 @@ namespace aptitude
     template<typename T>
     class dynamic_list_impl
       : public writable_dynamic_list<T>,
-        public boost::enable_shared_from_this<dynamic_list_impl<T> >
+        public std::enable_shared_from_this<dynamic_list_impl<T> >
     {
       typedef std::vector<T> collection;
       collection entries;
@@ -56,7 +53,7 @@ namespace aptitude
       T get_at(std::size_t idx);
 
       /** \brief Create an empty list. */
-      static boost::shared_ptr<dynamic_list_impl> create();
+      static std::shared_ptr<dynamic_list_impl> create();
 
       void insert(const T &t, std::size_t position);
       void remove(std::size_t position);
@@ -69,10 +66,10 @@ namespace aptitude
     }
 
     template<typename T>
-    boost::shared_ptr<dynamic_list_impl<T> >
+    std::shared_ptr<dynamic_list_impl<T> >
     dynamic_list_impl<T>::create()
     {
-      return boost::make_shared<dynamic_list_impl>();
+      return std::make_shared<dynamic_list_impl>();
     }
 
     template<typename T>

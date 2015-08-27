@@ -21,11 +21,11 @@
 #define APTITUDE_UTIL_LOGGING_H
 
 #include <boost/optional.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include <sigc++/connection.h>
 #include <sigc++/slot.h>
 
+#include <memory>
 #include <sstream>
 
 #include <limits.h> // For INT_MIN
@@ -69,7 +69,7 @@ namespace aptitude
       const char *describe_log_level(log_level l);
 
       class Logger;
-      typedef boost::shared_ptr<Logger> LoggerPtr;
+      typedef std::shared_ptr<Logger> LoggerPtr;
 
       class LoggingSystem;
 
@@ -232,7 +232,7 @@ namespace aptitude
         LoggingSystem();
         LoggingSystem(const LoggingSystem &);
 
-        friend boost::shared_ptr<LoggingSystem> createLoggingSystem();
+        friend std::shared_ptr<LoggingSystem> createLoggingSystem();
 
       public:
         virtual ~LoggingSystem();
@@ -248,7 +248,7 @@ namespace aptitude
       };
 
       /** \brief Create a new, local logging system. */
-      boost::shared_ptr<LoggingSystem> createLoggingSystem();
+      std::shared_ptr<LoggingSystem> createLoggingSystem();
     }
   }
 }

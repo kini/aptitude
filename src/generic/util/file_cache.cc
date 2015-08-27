@@ -39,7 +39,6 @@
 #include <boost/iostreams/seek.hpp>
 #include <boost/iostreams/stream.hpp>
 #include <boost/iostreams/write.hpp>
-#include <boost/make_shared.hpp>
 
 #include <loggers.h>
 
@@ -863,11 +862,11 @@ insert into globals(TotalBlobSize) values(0);				\
       };
     }
 
-    boost::shared_ptr<file_cache> file_cache::create(const std::string &filename,
+    std::shared_ptr<file_cache> file_cache::create(const std::string &filename,
 						     int memory_size,
 						     int disk_size)
     {
-      boost::shared_ptr<file_cache_multilevel> rval = boost::make_shared<file_cache_multilevel>();
+      std::shared_ptr<file_cache_multilevel> rval = std::make_shared<file_cache_multilevel>();
 
       if(memory_size > 0)
 	{

@@ -3,7 +3,7 @@
 #ifndef ENUMERATOR_H
 #define ENUMERATOR_H
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace aptitude
 {
@@ -84,17 +84,17 @@ namespace aptitude
     template<typename ForwardIter, typename T>
     class iterator_enumerator_with_keepalive : public iterator_enumerator<ForwardIter>
     {
-      boost::shared_ptr<T> keptalive;
+      std::shared_ptr<T> keptalive;
 
     public:
       iterator_enumerator_with_keepalive(ForwardIter begin, ForwardIter end,
-                                         boost::shared_ptr<T> _keptalive);
+                                         std::shared_ptr<T> _keptalive);
     };
 
     template<typename ForwardIter, typename T>
     iterator_enumerator_with_keepalive<ForwardIter, T>
     ::iterator_enumerator_with_keepalive(ForwardIter begin, ForwardIter end,
-                                         boost::shared_ptr<T> _keptalive)
+                                         std::shared_ptr<T> _keptalive)
       : iterator_enumerator<ForwardIter>(begin, end),
         keptalive(_keptalive)
     {

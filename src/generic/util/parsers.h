@@ -21,6 +21,7 @@
 #define PARSERS_H
 
 #include <exception>
+#include <memory>
 #include <string>
 #include <sstream>
 #include <ostream>
@@ -52,7 +53,6 @@
 #include <boost/fusion/iterator/equal_to.hpp>
 #include <boost/fusion/sequence.hpp>
 #include <boost/fusion/support/is_sequence.hpp>
-#include <boost/make_shared.hpp>
 #include <boost/mpl/begin.hpp>
 #include <boost/mpl/fold.hpp>
 #include <boost/mpl/front.hpp>
@@ -63,7 +63,6 @@
 #include <boost/preprocessor/repetition/enum_params.hpp>
 #include <boost/preprocessor/repetition/repeat.hpp>
 #include <boost/range.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/type_traits/is_same.hpp>
 #include <boost/variant.hpp>
 
@@ -1442,22 +1441,22 @@ namespace parsers
    *  parser.
    */
   template<typename P, typename Container>
-  class container_p : public parser_base<container_p<P, Container>, boost::shared_ptr<Container> >
+  class container_p : public parser_base<container_p<P, Container>, std::shared_ptr<Container> >
   {
     P p;
     // Elements to include at the front of each parse.
-    boost::shared_ptr<Container> prefix;
+    std::shared_ptr<Container> prefix;
 
   public:
     container_p(const P &_p, const Container &_prefix)
-      : p(_p), prefix(boost::make_shared<Container>(_prefix))
+      : p(_p), prefix(std::make_shared<Container>(_prefix))
     {
     }
 
     template<typename ParseInput>
-    boost::shared_ptr<Container> do_parse(ParseInput &input) const
+    std::shared_ptr<Container> do_parse(ParseInput &input) const
     {
-      boost::shared_ptr<Container> rval = boost::make_shared<Container>(*prefix);
+      std::shared_ptr<Container> rval = std::make_shared<Container>(*prefix);
       p.parse_container(input, *rval);
       return rval;
     }
@@ -1516,7 +1515,7 @@ namespace parsers
    */
   template<typename P1, typename P2>
   class concatenate_p : public parser_base<concatenate_p<P1, P2>,
-                                           boost::shared_ptr<std::vector<typename P1::element_type> > >
+                                           std::shared_ptr<std::vector<typename P1::element_type> > >
   {
     P1 p1;
     P2 p2;
@@ -1528,12 +1527,12 @@ namespace parsers
     }
 
     typedef typename P1::element_type element_type;
-    typedef boost::shared_ptr<std::vector<element_type> > result_type;
+    typedef std::shared_ptr<std::vector<element_type> > result_type;
 
     template<typename ParseInput>
     result_type do_parse(ParseInput &input) const
     {
-      result_type rval = boost::make_shared<std::vector<element_type> >();
+      result_type rval = std::make_shared<std::vector<element_type> >();
       parse_container(input, *rval);
       return rval;
     }
@@ -1672,7 +1671,7 @@ namespace parsers
    *  parse in a bad state).
    */
   template<typename P>
-  class many_p : public parser_base<many_p<P>, boost::shared_ptr<std::vector<typename P::element_type> > >
+  class many_p : public parser_base<many_p<P>, std::shared_ptr<std::vector<typename P::element_type> > >
   {
     P p;
     bool requireOne;
@@ -1688,14 +1687,14 @@ namespace parsers
     {
     }
 
-    typedef boost::shared_ptr<std::vector<typename P::element_type> > result_type;
+    typedef std::shared_ptr<std::vector<typename P::element_type> > result_type;
     typedef typename P::element_type element_type;
 
     template<typename ParseInput>
     result_type do_parse(ParseInput &input) const
     {
       result_type rval =
-        boost::make_shared<std::vector<typename P::element_type> >();
+        std::make_shared<std::vector<typename P::element_type> >();
 
       parse_container(input, *rval);
 
@@ -1747,7 +1746,7 @@ namespace parsers
   // Sanity-check that we get the correct result type out of a
   // many_p expression.
   BOOST_STATIC_ASSERT((boost::is_same<many_p<integer_p>::result_type,
-                                      boost::shared_ptr<std::vector<int> > >::value));
+                                      std::shared_ptr<std::vector<int> > >::value));
 
   /** \brief Apply the input parser zero or more times.
    */
@@ -1781,7 +1780,7 @@ namespace parsers
    */
   template<typename SeparatorP, typename ValueP>
   class sepBy_p : public parser_base<sepBy_p<SeparatorP, ValueP>,
-				     boost::shared_ptr<std::vector<typename ValueP::element_type> > >
+				     std::shared_ptr<std::vector<typename ValueP::element_type> > >
   {
     SeparatorP separatorP;
     ValueP valueP;
@@ -1793,13 +1792,13 @@ namespace parsers
     {
     }
 
-    typedef boost::shared_ptr<std::vector<typename ValueP::element_type> > result_type;
+    typedef std::shared_ptr<std::vector<typename ValueP::element_type> > result_type;
     typedef typename ValueP::element_type element_type;
 
     template<typename ParseInput>
     result_type do_parse(ParseInput &input) const
     {
-      result_type rval = boost::make_shared<std::vector<typename ValueP::element_type> >();
+      result_type rval = std::make_shared<std::vector<typename ValueP::element_type> >();
 
       parse_container(input, *rval);
 
@@ -2847,7 +2846,7 @@ namespace parsers
   template<typename Seq>
   struct notEmpty_f
   {
-    bool operator()(const boost::shared_ptr<Seq> &s) const
+    bool operator()(const std::shared_ptr<Seq> &s) const
     {
       return !s->empty();
     }

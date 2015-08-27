@@ -23,11 +23,11 @@
 
 #include "dynamic_set.h"
 
-#include <boost/enable_shared_from_this.hpp>
-#include <boost/make_shared.hpp>
+#include <sigc++/signal.h>
+
 #include <boost/unordered_map.hpp>
 
-#include <sigc++/signal.h>
+#include <memory>
 
 namespace aptitude
 {
@@ -39,7 +39,7 @@ namespace aptitude
     template<typename T>
     class dynamic_set_union
       : public dynamic_set<T>,
-        public boost::enable_shared_from_this<dynamic_set_union<T> >
+        public std::enable_shared_from_this<dynamic_set_union<T> >
     {
       typedef boost::unordered_map<T, int> value_counts_t;
 
@@ -51,7 +51,7 @@ namespace aptitude
 
       // Keeps sets contained in this union alive, and also stores the
       // connections binding each set to this object's handlers.
-      typedef boost::unordered_multimap<boost::shared_ptr<dynamic_set<T> >,
+      typedef boost::unordered_multimap<std::shared_ptr<dynamic_set<T> >,
                                         sigc::connection>
       contained_sets_t;
 
@@ -68,13 +68,13 @@ namespace aptitude
     public:
       dynamic_set_union();
 
-      static boost::shared_ptr<dynamic_set_union> create();
+      static std::shared_ptr<dynamic_set_union> create();
 
-      void insert_set(const boost::shared_ptr<dynamic_set<T> > &set);
-      void remove_set(const boost::shared_ptr<dynamic_set<T> > &set);
+      void insert_set(const std::shared_ptr<dynamic_set<T> > &set);
+      void remove_set(const std::shared_ptr<dynamic_set<T> > &set);
 
       std::size_t size();
-      boost::shared_ptr<enumerator<T> > enumerate();
+      std::shared_ptr<enumerator<T> > enumerate();
 
       sigc::connection connect_inserted(const sigc::slot<void, T> &slot);
       sigc::connection connect_removed(const sigc::slot<void, T> &slot);
@@ -86,19 +86,19 @@ namespace aptitude
     }
 
     template<typename T>
-    boost::shared_ptr<dynamic_set_union<T> >
+    std::shared_ptr<dynamic_set_union<T> >
     dynamic_set_union<T>::create()
     {
-      return boost::make_shared<dynamic_set_union<T> >();
+      return std::make_shared<dynamic_set_union<T> >();
     }
 
 
     template<typename T>
-    void dynamic_set_union<T>::insert_set(const boost::shared_ptr<dynamic_set<T> > &set)
+    void dynamic_set_union<T>::insert_set(const std::shared_ptr<dynamic_set<T> > &set)
     {
       if(contained_sets.find(set) == contained_sets.end())
         {
-          for(boost::shared_ptr<enumerator<T> > e = set->enumerate();
+          for(std::shared_ptr<enumerator<T> > e = set->enumerate();
               e->advance(); )
             handle_inserted(e->get_current());
 
@@ -113,12 +113,12 @@ namespace aptitude
     }
 
     template<typename T>
-    void dynamic_set_union<T>::remove_set(const boost::shared_ptr<dynamic_set<T> > &set)
+    void dynamic_set_union<T>::remove_set(const std::shared_ptr<dynamic_set<T> > &set)
     {
       // Paranoia: defensively take an extra reference in case "set"
       // is somehow being kept alive by our reference (which should be
       // impossible).
-      const boost::shared_ptr<dynamic_set<T> > set_copy = set;
+      const std::shared_ptr<dynamic_set<T> > set_copy = set;
 
       typedef typename contained_sets_t::iterator contained_iterator;
       const std::pair<contained_iterator, contained_iterator> found
@@ -126,7 +126,7 @@ namespace aptitude
 
       if(found.first != found.second)
         {
-          for(boost::shared_ptr<enumerator<T> > e = set->enumerate();
+          for(std::shared_ptr<enumerator<T> > e = set->enumerate();
               e->advance(); )
             handle_removed(e->get_current());
 
@@ -145,9 +145,9 @@ namespace aptitude
     }
 
     template<typename T>
-    boost::shared_ptr<enumerator<T> > dynamic_set_union<T>::enumerate()
+    std::shared_ptr<enumerator<T> > dynamic_set_union<T>::enumerate()
     {
-      return boost::make_shared<set_enumerator>(this->shared_from_this(),
+      return std::make_shared<set_enumerator>(this->shared_from_this(),
                                                 value_counts.begin(),
                                                 value_counts.end());
     }
@@ -213,12 +213,12 @@ namespace aptitude
       values_iterator;
 
     private:
-      boost::shared_ptr<dynamic_set<T> > parent;
+      std::shared_ptr<dynamic_set<T> > parent;
       values_iterator begin, end;
       bool is_first;
 
     public:
-      set_enumerator(const boost::shared_ptr<dynamic_set<T> > &_parent,
+      set_enumerator(const std::shared_ptr<dynamic_set<T> > &_parent,
                      const values_iterator &_begin,
                      const values_iterator &_end);
 
@@ -227,7 +227,7 @@ namespace aptitude
     };
 
     template<typename T>
-    dynamic_set_union<T>::set_enumerator::set_enumerator(const boost::shared_ptr<dynamic_set<T> > &_parent,
+    dynamic_set_union<T>::set_enumerator::set_enumerator(const std::shared_ptr<dynamic_set<T> > &_parent,
                                                          const values_iterator &_begin,
                                                          const values_iterator &_end)
       : parent(_parent),

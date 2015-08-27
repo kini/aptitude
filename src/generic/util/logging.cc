@@ -20,18 +20,15 @@
 
 #include "logging.h"
 
-#include <boost/enable_shared_from_this.hpp>
-#include <boost/make_shared.hpp>
 #include <boost/multi_index_container.hpp>
 #include <boost/multi_index/hashed_index.hpp>
 #include <boost/multi_index/mem_fun.hpp>
-#include <boost/weak_ptr.hpp>
 
 #include <cwidget/generic/threads/threads.h>
 
 #include <iostream>
+#include <memory>
 
-using boost::enable_shared_from_this;
 using boost::multi_index_container;
 using boost::multi_index::const_mem_fun;
 using boost::multi_index::hashed_non_unique;
@@ -61,7 +58,7 @@ namespace aptitude
       }
 
       class Logger::Impl : public Logger,
-                           public enable_shared_from_this<Logger::Impl>
+                           public std::enable_shared_from_this<Logger::Impl>
       {
         // If set, the level that has been configured for this
         // logger; otherwise, indicates that no level is configured
@@ -70,12 +67,12 @@ namespace aptitude
 
         const std::string category;
 
-        const boost::shared_ptr<Logger::Impl> parent;
+        const std::shared_ptr<Logger::Impl> parent;
 
         // We carry a weak pointer to the parent logging system, so
         // that we can call back into it even if it's not the global
         // instance.
-        const boost::weak_ptr<LoggingSystem::Impl> loggingSystemWeak;
+        const std::weak_ptr<LoggingSystem::Impl> loggingSystemWeak;
 
         sigc::signal<void, const char *, int, log_level, LoggerPtr, std::string>
         signal_message_logged;
@@ -86,8 +83,8 @@ namespace aptitude
 
       public:
         Impl(const std::string &_category,
-             const boost::shared_ptr<Logger::Impl> &_parent,
-             const boost::shared_ptr<LoggingSystem::Impl> &_loggingSystem);
+             const std::shared_ptr<Logger::Impl> &_parent,
+             const std::shared_ptr<LoggingSystem::Impl> &_loggingSystem);
 
         void log(const char *sourceFilename,
                  int sourceLineNumber,
@@ -95,7 +92,7 @@ namespace aptitude
                  const std::string &msg);
 
         const std::string &getCategory() const;
-        const boost::shared_ptr<Logger::Impl> &getParent() const;
+        const std::shared_ptr<Logger::Impl> &getParent() const;
 
         void setLevel(const optional<log_level> &value);
 
@@ -110,8 +107,8 @@ namespace aptitude
       };
 
       Logger::Impl::Impl(const std::string &_category,
-                         const boost::shared_ptr<Logger::Impl> &_parent,
-                         const boost::shared_ptr<LoggingSystem::Impl> &_loggingSystem)
+                         const std::shared_ptr<Logger::Impl> &_parent,
+                         const std::shared_ptr<LoggingSystem::Impl> &_loggingSystem)
         : Logger(_parent.get() == NULL
                  ? getDefaultLevel()
                  : _parent->effectiveLevel),
@@ -134,8 +131,8 @@ namespace aptitude
         // We emit this log message at each level of the hierarchy,
         // but the logger passed along always refers to where the
         // message started.
-        const boost::shared_ptr<Impl> self = shared_from_this();
-        boost::shared_ptr<Impl> logger = self;
+        const std::shared_ptr<Impl> self = shared_from_this();
+        std::shared_ptr<Impl> logger = self;
         while(logger.get() != NULL)
           {
             logger->signal_message_logged(sourceFilename,
@@ -153,7 +150,7 @@ namespace aptitude
         return category;
       }
 
-      const boost::shared_ptr<Logger::Impl> &Logger::Impl::getParent() const
+      const std::shared_ptr<Logger::Impl> &Logger::Impl::getParent() const
       {
         return parent;
       }
@@ -173,13 +170,13 @@ namespace aptitude
        */
       class LoggingSystem::Impl
         : public LoggingSystem,
-          public enable_shared_from_this<LoggingSystem::Impl>
+          public std::enable_shared_from_this<LoggingSystem::Impl>
       {
         class by_category_tag;
         class by_parent_tag;
 
         typedef multi_index_container<
-          boost::shared_ptr<Logger::Impl>,
+          std::shared_ptr<Logger::Impl>,
           indexed_by<
             hashed_unique<tag<by_category_tag>,
                           const_mem_fun<Logger::Impl,
@@ -187,7 +184,7 @@ namespace aptitude
                                         &Logger::Impl::getCategory> >,
             hashed_non_unique<tag<by_parent_tag>,
                               const_mem_fun<Logger::Impl,
-                                            const boost::shared_ptr<Logger::Impl> &,
+                                            const std::shared_ptr<Logger::Impl> &,
                                             &Logger::Impl::getParent> > > >
         logger_table;
 
@@ -205,7 +202,7 @@ namespace aptitude
 
         /** \brief Find the immediate children of the given logger. */
         std::pair<child_iterator, child_iterator>
-        find_children(const boost::shared_ptr<Logger::Impl> &parent)
+        find_children(const std::shared_ptr<Logger::Impl> &parent)
         {
           return loggers.get<by_parent_tag>().equal_range(parent);
         }
@@ -221,7 +218,7 @@ namespace aptitude
          *  \param effectiveLevel   The new effective level of logger
          *                          and of its descendants.
          */
-        void recursiveSetEffectiveLevel(const boost::shared_ptr<Logger::Impl> &logger,
+        void recursiveSetEffectiveLevel(const std::shared_ptr<Logger::Impl> &logger,
                                         log_level effectiveLevel)
         {
           logger->effectiveLevel = effectiveLevel;
@@ -230,7 +227,7 @@ namespace aptitude
 
           for(child_iterator it = children.first; it != children.second; ++it)
             {
-              const boost::shared_ptr<Logger::Impl> child = *it;
+              const std::shared_ptr<Logger::Impl> child = *it;
 
               if(!child->configuredLevel)
                 recursiveSetEffectiveLevel(child, effectiveLevel);
@@ -243,14 +240,14 @@ namespace aptitude
         //  1. Returns a Logger::Impl instead of a Logger;
         //  2. Doesn't lock the mutex (so it can be used recursively
         //     from within other routines).
-        boost::shared_ptr<Logger::Impl> doGetLogger(const std::string &category);
+        std::shared_ptr<Logger::Impl> doGetLogger(const std::string &category);
 
       public:
         Impl()
         {
         }
 
-        void setLevel(const boost::shared_ptr<Logger::Impl> &category,
+        void setLevel(const std::shared_ptr<Logger::Impl> &category,
                       const optional<log_level> &level);
 
         LoggerPtr getLogger(const std::string &category);
@@ -268,23 +265,23 @@ namespace aptitude
           // destructors ran, which has all sorts of nasty
           // possibilities.
           //
-          // Needs to be a boost::shared_ptr so enable_shared_from_this()
+          // Needs to be a std::shared_ptr so enable_shared_from_this()
           // works (which allows loggers to take weak references to
           // the logging system).
-          static boost::shared_ptr<Impl> *system =
-            new boost::shared_ptr<Impl>(boost::make_shared<Impl>());
+          static std::shared_ptr<Impl> *system =
+            new std::shared_ptr<Impl>(std::make_shared<Impl>());
 
           return **system;
         }
 
         /** \brief Create a new logging system. */
-        static boost::shared_ptr<Impl> create()
+        static std::shared_ptr<Impl> create()
         {
-          return boost::make_shared<Impl>();
+          return std::make_shared<Impl>();
         }
       };
 
-      void LoggingSystem::Impl::setLevel(const boost::shared_ptr<Logger::Impl> &category,
+      void LoggingSystem::Impl::setLevel(const std::shared_ptr<Logger::Impl> &category,
                                          const optional<log_level> &level)
       {
         mutex::lock l(loggers_mutex);
@@ -300,7 +297,7 @@ namespace aptitude
 
         if(!level)
           {
-            const boost::shared_ptr<Logger::Impl> parent = category->getParent();
+            const std::shared_ptr<Logger::Impl> parent = category->getParent();
             if(parent.get() == NULL)
               newEffectiveLevel = Logger::Impl::getDefaultLevel();
             else
@@ -319,7 +316,7 @@ namespace aptitude
         return doGetLogger(category);
       }
 
-      boost::shared_ptr<Logger::Impl>
+      std::shared_ptr<Logger::Impl>
       LoggingSystem::Impl::doGetLogger(const std::string &category)
       {
         by_category_index &by_category = loggers.get<by_category_tag>();
@@ -333,7 +330,7 @@ namespace aptitude
             return *found;
         }
 
-        boost::shared_ptr<Logger::Impl> parent;
+        std::shared_ptr<Logger::Impl> parent;
         // If they aren't asking for the root logger, find or
         // instantiate the parent.
         if(!category.empty())
@@ -348,8 +345,8 @@ namespace aptitude
             parent = doGetLogger(parent_category_name);
           }
 
-        boost::shared_ptr<Logger::Impl> rval =
-          boost::make_shared<Logger::Impl>(category, parent, shared_from_this());
+        std::shared_ptr<Logger::Impl> rval =
+          std::make_shared<Logger::Impl>(category, parent, shared_from_this());
 
         loggers.insert(rval);
 
@@ -358,7 +355,7 @@ namespace aptitude
 
       void Logger::Impl::setLevel(const optional<log_level> &value)
       {
-        boost::shared_ptr<LoggingSystem::Impl> loggingSystem =
+        std::shared_ptr<LoggingSystem::Impl> loggingSystem =
           loggingSystemWeak.lock();
 
         if(loggingSystem.get() != NULL)
@@ -392,7 +389,7 @@ namespace aptitude
         return LoggingSystem::Impl::get().getLogger(category);
       }
 
-      boost::shared_ptr<LoggingSystem> createLoggingSystem()
+      std::shared_ptr<LoggingSystem> createLoggingSystem()
       {
         return LoggingSystem::Impl::create();
       }

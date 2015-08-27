@@ -20,10 +20,10 @@
 #ifndef DYNAMIC_SET_H
 #define DYNAMIC_SET_H
 
-#include <boost/shared_ptr.hpp>
-
 #include <sigc++/connection.h>
 #include <sigc++/slot.h>
+
+#include <memory>
 
 namespace aptitude
 {
@@ -52,7 +52,7 @@ namespace aptitude
        *  set object; do not store it in a structure that could form a
        *  reference cycle with the set.
        */
-      virtual boost::shared_ptr<enumerator<T> > enumerate() = 0;
+      virtual std::shared_ptr<enumerator<T> > enumerate() = 0;
 
 
       /** \brief Register a slot to be invoked after an object is

@@ -24,12 +24,11 @@
 #include "dynamic_set.h"
 #include "enumerator.h"
 
-#include <boost/enable_shared_from_this.hpp>
-#include <boost/make_shared.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/unordered_set.hpp>
 
 #include <sigc++/signal.h>
+
+#include <memory>
 
 namespace aptitude
 {
@@ -42,7 +41,7 @@ namespace aptitude
      */
     template<typename T>
     class dynamic_set_impl
-      : public boost::enable_shared_from_this<dynamic_set_impl<T> >,
+      : public std::enable_shared_from_this<dynamic_set_impl<T> >,
         public writable_dynamic_set<T>
     {
       boost::unordered_set<T> values;
@@ -60,11 +59,11 @@ namespace aptitude
       dynamic_set_impl(const InputIter &begin, const InputIter &end);
 
       /** \brief Create an empty dynamic set. */
-      static boost::shared_ptr<dynamic_set_impl> create();
+      static std::shared_ptr<dynamic_set_impl> create();
 
       /** \brief Create a dynamic set from a range of values. */
       template<typename InputIter>
-      static boost::shared_ptr<dynamic_set_impl>
+      static std::shared_ptr<dynamic_set_impl>
       create(const InputIter &begin, const InputIter &end);
 
 
@@ -72,7 +71,7 @@ namespace aptitude
       void remove(const T &t);
 
       std::size_t size();
-      boost::shared_ptr<enumerator<T> > enumerate();
+      std::shared_ptr<enumerator<T> > enumerate();
       sigc::connection connect_inserted(const sigc::slot<void, T> &slot);
       sigc::connection connect_removed(const sigc::slot<void, T> &slot);
     };
@@ -90,17 +89,17 @@ namespace aptitude
     }
 
     template<typename T>
-    boost::shared_ptr<dynamic_set_impl<T> > dynamic_set_impl<T>::create()
+    std::shared_ptr<dynamic_set_impl<T> > dynamic_set_impl<T>::create()
     {
-      return boost::make_shared<dynamic_set_impl>();
+      return std::make_shared<dynamic_set_impl>();
     }
 
     template<typename T>
     template<typename InputIter>
-    boost::shared_ptr<dynamic_set_impl<T> >
+    std::shared_ptr<dynamic_set_impl<T> >
     dynamic_set_impl<T>::create(const InputIter &begin, const InputIter &end)
     {
-      return boost::make_shared<dynamic_set_impl>(begin, end);
+      return std::make_shared<dynamic_set_impl>(begin, end);
     }
 
     template<typename T>
@@ -128,12 +127,12 @@ namespace aptitude
     }
 
     template<typename T>
-    boost::shared_ptr<enumerator<T> > dynamic_set_impl<T>::enumerate()
+    std::shared_ptr<enumerator<T> > dynamic_set_impl<T>::enumerate()
     {
       typedef typename boost::unordered_set<T>::const_iterator Iter;
       typedef iterator_enumerator_with_keepalive<Iter, dynamic_set_impl<T> > Enum;
 
-      return boost::make_shared<Enum>(values.begin(),
+      return std::make_shared<Enum>(values.begin(),
                                       values.end(),
                                       this->shared_from_this());
     }

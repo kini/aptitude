@@ -23,7 +23,7 @@
 #include <sigc++/bind.h>
 #include <sigc++/slot.h>
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 /** \brief The type of a function that invokes a slot.  Used to safely
  *  invoke continuations from background processes in the main thread.
@@ -38,14 +38,14 @@ typedef void (*post_thunk_f)(const sigc::slot<void> &);
  */
 template<typename T>
 inline void keepalive(const sigc::slot<void> &f,
-		      const boost::shared_ptr<T> &)
+		      const std::shared_ptr<T> &)
 {
   f();
 }
 
 template<typename T>
 sigc::slot<void> make_keepalive_slot(const sigc::slot<void> &f,
-				     const boost::shared_ptr<T> &k)
+				     const std::shared_ptr<T> &k)
 {
   return sigc::bind(sigc::ptr_fun(keepalive<T>), f, k);
 }

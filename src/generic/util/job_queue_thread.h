@@ -18,13 +18,12 @@
 // the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 // Boston, MA 02111-1307, USA.
 
-#include <deque>
-
-#include <boost/make_shared.hpp>
-
 #include <cwidget/generic/threads/threads.h>
 
 #include <loggers.h>
+
+#include <deque>
+#include <memory>
 
 namespace aptitude
 {
@@ -52,10 +51,10 @@ namespace aptitude
       static std::deque<Job> jobs;
 
       // The single instance of this class.
-      static boost::shared_ptr<job_queue_thread> active_instance;
+      static std::shared_ptr<job_queue_thread> active_instance;
 
       // The active thread, or NULL if there isn't one.
-      static boost::shared_ptr<cwidget::threads::thread> active_thread;
+      static std::shared_ptr<cwidget::threads::thread> active_thread;
 
       // Set to true if the thread is currently stopped.  This causes
       // the job-processing loop to exit and prevents the thread from
@@ -68,10 +67,10 @@ namespace aptitude
 
       class bootstrap
       {
-	boost::shared_ptr<job_queue_thread> target;
+	std::shared_ptr<job_queue_thread> target;
 
       public:
-	bootstrap(const boost::shared_ptr<job_queue_thread> &_target)
+	bootstrap(const std::shared_ptr<job_queue_thread> &_target)
 	  : target(_target)
 	{
 	}
@@ -144,7 +143,7 @@ namespace aptitude
 
 	// Copy this since it'll be zeroed out when the thread exits,
 	// which can happen as soon as the lock is released below.
-	boost::shared_ptr<cwidget::threads::thread> active_thread_copy(active_thread);
+	std::shared_ptr<cwidget::threads::thread> active_thread_copy(active_thread);
 
 	l.release();
 
@@ -174,8 +173,8 @@ namespace aptitude
 	  {
 	    LOG_TRACE(Subclass::get_log_category(), "Starting the background thread.");
 
-	    active_instance = boost::make_shared<Subclass>();
-	    active_thread = boost::make_shared<cwidget::threads::thread>(bootstrap(active_instance));
+	    active_instance = std::make_shared<Subclass>();
+	    active_thread = std::make_shared<cwidget::threads::thread>(bootstrap(active_instance));
 	  }
       }
 
@@ -255,10 +254,10 @@ namespace aptitude
     std::deque<Job> job_queue_thread<Subclass, Job>::jobs;
 
     template<typename Subclass, typename Job>
-    boost::shared_ptr<job_queue_thread<Subclass, Job> > job_queue_thread<Subclass, Job>::active_instance;
+    std::shared_ptr<job_queue_thread<Subclass, Job> > job_queue_thread<Subclass, Job>::active_instance;
 
     template<typename Subclass, typename Job>
-    boost::shared_ptr<cwidget::threads::thread> job_queue_thread<Subclass, Job>::active_thread;
+    std::shared_ptr<cwidget::threads::thread> job_queue_thread<Subclass, Job>::active_thread;
 
     template<typename Subclass, typename Job>
     bool job_queue_thread<Subclass, Job>::stopped = false;

@@ -19,7 +19,7 @@
 
 #include <cwidget/generic/util/exception.h>
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include <time.h>
 
@@ -121,9 +121,9 @@ namespace aptitude
        *                        cache.  (if zero, only a memory cache
        *                        will be used)
        */
-      static boost::shared_ptr<file_cache> create(const std::string &filename,
-						  int memory_size,
-						  int disk_size);
+      static std::shared_ptr<file_cache> create(const std::string &filename,
+						int memory_size,
+						int disk_size);
 
       virtual ~file_cache();
     };

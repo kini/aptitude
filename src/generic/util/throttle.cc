@@ -6,7 +6,6 @@
 #include <loggers.h>
 
 // System includes:
-#include <boost/make_shared.hpp>
 #include <boost/optional.hpp>
 
 #include <generic/util/util.h>
@@ -113,9 +112,9 @@ namespace aptitude
     {
     }
 
-    boost::shared_ptr<throttle> create_throttle()
+    std::shared_ptr<throttle> create_throttle()
     {
-      return boost::make_shared<throttle_impl>();
+      return std::make_shared<throttle_impl>();
     }
   }
 }

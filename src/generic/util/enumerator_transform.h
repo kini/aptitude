@@ -23,7 +23,7 @@
 #include "enumerator.h"
 
 #include <boost/function.hpp>
-#include <boost/make_shared.hpp>
+#include <memory>
 
 namespace aptitude
 {
@@ -38,12 +38,12 @@ namespace aptitude
     template<typename From, typename To>
     class enumerator_transform : public enumerator<To>
     {
-      const boost::shared_ptr<enumerator<From> > sub_enumerator;
+      const std::shared_ptr<enumerator<From> > sub_enumerator;
       const boost::function<To (From)> f;
 
     public:
       /** \warning Should only be used by create(). */
-      enumerator_transform(const boost::shared_ptr<enumerator<From> > &
+      enumerator_transform(const std::shared_ptr<enumerator<From> > &
                            _sub_enumerator,
                            const boost::function<To (From)> &_f);
 
@@ -54,8 +54,8 @@ namespace aptitude
        *                           _sub_enumerator.  Normally this should
        *                           not have side-effects.
        */
-      static boost::shared_ptr<enumerator_transform>
-      create(const boost::shared_ptr<enumerator<From> > &sub_enumerator,
+      static std::shared_ptr<enumerator_transform>
+      create(const std::shared_ptr<enumerator<From> > &sub_enumerator,
              const boost::function<To (From)> &f);
 
       bool advance();
@@ -63,7 +63,7 @@ namespace aptitude
     };
 
     template<typename From, typename To>
-    enumerator_transform<From, To>::enumerator_transform(const boost::shared_ptr<enumerator<From> > &_sub_enumerator,
+    enumerator_transform<From, To>::enumerator_transform(const std::shared_ptr<enumerator<From> > &_sub_enumerator,
                                                          const boost::function<To (From)> &_f)
       : sub_enumerator(_sub_enumerator),
         f(_f)
@@ -71,11 +71,11 @@ namespace aptitude
     }
 
     template<typename From, typename To>
-    boost::shared_ptr<enumerator_transform<From, To> >
-    enumerator_transform<From, To>::create(const boost::shared_ptr<enumerator<From> > &sub_enumerator,
+    std::shared_ptr<enumerator_transform<From, To> >
+    enumerator_transform<From, To>::create(const std::shared_ptr<enumerator<From> > &sub_enumerator,
                                            const boost::function<To (From)> &f)
     {
-      return boost::make_shared<enumerator_transform<From, To> >(sub_enumerator, f);
+      return std::make_shared<enumerator_transform<From, To> >(sub_enumerator, f);
     }
 
     template<typename From, typename To>

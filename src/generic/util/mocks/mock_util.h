@@ -20,11 +20,9 @@
 #ifndef APTITUDE_GENERIC_MOCK_UTIL_H
 #define APTITUDE_GENERIC_MOCK_UTIL_H
 
-// System includes:
-#include <boost/make_shared.hpp>
-#include <boost/shared_ptr.hpp>
-
 #include <gmock/gmock.h>
+
+#include <memory>
 
 namespace aptitude
 {
@@ -57,21 +55,21 @@ namespace aptitude
         typedef testing::StrictMock<MockType> StrictMockType;
 
         /** \brief Create a default-style mock. */
-        static boost::shared_ptr<MockType> create_default()
+        static std::shared_ptr<MockType> create_default()
         {
-          return boost::make_shared<MockType>();
+          return std::make_shared<MockType>();
         }
 
         /** \brief Create a nice mock. */
-        static boost::shared_ptr<MockType> create_nice()
+        static std::shared_ptr<MockType> create_nice()
         {
-          return boost::make_shared<NiceMockType>();
+          return std::make_shared<NiceMockType>();
         }
 
         /** \brief Create a strict mock. */
-        static boost::shared_ptr<MockType> create_strict()
+        static std::shared_ptr<MockType> create_strict()
         {
-          return boost::make_shared<StrictMockType>();
+          return std::make_shared<StrictMockType>();
         }
       };
 

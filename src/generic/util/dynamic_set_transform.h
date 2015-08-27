@@ -24,11 +24,11 @@
 #include "enumerator_transform.h"
 
 #include <boost/function.hpp>
-#include <boost/make_shared.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include <sigc++/signal.h>
 #include <sigc++/slot.h>
+
+#include <memory>
 
 namespace aptitude
 {
@@ -44,7 +44,7 @@ namespace aptitude
     template<typename From, typename To>
     class dynamic_set_transform : public dynamic_set<To>
     {
-      boost::shared_ptr<dynamic_set<From> > wrapped_set;
+      std::shared_ptr<dynamic_set<From> > wrapped_set;
       boost::function<To (From)> f;
 
       sigc::signal<void, To> signal_inserted;
@@ -55,21 +55,21 @@ namespace aptitude
 
     public:
       /** \warning Should only be used by create(). */
-      dynamic_set_transform(const boost::shared_ptr<dynamic_set<From> > &_wrapped_set,
+      dynamic_set_transform(const std::shared_ptr<dynamic_set<From> > &_wrapped_set,
                             const boost::function<To (From)> &_f);
 
-      static boost::shared_ptr<dynamic_set_transform>
-      create(const boost::shared_ptr<dynamic_set<From> > &wrapped_set,
+      static std::shared_ptr<dynamic_set_transform>
+      create(const std::shared_ptr<dynamic_set<From> > &wrapped_set,
              const boost::function<To (From)> &f);
 
       std::size_t size();
-      boost::shared_ptr<enumerator<To> > enumerate();
+      std::shared_ptr<enumerator<To> > enumerate();
       sigc::connection connect_inserted(const sigc::slot<void, To> &slot);
       sigc::connection connect_removed(const sigc::slot<void, To> &slot);
     };
 
     template<typename From, typename To>
-    dynamic_set_transform<From, To>::dynamic_set_transform(const boost::shared_ptr<dynamic_set<From> > &_wrapped_set,
+    dynamic_set_transform<From, To>::dynamic_set_transform(const std::shared_ptr<dynamic_set<From> > &_wrapped_set,
                                                            const boost::function<To (From)> &_f)
       : wrapped_set(_wrapped_set),
         f(_f)
@@ -79,11 +79,11 @@ namespace aptitude
     }
 
     template<typename From, typename To>
-    boost::shared_ptr<dynamic_set_transform<From, To> >
-    dynamic_set_transform<From, To>::create(const boost::shared_ptr<dynamic_set<From> > &wrapped_set,
+    std::shared_ptr<dynamic_set_transform<From, To> >
+    dynamic_set_transform<From, To>::create(const std::shared_ptr<dynamic_set<From> > &wrapped_set,
                                             const boost::function<To (From)> &f)
     {
-      return boost::make_shared<dynamic_set_transform<From, To> >(wrapped_set, f);
+      return std::make_shared<dynamic_set_transform<From, To> >(wrapped_set, f);
     }
 
     template<typename From, typename To>
@@ -93,7 +93,7 @@ namespace aptitude
     }
 
     template<typename From, typename To>
-    boost::shared_ptr<enumerator<To> > dynamic_set_transform<From, To>::enumerate()
+    std::shared_ptr<enumerator<To> > dynamic_set_transform<From, To>::enumerate()
     {
       return enumerator_transform<From, To>::create(wrapped_set->enumerate(), f);
     }

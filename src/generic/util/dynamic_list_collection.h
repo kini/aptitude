@@ -24,19 +24,19 @@
 #include "dynamic_list_impl.h"
 
 #include <boost/functional/hash.hpp>
-#include <boost/make_shared.hpp>
 #include <boost/multi_index_container.hpp>
 #include <boost/multi_index/hashed_index.hpp>
 #include <boost/multi_index/member.hpp>
 #include <boost/multi_index/mem_fun.hpp>
 #include <boost/multi_index/random_access_index.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/unordered_map.hpp>
 
 #include <cwidget/generic/util/eassert.h>
 
 #include <sigc++/bind.h>
 #include <sigc++/connection.h>
+
+#include <memory>
 
 namespace aptitude
 {
@@ -52,7 +52,7 @@ namespace aptitude
     template<typename T>
     class dynamic_list_collection : public dynamic_list<T>
     {
-      typedef boost::unordered_multimap<boost::shared_ptr<dynamic_list<T> >,
+      typedef boost::unordered_multimap<std::shared_ptr<dynamic_list<T> >,
                                         sigc::connection>
       sub_list_connections;
 
@@ -64,16 +64,16 @@ namespace aptitude
 
       class cell
       {
-        boost::shared_ptr<dynamic_list<T> > parent_list;
+        std::shared_ptr<dynamic_list<T> > parent_list;
         std::size_t index_within_parent_list;
         T value;
 
       public:
-        cell(const boost::shared_ptr<dynamic_list<T> > &_parent_list,
+        cell(const std::shared_ptr<dynamic_list<T> > &_parent_list,
              std::size_t _index_within_parent_list,
              const T &_value);
 
-        const boost::shared_ptr<dynamic_list<T> > &get_parent_list() const
+        const std::shared_ptr<dynamic_list<T> > &get_parent_list() const
         {
           return parent_list;
         }
@@ -121,7 +121,7 @@ namespace aptitude
           boost::multi_index::hashed_non_unique<
             boost::multi_index::tag<by_parent_list_tag>,
             boost::multi_index::const_mem_fun<cell,
-                                              const boost::shared_ptr<dynamic_list<T> > &,
+                                              const std::shared_ptr<dynamic_list<T> > &,
                                               &cell::get_parent_list> > > >
       cells_collection;
 
@@ -131,11 +131,11 @@ namespace aptitude
       cells_collection cells;
 
       void handle_insert(const T &value, std::size_t idx,
-                         const boost::shared_ptr<dynamic_list<T> > &list);
+                         const std::shared_ptr<dynamic_list<T> > &list);
       void handle_remove(const T &value, std::size_t idx,
-                         const boost::shared_ptr<dynamic_list<T> > &list);
+                         const std::shared_ptr<dynamic_list<T> > &list);
       void handle_move(const T &value, std::size_t from, std::size_t to,
-                       const boost::shared_ptr<dynamic_list<T> > &list);
+                       const std::shared_ptr<dynamic_list<T> > &list);
 
     public:
       // Only public for make_shared.
@@ -144,14 +144,14 @@ namespace aptitude
       std::size_t size();
       T get_at(std::size_t idx);
 
-      void add_list(const boost::shared_ptr<dynamic_list<T> > &lst);
-      void remove_list(const boost::shared_ptr<dynamic_list<T> > &lst);
+      void add_list(const std::shared_ptr<dynamic_list<T> > &lst);
+      void remove_list(const std::shared_ptr<dynamic_list<T> > &lst);
 
-      static boost::shared_ptr<dynamic_list_collection> create();
+      static std::shared_ptr<dynamic_list_collection> create();
     };
 
     template<typename T>
-    dynamic_list_collection<T>::cell::cell(const boost::shared_ptr<dynamic_list<T> > &_parent_list,
+    dynamic_list_collection<T>::cell::cell(const std::shared_ptr<dynamic_list<T> > &_parent_list,
                                            std::size_t _index_within_parent_list,
                                            const T &_value)
       : parent_list(_parent_list),
@@ -167,10 +167,10 @@ namespace aptitude
     }
 
     template<typename T>
-    boost::shared_ptr<dynamic_list_collection<T> >
+    std::shared_ptr<dynamic_list_collection<T> >
     dynamic_list_collection<T>::create()
     {
-      return boost::make_shared<dynamic_list_collection>();
+      return std::make_shared<dynamic_list_collection>();
     }
 
     template<typename T>
@@ -188,7 +188,7 @@ namespace aptitude
 
     template<typename T>
     void dynamic_list_collection<T>::handle_insert(const T &value, std::size_t idx,
-                                                   const boost::shared_ptr<dynamic_list<T> > &list)
+                                                   const std::shared_ptr<dynamic_list<T> > &list)
     {
       concrete_view_index &concrete_view = cells.template get<concrete_view_tag>();
 
@@ -259,7 +259,7 @@ namespace aptitude
 
     template<typename T>
     void dynamic_list_collection<T>::handle_remove(const T &value, std::size_t idx,
-                                                   const boost::shared_ptr<dynamic_list<T> > &list)
+                                                   const std::shared_ptr<dynamic_list<T> > &list)
     {
       concrete_view_index &concrete_view = cells.template get<concrete_view_tag>();
 
@@ -323,7 +323,7 @@ namespace aptitude
     template<typename T>
     void dynamic_list_collection<T>::handle_move(const T &value,
                                                  std::size_t from, std::size_t to,
-                                                 const boost::shared_ptr<dynamic_list<T> > &list)
+                                                 const std::shared_ptr<dynamic_list<T> > &list)
     {
       if(from == to)
         return; // TODO: log a warning?  This should not happen.
@@ -416,7 +416,7 @@ namespace aptitude
     }
 
     template<typename T>
-    void dynamic_list_collection<T>::add_list(const boost::shared_ptr<dynamic_list<T> > &lst)
+    void dynamic_list_collection<T>::add_list(const std::shared_ptr<dynamic_list<T> > &lst)
     {
       // Insert all the list's items at the end of this collection.
       //
@@ -446,7 +446,7 @@ namespace aptitude
     }
 
     template<typename T>
-    void dynamic_list_collection<T>::remove_list(const boost::shared_ptr<dynamic_list<T> > &lst)
+    void dynamic_list_collection<T>::remove_list(const std::shared_ptr<dynamic_list<T> > &lst)
     {
       // First remove all the list's entries from the concrete view.
       // I'm avoiding the temptation to optimize this, with

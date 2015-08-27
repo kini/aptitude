@@ -20,8 +20,7 @@
 #ifndef APTITUDE_UTIL_THROTTLE_H
 #define APTITUDE_UTIL_THROTTLE_H
 
-// System includes:
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace aptitude
 {
@@ -52,7 +51,7 @@ namespace aptitude
      *  \todo This should take an argument giving the update interval
      *  in seconds.
      */
-    boost::shared_ptr<throttle> create_throttle();
+    std::shared_ptr<throttle> create_throttle();
   }
 }
 
