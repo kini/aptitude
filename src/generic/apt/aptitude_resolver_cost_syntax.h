@@ -22,7 +22,7 @@
 
 #include "aptitude_resolver_cost_types.h"
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <vector>
 
 /** \brief Exception type thrown by parse_cost_settings(). */
@@ -58,7 +58,7 @@ public:
  *
  *  Throws a std::exception if parsing failed.
  */
-boost::shared_ptr<std::vector<cost_component_structure> >
+std::shared_ptr<std::vector<cost_component_structure> >
 parse_cost_settings(const std::string &settings);
 
 /** \brief Write some settings to a stream.
@@ -67,10 +67,10 @@ parse_cost_settings(const std::string &settings);
  *  will produce an identical settings object to one passed as a
  *  parameter to dump_settings().
  */
-void dump_settings(std::ostream &out, const boost::shared_ptr<std::vector<cost_component_structure> > &settings);
+void dump_settings(std::ostream &out, const std::shared_ptr<std::vector<cost_component_structure> > &settings);
 
 /** \brief Synonym for dump_settings(). */
-std::ostream &operator<<(std::ostream &out, const boost::shared_ptr<std::vector<cost_component_structure> > &settings);
+std::ostream &operator<<(std::ostream &out, const std::shared_ptr<std::vector<cost_component_structure> > &settings);
 
 /** \brief Synonym for dump_settings(). */
 std::ostream &operator<<(std::ostream &out, const std::vector<cost_component_structure> &settings);

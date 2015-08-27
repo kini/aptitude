@@ -17,7 +17,7 @@
 // the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 // Boston, MA 02111-1307, USA.
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 class aptcfg;
 class aptitudeCacheFile;
@@ -45,5 +45,5 @@ pkgSourceList *apt_source_list=NULL;
 undo_list *apt_undos=NULL;
 resolver_manager *resman = NULL;
 
-boost::shared_ptr<aptitude::util::file_cache> download_cache;
+std::shared_ptr<aptitude::util::file_cache> download_cache;
 

@@ -35,19 +35,16 @@
 #include <signal.h>
 #include <sys/stat.h>
 
-#include <deque>
-
 #include <sigc++/bind.h>
 
 #include <apt-pkg/sourcelist.h>
 
 #include <cwidget/generic/util/ssprintf.h>
 
-#include <boost/enable_shared_from_this.hpp>
-#include <boost/make_shared.hpp>
-#include <boost/scoped_ptr.hpp>
-
 #include <loggers.h>
+
+#include <deque>
+#include <memory>
 
 using namespace std;
 namespace cw = cwidget;
@@ -72,7 +69,7 @@ namespace aptitude
 	    for (std::vector<pkgIndexFile *>::const_iterator indexesIt =
 		   indexes->begin(); indexesIt != indexes->end(); ++indexesIt)
 	      {
-		boost::scoped_ptr<pkgSrcRecords::Parser>
+		std::unique_ptr<pkgSrcRecords::Parser>
 		  parser((*indexesIt)->CreateSrcParser());
 
 		if(parser.get() != NULL)
@@ -84,30 +81,30 @@ namespace aptitude
       }
     }
 
-    boost::shared_ptr<changelog_info>
+    std::shared_ptr<changelog_info>
     changelog_info::create(const std::string &source_package,
 			   const std::string &source_version,
 			   const std::string &section,
 			   const std::string &display_name)
     {
-      return boost::make_shared<changelog_info>(source_package,
-						source_version,
-						section,
-						display_name);
+      return std::make_shared<changelog_info>(source_package,
+					      source_version,
+					      section,
+					      display_name);
     }
 
-    boost::shared_ptr<changelog_info>
+    std::shared_ptr<changelog_info>
     changelog_info::create(const pkgCache::VerIterator &ver)
     {
       if(ver.end())
-	return boost::shared_ptr<changelog_info>();
+	return std::shared_ptr<changelog_info>();
 
       if(ver.FileList().end())
 	{
 	  LOG_TRACE(Loggers::getAptitudeChangelog(),
 		    "No changelog information for " << ver.ParentPkg().Name()
 		    << ": it isn't available from any archive.");
-	  return boost::shared_ptr<changelog_info>();
+	  return std::shared_ptr<changelog_info>();
 	}
 
       pkgRecords::Parser &rec =
@@ -123,10 +120,10 @@ namespace aptitude
 		<< " " << ver.VerStr() << ", getting the changelog of the source package "
 		<< source_package << " " << source_version);
 
-      return boost::make_shared<changelog_info>(source_package,
-						source_version,
-						ver.Section(),
-						ver.ParentPkg().Name());
+      return std::make_shared<changelog_info>(source_package,
+					      source_version,
+					      ver.Section(),
+					      ver.ParentPkg().Name());
     }
 
     namespace
@@ -136,7 +133,7 @@ namespace aptitude
        *  This is responsible for switching to fallback URIs when a
        *  download fails.
        */
-      class changelog_download : public boost::enable_shared_from_this<changelog_download>, public download_request, public download_callbacks
+      class changelog_download : public std::enable_shared_from_this<changelog_download>, public download_request, public download_callbacks
       {
 	// The callbacks the client code wants us to use for reporting
 	// the state of the download.  All callbacks are passed through
@@ -145,10 +142,10 @@ namespace aptitude
 	//
 	// We rely in several places on the fact that this member is
 	// read-only (so we don't need to hold a lock to access it).
-	boost::shared_ptr<download_callbacks> parent;
+	std::shared_ptr<download_callbacks> parent;
 
 	// The current download, if any.
-	boost::shared_ptr<download_request> current_download;
+	std::shared_ptr<download_request> current_download;
 
 	// The URIs to fetch.
 	std::deque<std::string> uris;
@@ -172,7 +169,7 @@ namespace aptitude
 	std::string short_description;
 
       public:
-	changelog_download(const boost::shared_ptr<download_callbacks> &_parent,
+	changelog_download(const std::shared_ptr<download_callbacks> &_parent,
 			   post_thunk_f _post_thunk,
 			   const std::string &_short_description)
 	  : parent(_parent),
@@ -319,7 +316,7 @@ namespace aptitude
 	  sigc::slot<void, std::string> failure_slot(sigc::mem_fun(*this, &changelog_download::failure));
 	  sigc::slot<void> thunk(sigc::bind(failure_slot, msg));
 
-	  boost::shared_ptr<changelog_download> this_ptr(shared_from_this());
+	  std::shared_ptr<changelog_download> this_ptr(shared_from_this());
 
 	  post_thunk(make_keepalive_slot(thunk, this_ptr));
 	}
@@ -356,24 +353,24 @@ namespace aptitude
       class preprocess_changelogs_request
       {
 	// Information about the download to perform.
-	boost::shared_ptr<changelog_info> info;
+	std::shared_ptr<changelog_info> info;
 	// The download object to use.
-	boost::shared_ptr<changelog_download > download;
+	std::shared_ptr<changelog_download > download;
 
       public:
-	preprocess_changelogs_request(const boost::shared_ptr<changelog_info> &_info,
-				      const boost::shared_ptr<changelog_download> &_download)
+	preprocess_changelogs_request(const std::shared_ptr<changelog_info> &_info,
+				      const std::shared_ptr<changelog_download> &_download)
 	  : info(_info),
 	    download(_download)
 	{
 	}
 
-	const boost::shared_ptr<changelog_info> &get_info() const
+	const std::shared_ptr<changelog_info> &get_info() const
 	{
 	  return info;
 	}
 
-	const boost::shared_ptr<changelog_download> &get_download() const
+	const std::shared_ptr<changelog_download> &get_download() const
 	{
 	  return download;
 	}
@@ -587,16 +584,16 @@ namespace aptitude
       bool preprocess_changelogs_thread::signals_connected = false;
     }
 
-  boost::shared_ptr<download_request>
-  get_changelog(const boost::shared_ptr<changelog_info> &info,
-		const boost::shared_ptr<download_callbacks> &callbacks,
+  std::shared_ptr<download_request>
+  get_changelog(const std::shared_ptr<changelog_info> &info,
+		const std::shared_ptr<download_callbacks> &callbacks,
 		post_thunk_f post_thunk)
   {
     const std::string short_description =
       cw::util::ssprintf(_("Changelog of %s"), info->get_display_name().c_str());
 
-    boost::shared_ptr<changelog_download> rval =
-      boost::make_shared<changelog_download>(callbacks, post_thunk, short_description);
+    std::shared_ptr<changelog_download> rval =
+      std::make_shared<changelog_download>(callbacks, post_thunk, short_description);
 
     preprocess_changelogs_thread::add_job(preprocess_changelogs_request(info, rval));
 
@@ -630,14 +627,14 @@ namespace
   };
 }
 
-boost::shared_ptr<download_request>
+std::shared_ptr<download_request>
 get_changelog(const pkgCache::VerIterator &ver,
 	      post_thunk_f post_thunk,
 	      const sigc::slot<void, temp::name> &success,
 	      const sigc::slot<void, std::string> &failure)
 {
   return get_changelog(changelog_info::create(ver),
-		       boost::make_shared<slot_callbacks>(success, failure),
+		       std::make_shared<slot_callbacks>(success, failure),
 		       post_thunk);
 }
 }

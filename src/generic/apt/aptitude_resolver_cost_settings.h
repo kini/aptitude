@@ -25,7 +25,7 @@
 
 #include <generic/problemresolver/cost.h>
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <vector>
 
 class aptitude_resolver;
@@ -43,7 +43,7 @@ class aptitude_resolver_cost_settings
   // Hide the implementation.
   class settings_impl;
 
-  boost::shared_ptr<settings_impl> impl;
+  std::shared_ptr<settings_impl> impl;
 public:
   /** \brief Reference to a single cost component.
    *
@@ -106,7 +106,7 @@ public:
    *
    *  \param settings  The components of the cost.
    */
-  explicit aptitude_resolver_cost_settings(const boost::shared_ptr<std::vector<cost_component_structure> > &settings);
+  explicit aptitude_resolver_cost_settings(const std::shared_ptr<std::vector<cost_component_structure> > &settings);
   ~aptitude_resolver_cost_settings();
 
   /** \brief Test whether the given component is relevant to the cost

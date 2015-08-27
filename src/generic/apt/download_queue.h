@@ -21,12 +21,12 @@
 #ifndef DOWNLOAD_QUEUE_H
 #define DOWNLOAD_QUEUE_H
 
-#include <boost/shared_ptr.hpp>
-
 #include <generic/util/post_thunk.h>
 #include <generic/util/temp.h>
 
 #include <sigc++/slot.h>
+
+#include <memory>
 
 namespace aptitude
 {
@@ -120,10 +120,10 @@ namespace aptitude
    *
    *  \return a handle that can be used to cancel the download.
    */
-  boost::shared_ptr<download_request>
+  std::shared_ptr<download_request>
   queue_download(const std::string &uri,
 		 const std::string &short_description,
-		 const boost::shared_ptr<download_callbacks> &callbacks,
+		 const std::shared_ptr<download_callbacks> &callbacks,
 		 post_thunk_f post_thunk);
 
   /** \brief Shut down the background thread and clear its data

@@ -41,6 +41,8 @@
 #include <generic/util/job_queue_thread.h>
 #include <generic/util/util.h>
 
+#include <memory>
+
 namespace cw = cwidget;
 
 namespace aptitude
@@ -410,9 +412,9 @@ namespace aptitude
 	post_thunk_f get_post_thunk() const { return post_thunk; }
       };
 
-      std::ostream &operator<<(std::ostream &out, const boost::shared_ptr<parse_changelog_job> &job);
+      std::ostream &operator<<(std::ostream &out, const std::shared_ptr<parse_changelog_job> &job);
 
-      std::ostream &operator<<(std::ostream &out, const boost::shared_ptr<parse_changelog_job> &job)
+      std::ostream &operator<<(std::ostream &out, const std::shared_ptr<parse_changelog_job> &job)
       {
 	return out
 	  << "(name=" << job->get_name().get_name()
@@ -433,7 +435,7 @@ namespace aptitude
        *  This is a self-terminating singleton thread.
        */
       class parse_changelog_thread : public aptitude::util::job_queue_thread<parse_changelog_thread,
-									     boost::shared_ptr<parse_changelog_job> >
+									     std::shared_ptr<parse_changelog_job> >
       {
 	// Set to true when the global signal handlers are connected up.
 	static bool signals_connected;
@@ -455,7 +457,7 @@ namespace aptitude
 	    }
 	}
 
-	void process_job(const boost::shared_ptr<parse_changelog_job> &job)
+	void process_job(const std::shared_ptr<parse_changelog_job> &job)
 	{
 	  std::string changelog_uri;
 	  if(job->get_from().empty())
@@ -501,14 +503,14 @@ namespace aptitude
 				    bool digested,
 				    post_thunk_f post_thunk)
     {
-      boost::shared_ptr<parse_changelog_job> job =
-	boost::make_shared<parse_changelog_job>(name,
-						slot,
-						from,
-						to,
-						source_package,
-						digested,
-						post_thunk);
+      std::shared_ptr<parse_changelog_job> job =
+	std::make_shared<parse_changelog_job>(name,
+					      slot,
+					      from,
+					      to,
+					      source_package,
+					      digested,
+					      post_thunk);
 
       parse_changelog_thread::add_job(job);
     }

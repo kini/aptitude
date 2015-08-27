@@ -26,9 +26,9 @@
 
 namespace aptitude
 {
-  boost::shared_ptr<download_request>
+  std::shared_ptr<download_request>
   get_screenshot(const screenshot_key &key,
-		 const boost::shared_ptr<download_callbacks> &callbacks,
+		 const std::shared_ptr<download_callbacks> &callbacks,
 		 post_thunk_f post_thunk)
   {
     std::string uri, short_description;

@@ -21,10 +21,11 @@
 #define SCREENSHOT_H
 
 #include <boost/functional/hash.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include <generic/util/post_thunk.h>
 #include <generic/util/safe_slot.h>
+
+#include <memory>
 
 namespace aptitude
 {
@@ -120,9 +121,9 @@ namespace aptitude
    *
    *  \return a handle that can be used to cancel the download.
    */
-  boost::shared_ptr<download_request>
+  std::shared_ptr<download_request>
   get_screenshot(const screenshot_key &key,
-		 const boost::shared_ptr<download_callbacks> &callbacks,
+		 const std::shared_ptr<download_callbacks> &callbacks,
 		 post_thunk_f post_thunk);
 }
 

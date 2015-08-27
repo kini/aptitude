@@ -42,7 +42,7 @@ namespace
     {
       typedef cost_component_structure::entry result_type;
 
-      result_type operator()(int scaling_factor, const boost::shared_ptr<std::string> &name) const
+      result_type operator()(int scaling_factor, const std::shared_ptr<std::string> &name) const
       {
         return result_type(*name, scaling_factor);
       }
@@ -78,7 +78,7 @@ namespace
       typedef cost_component_structure result_type;
 
       result_type operator()(cost_component_structure::op combining_op,
-                             const boost::shared_ptr<std::vector<cost_component_structure::entry> > &entries) const
+                             const std::shared_ptr<std::vector<cost_component_structure::entry> > &entries) const
       {
         return cost_component_structure(combining_op, *entries);
       }
@@ -91,7 +91,7 @@ namespace
     {
       typedef cost_component_structure result_type;
 
-      result_type operator()(const boost::shared_ptr<std::vector<cost_component_structure::entry> > &entries) const
+      result_type operator()(const std::shared_ptr<std::vector<cost_component_structure::entry> > &entries) const
       {
         return cost_component_structure(entries->size() == 1
                                           ? cost_component_structure::combine_none
@@ -133,10 +133,10 @@ namespace
   };
 }
 
-class unpack_parse_result_visitor : public boost::static_visitor<boost::shared_ptr<std::vector<cost_component_structure> > >
+class unpack_parse_result_visitor : public boost::static_visitor<std::shared_ptr<std::vector<cost_component_structure> > >
 {
 public:
-  boost::shared_ptr<std::vector<cost_component_structure> > operator()(const parsers::ParseException &ex) const
+  std::shared_ptr<std::vector<cost_component_structure> > operator()(const parsers::ParseException &ex) const
   {
     throw ResolverCostParseException(ex.what(),
                                      ex.get_raw_msg(),
@@ -144,18 +144,18 @@ public:
                                      ex.get_column_number());
   }
 
-  boost::shared_ptr<std::vector<cost_component_structure> > operator()(const boost::shared_ptr<std::vector<cost_component_structure> > &rval) const
+  std::shared_ptr<std::vector<cost_component_structure> > operator()(const std::shared_ptr<std::vector<cost_component_structure> > &rval) const
   {
     return rval;
   }
 };
 
-boost::shared_ptr<std::vector<cost_component_structure> >
+std::shared_ptr<std::vector<cost_component_structure> >
 parse_cost_settings(const std::string &settings)
 {
   using namespace parsers;
 
-  boost::variant<boost::shared_ptr<std::vector<cost_component_structure> >, ParseException>
+  boost::variant<std::shared_ptr<std::vector<cost_component_structure> >, ParseException>
     result = parsers::parse(settings, sepByPlus(lexeme(ch(',')), cost_component_structure_parser()) << eof());
 
   return boost::apply_visitor(unpack_parse_result_visitor(),
@@ -163,7 +163,7 @@ parse_cost_settings(const std::string &settings)
 }
 
 
-void dump_settings(std::ostream &out, const boost::shared_ptr<std::vector<cost_component_structure> > &settings)
+void dump_settings(std::ostream &out, const std::shared_ptr<std::vector<cost_component_structure> > &settings)
 {
   out << *settings;
 }
@@ -191,7 +191,7 @@ std::ostream &operator<<(std::ostream &out, const std::vector<cost_component_str
   return out;
 }
 
-std::ostream &operator<<(std::ostream &out, const boost::shared_ptr<std::vector<cost_component_structure> > &settings)
+std::ostream &operator<<(std::ostream &out, const std::shared_ptr<std::vector<cost_component_structure> > &settings)
 {
   dump_settings(out, settings);
 

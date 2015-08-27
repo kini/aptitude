@@ -29,7 +29,6 @@
 #include "dump_packages.h"
 
 #include <boost/format.hpp>
-#include <boost/make_shared.hpp>
 
 #include <loggers.h>
 
@@ -899,7 +898,7 @@ void resolver_manager::create_resolver()
   std::string cost_configuration = aptcfg->Find(PACKAGE "::ProblemResolver::SolutionCost",
                                                 "safety,priority");
 
-  boost::shared_ptr<std::vector<cost_component_structure> > cost_components;
+  std::shared_ptr<std::vector<cost_component_structure> > cost_components;
   try
     {
       cost_components = parse_cost_settings(cost_configuration);
@@ -914,7 +913,7 @@ void resolver_manager::create_resolver()
 
       // Fall back to a default cost settings list containing the
       // "safety" and "priority" components.
-      cost_components = boost::make_shared<std::vector<cost_component_structure> >();
+      cost_components = std::make_shared<std::vector<cost_component_structure> >();
 
       std::vector<cost_component_structure::entry> level0;
       level0.push_back(cost_component_structure::entry("safety", 1));
@@ -1284,7 +1283,7 @@ const aptitude_resolver::solution &resolver_manager::get_solution(unsigned int s
   cwidget::threads::condition c;
 
   {
-    boost::shared_ptr<background_continuation> k;
+    std::shared_ptr<background_continuation> k;
     k.reset(new solution_return_continuation(sol, abort_msg,
 					     oot, oos, m, c));
     get_solution_background(solution_num, max_steps, k,
@@ -1324,7 +1323,7 @@ bool resolver_manager::get_is_keep_all_solution(unsigned int solution_num,
 
 void resolver_manager::get_solution_background(unsigned int solution_num,
 					       int max_steps,
-					       const boost::shared_ptr<background_continuation> &k,
+					       const std::shared_ptr<background_continuation> &k,
 					       post_thunk_f post_thunk)
 {
   cwidget::threads::mutex::lock l(mutex);
@@ -1355,7 +1354,7 @@ void resolver_manager::get_solution_background(unsigned int solution_num,
 class blocking_continuation : public resolver_manager::background_continuation
 {
   /** The real continuation */
-  boost::shared_ptr<resolver_manager::background_continuation> k;
+  std::shared_ptr<resolver_manager::background_continuation> k;
 
   /** The solution for which we are searching. */
   unsigned int solution_num;
@@ -1375,7 +1374,7 @@ class blocking_continuation : public resolver_manager::background_continuation
   post_thunk_f post_thunk;
 
 public:
-  blocking_continuation(const boost::shared_ptr<background_continuation> &_k,
+  blocking_continuation(const std::shared_ptr<background_continuation> &_k,
 			unsigned int _solution_num,
 			cwidget::threads::box<bool> &_result_box,
 			int _remaining_steps,
@@ -1700,7 +1699,7 @@ void resolver_manager::dump(ostream &out)
   out << "EXPECT ( " << aptcfg->FindI(PACKAGE "::ProblemResolver::StepLimit", defaultStepLimit) << " ANY )" << std::endl;
 }
 
-void resolver_manager::maybe_start_solution_calculation(const boost::shared_ptr<background_continuation> &k,
+void resolver_manager::maybe_start_solution_calculation(const std::shared_ptr<background_continuation> &k,
 							post_thunk_f post_thunk)
 {
   state st = state_snapshot();
@@ -1725,13 +1724,13 @@ void resolver_manager::maybe_start_solution_calculation(const boost::shared_ptr<
 
 class resolver_manager::safe_resolver_continuation : public resolver_manager::background_continuation
 {
-  boost::shared_ptr<background_continuation> real_continuation;
+  std::shared_ptr<background_continuation> real_continuation;
   resolver_manager *manager;
   // Used to update the statistics in the manager.
   generic_solution<aptitude_universe> last_sol;
   post_thunk_f post_thunk;
 
-  safe_resolver_continuation(const boost::shared_ptr<background_continuation> &_real_continuation,
+  safe_resolver_continuation(const std::shared_ptr<background_continuation> &_real_continuation,
 			     resolver_manager *_manager,
 			     const generic_solution<aptitude_universe> &_last_sol,
 			     post_thunk_f _post_thunk)
@@ -1743,7 +1742,7 @@ class resolver_manager::safe_resolver_continuation : public resolver_manager::ba
   }
 
 public:
-  safe_resolver_continuation(const boost::shared_ptr<background_continuation> &_real_continuation,
+  safe_resolver_continuation(const std::shared_ptr<background_continuation> &_real_continuation,
 			     resolver_manager *_manager,
 			     post_thunk_f _post_thunk)
     : real_continuation(_real_continuation),
@@ -1811,11 +1810,11 @@ public:
 
 	// NULL out the sub-continuation so that we don't accidentally
 	// trigger it twice.
-	boost::shared_ptr<background_continuation> k = real_continuation;
+	std::shared_ptr<background_continuation> k = real_continuation;
 	real_continuation.reset();
 
 
-	boost::shared_ptr<safe_resolver_continuation> safe_resolver_k;
+	std::shared_ptr<safe_resolver_continuation> safe_resolver_k;
 	safe_resolver_k.reset(new safe_resolver_continuation(k, manager, sol, post_thunk));
 
 	// Hold the global lock on the solution so that we can
@@ -2005,11 +2004,11 @@ void resolver_manager::setup_safe_resolver(bool no_new_installs, bool no_new_upg
 }
 
 void resolver_manager::safe_resolve_deps_background(bool no_new_installs, bool no_new_upgrades,
-						    const boost::shared_ptr<background_continuation> &k,
+						    const std::shared_ptr<background_continuation> &k,
 						    post_thunk_f post_thunk)
 {
   setup_safe_resolver(no_new_installs, no_new_upgrades);
-  maybe_start_solution_calculation(boost::make_shared<safe_resolver_continuation>(k, this, post_thunk),
+  maybe_start_solution_calculation(std::make_shared<safe_resolver_continuation>(k, this, post_thunk),
 				   post_thunk);
 }
 

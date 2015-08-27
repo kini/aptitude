@@ -24,7 +24,6 @@
 #include "aptitude_resolver_cost_syntax.h"
 
 #include <boost/format.hpp>
-#include <boost/make_shared.hpp>
 #include <boost/multi_index_container.hpp>
 #include <boost/multi_index/hashed_index.hpp>
 #include <boost/multi_index/mem_fun.hpp>
@@ -152,10 +151,10 @@ class aptitude_resolver_cost_settings::settings_impl
 
   entry_holder entries;
 
-  boost::shared_ptr<std::vector<cost_component_structure> > settings;
+  std::shared_ptr<std::vector<cost_component_structure> > settings;
 
 public:
-  explicit settings_impl(const boost::shared_ptr<std::vector<cost_component_structure> > &_settings)
+  explicit settings_impl(const std::shared_ptr<std::vector<cost_component_structure> > &_settings)
     : settings(_settings)
   {
     // Every time a cost component is named in the given settings
@@ -318,8 +317,8 @@ public:
   }
 };
 
-aptitude_resolver_cost_settings::aptitude_resolver_cost_settings(const boost::shared_ptr<std::vector<cost_component_structure> > &settings)
-  : impl(boost::make_shared<settings_impl>(settings))
+aptitude_resolver_cost_settings::aptitude_resolver_cost_settings(const std::shared_ptr<std::vector<cost_component_structure> > &settings)
+  : impl(std::make_shared<settings_impl>(settings))
 {
 }
 

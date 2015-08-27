@@ -31,13 +31,11 @@
 #include <apt-pkg/acquire-worker.h>
 #include <apt-pkg/strutl.h>
 
-#include <boost/enable_shared_from_this.hpp>
 #include <boost/format.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/unordered_map.hpp>
-#include <boost/weak_ptr.hpp>
 
 #include <list>
+#include <memory>
 
 #include <sigc++/bind.h>
 
@@ -63,7 +61,7 @@ namespace aptitude
       // The last-modified-time of the cached value.
       time_t last_modified_time;
 
-      typedef std::pair<boost::shared_ptr<download_callbacks>, post_thunk_f> listener;
+      typedef std::pair<std::shared_ptr<download_callbacks>, post_thunk_f> listener;
       // The registered listeners on this job.  When one is canceled,
       // it's pulled out of this list.  This is threadsafe: remember
       // that the actual cancel process takes place in the download
@@ -96,7 +94,7 @@ namespace aptitude
       /** \brief Return \b true if there are no listeners on this job. */
       bool listeners_empty() const { return listeners.empty(); }
 
-      listener_connection add_listener(const boost::shared_ptr<download_callbacks> &callbacks,
+      listener_connection add_listener(const std::shared_ptr<download_callbacks> &callbacks,
 				       post_thunk_f post_thunk)
       {
 	return listeners.insert(listeners.end(), listener(callbacks, post_thunk));
@@ -198,7 +196,7 @@ namespace aptitude
     // destroyed yet (and thus removed from its owner's queue).
     class AcqQueuedFile : public pkgAcqFile, public sigc::trackable
     {
-      boost::shared_ptr<download_job> job;
+      std::shared_ptr<download_job> job;
 
       // Deal with failure situations.  Necessary since we want to
       // fall back to cached values if they're available.
@@ -226,7 +224,7 @@ namespace aptitude
 
     public:
       AcqQueuedFile(pkgAcquire *Owner,
-		    const boost::shared_ptr<download_job> &_job)
+		    const std::shared_ptr<download_job> &_job)
 	: pkgAcqFile(Owner, _job->get_uri(), "", 0,
 		     "", _job->get_short_description(), "",
 		     _job->get_filename().get_name()),
@@ -282,7 +280,7 @@ namespace aptitude
 	// destroy this object.  Because of that, we can't access
 	// "this" after invoking it, so if we want to reset the job
 	// pointer, we need to work on a copy.
-	boost::shared_ptr<download_job> job_copy(job);
+	std::shared_ptr<download_job> job_copy(job);
 	job.reset();
 	job_copy->mark_finished();
       }
@@ -350,7 +348,7 @@ namespace aptitude
 	// destroy this object.  Because of that, we can't access
 	// "this" after invoking it, so if we want to reset the job
 	// pointer, we need to work on a copy.
-	boost::shared_ptr<download_job> job_copy(job);
+	std::shared_ptr<download_job> job_copy(job);
 	job.reset();
 	job_copy->mark_finished();
       }
@@ -369,18 +367,18 @@ namespace aptitude
      */
     class active_download_info
     {
-      boost::shared_ptr<download_job> job;
+      std::shared_ptr<download_job> job;
       sigc::slot<void> destroy;
 
     public:
-      active_download_info(const boost::shared_ptr<download_job> &_job,
+      active_download_info(const std::shared_ptr<download_job> &_job,
 			   const sigc::slot<void> &_destroy)
 	: job(_job),
 	  destroy(_destroy)
       {
       }
 
-      const boost::shared_ptr<download_job> &get_job() const { return job; }
+      const std::shared_ptr<download_job> &get_job() const { return job; }
       void destroy_item() { destroy(); }
     };
 
@@ -413,9 +411,9 @@ namespace aptitude
      *  ensure that it always runs in the same thread.
      */
     class download_request_impl : public download_request,
-				  public boost::enable_shared_from_this<download_request_impl>
+				  public std::enable_shared_from_this<download_request_impl>
     {
-      boost::weak_ptr<download_job> parent;
+      std::weak_ptr<download_job> parent;
 
       // The handle used to cancel listening to events on this item.
       download_job::listener_connection connection;
@@ -435,7 +433,7 @@ namespace aptitude
       /** \brief Associate this request with a particular active
        *  download.
        */
-      void bind(const boost::shared_ptr<download_job> &_parent,
+      void bind(const std::shared_ptr<download_job> &_parent,
 		download_job::listener_connection _connection)
       {
 	parent = _parent;
@@ -482,7 +480,7 @@ namespace aptitude
 	// trouble)
 	temp::name cached_filename;
 
-	boost::shared_ptr<download_callbacks> callbacks;
+	std::shared_ptr<download_callbacks> callbacks;
 	post_thunk_f post_thunk;
 
 	// When the cached file was last modified, or 0 to not set the
@@ -494,15 +492,15 @@ namespace aptitude
 	/** \brief A blank request that should be bound to the new
 	 *  download object.
 	 */
-	boost::shared_ptr<download_request_impl> request;
+	std::shared_ptr<download_request_impl> request;
 
       public:
 	start_request(const std::string &_uri,
 		      const std::string &_short_description,
 		      const temp::name &_filename,
-		      const boost::shared_ptr<download_callbacks> &_callbacks,
+		      const std::shared_ptr<download_callbacks> &_callbacks,
 		      post_thunk_f _post_thunk,
-		      const boost::shared_ptr<download_request_impl> &_request)
+		      const std::shared_ptr<download_request_impl> &_request)
 	  : uri(_uri),
 	    short_description(_short_description),
 	    filename(_filename),
@@ -518,9 +516,9 @@ namespace aptitude
 	const temp::name &get_filename() const { return filename; }
 	const temp::name &get_cached_filename() const { return cached_filename; }
 	time_t get_last_modified_time() const { return last_modified_time; }
-	const boost::shared_ptr<download_callbacks> &get_callbacks() const { return callbacks; }
+	const std::shared_ptr<download_callbacks> &get_callbacks() const { return callbacks; }
 	post_thunk_f get_post_thunk() const { return post_thunk; }
-	const boost::shared_ptr<download_request_impl> &get_request() const { return request; }
+	const std::shared_ptr<download_request_impl> &get_request() const { return request; }
 
 	void update_from_cache(const temp::name &new_filename,
 			       time_t new_last_modified_time)
@@ -540,7 +538,7 @@ namespace aptitude
        */
       class cache_lookup_thread :
 	public util::job_queue_thread<cache_lookup_thread,
-				      boost::shared_ptr<start_request> >
+				      std::shared_ptr<start_request> >
       {
 	static bool signals_connected;
       public:
@@ -561,7 +559,7 @@ namespace aptitude
 	    }
 	}
 
-	void process_job(const boost::shared_ptr<start_request> &job)
+	void process_job(const std::shared_ptr<start_request> &job)
 	{
 	  if(download_cache)
 	    {
@@ -589,7 +587,7 @@ namespace aptitude
 	  // case, so we have to signal the hit manually.
 	  cw::threads::mutex::lock l(state_mutex);
 
-	  boost::unordered_map<std::string, boost::shared_ptr<active_download_info> >::iterator
+	  boost::unordered_map<std::string, std::shared_ptr<active_download_info> >::iterator
 	    found = active_downloads.find(item.URI);
 	  if(found != active_downloads.end())
 	    {
@@ -610,7 +608,7 @@ namespace aptitude
 	      return false;
 	    }
 
-	  for(std::deque<boost::shared_ptr<start_request> >::const_iterator it =
+	  for(std::deque<std::shared_ptr<start_request> >::const_iterator it =
 		start_requests.begin();
 	      it != start_requests.end(); ++it)
 	    {
@@ -620,7 +618,7 @@ namespace aptitude
 	    }
 	  start_requests.clear();
 
-	  for(std::deque<boost::shared_ptr<download_request_impl> >::const_iterator it =
+	  for(std::deque<std::shared_ptr<download_request_impl> >::const_iterator it =
 		cancel_requests.begin(); it != cancel_requests.end(); ++it)
 	    {
 	      (*it)->do_cancel();
@@ -634,7 +632,7 @@ namespace aptitude
 		continue;
 
 	      const std::string &uri = w->CurrentItem->URI;
-	      boost::unordered_map<std::string, boost::shared_ptr<active_download_info> >::iterator
+	      boost::unordered_map<std::string, std::shared_ptr<active_download_info> >::iterator
 		found = active_downloads.find(uri);
 
 	      if(found != active_downloads.end())
@@ -672,14 +670,14 @@ namespace aptitude
 
       // A queue of requests for the background thread to start
       // downloading URIs.
-      static std::deque<boost::shared_ptr<start_request> > start_requests;
+      static std::deque<std::shared_ptr<start_request> > start_requests;
 
       // A queue of requests for the background thread to stop
       // downloading URIs.
-      static std::deque<boost::shared_ptr<download_request_impl> > cancel_requests;
+      static std::deque<std::shared_ptr<download_request_impl> > cancel_requests;
 
       // Tracks the active downloads, if any, for various URIs.
-      static boost::unordered_map<std::string, boost::shared_ptr<active_download_info> > active_downloads;
+      static boost::unordered_map<std::string, std::shared_ptr<active_download_info> > active_downloads;
 
       // The single instance of this object (or NULL if there is no
       // active thread).
@@ -687,13 +685,13 @@ namespace aptitude
       // The thread itself isn't stored because we never need to
       // join() it: it's perfectly safe for it to keep downloading
       // while the cache is closed, for instance.
-      static boost::shared_ptr<download_thread> instance;
+      static std::shared_ptr<download_thread> instance;
 
       // Similarly, if the instance is still running, this is a thread
       // object for the thread it's running in.  Users of this member
       // should make a strong copy while holding the state lock, since
       // the background thread clears it upon exit.
-      static boost::shared_ptr<cw::threads::thread> instancet;
+      static std::shared_ptr<cw::threads::thread> instancet;
 
       // Set to true to cancel any pending downloads in preparation
       // for shutting down the program.
@@ -713,10 +711,10 @@ namespace aptitude
        */
       class bootstrap
       {
-	boost::shared_ptr<download_thread> instance;
+	std::shared_ptr<download_thread> instance;
 
       public:
-	bootstrap(const boost::shared_ptr<download_thread> &_instance)
+	bootstrap(const std::shared_ptr<download_thread> &_instance)
 	  : instance(_instance)
 	{
 	}
@@ -734,8 +732,8 @@ namespace aptitude
 
 	if(instance.get() == NULL)
 	  {
-	    instance = boost::make_shared<download_thread>();
-	    instancet = boost::make_shared<cw::threads::thread>(bootstrap(instance));
+	    instance = std::make_shared<download_thread>();
+	    instancet = std::make_shared<cw::threads::thread>(bootstrap(instance));
 	  }
       }
 
@@ -745,7 +743,7 @@ namespace aptitude
        *  check whether the URI it references is in the download
        *  cache.
        */
-      static void queue_job(const boost::shared_ptr<start_request> &job)
+      static void queue_job(const std::shared_ptr<start_request> &job)
       {
 	cw::threads::mutex::lock l(state_mutex);
 
@@ -768,8 +766,8 @@ namespace aptitude
 	LOG_TRACE(Loggers::getAptitudeDownloadQueue(),
 		  "Creating a new download item for " << req.get_uri());
 
-	boost::shared_ptr<download_job> job =
-	  boost::make_shared<download_job>(req.get_uri(),
+	std::shared_ptr<download_job> job =
+	  std::make_shared<download_job>(req.get_uri(),
 					   req.get_short_description(),
 					   req.get_filename(),
 					   req.get_cached_filename(),
@@ -780,8 +778,8 @@ namespace aptitude
 	// delete the item in between them).
 	AcqQueuedFile *item = new AcqQueuedFile(&acquireQueue, job);
 
-	boost::shared_ptr<active_download_info> download =
-	  boost::make_shared<active_download_info>(job, sigc::mem_fun(*item, &AcqQueuedFile::destroy));
+	std::shared_ptr<active_download_info> download =
+	  std::make_shared<active_download_info>(job, sigc::mem_fun(*item, &AcqQueuedFile::destroy));
 
 	active_downloads[req.get_uri()] = download;
 
@@ -796,16 +794,16 @@ namespace aptitude
       }
 
       // The main frontend routine.
-      static boost::shared_ptr<download_request>
+      static std::shared_ptr<download_request>
       start_download_job(const std::string &uri,
 			 const std::string &short_description,
-			 const boost::shared_ptr<download_callbacks> &callbacks,
+			 const std::shared_ptr<download_callbacks> &callbacks,
 			 post_thunk_f post_thunk)
       {
 	cw::threads::mutex::lock l(state_mutex);
 
-	boost::shared_ptr<download_request_impl> rval =
-	  boost::make_shared<download_request_impl>();
+	std::shared_ptr<download_request_impl> rval =
+	  std::make_shared<download_request_impl>();
 
 	if(shutdown_queue)
 	  {
@@ -816,8 +814,8 @@ namespace aptitude
 	    return rval;
 	  }
 
-	boost::shared_ptr<start_request> start =
-	  boost::make_shared<start_request>(uri, short_description,
+	std::shared_ptr<start_request> start =
+	  std::make_shared<start_request>(uri, short_description,
 					    temp::name("aptitudeDownload"),
 					    callbacks,
 					    post_thunk,
@@ -833,7 +831,7 @@ namespace aptitude
       /** \brief Insert a request to cancel the given
        *  job into the cancel queue.
        */
-      static void cancel_job(const boost::shared_ptr<download_request_impl> &req)
+      static void cancel_job(const std::shared_ptr<download_request_impl> &req)
       {
 	cw::threads::mutex::lock l(state_mutex);
 
@@ -875,7 +873,7 @@ namespace aptitude
 		      "Waiting for the background download thread to terminate.");
 	    // Take a strong copy in case the instance thread is
 	    // destroyed while we're working on it.
-	    boost::shared_ptr<cw::threads::thread> instancet_copy(instancet);
+	    std::shared_ptr<cw::threads::thread> instancet_copy(instancet);
 
 	    l.release();
 	    instancet_copy->join();
@@ -918,7 +916,7 @@ namespace aptitude
 	    return;
 	  }
 
-	boost::unordered_map<std::string, boost::shared_ptr<active_download_info> >::iterator
+	boost::unordered_map<std::string, std::shared_ptr<active_download_info> >::iterator
 	  found = active_downloads.find(uri);
 
 	if(found != active_downloads.end())
@@ -943,7 +941,7 @@ namespace aptitude
 	    pkgAcquire downloader;
             downloader.Setup(&cb);
 
-	    for(std::deque<boost::shared_ptr<start_request> >::const_iterator it =
+	    for(std::deque<std::shared_ptr<start_request> >::const_iterator it =
 		  start_requests.begin();
 		it != start_requests.end(); ++it)
 	      {
@@ -981,16 +979,16 @@ namespace aptitude
 
     cw::threads::mutex download_thread::state_mutex((cw::threads::mutex::attr(PTHREAD_MUTEX_RECURSIVE)));
 
-    std::deque<boost::shared_ptr<download_thread::start_request> > download_thread::start_requests;
+    std::deque<std::shared_ptr<download_thread::start_request> > download_thread::start_requests;
 
-    std::deque<boost::shared_ptr<download_request_impl> > download_thread::cancel_requests;
+    std::deque<std::shared_ptr<download_request_impl> > download_thread::cancel_requests;
 
-    boost::unordered_map<std::string, boost::shared_ptr<active_download_info> > download_thread::active_downloads;
+    boost::unordered_map<std::string, std::shared_ptr<active_download_info> > download_thread::active_downloads;
 
     bool download_thread::shutdown_queue = false;
 
-    boost::shared_ptr<download_thread> download_thread::instance;
-    boost::shared_ptr<cw::threads::thread> download_thread::instancet;
+    std::shared_ptr<download_thread> download_thread::instance;
+    std::shared_ptr<cw::threads::thread> download_thread::instancet;
 
 
     void download_job::mark_finished()
@@ -1017,7 +1015,7 @@ namespace aptitude
 	return;
 
 
-      boost::shared_ptr<download_job> job(parent.lock());
+      std::shared_ptr<download_job> job(parent.lock());
       if(job.get() != NULL)
 	{
 	  job->remove_listener(connection);
@@ -1034,10 +1032,10 @@ namespace aptitude
   {
   }
 
-  boost::shared_ptr<download_request>
+  std::shared_ptr<download_request>
   queue_download(const std::string &uri,
 		 const std::string &short_description,
-		 const boost::shared_ptr<download_callbacks> &callbacks,
+		 const std::shared_ptr<download_callbacks> &callbacks,
 		 post_thunk_f post_thunk)
   {
     return download_thread::start_download_job(uri, short_description,

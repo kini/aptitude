@@ -28,11 +28,10 @@
 
 #include <apt-pkg/pkgcache.h>
 
-#include <boost/shared_ptr.hpp>
-
 #include <sigc++/signal.h>
 #include <sigc++/trackable.h>
 
+#include <memory>
 #include <queue>
 #include <set>
 #include <vector>
@@ -172,7 +171,7 @@ private:
     int max_steps;
 
     /** The continuation of this computation. */
-    boost::shared_ptr<background_continuation> k;
+    std::shared_ptr<background_continuation> k;
 
     /** \brief The trampoline function used to invoke the
      *  continuation's methods.
@@ -180,7 +179,7 @@ private:
     post_thunk_f post_thunk;
 
     job_request(int _sol_num, int _max_steps,
-		const boost::shared_ptr<background_continuation> &_k,
+		const std::shared_ptr<background_continuation> &_k,
 		post_thunk_f _post_thunk)
       : sol_num(_sol_num), max_steps(_max_steps), k(_k),
 	post_thunk(_post_thunk)
@@ -562,7 +561,7 @@ public:
    */
   void get_solution_background(unsigned int solution_num,
 			       int max_steps,
-			       const boost::shared_ptr<background_continuation> &k,
+			       const std::shared_ptr<background_continuation> &k,
 			       post_thunk_f post_thunk);
 
   /** If \b true, all solutions have been generated.  This is equivalent
@@ -723,7 +722,7 @@ public:
    *  command line (which blocks the main thread while the resolver
    *  runs).
    */
-  void maybe_start_solution_calculation(const boost::shared_ptr<background_continuation> &k,
+  void maybe_start_solution_calculation(const std::shared_ptr<background_continuation> &k,
 					post_thunk_f post_thunk);
 
   /** Tweak the resolver score of a particular package/version.  This
@@ -822,7 +821,7 @@ public:
    *  until the safe resolution completes.
    */
   void safe_resolve_deps_background(bool no_new_installs, bool no_new_upgrades,
-				    const boost::shared_ptr<background_continuation> &k,
+				    const std::shared_ptr<background_continuation> &k,
 				    post_thunk_f post_thunk);
 
   // @}

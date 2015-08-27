@@ -21,14 +21,11 @@
 #ifndef APTITUDE_RESOLVER_COST_TYPES_H
 #define APTITUDE_RESOLVER_COST_TYPES_H
 
-#include <boost/make_shared.hpp>
-#include <boost/shared_ptr.hpp>
-
 #include <cwidget/generic/util/exception.h>
 
-#include <string>
-
 #include <iosfwd>
+#include <memory>
+#include <string>
 
 class CostTypeCheckFailure : public std::exception
 {
@@ -101,20 +98,20 @@ public:
 
 private:
   op combining_op;
-  boost::shared_ptr<std::vector<entry> > entries;
+  std::shared_ptr<std::vector<entry> > entries;
 
 public:
   cost_component_structure(op _combining_op,
                            const std::vector<entry> &_entries)
     : combining_op(_combining_op),
-      entries(boost::make_shared<std::vector<entry> >(_entries))
+      entries(std::make_shared<std::vector<entry> >(_entries))
   {
   }
 
   template<typename Iter>
   cost_component_structure(op _combining_op, Iter begin, Iter end)
     : combining_op(_combining_op),
-      entries(boost::make_shared<std::vector<entry> >(begin, end))
+      entries(std::make_shared<std::vector<entry> >(begin, end))
   {
   }
 
@@ -127,7 +124,7 @@ public:
   }
 
   /** \brief Retrieve the entries of this component. */
-  const boost::shared_ptr<std::vector<entry> > &get_entries() const
+  const std::shared_ptr<std::vector<entry> > &get_entries() const
   {
     return entries;
   }

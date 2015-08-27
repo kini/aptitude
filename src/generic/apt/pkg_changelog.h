@@ -33,7 +33,7 @@
 #include <sigc++/signal.h>
 #include <sigc++/slot.h>
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 /** \brief Routines to download a Debian changelog for a given package.
  *
@@ -75,7 +75,7 @@ namespace aptitude
       {
       }
 
-      static boost::shared_ptr<changelog_info>
+      static std::shared_ptr<changelog_info>
       create(const std::string &source_package,
 	     const std::string &source_version,
 	     const std::string &section,
@@ -87,7 +87,7 @@ namespace aptitude
        *  \return the new object, or an invalid pointer if the
        *  changelog can't be downloaded.
        */
-      static boost::shared_ptr<changelog_info>
+      static std::shared_ptr<changelog_info>
       create(const pkgCache::VerIterator &ver);
 
       /** \brief Retrieve the name of the changelog's source package. */
@@ -112,9 +112,9 @@ namespace aptitude
      *  \param callbacks  The callbacks to invoke for download events.
      *  \param post_thunk How to post thunks to the foreground thread.
      */
-    boost::shared_ptr<download_request>
-    get_changelog(const boost::shared_ptr<changelog_info> &info,
-		  const boost::shared_ptr<download_callbacks> &callbacks,
+    std::shared_ptr<download_request>
+    get_changelog(const std::shared_ptr<changelog_info> &info,
+		  const std::shared_ptr<download_callbacks> &callbacks,
 		  post_thunk_f post_thunk);
 
     /** \brief Convenience code to download a version's changelog.
@@ -126,7 +126,7 @@ namespace aptitude
      *  copy them in the thread that invokes get_changelog().  No
      *  special treatment is necessary.
      */
-    boost::shared_ptr<download_request>
+    std::shared_ptr<download_request>
     get_changelog(const pkgCache::VerIterator &ver,
 		  post_thunk_f post_thunk,
 		  const sigc::slot<void, temp::name> &success,
