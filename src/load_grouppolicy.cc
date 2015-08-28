@@ -682,7 +682,7 @@ class pattern_policy_parser : public group_policy_parser
 	    stripws(format);
 
 	    if(format.empty())
-	      throw GroupParseException(_("Unexpectedly empty tree title after \"%s\""),
+	      throw GroupParseException(_("Unexpected empty tree title after \"%s\""),
 					string(begin0, end).c_str());
 	  }
 	else if(begin != end && *begin == '|')

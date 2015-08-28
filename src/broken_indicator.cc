@@ -133,16 +133,19 @@ private:
     bool can_next = (state.selected_solution < state.generated_solutions &&
 		     !(state.selected_solution + 1 == state.generated_solutions && state.solutions_exhausted));
 
+    // TRANSLATORS: The object which is "applied" is a package dependency solution
     cw::fragment *apply_fragment =
       cw::style_fragment(cw::fragf(_("%ls: Apply"),
 				   apply.c_str()),
 			 can_apply ? st_normal : st_disabled);
 
+    // TRANSLATORS: This refers to the next package dependency solution
     cw::fragment *next_fragment =
       cw::style_fragment(cw::fragf(_("%ls: Next"),
 				   next.c_str()),
 			 can_next ? st_normal : st_disabled);
 
+    // TRANSLATORS: This refers to the previous package dependency solution
     const bool can_prev = (state.selected_solution > 0);
     cw::fragment *prev_fragment =
       cw::style_fragment(cw::fragf(_("%ls: Previous"),
