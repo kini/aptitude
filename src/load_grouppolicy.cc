@@ -1,26 +1,27 @@
 // load_grouppolicy.cc
 //
 //  Copyright 2001 Daniel Burrows
-//
-//  Routines to parse grouping policies
-//
-// This uses a bunch of little functions to parse stuff.  Sue me.
-//
-// The parsers take an arglist and a chain argument, and return either a
-// new pkg_grouppolicy_factory, or (if an error was encountered) NULL.
-// (note: the chain argument will be NULL if the policy is the tail of a list)
-//
-// The astute observer will wonder why I don't just use bison or
-// something similar.  The main reason is also the main reason I can't
-// just do a straightforward parse: the matcher grammar.
-// Unfortunately, it's hard to assemble grammars modularly in yacc,
-// and I don't want to duplicate the matchers' grammar in several
-// places; there's also the "minor" problem that the lexical analysis
-// of matchers is radically different from the rest of the constructs.
-//
-// TODO: a lot of classes just exist to complain about having
-// arguments and then creating a new instance of a policy0;
-// commonalize this.
+
+
+///  Routines to parse grouping policies
+///
+/// This uses a bunch of little functions to parse stuff.  Sue me.
+///
+/// The parsers take an arglist and a chain argument, and return either a
+/// new pkg_grouppolicy_factory, or (if an error was encountered) NULL.
+/// (note: the chain argument will be NULL if the policy is the tail of a list)
+///
+/// The astute observer will wonder why I don't just use bison or
+/// something similar.  The main reason is also the main reason I can't
+/// just do a straightforward parse: the matcher grammar.
+/// Unfortunately, it's hard to assemble grammars modularly in yacc,
+/// and I don't want to duplicate the matchers' grammar in several
+/// places; there's also the "minor" problem that the lexical analysis
+/// of matchers is radically different from the rest of the constructs.
+///
+/// TODO: a lot of classes just exist to complain about having
+/// arguments and then creating a new instance of a policy0;
+/// commonalize this.
 
 #include "load_grouppolicy.h"
 
