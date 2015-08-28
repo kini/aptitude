@@ -1164,7 +1164,7 @@ private:
   void sanity_check_not_deferred(const step &s)
   {
 #ifdef ENABLE_RESOLVER_SANITY_CHECKS
-    if(logger->isErrorEnabled())
+    if(logger->isEnabledFor(aptitude::util::logging::ERROR_LEVEL))
       {
 	if(!s.is_deferred_listener.valid())
 	  {
@@ -1252,18 +1252,16 @@ private:
 						 non_incipient);
 
     if(non_incipient.get_has_value() &&
-       s.final_step_cost < non_incipient.get_value().get_cost())
+       s.final_step_cost.compare(non_incipient.get_value().get_cost()) < 0)
       LOG_ERROR(logger, "In step " << s.step_num << ": the embedded promotion "
 		<< non_incipient.get_value() << " was not applied.");
     else
       {
-	typename promotion_set::const_iterator found_promotion =
-	  promotions.find_highest_promotion_for(s.actions);
+	auto highest_promotion_cost = promotions.find_highest_promotion_cost(s.actions);
 
-	if(found_promotion != promotions.end() &&
-	   s.final_step_cost < found_promotion->get_cost())
+	if(s.final_step_cost.compare(highest_promotion_cost) < 0)
 	  LOG_ERROR(logger, "In step " << s.step_num << ": the embedded promotion "
-		    << *found_promotion << " was not applied.");
+		    << highest_promotion_cost << " was not applied.");
       }
 
     typedef generic_solver_information<PackageUniverse> solver_information;
@@ -1304,7 +1302,7 @@ private:
 	  typename boost::unordered_map<choice, promotion>::const_iterator
 	    found_incipient = incipient.find(solver);
 	  if(found_incipient != incipient.end() &&
-	     solver_inf.get_cost() < found_incipient->second.get_cost())
+	     solver_inf.get_cost().compare(found_incipient->second.get_cost()) < 0)
 	    LOG_ERROR(logger, "In step " << s.step_num
 		      << ": incipient promotion " << found_incipient->second
 		      << " was never applied to " << solver << ".");
@@ -1314,7 +1312,7 @@ private:
 	  typename promotion_set::const_iterator found_promotion =
 	    promotions.find_highest_promotion_containing(test_set, solver);
 	  if(found_promotion != promotions.end() &&
-	     solver_inf.get_cost() < found_promotion->get_cost())
+	     solver_inf.get_cost().compare(found_promotion->get_cost()) < 0)
 	    LOG_ERROR(logger, "In step " << s.step_num
 		      << ": the incipient promotion " << *found_promotion
 		      << " was not detected as incipient for " << solver);
