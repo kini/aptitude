@@ -40,7 +40,8 @@
 
 #include <memory>
 
-#include <stdio.h>
+#include <cstdio>
+#include <cstdint>
 #include <sys/stat.h>
 
 using namespace std;
@@ -99,7 +100,7 @@ class LogCleaner : public pkgArchiveCleaner
 {
   bool simulate;
 
-  long total_size;
+  uint64_t total_size;
 
 protected:
   virtual void Erase(const char *File,string Pkg,string Ver,struct stat &St) 
@@ -116,11 +117,12 @@ protected:
       }
     else
       total_size+=St.st_size;
-  };
-public:
-  LogCleaner(bool _simulate):simulate(_simulate), total_size(0) { }
+  }
 
-  long get_total_size() {return total_size;}
+public:
+  LogCleaner(bool _simulate) : simulate(_simulate), total_size(0) { }
+
+  uint64_t get_total_size() const { return total_size; }
 };
 
 int cmdline_autoclean(int argc, char *argv[], bool simulate)
