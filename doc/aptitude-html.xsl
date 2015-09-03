@@ -5,16 +5,16 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
                 version="1.0">
 
-<xsl:import href="/usr/share/xml/docbook/stylesheet/nwalsh/html/chunk.xsl"/>
+<xsl:import href="/usr/share/xml/docbook/stylesheet/nwalsh/xhtml/chunk.xsl"/>
 
 <xsl:import href="aptitude-common.xsl"/>
 
 <xsl:output method="html" encoding="UTF-8"/>
 <xsl:param name="chunker.output.encoding" select="'utf-8'"/>
 <xsl:param name="chunker.output.doctype-public"
-    select="'-//W3C//DTD HTML 4.01 Transitional//EN'"/>
+	   select="'-//W3C//DTD XHTML 1.0 Transitional//EN'"/>
 <xsl:param name="chunker.output.doctype-system"
-    select="'http://www.w3.org/TR/html4/loose.dtd'"/>
+	   select="'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'"/>
 
 <xsl:param name="chunk.section.depth" select="2"/>
 <xsl:param name="chunk.quietly" select="1"/>
