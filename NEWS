@@ -6,6 +6,15 @@ Version 0.7.1 UNRELASED
   * Fix for wrong reported size of deleted files with 'autoclean' on 32-bit
     arches (Closes: #499872)
 
+  * Be explicit when packages are already installed, cannot be removed/purged
+    because they are not installed, and similar (Closes: #421469).
+
+    It was changed to work in this way a few years ago in #258913 due to the
+    installer, and required to pass verbose flag to print these messages, but
+    this was caused at least 3 bug reports (merged) to be explicit, and aptitude
+    prints many other messages even ignoring these lines.  It can be made to be
+    quiet with another flag, if needed.
+
 - Documentation:
 
   * Quick help (help.txt):

@@ -316,7 +316,7 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
     case cmdline_install:
       if(pkg.CurrentVer()!=ver || pkg->CurrentState!=pkgCache::State::Installed)
 	to_install.insert(pkg);
-      else if(pkg_state.Keep() && verbose>0)
+      else
 	printf(_("%s is already installed at the requested version (%s)\n"),
 	       pkg.FullName(true).c_str(),
 	       ver.VerStr());
@@ -326,11 +326,10 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 	to_install.insert(pkg);
       else if(pkg_state.Status > 1)
 	{
-	  if(verbose > 0)
-	    printf(_("%s is not currently installed, so it will not be upgraded.\n"),
-                   pkg.FullName(true).c_str());
+	  printf(_("%s is not currently installed, so it will not be upgraded.\n"),
+                 pkg.FullName(true).c_str());
 	}
-      else if(verbose > 0)
+      else
 	printf(_("%s is already installed at the latest version, so it will not be upgraded.\n"),
                pkg.FullName(true).c_str());
       break;
@@ -344,14 +343,14 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
     case cmdline_remove:
       if(!pkg.CurrentVer().end())
 	to_remove.insert(pkg);
-      else if(pkg_state.Keep() && verbose>0)
+      else
 	printf(_("Package %s is not installed, so it will not be removed\n"),
                pkg.FullName(true).c_str());
       break;
     case cmdline_purge:
       if(!pkg.CurrentVer().end() || pkg->CurrentState!=pkgCache::State::ConfigFiles)
 	to_purge.insert(pkg);
-      else if(pkg_state.Keep() && verbose>0)
+      else
 	printf(_("Package %s is not installed, so it will not be removed\n"),
                pkg.FullName(true).c_str());
       break;
