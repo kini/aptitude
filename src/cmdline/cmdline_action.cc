@@ -330,8 +330,9 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
                  pkg.FullName(true).c_str());
 	}
       else
-	printf(_("%s is already installed at the latest version, so it will not be upgraded.\n"),
-               pkg.FullName(true).c_str());
+	printf(_("%s is already installed at the latest version (%s), so it will not be upgraded.\n"),
+               pkg.FullName(true).c_str(),
+	       ver.VerStr());
       break;
 
     case cmdline_reinstall:
