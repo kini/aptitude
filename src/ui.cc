@@ -2817,7 +2817,7 @@ void ui_init()
     update_key=cw::config::global_bindings.readable_keyname("UpdatePackageList"),
     install_key=cw::config::global_bindings.readable_keyname("DoInstallRun");
 
-  wstring helptext = swsprintf(W_("%ls: Menu  %ls: Help  %ls: Quit  %ls: Update  %ls: Download/Install/Remove Pkgs").c_str(),
+  wstring helptext = swsprintf(W_("%ls: Menu  %ls: Help  %ls: Quit  %ls: Update  %ls: Preview & Download/Install/Remove Pkgs").c_str(),
 			menu_key.c_str(),
 			help_key.c_str(),
 			quit_key.c_str(),
