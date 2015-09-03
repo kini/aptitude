@@ -552,11 +552,14 @@ bool cmdline_applyaction(string s,
 		possible.push_back(j);
 	    }
 
+	  // Don't overwhelm the user.
+	  size_t package_limit = 40;
 	  if(!possible.empty())
 	    {
 	      // Don't overwhelm the user.
-	      if(possible.size()>40)
-		printf(_("Couldn't find package \"%s\", and more than 40\npackages contain \"%s\" in their name.\n"), package.c_str(), package.c_str());
+	      if (possible.size() > package_limit)
+	        printf(_("Couldn't find package \"%s\", and more than %zu\npackages contain \"%s\" in their name.\n"),
+		       package.c_str(), package_limit, package.c_str());
 	      else
 		{
 		  printf(_("Couldn't find package \"%s\".  However, the following\npackages contain \"%s\" in their name:\n"), package.c_str(), package.c_str());
@@ -582,8 +585,10 @@ bool cmdline_applyaction(string s,
 
 	      if(possible.empty())
 		printf(_("Couldn't find any package whose name or description matched \"%s\"\n"), package.c_str());
-	      else if(possible.size()>40)
-		printf(_("Couldn't find any package matching \"%s\", and more than 40\npackages contain \"%s\" in their description.\n"), package.c_str(), package.c_str());
+	      else if (possible.size() > package_limit)
+		// Don't overwhelm the user.
+		printf(_("Couldn't find any package matching \"%s\", and more than %zu\npackages contain \"%s\" in their description.\n"),
+		       package.c_str(), package_limit, package.c_str());
 	      else
 		{
 		  printf(_("Couldn't find any package matching \"%s\".  However, the following\npackages contain \"%s\" in their description:\n"), package.c_str(), package.c_str());
