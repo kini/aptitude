@@ -125,20 +125,19 @@ void pkg_grouppolicy_info::setup_package_info(const pkgCache::PkgIterator &pkg,
                                           _("Multi-Arch: "), multiarch.c_str())));
 
       frags.push_back(clipbox(cw::fragf("%B%s%b%s%n"
-				    "%B%s%b%s%n"
-				    "%B%s%b%s%n"
-				    "%B%s%b%s%n"
-				    "%B%s%b%s%n"
-				    "%B%s%b%s%n"
-				    "%B%s%b%s%n",
-				    _("Priority: "),pkgCache::VerIterator(ver).PriorityType()?pkgCache::VerIterator(ver).PriorityType():_("Unknown"),
-				    _("Section: "),ver.Section()?ver.Section():_("Unknown"),
-				    _("Maintainer: "),rec.Maintainer().c_str(),
-				    _("Architecture: "),pkgCache::VerIterator(ver).Arch(),
-				    _("Compressed Size: "), SizeToStr(ver->Size).c_str(),
-				    _("Uncompressed Size: "), SizeToStr(ver->InstalledSize).c_str(),
-				    _("Source Package: "),
-				    rec.SourcePkg().empty()?pkg.Name():rec.SourcePkg().c_str())));
+					"%B%s%b%s%n"
+					"%B%s%b%s%n"
+					"%B%s%b%s%n"
+					"%B%s%b%s%n"
+					"%B%s%b%s%n"
+					"%B%s%b%s%n",
+					_("Priority: "),pkgCache::VerIterator(ver).PriorityType()?pkgCache::VerIterator(ver).PriorityType():_("Unknown"),
+					_("Section: "),ver.Section()?ver.Section():_("Unknown"),
+					_("Maintainer: "),rec.Maintainer().c_str(),
+					_("Architecture: "),pkgCache::VerIterator(ver).Arch(),
+					_("Compressed Size: "), SizeToStr(ver->Size).c_str(),
+					_("Uncompressed Size: "), SizeToStr(ver->InstalledSize).c_str(),
+					_("Source Package: "), rec.SourcePkg().empty()?pkg.Name():rec.SourcePkg().c_str())));
 
       tree->add_child(new cw::layout_item(cw::sequence_fragment(frags)));
 
