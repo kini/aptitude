@@ -668,16 +668,25 @@ void pkg_item::pkg_columnizer::setup_columns(bool force_update)
     delete columns;
   if(force_update || !columns)
     {
-      std::wstring cfg;
+      std::string cfg_option_name = PACKAGE "::UI::Package-Display-Format";
+      std::string aptcfg_display_format = aptcfg->Find(cfg_option_name.c_str(), default_pkgdisplay);
+      bool format_ok = check_valid_display_format(aptcfg_display_format, cfg_option_name);
+      if (!format_ok)
+	{
+	  aptcfg_display_format = default_pkgdisplay;
+	  _error->Warning(_("Using default for %s string: '%s'"), cfg_option_name.c_str(), aptcfg_display_format.c_str());
+	}
 
-      if(!cw::util::transcode(aptcfg->Find(PACKAGE "::UI::Package-Display-Format",
-				 default_pkgdisplay).c_str(),
-		    cfg))
+      std::wstring cfg;
+      if(!cw::util::transcode(aptcfg_display_format.c_str(), cfg))
 	_error->Errno("iconv", _("Unable to transcode package display format after \"%ls\""), cfg.c_str());
       else
-	columns=parse_columns(cfg,
-			      pkg_columnizer::parse_column_type,
-			      pkg_columnizer::defaults);
+	{
+	  columns=parse_columns(cfg,
+				pkg_columnizer::parse_column_type,
+				pkg_columnizer::defaults);
+	}
+
       if(!columns)
 	{
 	  cfg.clear();
@@ -707,4 +716,20 @@ std::wstring pkg_item::pkg_columnizer::format_column_names(unsigned int width)
 
   cw::config::empty_column_parameters p;
   return pkg_genheaders(*columns).layout_columns(width, p);
+}
+
+bool pkg_item::pkg_columnizer::check_valid_display_format(const std::string& display_format, const std::string& cfg_option_name)
+{
+  for (size_t i = 0; i < display_format.size(); ++i)
+    {
+      auto it = display_format[i];
+      if (iscntrl(it) || it == '\n' || it == '\\')
+	{
+	  _error->Error(_("Forbidden character in position %zu of %s string: '%s'"),
+			i, cfg_option_name.c_str(), display_format.c_str());
+	  return false;
+	}
+    }
+
+  return true;
 }

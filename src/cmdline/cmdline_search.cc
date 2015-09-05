@@ -190,6 +190,12 @@ int cmdline_search(int argc, char *argv[], const char *status_fname,
       real_width=tmp;
     }
 
+  if(!disable_columns && !pkg_item::pkg_columnizer::check_valid_display_format(display_format, PACKAGE "::CmdLine::Package-Display-Format" " (or -F)"))
+    {
+      _error->DumpErrors();
+      return -1;
+    }
+
   wstring wdisplay_format;
 
   if(!cw::util::transcode(display_format.c_str(), wdisplay_format))

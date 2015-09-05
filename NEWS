@@ -15,6 +15,13 @@ Version 0.7.1 UNRELASED
     prints many other messages even ignoring these lines.  It can be made to be
     quiet with another flag, if needed.
 
+  * Check string formats for columns in both curses and command line interface,
+    and forbid characters which can lead to cwidget assertions and program
+    crashes.  These strings can be specified in the the command line for
+    "search" or "versions" with -F or configuration options (and they can be
+    made permanent by mistake, causing crashes upon start, as the bug reports
+    prove). (Closes: #497129, #532662).
+
 - Documentation:
 
   * Quick help (help.txt):

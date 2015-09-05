@@ -77,6 +77,36 @@ public:
 
   static int parse_column_type(char id);
 
+  /** Check for errors, typically from variables (which can be configured or
+   * specified in the command line with -o):
+   *
+   * ::UI::Package-Display-Format,
+   * ::UI::Package-Header-Format,
+   * ::UI::Package-Status-Format,
+   * ::CmdLine::Package-Display-Format and
+   * ::CmdLine::Version-Display-Format
+   *
+   * The format string can also be specified for commands like "search" and
+   * "versions" with '-F'.
+   *
+   * The string when displaying columns should not contain newlines or \n,
+   * because they do not make sense for formatting which columns to show, and in
+   * that case cwidget fails with an assertion:
+   *
+   *   Uncaught exception: ../../../src/cwidget/columnify.h:64: cwidget::column::column(const cwidget::column_disposition&, int, bool, bool): Assertion "_width>=0" failed.
+   *
+   * For safety, '\' and control characters are forbidden at the time of writing
+   * this, because they also do not make sense in this kind of formatting
+   * string.
+   *
+   * @display_format Format string to be parsed
+   *
+   * @cfg_option_name Name, to be able to tell back which string was wrong
+   *
+   * @return Whether the string is safe to use or not
+   */
+  static bool check_valid_display_format(const std::string& display_format, const std::string& cfg_option_name);
+
   static void setup_columns(bool force_update=false);
   // This reads and sets up the necessary information about how to format the
   // display of packages.

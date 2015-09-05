@@ -775,14 +775,45 @@ static cw::widget_ref make_default_view(const menu_tree_ref &mainwidget,
 	}
     }
 
+  // helper for format strings of headers, status
+  struct aptcfg_format_string {
+    std::string option_name;
+    std::string value;
+    std::string default_value;
+
+    void get_value_from_config() {
+      value = aptcfg->Find(option_name.c_str(), default_value.c_str());
+    }
+
+    void sanitize_values() {
+      bool valid = pkg_item::pkg_columnizer::check_valid_display_format(value, option_name);
+      if (!valid) {
+	// forcing default
+	value = default_value;
+	_error->Warning(_("Using default value for %s string: '%s'"), option_name.c_str(), value.c_str());
+	// raise error
+	check_apt_errors();
+      }
+    }
+  };
+  // ::UI::Package-Header-Format
+  aptcfg_format_string ui_package_header_format = { PACKAGE "::UI::Package-Header-Format", "", default_pkgheaderdisplay };
+  ui_package_header_format.get_value_from_config();
+  ui_package_header_format.sanitize_values();
+  // ::UI::Package-Status-Format
+  aptcfg_format_string ui_package_status_format = { PACKAGE "::UI::Package-Status-Format", "", default_pkgstatusdisplay };
+  ui_package_status_format.get_value_from_config();
+  ui_package_status_format.sanitize_values();
+
+
   list<package_view_item> basic_format;
 
   // FIXME: do the config lookup inside the package-view code?
   basic_format.push_back(package_view_item("static1",
-					   parse_columns(cw::util::transcode(aptcfg->Find(PACKAGE "::UI::Package-Header-Format", default_pkgheaderdisplay)),
+					   parse_columns(cw::util::transcode(ui_package_header_format.value),
 							 pkg_item::pkg_columnizer::parse_column_type,
 							 pkg_item::pkg_columnizer::defaults),
-					   PACKAGE "::UI::Package-Header-Format",
+					   ui_package_header_format.option_name,
 					   0, 0, 1, 1,
 					   cw::table::ALIGN_CENTER | cw::table::EXPAND | cw::table::FILL | cw::table::SHRINK,
 					   cw::table::ALIGN_CENTER,
@@ -798,10 +829,10 @@ static cw::widget_ref make_default_view(const menu_tree_ref &mainwidget,
 					   true));
 
   basic_format.push_back(package_view_item("static2",
-					   parse_columns(cw::util::transcode(aptcfg->Find(PACKAGE "::UI::Package-Status-Format", default_pkgstatusdisplay)),
+					   parse_columns(cw::util::transcode(ui_package_status_format.value),
 							 pkg_item::pkg_columnizer::parse_column_type,
 							 pkg_item::pkg_columnizer::defaults),
-					   PACKAGE "::UI::Package-Status-Format",
+					   ui_package_status_format.option_name,
 					   2, 0, 1, 1,
 					   cw::table::ALIGN_CENTER | cw::table::EXPAND | cw::table::FILL | cw::table::SHRINK,
 					   cw::table::ALIGN_CENTER,
@@ -2640,6 +2671,8 @@ static void do_show_menu_description(cw::menu_item *item, cw::label &label)
 static void do_setup_columns()
 {
   pkg_item::pkg_columnizer::setup_columns(true);
+  // check for errors in ::UI::Package-Display-Format or substitute
+  check_apt_errors();
 }
 
 static void load_options(string base, bool usetheme)
@@ -2868,6 +2901,8 @@ void ui_init()
   // FIXME: put this in load_options() and kill all other references
   //       to setup_columns?
   pkg_item::pkg_columnizer::setup_columns();
+  // check for errors in ::UI::Package-Display-Format or substitute
+  check_apt_errors();
 
   // Make sure the broken indicator doesn't annoyingly pop up for a
   // moment. (hack?)
