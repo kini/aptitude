@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude 0.4.11.9\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2015-09-05 20:10+0100\n"
+"POT-Creation-Date: 2015-09-05 21:16+0100\n"
 "PO-Revision-Date: 2014-11-29 19:57+0100\n"
 "Last-Translator: Orestes Mas <orestes@tsc.upc.edu>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -660,9 +660,6 @@ msgstr "El paquet %s no està instal·lat, per tant no s'actualitzarà.\n"
 
 #: src/cmdline/cmdline_action.cc:333
 #, fuzzy, c-format
-#| msgid ""
-#| "%s is already installed at the latest version, so it will not be "
-#| "upgraded.\n"
 msgid ""
 "%s is already installed at the latest version (%s), so it will not be "
 "upgraded.\n"
@@ -711,9 +708,6 @@ msgstr "En una ordre 'install' només podeu especificar un arxiu.\n"
 
 #: src/cmdline/cmdline_action.cc:561
 #, fuzzy, c-format
-#| msgid ""
-#| "Couldn't find package \"%s\", and more than 40\n"
-#| "packages contain \"%s\" in their name.\n"
 msgid ""
 "Couldn't find package \"%s\", and more than %zu\n"
 "packages contain \"%s\" in their name.\n"
@@ -739,9 +733,6 @@ msgstr ""
 
 #: src/cmdline/cmdline_action.cc:590
 #, fuzzy, c-format
-#| msgid ""
-#| "Couldn't find any package matching \"%s\", and more than 40\n"
-#| "packages contain \"%s\" in their description.\n"
 msgid ""
 "Couldn't find any package matching \"%s\", and more than %zu\n"
 "packages contain \"%s\" in their description.\n"
@@ -821,7 +812,6 @@ msgstr "Suprimeix %s* %sparcial/*\n"
 #: src/cmdline/cmdline_clean.cc:78 src/cmdline/cmdline_clean.cc:149
 #: src/ui.cc:1787 src/ui.cc:1875
 #, fuzzy
-#| msgid "Unable to look up your home directory, saving to /tmp/function_pkgs!"
 msgid "Unable to lock the download directory"
 msgstr ""
 "No s'ha pogut cercar el vostre directori d'usuari, s'està desant a /tmp/"
@@ -896,7 +886,6 @@ msgstr ""
 
 #: src/cmdline/cmdline_download_progress_display.cc:161
 #, fuzzy
-#| msgid "Hit "
 msgid "Hit"
 msgstr "Prem"
 
@@ -904,7 +893,6 @@ msgstr "Prem"
 #. the same width as the translation of "Err".
 #: src/cmdline/cmdline_download_progress_display.cc:188
 #, fuzzy
-#| msgid "Ign "
 msgid "Ign"
 msgstr "Ign "
 
@@ -993,7 +981,6 @@ msgstr "Què és això?  Evidentment és una serp menjant-se un elefant.\n"
 
 #: src/cmdline/cmdline_progress_display.cc:165 src/gtk/download.cc:204
 #, fuzzy
-#| msgid "none"
 msgid "Done"
 msgstr "cap"
 
@@ -1399,7 +1386,6 @@ msgstr ""
 
 #: src/cmdline/cmdline_prompt.cc:909
 #, fuzzy
-#| msgid "'&M' to mark packages as automatically installed"
 msgid "'a': the package was automatically installed or removed."
 msgstr "'&M' per marcar els paquets com a instal·lats automàticament"
 
@@ -1529,9 +1515,6 @@ msgstr "L'estat del sistema de resolució s'ha desat correctament!"
 
 #: src/cmdline/cmdline_resolver.cc:217
 #, fuzzy, c-format
-#| msgid ""
-#| "y: %Fn: %Fq: %F.: %F,: %Fo: %Fe: %Fx: %Fr pkg ver ...: %F%na pkg ver ...: "
-#| "%F%n<ACTION> pkg... : %F%n%F%F%F%F%F%F%F%F"
 msgid ""
 "y: %Fn: %Fq: %F.: %F,: %Fo: %Fe: %Fx: %Fr (ID|pkg ver) ...: %F%na (ID|pkg "
 "ver) ...: %F%n<ID>: %F%n<ACTION> pkg... : %F%n%F%F%F%F%F%F%F%F"
@@ -1684,31 +1667,26 @@ msgstr "És necessària la instal·lació de %s versió %s (%s)"
 
 #: src/cmdline/cmdline_resolver.cc:491
 #, fuzzy, c-format
-#| msgid "Leave the following recommendations unresolved:"
 msgid "Allowing this recommendation to be ignored: %s"
 msgstr "Deixa per resoldre les recomanacions següents:"
 
 #: src/cmdline/cmdline_resolver.cc:497
 #, fuzzy, c-format
-#| msgid "Audit ^Recommendations"
 msgid "Always obeying this recommendation: %s"
 msgstr "Audita les ^recomanacions"
 
 #: src/cmdline/cmdline_resolver.cc:506
 #, fuzzy, c-format
-#| msgid "No longer requiring the removal of %s"
 msgid "No longer ignoring this recommendation: %s"
 msgstr "No és necessària la supressió de %s"
 
 #: src/cmdline/cmdline_resolver.cc:512
 #, fuzzy, c-format
-#| msgid "Audit ^Recommendations"
 msgid "Ignoring this recommendation: %s"
 msgstr "Audita les ^recomanacions"
 
 #: src/cmdline/cmdline_resolver.cc:571
 #, fuzzy, c-format
-#| msgid "Actions"
 msgid "Action \"%s\""
 msgstr "Accions"
 
@@ -1865,7 +1843,6 @@ msgstr "No s'han pogut resoldre les dependències! Finalitzant..."
 
 #: src/cmdline/cmdline_resolver.cc:1202
 #, fuzzy, c-format
-#| msgid "Unable to resolve dependencies for the upgrade (%s)."
 msgid "Unable to resolve dependencies for the upgrade: %s"
 msgstr "No s'han pogut resoldre les dependències per a l'actualització (%s)."
 
@@ -1901,7 +1878,6 @@ msgstr "però no es pot instal·lar."
 
 #: src/cmdline/cmdline_show_broken.cc:96
 #, fuzzy, c-format
-#| msgid "but %s is to be installed."
 msgid "but it is not going to be installed."
 msgstr "però el %s està per instal·lar."
 
@@ -2235,7 +2211,6 @@ msgstr "No podeu especificar un arxiu i una versió per a un paquet\n"
 
 #: src/cmdline/cmdline_util.cc:272
 #, fuzzy, c-format
-#| msgid "Couldn't find a changelog for %s"
 msgid "Couldn't find task '%s'"
 msgstr "No s'ha pogut trobar un registre de modificacions de %s"
 
@@ -2281,19 +2256,16 @@ msgstr[1] ""
 
 #: src/cmdline/cmdline_versions.cc:122
 #, fuzzy, c-format
-#| msgid "Packages"
 msgid "Package %s:"
 msgstr "Paquets"
 
 #: src/cmdline/cmdline_versions.cc:149 src/cmdline/cmdline_versions.cc:188
 #, fuzzy, c-format
-#| msgid "Source Package: "
 msgid "Source package %s:"
 msgstr "Font del paquet: "
 
 #: src/cmdline/cmdline_versions.cc:210
 #, fuzzy, c-format
-#| msgid "Archive"
 msgid "Archive %s:"
 msgstr "Arxiu"
 
@@ -2332,7 +2304,6 @@ msgstr ""
 
 #: src/cmdline/cmdline_versions.cc:587
 #, fuzzy, c-format
-#| msgid "search: You must provide at least one search term\n"
 msgid "versions: You must provide at least one package selector\n"
 msgstr "cerca: heu de proporcionar, com a mínim, un terme de cerca\n"
 
@@ -2455,7 +2426,6 @@ msgstr "No s'ha trobat una raó per a instal·lar %s.\n"
 
 #: src/cmdline/cmdline_why.cc:1226
 #, fuzzy, c-format
-#| msgid "Packages depending on %s"
 msgid "Packages requiring %s:"
 msgstr "Paquets que depenen de %s"
 
@@ -2490,7 +2460,6 @@ msgstr ""
 #. for "ERROR".
 #: src/cmdline/text_progress.cc:93
 #, fuzzy, c-format
-#| msgid "[ERROR]"
 msgid "[ ERR] %s"
 msgstr "[Error]"
 
@@ -2709,7 +2678,6 @@ msgstr ""
 
 #: src/generic/apt/apt.cc:1235
 #, fuzzy
-#| msgid "allow_choices"
 msgid "allowed"
 msgstr "permet_opcions"
 
@@ -2851,7 +2819,6 @@ msgstr "No s'ha pogut regenerar la memòria cau de paquets"
 
 #: src/generic/apt/dpkg.cc:102
 #, fuzzy, c-format
-#| msgid "Couldn't find a changelog for %s"
 msgid "Couldn't chroot into %s for %s"
 msgstr "No s'ha pogut trobar un registre de modificacions de %s"
 
@@ -2867,7 +2834,6 @@ msgstr "No s'ha pogut obtenir l'estat de \"%s\""
 
 #: src/generic/apt/dump_packages.cc:674
 #, fuzzy, c-format
-#| msgid "Unable to locate package %s"
 msgid "Unable to create truncated cache: %s."
 msgstr "No s'ha pogut ubicar el paquet %s"
 
@@ -2994,7 +2960,6 @@ msgstr ""
 #: src/generic/apt/matching/match.cc:3055
 #: src/generic/apt/matching/match.cc:3169
 #, fuzzy
-#| msgid "Downloading packages"
 msgid "Filtering packages"
 msgstr "S'estan baixant les paquets"
 
@@ -3005,7 +2970,6 @@ msgstr "El tipus d'acció és desconegut: %s"
 
 #: src/generic/apt/matching/parse.cc:330
 #, fuzzy, c-format
-#| msgid "Unknown action type: %s"
 msgid "Unknown multiarch type: %s"
 msgstr "El tipus d'acció és desconegut: %s"
 
@@ -3037,7 +3001,6 @@ msgstr "El tipus de dependència és desconegut: %s"
 
 #: src/generic/apt/matching/parse.cc:914
 #, fuzzy, c-format
-#| msgid "Unknown matcher type: \"%s\"."
 msgid "Unknown term type: \"%s\"."
 msgstr "El tipus de coincidència és desconegut: «%s»."
 
@@ -3073,7 +3036,6 @@ msgstr "L'expressió, inesperadament, és buida"
 
 #: src/generic/apt/matching/parse.cc:1447
 #, fuzzy, c-format
-#| msgid "Badly formed expression"
 msgid "Badly formed expression: expected '|', got '%c'"
 msgstr "L'expressió està mal formada"
 
@@ -3108,13 +3070,11 @@ msgstr ""
 
 #: src/generic/apt/pkg_changelog.cc:569 src/generic/apt/pkg_changelog.cc:574
 #, fuzzy, c-format
-#| msgid "URL to use to download changelogs"
 msgid "Failed to download changelogs: %s"
 msgstr "URL a utilitzar per baixar els registres de canvis"
 
 #: src/generic/apt/pkg_changelog.cc:579
 #, fuzzy
-#| msgid "URL to use to download changelogs"
 msgid "Failed to download changelogs: unexpected exception."
 msgstr "URL a utilitzar per baixar els registres de canvis"
 
@@ -3131,7 +3091,6 @@ msgstr ""
 #: src/generic/apt/resolver_manager.cc:909
 #: src/generic/apt/resolver_manager.cc:911
 #, fuzzy, c-format
-#| msgid "Unable to parse pattern %s"
 msgid "Failed to parse the cost settings string: %s"
 msgstr "No s'ha pogut analitzar el patró %s"
 
@@ -3171,67 +3130,56 @@ msgstr ""
 
 #: src/generic/util/parsers.h:734
 #, fuzzy, c-format
-#| msgid "Expected '%c', got '%c'."
 msgid "Expected '%s', but got EOF."
 msgstr "S'esperava «%c», s'ha obtingut «%c»."
 
 #: src/generic/util/parsers.h:736
 #, fuzzy, c-format
-#| msgid "Expected '%c', got '%c'."
 msgid "Expected '%s', but got '%s'."
 msgstr "S'esperava «%c», s'ha obtingut «%c»."
 
 #: src/generic/util/parsers.h:777
 #, fuzzy
-#| msgid "Expected a number after -q=, got %s\n"
 msgid "Expected any character, but got EOF."
 msgstr "S'esperava un número a continuació de -q=, s'ha obtingut %s\n"
 
 #: src/generic/util/parsers.h:790
 #, fuzzy
-#| msgid "Bad action character '%c'\n"
 msgid "any character"
 msgstr "El caràcter d'acció '%c' és erroni\n"
 
 #: src/generic/util/parsers.h:831
 #, fuzzy, c-format
-#| msgid "Expected '%c', got '%c'."
 msgid "Expected %s, but got EOF."
 msgstr "S'esperava «%c», s'ha obtingut «%c»."
 
 #: src/generic/util/parsers.h:842
 #, fuzzy, c-format
-#| msgid "Expected '%c', got '%c'."
 msgid "Expected %s, but got '%c'."
 msgstr "S'esperava «%c», s'ha obtingut «%c»."
 
 #: src/generic/util/parsers.h:1016
 #, fuzzy
-#| msgid "Expected policy identifier, got '%c'"
 msgid "Expected an integer, got EOF."
 msgstr "S'esperava un identificador de política, s'ha obtingut «%c»"
 
 #: src/generic/util/parsers.h:1025
 #, fuzzy
-#| msgid "Expected ',' or ')' following '||', got '%s'"
 msgid "Expected an integer following '-', got EOF."
 msgstr "S'esperava «,» o «(» després de «||», s'ha obtingut «%s»"
 
 #: src/generic/util/parsers.h:1031
 #, fuzzy, c-format
-#| msgid "Expected policy identifier, got '%c'"
 msgid "Expected an integer, got '%c'."
 msgstr "S'esperava un identificador de política, s'ha obtingut «%c»"
 
 #: src/generic/util/parsers.h:1045 src/generic/util/parsers.h:1053
 #, fuzzy, c-format
-#| msgid "Invalid operation %s"
 msgid "Invalid integer: \"%s\"."
 msgstr "L'operació %s no és vàlida"
 
 #: src/generic/util/parsers.h:1076
 #, fuzzy, c-format
-#| msgid "Expected '%c', got '%c'."
 msgid "Expected EOF, got '%c'."
 msgstr "S'esperava «%c», s'ha obtingut «%c»."
 
@@ -3245,7 +3193,6 @@ msgstr ""
 #: src/generic/util/parsers.h:1940 src/generic/util/parsers.h:2033
 #: src/generic/util/parsers.h:2084
 #, fuzzy, c-format
-#| msgid "Unexpected ')'"
 msgid "Expected %s"
 msgstr "El ')' és inesperat"
 
@@ -3255,7 +3202,6 @@ msgstr " o "
 
 #: src/generic/util/parsers.h:2769
 #, fuzzy, c-format
-#| msgid "Unexpected ')'"
 msgid "Unexpected %s"
 msgstr "El ')' és inesperat"
 
@@ -3267,7 +3213,6 @@ msgstr ""
 
 #: src/generic/util/temp.cc:342
 #, fuzzy, c-format
-#| msgid "Unable to create temporary directory from template \"%s\": %s"
 msgid "Unable to create temporary filename from prefix \"%s\""
 msgstr ""
 "No s'ha pogut crear el directori temporal a partir de la plantilla \"%s\": %s"
@@ -3304,7 +3249,6 @@ msgstr ""
 
 #: src/gtk/aptitude.glade:19 src/gtk/aptitude.glade:2264
 #, fuzzy
-#| msgid "False"
 msgid "_File"
 msgstr "Fals"
 
@@ -3346,9 +3290,6 @@ msgstr "Torna a carregar la memòria cau dels paquets"
 
 #: src/gtk/aptitude.glade:118 src/gtk/aptitude.glade:2372 src/ui.cc:2389
 #, fuzzy
-#| msgid ""
-#| "Run 'su' to become root; this will restart the program, but your settings "
-#| "will be preserved"
 msgid "Restart the program as root; your settings will be preserved"
 msgstr ""
 "Executeu l'ordre 'su' per ser superusuari; es reiniciarà el programa, però "
@@ -3368,13 +3309,11 @@ msgstr "Desfés l'última operació o grup d'operacions del paquets"
 
 #: src/gtk/aptitude.glade:197 src/gtk/aptitude.glade:2453
 #, fuzzy
-#| msgid "Package"
 msgid "_Package"
 msgstr "Paquet"
 
 #: src/gtk/aptitude.glade:209 src/gtk/aptitude.glade:2465
 #, fuzzy
-#| msgid "Views"
 msgid "_View"
 msgstr "Vistes"
 
@@ -3394,7 +3333,6 @@ msgstr ""
 
 #: src/gtk/aptitude.glade:288 src/gtk/aptitude.glade:2547
 #, fuzzy
-#| msgid "Help"
 msgid "_Help"
 msgstr "Ajuda"
 
@@ -3405,7 +3343,6 @@ msgstr ""
 
 #: src/gtk/aptitude.glade:336 src/gtk/aptitude.glade:2595
 #, fuzzy
-#| msgid "List Update"
 msgid "Update"
 msgstr "Actualitza la llista"
 
@@ -3427,7 +3364,6 @@ msgstr "Sistema de resolució"
 
 #: src/gtk/aptitude.glade:380 src/gtk/aptitude.glade:2639
 #, fuzzy
-#| msgid "Installed"
 msgid "Install/Remove"
 msgstr "Instal·lat"
 
@@ -3437,20 +3373,17 @@ msgstr ""
 
 #: src/gtk/aptitude.glade:625
 #, fuzzy
-#| msgid "Remove the filter from the package list"
 msgid "Make this the default for new package lists."
 msgstr "Suprimeix el filtre de la llista de paquets"
 
 #: src/gtk/aptitude.glade:640
 #, fuzzy
-#| msgid "Apply a filter to the package list"
 msgid "Apply these settings to all active package lists."
 msgstr "Aplica un filtre a la llista de paquets"
 
 #: src/gtk/aptitude.glade:714 src/gtk/aptitude.glade:1448
 #: src/gtk/aptitude.glade:1780 src/gtk/aptitude.glade:1919
 #, fuzzy
-#| msgid "Search"
 msgid "Search:"
 msgstr "Cerca"
 
@@ -3461,7 +3394,6 @@ msgstr "Incremental"
 #: src/gtk/aptitude.glade:765 src/gtk/aptitude.glade:1487
 #: src/gtk/aptitude.glade:1819 src/gtk/aptitude.glade:1958
 #, fuzzy
-#| msgid "Err "
 msgid "Errors"
 msgstr "Err "
 
@@ -3476,7 +3408,6 @@ msgstr ""
 
 #: src/gtk/aptitude.glade:953
 #, fuzzy
-#| msgid "Dependencies of %s"
 msgid "Dependencies"
 msgstr "Dependències de %s"
 
@@ -3486,7 +3417,6 @@ msgstr "Registre de canvis"
 
 #: src/gtk/aptitude.glade:1011
 #, fuzzy
-#| msgid "False"
 msgid "Files"
 msgstr "Fals"
 
@@ -3500,7 +3430,6 @@ msgstr ""
 
 #: src/gtk/aptitude.glade:1042
 #, fuzzy
-#| msgid "Tags"
 msgid "tags"
 msgstr "Marcadors"
 
@@ -3523,13 +3452,11 @@ msgstr ""
 #: src/gtk/aptitude.glade:1204 src/gtk/download.cc:261
 #: src/gtk/entityview.cc:551
 #, fuzzy
-#| msgid "State"
 msgid "Status"
 msgstr "Estat"
 
 #: src/gtk/aptitude.glade:1238
 #, fuzzy
-#| msgid "Unknown action type: %s"
 msgid "Group by action type"
 msgstr "El tipus d'acció és desconegut: %s"
 
@@ -3574,38 +3501,32 @@ msgstr ""
 
 #: src/gtk/aptitude.glade:1391
 #, fuzzy
-#| msgid "^Examine Solution"
 msgid "Find a new solution"
 msgstr "^Examina la solució"
 
 #: src/gtk/aptitude.glade:1395
 #, fuzzy
-#| msgid "Select the next solution to the dependency problems."
 msgid "Calculate the next solution that has not yet been generated."
 msgstr "Selecciona la següent solució dels problemes de dependències."
 
 #: src/gtk/aptitude.glade:1410
 #, fuzzy
-#| msgid "Perform the actions contained in the currently selected solution."
 msgid ""
 "Perform the actions in the currently selected solution and close this tab."
 msgstr "Executa les accions definides en la solució seleccionada."
 
 #: src/gtk/aptitude.glade:1567
 #, fuzzy
-#| msgid "Upgrade"
 msgid "Upgrade Summary"
 msgstr "Actualitza"
 
 #: src/gtk/aptitude.glade:1596
 #, fuzzy
-#| msgid "Source Package: "
 msgid "Selected Package"
 msgstr "Font del paquet: "
 
 #: src/gtk/aptitude.glade:1643
 #, fuzzy
-#| msgid "Manual"
 msgid "Fix Manually"
 msgstr "Manual"
 
@@ -3661,19 +3582,16 @@ msgstr "Explora els paquets disponibles"
 
 #: src/gtk/areas.cc:73
 #, fuzzy
-#| msgid "^Find"
 msgid "Find"
 msgstr "^Cerca"
 
 #: src/gtk/areas.cc:74
 #, fuzzy
-#| msgid "Search for a package"
 msgid "Search for packages."
 msgstr "Cerca un paquet"
 
 #: src/gtk/areas.cc:76
 #, fuzzy
-#| msgid "Got "
 msgid "Go"
 msgstr "Obtingut/s "
 
@@ -3707,19 +3625,16 @@ msgstr ""
 
 #: src/gtk/changelog.cc:390
 #, fuzzy, c-format
-#| msgid "URL to use to download changelogs"
 msgid "Failed to download the changelog: %s"
 msgstr "URL a utilitzar per baixar els registres de canvis"
 
 #: src/gtk/changelog.cc:554 src/gtk/changelog.cc:692
 #, fuzzy, c-format
-#| msgid "Requiring the installation of %s version %s (%s)"
 msgid "Parsing the changelog of %s version %s..."
 msgstr "És necessària la instal·lació de %s versió %s (%s)"
 
 #: src/gtk/changelog.cc:659
 #, fuzzy, c-format
-#| msgid "You can only view changelogs of official Debian packages."
 msgid ""
 "You can only view changelogs of official Debian packages; the origin of %s "
 "is unknown."
@@ -3729,7 +3644,6 @@ msgstr ""
 
 #: src/gtk/changelog.cc:663
 #, fuzzy, c-format
-#| msgid "You can only view changelogs of official Debian packages."
 msgid ""
 "You can only view changelogs of official Debian packages; %s is from %s."
 msgstr ""
@@ -3738,13 +3652,11 @@ msgstr ""
 
 #: src/gtk/changelog.cc:739
 #, fuzzy, c-format
-#| msgid "Downloading Changelog"
 msgid "Downloading the changelog of %s version %s..."
 msgstr "S'està baixant el registre de canvis"
 
 #: src/gtk/changelog.cc:931
 #, fuzzy, c-format
-#| msgid "URL to use to download changelogs"
 msgid "Preparing to download the changelog of %s version %s."
 msgstr "URL a utilitzar per baixar els registres de canvis"
 
@@ -3754,7 +3666,6 @@ msgstr ""
 
 #: src/gtk/dashboardtab.cc:297
 #, fuzzy
-#| msgid "URL to use to download changelogs"
 msgid "Preparing to download changelogs"
 msgstr "URL a utilitzar per baixar els registres de canvis"
 
@@ -3764,8 +3675,6 @@ msgstr ""
 
 #: src/gtk/dashboardtab.cc:399
 #, fuzzy, c-format
-#| msgid "%d upgrade"
-#| msgid_plural "%d upgrades"
 msgid "%d available upgrade:"
 msgid_plural "%d available upgrades:"
 msgstr[0] "%d actualitzat"
@@ -3773,13 +3682,11 @@ msgstr[1] "%d actualitzats"
 
 #: src/gtk/dashboardtab.cc:618
 #, fuzzy
-#| msgid "Not Installed"
 msgid "No upgrades are available."
 msgstr "No instal·lat"
 
 #: src/gtk/dashboardtab.cc:630
 #, fuzzy
-#| msgid "Unable to locate package %s"
 msgid "Unable to calculate an upgrade."
 msgstr "No s'ha pogut ubicar el paquet %s"
 
@@ -3814,7 +3721,6 @@ msgstr ""
 
 #: src/gtk/dashboardtab.cc:693
 #, fuzzy, c-format
-#| msgid "Internal error: Default column string is unparsable"
 msgid "Internal error encountered while calculating an upgrade: %s"
 msgstr ""
 "S'ha produït un error intern: la cadena predeterminada de la columna no es "
@@ -3822,19 +3728,16 @@ msgstr ""
 
 #: src/gtk/dependency_chains_tab.cc:80
 #, fuzzy
-#| msgid "Dependency handling"
 msgid "Find dependency chains: start"
 msgstr "Gestió de les dependències"
 
 #: src/gtk/dependency_chains_tab.cc:84
 #, fuzzy
-#| msgid "Dependency handling"
 msgid "Find dependency chains: end"
 msgstr "Gestió de les dependències"
 
 #: src/gtk/dependency_chains_tab.cc:88
 #, fuzzy
-#| msgid "Dependency handling"
 msgid "Find dependency chains: results"
 msgstr "Gestió de les dependències"
 
@@ -3844,7 +3747,6 @@ msgstr ""
 
 #: src/gtk/dependency_chains_tab.cc:284
 #, fuzzy
-#| msgid "Dependency handling"
 msgid "No dependency chain found."
 msgstr "Gestió de les dependències"
 
@@ -3854,13 +3756,11 @@ msgstr ""
 
 #: src/gtk/download.cc:185
 #, fuzzy
-#| msgid "False"
 msgid "Failed"
 msgstr "Fals"
 
 #: src/gtk/download.cc:193
 #, fuzzy
-#| msgid "Deleting downloaded files"
 msgid "Already downloaded"
 msgstr "S'estan suprimint els fitxers baixats"
 
@@ -3871,13 +3771,11 @@ msgstr "Descripció"
 
 #: src/gtk/download.cc:253
 #, fuzzy
-#| msgid "Total Progress: "
 msgid "Progress"
 msgstr "Progrés total: "
 
 #: src/gtk/download.cc:264
 #, fuzzy
-#| msgid "Description"
 msgid "Short Description"
 msgstr "Descripció"
 
@@ -3887,14 +3785,12 @@ msgstr ""
 
 #: src/gtk/download.cc:319
 #, fuzzy
-#| msgid "Cleaning while a download is in progress is not allowed"
 msgid "The download is still in progress.  Should it be canceled?"
 msgstr ""
 "La tasca de neteja no es pot realitzar quan s'està realitzant una baixada"
 
 #: src/gtk/download.cc:395 src/gtk/gui.cc:832
 #, fuzzy
-#| msgid "View next display"
 msgid "View Details"
 msgstr "Mostra la visualització següent"
 
@@ -3914,19 +3810,16 @@ msgstr ""
 
 #: src/gtk/download.cc:486
 #, fuzzy, c-format
-#| msgid "%s; will be installed"
 msgid "%s: %lu/%lu, stalled"
 msgstr "%s; s'instal·larà"
 
 #: src/gtk/download.cc:507
 #, fuzzy, c-format
-#| msgid " [ %i%% ] (%sB/s, %s remaining)"
 msgid "%s: %sB of %sB at %sB/s, %s remaining"
 msgstr " [ %i%% ] (%sB/s, %s restant)"
 
 #: src/gtk/download.cc:514
 #, fuzzy, c-format
-#| msgid "but %s is to be installed."
 msgid "%s: %sB of %sB, stalled"
 msgstr "però el %s està per instal·lar."
 
@@ -3940,7 +3833,6 @@ msgstr ""
 
 #: src/gtk/dpkg_terminal.cc:352
 #, fuzzy, c-format
-#| msgid "Unable to locate package %s"
 msgid "%s: Unable to create a Unix-domain socket: %s"
 msgstr "No s'ha pogut ubicar el paquet %s"
 
@@ -3951,7 +3843,6 @@ msgstr ""
 
 #: src/gtk/dpkg_terminal.cc:429
 #, fuzzy, c-format
-#| msgid "Unable to create temporary directory from template \"%s\": %s"
 msgid "%s: Unable to accept a connection: %s"
 msgstr ""
 "No s'ha pogut crear el directori temporal a partir de la plantilla \"%s\": %s"
@@ -3978,25 +3869,21 @@ msgstr ""
 
 #: src/gtk/entitysummary.cc:115
 #, fuzzy, c-format
-#| msgid "%s versions"
 msgid "Upgrade to %s version %s"
 msgstr "%s versions"
 
 #: src/gtk/entitysummary.cc:123
 #, fuzzy, c-format
-#| msgid "Install(%s provides %s)"
 msgid "Install %s version %s"
 msgstr "Instal·la(%s proveeix %s)"
 
 #: src/gtk/entitysummary.cc:131
 #, fuzzy, c-format
-#| msgid "  cwidget version: %s\n"
 msgid "Downgrade to %s version %s"
 msgstr "  Versió de les cwidget: %s\n"
 
 #: src/gtk/entitysummary.cc:142
 #, fuzzy, c-format
-#| msgid "Keep the following packages at their current version:"
 msgid "Don't hold %s at its current version."
 msgstr "Mantín la versió actual dels següents paquets:"
 
@@ -4008,31 +3895,26 @@ msgstr "Canc^el·la qualsevol acció a %s."
 
 #: src/gtk/entitysummary.cc:150
 #, fuzzy, c-format
-#| msgid "Cancel the removal of %F"
 msgid "Cancel the purge of %s."
 msgstr "Cancel·la la supressió de %F"
 
 #: src/gtk/entitysummary.cc:152
 #, fuzzy, c-format
-#| msgid "Cancel the removal of %F"
 msgid "Cancel the removal of %s."
 msgstr "Cancel·la la supressió de %F"
 
 #: src/gtk/entitysummary.cc:157
 #, fuzzy, c-format
-#| msgid "Cancel the removal of %F"
 msgid "Cancel the upgrade of %s."
 msgstr "Cancel·la la supressió de %F"
 
 #: src/gtk/entitysummary.cc:159
 #, fuzzy, c-format
-#| msgid "Cancel the installation of %F"
 msgid "Cancel the installation of %s."
 msgstr "Cancel·la la instal·lació de %F"
 
 #: src/gtk/entitysummary.cc:161
 #, fuzzy, c-format
-#| msgid "Cancel the removal of %F"
 msgid "Cancel the downgrade of %s."
 msgstr "Cancel·la la supressió de %F"
 
@@ -4043,13 +3925,11 @@ msgstr "Cancel·la la reinstal·lació de %s."
 
 #: src/gtk/entitysummary.cc:206
 #, fuzzy, c-format
-#| msgid "Remove(%s)"
 msgid "Remove %s"
 msgstr "Suprimeix(%s)"
 
 #: src/gtk/entitysummary.cc:210
 #, fuzzy, c-format
-#| msgid "^Purge"
 msgid "Purge %s"
 msgstr "^Purga"
 
@@ -4060,7 +3940,6 @@ msgstr ""
 
 #: src/gtk/entitysummary.cc:223
 #, fuzzy, c-format
-#| msgid "'&M' to mark packages as automatically installed"
 msgid "Mark %s as automatically installed."
 msgstr "'&M' per marcar els paquets com a instal·lats automàticament"
 
@@ -4071,7 +3950,6 @@ msgstr "'&m' marca els paquets com a instal·lats manualment"
 
 #: src/gtk/entitysummary.cc:279
 #, fuzzy, c-format
-#| msgid "\"%s\" is a virtual package provided by:\n"
 msgid "%s is a virtual package provided by:\n"
 msgstr "\"%s\" és un paquet virtual proporcionat per:\n"
 
@@ -4081,14 +3959,12 @@ msgstr ""
 
 #: src/gtk/entitysummary.cc:375
 #, fuzzy
-#| msgid "Source Package: "
 msgid "Source: "
 msgstr "Font del paquet: "
 
 #: src/gtk/entityview.cc:381 src/gtk/entityview.cc:575
 #: src/qt/widgets/packages_tab.cc:105
 #, fuzzy
-#| msgid "ProgName"
 msgid "Name"
 msgstr "NomProg"
 
@@ -4098,13 +3974,11 @@ msgstr ""
 
 #: src/gtk/entityview.cc:411
 #, fuzzy, c-format
-#| msgid "Could not open file \"%s\""
 msgid "Columns of \"%s\":"
 msgstr "No s'ha pogut obrir el fitxer \"%s\""
 
 #: src/gtk/entityview.cc:412
 #, fuzzy, c-format
-#| msgid "Rejecting the removal of %s"
 msgid "Editing the columns of \"%s\""
 msgstr "S'està rebutjant la supressió de %s"
 
@@ -4118,25 +3992,21 @@ msgstr "Auto"
 
 #: src/gtk/entityview.cc:570
 #, fuzzy
-#| msgid "'&M' to mark packages as automatically installed"
 msgid "Whether the package is automatically installed."
 msgstr "'&M' per marcar els paquets com a instal·lats automàticament"
 
 #: src/gtk/entityview.cc:576
 #, fuzzy
-#| msgid "Cancel any action on the selected package"
 msgid "The name and description of the package."
 msgstr "Cancel·la qualsevol acció al paquet seleccionat"
 
 #: src/gtk/entityview.cc:591 src/qt/widgets/packages_tab.cc:105
 #, fuzzy
-#| msgid "Version: "
 msgid "Version"
 msgstr "Versió: "
 
 #: src/gtk/entityview.cc:592
 #, fuzzy
-#| msgid "Check for new versions of packages"
 msgid "The version number of the package."
 msgstr "Verifica si hi ha noves versions dels paquets"
 
@@ -4157,7 +4027,6 @@ msgstr ""
 
 #: src/gtk/gui.cc:80
 #, fuzzy
-#| msgid "not installed"
 msgid "Not installed"
 msgstr "no instal·lat"
 
@@ -4167,25 +4036,21 @@ msgstr "Virtual"
 
 #: src/gtk/gui.cc:82
 #, fuzzy
-#| msgid "unpacked"
 msgid "Unpacked"
 msgstr "desempaquetats"
 
 #: src/gtk/gui.cc:83
 #, fuzzy
-#| msgid "half-config"
 msgid "Half-configured"
 msgstr "configuració parcial"
 
 #: src/gtk/gui.cc:84
 #, fuzzy
-#| msgid "half-install"
 msgid "Half-installed"
 msgstr "instal·lació parcial"
 
 #: src/gtk/gui.cc:85
 #, fuzzy
-#| msgid "not installed (configuration files remain)"
 msgid "Configuration files and data remain"
 msgstr "no instal·lat (es mantenen els fitxers de configuració)"
 
@@ -4219,7 +4084,6 @@ msgstr ""
 
 #: src/gtk/gui.cc:97
 #, fuzzy
-#| msgid "forbidden upgrade"
 msgid "Hold (don't upgrade)"
 msgstr "actualització prohibida"
 
@@ -4238,7 +4102,6 @@ msgstr ""
 
 #: src/gtk/gui.cc:290
 #, fuzzy
-#| msgid "Apply a filter to the package list"
 msgid "You must be root to update the package lists."
 msgstr "Aplica un filtre a la llista de paquets"
 
@@ -4253,13 +4116,11 @@ msgstr "La llista de paquets ja s'està actualitzant o instal·lant."
 
 #: src/gtk/gui.cc:359
 #, fuzzy, c-format
-#| msgid "List Update"
 msgid "Update %s?"
 msgstr "Actualitza la llista"
 
 #: src/gtk/gui.cc:385
 #, fuzzy, c-format
-#| msgid "Unable to replace %s with new configuration file"
 msgid ""
 "Replace configuration file\n"
 "'%s'?"
@@ -4287,31 +4148,26 @@ msgstr ""
 
 #: src/gtk/gui.cc:776
 #, fuzzy
-#| msgid "%s changes"
 msgid "Done applying changes!"
 msgstr "%s modificacions"
 
 #: src/gtk/gui.cc:823
 #, fuzzy
-#| msgid "%s changes"
 msgid "Applying changes..."
 msgstr "%s modificacions"
 
 #: src/gtk/gui.cc:875
 #, fuzzy, c-format
-#| msgid "[%s] %s\n"
 msgid "%s: %s"
 msgstr "[%s] %s\n"
 
 #: src/gtk/gui.cc:878
 #, fuzzy, c-format
-#| msgid "No broken packages."
 msgid "Error in package %s"
 msgstr "No hi ha cap paquet trencat."
 
 #: src/gtk/gui.cc:906
 #, fuzzy, c-format
-#| msgid "Unable to replace %s with new configuration file"
 msgid "Asking whether to replace the configuration file %s"
 msgstr "No s'ha pogut reemplaçar el %s pel nou fitxer de configuració"
 
@@ -4321,25 +4177,21 @@ msgstr "S'estan baixant les paquets"
 
 #: src/gtk/gui.cc:1038
 #, fuzzy
-#| msgid "No broken packages."
 msgid "Broken packages"
 msgstr "No hi ha cap paquet trencat."
 
 #: src/gtk/gui.cc:1071
 #, fuzzy
-#| msgid "No broken packages."
 msgid "Show broken packages"
 msgstr "No hi ha cap paquet trencat."
 
 #: src/gtk/gui.cc:1075
 #, fuzzy
-#| msgid "Resolve Dependencies"
 msgid "Resolve dependencies"
 msgstr "Resol les dependències"
 
 #: src/gtk/gui.cc:1103
 #, fuzzy, c-format
-#| msgid "No packages are broken."
 msgid "%d package is broken"
 msgid_plural "%d packages are broken."
 msgstr[0] "No hi ha cap paquet trencat."
@@ -4347,13 +4199,11 @@ msgstr[1] "No hi ha cap paquet trencat."
 
 #: src/gtk/gui.cc:1147
 #, fuzzy
-#| msgid "%s changes"
 msgid "View changes"
 msgstr "%s modificacions"
 
 #: src/gtk/gui.cc:1151
 #, fuzzy
-#| msgid "%s changes"
 msgid "Apply changes"
 msgstr "%s modificacions"
 
@@ -4362,8 +4212,6 @@ msgstr "%s modificacions"
 #. font.
 #: src/gtk/gui.cc:1192
 #, fuzzy, c-format
-#| msgid "%d install"
-#| msgid_plural "%d installs"
 msgid "%d package to install"
 msgid_plural "%d packages to install"
 msgstr[0] "%d instal·lació"
@@ -4374,7 +4222,6 @@ msgstr[1] "%d instal·lació"
 #. font.
 #: src/gtk/gui.cc:1207
 #, fuzzy, c-format
-#| msgid "failed to remove %s"
 msgid "%d package to remove"
 msgid_plural "%d packages to remove"
 msgstr[0] "s'ha produït un error en suprimir %s"
@@ -4382,7 +4229,6 @@ msgstr[1] "s'ha produït un error en suprimir %s"
 
 #: src/gtk/gui.cc:1246
 #, fuzzy, c-format
-#| msgid "DownloadSize"
 msgid "Download size: %sB."
 msgstr "MidaBaixada"
 
@@ -4397,19 +4243,16 @@ msgstr ""
 
 #: src/gtk/gui.cc:1351
 #, fuzzy
-#| msgid "not installed"
 msgid "Not implemented"
 msgstr "no instal·lat"
 
 #: src/gtk/gui.cc:1403 src/gtk/gui.cc:1422
 #, fuzzy
-#| msgid "Installed"
 msgid "Install/Upgrade"
 msgstr "Instal·lat"
 
 #: src/gtk/gui.cc:1429
 #, fuzzy
-#| msgid "^Purge"
 msgid "Purge"
 msgstr "^Purga"
 
@@ -4427,7 +4270,6 @@ msgstr ""
 
 #: src/gtk/gui.cc:1450
 #, fuzzy
-#| msgid "User's Manual"
 msgid "Set as manual"
 msgstr "Manual d'usuari"
 
@@ -4442,7 +4284,6 @@ msgstr ""
 
 #: src/gtk/info.cc:161 src/gtk/pkgview.cc:169
 #, fuzzy
-#| msgid "Current status: %F."
 msgid "Current status"
 msgstr "Estat actual: %F."
 
@@ -4452,19 +4293,16 @@ msgstr ""
 
 #: src/gtk/info.cc:496
 #, fuzzy
-#| msgid "Not Installed"
 msgid "Not available"
 msgstr "No instal·lat"
 
 #: src/gtk/info.cc:545
 #, fuzzy
-#| msgid "C^ycle Package Information"
 msgid "Package information: version list"
 msgstr "Comm^uta la informació dels paquets"
 
 #: src/gtk/info.cc:555
 #, fuzzy
-#| msgid "Packages which depend on %s"
 msgid "Package information: dependency list"
 msgstr "Paquets dels qual depèn el %s"
 
@@ -4474,7 +4312,6 @@ msgstr ""
 
 #: src/gtk/info.cc:779
 #, fuzzy
-#| msgid "no"
 msgid "Info"
 msgstr "no"
 
@@ -4489,7 +4326,6 @@ msgstr "Desconegut"
 
 #: src/gtk/packagestab.cc:203
 #, fuzzy, c-format
-#| msgid "No packages matched the pattern \"%ls\"."
 msgid "No packages matched \"%s\"."
 msgstr "No hi ha cap paquet que coincideixi amb el patró \"%ls\"."
 
@@ -4499,31 +4335,26 @@ msgstr ""
 
 #: src/gtk/packagestab.cc:415
 #, fuzzy
-#| msgid "Package: "
 msgid "Packages: "
 msgstr "Paquet: "
 
 #: src/gtk/pkgview.cc:224
 #, fuzzy, c-format
-#| msgid "%s; will be installed automatically"
 msgid "%s was installed automatically."
 msgstr "%s; s'instal·larà automàticament"
 
 #: src/gtk/pkgview.cc:227
 #, fuzzy, c-format
-#| msgid "%s; will be installed automatically"
 msgid "%s is being installed automatically."
 msgstr "%s; s'instal·larà automàticament"
 
 #: src/gtk/pkgview.cc:235
 #, fuzzy, c-format
-#| msgid "%s; will be installed automatically"
 msgid "%s was installed manually."
 msgstr "%s; s'instal·larà automàticament"
 
 #: src/gtk/pkgview.cc:238
 #, fuzzy, c-format
-#| msgid "%s; will be installed automatically"
 msgid "%s is being installed manually."
 msgstr "%s; s'instal·larà automàticament"
 
@@ -4533,13 +4364,11 @@ msgstr ""
 
 #: src/gtk/pkgview.cc:607
 #, fuzzy
-#| msgid "Search"
 msgid "Searching..."
 msgstr "Cerca"
 
 #: src/gtk/pkgview.cc:718
 #, fuzzy
-#| msgid "Building view"
 msgid "Finalizing view"
 msgstr "S'està construïnt la vista"
 
@@ -4671,13 +4500,11 @@ msgstr ""
 
 #: src/gtk/previewtab.cc:179
 #, fuzzy
-#| msgid "Preview"
 msgid "Preview: "
 msgstr "Previsualització"
 
 #: src/gtk/resolver.cc:68
 #, fuzzy, c-format
-#| msgid "Error while dumping resolver state"
 msgid "Error in dependency resolver: %s"
 msgstr "S'ha produït un error en volcar l'estat del sistema de resolució"
 
@@ -4692,7 +4519,6 @@ msgstr ""
 
 #: src/gtk/resolver.cc:212
 #, fuzzy
-#| msgid "Package"
 msgid "Virtual package"
 msgstr "Paquet"
 
@@ -4702,7 +4528,6 @@ msgstr "No instal·lat"
 
 #: src/gtk/resolver.cc:377
 #, fuzzy, c-format
-#| msgid "Removing %s"
 msgid "Removing %s is rejected."
 msgstr "S'està suprimint %s"
 
@@ -4718,25 +4543,21 @@ msgstr "S'ha rebutjat la supressió de %s"
 
 #: src/gtk/resolver.cc:394
 #, fuzzy, c-format
-#| msgid "Keep %F at version %s (%s)"
 msgid "Keeping %s at version %s is rejected."
 msgstr "Mantín %F a la versió %s (%s)"
 
 #: src/gtk/resolver.cc:401
 #, fuzzy, c-format
-#| msgid "Install(%s provides %s)"
 msgid "Installing %s version %s is rejected."
 msgstr "Instal·la(%s proveeix %s)"
 
 #: src/gtk/resolver.cc:407
 #, fuzzy, c-format
-#| msgid "  cwidget version: %s\n"
 msgid "Downgrading %s to version %s is rejected."
 msgstr "  Versió de les cwidget: %s\n"
 
 #: src/gtk/resolver.cc:413
 #, fuzzy, c-format
-#| msgid "%s versions"
 msgid "Upgrading %s to version %s is rejected."
 msgstr "%s versions"
 
@@ -4778,7 +4599,6 @@ msgstr ""
 
 #: src/gtk/resolver.cc:466
 #, fuzzy, c-format
-#| msgid "%s versions"
 msgid ""
 "Upgrading %s to version %s is preferred over all un-accepted alternatives."
 msgstr "%s versions"
@@ -4866,7 +4686,6 @@ msgstr "%s deixa obsolet %s"
 
 #: src/gtk/resolver.cc:1264 src/solution_fragment.cc:151
 #, fuzzy, c-format
-#| msgid "%s replaces %s"
 msgid "%s enhances %s"
 msgstr "%s substitueix %s"
 
@@ -4880,7 +4699,6 @@ msgstr "Instal·la els següents paquets:"
 
 #: src/gtk/resolver.cc:1403 src/gtk/resolver.cc:1865
 #, fuzzy
-#| msgid "Remove the following packages:"
 msgid "Keep the following packages:"
 msgstr "Suprimeix els següents paquets:"
 
@@ -4895,121 +4713,101 @@ msgstr "Desactualitza els següents paquets:"
 #: src/gtk/resolver.cc:1442 src/gtk/resolver.cc:1903
 #: src/solution_fragment.cc:509
 #, fuzzy
-#| msgid "Leave the following dependencies unresolved:%n"
 msgid "Leave the following dependencies unresolved:"
 msgstr "Deixa les dependències següents pendents de resolució:%n"
 
 #: src/gtk/resolver.cc:1519
 #, fuzzy, c-format
-#| msgid "Remove %F [%s (%s)]"
 msgid "Remove %s [<big>%s</big> (%s)]"
 msgstr "Suprimeix %F [%s (%s)]"
 
 #: src/gtk/resolver.cc:1526
 #, fuzzy, c-format
-#| msgid "Install %F [%s (%s)]"
 msgid "Install %s [<big>%s</big> (%s)]"
 msgstr "Instal·la %F [%s (%s)]"
 
 #: src/gtk/resolver.cc:1534
 #, fuzzy, c-format
-#| msgid "Cancel the installation of %F"
 msgid "Cancel the installation of %s"
 msgstr "Cancel·la la instal·lació de %F"
 
 #: src/gtk/resolver.cc:1537
 #, fuzzy, c-format
-#| msgid "Cancel the removal of %F"
 msgid "Cancel the removal of %s"
 msgstr "Cancel·la la supressió de %F"
 
 #: src/gtk/resolver.cc:1540
 #, fuzzy, c-format
-#| msgid "Keep %F at version %s (%s)"
 msgid "Keep %s at version <big>%s</big> (%s)"
 msgstr "Mantín %F a la versió %s (%s)"
 
 #: src/gtk/resolver.cc:1547
 #, fuzzy, c-format
-#| msgid "Upgrade %F [%s (%s) -> %s (%s)]"
 msgid "Upgrade %s [<big>%s</big> (%s) -> <big>%s</big> (%s)]"
 msgstr "Actualitza %F [%s (%s) -> %s (%s)]"
 
 #: src/gtk/resolver.cc:1556
 #, fuzzy, c-format
-#| msgid "Downgrade %F [%s (%s) -> %s (%s)]"
 msgid "Downgrade %s [<big>%s</big> (%s) -> <big>%s</big> (%s)]"
 msgstr "Desactualitza %F [%s (%s) -> %s (%s)]"
 
 #: src/gtk/resolver.cc:1615
 #, fuzzy, c-format
-#| msgid "Remove(%s)"
 msgid "<b>Remove</b> %s"
 msgstr "Suprimeix(%s)"
 
 #: src/gtk/resolver.cc:1615
 #, fuzzy, c-format
-#| msgid "Remove(%s)"
 msgid "<b>remove</b> %s"
 msgstr "Suprimeix(%s)"
 
 #: src/gtk/resolver.cc:1624
 #, fuzzy, c-format
-#| msgid "Keep %F at version %s (%s)"
 msgid "<b>Keep</b> %s at version %s"
 msgstr "Mantín %F a la versió %s (%s)"
 
 #: src/gtk/resolver.cc:1624
 #, fuzzy, c-format
-#| msgid "Keep %F at version %s (%s)"
 msgid "<b>keep</b> %s at version %s"
 msgstr "Mantín %F a la versió %s (%s)"
 
 #: src/gtk/resolver.cc:1632
 #, fuzzy, c-format
-#| msgid "Cancel the installation of %F"
 msgid "<b>Cancel</b> the installation of %s"
 msgstr "Cancel·la la instal·lació de %F"
 
 #: src/gtk/resolver.cc:1632
 #, fuzzy, c-format
-#| msgid "Cancel the installation of %F"
 msgid "<b>cancel</b> the installation of %s"
 msgstr "Cancel·la la instal·lació de %F"
 
 #: src/gtk/resolver.cc:1639
 #, fuzzy, c-format
-#| msgid "Install %F [%s (%s)]"
 msgid "<b>Install</b> %s %s"
 msgstr "Instal·la %F [%s (%s)]"
 
 #: src/gtk/resolver.cc:1639
 #, fuzzy, c-format
-#| msgid "Install %F [%s (%s)]"
 msgid "<b>install</b> %s %s"
 msgstr "Instal·la %F [%s (%s)]"
 
 #: src/gtk/resolver.cc:1648
 #, fuzzy, c-format
-#| msgid "  cwidget version: %s\n"
 msgid "<b>Downgrade</b> %s to version %s"
 msgstr "  Versió de les cwidget: %s\n"
 
 #: src/gtk/resolver.cc:1648
 #, fuzzy, c-format
-#| msgid "  cwidget version: %s\n"
 msgid "<b>downgrade</b> %s to version %s"
 msgstr "  Versió de les cwidget: %s\n"
 
 #: src/gtk/resolver.cc:1657
 #, fuzzy, c-format
-#| msgid "%s versions"
 msgid "<b>Upgrade</b> %s to version %s"
 msgstr "%s versions"
 
 #: src/gtk/resolver.cc:1657
 #, fuzzy, c-format
-#| msgid "%s versions"
 msgid "<b>upgrade</b> %s to version %s"
 msgstr "%s versions"
 
@@ -5025,8 +4823,6 @@ msgstr ""
 
 #: src/gtk/resolver.cc:1738
 #, fuzzy, c-format
-#| msgid "%d install"
-#| msgid_plural "%d installs"
 msgid "%s install"
 msgid_plural "%s installs"
 msgstr[0] "%d instal·lació"
@@ -5034,8 +4830,6 @@ msgstr[1] "%d instal·lacions"
 
 #: src/gtk/resolver.cc:1743
 #, fuzzy, c-format
-#| msgid "%d removal"
-#| msgid_plural "%d removals"
 msgid "%s remove"
 msgid_plural "%s removes"
 msgstr[0] "%d supressió"
@@ -5050,8 +4844,6 @@ msgstr[1] "%s mantinguts"
 
 #: src/gtk/resolver.cc:1755
 #, fuzzy, c-format
-#| msgid "%d upgrade"
-#| msgid_plural "%d upgrades"
 msgid "%s upgrade"
 msgid_plural "%s upgrades"
 msgstr[0] "%d actualitzat"
@@ -5059,8 +4851,6 @@ msgstr[1] "%d actualitzats"
 
 #: src/gtk/resolver.cc:1761
 #, fuzzy, c-format
-#| msgid "%d downgrade"
-#| msgid_plural "%d downgrades"
 msgid "%s downgrade"
 msgid_plural "%s downgrades"
 msgstr[0] "$d desactualitzat"
@@ -5068,7 +4858,6 @@ msgstr[1] "%d desactualitzats"
 
 #: src/gtk/resolver.cc:1767
 #, fuzzy, c-format
-#| msgid "Audit ^Recommendations"
 msgid "%s unresolved recommendation"
 msgid_plural "%s unresolved recommendations"
 msgstr[0] "Audita les ^recomanacions"
@@ -5076,19 +4865,16 @@ msgstr[1] "Audita les ^recomanacions"
 
 #: src/gtk/resolver.cc:2059
 #, fuzzy
-#| msgid "No more solutions."
 msgid "No solutions yet."
 msgstr "No hi ha més solucions."
 
 #: src/gtk/resolver.cc:2066
 #, fuzzy
-#| msgid "Dependency handling"
 msgid "No dependency solution was found."
 msgstr "Gestió de les dependències"
 
 #: src/gtk/resolver.cc:2067
 #, fuzzy
-#| msgid "No more solutions."
 msgid "No solutions."
 msgstr "No hi ha més solucions."
 
@@ -5098,7 +4884,6 @@ msgstr ""
 
 #: src/gtk/resolver.cc:2079
 #, fuzzy, c-format
-#| msgid "No more solutions."
 msgid "%u solution."
 msgid_plural "%u solutions."
 msgstr[0] "No hi ha més solucions."
@@ -5106,13 +4891,11 @@ msgstr[1] "No hi ha més solucions."
 
 #: src/gtk/resolver.cc:2111
 #, fuzzy, c-format
-#| msgid "Could not open file \"%s\""
 msgid "Solution %s of %s."
 msgstr "No s'ha pogut obrir el fitxer \"%s\""
 
 #: src/gtk/tab.cc:68
 #, fuzzy
-#| msgid "[Downloaded]"
 msgid "Download"
 msgstr " [Baixat]"
 
@@ -5162,7 +4945,6 @@ msgstr "S'esperava un identificador de política, s'ha obtingut «%c»"
 
 #: src/load_grouppolicy.cc:305
 #, fuzzy, c-format
-#| msgid "Expected ',' or '(', got '%c'"
 msgid "Expected ',', '%c', or '('; got '%c'"
 msgstr "S'esperava «,» o «(», s'ha obtingut «%c»"
 
@@ -5183,7 +4965,6 @@ msgstr "La política del terminal '%s' hauria de ser l'última de la llista"
 
 #: src/load_grouppolicy.cc:385
 #, fuzzy
-#| msgid "Unmatched '(' in pattern grouping policy"
 msgid "Unmatched '(' in grouping policy"
 msgstr "La política d'agrupació de patrons conté un '(' no tancat"
 
@@ -5202,7 +4983,6 @@ msgstr ""
 #: src/load_grouppolicy.cc:428 src/load_grouppolicy.cc:544
 #: src/load_grouppolicy.cc:601
 #, fuzzy, c-format
-#| msgid "Too many arguments to by-section grouping policy"
 msgid "Too many arguments to '%s' grouping policy"
 msgstr "La política d'agrupació per secció no precisa de tants arguments"
 
@@ -5211,7 +4991,6 @@ msgstr "La política d'agrupació per secció no precisa de tants arguments"
 #: src/load_grouppolicy.cc:566 src/load_grouppolicy.cc:577
 #: src/load_grouppolicy.cc:588 src/load_grouppolicy.cc:746
 #, fuzzy, c-format
-#| msgid "Task grouping policies take no arguments"
 msgid "Grouping policy '%s' takes no arguments"
 msgstr "Les polítiques d'agrupació de tasques no precisen d'arguments"
 
@@ -5232,7 +5011,6 @@ msgstr ""
 
 #: src/load_grouppolicy.cc:624
 #, fuzzy, c-format
-#| msgid "Too many arguments to by-section grouping policy"
 msgid "Missing arguments to '%s' grouping policy"
 msgstr "La política d'agrupació per secció no precisa de tants arguments"
 
@@ -5243,19 +5021,16 @@ msgstr "No s'ha pogut analitzar el patró a continuació de \"%s\""
 
 #: src/load_grouppolicy.cc:685
 #, fuzzy, c-format
-#| msgid "Unexpectedly empty tree title after \"%s\""
 msgid "Unexpected empty tree title after \"%s\""
 msgstr "Títol de l'arbre buit a continuació de \"%s\""
 
 #: src/load_grouppolicy.cc:704
 #, fuzzy, c-format
-#| msgid "Expected ',' or ')' following '||', got '%s'"
 msgid "Expected '{', ')', or ',' following '||', got '%s'"
 msgstr "S'esperava «,» o «(» després de «||», s'ha obtingut «%s»"
 
 #: src/load_grouppolicy.cc:730
 #, fuzzy, c-format
-#| msgid "Unmatched '(' in pattern grouping policy"
 msgid "Unmatched '(' in '%s' grouping policy"
 msgstr "La política d'agrupació de patrons conté un '(' no tancat"
 
@@ -5300,7 +5075,6 @@ msgstr "Tipus d'alineació '%s' desconegut"
 #: src/load_sortpolicy.cc:77 src/load_sortpolicy.cc:90
 #: src/load_sortpolicy.cc:103 src/load_sortpolicy.cc:117
 #, fuzzy, c-format
-#| msgid "By-name sorting policies take no arguments"
 msgid "Sorting policy '%s' takes no arguments"
 msgstr "Les polítiques d'ordenació pel nom no precisen de cap argument"
 
@@ -5365,25 +5139,21 @@ msgstr "  libsigc++ versió: %s\n"
 
 #: src/main.cc:165
 #, fuzzy, c-format
-#| msgid "  apt version %d.%d.%d\n"
 msgid "  Gtk+ version %d.%d.%d\n"
 msgstr "  apt versió %d.%d.%d\n"
 
 #: src/main.cc:167
 #, fuzzy, c-format
-#| msgid "  apt version %d.%d.%d\n"
 msgid "  Gtk-- version %d.%d.%d\n"
 msgstr "  apt versió %d.%d.%d\n"
 
 #: src/main.cc:170
 #, fuzzy, c-format
-#| msgid "  Ept support disabled.\n"
 msgid "  Gtk+ support disabled.\n"
 msgstr "  Suport d'ept inhabilitat\n"
 
 #: src/main.cc:173
 #, fuzzy, c-format
-#| msgid "%s %s compiled at %s %s\n"
 msgid "  Compiled with Qt %s\n"
 msgstr "%s %s compilat el %s %s\n"
 
@@ -5394,7 +5164,6 @@ msgstr ""
 
 #: src/main.cc:176
 #, fuzzy, c-format
-#| msgid "  Ept support disabled.\n"
 msgid "  Qt support disabled.\n"
 msgstr "  Suport d'ept inhabilitat\n"
 
@@ -5507,7 +5276,6 @@ msgstr ""
 
 #: src/main.cc:203
 #, fuzzy, c-format
-#| msgid "'&BD' to install the build-dependencies of a package."
 msgid " build-dep    - Install the build-dependencies of packages.\n"
 msgstr "«&BD» per a instal·lar les dependències de construcció d'un paquet."
 
@@ -5528,7 +5296,6 @@ msgstr " show       - Mostra informació detallada d'un paquet.\n"
 
 #: src/main.cc:207
 #, fuzzy, c-format
-#| msgid " show         - Display detailed information about a package\n"
 msgid " versions     - Displays the versions of specified packages.\n"
 msgstr " show       - Mostra informació detallada d'un paquet\n"
 
@@ -5607,7 +5374,6 @@ msgstr ""
 
 #: src/main.cc:226
 #, fuzzy, c-format
-#| msgid " -h             This help text\n"
 msgid " --qt           Use the Qt GUI.\n"
 msgstr " -h             Aquest text d'ajuda\n"
 
@@ -5759,7 +5525,6 @@ msgstr "                  L'aptitude no té super poders bovins.\n"
 #. the command-line or set in the configuration file.
 #: src/main.cc:377
 #, fuzzy
-#| msgid "true"
 msgid "trace"
 msgstr "cert"
 
@@ -5773,7 +5538,6 @@ msgstr ""
 #. the command-line or set in the configuration file.
 #: src/main.cc:383
 #, fuzzy
-#| msgid "no"
 msgid "info"
 msgstr "no"
 
@@ -5787,7 +5551,6 @@ msgstr ""
 #. the command-line or set in the configuration file.
 #: src/main.cc:389
 #, fuzzy
-#| msgid "Err "
 msgid "error"
 msgstr "Err "
 
@@ -5795,7 +5558,6 @@ msgstr "Err "
 #. the command-line or set in the configuration file.
 #: src/main.cc:392
 #, fuzzy
-#| msgid "false"
 msgid "fatal"
 msgstr "fals"
 
@@ -5830,7 +5592,6 @@ msgstr ""
 #.
 #: src/main.cc:486
 #, fuzzy, c-format
-#| msgid "Invalid operation %s"
 msgid "Invalid logger name \"%s\"."
 msgstr "L'operació %s no és vàlida"
 
@@ -5883,7 +5644,6 @@ msgstr ""
 
 #: src/main.cc:1025
 #, fuzzy
-#| msgid "Package"
 msgid "first-package"
 msgstr "Paquet"
 
@@ -5893,7 +5653,6 @@ msgstr ""
 
 #: src/main.cc:1029
 #, fuzzy
-#| msgid "All Packages"
 msgid "all-packages"
 msgstr "Tots els paquets"
 
@@ -5914,7 +5673,6 @@ msgstr ""
 
 #: src/main.cc:1079
 #, fuzzy
-#| msgid "Only one of -u and -i may be specified\n"
 msgid ""
 "Only one of --auto-clean-on-startup, --clean-on-startup, -i, and -u may be "
 "specified\n"
@@ -5922,8 +5680,6 @@ msgstr "Només es pot utilitzar un -u o -i\n"
 
 #: src/main.cc:1088
 #, fuzzy
-#| msgid ""
-#| "-u and -i may not be specified in command-line mode (eg, with 'install')"
 msgid ""
 "-u, -i, and --clean-on-startup may not be specified in command-line mode "
 "(eg, with 'install')"
@@ -5933,7 +5689,6 @@ msgstr ""
 
 #: src/main.cc:1105
 #, fuzzy
-#| msgid "-u and -i may not be specified with a command"
 msgid "-u, -i, and --clean-on-startup may not be specified with a command"
 msgstr "-u i -i no s'han d'utilitzar amb una ordre"
 
@@ -6704,19 +6459,16 @@ msgstr ""
 
 #: src/qt/widgets/packages_tab.cc:72
 #, fuzzy
-#| msgid "Install"
 msgid "all"
 msgstr "Instal·la"
 
 #: src/qt/widgets/packages_tab.cc:72
 #, fuzzy
-#| msgid "installed"
 msgid "installed locally"
 msgstr "instal·lat"
 
 #: src/qt/widgets/packages_tab.cc:72
 #, fuzzy
-#| msgid "New"
 msgid "new"
 msgstr "Nou"
 
@@ -6730,13 +6482,11 @@ msgstr ""
 
 #: src/qt/widgets/packages_tab.cc:105
 #, fuzzy
-#| msgid "Description"
 msgid "Name and Description"
 msgstr "Descripció"
 
 #: src/qt/widgets/packages_tab.cc:111
 #, fuzzy
-#| msgid "^Find"
 msgid "Find:"
 msgstr "^Cerca"
 
@@ -6746,19 +6496,16 @@ msgstr ""
 
 #: src/qt/windows/main_window.cc:96
 #, fuzzy
-#| msgid "False"
 msgid "&File"
 msgstr "Fals"
 
 #: src/qt/windows/main_window.cc:104
 #, fuzzy
-#| msgid "Packages"
 msgid "&Packages"
 msgstr "Paquets"
 
 #: src/qt/windows/main_window.cc:112
 #, fuzzy
-#| msgid "Help"
 msgid "&Help"
 msgstr "Ajuda"
 
@@ -7189,7 +6936,6 @@ msgstr ""
 
 #: src/ui.cc:473
 #, fuzzy, c-format
-#| msgid "Unable to open %ls"
 msgid "Unable to fork: %s"
 msgstr "No s'ha pogut obrir %ls"
 
@@ -7517,9 +7263,6 @@ msgstr "S'han suprimit els fitxers dels paquets baixats"
 
 #: src/ui.cc:1816
 #, fuzzy
-#| msgid ""
-#| "Updating the package lists requires administrative privileges, which you "
-#| "currently do not have.  Would you like to change to the root account?"
 msgid ""
 "Cleaning the package cache requires administrative privileges, which you "
 "currently do not have.  Would you like to change to the root account?"
@@ -7544,9 +7287,6 @@ msgstr ""
 
 #: src/ui.cc:1911
 #, fuzzy
-#| msgid ""
-#| "Updating the package lists requires administrative privileges, which you "
-#| "currently do not have.  Would you like to change to the root account?"
 msgid ""
 "Deleting obsolete files requires administrative privileges, which you "
 "currently do not have.  Would you like to change to the root account?"
@@ -8053,12 +7793,9 @@ msgstr "Vistes"
 
 #: src/ui.cc:2853
 #, fuzzy, c-format
-#| msgid ""
-#| "%ls: Menu  %ls: Help  %ls: Quit  %ls: Update  %ls: Download/Install/"
-#| "Remove Pkgs"
 msgid ""
-"%ls: Menu  %ls: Help  %ls: Quit  %ls: Update  %ls: Preview & Download/"
-"Install/Remove Pkgs"
+"%ls: Menu  %ls: Help  %ls: Quit  %ls: Update  %ls: Preview/Download/Install/"
+"Remove Pkgs"
 msgstr ""
 "%ls: Menú  %ls: Ajuda  %ls: Surt  %ls: Actualitza  %ls: Descarrega/Instal·la/"
 "Suprimeix"
@@ -8082,19 +7819,16 @@ msgstr "Mostra els canvis realitzats en aquest paquet de Debian."
 
 #: src/view_changelog.cc:343
 #, fuzzy, c-format
-#| msgid "URL to use to download changelogs"
 msgid "Preparing to download the changelog of %s"
 msgstr "URL a utilitzar per baixar els registres de canvis"
 
 #: src/view_changelog.cc:371
 #, fuzzy, c-format
-#| msgid "URL to use to download changelogs"
 msgid "Failed to download the changelog of %s: %s"
 msgstr "URL a utilitzar per baixar els registres de canvis"
 
 #: src/view_changelog.cc:382
 #, fuzzy, c-format
-#| msgid "Downloading Changelog"
 msgid "Downloading the changelog of %s"
 msgstr "S'està baixant el registre de canvis"
 
