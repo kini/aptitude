@@ -239,11 +239,6 @@ void cmine::do_start_custom_game(cw::widget &w_bare,
 
   if(s.empty()==true || *end!='\0' || height<1)
     {
-      // FIXME: should say "positive integer" but the translators will
-      // lynch me ;-)
-      //
-      //
-      // That's ok, they'll do that anyway in a couple releases ;-)
       popup_widget(dialogs::ok(W_("The board height must be a positive integer"),
 			       NULL,
 			       cw::get_style("Error")));
