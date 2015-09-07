@@ -349,10 +349,10 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
                pkg.FullName(true).c_str());
       break;
     case cmdline_purge:
-      if(!pkg.CurrentVer().end() || pkg->CurrentState!=pkgCache::State::ConfigFiles)
+      if(!pkg.CurrentVer().end() || pkg->CurrentState == pkgCache::State::ConfigFiles)
 	to_purge.insert(pkg);
       else
-	printf(_("Package %s is not installed, so it will not be removed\n"),
+	printf(_("Package %s is not installed, so it will not be purged\n"),
                pkg.FullName(true).c_str());
       break;
     case cmdline_hold:
