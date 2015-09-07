@@ -3160,11 +3160,20 @@ void prompt_string(const std::wstring &prompt,
       main_table->focus_widget(main_status_multiplex);
     }
   else
-    main_stacked->add_visible_widget(cw::dialogs::string(prompt, text,
-						      slot, cancel_slot,
-						      changed_slot,
-						      history),
-				     true);
+    {
+      cw::widget_ref w = cw::dialogs::string(prompt, text,
+					     slot, cancel_slot,
+					     changed_slot,
+					     history);
+      w->connect_key("Cancel",
+		     &cw::config::global_bindings,
+		     sigc::mem_fun(w.unsafe_get_ref(), &cw::widget::destroy));
+      if (cancel_slot)
+	w->connect_key("Cancel",
+		       &cw::config::global_bindings,
+		       *cancel_slot);
+      main_stacked->add_visible_widget(w, true);
+    }
 }
 
 void prompt_string(const std::string &prompt,
