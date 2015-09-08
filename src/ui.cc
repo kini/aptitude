@@ -3230,6 +3230,14 @@ void prompt_yesno(const std::wstring &prompt,
 				   yesslot,
 				   noslot));
 
+      c->connect_key("Cancel",
+		     &cw::config::global_bindings,
+		     sigc::mem_fun(c.unsafe_get_ref(), &cw::widget::destroy));
+      if(noslot)
+	c->connect_key("Cancel",
+		       &cw::config::global_bindings,
+		       *noslot);
+
       main_status_multiplex->add_visible_widget(c, true);
       main_table->focus_widget(main_status_multiplex);
     }
