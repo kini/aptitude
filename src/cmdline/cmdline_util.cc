@@ -357,8 +357,8 @@ namespace
        final.get_num_broken() != initial.get_num_broken())
       {
 	std::string change =
-	  ssprintf(ngettext("%d broken [%+d]",
-			    "%d broken [%+d]",
+	  ssprintf(ngettext("%d (%+d) broken",
+			    "%d (%+d) broken",
 			    final.get_num_broken()),
 		   final.get_num_broken(),
 		   final.get_num_broken() - initial.get_num_broken());
@@ -371,8 +371,8 @@ namespace
        final.get_num_upgradable() != initial.get_num_upgradable())
       {
 	std::string change =
-	  ssprintf(ngettext("%d update [%+d]",
-			    "%d updates [%+d]",
+	  ssprintf(ngettext("%d (%+d) update",
+			    "%d (%+d) updates",
 			    final.get_num_upgradable()),
 		   final.get_num_upgradable(),
 		   final.get_num_upgradable() - initial.get_num_upgradable());
@@ -385,8 +385,8 @@ namespace
        final.get_num_new() != initial.get_num_new())
       {
 	std::string change =
-	  ssprintf(ngettext("%d new [%+d]",
-			    "%d new [%+d]",
+	  ssprintf(ngettext("%d (%+d) new",
+			    "%d (%+d) new",
 			    final.get_num_new()),
 		   final.get_num_new(),
 		   final.get_num_new() - initial.get_num_new());
