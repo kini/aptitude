@@ -367,6 +367,12 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
     case cmdline_unhold:
       to_hold.erase(pkg);
       break;
+    case cmdline_markauto:
+    case cmdline_unmarkauto:
+      if(pkg.CurrentVer().end())
+	printf(_("Package %s is not installed, cannot be marked/unmarked as automatically installed\n"),
+               pkg.FullName(true).c_str());
+      break;
     case cmdline_forbid_version:
       if(source==cmdline_version_cand)
 	{
