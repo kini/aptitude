@@ -6,10 +6,3 @@ PO4A-HEADER:mode=after;position=</author>;beginboundary=<legalnotice>
   <email>l.lamberov@gmail.com</email>
   <contrib>Перевод</contrib>
 </othercredit>
-<othercredit>
-  <personname>
-    <firstname>Сергей</firstname> <surname>Алёшин</surname>
-  </personname>
-  <email>alyoshin.s@gmail.com</email>
-  <contrib>Перевод</contrib>
-</othercredit>
