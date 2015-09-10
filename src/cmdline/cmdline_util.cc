@@ -371,8 +371,8 @@ namespace
        final.get_num_upgradable() != initial.get_num_upgradable())
       {
 	std::string change =
-	  ssprintf(ngettext("%d (%+d) update",
-			    "%d (%+d) updates",
+	  ssprintf(ngettext("%d (%+d) upgradable",
+			    "%d (%+d) upgradable",
 			    final.get_num_upgradable()),
 		   final.get_num_upgradable(),
 		   final.get_num_upgradable() - initial.get_num_upgradable());
