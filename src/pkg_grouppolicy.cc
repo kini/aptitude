@@ -25,8 +25,6 @@
 #include "pkg_item.h"
 #include "pkg_subtree.h"
 
-#include <cwidget/generic/util/transcode.h>
-
 #include <generic/apt/apt.h>
 #include <generic/apt/config_signal.h>
 #include <generic/apt/matching/match.h>
@@ -35,6 +33,8 @@
 #include <generic/apt/tasks.h>
 
 #include <generic/util/util.h>
+
+#include <cwidget/generic/util/transcode.h>
 
 #include <apt-pkg/configuration.h>
 #include <apt-pkg/pkgsystem.h>

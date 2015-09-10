@@ -21,12 +21,12 @@
 #ifndef PKG_GROUPPOLICY_H
 #define PKG_GROUPPOLICY_H
 
+#include <generic/apt/matching/pattern.h>
+
 #include <apt-pkg/pkgcache.h>
 #include <sigc++/signal.h>
 
 #include <vector>
-
-#include <generic/apt/matching/pattern.h>
 
 /** \brief Provides a flexible way to group and filter packages
  *
