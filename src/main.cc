@@ -591,6 +591,47 @@ void handle_message_logged(const char *sourceFilename,
     }
 }
 
+
+/** Signal handler
+ *
+ * Clean up routines when we have to close down abruptly, to not leave files
+ * behind, etc. -- e.g. see: https://bugs.debian.org/558352
+ */
+void signal_handler(int signum)
+{
+  //fprintf(stderr, "Top-level signal handler: %d\n", signum);
+
+  // remove directory in /tmp
+  temp::shutdown();
+
+  // re-raise signal with default handling, to set correct exit status and so on
+  signal(signum, SIG_DFL);
+  raise(signum);
+}
+
+/** Install signal handlers
+ *
+ * Register which process signals do we want to handle, and with which handlers
+ */
+void install_signal_handlers()
+{
+  // termination signals
+  signal(SIGTERM, signal_handler);
+  signal(SIGINT,  signal_handler);
+  signal(SIGHUP,  signal_handler);
+
+  // for debugging purposes like core dumps, should not delete intermediate
+  // files, so we leave the default
+  //
+  //signal(SIGQUIT, signal_handler);
+
+  // abrupt termination
+  signal(SIGILL,  signal_handler);
+  signal(SIGSEGV, signal_handler);
+  signal(SIGBUS,  signal_handler);
+  signal(SIGABRT, signal_handler);
+}
+
 int main(int argc, char *argv[])
 {
   // Block signals that we want to sigwait() on by default and put the
@@ -613,6 +654,9 @@ int main(int argc, char *argv[])
 
     pthread_sigmask(SIG_BLOCK, &mask, NULL);
   }
+
+  // handle signals, like abrupt termination (do clean-up, etc)
+  install_signal_handlers();
 
   srandom(time(0));
 
