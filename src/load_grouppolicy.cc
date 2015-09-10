@@ -541,7 +541,7 @@ public:
   group_policy_parse_node *create_node(const vector<string> &args)
   {
     if(args.size()!=0)
-      throw GroupParseException(_("Too many arguments to '%s' grouping policy"), "source");
+      throw GroupParseException(_("Grouping policy '%s' takes no arguments"), "source");
 
     return new policy_node0<pkg_grouppolicy_source_factory>;
   }
