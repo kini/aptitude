@@ -1,6 +1,7 @@
 // pkg_grouppolicy.h       -*-c++-*-
 //
 //  Copyright 1999-2002, 2005, 2007-2008 Daniel Burrows
+//  Copyright 2012-2015 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -218,23 +219,60 @@ public:
   {delete chain;}
 };
 
-//   Evidently some people like this.  No, I don't know why.  But other programs
-// have it and it's trivial to add as an option, so..
-//
-//   Creates a separate subtree for each first character (so you get one for
-// packages beginning in "a", one for "b", etc.
-class pkg_grouppolicy_firstchar_factory:public pkg_grouppolicy_factory
+
+/** \brief Group (create subtree) based on first character of the package name
+ *
+ * Example: "dpkg" would come under letter "d".  To be precise, it is not always
+ * the first letter: for packages starting with "lib*" the name of the group is
+ * "liba", "libb", ... like in Debian FTPs.
+ *
+ * There is the option to choose whether to use the binary package name or the
+ * source package name for the grouping.  Again, with "dpkg" as example:
+ *
+ * - using source option, all its binary packages would be classified under "d"
+ *
+ * - with binary option, the binary packages "dselect", "dpkg" and "dpkg-dev"
+ *   would be under the "d" group, while "libdpkg-dev" and "libdpkg-perl" would
+ *   be under the "libd" group
+ *
+ *
+ * Comment from original implementer:
+ *
+ * Evidently some people like this.  No, I don't know why.  But other programs
+ * have it and it's trivial to add as an option, so..
+ *
+ * Creates a separate subtree for each first character (so you get one for
+ * packages beginning in "a", one for "b", etc.
+ */
+class pkg_grouppolicy_firstchar_factory: public pkg_grouppolicy_factory
 {
-  pkg_grouppolicy_factory *chain;
 public:
-  pkg_grouppolicy_firstchar_factory(pkg_grouppolicy_factory *_chain):chain(_chain) {}
+  /** \brief Whether to use source or binary package name for the grouping */
+  enum class package_name_mode_type
+    {
+      /** \brief Use the binary package name */
+      binary = 0,
 
-  pkg_grouppolicy *instantiate(pkg_signal *_sig,
-			       desc_signal *_desc_sig);
+      /** \brief Use the source package name */
+      source = 1
+    };
 
-  virtual ~pkg_grouppolicy_firstchar_factory()
-  {delete chain;}
+private:
+  pkg_grouppolicy_factory* chain;
+
+  /** Mode, see documentation of the type */
+  package_name_mode_type package_name_mode;
+
+public:
+  pkg_grouppolicy_firstchar_factory(const package_name_mode_type _package_name_mode,
+				    pkg_grouppolicy_factory* _chain)
+    : chain(_chain), package_name_mode(_package_name_mode) { }
+
+  pkg_grouppolicy* instantiate(pkg_signal* _sig, desc_signal* _desc_sig);
+
+  virtual ~pkg_grouppolicy_firstchar_factory() { delete chain; }
 };
+
 
 // Groups by priority
 class pkg_grouppolicy_priority_factory:public pkg_grouppolicy_factory

@@ -1,6 +1,7 @@
 // pkg_grouppolicy.cc
 //
 //  Copyright 1999-2005, 2007-2010 Daniel Burrows
+//  Copyright 2012-2015 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -695,17 +696,23 @@ pkg_grouppolicy *pkg_grouppolicy_mode_factory::instantiate(pkg_signal *_sig,
 
 /*****************************************************************************/
 
-class pkg_grouppolicy_firstchar:public pkg_grouppolicy
+class pkg_grouppolicy_firstchar: public pkg_grouppolicy
 {
   pkg_grouppolicy_factory *chain;
 
-  typedef map<string, pair<pkg_grouppolicy *, pkg_subtree *> > childmap;
+  typedef map<string, pair<pkg_grouppolicy*, pkg_subtree*>> childmap;
   // Store the child group policies and their associated subtrees.
   childmap children;
+
+  // As in the factory
+  typedef pkg_grouppolicy_firstchar_factory::package_name_mode_type package_name_mode_type;
+  package_name_mode_type package_name_mode;
+
 public:
-  pkg_grouppolicy_firstchar(pkg_grouppolicy_factory *_chain,
+  pkg_grouppolicy_firstchar(const package_name_mode_type _package_name_mode,
+			    pkg_grouppolicy_factory *_chain,
 			    pkg_signal *_sig, desc_signal *_desc_sig)
-    :pkg_grouppolicy(_sig, _desc_sig), chain(_chain)
+    : pkg_grouppolicy(_sig, _desc_sig), chain(_chain), package_name_mode(_package_name_mode)
   {
   }
 
@@ -719,11 +726,29 @@ public:
   {
     eassert(pkg.Name());
 
+    // default to package name
+    string package_name = pkg.Name();
+
+    // source package name?
+    if (package_name_mode == package_name_mode_type::source)
+      {
+	if ( ! (pkg.VersionList().end() || pkg.VersionList().FileList().end()) )
+	  {
+	    string source = apt_package_records->Lookup(pkg.VersionList().FileList()).SourcePkg();
+	    if ( ! source.empty() )
+	      {
+		package_name = source;
+	      }
+	  }
+      }
+
+    eassert( ! package_name.empty() );
+
     string treename;
-    if(strncmp(pkg.Name(), "lib", 3) == 0)
-      treename = string(pkg.Name(), 4);
+    if(strncmp(package_name.c_str(), "lib", 3) == 0)
+      treename = package_name.substr(0, 4);
     else
-      treename = pkg.Name()[0];
+      treename = package_name.at(0);
 
     childmap::iterator found=children.find(treename);
     if(found!=children.end())
@@ -747,7 +772,7 @@ public:
 pkg_grouppolicy *pkg_grouppolicy_firstchar_factory::instantiate(pkg_signal *sig,
 								desc_signal *desc_sig)
 {
-  return new pkg_grouppolicy_firstchar(chain, sig, desc_sig);
+  return new pkg_grouppolicy_firstchar(package_name_mode, chain, sig, desc_sig);
 }
 
 /*****************************************************************************/

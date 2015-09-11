@@ -5,6 +5,19 @@ Version 0.7.2 UNRELEASED
 
   * 'Escape' key cancels input dialogs (search, limit, etc.) (Closes: #493322)
 
+  * Extend "firstchar" grouping policy to optionally use source package names.
+
+    With "firstchar(binary)" or the default "firstchar" it will use binary
+    package names (same behaviour as before); while with "firstchar(source)" it
+    will use source package names.
+
+    This is useful for example when browsing packages coming from the same
+    source package ("source" grouping policy) within large collections
+    (examples: all installed packages, all upgradable packages, all packages
+    from "main" section), to add an intermediate grouping step.  In this way,
+    one can for example emulate the hierarchy of FTPs (try grouping:
+    "section(topdir),firstchar(source),source").
+
 - Bug fixes:
 
   * Disable strings gathered for translation (Closes: #790568)

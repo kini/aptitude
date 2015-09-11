@@ -145,11 +145,22 @@
 <book lang="en"> <bookinfo> <title>&aptitude; user's manual</title>
 <subtitle>Version &VERSION;</subtitle>
 
-<author><personname><firstname>Daniel</firstname><surname>Burrows</surname></personname><email>dburrows@debian.org</email></author>
+<authorgroup>
+  <author>
+    <personname><firstname>Daniel</firstname><surname>Burrows</surname></personname><email>dburrows@debian.org</email>
+    <contrib>Main author of the document.</contrib>
+  </author>
+  <author>
+    <personname><firstname>Manuel A.</firstname><surname>Fernandez Montecelo</surname></personname><email>mafm@debian.org</email>
+    <contrib>Added documentation about new features, corrections and formatting.</contrib>
+  </author>
+</authorgroup>
 
 <copyright>
-  <year>2004-2008</year>
+  <year>2004-2011</year>
   <holder>Daniel Burrows</holder>
+  <year>2012-2015</year>
+  <holder>Manuel A. Fernandez Montecelo</holder>
 </copyright>
 
 <legalnotice>
@@ -7656,13 +7667,90 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 	    </varlistentry>
 
 	    <varlistentry>
-	      <term><synopsis>firstchar</synopsis></term>
+	      <term><synopsis>firstchar<optional>(<replaceable>mode</replaceable>)</optional></synopsis></term>
 
 	      <listitem>
 		<para>
-		  Groups packages based on the first character of
-		  their name.
+		  Groups packages based on the first character of their name.
 		</para>
+
+		<para>
+		  To be precise, it is not always the first letter -- for
+		  packages starting with <literal>lib*</literal> the name of the
+		  group is <literal>liba</literal>, <literal>libb</literal>,
+		  ... like in Debian FTPs.
+		</para>
+
+		<para>
+		  <replaceable>mode</replaceable> can be one of the following:
+		</para>
+
+		<variablelist>
+		  <varlistentry>
+		    <term><literal>binary</literal></term>
+
+		    <listitem>
+		      <para>
+			Group based on the binary package name.  This is the
+			default if no <replaceable>mode</replaceable> is
+			specified.
+		      </para>
+
+		      <example>
+			<title>Grouping policy <literal>firstchar</literal> or
+			<literal>firstchar(binary)</literal></title>
+
+			<para>
+			  With the source package <literal>dpkg</literal> as an
+			  example, the binary packages
+			  <literal>dselect</literal>, <literal>dpkg</literal>
+			  and <literal>dpkg-dev</literal> would be grouped under
+			  <literal>d</literal>, while
+			  <literal>libdpkg-dev</literal> and
+			  <literal>libdpkg-perl</literal> would be added to the
+			  <literal>libd</literal> group.
+			</para>
+		      </example>
+		    </listitem>
+		  </varlistentry>
+
+		  <varlistentry>
+		    <term><literal>source</literal></term>
+
+		    <listitem>
+		      <para>
+			Group based on the source package name.
+		      </para>
+
+		      <para>
+			This is useful for example when browsing packages coming
+			from the same source package (<link
+			linkend='SourceGroupingPolicy'>source</link> grouping
+			policy) within large collections (examples: all
+			installed packages, all upgradable packages, all
+			packages from "main" section), to add an intermediate
+			grouping step.  In this way, one can for example emulate
+			the hierarchy of FTPs (try grouping:
+			<literal>"section(topdir),firstchar(source),source"</literal>).
+		      </para>
+
+		      <example>
+			<title>Grouping policy
+			<literal>firstchar(source)</literal></title>
+
+			<para>
+			  Again, with the source package <literal>dpkg</literal>
+			  as an example, all the binary packages
+			  <literal>dselect</literal>, <literal>dpkg</literal>,
+			  <literal>dpkg-dev</literal>,
+			  <literal>libdpkg-dev</literal> and
+			  <literal>libdpkg-perl</literal> would be grouped under
+			  <literal>d</literal>.
+			</para>
+		      </example>
+		    </listitem>
+		  </varlistentry>
+		</variablelist>
 	      </listitem>
 	    </varlistentry>
 
@@ -7931,7 +8019,7 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 	      </listitem>
 	    </varlistentry>
 
-            <varlistentry>
+            <varlistentry id='SourceGroupingPolicy'>
               <term><synopsis>source</synopsis></term>
 
               <listitem>

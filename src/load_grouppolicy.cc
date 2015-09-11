@@ -1,6 +1,7 @@
 // load_grouppolicy.cc
 //
 //  Copyright 2001 Daniel Burrows
+//  Copyright 2015 Manuel A. Fernandez Montecelo
 
 
 ///  Routines to parse grouping policies
@@ -528,10 +529,35 @@ class firstchar_policy_parser : public string_policy_parser
 {
   group_policy_parse_node *create_node(const vector<string> &args)
   {
-    if(args.size()!=0)
-      throw GroupParseException(_("Grouping policy '%s' takes no arguments"), "firstchar");
+    typedef pkg_grouppolicy_firstchar_factory::package_name_mode_type package_name_mode_type;
 
-    return new policy_node0<pkg_grouppolicy_firstchar_factory>;
+    package_name_mode_type package_name_mode = package_name_mode_type::binary;
+
+    if (args.size() == 0)
+      {
+	// OK, default to ::binary
+      }
+    else if (args.size() == 1)
+      {
+	if (args[0] == "binary")
+	  {
+	    // OK, default to ::binary
+	  }
+	else if (args[0] == "source")
+	  {
+	    package_name_mode = package_name_mode_type::source;
+	  }
+	else
+	  {
+	    throw GroupParseException(_("Bad mode name '%s' (use 'binary' or 'source')"), args[0].c_str());
+	  }
+      }
+    else
+      {
+	throw GroupParseException(_("Too many arguments to '%s' grouping policy"), "firstchar");
+      }
+
+    return new policy_node1<pkg_grouppolicy_firstchar_factory, package_name_mode_type>(package_name_mode);
   }
 };
 
