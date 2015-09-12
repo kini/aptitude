@@ -928,9 +928,9 @@ void do_new_flat_view(OpProgress &progress)
   add_main_widget(make_default_view(tree,
                                     &tree->selected_signal,
                                     &tree->selected_desc_signal),
-                  _("Packages"),
-                  _("View available packages and choose actions to perform"),
-                  _("Packages"));
+                  _("Packages (flat)"),
+                  _("View available packages (flat, no grouping) and choose actions to perform"),
+                  _("Packages (flat)"));
 
   tree->build_tree(progress);
 }
@@ -956,9 +956,9 @@ static void do_new_tag_view_with_new_bar()
   add_main_widget(make_default_view(tree,
 				    &tree->selected_signal,
 				    &tree->selected_desc_signal),
-		  _("Packages"),
-		  _("View available packages and choose actions to perform"),
-		  _("Packages"));
+		  _("Packages (debtags)"),
+		  _("View available packages (debtags grouping) and choose actions to perform"),
+		  _("Packages (debtags)"));
 
   tree->build_tree(*p->get_progress().unsafe_get_ref());
   p->destroy();
@@ -976,9 +976,9 @@ static void do_new_source_view_with_new_bar()
   add_main_widget(make_default_view(tree,
 				    &tree->selected_signal,
 				    &tree->selected_desc_signal),
-		  _("Packages (Source view)"),
+		  _("Packages (source)"),
 		  _("View available packages (source grouping) and choose actions to perform"),
-		  _("Packages (Source view)"));
+		  _("Packages (source)"));
 
   tree->build_tree(*p->get_progress().unsafe_get_ref());
   p->destroy();
