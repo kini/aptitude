@@ -107,6 +107,16 @@ namespace aptitude
 	  return std::shared_ptr<changelog_info>();
 	}
 
+#if APT_PKG_MAJOR >= 5
+      // with apt-1.1:
+      //
+      // - SourcePkg (and Version) are in the binary cache and available via
+      //   the VerIterator; much faster than parsing the pkgRecord
+      //
+      // - defaults to package name, no need to check if it's empty
+      string source_package = ver.SourcePkgName();
+      string source_version = ver.SourceVerStr();
+#else
       pkgRecords::Parser &rec =
 	apt_package_records->Lookup(ver.FileList());
       string source_package =
@@ -114,6 +124,7 @@ namespace aptitude
 
       const string source_version =
 	rec.SourceVer().empty() ? ver.VerStr() : rec.SourceVer();
+#endif
 
       LOG_TRACE(Loggers::getAptitudeChangelog(),
 		"For " << ver.ParentPkg().Name()
@@ -463,6 +474,16 @@ namespace aptitude
 			   pkg->CurrentState != pkgCache::State::NotInstalled &&
 			   pkg->CurrentState != pkgCache::State::ConfigFiles)
 			  {
+#if APT_PKG_MAJOR >= 5
+			    // with apt-1.1:
+			    //
+			    // - SourcePkg (and Version) are in the binary cache and available via
+			    //   the VerIterator; much faster than parsing the pkgRecord
+			    //
+			    // - defaults to package name, no need to check if it's empty
+			    std::string rec_sourcepkg = pkg.CurrentVer().SourcePkgName();
+			    std::string rec_sourcever = pkg.CurrentVer().SourceVerStr();
+#else
 			    pkgRecords::Parser &rec(apt_package_records->Lookup(pkg.CurrentVer().FileList()));
 			    std::string rec_sourcepkg = rec.SourcePkg();
 			    if(rec_sourcepkg.empty())
@@ -470,6 +491,7 @@ namespace aptitude
 			    std::string rec_sourcever = rec.SourceVer();
 			    if(rec_sourcever.empty())
 			      rec_sourcever = pkg.CurrentVer().VerStr();
+#endif
 
 			    if(rec_sourcepkg == source_package &&
 			       rec_sourcever == source_version)

@@ -51,6 +51,24 @@ Version 0.7.2 UNRELEASED
 
   * [curses] Improve titles and descriptions of views
 
+- Internal changes:
+
+  * Improve retrieval of source package information with (upcoming) APT 1.1.
+
+    Thanks to David Kalnischkies for the suggestion and implementation advice.
+
+    Information about source package and version will be in the binary cache,
+    and available via the VerIterator (ver.SourcePkgName() and
+    ver.SourceVerStr()); and it is much faster than parsing the package record.
+
+    Additionally, retrieving the source package name in that way defaults to the
+    binary package name if no Source record is explicit, so there is no need to
+    check if it's empty.
+
+    It is not used in many places in the aptitude code (about 6 files and 10
+    different functions/places), but this speeds-up and simplifies the code
+    considerably where it was used.
+
 - Documentation:
 
   * Guide/User's Manual:

@@ -124,6 +124,18 @@ void pkg_grouppolicy_info::setup_package_info(const pkgCache::PkgIterator &pkg,
         frags.push_back(clipbox(cw::fragf("%B%s%b%s",
                                           _("Multi-Arch: "), multiarch.c_str())));
 
+#if APT_PKG_MAJOR >= 5
+      // with apt-1.1:
+      //
+      // - SourcePkg (and Version) are in the binary cache and available via
+      //   the VerIterator; much faster than parsing the pkgRecord
+      //
+      // - defaults to package name, no need to check if it's empty
+      std::string source_package = ver.SourcePkgName();
+#else
+      std::string source_package = rec.SourcePkg().empty() ? pkg.Name() : rec.SourcePkg();
+#endif
+
       frags.push_back(clipbox(cw::fragf("%B%s%b%s%n"
 					"%B%s%b%s%n"
 					"%B%s%b%s%n"
@@ -137,7 +149,8 @@ void pkg_grouppolicy_info::setup_package_info(const pkgCache::PkgIterator &pkg,
 					_("Architecture: "),pkgCache::VerIterator(ver).Arch(),
 					_("Compressed Size: "), SizeToStr(ver->Size).c_str(),
 					_("Uncompressed Size: "), SizeToStr(ver->InstalledSize).c_str(),
-					_("Source Package: "), rec.SourcePkg().empty()?pkg.Name():rec.SourcePkg().c_str())));
+					_("Source Package: "), source_package.c_str()
+				      )));
 
       tree->add_child(new cw::layout_item(cw::sequence_fragment(frags)));
 

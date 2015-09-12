@@ -131,6 +131,15 @@ namespace
                     const cw::util::ref_ptr<m::structural_match> &match,
                     std::vector<std::string> &output)
     {
+#if APT_PKG_MAJOR >= 5
+      // with apt-1.1:
+      //
+      // - SourcePkg (and Version) are in the binary cache and available via
+      //   the VerIterator; much faster than parsing the pkgRecord
+      //
+      // - defaults to package name, no need to check if it's empty
+      output.push_back(ver.SourcePkgName());
+#else
       // I don't think FileList() *can* be invalid; this is just
       // paranoia.
       if(!ver.FileList().end())
@@ -142,6 +151,7 @@ namespace
           else
             output.push_back(srcpkg);
         }
+#endif
     }
 
     std::string format_header(const std::string &group)
@@ -158,6 +168,15 @@ namespace
                     const cw::util::ref_ptr<m::structural_match> &match,
                     std::vector<std::string> &output)
     {
+#if APT_PKG_MAJOR >= 5
+      // with apt-1.1:
+      //
+      // - SourcePkg (and Version) are in the binary cache and available via
+      //   the VerIterator; much faster than parsing the pkgRecord
+      //
+      // - defaults to package name, no need to check if it's empty
+      output.push_back(ver.SourcePkgName() + " " + ver.SourceVerStr());
+#else
       // I don't think FileList() *can* be invalid; this is just
       // paranoia.
       if(!ver.FileList().end())
@@ -181,6 +200,7 @@ namespace
 
           output.push_back(result);
         }
+#endif
     }
 
     std::string format_header(const std::string &group)

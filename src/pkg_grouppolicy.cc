@@ -765,6 +765,18 @@ public:
     // source package name?
     if (package_name_mode == package_name_mode_type::source)
       {
+#if APT_PKG_MAJOR >= 5
+	// with apt-1.1:
+	//
+	// - SourcePkg (and Version) are in the binary cache and available via
+	//   the VerIterator; much faster than parsing the pkgRecord
+	//
+	// - defaults to package name, no need to check if it's empty
+	if ( ! pkg.VersionList().end() )
+	  {
+	    package_name = pkg.VersionList().SourcePkgName();
+	  }
+#else
 	if ( ! (pkg.VersionList().end() || pkg.VersionList().FileList().end()) )
 	  {
 	    string source = apt_package_records->Lookup(pkg.VersionList().FileList()).SourcePkg();
@@ -773,6 +785,7 @@ public:
 		package_name = source;
 	      }
 	  }
+#endif
       }
 
     eassert( ! package_name.empty() );
@@ -1571,12 +1584,26 @@ public:
 
   void add_package(const pkgCache::PkgIterator &pkg, pkg_subtree *root)
   {
+#if APT_PKG_MAJOR >= 5
+    // with apt-1.1:
+    //
+    // - SourcePkg (and Version) are in the binary cache and available via
+    //   the VerIterator; much faster than parsing the pkgRecord
+    //
+    // - defaults to package name, no need to check if it's empty
+    if (pkg.VersionList().end())
+      return;
+
+    std::string source_package_name = pkg.VersionList().SourcePkgName();
+#else
     if(pkg.VersionList().end() || pkg.VersionList().FileList().end())
       return;
+
     std::string source_package_name =
       apt_package_records->Lookup(pkg.VersionList().FileList()).SourcePkg();
     if(source_package_name.length() == 0)
       source_package_name = pkg.Name();
+#endif
 
     childmap::iterator found = children.find(source_package_name);
 

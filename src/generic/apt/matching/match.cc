@@ -1502,6 +1502,24 @@ namespace aptitude
 	      if(!target.get_has_version())
 		return NULL;
 
+#if APT_PKG_MAJOR >= 5
+	      // with apt-1.1:
+	      //
+	      // - SourcePkg (and Version) are in the binary cache and available via
+	      //   the VerIterator; much faster than parsing the pkgRecord
+	      //
+	      // - defaults to package name, no need to check if it's empty
+	      pkgCache::VerIterator ver(target.get_version_iterator(cache));
+	      if ( ! ver.end() )
+		{
+		  ref_ptr<match> rval = evaluate_regexp(p,
+							p->get_source_package_regex_info(),
+							ver.SourcePkgName(),
+							debug);
+		  if (rval.valid())
+		    return rval;
+		}
+#else
 	      bool checked_real_package = false;
 
 	      pkgCache::PkgIterator pkg(target.get_package_iterator(cache));
@@ -1538,6 +1556,7 @@ namespace aptitude
 			return rval;
 		    }
 		}
+#endif
 
 	      return NULL;
 	    }
@@ -1548,9 +1567,27 @@ namespace aptitude
 	      if(!target.get_has_version())
 		return NULL;
 
+#if APT_PKG_MAJOR >= 5
+	      // with apt-1.1:
+	      //
+	      // - SourcePkg (and Version) are in the binary cache and available via
+	      //   the VerIterator; much faster than parsing the pkgRecord
+	      //
+	      // - defaults to package name, no need to check if it's empty
+	      pkgCache::VerIterator ver(target.get_version_iterator(cache));
+	      if ( ! ver.end() )
+		{
+		  ref_ptr<match> rval = evaluate_regexp(p,
+							p->get_source_version_regex_info(),
+							ver.SourceVerStr(),
+							debug);
+		  if (rval.valid())
+		    return rval;
+		}
+#else
 	      bool checked_real_package = false;
 
-	      pkgCache::PkgIterator pkg(target.get_package_iterator(cache));
+	      //pkgCache::PkgIterator pkg(target.get_package_iterator(cache));
 	      pkgCache::VerIterator ver(target.get_version_iterator(cache));
 
 	      for(pkgCache::VerFileIterator vf = ver.FileList();
@@ -1584,6 +1621,7 @@ namespace aptitude
 			return rval;
 		    }
 		}
+#endif
 
 	      return NULL;
 	    }
