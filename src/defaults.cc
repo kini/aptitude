@@ -89,7 +89,7 @@ static void init_styles()
   cw::set_style("PkgBroken", cw::style_fg(COLOR_RED) + cw::style_attrs_on(A_REVERSE));
   cw::set_style("PkgToInstall", cw::style_fg(COLOR_GREEN) + cw::style_attrs_on(A_REVERSE));
   cw::set_style("PkgToUpgrade", cw::style_fg(COLOR_CYAN) + cw::style_attrs_on(A_REVERSE));
-  cw::set_style("PkgToDowngrade", cw::style_attrs_on(A_BOLD));
+  cw::set_style("PkgToDowngrade", cw::style_fg(COLOR_YELLOW) + cw::style_attrs_on(A_REVERSE));
 
 
   cw::set_style("PkgNotInstalledHighlighted",
@@ -107,7 +107,7 @@ static void init_styles()
   cw::set_style("PkgToUpgradeHighlighted",
 	    cw::style_fg(COLOR_CYAN));
   cw::set_style("PkgToDowngradeHighlighted",
-	    cw::style_attrs_on(A_BOLD) + cw::style_attrs_flip(A_REVERSE));
+	    cw::style_fg(COLOR_YELLOW));
 
 
 
