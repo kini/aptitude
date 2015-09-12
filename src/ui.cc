@@ -1,6 +1,7 @@
 // ui.cc
 //
 //   Copyright 2000-2009 Daniel Burrows <dburrows@debian.org>
+//   Copyright 2012-2015 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -958,6 +959,26 @@ static void do_new_tag_view_with_new_bar()
 		  _("Packages"),
 		  _("View available packages and choose actions to perform"),
 		  _("Packages"));
+
+  tree->build_tree(*p->get_progress().unsafe_get_ref());
+  p->destroy();
+}
+
+static void do_new_source_view_with_new_bar()
+{
+  progress_ref p = gen_progress_bar();
+
+  string grpstr = "section(topdir),firstchar(source),source";
+  pkg_grouppolicy_factory *grp = parse_grouppolicy(grpstr);
+
+  pkg_tree_ref tree = pkg_tree::create(grpstr.c_str(), grp);
+
+  add_main_widget(make_default_view(tree,
+				    &tree->selected_signal,
+				    &tree->selected_desc_signal),
+		  _("Packages (Source view)"),
+		  _("View available packages (source grouping) and choose actions to perform"),
+		  _("Packages (Source view)"));
 
   tree->build_tree(*p->get_progress().unsafe_get_ref());
   p->destroy();
@@ -2607,6 +2628,11 @@ cw::menu_info views_menu_info[]={
 	       NULL,
 	       N_("Browse packages using Debtags data"),
 	       sigc::ptr_fun(do_new_tag_view_with_new_bar)),
+
+  cw::menu_info(cw::menu_info::MENU_ITEM, N_("New ^Source Package View"),
+	       NULL,
+	       N_("Create a new package view, grouped by source package"),
+	       sigc::ptr_fun(do_new_source_view_with_new_bar)),
 
   cw::menu_info::MENU_SEPARATOR,
   cw::menu_info::MENU_END
