@@ -83,33 +83,22 @@ static void init_keybindings()
 static void init_styles()
 {
   cw::set_style("PkgNotInstalled", cw::style());
-  cw::set_style("PkgIsInstalled", cw::style_attrs_on(A_BOLD));
-  cw::set_style("PkgToHold", cw::style_fg(COLOR_WHITE) + cw::style_attrs_on(A_REVERSE));
-  cw::set_style("PkgToRemove", cw::style_fg(COLOR_MAGENTA) + cw::style_attrs_on(A_REVERSE));
-  cw::set_style("PkgBroken", cw::style_fg(COLOR_RED) + cw::style_attrs_on(A_REVERSE));
-  cw::set_style("PkgToInstall", cw::style_fg(COLOR_GREEN) + cw::style_attrs_on(A_REVERSE));
-  cw::set_style("PkgToUpgrade", cw::style_fg(COLOR_CYAN) + cw::style_attrs_on(A_REVERSE));
-  cw::set_style("PkgToDowngrade", cw::style_fg(COLOR_YELLOW) + cw::style_attrs_on(A_REVERSE));
+  cw::set_style("PkgIsInstalled",  cw::style_attrs_on(A_BOLD));
+  cw::set_style("PkgToHold",       cw::style_fg(COLOR_WHITE)   + cw::style_attrs_on(A_REVERSE));
+  cw::set_style("PkgToRemove",     cw::style_fg(COLOR_MAGENTA) + cw::style_attrs_on(A_REVERSE));
+  cw::set_style("PkgBroken",       cw::style_fg(COLOR_RED)     + cw::style_attrs_on(A_REVERSE));
+  cw::set_style("PkgToInstall",    cw::style_fg(COLOR_GREEN)   + cw::style_attrs_on(A_REVERSE));
+  cw::set_style("PkgToUpgrade",    cw::style_fg(COLOR_CYAN)    + cw::style_attrs_on(A_REVERSE));
+  cw::set_style("PkgToDowngrade",  cw::style_fg(COLOR_YELLOW)  + cw::style_attrs_on(A_REVERSE));
 
-
-  cw::set_style("PkgNotInstalledHighlighted",
-	    cw::style_attrs_flip(A_REVERSE));
-  cw::set_style("PkgIsInstalledHighlighted",
-	    cw::style_attrs_on(A_BOLD) + cw::style_attrs_flip(A_REVERSE));
-  cw::set_style("PkgToHoldHighlighted",
-	    cw::style_fg(COLOR_WHITE));
-  cw::set_style("PkgToRemoveHighlighted",
-	    cw::style_fg(COLOR_MAGENTA));
-  cw::set_style("PkgBrokenHighlighted",
-	    cw::style_fg(COLOR_RED));
-  cw::set_style("PkgToInstallHighlighted",
-	    cw::style_fg(COLOR_GREEN));
-  cw::set_style("PkgToUpgradeHighlighted",
-	    cw::style_fg(COLOR_CYAN));
-  cw::set_style("PkgToDowngradeHighlighted",
-	    cw::style_fg(COLOR_YELLOW));
-
-
+  cw::set_style("PkgNotInstalledHighlighted", cw::style_attrs_flip(A_REVERSE));
+  cw::set_style("PkgIsInstalledHighlighted",  cw::style_attrs_on(A_BOLD) + cw::style_attrs_flip(A_REVERSE));
+  cw::set_style("PkgToHoldHighlighted",       cw::style_fg(COLOR_WHITE));
+  cw::set_style("PkgToRemoveHighlighted",     cw::style_fg(COLOR_MAGENTA));
+  cw::set_style("PkgBrokenHighlighted",       cw::style_fg(COLOR_RED));
+  cw::set_style("PkgToInstallHighlighted",    cw::style_fg(COLOR_GREEN));
+  cw::set_style("PkgToUpgradeHighlighted",    cw::style_fg(COLOR_CYAN));
+  cw::set_style("PkgToDowngradeHighlighted",  cw::style_fg(COLOR_YELLOW));
 
   cw::set_style("DepBroken", cw::style_fg(COLOR_BLACK)+cw::style_bg(COLOR_RED));
 
