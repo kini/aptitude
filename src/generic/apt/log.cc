@@ -1,6 +1,7 @@
 // log.cc
 //
 //   Copyright (C) 2005-2008, 2010 Daniel Burrows
+//   Copyright (C) 2015 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -87,60 +88,63 @@ bool do_log(const string &log,
   for(loglist::const_iterator i = changed_packages.begin();
       i != changed_packages.end(); ++i)
     {
-      if(i->second == pkg_upgrade)
-	fprintf(f, _("[UPGRADE] %s %s -> %s\n"), i->first.FullName(false).c_str(),
-		i->first.CurrentVer().VerStr(),
-		(*apt_cache_file)[i->first].CandidateVerIter(*apt_cache_file).VerStr());
-      else if(i->second == pkg_downgrade)
-	fprintf(f, _("[DOWNGRADE] %s %s -> %s\n"), i->first.FullName(false).c_str(),
-		i->first.CurrentVer().VerStr(),
-		(*apt_cache_file)[i->first].CandidateVerIter(*apt_cache_file).VerStr());
-      else
-	if(i->second != pkg_unchanged)
-	  {
-	    const char *tag = NULL;
-	    switch(i->second)
-	      {
-	      case pkg_remove:
-		tag = _("REMOVE");
-		break;
-		//case pkg_upgrade:
-		//tag=_("UPGRADE");
-		//break;
-	      case pkg_install:
-		tag = _("INSTALL");
-		break;
-	      case pkg_reinstall:
-		tag = _("REINSTALL");
-		break;
-	      case pkg_hold:
-		tag = _("HOLD");
-		break;
-	      case pkg_broken:
-		tag = _("BROKEN");
-		break;
-	      case pkg_unused_remove:
-		tag = _("REMOVE, NOT USED");
-		break;
-	      case pkg_auto_remove:
-		tag = _("REMOVE, DEPENDENCIES");
-		break;
-	      case pkg_auto_install:
-		tag = _("INSTALL, DEPENDENCIES");
-		break;
-	      case pkg_auto_hold:
-		tag = _("HOLD, DEPENDENCIES");
-		break;
-	      case pkg_unconfigured:
-		tag = _("UNCONFIGURED");
-		break;
-	      default:
-		tag = _("????????");
-		break;
-	      }
+      std::string action_tag;
+      switch (i->second)
+	{
+	case pkg_install:       action_tag = _("INSTALL"); break;
+	case pkg_remove:        action_tag = _("REMOVE"); break;
+	case pkg_upgrade:       action_tag = _("UPGRADE"); break;
+	case pkg_downgrade:     action_tag = _("DOWNGRADE"); break;
+	case pkg_reinstall:     action_tag = _("REINSTALL"); break;
+	case pkg_hold:          action_tag = _("HOLD"); break;
+	case pkg_broken:        action_tag = _("BROKEN"); break;
+	case pkg_unused_remove:	action_tag = _("REMOVE, NOT USED"); break;
+	case pkg_auto_remove:   action_tag = _("REMOVE, DEPENDENCIES"); break;
+	case pkg_auto_install:  action_tag = _("INSTALL, DEPENDENCIES"); break;
+	case pkg_auto_hold:     action_tag = _("HOLD, DEPENDENCIES"); break;
+	case pkg_unconfigured:  action_tag = _("UNCONFIGURED"); break;
+	default:                action_tag = _("????????"); break;
+	}
 
-	    fprintf(f, _("[%s] %s\n"), tag, i->first.FullName(false).c_str());
-	  }
+      switch (i->second)
+	{
+	case pkg_install:
+	case pkg_auto_install:
+	  // version: candidate
+	  fprintf(f, _("[%s] %s %s\n"),
+		  action_tag.c_str(),
+		  i->first.FullName(false).c_str(),
+		  (*apt_cache_file)[i->first].CandidateVerIter(*apt_cache_file).VerStr());
+	  break;
+	case pkg_reinstall:
+	case pkg_remove:
+	case pkg_unused_remove:
+	case pkg_auto_remove:
+	case pkg_hold:
+	case pkg_auto_hold:
+	case pkg_unconfigured:
+	  // version: current
+	  fprintf(f, _("[%s] %s %s\n"),
+		  action_tag.c_str(),
+		  i->first.FullName(false).c_str(),
+		  i->first.CurrentVer().VerStr());
+	  break;
+	case pkg_upgrade:
+	case pkg_downgrade:
+	  // version: current + candidate
+	  fprintf(f, _("[%s] %s %s -> %s\n"),
+		  action_tag.c_str(),
+		  i->first.FullName(false).c_str(),
+		  i->first.CurrentVer().VerStr(),
+		  (*apt_cache_file)[i->first].CandidateVerIter(*apt_cache_file).VerStr());
+	  break;
+	case pkg_broken:
+	default:
+	  // version: none
+	  fprintf(f, _("[%s] %s\n"),
+		  action_tag.c_str(),
+		  i->first.FullName(false).c_str());
+	}
     }
   fprintf(f, _("===============================================================================\n\nLog complete.\n"));
 
