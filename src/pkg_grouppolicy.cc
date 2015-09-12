@@ -600,6 +600,31 @@ public:
   void add_package(const pkgCache::PkgIterator &pkg, pkg_subtree *root)
   {
     int group = find_pkg_state(pkg, *apt_cache_file);
+
+    // establish an explicit, more sensible order for the children of the
+    // subtree; rather than using the values coming from a structure that were
+    // not devised for this purpose and do not work well -- see #434352
+    //
+    // possible states are from pkg_action_state in src/generic/apt/apt.h
+    unsigned char explicit_order = 0;
+    switch (group)
+    {
+    case pkg_broken:		explicit_order =  1; break; /** \brief The package has broken dependencies. */
+    case pkg_upgrade:		explicit_order =  2; break; /** \brief The package is being upgraded. */
+    case pkg_downgrade:		explicit_order =  3; break; /** \brief The package is being downgraded. */
+    case pkg_install:		explicit_order =  4; break; /** \brief The package is being installed. */
+    case pkg_auto_install:	explicit_order =  5; break; /** \brief The package is being installed to fulfill dependencies. */
+    case pkg_reinstall:		explicit_order =  6; break; /** \brief The package is being reinstalled. */
+    case pkg_remove:		explicit_order =  7; break; /** \brief The package is being removed. */
+    case pkg_auto_remove:	explicit_order =  8; break; /** \brief The package is being removed to fulfill dependencies. */
+    case pkg_unused_remove:	explicit_order =  9; break; /** \brief The package is unused and will be removed. */
+    case pkg_hold:		explicit_order = 10; break; /** \brief The package is held back. */
+    case pkg_auto_hold:		explicit_order = 11; break; /** \brief The package was automatically held on the system. */
+    case pkg_unchanged:		explicit_order = 12; break; /** \brief No action is being performed on the package. */
+    case pkg_unconfigured:	explicit_order = 13; break; /** \brief The package is installed but not configured. */
+    default:			explicit_order = 99; break;
+    };
+
     if(group!=pkg_unchanged)
       {
 	if(!children[group].second)
@@ -610,7 +635,7 @@ public:
 	    pkg_subtree *newtree=new pkg_subtree_with_order(shortdesc,
 							    desc,
 							    get_desc_sig(),
-							    group,
+							    explicit_order,
 							    true);
 	    root->add_child(newtree);
 	    newtree->set_num_packages_parent(root);
@@ -628,10 +653,14 @@ public:
 	    const wstring desc=W_("Packages which are recommended by other packages\n These packages are not strictly required, but they may be necessary to provide full functionality in some other programs that you are installing or upgrading.");
 	    const wstring shortdesc(desc, 0, desc.find('\n'));
 
+	    // see explicit_order above, anything between actual package states
+	    // and upper limit (and not used by others) will do
+	    explicit_order = 20;
+
 	    pkg_subtree *newtree=new pkg_subtree_with_order(shortdesc,
 							    desc,
 							    get_desc_sig(),
-							    num_pkg_action_states,
+							    explicit_order,
 							    true);
 	    root->add_child(newtree);
 	    newtree->set_num_packages_parent(root);
@@ -649,10 +678,14 @@ public:
 	    const wstring desc=W_("Packages which are suggested by other packages\n These packages are not required in order to make your system function properly, but they may provide enhanced functionality for some programs that you are currently installing.");
 	    const wstring shortdesc(desc, 0, desc.find('\n'));
 
+	    // see explicit_order above, anything between actual package states
+	    // and upper limit (and not used by others) will do
+	    explicit_order = 21;
+
 	    pkg_subtree *newtree=new pkg_subtree_with_order(shortdesc,
 							    desc,
 							    get_desc_sig(),
-							    num_pkg_action_states+1,
+							    explicit_order,
 							    false);
 	    root->add_child(newtree);
 	    newtree->set_num_packages_parent(root);
