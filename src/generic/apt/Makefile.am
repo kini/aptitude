@@ -46,6 +46,8 @@ libgeneric_apt_a_SOURCES = \
 	download_signal_log.h  \
 	dpkg.cc             \
 	dpkg.h              \
+	dpkg_selections.cc  \
+	dpkg_selections.h   \
 	dump_packages.cc    \
 	dump_packages.h     \
 	globals.cc          \
