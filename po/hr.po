@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2015-09-05 21:16+0100\n"
+"POT-Creation-Date: 2015-09-16 20:11+0100\n"
 "PO-Revision-Date: 2012-06-03 12:26+0800\n"
 "Last-Translator: Tomislav Krznar <tomislav.krznar@gmail.com>\n"
 "Language-Team: Hrvatski <lokalizacija@linux.hr>\n"
@@ -597,7 +597,7 @@ msgstr "Opcije korisničkog sučelja"
 msgid "Dependency handling"
 msgstr "Rukovanje ovisnostima"
 
-#: src/apt_options.cc:529 src/pkg_grouppolicy.cc:904
+#: src/apt_options.cc:529 src/pkg_grouppolicy.cc:975
 msgid "Miscellaneous"
 msgstr "Razno"
 
@@ -775,27 +775,41 @@ msgstr ""
 msgid "%s is not currently installed, so it will not be reinstalled.\n"
 msgstr "%s nije trenutno instaliran pa se neće ponovo instalirati.\n"
 
-#: src/cmdline/cmdline_action.cc:348 src/cmdline/cmdline_action.cc:355
+#: src/cmdline/cmdline_action.cc:348
 #, c-format
 msgid "Package %s is not installed, so it will not be removed\n"
 msgstr "Paket %s nije instaliran pa se neće ukloniti\n"
 
-#: src/cmdline/cmdline_action.cc:374
+#: src/cmdline/cmdline_action.cc:355
+#, fuzzy, c-format
+#| msgid "Package %s is not installed, so it will not be removed\n"
+msgid "Package %s is not installed, so it will not be purged\n"
+msgstr "Paket %s nije instaliran pa se neće ukloniti\n"
+
+#: src/cmdline/cmdline_action.cc:373
+#, fuzzy, c-format
+#| msgid "Package %s is not installed, cannot forbid an upgrade\n"
+msgid ""
+"Package %s is not installed, cannot be marked/unmarked as automatically "
+"installed\n"
+msgstr "Paket %s nije instaliran, ne mogu zabraniti nadogradnju\n"
+
+#: src/cmdline/cmdline_action.cc:380
 #, c-format
 msgid "Package %s is not installed, cannot forbid an upgrade\n"
 msgstr "Paket %s nije instaliran, ne mogu zabraniti nadogradnju\n"
 
-#: src/cmdline/cmdline_action.cc:377
+#: src/cmdline/cmdline_action.cc:383
 #, c-format
 msgid "Package %s is not upgradable, cannot forbid an upgrade\n"
 msgstr "Paket %s se ne može nadograditi, ne mogu zabraniti nadogradnju\n"
 
-#: src/cmdline/cmdline_action.cc:482
+#: src/cmdline/cmdline_action.cc:488
 #, c-format
 msgid "Note: selecting the task \"%s: %s\" for installation\n"
 msgstr "Napomena: biram instalaciju zadatka \"%s: %s\"\n"
 
-#: src/cmdline/cmdline_action.cc:512
+#: src/cmdline/cmdline_action.cc:518
 #, c-format
 msgid ""
 "You can only specify a package version with an 'install' command or a "
@@ -803,12 +817,12 @@ msgid ""
 msgstr ""
 "Inačicu paketa možete navesti samo uz naredbe 'install' i 'forbid-version'.\n"
 
-#: src/cmdline/cmdline_action.cc:521
+#: src/cmdline/cmdline_action.cc:527
 #, c-format
 msgid "You can only specify a package archive with an 'install' command.\n"
 msgstr "Arhivu paketa možete navesti samo uz naredbu 'install'.\n"
 
-#: src/cmdline/cmdline_action.cc:561
+#: src/cmdline/cmdline_action.cc:567
 #, fuzzy, c-format
 msgid ""
 "Couldn't find package \"%s\", and more than %zu\n"
@@ -817,7 +831,7 @@ msgstr ""
 "Ne mogu pronaći paket \"%s\" i više od 40\n"
 "paketa sadrži \"%s\" u svom imenu.\n"
 
-#: src/cmdline/cmdline_action.cc:565
+#: src/cmdline/cmdline_action.cc:571
 #, c-format
 msgid ""
 "Couldn't find package \"%s\".  However, the following\n"
@@ -826,12 +840,12 @@ msgstr ""
 "Ne mogu pronaći paket \"%s\".  Međutim, sljedeći\n"
 "paketi sadrže \"%s\" u svom imenu:\n"
 
-#: src/cmdline/cmdline_action.cc:587
+#: src/cmdline/cmdline_action.cc:593
 #, c-format
 msgid "Couldn't find any package whose name or description matched \"%s\"\n"
 msgstr "Ne mogu pronaći nijedan paket čije ime ili opis odgovara \"%s\"\n"
 
-#: src/cmdline/cmdline_action.cc:590
+#: src/cmdline/cmdline_action.cc:596
 #, fuzzy, c-format
 msgid ""
 "Couldn't find any package matching \"%s\", and more than %zu\n"
@@ -840,7 +854,7 @@ msgstr ""
 "Ne mogu pronaći nijedan paket koji odgovara \"%s\" i više od 40\n"
 "paketa sadrži \"%s\" u svom opisu.\n"
 
-#: src/cmdline/cmdline_action.cc:594
+#: src/cmdline/cmdline_action.cc:600
 #, c-format
 msgid ""
 "Couldn't find any package matching \"%s\".  However, the following\n"
@@ -849,7 +863,7 @@ msgstr ""
 "Ne mogu pronaći nijedan paket koji sadrži \"%s\".  Međutim, sljedeći\n"
 "paketi sadrže \"%s\" u svom opisu:\n"
 
-#: src/cmdline/cmdline_action.cc:736
+#: src/cmdline/cmdline_action.cc:742
 #, c-format
 msgid "Bad action character '%c'\n"
 msgstr "Krivi znak radnje '%c'\n"
@@ -871,8 +885,8 @@ msgstr "Greška"
 msgid "Changelog download failed: %s"
 msgstr "Preuzimanje popisa promjena nije uspjelo: %s"
 
-#: src/cmdline/cmdline_changelog.cc:195 src/generic/apt/pkg_changelog.cc:439
-#: src/generic/apt/pkg_changelog.cc:593 src/view_changelog.cc:272
+#: src/cmdline/cmdline_changelog.cc:195 src/generic/apt/pkg_changelog.cc:450
+#: src/generic/apt/pkg_changelog.cc:615 src/view_changelog.cc:272
 #, c-format
 msgid "Changelog of %s"
 msgstr "Popis promjena za %s"
@@ -907,7 +921,7 @@ msgid "Del %s* %spartial/*\n"
 msgstr "Brišem %s* %sdjelomično/*\n"
 
 #: src/cmdline/cmdline_clean.cc:78 src/cmdline/cmdline_clean.cc:149
-#: src/ui.cc:1787 src/ui.cc:1875
+#: src/ui.cc:1808 src/ui.cc:1896
 msgid "Unable to lock the download directory"
 msgstr "Ne mogu zaključati direktorij preuzimanja"
 
@@ -948,7 +962,7 @@ msgstr ""
 "Ne mogu sigurno riješiti ovisnosti, pokušajte pokrenuti s --full-resolver.\n"
 
 #: src/cmdline/cmdline_do_action.cc:385 src/cmdline/cmdline_simulate.cc:59
-#: src/main.cc:1223
+#: src/main.cc:1267
 #, c-format
 msgid "Abort.\n"
 msgstr "Prekini.\n"
@@ -1016,7 +1030,7 @@ msgstr ""
 
 #: src/cmdline/cmdline_extract_cache_subset.cc:94
 #: src/cmdline/cmdline_resolver.cc:356 src/cmdline/cmdline_user_tag.cc:132
-#: src/cmdline/cmdline_versions.cc:292
+#: src/cmdline/cmdline_versions.cc:312
 #, c-format
 msgid "No such package \"%s\""
 msgstr "Nema takvog paketa \"%s\""
@@ -1139,17 +1153,17 @@ msgstr "Sljedeći paketi će biti nadograđeni:"
 msgid "The following partially installed packages will be configured:"
 msgstr "Sljedeći djelomično instalirani paketi će biti konfigurirani:"
 
-#: src/cmdline/cmdline_prompt.cc:459 src/ui.cc:1574
+#: src/cmdline/cmdline_prompt.cc:459 src/ui.cc:1595
 #, c-format
 msgid "The following ESSENTIAL packages will be REMOVED!\n"
 msgstr "Sljedeći ESENCIJALNI paketi će biti UKLONJENI!\n"
 
-#: src/cmdline/cmdline_prompt.cc:468 src/ui.cc:1589
+#: src/cmdline/cmdline_prompt.cc:468 src/ui.cc:1610
 #, c-format
 msgid "The following ESSENTIAL packages will be BROKEN by this action:\n"
 msgstr "Sljedeći ESENCIJALNI paketi će biti SLOMLJENI ovom radnjom:\n"
 
-#: src/cmdline/cmdline_prompt.cc:478 src/ui.cc:1602
+#: src/cmdline/cmdline_prompt.cc:478 src/ui.cc:1623
 #, c-format
 msgid ""
 "WARNING: Performing this action will probably cause your system to break!\n"
@@ -1162,7 +1176,7 @@ msgstr ""
 msgid "I am aware that this is a very bad idea"
 msgstr "Siguran sam da je ovo vrlo loša ideja"
 
-#: src/cmdline/cmdline_prompt.cc:484 src/ui.cc:1603
+#: src/cmdline/cmdline_prompt.cc:484 src/ui.cc:1624
 #, c-format
 msgid "To continue, type the phrase \"%s\":\n"
 msgstr "Za nastavak, utipkajte frazu \"%s\":\n"
@@ -1299,7 +1313,7 @@ msgid "No packages to show -- enter the package names on the line after 'i'.\n"
 msgstr "Nema paketa za prikaz -- unesite imena paketa u redak nakon 'i'.\n"
 
 #: src/cmdline/cmdline_prompt.cc:777 src/cmdline/cmdline_prompt.cc:792
-#: src/pkg_item.cc:410 src/ui.cc:1219
+#: src/pkg_item.cc:410 src/ui.cc:1240
 msgid "Press Return to continue."
 msgstr "Pritisnite Return za nastavak."
 
@@ -1912,7 +1926,7 @@ msgstr "Napuštam automatsko rješavanje ovisnosti i vraćam na ručno rješavan
 msgid "The following commands are available:"
 msgstr "Dostupne su sljedeće naredbe:"
 
-#: src/cmdline/cmdline_resolver.cc:994 src/ui.cc:2316
+#: src/cmdline/cmdline_resolver.cc:994 src/ui.cc:2337
 msgid "File to write resolver state to: "
 msgstr "Datoteka za upis stanja algoritma za rješavanje: "
 
@@ -1968,7 +1982,7 @@ msgstr "Ne mogu riješiti ovisnosti za nadogradnju: nema pronađenih rješenja."
 msgid "Unable to resolve dependencies for the upgrade: %s"
 msgstr "Ne mogu riješiti ovisnosti za nadogradnju: %s"
 
-#: src/cmdline/cmdline_search.cc:204 src/cmdline/cmdline_versions.cc:570
+#: src/cmdline/cmdline_search.cc:204 src/cmdline/cmdline_versions.cc:590
 #, c-format
 msgid "iconv of %s failed.\n"
 msgstr "iconv %s nije uspio.\n"
@@ -2019,7 +2033,7 @@ msgid "The following packages have unmet dependencies:\n"
 msgstr "Sljedeći paketi imaju nezadovoljene ovisnosti:\n"
 
 #: src/cmdline/cmdline_show.cc:197 src/cmdline/cmdline_show.cc:447
-#: src/cmdline/cmdline_versions.cc:205 src/gtk/resolver.cc:1192
+#: src/cmdline/cmdline_versions.cc:225 src/gtk/resolver.cc:1192
 #: src/solution_fragment.cc:64
 msgid "<NULL>"
 msgstr "<NULL>"
@@ -2164,7 +2178,7 @@ msgstr "Višestruke arhitekture: "
 msgid "Version: "
 msgstr "Inačica: "
 
-#: src/cmdline/cmdline_show.cc:423 src/pkg_info_screen.cc:134
+#: src/cmdline/cmdline_show.cc:423 src/pkg_info_screen.cc:146
 msgid "Priority: "
 msgstr "Prioritet: "
 
@@ -2172,23 +2186,23 @@ msgstr "Prioritet: "
 msgid "N/A"
 msgstr "Nedostupno"
 
-#: src/cmdline/cmdline_show.cc:425 src/pkg_info_screen.cc:135
+#: src/cmdline/cmdline_show.cc:425 src/pkg_info_screen.cc:147
 msgid "Section: "
 msgstr "Odjeljak: "
 
-#: src/cmdline/cmdline_show.cc:427 src/pkg_info_screen.cc:136
+#: src/cmdline/cmdline_show.cc:427 src/pkg_info_screen.cc:148
 msgid "Maintainer: "
 msgstr "Održavatelj: "
 
-#: src/cmdline/cmdline_show.cc:429 src/pkg_info_screen.cc:137
+#: src/cmdline/cmdline_show.cc:429 src/pkg_info_screen.cc:149
 msgid "Architecture: "
 msgstr "Arhitektura: "
 
-#: src/cmdline/cmdline_show.cc:432 src/pkg_info_screen.cc:139
+#: src/cmdline/cmdline_show.cc:432 src/pkg_info_screen.cc:151
 msgid "Uncompressed Size: "
 msgstr "Nekomprimirana veličina: "
 
-#: src/cmdline/cmdline_show.cc:436 src/pkg_info_screen.cc:138
+#: src/cmdline/cmdline_show.cc:436 src/pkg_info_screen.cc:150
 msgid "Compressed Size: "
 msgstr "Komprimirana veličina: "
 
@@ -2275,7 +2289,7 @@ msgstr "Preuzet/instalirat/uklonit ću sljedeće pakete.\n"
 msgid "Internal Error, Ordering didn't finish"
 msgstr "Interna greška, raspoređivanje nije završilo"
 
-#: src/cmdline/cmdline_update.cc:43 src/ui.cc:1711 src/ui.cc:1880
+#: src/cmdline/cmdline_update.cc:43 src/ui.cc:1732 src/ui.cc:1901
 msgid "Deleting obsolete downloaded files"
 msgstr "Brišem zastarjele preuzete datoteke"
 
@@ -2336,28 +2350,32 @@ msgid "Couldn't find task '%s'"
 msgstr "Ne mogu pokrenuti preglednik %s"
 
 #: src/cmdline/cmdline_util.cc:360
-#, c-format
-msgid "%d broken [%+d]"
-msgid_plural "%d broken [%+d]"
+#, fuzzy, c-format
+#| msgid "%d broken [%+d]"
+#| msgid_plural "%d broken [%+d]"
+msgid "%d (%+d) broken"
+msgid_plural "%d (%+d) broken"
 msgstr[0] "%d slomljen [%+d]"
 msgstr[1] "%d slomljena [%+d]"
 msgstr[2] "%d slomljenih [%+d]"
 
 #: src/cmdline/cmdline_util.cc:374
-#, c-format
-msgid "%d update [%+d]"
-msgid_plural "%d updates [%+d]"
-msgstr[0] "%d ažuriran [%+d]"
-msgstr[1] "%d ažurirana [%+d]"
-msgstr[2] "%d ažuriranih [%+d]"
+#, fuzzy, c-format
+#| msgid "%d upgrade"
+#| msgid_plural "%d upgrades"
+msgid "%d (%+d) upgradable"
+msgid_plural "%d (%+d) upgradable"
+msgstr[0] "%d nadograđen"
+msgstr[1] "%d nadograđena"
+msgstr[2] "%d nadograđenih"
 
 #: src/cmdline/cmdline_util.cc:388
 #, c-format
-msgid "%d new [%+d]"
-msgid_plural "%d new [%+d]"
-msgstr[0] "%d novi [%+d]"
-msgstr[1] "%d nova [%+d]"
-msgstr[2] "%d novih [%+d]"
+msgid "%d (%+d) new"
+msgid_plural "%d (%+d) new"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: src/cmdline/cmdline_util.cc:399
 #, c-format
@@ -2385,43 +2403,43 @@ msgstr[2] "Postoji %d novih zastarjelih paketa:"
 msgid "Package %s:"
 msgstr "Paket %s:"
 
-#: src/cmdline/cmdline_versions.cc:149 src/cmdline/cmdline_versions.cc:188
+#: src/cmdline/cmdline_versions.cc:159 src/cmdline/cmdline_versions.cc:208
 #, c-format
 msgid "Source package %s:"
 msgstr "Paket koda %s:"
 
-#: src/cmdline/cmdline_versions.cc:210
+#: src/cmdline/cmdline_versions.cc:230
 #, c-format
 msgid "Archive %s:"
 msgstr "Arhiva %s:"
 
-#: src/cmdline/cmdline_versions.cc:499
+#: src/cmdline/cmdline_versions.cc:519
 msgid "--group-by|archive"
 msgstr "--group-by|archive"
 
-#: src/cmdline/cmdline_versions.cc:503
+#: src/cmdline/cmdline_versions.cc:523
 msgid "--group-by|auto"
 msgstr "--group-by|auto"
 
-#: src/cmdline/cmdline_versions.cc:507
+#: src/cmdline/cmdline_versions.cc:527
 msgid "--group-by|none"
 msgstr "--group-by|none"
 
-#: src/cmdline/cmdline_versions.cc:511
+#: src/cmdline/cmdline_versions.cc:531
 msgid "--group-by|package"
 msgstr "--group-by|package"
 
-#: src/cmdline/cmdline_versions.cc:515
+#: src/cmdline/cmdline_versions.cc:535
 msgid "--group-by|source-package"
 msgstr "--group-by|source-package"
 
-#: src/cmdline/cmdline_versions.cc:519
+#: src/cmdline/cmdline_versions.cc:539
 msgid "--group-by|source-version"
 msgstr "--group-by|source-version"
 
 #. TRANSLATORS: --group-by is the argument name and shouldn't
 #. be translated.
-#: src/cmdline/cmdline_versions.cc:525
+#: src/cmdline/cmdline_versions.cc:545
 #, c-format
 msgid ""
 "Invalid package grouping mode \"%s\" (should be \"auto\", \"none\", \"package"
@@ -2430,7 +2448,7 @@ msgstr ""
 "Neispravan način grupiranja paketa \"%s\" (treba biti \"auto\", \"none\", "
 "\"package\" ili \"source-package\")"
 
-#: src/cmdline/cmdline_versions.cc:587
+#: src/cmdline/cmdline_versions.cc:607
 #, c-format
 msgid "versions: You must provide at least one package selector\n"
 msgstr "versions: Morate navesti barem jedan izbornik paketa\n"
@@ -2631,7 +2649,7 @@ msgstr "%n%nNeke datoteke nisu uspješno preuzete."
 msgid "Continue"
 msgstr "Nastavi"
 
-#: src/download_list.cc:100 src/mine/cmine.cc:301 src/mine/cmine.cc:366
+#: src/download_list.cc:100 src/mine/cmine.cc:296 src/mine/cmine.cc:361
 msgid "Cancel"
 msgstr "Otkaži"
 
@@ -2679,7 +2697,7 @@ msgstr "[GREŠKA]"
 msgid "Attempt to start a download thread twice!"
 msgstr "Pokušaj pokretanja dretve preuzimanja dva puta!"
 
-#: src/generic/apt/aptcache.cc:271
+#: src/generic/apt/aptcache.cc:273
 #, c-format
 msgid ""
 "Error parsing a user-tag for the package %s: unexpected end-of-line "
@@ -2688,70 +2706,81 @@ msgstr ""
 "Greška analize korisničke oznake za paket %s: neočekivani kraj linije (EOL) "
 "nakon %s."
 
-#: src/generic/apt/aptcache.cc:288
+#: src/generic/apt/aptcache.cc:290
 #, c-format
 msgid "Unterminated '\"' in the user-tags list of the package %s."
 msgstr "Nedovršeni '\"' u popisu korisničkih oznaka paketa %s."
 
-#: src/generic/apt/aptcache.cc:392
+#: src/generic/apt/aptcache.cc:395
 msgid "Can't open Aptitude extended state file"
 msgstr "Ne mogu otvoriti datoteku Aptitude proširenih stanja"
 
-#: src/generic/apt/aptcache.cc:406 src/generic/apt/aptcache.cc:501
-#: src/generic/apt/aptcache.cc:503
+#: src/generic/apt/aptcache.cc:409 src/generic/apt/aptcache.cc:505
+#: src/generic/apt/aptcache.cc:507
 msgid "Reading extended state information"
 msgstr "Čitam informacije o proširenom stanju"
 
-#: src/generic/apt/aptcache.cc:509 src/generic/apt/aptcache.cc:591
-#: src/generic/apt/aptcache.cc:594
+#: src/generic/apt/aptcache.cc:513 src/generic/apt/aptcache.cc:595
+#: src/generic/apt/aptcache.cc:598
 msgid "Initializing package states"
 msgstr "Inicijaliziram stanja paketa"
 
-#: src/generic/apt/aptcache.cc:752
+#: src/generic/apt/aptcache.cc:759
 msgid "Cannot open Aptitude state file"
 msgstr "Ne mogu otvoriti datoteku Aptitude stanja"
 
-#: src/generic/apt/aptcache.cc:756 src/generic/apt/aptcache.cc:863
-#: src/generic/apt/aptcache.cc:866
+#: src/generic/apt/aptcache.cc:763 src/generic/apt/aptcache.cc:896
+#: src/generic/apt/aptcache.cc:899
 msgid "Writing extended state information"
 msgstr "Pišem informacije o proširenim stanjima"
 
-#: src/generic/apt/aptcache.cc:854
+#: src/generic/apt/aptcache.cc:887
 msgid "Couldn't write state file"
 msgstr "Ne mogu pisati u datoteku stanja"
 
-#: src/generic/apt/aptcache.cc:871
+#: src/generic/apt/aptcache.cc:904
 msgid "Error writing state file"
 msgstr "Greška pisanja u datoteku stanja"
 
-#: src/generic/apt/aptcache.cc:889
+#: src/generic/apt/aptcache.cc:922
 #, c-format
 msgid "failed to remove %s"
 msgstr "nisam uspio preimenovati %s"
 
-#: src/generic/apt/aptcache.cc:896
+#: src/generic/apt/aptcache.cc:929
 #, c-format
 msgid "failed to rename %s to %s"
 msgstr "nisam uspio preimenovati %s u %s"
 
-#: src/generic/apt/aptcache.cc:904
+#: src/generic/apt/aptcache.cc:937
 #, c-format
 msgid "couldn't replace %s with %s"
 msgstr "nisam uspio zamijeniti %s sa %s"
 
-#: src/generic/apt/aptcache.cc:1525
+#: src/generic/apt/aptcache.cc:955
+#: src/generic/apt/download_install_manager.cc:219
+msgid ""
+"Could not regain the system lock!  (Perhaps another apt or dpkg is running?)"
+msgstr ""
+"Ne mogu ponovo zaključati sustav!  (Možda je pokrenut drugi apt ili dpkg?)"
+
+#: src/generic/apt/aptcache.cc:958
+msgid "failed to save selections to dpkg database"
+msgstr ""
+
+#: src/generic/apt/aptcache.cc:1578
 msgid "Unable to correct dependencies, some packages cannot be installed"
 msgstr "Ne mogu ispraviti ovisnosti, neki paketi ne mogu biti instalirani"
 
-#: src/generic/apt/aptcache.cc:2172
+#: src/generic/apt/aptcache.cc:2236
 msgid "The list of sources could not be read."
 msgstr "Ne mogu čitati popis izvora."
 
-#: src/generic/apt/aptcache.cc:2179
+#: src/generic/apt/aptcache.cc:2243
 msgid "The package lists or status file could not be parsed or opened."
 msgstr "Ne mogu analizirati ili otvoriti popis paketa ili datoteku stanja."
 
-#: src/generic/apt/aptcache.cc:2182
+#: src/generic/apt/aptcache.cc:2246
 msgid "You may want to update the package lists to correct these missing files"
 msgstr ""
 "Možda biste htjeli ažurirati popis paketa kako biste popravili nedostajuće "
@@ -2920,12 +2949,6 @@ msgstr "Ne mogu popraviti za nedostupne pakete"
 msgid "Failed to perform requested operation on package.  Trying to recover:"
 msgstr ""
 
-#: src/generic/apt/download_install_manager.cc:219
-msgid ""
-"Could not regain the system lock!  (Perhaps another apt or dpkg is running?)"
-msgstr ""
-"Ne mogu ponovo zaključati sustav!  (Možda je pokrenut drugi apt ili dpkg?)"
-
 #: src/generic/apt/download_update_manager.cc:70
 msgid "Couldn't read list of package sources"
 msgstr "Ne mogu čitati popis izvora paketa"
@@ -2957,6 +2980,40 @@ msgstr "Ne mogu pronaći popis promjena za %s"
 msgid "Waited for %s but it wasn't there"
 msgstr ""
 
+#: src/generic/apt/dpkg_selections.cc:106
+msgid "Failed to create pipe for dpkg selections."
+msgstr ""
+
+#: src/generic/apt/dpkg_selections.cc:114
+msgid "Failed to fork process for dpkg selections."
+msgstr ""
+
+#: src/generic/apt/dpkg_selections.cc:191
+#, c-format
+msgid ""
+"Failed to execute process to save dpkg selections, waitpid error: %d: '%s'"
+msgstr ""
+
+#: src/generic/apt/dpkg_selections.cc:205
+#, c-format
+msgid ""
+"Failed to execute process to save dpkg selections, dpkg or trying to execute "
+"it exited with status/errno: %d"
+msgstr ""
+
+#: src/generic/apt/dpkg_selections.cc:210
+#, fuzzy, c-format
+#| msgid "Unable to create the output file: child killed by signal %d."
+msgid ""
+"Failed to execute process to save dpkg selections, dpkg killed by signal: %d"
+msgstr "Ne mogu stvoriti izlaznu datoteku: dijete je ubio signal %d."
+
+#: src/generic/apt/dpkg_selections.cc:215
+msgid ""
+"Failed to execute process to save dpkg selections, dpkg exited with unknown "
+"problem"
+msgstr ""
+
 #: src/generic/apt/dump_packages.cc:539 src/generic/apt/dump_packages.cc:629
 #, c-format
 msgid "Unable to stat %s."
@@ -2967,26 +3024,26 @@ msgstr "Ne mogu izvršiti stat %s."
 msgid "Unable to create truncated cache: %s."
 msgstr "Ne mogu stvoriti skraćeni spremnik: %s."
 
-#: src/generic/apt/log.cc:55
+#: src/generic/apt/log.cc:56
 #, c-format
 msgid "Unable to open %s to log actions"
 msgstr "Ne mogu otvoriti %s za zapisivanje radnji"
 
 #. TRANSLATORS: This is a date and time format.  See strftime(3).
-#: src/generic/apt/log.cc:66
+#: src/generic/apt/log.cc:67
 msgid "%a, %b %e %Y %T %z"
 msgstr "%a, %e. %b. %Y., %T %z"
 
-#: src/generic/apt/log.cc:68
+#: src/generic/apt/log.cc:69
 #, c-format
 msgid "Error generating local time (%s)"
 msgstr "Greška stvaranja lokalnog vremena (%s)"
 
-#: src/generic/apt/log.cc:72
+#: src/generic/apt/log.cc:73
 msgid "log report"
 msgstr "spremi izvještaj u dnevnik"
 
-#: src/generic/apt/log.cc:73
+#: src/generic/apt/log.cc:74
 #, c-format
 msgid ""
 "IMPORTANT: this log only lists intended actions; actions which fail due to\n"
@@ -2998,81 +3055,97 @@ msgstr ""
 "\n"
 
 # množina!
-#: src/generic/apt/log.cc:74
+#: src/generic/apt/log.cc:75
 #, c-format
 msgid "Will install %li packages, and remove %li packages.\n"
 msgstr "Instalirat ću %li paketa i ukloniti %li paketa.\n"
 
-#: src/generic/apt/log.cc:78
+#: src/generic/apt/log.cc:79
 #, c-format
 msgid "%sB of disk space will be used\n"
 msgstr "zauzet će %sB diskovnog prostora\n"
 
-#: src/generic/apt/log.cc:81
+#: src/generic/apt/log.cc:82
 #, c-format
 msgid "%sB of disk space will be freed\n"
 msgstr "oslobodit će %sB diskovnog prostora\n"
 
-#: src/generic/apt/log.cc:91
-#, c-format
-msgid "[UPGRADE] %s %s -> %s\n"
-msgstr "[NADOGRADNJA] %s %s -> %s\n"
-
-#: src/generic/apt/log.cc:95
-#, c-format
-msgid "[DOWNGRADE] %s %s -> %s\n"
-msgstr "[VRAĆANJE] %s %s -> %s\n"
-
-#: src/generic/apt/log.cc:105
-msgid "REMOVE"
-msgstr "UKLONI"
-
-#: src/generic/apt/log.cc:111
+#: src/generic/apt/log.cc:94
 msgid "INSTALL"
 msgstr "INSTALIRAJ"
 
-#: src/generic/apt/log.cc:114
+#: src/generic/apt/log.cc:95
+msgid "REMOVE"
+msgstr "UKLONI"
+
+#: src/generic/apt/log.cc:96
+msgid "UPGRADE"
+msgstr ""
+
+#: src/generic/apt/log.cc:97
+msgid "DOWNGRADE"
+msgstr ""
+
+#: src/generic/apt/log.cc:98
 msgid "REINSTALL"
 msgstr "PONOVO INSTALIRAJ"
 
-#: src/generic/apt/log.cc:117
+#: src/generic/apt/log.cc:99
 msgid "HOLD"
 msgstr "ZADRŽI"
 
-#: src/generic/apt/log.cc:120
+#: src/generic/apt/log.cc:100
 msgid "BROKEN"
 msgstr "SLOMLJEN"
 
-#: src/generic/apt/log.cc:123
+#: src/generic/apt/log.cc:101
 msgid "REMOVE, NOT USED"
 msgstr "UKLONI, NIJE KORIŠTEN"
 
-#: src/generic/apt/log.cc:126
+#: src/generic/apt/log.cc:102
 msgid "REMOVE, DEPENDENCIES"
 msgstr "UKLONI, OVISNOSTI"
 
-#: src/generic/apt/log.cc:129
+#: src/generic/apt/log.cc:103
 msgid "INSTALL, DEPENDENCIES"
 msgstr "INSTALIRAJ, OVISNOSTI"
 
-#: src/generic/apt/log.cc:132
+#: src/generic/apt/log.cc:104
 msgid "HOLD, DEPENDENCIES"
 msgstr "ZADRŽI, OVISNOSTI"
 
-#: src/generic/apt/log.cc:135
+#: src/generic/apt/log.cc:105
 msgid "UNCONFIGURED"
 msgstr "NEKONFIGURIRAN"
 
-#: src/generic/apt/log.cc:138
+#: src/generic/apt/log.cc:106
 msgid "????????"
 msgstr "????????"
 
-#: src/generic/apt/log.cc:142
+#: src/generic/apt/log.cc:109 src/generic/apt/log.cc:110
+#, fuzzy
+#| msgid "No resolution found."
+msgid "(no version found)"
+msgstr "Nisu pronađena rješenja."
+
+#: src/generic/apt/log.cc:126 src/generic/apt/log.cc:139
+#, fuzzy, c-format
+#| msgid "[%s] %s\n"
+msgid "[%s] %s %s\n"
+msgstr "[%s] %s\n"
+
+#: src/generic/apt/log.cc:147
+#, fuzzy, c-format
+#| msgid "[UPGRADE] %s %s -> %s\n"
+msgid "[%s] %s %s -> %s\n"
+msgstr "[NADOGRADNJA] %s %s -> %s\n"
+
+#: src/generic/apt/log.cc:156
 #, c-format
 msgid "[%s] %s\n"
 msgstr "[%s] %s\n"
 
-#: src/generic/apt/log.cc:145
+#: src/generic/apt/log.cc:161
 #, c-format
 msgid ""
 "===============================================================================\n"
@@ -3083,13 +3156,13 @@ msgstr ""
 "\n"
 "Zapisivanje gotovo.\n"
 
-#: src/generic/apt/matching/match.cc:3045
-#: src/generic/apt/matching/match.cc:3162
+#: src/generic/apt/matching/match.cc:3083
+#: src/generic/apt/matching/match.cc:3200
 msgid "Accessing index"
 msgstr "Pristupam indeksu"
 
-#: src/generic/apt/matching/match.cc:3055
-#: src/generic/apt/matching/match.cc:3169
+#: src/generic/apt/matching/match.cc:3093
+#: src/generic/apt/matching/match.cc:3207
 msgid "Filtering packages"
 msgstr "Filtriram pakete"
 
@@ -3199,12 +3272,12 @@ msgid ""
 msgstr ""
 "Datoteke indeksa paketa su pokvarene. Nema polja `Ime datoteke:' za paket %s."
 
-#: src/generic/apt/pkg_changelog.cc:569 src/generic/apt/pkg_changelog.cc:574
+#: src/generic/apt/pkg_changelog.cc:591 src/generic/apt/pkg_changelog.cc:596
 #, c-format
 msgid "Failed to download changelogs: %s"
 msgstr "Nisam uspio preuzeti popise promjena: %s"
 
-#: src/generic/apt/pkg_changelog.cc:579
+#: src/generic/apt/pkg_changelog.cc:601
 msgid "Failed to download changelogs: unexpected exception."
 msgstr "Nisam uspio preuzeti popise promjena: neočekivana iznimka."
 
@@ -3375,47 +3448,47 @@ msgstr "Aptitude upravitelj paketa"
 msgid "_File"
 msgstr "_Datoteka"
 
-#: src/gtk/aptitude.glade:28 src/gtk/aptitude.glade:2274 src/ui.cc:2347
+#: src/gtk/aptitude.glade:28 src/gtk/aptitude.glade:2274 src/ui.cc:2368
 msgid "Perform all pending installs and removals"
 msgstr "Izvrši sve trenutne instalacije i uklanjanja"
 
-#: src/gtk/aptitude.glade:38 src/gtk/aptitude.glade:2285 src/ui.cc:2350
+#: src/gtk/aptitude.glade:38 src/gtk/aptitude.glade:2285 src/ui.cc:2371
 msgid "Check for new versions of packages"
 msgstr "Provjeri postoje li nove inačice paketa"
 
-#: src/gtk/aptitude.glade:53 src/gtk/aptitude.glade:2301 src/ui.cc:2355
+#: src/gtk/aptitude.glade:53 src/gtk/aptitude.glade:2301 src/ui.cc:2376
 msgid "Mark all upgradable packages which are not held for upgrade"
 msgstr "Označi za nadogradnju sve dostupne pakete koji nisu zadržani"
 
-#: src/gtk/aptitude.glade:63 src/gtk/aptitude.glade:2312 src/ui.cc:2360
+#: src/gtk/aptitude.glade:63 src/gtk/aptitude.glade:2312 src/ui.cc:2381
 msgid "Forget which packages are \"new\""
 msgstr "Zaboravi koji su \"novi\" paketi"
 
-#: src/gtk/aptitude.glade:72 src/gtk/aptitude.glade:2322 src/ui.cc:2364
+#: src/gtk/aptitude.glade:72 src/gtk/aptitude.glade:2322 src/ui.cc:2385
 msgid "Cancel all pending installations, removals, holds, and upgrades."
 msgstr ""
 "Otkaži sve trenutne instalacije, uklanjanja, zadržavanja i nadogradnje."
 
-#: src/gtk/aptitude.glade:81 src/gtk/aptitude.glade:2332 src/ui.cc:2368
+#: src/gtk/aptitude.glade:81 src/gtk/aptitude.glade:2332 src/ui.cc:2389
 msgid "Delete package files which were previously downloaded"
 msgstr "Izbriši datoteke paketa koje su prethodno preuzete"
 
-#: src/gtk/aptitude.glade:90 src/gtk/aptitude.glade:2342 src/ui.cc:2372
+#: src/gtk/aptitude.glade:90 src/gtk/aptitude.glade:2342 src/ui.cc:2393
 msgid "Delete package files which can no longer be downloaded"
 msgstr "Izbriši datoteke paketa koje se više ne mogu preuzeti"
 
-#: src/gtk/aptitude.glade:104 src/gtk/aptitude.glade:2357 src/ui.cc:2379
+#: src/gtk/aptitude.glade:104 src/gtk/aptitude.glade:2357 src/ui.cc:2400
 msgid "Reload the package cache"
 msgstr "Ponovo učitaj spremnik paketa"
 
-#: src/gtk/aptitude.glade:118 src/gtk/aptitude.glade:2372 src/ui.cc:2389
+#: src/gtk/aptitude.glade:118 src/gtk/aptitude.glade:2372 src/ui.cc:2410
 #, fuzzy
 msgid "Restart the program as root; your settings will be preserved"
 msgstr ""
 "Pokreni 'su' za administratorske ovlasti; ovo će ponovo pokrenuti program, "
 "ali će vaše postavke ostati očuvane"
 
-#: src/gtk/aptitude.glade:127 src/gtk/aptitude.glade:2382 src/ui.cc:2392
+#: src/gtk/aptitude.glade:127 src/gtk/aptitude.glade:2382 src/ui.cc:2413
 msgid "Exit the program"
 msgstr "Izađi iz programa"
 
@@ -3423,7 +3496,7 @@ msgstr "Izađi iz programa"
 msgid "E_dit"
 msgstr "Ure_di"
 
-#: src/gtk/aptitude.glade:148 src/gtk/aptitude.glade:2404 src/ui.cc:2399
+#: src/gtk/aptitude.glade:148 src/gtk/aptitude.glade:2404 src/ui.cc:2420
 msgid "Undo the last package operation or group of operations"
 msgstr "Poništi zadnju operaciju na paketu ili grupu operacija"
 
@@ -3464,18 +3537,17 @@ msgid "Update"
 msgstr "Ažuriraj"
 
 #: src/gtk/aptitude.glade:347 src/gtk/aptitude.glade:2606 src/gtk/gui.cc:1323
-#: src/qt/tabs_manager.cc:241 src/ui.cc:883 src/ui.cc:885 src/ui.cc:930
-#: src/ui.cc:932 src/ui.cc:958 src/ui.cc:960
+#: src/qt/tabs_manager.cc:241 src/ui.cc:884 src/ui.cc:886
 msgid "Packages"
 msgstr "Paketi"
 
 #: src/gtk/aptitude.glade:358 src/gtk/aptitude.glade:2617 src/gtk/gui.cc:1033
-#: src/gtk/previewtab.cc:118 src/qt/tabs_manager.cc:220 src/ui.cc:1395
+#: src/gtk/previewtab.cc:118 src/qt/tabs_manager.cc:220 src/ui.cc:1416
 msgid "Preview"
 msgstr "Pregled"
 
 #: src/gtk/aptitude.glade:369 src/gtk/aptitude.glade:2628 src/gtk/gui.cc:1028
-#: src/qt/tabs_manager.cc:263 src/ui.cc:2784
+#: src/qt/tabs_manager.cc:263 src/ui.cc:2810
 msgid "Resolver"
 msgstr "Rješavanje ovisnosti"
 
@@ -3708,7 +3780,7 @@ msgstr "Idi"
 msgid "Finalize and apply your changes to the system."
 msgstr "Dovršite i primijenite svoje promjene na sustavu."
 
-#: src/gtk/areas.cc:79 src/ui.cc:711 src/ui.cc:713
+#: src/gtk/areas.cc:79 src/ui.cc:712 src/ui.cc:714
 msgid "Preferences"
 msgstr "Postavke"
 
@@ -4209,7 +4281,7 @@ msgstr "Morate biti root za ažuriranje popisa paketa."
 msgid "Download already running."
 msgstr "Preuzimanje je već pokrenuto."
 
-#: src/gtk/gui.cc:300 src/gtk/gui.cc:948 src/ui.cc:1526 src/ui.cc:1765
+#: src/gtk/gui.cc:300 src/gtk/gui.cc:948 src/ui.cc:1547 src/ui.cc:1786
 msgid "A package-list update or install run is already taking place."
 msgstr "Ažuriranje paketa ili instalacija je već u tijeku."
 
@@ -4276,7 +4348,7 @@ msgstr "Greška u paketu %s"
 msgid "Asking whether to replace the configuration file %s"
 msgstr "Pitam o zamjeni konfiguracijske datoteke %s"
 
-#: src/gtk/gui.cc:962 src/ui.cc:1266
+#: src/gtk/gui.cc:962 src/ui.cc:1287
 msgid "Downloading packages"
 msgstr "Preuzimam pakete"
 
@@ -4412,8 +4484,8 @@ msgstr "Informacije"
 
 #: src/gtk/packageinformation.cc:104 src/gtk/packageinformation.cc:106
 #: src/pkg_columnizer.cc:354 src/pkg_columnizer.cc:375
-#: src/pkg_columnizer.cc:382 src/pkg_grouppolicy.cc:268
-#: src/pkg_info_screen.cc:134 src/pkg_info_screen.cc:135
+#: src/pkg_columnizer.cc:382 src/pkg_grouppolicy.cc:269
+#: src/pkg_info_screen.cc:146 src/pkg_info_screen.cc:147
 #: src/pkg_ver_item.cc:345 src/pkg_ver_item.cc:379 src/qt/package.cc:226
 #: src/qt/version.cc:117
 msgid "Unknown"
@@ -4469,7 +4541,7 @@ msgstr "Završavam pregled"
 msgid "Building view"
 msgstr "Gradim pregled"
 
-#: src/gtk/previewtab.cc:97 src/pkg_grouppolicy.cc:676
+#: src/gtk/previewtab.cc:97 src/pkg_grouppolicy.cc:710
 msgid ""
 "Packages with unsatisfied dependencies\n"
 " The dependency requirements of these packages will be unmet after the "
@@ -4485,7 +4557,7 @@ msgstr ""
 " Prisutnost ovog stabla vjerojatno znači da je nešto slomljeno, na vašem "
 "sustavu ili u Debian arhivi."
 
-#: src/gtk/previewtab.cc:98 src/pkg_grouppolicy.cc:677
+#: src/gtk/previewtab.cc:98 src/pkg_grouppolicy.cc:711
 msgid ""
 "Packages being removed because they are no longer used\n"
 " These packages are being deleted because they were automatically installed "
@@ -4497,7 +4569,7 @@ msgstr ""
 "ovisnosti i planiranom radnjom nijedan instaliran paket neće imati 'važnu' "
 "ovisnost o njima.\n"
 
-#: src/gtk/previewtab.cc:99 src/pkg_grouppolicy.cc:678
+#: src/gtk/previewtab.cc:99 src/pkg_grouppolicy.cc:712
 msgid ""
 "Packages being automatically held in their current state\n"
 " These packages could be upgraded, but they have been kept in their current "
@@ -4507,7 +4579,7 @@ msgstr ""
 " Ovi paketi se mogu nadograditi, ali su zadržani u trenutnom stanju zbog "
 "izbjegavanja slamanja ovisnosti."
 
-#: src/gtk/previewtab.cc:100 src/pkg_grouppolicy.cc:679
+#: src/gtk/previewtab.cc:100 src/pkg_grouppolicy.cc:713
 msgid ""
 "Packages being automatically installed to satisfy dependencies\n"
 " These packages are being installed because they are required by another "
@@ -4517,7 +4589,7 @@ msgstr ""
 " Ovi paketi se automatski instaliraju jer ih zahtijevaju drugi paketi koje "
 "ste odabrali za instalaciju."
 
-#: src/gtk/previewtab.cc:101 src/pkg_grouppolicy.cc:680
+#: src/gtk/previewtab.cc:101 src/pkg_grouppolicy.cc:714
 msgid ""
 "Packages being deleted due to unsatisfied dependencies\n"
 " These packages are being deleted because one or more of their dependencies "
@@ -4527,7 +4599,7 @@ msgstr ""
 " Ovi paketi se uklanjaju jer nisu dostupne njihove ovisnosti ili zato što su "
 "drugi paketi u sukobu s njima."
 
-#: src/gtk/previewtab.cc:102 src/pkg_grouppolicy.cc:681
+#: src/gtk/previewtab.cc:102 src/pkg_grouppolicy.cc:715
 msgid ""
 "Packages to be downgraded\n"
 " An older version of these packages than is currently installed will be "
@@ -4536,7 +4608,7 @@ msgstr ""
 "Paketi vraćeni na prethodnu inačicu\n"
 " Instalirat će se starija inačica paketa nego je trenutno instalirana."
 
-#: src/gtk/previewtab.cc:103 src/pkg_grouppolicy.cc:682
+#: src/gtk/previewtab.cc:103 src/pkg_grouppolicy.cc:716
 msgid ""
 "Packages being held back\n"
 " These packages could be upgraded, but you have asked for them to be held at "
@@ -4546,7 +4618,7 @@ msgstr ""
 " Ovi paketi se mogu nadograditi, ali ste odlučili zadržati ih na trenutnoj "
 "inačici."
 
-#: src/gtk/previewtab.cc:104 src/pkg_grouppolicy.cc:683
+#: src/gtk/previewtab.cc:104 src/pkg_grouppolicy.cc:717
 msgid ""
 "Packages to be reinstalled\n"
 " These packages will be reinstalled."
@@ -4554,7 +4626,7 @@ msgstr ""
 "Paketi za ponovnu instalaciju\n"
 " Ovi paketi će biti ponovo instalirani."
 
-#: src/gtk/previewtab.cc:105 src/pkg_grouppolicy.cc:684
+#: src/gtk/previewtab.cc:105 src/pkg_grouppolicy.cc:718
 msgid ""
 "Packages to be installed\n"
 " These packages have been manually selected for installation on your "
@@ -4563,7 +4635,7 @@ msgstr ""
 "Paketi za instalaciju\n"
 " Ovi paketi su ručno odabrani za instalaciju na vašem računalu."
 
-#: src/gtk/previewtab.cc:106 src/pkg_grouppolicy.cc:685
+#: src/gtk/previewtab.cc:106 src/pkg_grouppolicy.cc:719
 msgid ""
 "Packages to be removed\n"
 " These packages have been manually selected for removal."
@@ -4571,7 +4643,7 @@ msgstr ""
 "Paketi za uklanjanje\n"
 " Ovi paketi su ručno odabrani za uklanjanje."
 
-#: src/gtk/previewtab.cc:107 src/pkg_grouppolicy.cc:686
+#: src/gtk/previewtab.cc:107 src/pkg_grouppolicy.cc:720
 msgid ""
 "Packages to be upgraded\n"
 " These packages will be upgraded to a newer version."
@@ -4579,7 +4651,7 @@ msgstr ""
 "Paketi za nadogradnju\n"
 " Ovi paketi će se nadograditi na noviju inačicu."
 
-#: src/gtk/previewtab.cc:108 src/pkg_grouppolicy.cc:687
+#: src/gtk/previewtab.cc:108 src/pkg_grouppolicy.cc:721
 msgid ""
 "Packages that are partially installed\n"
 " These packages are not fully installed and configured; an attempt will be "
@@ -5059,96 +5131,103 @@ msgstr "Neispravna stavka u grupi funkcija tipki: \"%s\""
 msgid "Ignoring invalid keybinding \"%s\" -> \"%s\""
 msgstr "Zanemarujem neispravne funkcije tipki \"%s\" -> \"%s\""
 
-#: src/load_grouppolicy.cc:289
+#: src/load_grouppolicy.cc:290
 #, c-format
 msgid "Expected policy identifier, got '%c'"
 msgstr "Očekujem identifikator police, dobio '%c'"
 
-#: src/load_grouppolicy.cc:305
+#: src/load_grouppolicy.cc:306
 #, c-format
 msgid "Expected ',', '%c', or '('; got '%c'"
 msgstr "Očekujem ',', '%c' ili '('; dobio '%c'"
 
-#: src/load_grouppolicy.cc:309
+#: src/load_grouppolicy.cc:310
 #, c-format
 msgid "Expected ',' or '(', got '%c'"
 msgstr "Očekujem ',' ili '(', dobio '%c'"
 
-#: src/load_grouppolicy.cc:317
+#: src/load_grouppolicy.cc:318
 #, c-format
 msgid "Unknown grouping policy \"%s\""
 msgstr "Nepoznata polica grupiranja \"%s\""
 
-#: src/load_grouppolicy.cc:324
+#: src/load_grouppolicy.cc:325
 #, c-format
 msgid "Terminal policy '%s' should be the last policy in the list"
 msgstr "Polica terminala '%s' treba biti zadnja na popisu"
 
-#: src/load_grouppolicy.cc:385
+#: src/load_grouppolicy.cc:386
 msgid "Unmatched '(' in grouping policy"
 msgstr "Nesparena '(' u polici grupiranja"
 
-#: src/load_grouppolicy.cc:413
+#: src/load_grouppolicy.cc:414
 #, c-format
 msgid "Bad section name '%s' (use 'none', 'topdir', 'subdir', or 'subdirs')"
 msgstr ""
 "Krivo ime odjeljka '%s' (koristite 'none', 'topdir', 'subdir' ili 'subdirs')"
 
-#: src/load_grouppolicy.cc:423
+#: src/load_grouppolicy.cc:424
 #, c-format
 msgid "Bad passthrough setting '%s' (use 'passthrough' or 'nopassthrough')"
 msgstr ""
 "Kriva postavka prolaza '%s' (koristite 'passthrough' ili 'nopassthrough')"
 
-#: src/load_grouppolicy.cc:428 src/load_grouppolicy.cc:544
-#: src/load_grouppolicy.cc:601
+#: src/load_grouppolicy.cc:429 src/load_grouppolicy.cc:557
+#: src/load_grouppolicy.cc:627
 #, c-format
 msgid "Too many arguments to '%s' grouping policy"
 msgstr "Previše argumenata polici grupiranja '%s'"
 
-#: src/load_grouppolicy.cc:441 src/load_grouppolicy.cc:521
-#: src/load_grouppolicy.cc:532 src/load_grouppolicy.cc:555
-#: src/load_grouppolicy.cc:566 src/load_grouppolicy.cc:577
-#: src/load_grouppolicy.cc:588 src/load_grouppolicy.cc:746
+#: src/load_grouppolicy.cc:442 src/load_grouppolicy.cc:522
+#: src/load_grouppolicy.cc:570 src/load_grouppolicy.cc:581
+#: src/load_grouppolicy.cc:592 src/load_grouppolicy.cc:603
+#: src/load_grouppolicy.cc:614 src/load_grouppolicy.cc:772
 #, c-format
 msgid "Grouping policy '%s' takes no arguments"
 msgstr "Polica grupiranja '%s' ne prihvaća argumente"
 
-#: src/load_grouppolicy.cc:460 src/load_grouppolicy.cc:616
+#: src/load_grouppolicy.cc:461 src/load_grouppolicy.cc:642
 #, c-format
 msgid "Expected '(' after '%s'"
 msgstr "Očekujem '(' nakon '%s'"
 
-#: src/load_grouppolicy.cc:497
+#: src/load_grouppolicy.cc:498
 #, c-format
 msgid "Unable to parse pattern at '%s'"
 msgstr "Ne mogu analizirati uzorak na '%s'"
 
-#: src/load_grouppolicy.cc:502
+#: src/load_grouppolicy.cc:503
 msgid "Exactly one filter must be provided as an argument to a 'filter' policy"
 msgstr "Točno jedan filter mora biti naveden kao argument polici 'filter'"
 
-#: src/load_grouppolicy.cc:624
+#: src/load_grouppolicy.cc:552
+#, fuzzy, c-format
+#| msgid "Bad section name '%s' (use 'none', 'topdir', 'subdir', or 'subdirs')"
+msgid "Bad mode name '%s' (use 'binary' or 'source')"
+msgstr ""
+"Krivo ime odjeljka '%s' (koristite 'none', 'topdir', 'subdir' ili 'subdirs')"
+
+#: src/load_grouppolicy.cc:650
 #, c-format
 msgid "Missing arguments to '%s' grouping policy"
 msgstr "Nedostaju argumenti police grupiranja '%s'"
 
-#: src/load_grouppolicy.cc:647
+#: src/load_grouppolicy.cc:673
 #, c-format
 msgid "Unable to parse pattern after \"%s\""
 msgstr "Ne mogu analizirati uzorak nakon \"%s\""
 
-#: src/load_grouppolicy.cc:685
+#: src/load_grouppolicy.cc:711
 #, fuzzy, c-format
 msgid "Unexpected empty tree title after \"%s\""
 msgstr "Neočekivan naslov praznog stabla nakon \"%s\""
 
-#: src/load_grouppolicy.cc:704
+#: src/load_grouppolicy.cc:730
 #, c-format
 msgid "Expected '{', ')', or ',' following '||', got '%s'"
 msgstr "Očekujem '{'. ')' ili ',' nakon čega slijedi '||', dobio '%s'"
 
-#: src/load_grouppolicy.cc:730
+#: src/load_grouppolicy.cc:756
 #, c-format
 msgid "Unmatched '(' in '%s' grouping policy"
 msgstr "Nesparena '(' u polici grupiranja '%s'"
@@ -5699,43 +5778,43 @@ msgstr ""
 msgid "Invalid logger name \"%s\"."
 msgstr "Neispravno ime zapisivača dnevnika \"%s\"."
 
-#: src/main.cc:763
+#: src/main.cc:807
 #, c-format
 msgid "Expected a number after -q=\n"
 msgstr "Očekujem broj nakon -q=\n"
 
-#: src/main.cc:772
+#: src/main.cc:816
 #, c-format
 msgid "Expected a number after -q=, got %s\n"
 msgstr "Očekujem broj nakon -q=, dobio %s\n"
 
-#: src/main.cc:796
+#: src/main.cc:840
 #, c-format
 msgid "-o requires an argument of the form key=value, got %s\n"
 msgstr "-o zahtijeva argument u obliku ključ=vrijednost, dobio %s\n"
 
-#: src/main.cc:886
+#: src/main.cc:930
 #, c-format
 msgid "No comma following tag name \"%s\".\n"
 msgstr "Nema zareza nakon oznake imena \"%s\".\n"
 
-#: src/main.cc:978 src/main.cc:988
+#: src/main.cc:1022 src/main.cc:1032
 msgid "WEIRDNESS: unknown option code received\n"
 msgstr "ČUDNO: primljen nepoznat opcijski kod\n"
 
-#: src/main.cc:1006
+#: src/main.cc:1050
 msgid "--show-package-names|never"
 msgstr "--show-package-names|never"
 
-#: src/main.cc:1009
+#: src/main.cc:1053
 msgid "--show-package-names|auto"
 msgstr "--show-package-names|auto"
 
-#: src/main.cc:1012
+#: src/main.cc:1056
 msgid "--show-package-names|always"
 msgstr "--show-package-names|always"
 
-#: src/main.cc:1017
+#: src/main.cc:1061
 #, c-format
 msgid ""
 "Invalid package names display mode \"%s\" (should be \"never\", \"auto\", or "
@@ -5744,30 +5823,30 @@ msgstr ""
 "Neispravan način prikaza imena paketa \"%s\" (treba biti \"never\", \"auto\" "
 "ili \"always\")."
 
-#: src/main.cc:1023
+#: src/main.cc:1067
 msgid "no-summary"
 msgstr "bez-sažetka"
 
-#: src/main.cc:1025
+#: src/main.cc:1069
 msgid "first-package"
 msgstr "prvi-paket"
 
-#: src/main.cc:1027
+#: src/main.cc:1071
 msgid "first-package-and-type"
 msgstr "prvi-paket-i-vrsta"
 
-#: src/main.cc:1029
+#: src/main.cc:1073
 msgid "all-packages"
 msgstr "svi-paketi"
 
-#: src/main.cc:1031
+#: src/main.cc:1075
 msgid "all-packages-with-dep-versions"
 msgstr "svi-paketi-s-inačicama-ovisnosti"
 
 #. TRANSLATORS: "why" here is the aptitude command name and should not
 #. be translated.  Both the translated and the untranslated log level
 #. names are accepted here.
-#: src/main.cc:1038
+#: src/main.cc:1082
 #, c-format
 msgid ""
 "Invalid \"why\" summary mode \"%s\": expected \"no-summary\", \"first-package"
@@ -5778,7 +5857,7 @@ msgstr ""
 "package\", \"first-package-and-type\", \"all-packages\" ili \"all-packages-"
 "with-dep-versions\"."
 
-#: src/main.cc:1079
+#: src/main.cc:1123
 msgid ""
 "Only one of --auto-clean-on-startup, --clean-on-startup, -i, and -u may be "
 "specified\n"
@@ -5786,7 +5865,7 @@ msgstr ""
 "Samo jedna od opcija --auto-clean-on-startup, --clean-on-startup, -i i -u "
 "može biti navedena\n"
 
-#: src/main.cc:1088
+#: src/main.cc:1132
 msgid ""
 "-u, -i, and --clean-on-startup may not be specified in command-line mode "
 "(eg, with 'install')"
@@ -5794,21 +5873,21 @@ msgstr ""
 "-u, -i i --clean-on-startup ne mogu biti navedene u naredbenom retku (npr. "
 "uz 'install')"
 
-#: src/main.cc:1105
+#: src/main.cc:1149
 msgid "-u, -i, and --clean-on-startup may not be specified with a command"
 msgstr "-u, -i, and --clean-on-startup ne mogu biti navedene uz naredbu"
 
-#: src/main.cc:1216
+#: src/main.cc:1260
 #, c-format
 msgid "Unknown command \"%s\"\n"
 msgstr "Nepoznata naredba \"%s\"\n"
 
-#: src/main.cc:1228 src/main.cc:1313
+#: src/main.cc:1272 src/main.cc:1357
 #, c-format
 msgid "Uncaught exception: %s\n"
 msgstr "Neuhvaćena iznimka: %s\n"
 
-#: src/main.cc:1232 src/main.cc:1317
+#: src/main.cc:1276 src/main.cc:1361
 #, c-format
 msgid ""
 "Backtrace:\n"
@@ -5817,7 +5896,7 @@ msgstr ""
 "Praćenje unatrag:\n"
 "%s\n"
 
-#: src/menu_text_layout.cc:43 src/menu_tree.cc:232 src/ui.cc:257
+#: src/menu_text_layout.cc:43 src/menu_tree.cc:232 src/ui.cc:258
 #: src/view_changelog.cc:168
 msgid "Search for: "
 msgstr "Traži: "
@@ -5826,7 +5905,7 @@ msgstr "Traži: "
 msgid "Search backwards for: "
 msgstr "Traži unatrag: "
 
-#: src/mine/cmine.cc:115 src/mine/cmine.cc:154 src/ui.cc:1770
+#: src/mine/cmine.cc:115 src/mine/cmine.cc:154 src/ui.cc:1791
 msgid "Minesweeper"
 msgstr "Čistač mina"
 
@@ -5866,168 +5945,79 @@ msgstr "Ne mogu otvoriti datoteku \"%s\""
 msgid "Could not load game from %s"
 msgstr "Ne mogu učitati igru iz %s"
 
-#: src/mine/cmine.cc:247
+#: src/mine/cmine.cc:242
 msgid "The board height must be a positive integer"
 msgstr "Visina ploče mora biti pozitivan cijeli broj"
 
-#: src/mine/cmine.cc:258
+#: src/mine/cmine.cc:253
 msgid "The board width must be a positive integer"
 msgstr "Širina ploče mora biti pozitivan cijeli broj"
 
-#: src/mine/cmine.cc:269
+#: src/mine/cmine.cc:264
 msgid "Invalid mine count; please enter a positive integer"
 msgstr "Neispravan broj mina; molim unesite pozitivan cijeli broj"
 
-#: src/mine/cmine.cc:289
+#: src/mine/cmine.cc:284
 msgid "Setup custom game"
 msgstr "Postavi prilagođenu igru"
 
-#: src/mine/cmine.cc:291
+#: src/mine/cmine.cc:286
 msgid "Height of board: "
 msgstr "Visina ploče: "
 
-#: src/mine/cmine.cc:294
+#: src/mine/cmine.cc:289
 msgid "Width of board: "
 msgstr "Širina ploče: "
 
-#: src/mine/cmine.cc:297
+#: src/mine/cmine.cc:292
 msgid "Number of mines: "
 msgstr "Broj mina: "
 
-#: src/mine/cmine.cc:300 src/mine/cmine.cc:365 src/ui.cc:290 src/ui.cc:362
+#: src/mine/cmine.cc:295 src/mine/cmine.cc:360 src/ui.cc:291 src/ui.cc:363
 msgid "Ok"
 msgstr "U redu"
 
-#: src/mine/cmine.cc:358
+#: src/mine/cmine.cc:353
 msgid "Choose difficulty level"
 msgstr "Odaberi težinu"
 
-#: src/mine/cmine.cc:360
+#: src/mine/cmine.cc:355
 msgid "Easy"
 msgstr "Lagano"
 
-#: src/mine/cmine.cc:361
+#: src/mine/cmine.cc:356
 msgid "Medium"
 msgstr "Srednje"
 
-#: src/mine/cmine.cc:362
+#: src/mine/cmine.cc:357
 msgid "Hard"
 msgstr "Teško"
 
-#: src/mine/cmine.cc:363
+#: src/mine/cmine.cc:358
 msgid "Custom"
 msgstr "Prilagođeno"
 
-#: src/mine/cmine.cc:461
+#: src/mine/cmine.cc:456
 msgid "You have won."
 msgstr "Pobijedili ste."
 
-#: src/mine/cmine.cc:464
+#: src/mine/cmine.cc:459
 msgid "You lose!"
 msgstr "Izgubili ste!"
 
-#: src/mine/cmine.cc:469
-msgid "You die...  --More--"
-msgstr "Umrli ste...  --Više--"
-
-#: src/mine/cmine.cc:482
-msgid "The spikes were poisoned!  The poison was deadly...  --More--"
-msgstr "Bodlje su otrovane!  Otrov je smrtonosan...  --Više--"
-
-#: src/mine/cmine.cc:485
-msgid "You land on a set of sharp iron spikes!  --More--"
-msgstr "Sletjeli ste na skup oštrih željeznih bodlji!  --Više--"
-
-#: src/mine/cmine.cc:488
-msgid "You fall into a pit!  --More--"
-msgstr "Upali ste u jamu!  --Više--"
-
-#: src/mine/cmine.cc:491
-msgid "KABOOM!  You step on a land mine.  --More--"
-msgstr "KABUM!  Stali ste na minu.  --Više--"
-
-#: src/mine/cmine.cc:496
-msgid "The dart was poisoned!  The poison was deadly...  --More--"
-msgstr "Strelica je otrovana!  Otrov je smrtonosan... --Više--"
-
-#: src/mine/cmine.cc:498
-msgid ""
-"A little dart shoots out at you!  You are hit by a little dart!  --More--"
-msgstr "Gađaju vas malom strelicom!  Pogodila vas je mala strelica!  --Više--"
-
-#: src/mine/cmine.cc:502
-msgid "You turn to stone... --More--"
-msgstr "Pretvorili ste se u kamen... --Više--"
-
-#: src/mine/cmine.cc:504
-msgid "Touching the cockatrice corpse was a fatal mistake.  --More--"
-msgstr "Diranje zmajevog trupla je bila fatalna pogreška.  --Više--"
-
-#: src/mine/cmine.cc:506
-msgid "You feel here a cockatrice corpse.  --More--"
-msgstr "Osjećate se kao zmajevo truplo.  --Više--"
-
-#: src/mine/cmine.cc:510
-msgid ""
-"Click!  You trigger a rolling boulder trap!  You are hit by a boulder! --"
-"More--"
-msgstr ""
-"Klik!  Pokrenuli ste kotrljajući kamen!  Pogodio vas je kamen! --Više--"
-
-#: src/mine/cmine.cc:520
-msgid "sleep"
-msgstr "spavanja"
-
-#: src/mine/cmine.cc:523
-msgid "striking"
-msgstr "udaranja"
-
-#: src/mine/cmine.cc:526
-msgid "death"
-msgstr "smrti"
-
-#: src/mine/cmine.cc:529
-msgid "polymorph"
-msgstr "mijenjanja oblika"
-
-#: src/mine/cmine.cc:532
-msgid "magic missile"
-msgstr "čarobnih strelica"
-
-#: src/mine/cmine.cc:535
-msgid "secret door detection"
-msgstr "pronalaženja skrivenih vrata"
-
-#: src/mine/cmine.cc:538
-msgid "invisibility"
-msgstr "nevidljivosti"
-
-#: src/mine/cmine.cc:541
-msgid "cold"
-msgstr "hladnoće"
-
-#: src/mine/cmine.cc:545
-#, c-format
-msgid "Your wand of %s breaks apart and explodes!  --More--"
-msgstr "Vaš štapić %s se strgao i eksplodirao!  --Više--"
-
-#: src/mine/cmine.cc:551
-msgid "You are jolted by a surge of electricity!  --More--"
-msgstr "Spržio vas je električni izboj!  --Više--"
-
-#: src/mine/cmine.cc:655
+#: src/mine/cmine.cc:657
 msgid "Enter the filename to load: "
 msgstr "Unesite ime datoteke za učitavanje: "
 
-#: src/mine/cmine.cc:662
+#: src/mine/cmine.cc:664
 msgid "Enter the filename to save: "
 msgstr "Unesite ime datoteke za spremanje: "
 
-#: src/mine/cmine.cc:670
+#: src/mine/cmine.cc:672
 msgid "mine-help.txt"
 msgstr "mine-help.txt"
 
-#: src/mine/cmine.cc:672
+#: src/mine/cmine.cc:674
 msgid "Encoding of mine-help.txt|UTF-8"
 msgstr "Kodiranje mine-help.txt|UTF-8"
 
@@ -6035,7 +6025,7 @@ msgstr "Kodiranje mine-help.txt|UTF-8"
 msgid "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 1 10 9 12 30 17 15"
 msgstr "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 1 10 9 14 30 17 15"
 
-#: src/pkg_columnizer.cc:89 src/ui.cc:2783
+#: src/pkg_columnizer.cc:89 src/ui.cc:2809
 msgid "Package"
 msgstr "Paket"
 
@@ -6116,8 +6106,8 @@ msgstr "<Nedostupno>"
 msgid "<none>"
 msgstr "<nijedan>"
 
-#: src/pkg_columnizer.cc:238 src/pkg_grouppolicy.cc:263
-#: src/pkg_grouppolicy.cc:1588 src/qt/package.cc:236
+#: src/pkg_columnizer.cc:238 src/pkg_grouppolicy.cc:264
+#: src/pkg_grouppolicy.cc:1673 src/qt/package.cc:236
 #: src/qt/widgets/packages_tab.cc:73
 msgid "virtual"
 msgstr "virtualni"
@@ -6261,11 +6251,11 @@ msgstr "Interna greška: Zadani niz stupca se ne može analizirati"
 msgid "Forbidden character in position %zu of %s string: '%s'"
 msgstr ""
 
-#: src/pkg_grouppolicy.cc:273 src/pkg_grouppolicy.cc:965
+#: src/pkg_grouppolicy.cc:274 src/pkg_grouppolicy.cc:1036
 msgid "Tasks"
 msgstr "Zadaci"
 
-#: src/pkg_grouppolicy.cc:466
+#: src/pkg_grouppolicy.cc:467
 msgid ""
 "Security Updates\n"
 " Security updates for these packages are available from security.debian.org."
@@ -6273,7 +6263,7 @@ msgstr ""
 "Sigurnosne nadogradnje\n"
 " Sigurnosne nadogradnje za ove pakete su dostupne na security.debian.org."
 
-#: src/pkg_grouppolicy.cc:467
+#: src/pkg_grouppolicy.cc:468
 msgid ""
 "Upgradable Packages\n"
 " A newer version of these packages is available."
@@ -6281,7 +6271,7 @@ msgstr ""
 "Nadogradivi paketi\n"
 " Dostupna je novija inačica ovih paketa."
 
-#: src/pkg_grouppolicy.cc:468
+#: src/pkg_grouppolicy.cc:469
 msgid ""
 "New Packages\n"
 " These packages have been added to Debian since the last time you cleared "
@@ -6293,7 +6283,7 @@ msgstr ""
 "\"novih\" paketa (odaberite \"Zaboravi nove pakete\" iz izbornika Radnje za "
 "pražnjenje ovog popisa)."
 
-#: src/pkg_grouppolicy.cc:469
+#: src/pkg_grouppolicy.cc:470
 msgid ""
 "Installed Packages\n"
 " These packages are currently installed on your computer."
@@ -6301,7 +6291,7 @@ msgstr ""
 "Instalirani paketi\n"
 " Ovi paketi su trenutno instalirani na vašem računalu."
 
-#: src/pkg_grouppolicy.cc:470
+#: src/pkg_grouppolicy.cc:471
 msgid ""
 "Not Installed Packages\n"
 " These packages are not installed on your computer."
@@ -6309,7 +6299,7 @@ msgstr ""
 "Neinstalirani paketi\n"
 " Ovi paketi nisu instalirani na vašem računalu."
 
-#: src/pkg_grouppolicy.cc:471
+#: src/pkg_grouppolicy.cc:472
 msgid ""
 "Obsolete and Locally Created Packages\n"
 " These packages are currently installed on your computer, but they are not "
@@ -6321,7 +6311,7 @@ msgstr ""
 "apt izvorima.  Možda su zastarjeli i uklonjeni iz arhive, ili ste napravili "
 "vlastitu inačicu."
 
-#: src/pkg_grouppolicy.cc:472
+#: src/pkg_grouppolicy.cc:473
 msgid ""
 "Virtual Packages\n"
 " These packages do not exist; they are names other packages use to require "
@@ -6331,7 +6321,7 @@ msgstr ""
 " Ovi paketi ne postoje; to su imena koja koriste ostali paketi za "
 "zahtijevanje ili pružanje određene funkcionalnosti."
 
-#: src/pkg_grouppolicy.cc:627
+#: src/pkg_grouppolicy.cc:653
 msgid ""
 "Packages which are recommended by other packages\n"
 " These packages are not strictly required, but they may be necessary to "
@@ -6343,7 +6333,7 @@ msgstr ""
 "potpune funkcionalnosti u drugim programima koje instalirate ili "
 "nadograđujete."
 
-#: src/pkg_grouppolicy.cc:648
+#: src/pkg_grouppolicy.cc:678
 msgid ""
 "Packages which are suggested by other packages\n"
 " These packages are not required in order to make your system function "
@@ -6354,40 +6344,40 @@ msgstr ""
 " Ovi paketi nisu potrebni za pravilan rad vašeg sustava, no mogu pružiti "
 "nadopunjenu funkcionalnost nekih programa koje instalirate."
 
-#: src/pkg_grouppolicy.cc:805
+#: src/pkg_grouppolicy.cc:876
 msgid "unknown"
 msgstr "nepoznato"
 
-#: src/pkg_grouppolicy.cc:816
+#: src/pkg_grouppolicy.cc:887
 #, c-format
 msgid "Priority %s"
 msgstr "Prioritet %s"
 
-#: src/pkg_grouppolicy.cc:899
+#: src/pkg_grouppolicy.cc:970
 msgid "End-user"
 msgstr "Krajnji-korisnik"
 
-#: src/pkg_grouppolicy.cc:900
+#: src/pkg_grouppolicy.cc:971
 msgid "Servers"
 msgstr "Poslužitelji"
 
-#: src/pkg_grouppolicy.cc:901
+#: src/pkg_grouppolicy.cc:972
 msgid "Development"
 msgstr "Razvoj"
 
-#: src/pkg_grouppolicy.cc:902
+#: src/pkg_grouppolicy.cc:973
 msgid "Localization"
 msgstr "Lokalizacija"
 
-#: src/pkg_grouppolicy.cc:903
+#: src/pkg_grouppolicy.cc:974
 msgid "Hardware Support"
 msgstr "Hardverska podrška"
 
-#: src/pkg_grouppolicy.cc:905
+#: src/pkg_grouppolicy.cc:976
 msgid "Unrecognized tasks"
 msgstr "Neprepoznati zadaci"
 
-#: src/pkg_grouppolicy.cc:966
+#: src/pkg_grouppolicy.cc:1037
 msgid ""
 "\n"
 " Tasks are groups of packages which provide an easy way to select a "
@@ -6397,26 +6387,26 @@ msgstr ""
 " Zadaci su grupe paketa koje omogućuju jednostavan način biranja prethodno "
 "definiranih skupova paketa za pojedinu svrhu."
 
-#: src/pkg_grouppolicy.cc:1095
+#: src/pkg_grouppolicy.cc:1166
 #, c-format
 msgid "Bad number in format string: %ls"
 msgstr "Krivi broj u nizu oblika: %ls"
 
-#: src/pkg_grouppolicy.cc:1104
+#: src/pkg_grouppolicy.cc:1175
 #, c-format
 msgid "Match indices must be 1 or greater, not \"%s\""
 msgstr "Indeksi podudaranja moraju biti 1 ili veći, ne \"%s\""
 
-#: src/pkg_grouppolicy.cc:1122
+#: src/pkg_grouppolicy.cc:1193
 #, c-format
 msgid "Match index %ls is too large; available groups are (%s)"
 msgstr "Indeks podudaranja %ls je prevelik; dostupne grupe su (%s)"
 
-#: src/pkg_grouppolicy.cc:1361
+#: src/pkg_grouppolicy.cc:1432
 msgid "TAGLESS PACKAGES"
 msgstr "PAKETI BEZ OZNAKE"
 
-#: src/pkg_grouppolicy.cc:1362
+#: src/pkg_grouppolicy.cc:1433
 msgid ""
 "\n"
 " These packages have not yet been classified in debtags, or the debtags "
@@ -6427,21 +6417,21 @@ msgstr ""
 "podataka nije prisutna (instalacija paketa debtags može popraviti ovaj "
 "problem)."
 
-#: src/pkg_info_screen.cc:140
+#: src/pkg_info_screen.cc:152
 msgid "Source Package: "
 msgstr "Izvorni paket: "
 
-#: src/pkg_info_screen.cc:149
+#: src/pkg_info_screen.cc:162
 #, c-format
 msgid "Package names provided by %s"
 msgstr "Imena paketa koja omogućuje %s"
 
-#: src/pkg_info_screen.cc:162
+#: src/pkg_info_screen.cc:175
 #, c-format
 msgid "Packages which depend on %s"
 msgstr "Paketi koji ovise o %s"
 
-#: src/pkg_info_screen.cc:168
+#: src/pkg_info_screen.cc:181
 #, c-format
 msgid "Versions of %s"
 msgstr "Inačice %s"
@@ -6963,23 +6953,23 @@ msgstr ""
 #. TRANSLATORS: This string is a confirmation message, which users
 #. (especially CJK users) should be able to input without input
 #. methods.  Please include nothing but ASCII characters.
-#: src/ui.cc:208
+#: src/ui.cc:209
 msgid "Yes, I am aware this is a very bad idea"
 msgstr "Da, siguran sam da je ovo vrlo loša ideja"
 
-#: src/ui.cc:235
+#: src/ui.cc:236
 msgid "Er, there aren't any errors, this shouldn't have happened.."
 msgstr "Hm, nema nikakvih grešaka, ovo se nije trebalo dogoditi.."
 
-#: src/ui.cc:241
+#: src/ui.cc:242
 msgid "E:"
 msgstr "G:"
 
-#: src/ui.cc:243
+#: src/ui.cc:244
 msgid "W:"
 msgstr "U:"
 
-#: src/ui.cc:339
+#: src/ui.cc:340
 msgid ""
 "WARNING: the package cache is opened in read-only mode!  This change and all "
 "subsequent changes will not be saved unless you stop all other running apt-"
@@ -6989,116 +6979,154 @@ msgstr ""
 "nakon nje neće biti spremljene osim ako zaustavite sve ostale programe "
 "bazirane na aptu i odaberete \"Postani root\" iz izbornika Radnje."
 
-#: src/ui.cc:345
+#: src/ui.cc:346
 msgid "Never display this message again."
 msgstr "Ne prikazuj ponovo ovu poruku."
 
-#: src/ui.cc:391
+#: src/ui.cc:392
 msgid ""
 "You may not modify the state of any package while a download is underway."
 msgstr "Ne možete mijenjati stanje paketa dok je preuzimanje u tijeku."
 
-#: src/ui.cc:422
+#: src/ui.cc:423
 msgid "You already are root!"
 msgstr "Već jeste root!"
 
-#: src/ui.cc:437
+#: src/ui.cc:438
 msgid "Invalid Get-Root-Command; it should start with su: or sudo:"
 msgstr "Neispravna Postani-Root-Naredba; mora početi sa su: ili sudo:"
 
-#: src/ui.cc:444
+#: src/ui.cc:445
 #, c-format
 msgid "Invalid Get-Root-Command; it should start with su: or sudo:, not %s:"
 msgstr "Neispravna Postani-Root-Naredba; mora početi sa su: ili sudo:, ne %s:"
 
-#: src/ui.cc:473
+#: src/ui.cc:474
 #, c-format
 msgid "Unable to fork: %s"
 msgstr "Ne mogu razdvojiti: %s"
 
-#: src/ui.cc:577
+#: src/ui.cc:578
 msgid ""
 "Subprocess exited with an error -- did you type your password correctly?"
 msgstr "Potproces je izašao s greškom -- jeste li točno upisali lozinku?"
 
-#: src/ui.cc:616
+#: src/ui.cc:617
 msgid "Loading cache"
 msgstr "Učitavam spremnik"
 
-#: src/ui.cc:658
+#: src/ui.cc:659
 msgid "Really quit Aptitude?"
 msgstr "Želite li zaista zatvoriti Aptitude?"
 
-#: src/ui.cc:712 src/ui.cc:2549
+#: src/ui.cc:713 src/ui.cc:2570
 msgid "Change the behavior of aptitude"
 msgstr "Promijeni ponašanje programa aptitude"
 
-#: src/ui.cc:748
+#: src/ui.cc:749
 msgid "Really discard your personal settings and reload the defaults?"
 msgstr "Želite li zaista odbaciti vlastite postavke i učitati zadane?"
 
-#: src/ui.cc:793
+#: src/ui.cc:794
 #, c-format
 msgid "Using default value for %s string: '%s'"
 msgstr ""
 
-#: src/ui.cc:884 src/ui.cc:931 src/ui.cc:959
+#: src/ui.cc:885
 msgid "View available packages and choose actions to perform"
 msgstr "Pregledaj dostupne pakete i odaberi radnje za izvršavanje"
 
-#: src/ui.cc:913
+#: src/ui.cc:914
 msgid "Recommended Packages"
 msgstr "Preporučeni paketi"
 
-#: src/ui.cc:914
+#: src/ui.cc:915
 msgid "View packages that it is recommended that you install"
 msgstr "Pregledaj pakete čija se instalacija preporučuje"
 
-#: src/ui.cc:915
+#: src/ui.cc:916
 msgid "Recommendations"
 msgstr "Preporuke"
 
-#: src/ui.cc:981
+#: src/ui.cc:931 src/ui.cc:933
+#, fuzzy
+#| msgid "Packages: "
+msgid "Packages (flat)"
+msgstr "Paketi: "
+
+#: src/ui.cc:932
+#, fuzzy
+#| msgid "View available packages and choose actions to perform"
+msgid ""
+"View available packages (flat, no grouping) and choose actions to perform"
+msgstr "Pregledaj dostupne pakete i odaberi radnje za izvršavanje"
+
+#: src/ui.cc:959 src/ui.cc:961
+#, fuzzy
+#| msgid "Packages: "
+msgid "Packages (debtags)"
+msgstr "Paketi: "
+
+#: src/ui.cc:960
+#, fuzzy
+#| msgid "View available packages and choose actions to perform"
+msgid ""
+"View available packages (debtags grouping) and choose actions to perform"
+msgstr "Pregledaj dostupne pakete i odaberi radnje za izvršavanje"
+
+#: src/ui.cc:979 src/ui.cc:981
+#, fuzzy
+#| msgid "Packages: "
+msgid "Packages (source)"
+msgstr "Paketi: "
+
+#: src/ui.cc:980
+#, fuzzy
+#| msgid "View available packages and choose actions to perform"
+msgid "View available packages (source grouping) and choose actions to perform"
+msgstr "Pregledaj dostupne pakete i odaberi radnje za izvršavanje"
+
+#: src/ui.cc:1002
 #, c-format
 msgid "Information about %s"
 msgstr "Informacije o %s"
 
-#: src/ui.cc:983
+#: src/ui.cc:1004
 #, c-format
 msgid "%s info"
 msgstr "%s informacije"
 
-#: src/ui.cc:1004
+#: src/ui.cc:1025
 #, c-format
 msgid "Packages depending on %s"
 msgstr "Paketi ovisni o %s"
 
-#: src/ui.cc:1005
+#: src/ui.cc:1026
 #, c-format
 msgid "Dependencies of %s"
 msgstr "Ovisnosti %s"
 
-#: src/ui.cc:1008
+#: src/ui.cc:1029
 #, c-format
 msgid "%s reverse deps"
 msgstr "%s obrnute ovisnosti"
 
-#: src/ui.cc:1009
+#: src/ui.cc:1030
 #, c-format
 msgid "%s deps"
 msgstr "%s ovisnosti"
 
-#: src/ui.cc:1027
+#: src/ui.cc:1048
 #, c-format
 msgid "Available versions of %s"
 msgstr "Dostupne inačice %s"
 
-#: src/ui.cc:1029
+#: src/ui.cc:1050
 #, c-format
 msgid "%s versions"
 msgstr "%s inačice"
 
-#: src/ui.cc:1035
+#: src/ui.cc:1056
 msgid ""
 "Aptitude %s%n%nCopyright 2000-2008 Daniel Burrows.%n%naptitude comes with "
 "%BABSOLUTELY NO WARRANTY%b; for details see 'license' in the Help menu.  "
@@ -7110,88 +7138,88 @@ msgstr ""
 "je slobodan softver i smijete ga distribuirati pod određenim uvjetima; "
 "pogledajte 'licenca' za detalje."
 
-#: src/ui.cc:1085 src/ui.cc:1087
+#: src/ui.cc:1106 src/ui.cc:1108
 msgid "License"
 msgstr "Licenca"
 
-#: src/ui.cc:1086 src/ui.cc:2636
+#: src/ui.cc:1107 src/ui.cc:2662
 msgid "View the terms under which you may copy and distribute aptitude"
 msgstr "Pogledajte uvjete pod kojima smijete kopirati i distribuirati aptitude"
 
 #. TRANSLATORS: You can translate help.txt and set the filename here.
-#: src/ui.cc:1101
+#: src/ui.cc:1122
 msgid "Localized file|help.txt"
 msgstr "help.txt"
 
-#: src/ui.cc:1103
+#: src/ui.cc:1124
 msgid "Encoding of help.txt|UTF-8"
 msgstr "Kodiranje help.txt|UTF-8"
 
-#: src/ui.cc:1114
+#: src/ui.cc:1135
 msgid "Online Help"
 msgstr "Pomoć na webu"
 
-#: src/ui.cc:1115
+#: src/ui.cc:1136
 msgid "View a brief introduction to aptitude"
 msgstr "Pogledajte kratak uvod u aptitude"
 
-#: src/ui.cc:1116 src/ui.cc:2788
+#: src/ui.cc:1137 src/ui.cc:2814
 msgid "Help"
 msgstr "Pomoć"
 
 #. TRANSLATORS: You can translate README and set the filename here.
-#: src/ui.cc:1125
+#: src/ui.cc:1146
 msgid "Localized file|README"
 msgstr "README"
 
-#: src/ui.cc:1126
+#: src/ui.cc:1147
 msgid "Encoding of README|ISO_8859-1"
 msgstr "Kodiranje README|ISO_8859-1"
 
-#: src/ui.cc:1137
+#: src/ui.cc:1158
 msgid "User's Manual"
 msgstr "Korisnički priručnik"
 
-#: src/ui.cc:1138
+#: src/ui.cc:1159
 msgid "Read the full user's manual of aptitude"
 msgstr "Pročitajte potpuni aptitude korisnički priručnik"
 
-#: src/ui.cc:1139
+#: src/ui.cc:1160
 msgid "Manual"
 msgstr "Priručnik"
 
-#: src/ui.cc:1146 src/ui.cc:1148
+#: src/ui.cc:1167 src/ui.cc:1169
 msgid "FAQ"
 msgstr "ČPP"
 
-#: src/ui.cc:1147 src/ui.cc:2628
+#: src/ui.cc:1168 src/ui.cc:2654
 msgid "View a list of frequently asked questions"
 msgstr "Pogledajte popis često postavljanih pitanja"
 
-#: src/ui.cc:1156 src/ui.cc:1158
+#: src/ui.cc:1177 src/ui.cc:1179
 msgid "News"
 msgstr "Novosti"
 
-#: src/ui.cc:1157
+#: src/ui.cc:1178
 #, c-format
 msgid "View the important changes made in each version of %s"
 msgstr "Pogledajte važne promjene napravljene u svakoj inačici %s"
 
-#: src/ui.cc:1164
+#: src/ui.cc:1185
 #, c-format
 msgid ""
 "Unable to remove the old temporary directory; you should remove %s by hand."
 msgstr ""
 "Ne mogu ukloniti stari privremeni direktorij; probajte ručno ukloniti %s."
 
-#: src/ui.cc:1169
+#: src/ui.cc:1190
 #, c-format
 msgid ""
 "Will not remove %s; you should examine the files in it and remove them by "
 "hand."
 msgstr "Ne mogu ukloniti %s; pregledajte datoteke u njemu i ručno ga uklonite."
 
-#: src/ui.cc:1195
+#: src/ui.cc:1216
 #, c-format
 msgid ""
 "It appears that a previous version of aptitude left files behind in %s.  "
@@ -7204,15 +7232,15 @@ msgstr ""
 "%nŽelite li ukloniti ovaj direktorij i sav njegov sadržaj?  Ako odaberete "
 "\"Ne\", više nećete vidjeti ovu poruku."
 
-#: src/ui.cc:1267
+#: src/ui.cc:1288
 msgid "View the progress of the package download"
 msgstr "Pregledaj napredak preuzimanja paketa"
 
-#: src/ui.cc:1268
+#: src/ui.cc:1289
 msgid "Package Download"
 msgstr "Preuzimanje paketa"
 
-#: src/ui.cc:1315
+#: src/ui.cc:1336
 msgid ""
 "%BWARNING%b: untrusted versions of the following packages will be installed!"
 "%n%nUntrusted packages could %Bcompromise your system's security%b.  You "
@@ -7224,35 +7252,35 @@ msgstr ""
 "Trebali biste nastaviti s instalacijom samo ako ste sigurni da to zaista "
 "želite.%n%n"
 
-#: src/ui.cc:1321
+#: src/ui.cc:1342
 msgid "  %S*%N %s [version %s]%n"
 msgstr "  %S*%N %s [inačica %s]%n"
 
-#: src/ui.cc:1327
+#: src/ui.cc:1348
 msgid "Really Continue"
 msgstr "Stvarno nastavi"
 
-#: src/ui.cc:1329
+#: src/ui.cc:1350
 msgid "Abort Installation"
 msgstr "Prekini instalaciju"
 
-#: src/ui.cc:1393
+#: src/ui.cc:1414
 msgid "Preview of package installation"
 msgstr "Pregled instalacije paketa"
 
-#: src/ui.cc:1394
+#: src/ui.cc:1415
 msgid "View and/or adjust the actions that will be performed"
 msgstr "Pregledaj ili prilagodi radnje koje će se izvršiti"
 
-#: src/ui.cc:1456
+#: src/ui.cc:1477
 msgid "Some packages were broken and have been fixed:"
 msgstr "Neki paketi su bili slomljeni i popravljeni su:"
 
-#: src/ui.cc:1464
+#: src/ui.cc:1485
 msgid "No solution to these dependency problems exists!"
 msgstr "Ne postoji rješenje za ove probleme ovisnosti!"
 
-#: src/ui.cc:1470
+#: src/ui.cc:1491
 #, c-format
 msgid ""
 "Ran out of time while trying to resolve dependencies (press \"%s\" to try "
@@ -7261,7 +7289,7 @@ msgstr ""
 "Isteklo je vrijeme pri pokušaju rješavanja ovisnosti (pritisnite \"%s\" da "
 "se više potrudim)"
 
-#: src/ui.cc:1516
+#: src/ui.cc:1537
 msgid ""
 "Installing/removing packages requires administrative privileges, which you "
 "currently do not have.  Would you like to change to the root account?"
@@ -7269,19 +7297,19 @@ msgstr ""
 "Instalacija/uklanjanje paketa zahtijeva administrativne ovlasti, koje "
 "trenutno nemate.  Želite li promijeniti u root korisnički račun?"
 
-#: src/ui.cc:1519 src/ui.cc:1758 src/ui.cc:1819 src/ui.cc:1914
+#: src/ui.cc:1540 src/ui.cc:1779 src/ui.cc:1840 src/ui.cc:1935
 msgid "Become root"
 msgstr "Postani root"
 
-#: src/ui.cc:1521 src/ui.cc:1760 src/ui.cc:1821 src/ui.cc:1916
+#: src/ui.cc:1542 src/ui.cc:1781 src/ui.cc:1842 src/ui.cc:1937
 msgid "Don't become root"
 msgstr "Nemoj postati root"
 
-#: src/ui.cc:1642
+#: src/ui.cc:1663
 msgid "No packages are scheduled to be installed, removed, or upgraded."
 msgstr "Nema paketa određenih za instalaciju, uklanjanje ili nadogradnju."
 
-#: src/ui.cc:1648
+#: src/ui.cc:1669
 msgid ""
 "No packages will be installed, removed or upgraded.  Some packages could be "
 "upgraded, but you have not chosen to upgrade them.  Type \"U\" to prepare an "
@@ -7291,19 +7319,19 @@ msgstr ""
 "mogu nadograditi, ali ste odlučili ne učiniti to.  Pritisnite \"U\" za "
 "pripremu nadogradnje."
 
-#: src/ui.cc:1728
+#: src/ui.cc:1749
 msgid "Updating package lists"
 msgstr "Ažuriram popis paketa"
 
-#: src/ui.cc:1729
+#: src/ui.cc:1750
 msgid "View the progress of the package list update"
 msgstr "Pogledaj napredak ažuriranja popisa paketa"
 
-#: src/ui.cc:1730
+#: src/ui.cc:1751
 msgid "List Update"
 msgstr "Ažuriranje popisa"
 
-#: src/ui.cc:1755
+#: src/ui.cc:1776
 msgid ""
 "Updating the package lists requires administrative privileges, which you "
 "currently do not have.  Would you like to change to the root account?"
@@ -7311,23 +7339,23 @@ msgstr ""
 "Ažuriranje popisa paketa zahtijeva administrativne ovlasti, koje trenutno "
 "nemate.  Želite li promijeniti u root korisnički račun?"
 
-#: src/ui.cc:1770 src/ui.cc:2384
+#: src/ui.cc:1791 src/ui.cc:2405
 msgid "Waste time trying to find mines"
 msgstr "Ubijte vrijeme tražeći mine"
 
-#: src/ui.cc:1777 src/ui.cc:1865
+#: src/ui.cc:1798 src/ui.cc:1886
 msgid "Cleaning while a download is in progress is not allowed"
 msgstr "Čišćenje nije dozvoljeno dok je preuzimanje u tijeku"
 
-#: src/ui.cc:1792
+#: src/ui.cc:1813
 msgid "Deleting downloaded files"
 msgstr "Brišem preuzete datoteke"
 
-#: src/ui.cc:1806
+#: src/ui.cc:1827
 msgid "Downloaded package files have been deleted"
 msgstr "Preuzete datoteke paketa su izbrisane"
 
-#: src/ui.cc:1816
+#: src/ui.cc:1837
 msgid ""
 "Cleaning the package cache requires administrative privileges, which you "
 "currently do not have.  Would you like to change to the root account?"
@@ -7335,11 +7363,11 @@ msgstr ""
 "Čišćenje spremnika paketa zahtijeva administrativne ovlasti, koje trenutno "
 "nemate.  Želite li promijeniti u root korisnički račun?"
 
-#: src/ui.cc:1862
+#: src/ui.cc:1883
 msgid "The apt cache file is not available; cannot auto-clean."
 msgstr "Datoteka apt spremnika nije dostupna; ne mogu izvršiti auto-clean."
 
-#: src/ui.cc:1900
+#: src/ui.cc:1921
 #, c-format
 msgid ""
 "Obsolete downloaded package files have been deleted, freeing %sB of disk "
@@ -7348,7 +7376,7 @@ msgstr ""
 "Zastarjele preuzete datoteke paketa su izbrisane, što je oslobodilo %sB "
 "prostora na disku."
 
-#: src/ui.cc:1911
+#: src/ui.cc:1932
 msgid ""
 "Deleting obsolete files requires administrative privileges, which you "
 "currently do not have.  Would you like to change to the root account?"
@@ -7356,142 +7384,142 @@ msgstr ""
 "Brisanje zastarjelih datoteka zahtijeva administrativne ovlasti, koje "
 "trenutno nemate.  Želite li promijeniti u root korisnički račun?"
 
-#: src/ui.cc:2013
+#: src/ui.cc:2034
 msgid "No more solutions."
 msgstr "Nema više rješenja."
 
-#: src/ui.cc:2221
+#: src/ui.cc:2242
 msgid "Unable to find a solution to apply."
 msgstr "Ne mogu naći rješenje za primjenu."
 
-#: src/ui.cc:2227
+#: src/ui.cc:2248
 msgid "Ran out of time while trying to find a solution."
 msgstr "Isteklo je vrijeme pri traženju rješenja."
 
-#: src/ui.cc:2287 src/ui.cc:2289
+#: src/ui.cc:2308 src/ui.cc:2310
 msgid "Resolve Dependencies"
 msgstr "Riješi ovisnosti"
 
-#: src/ui.cc:2288
+#: src/ui.cc:2309
 msgid "Search for solutions to unsatisfied dependencies"
 msgstr "Traži rješenja nezadovoljenih ovisnosti"
 
-#: src/ui.cc:2300
+#: src/ui.cc:2321
 #, c-format
 msgid "Unable to open %ls"
 msgstr "Ne mogu otvoriti %ls"
 
-#: src/ui.cc:2306
+#: src/ui.cc:2327
 msgid "Error while dumping resolver state"
 msgstr "Greška ispisa stanja algoritma za rješavanje"
 
-#: src/ui.cc:2346
+#: src/ui.cc:2367
 msgid "^Install/remove packages"
 msgstr "^Instaliraj/ukloni pakete"
 
-#: src/ui.cc:2349
+#: src/ui.cc:2370
 msgid "^Update package list"
 msgstr "Až^uriraj popis paketa"
 
-#: src/ui.cc:2354
+#: src/ui.cc:2375
 msgid "Mark Up^gradable"
 msgstr "Označi za nado^gradnju"
 
-#: src/ui.cc:2359
+#: src/ui.cc:2380
 msgid "^Forget new packages"
 msgstr "^Zaboravi nove pakete"
 
-#: src/ui.cc:2363
+#: src/ui.cc:2384
 msgid "Canc^el pending actions"
 msgstr "Otkaži radnj^e koje se izvršavaju"
 
-#: src/ui.cc:2367
+#: src/ui.cc:2388
 msgid "^Clean package cache"
 msgstr "Očisti spremni^k paketa"
 
-#: src/ui.cc:2371
+#: src/ui.cc:2392
 msgid "Clean ^obsolete files"
 msgstr "^Očisti zastarjele pakete"
 
-#: src/ui.cc:2378
+#: src/ui.cc:2399
 msgid "^Reload package cache"
 msgstr "Ponovo učitaj sp^remnik paketa"
 
-#: src/ui.cc:2383
+#: src/ui.cc:2404
 msgid "^Play Minesweeper"
 msgstr "Igra^j Čistača mina"
 
-#: src/ui.cc:2388
+#: src/ui.cc:2409
 msgid "^Become root"
 msgstr "Pos^tani root"
 
-#: src/ui.cc:2391
+#: src/ui.cc:2412
 msgid "^Quit"
 msgstr "^Izađi"
 
-#: src/ui.cc:2398 src/ui.cc:2782
+#: src/ui.cc:2419 src/ui.cc:2808
 msgid "Undo"
 msgstr "Vrati"
 
-#: src/ui.cc:2407
+#: src/ui.cc:2428
 msgid "^Install"
 msgstr "^Instaliraj"
 
-#: src/ui.cc:2408
+#: src/ui.cc:2429
 msgid "Flag the currently selected package for installation or upgrade"
 msgstr "Označi trenutno odabran paket za instalaciju ili nadogradnju"
 
-#: src/ui.cc:2411
+#: src/ui.cc:2432
 #, fuzzy
 msgid "R^einstall"
 msgstr "Ponovo instaliraj"
 
-#: src/ui.cc:2412
+#: src/ui.cc:2433
 #, fuzzy
 msgid "Flag the currently selected package for reinstallation"
 msgstr "Označi trenutno odabran paket za instalaciju ili nadogradnju"
 
-#: src/ui.cc:2415
+#: src/ui.cc:2436
 msgid "^Remove"
 msgstr "^Ukloni"
 
-#: src/ui.cc:2416
+#: src/ui.cc:2437
 msgid "Flag the currently selected package for removal"
 msgstr "Označi trenutno odabran paket za uklanjanje"
 
-#: src/ui.cc:2419
+#: src/ui.cc:2440
 msgid "^Purge"
 msgstr "^Potpuno ukloni"
 
-#: src/ui.cc:2420
+#: src/ui.cc:2441
 msgid ""
 "Flag the currently selected package and its configuration files for removal"
 msgstr "Označi trenutno odabran paket i konfiguracijske datoteke za uklanjanje"
 
-#: src/ui.cc:2423
+#: src/ui.cc:2444
 msgid "^Keep"
 msgstr "^Ostavi"
 
-#: src/ui.cc:2424
+#: src/ui.cc:2445
 msgid "Cancel any action on the selected package"
 msgstr "Otkaži sve radnje na odabranom paketu"
 
-#: src/ui.cc:2427
+#: src/ui.cc:2448
 msgid "^Hold"
 msgstr "^Zadrži"
 
-#: src/ui.cc:2428
+#: src/ui.cc:2449
 msgid ""
 "Cancel any action on the selected package, and protect it from future "
 "upgrades"
 msgstr ""
 "Otkaži sve radnje na odabranom paketu i zaštiti ga od budućih nadogradnji"
 
-#: src/ui.cc:2431
+#: src/ui.cc:2452
 msgid "Mark ^Auto"
 msgstr "Označi ^automatski"
 
-#: src/ui.cc:2432
+#: src/ui.cc:2453
 msgid ""
 "Mark the selected package as having been automatically installed; it will "
 "automatically be removed if no other packages depend on it"
@@ -7499,11 +7527,11 @@ msgstr ""
 "Označi odabrani paket kao da je automatski instaliran; bit će automatski "
 "uklonjen ako nijedan paket ne ovisi o njemu"
 
-#: src/ui.cc:2435
+#: src/ui.cc:2456
 msgid "Mark ^Manual"
 msgstr "Označi ^ručno"
 
-#: src/ui.cc:2436
+#: src/ui.cc:2457
 msgid ""
 "Mark the selected package as having been manually installed; it will not be "
 "removed unless you manually remove it"
@@ -7511,11 +7539,11 @@ msgstr ""
 "Označi odabrani paket kao da je ručno instaliran; neće biti uklonjen osim "
 "ako ga ručno ne uklonite"
 
-#: src/ui.cc:2439
+#: src/ui.cc:2460
 msgid "^Forbid Version"
 msgstr "^Zabrani inačicu"
 
-#: src/ui.cc:2440
+#: src/ui.cc:2461
 msgid ""
 "Forbid the candidate version of the selected package from being installed; "
 "newer versions of the package will be installed as usual"
@@ -7523,19 +7551,19 @@ msgstr ""
 "Zabrani instalaciju inačice kandidata odabranog paketa; novije inačice "
 "paketa će biti instalirene kao i obično"
 
-#: src/ui.cc:2444
+#: src/ui.cc:2465
 msgid "I^nformation"
 msgstr "I^nformacije"
 
-#: src/ui.cc:2445
+#: src/ui.cc:2466
 msgid "Display more information about the selected package"
 msgstr "Prikaži više informacija o odabranom paketu"
 
-#: src/ui.cc:2448
+#: src/ui.cc:2469
 msgid "C^ycle Package Information"
 msgstr "^Kruži kroz informacije o paketu"
 
-#: src/ui.cc:2449
+#: src/ui.cc:2470
 msgid ""
 "Cycle through the modes of the package information area: it can show the "
 "package's long description, a summary of its dependency status, or an "
@@ -7545,93 +7573,93 @@ msgstr ""
 "dugačak opis paketa, sažetak stanja njegovih ovisnosti ili analizu zašto je "
 "paket potreban."
 
-#: src/ui.cc:2452
+#: src/ui.cc:2473
 msgid "^Changelog"
 msgstr "^Dnevnik promjena"
 
-#: src/ui.cc:2453
+#: src/ui.cc:2474
 msgid "Display the Debian changelog of the selected package"
 msgstr "Prikaži Debian dnevnik promjena odabranog paketa"
 
-#: src/ui.cc:2460
+#: src/ui.cc:2481
 msgid "^Examine Solution"
 msgstr "Pr^egledaj rješenja"
 
-#: src/ui.cc:2461
+#: src/ui.cc:2482
 msgid "Examine the currently selected solution to the dependency problems."
 msgstr "Pregledaj trenutno odabrano rješenje problema ovisnosti."
 
-#: src/ui.cc:2464
+#: src/ui.cc:2485
 msgid "Apply ^Solution"
 msgstr "Primijeni ^Rješenje"
 
-#: src/ui.cc:2465
+#: src/ui.cc:2486
 msgid "Perform the actions contained in the currently selected solution."
 msgstr "Izvrši radnje sadržane u trenutno odabranom rješenju."
 
-#: src/ui.cc:2468
+#: src/ui.cc:2489
 msgid "^Next Solution"
 msgstr "Sljedeće rješe^nje"
 
-#: src/ui.cc:2469
+#: src/ui.cc:2490
 msgid "Select the next solution to the dependency problems."
 msgstr "Odaberi sljedeće rješenje problema ovisnosti."
 
-#: src/ui.cc:2472
+#: src/ui.cc:2493
 msgid "^Previous Solution"
 msgstr "^Prethodno rješenje"
 
-#: src/ui.cc:2473
+#: src/ui.cc:2494
 msgid "Select the previous solution to the dependency problems."
 msgstr "Odaberi prethodno rješenje problema ovisnosti."
 
-#: src/ui.cc:2476
+#: src/ui.cc:2497
 msgid "^First Solution"
 msgstr "Prvo rješ^enje"
 
-#: src/ui.cc:2477
+#: src/ui.cc:2498
 msgid "Select the first solution to the dependency problems."
 msgstr "Odaberi prvo rješenje problema ovisnosti."
 
-#: src/ui.cc:2480
+#: src/ui.cc:2501
 msgid "^Last Solution"
 msgstr "Pos^ljednje rješenje"
 
-#: src/ui.cc:2481
+#: src/ui.cc:2502
 msgid ""
 "Select the last solution to the dependency problems that has been generated "
 "so far."
 msgstr "Odaberi posljednje rješenje problema ovisnosti stvoreno do sad."
 
-#: src/ui.cc:2487
+#: src/ui.cc:2508
 msgid "Toggle ^Rejected"
 msgstr "P^romijeni odbacivanje"
 
-#: src/ui.cc:2488
+#: src/ui.cc:2509
 msgid "Toggle whether the currently selected action is rejected."
 msgstr "Promijeni oznaku odbacivanja odabrane radnje."
 
-#: src/ui.cc:2492
+#: src/ui.cc:2513
 msgid "Toggle ^Approved"
 msgstr "Promijeni prihv^aćeno"
 
-#: src/ui.cc:2493
+#: src/ui.cc:2514
 msgid "Toggle whether the currently selected action is approved."
 msgstr "Promijeni oznaku prihvaćanja odabrane radnje."
 
-#: src/ui.cc:2497
+#: src/ui.cc:2518
 msgid "^View Target"
 msgstr "Pregledaj me^tu"
 
-#: src/ui.cc:2498
+#: src/ui.cc:2519
 msgid "View the package which will be affected by the selected action"
 msgstr "Pregledaj pakete na koje će utjecati odabrane radnje"
 
-#: src/ui.cc:2504
+#: src/ui.cc:2525
 msgid "Reject Breaking ^Holds"
 msgstr "Odbij lomljenje ^zadržavanja"
 
-#: src/ui.cc:2506
+#: src/ui.cc:2527
 msgid ""
 "Reject all actions that would change the state of held packages or install "
 "forbidden versions"
@@ -7639,135 +7667,135 @@ msgstr ""
 "Odbij sve radnje koje bi promijenile stanje zadržanih paketa ili instalirale "
 "zabranjene inačice"
 
-#: src/ui.cc:2514
+#: src/ui.cc:2535
 msgid "^Find"
 msgstr "^Traži"
 
-#: src/ui.cc:2515
+#: src/ui.cc:2536
 msgid "Search forwards"
 msgstr "Traži prema naprijed"
 
-#: src/ui.cc:2518
+#: src/ui.cc:2539
 msgid "^Find Backwards"
 msgstr "^Traži unatrag"
 
-#: src/ui.cc:2519
+#: src/ui.cc:2540
 msgid "Search backwards"
 msgstr "Traži prema natrag"
 
-#: src/ui.cc:2522
+#: src/ui.cc:2543
 msgid "Find ^Again"
 msgstr "Tr^aži ponovo"
 
-#: src/ui.cc:2523
+#: src/ui.cc:2544
 msgid "Repeat the last search"
 msgstr "Ponovi zadnje traženje"
 
-#: src/ui.cc:2526
+#: src/ui.cc:2547
 msgid "Find Again ^Backwards"
 msgstr "Traži ponovo ^unatrag"
 
-#: src/ui.cc:2527
+#: src/ui.cc:2548
 msgid "Repeat the last search in the opposite direction"
 msgstr "Ponovi zadnje traženje u suprotnom smjeru"
 
-#: src/ui.cc:2531
+#: src/ui.cc:2552
 msgid "^Limit Display"
 msgstr "Ograniči ^prikaz"
 
-#: src/ui.cc:2532
+#: src/ui.cc:2553
 msgid "Apply a filter to the package list"
 msgstr "Primijeni filtar na popis paketa"
 
-#: src/ui.cc:2535
+#: src/ui.cc:2556
 msgid "^Un-Limit Display"
 msgstr "^Ukloni granice prikaza"
 
-#: src/ui.cc:2536
+#: src/ui.cc:2557
 msgid "Remove the filter from the package list"
 msgstr "Ukloni filtar s popisa paketa"
 
-#: src/ui.cc:2540
+#: src/ui.cc:2561
 msgid "Find ^Broken"
 msgstr "Nađi ^slomljene"
 
-#: src/ui.cc:2541
+#: src/ui.cc:2562
 msgid "Find the next package with unsatisfied dependencies"
 msgstr "Nađi sljedeći paket s nezadovoljenim ovisnostima"
 
-#: src/ui.cc:2548
+#: src/ui.cc:2569
 msgid "^Preferences"
 msgstr "O^pcije"
 
-#: src/ui.cc:2553
+#: src/ui.cc:2574
 msgid "^UI options"
 msgstr "Opcije s^učelja"
 
-#: src/ui.cc:2554
+#: src/ui.cc:2575
 msgid "Change the settings which affect the user interface"
 msgstr "Mijenja postavke koje utječu na korisničko sučelje"
 
-#: src/ui.cc:2557
+#: src/ui.cc:2578
 msgid "^Dependency handling"
 msgstr "Rukovanje ovisnos^tima"
 
-#: src/ui.cc:2558
+#: src/ui.cc:2579
 msgid "Change the settings which affect how package dependencies are handled"
 msgstr "Mijenja postavke koje utječu na rukovanje ovisnostima"
 
-#: src/ui.cc:2561
+#: src/ui.cc:2582
 msgid "^Miscellaneous"
 msgstr "Raz^no"
 
-#: src/ui.cc:2562
+#: src/ui.cc:2583
 msgid "Change miscellaneous program settings"
 msgstr "Mijenja razne postavke programa"
 
-#: src/ui.cc:2568
+#: src/ui.cc:2589
 msgid "^Revert options"
 msgstr "V^rati opcije"
 
-#: src/ui.cc:2569
+#: src/ui.cc:2590
 msgid "Reset all settings to the system defaults"
 msgstr "Vraća sve postavke na zadane"
 
-#: src/ui.cc:2580
+#: src/ui.cc:2601
 msgid "^Next"
 msgstr "S^ljedeći"
 
-#: src/ui.cc:2581
+#: src/ui.cc:2602
 msgid "View next display"
 msgstr "Pregledaj sljedeći prikaz"
 
-#: src/ui.cc:2584
+#: src/ui.cc:2605
 msgid "^Prev"
 msgstr "^Prethodni"
 
-#: src/ui.cc:2585
+#: src/ui.cc:2606
 msgid "View previous display"
 msgstr "Pregledaj prethodni prikaz"
 
-#: src/ui.cc:2588
+#: src/ui.cc:2609
 msgid "^Close"
 msgstr "^Zatvori"
 
-#: src/ui.cc:2589
+#: src/ui.cc:2610
 msgid "Close this display"
 msgstr "Zatvara ovaj prikaz"
 
-#: src/ui.cc:2594
+#: src/ui.cc:2615
 msgid "New Package ^View"
 msgstr "No^vi pregled paketa"
 
-#: src/ui.cc:2595
+#: src/ui.cc:2616
 msgid "Create a new default package view"
 msgstr "Napravi novi zadani pregled paketa"
 
-#: src/ui.cc:2598
+#: src/ui.cc:2619
 msgid "Audit ^Recommendations"
 msgstr "^Revidiraj preporuke"
 
-#: src/ui.cc:2599
+#: src/ui.cc:2620
 msgid ""
 "View packages which it is recommended that you install, but which are not "
 "currently installed."
@@ -7775,79 +7803,89 @@ msgstr ""
 "Pogledaj pakete čija se instalacija preporučuje, ali nisu trenutno "
 "instalirani."
 
-#: src/ui.cc:2602
+#: src/ui.cc:2623
 msgid "New ^Flat Package List"
 msgstr "Novi ^ravni popis paketa"
 
-#: src/ui.cc:2603
+#: src/ui.cc:2624
 msgid "View all the packages on the system in a single uncategorized list"
 msgstr "Pregledaj sve pakete sustava u jednom popisu bez kategorija"
 
-#: src/ui.cc:2606
+#: src/ui.cc:2627
 msgid "New ^Debtags Browser"
 msgstr "Novi ^Debtags preglednik"
 
-#: src/ui.cc:2608
+#: src/ui.cc:2629
 msgid "Browse packages using Debtags data"
 msgstr "Pregledaj pakete korištenjem Debtags podataka"
 
-#: src/ui.cc:2616
+#: src/ui.cc:2632
+#, fuzzy
+#| msgid "New Package ^View"
+msgid "New ^Source Package View"
+msgstr "No^vi pregled paketa"
+
+#: src/ui.cc:2634
+msgid "Create a new package view, grouped by source package"
+msgstr ""
+
+#: src/ui.cc:2642
 msgid "^About"
 msgstr "^O programu"
 
-#: src/ui.cc:2617
+#: src/ui.cc:2643
 msgid "View information about this program"
 msgstr "Pogledajte informacije o ovom programu"
 
-#: src/ui.cc:2620
+#: src/ui.cc:2646
 msgid "^Help"
 msgstr "^Pomoć"
 
-#: src/ui.cc:2621
+#: src/ui.cc:2647
 msgid "View the on-line help"
 msgstr "Pogledajte pomoć"
 
-#: src/ui.cc:2623
+#: src/ui.cc:2649
 msgid "User's ^Manual"
 msgstr "Korisnički pri^ručnik"
 
-#: src/ui.cc:2624
+#: src/ui.cc:2650
 msgid "View the detailed program manual"
 msgstr "Pogledajte detaljni programski priručnik"
 
-#: src/ui.cc:2627
+#: src/ui.cc:2653
 msgid "^FAQ"
 msgstr "Č^PP"
 
-#: src/ui.cc:2631
+#: src/ui.cc:2657
 msgid "^News"
 msgstr "^Novosti"
 
-#: src/ui.cc:2632
+#: src/ui.cc:2658
 msgid "View the important changes made in each version of "
 msgstr "Pogledajte važne promjene napravljene u svakoj inačici "
 
-#: src/ui.cc:2635
+#: src/ui.cc:2661
 msgid "^License"
 msgstr "^Licenca"
 
-#: src/ui.cc:2781
+#: src/ui.cc:2807
 msgid "Actions"
 msgstr "Radnje"
 
-#: src/ui.cc:2785
+#: src/ui.cc:2811
 msgid "Search"
 msgstr "Traži"
 
-#: src/ui.cc:2786
+#: src/ui.cc:2812
 msgid "Options"
 msgstr "Opcije"
 
-#: src/ui.cc:2787
+#: src/ui.cc:2813
 msgid "Views"
 msgstr "Pogled"
 
-#: src/ui.cc:2853
+#: src/ui.cc:2879
 #, fuzzy, c-format
 msgid ""
 "%ls: Menu  %ls: Help  %ls: Quit  %ls: Update  %ls: Preview/Download/Install/"
@@ -7856,11 +7894,11 @@ msgstr ""
 "%ls: Izbornik  %ls: Pomoć  %ls: Izlaz  %ls: Ažuriraj  %ls: Preuzmi/"
 "Instaliraj/Ukloni Pakete"
 
-#: src/ui.cc:3214
+#: src/ui.cc:3249
 msgid "yes_key"
 msgstr "da_tipka"
 
-#: src/ui.cc:3215
+#: src/ui.cc:3250
 msgid "no_key"
 msgstr "ne_tipka"
 
@@ -7891,6 +7929,89 @@ msgstr "Preuzimam dnevnik promjena %s"
 #: src/view_changelog.cc:415
 msgid "You can only view changelogs of official Debian packages."
 msgstr "Možete pregledati samo dnevnike promjena službenih Debian paketa."
+
+#~ msgid "%d update [%+d]"
+#~ msgid_plural "%d updates [%+d]"
+#~ msgstr[0] "%d ažuriran [%+d]"
+#~ msgstr[1] "%d ažurirana [%+d]"
+#~ msgstr[2] "%d ažuriranih [%+d]"
+
+#~ msgid "%d new [%+d]"
+#~ msgid_plural "%d new [%+d]"
+#~ msgstr[0] "%d novi [%+d]"
+#~ msgstr[1] "%d nova [%+d]"
+#~ msgstr[2] "%d novih [%+d]"
+
+#~ msgid "[DOWNGRADE] %s %s -> %s\n"
+#~ msgstr "[VRAĆANJE] %s %s -> %s\n"
+
+#~ msgid "You die...  --More--"
+#~ msgstr "Umrli ste...  --Više--"
+
+#~ msgid "The spikes were poisoned!  The poison was deadly...  --More--"
+#~ msgstr "Bodlje su otrovane!  Otrov je smrtonosan...  --Više--"
+
+#~ msgid "You land on a set of sharp iron spikes!  --More--"
+#~ msgstr "Sletjeli ste na skup oštrih željeznih bodlji!  --Više--"
+
+#~ msgid "You fall into a pit!  --More--"
+#~ msgstr "Upali ste u jamu!  --Više--"
+
+#~ msgid "KABOOM!  You step on a land mine.  --More--"
+#~ msgstr "KABUM!  Stali ste na minu.  --Više--"
+
+#~ msgid "The dart was poisoned!  The poison was deadly...  --More--"
+#~ msgstr "Strelica je otrovana!  Otrov je smrtonosan... --Više--"
+
+#~ msgid ""
+#~ "A little dart shoots out at you!  You are hit by a little dart!  --More--"
+#~ msgstr ""
+#~ "Gađaju vas malom strelicom!  Pogodila vas je mala strelica!  --Više--"
+
+#~ msgid "You turn to stone... --More--"
+#~ msgstr "Pretvorili ste se u kamen... --Više--"
+
+#~ msgid "Touching the cockatrice corpse was a fatal mistake.  --More--"
+#~ msgstr "Diranje zmajevog trupla je bila fatalna pogreška.  --Više--"
+
+#~ msgid "You feel here a cockatrice corpse.  --More--"
+#~ msgstr "Osjećate se kao zmajevo truplo.  --Više--"
+
+#~ msgid ""
+#~ "Click!  You trigger a rolling boulder trap!  You are hit by a boulder! --"
+#~ "More--"
+#~ msgstr ""
+#~ "Klik!  Pokrenuli ste kotrljajući kamen!  Pogodio vas je kamen! --Više--"
+
+#~ msgid "sleep"
+#~ msgstr "spavanja"
+
+#~ msgid "striking"
+#~ msgstr "udaranja"
+
+#~ msgid "death"
+#~ msgstr "smrti"
+
+#~ msgid "polymorph"
+#~ msgstr "mijenjanja oblika"
+
+#~ msgid "magic missile"
+#~ msgstr "čarobnih strelica"
+
+#~ msgid "secret door detection"
+#~ msgstr "pronalaženja skrivenih vrata"
+
+#~ msgid "invisibility"
+#~ msgstr "nevidljivosti"
+
+#~ msgid "cold"
+#~ msgstr "hladnoće"
+
+#~ msgid "Your wand of %s breaks apart and explodes!  --More--"
+#~ msgstr "Vaš štapić %s se strgao i eksplodirao!  --Više--"
+
+#~ msgid "You are jolted by a surge of electricity!  --More--"
+#~ msgstr "Spržio vas je električni izboj!  --Više--"
 
 #~ msgid "No hierarchy information to edit"
 #~ msgstr "Nema informacije o hijerarhiji za uređivanje"
