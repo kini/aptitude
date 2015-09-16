@@ -106,6 +106,18 @@ bool do_log(const string &log,
 	default:                action_tag = _("????????"); break;
 	}
 
+      std::string cur_verstr  = _("(no version found)");
+      std::string cand_verstr = _("(no version found)");
+      auto candver_it = (*apt_cache_file)[i->first].CandidateVerIter(*apt_cache_file);
+      if (i->first.CurVersion())
+	{
+	  cur_verstr = i->first.CurVersion();
+	}
+      if (! candver_it.end() && candver_it.VerStr())
+	{
+	  cand_verstr = candver_it.VerStr();
+	}
+
       switch (i->second)
 	{
 	case pkg_install:
@@ -114,7 +126,7 @@ bool do_log(const string &log,
 	  fprintf(f, _("[%s] %s %s\n"),
 		  action_tag.c_str(),
 		  i->first.FullName(false).c_str(),
-		  (*apt_cache_file)[i->first].CandidateVerIter(*apt_cache_file).VerStr());
+		  cand_verstr.c_str());
 	  break;
 	case pkg_reinstall:
 	case pkg_remove:
@@ -127,7 +139,7 @@ bool do_log(const string &log,
 	  fprintf(f, _("[%s] %s %s\n"),
 		  action_tag.c_str(),
 		  i->first.FullName(false).c_str(),
-		  i->first.CurrentVer().VerStr());
+		  cur_verstr.c_str());
 	  break;
 	case pkg_upgrade:
 	case pkg_downgrade:
@@ -135,8 +147,8 @@ bool do_log(const string &log,
 	  fprintf(f, _("[%s] %s %s -> %s\n"),
 		  action_tag.c_str(),
 		  i->first.FullName(false).c_str(),
-		  i->first.CurrentVer().VerStr(),
-		  (*apt_cache_file)[i->first].CandidateVerIter(*apt_cache_file).VerStr());
+		  cur_verstr.c_str(),
+		  cand_verstr.c_str());
 	  break;
 	case pkg_broken:
 	default:
