@@ -1,6 +1,7 @@
 // aptcache.cc
 //
 //  Copyright 1999-2009, 2011 Daniel Burrows
+//  Copyright 2015 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -26,6 +27,7 @@
 #include "aptitude_resolver_universe.h"
 #include "aptitudepolicy.h"
 #include "config_signal.h"
+#include "dpkg_selections.h"
 #include <generic/apt/matching/match.h>
 #include <generic/apt/matching/parse.h>
 #include <generic/apt/matching/pattern.h>
@@ -353,6 +355,7 @@ bool aptitudeDepCache::build_selection_list(OpProgress &Prog, bool WithLock,
       package_states[i].reinstall=false;
       package_states[i].user_tags.clear();
       package_states[i].remove_reason=manual;
+      package_states[i].original_selection_state = pkgCache::State::Unknown;
       package_states[i].selection_state = pkgCache::State::Unknown;
       package_states[i].previously_auto_package = false;
     }
@@ -458,6 +461,7 @@ bool aptitudeDepCache::build_selection_list(OpProgress &Prog, bool WithLock,
 	      candver=section.FindS("Version");
 
 	      pkg_state.selection_state=(pkgCache::State::PkgSelectedState) section.FindI("State", pkgCache::State::Unknown);
+	      pkg_state.original_selection_state = static_cast<pkgCache::State::PkgSelectedState>(pkg->SelectedState);
 	      pkgCache::State::PkgSelectedState last_dselect_state
 		= (pkgCache::State::PkgSelectedState)
 		    section.FindI("Dselect-State", pkg->SelectedState);
@@ -735,6 +739,9 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
   if(status_fname == NULL)
     writeStateFile(&prog);
 
+  // helper class to save selection state of packages to dpkg database
+  aptitude::apt::dpkg::DpkgSelections dpkg_selections;
+
   string statefile=_config->FindDir("Dir::Aptitude::state", STATEDIR)+"pkgstates";
 
   FileFd newstate;
@@ -849,6 +856,32 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
 				      user_tags.c_str(),
 				      tailstr.c_str()));
 
+	    // dpkg-dselect state
+	    if (estate.original_selection_state != estate.selection_state
+		&& ! (estate.original_selection_state == pkgCache::State::Unknown && estate.selection_state == pkgCache::State::DeInstall) )
+	      {
+		// for internal reasons, apt's PkgIterator is always arch:any,
+		// not arch:all.  VerIterator can be arch:all, though.
+		std::string select_arch = i.Arch();
+
+		// all install, downgrade, upgrade, etc -- try to use candidate version
+		if (state.Install() && !GetCandidateVer(i).end())
+		  {
+		    select_arch = GetCandidateVer(i).Arch();
+		  }
+		// all delete, purge, hold, keep etc -- try to use current version
+		else if (! i.CurrentVer().end())
+		  {
+		    select_arch = i.CurrentVer().Arch();
+		  }
+
+		// add to selections to save
+		dpkg_selections.add(i.Name(), select_arch, estate.selection_state);
+
+		// new state is also the original now
+		estate.original_selection_state = estate.selection_state;
+	      }
+
 	    if(newstate.Failed() || !newstate.Write(line.c_str(), line.size()))
 	      {
 		_error->Error(_("Couldn't write state file"));
@@ -905,6 +938,26 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
 	      prog.Done();
 	      return false;
 	    }
+	}
+
+      // save selection state to dpkg database
+      //
+      // \todo Need to release lock before the operation, otherwise internal
+      // calls to dpkg fail with:
+      //
+      //   'error: dpkg status database is locked by another process'
+      //
+      // Review if dpkg provides a better way to do this, currently (Sep 2015)
+      // it does not.
+      apt_cache_file->ReleaseLock();
+      bool dpkg_selections_saved = dpkg_selections.save_selections();
+      if (! apt_cache_file->GainLock())
+	_error->Error(_("Could not regain the system lock!  (Perhaps another apt or dpkg is running?)"));
+      if (! dpkg_selections_saved)
+	{
+	  _error->Error(_("failed to save selections to dpkg database"));
+	  prog.Done();
+	  return false;
 	}
     }
 
@@ -1572,6 +1625,8 @@ void aptitudeDepCache::MarkFromDselect(const PkgIterator &Pkg)
     }
 
   aptitude_state &state=get_ext_state(Pkg);
+
+  state.original_selection_state = static_cast<pkgCache::State::PkgSelectedState>(Pkg->SelectedState);
 
   if(Pkg->SelectedState!=state.selection_state)
     {

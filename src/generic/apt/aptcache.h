@@ -1,6 +1,7 @@
 // aptcache.h  -*-c++-*-
 //
 //  Copyright 1999-2005, 2007-2009, 2011 Daniel Burrows
+//  Copyright 2015 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -95,6 +96,9 @@ public:
    */
   struct aptitude_state
   {
+    /** The original action stored on the package when starting. */
+    pkgCache::State::PkgSelectedState original_selection_state;
+
     /** The current action stored on the package. */
     pkgCache::State::PkgSelectedState selection_state;
 

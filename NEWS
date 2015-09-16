@@ -41,6 +41,16 @@ Version 0.7.2 UNRELEASED
     actions show version information, either the candidate version
     (e.g. install, auto install) or current version (remove, hold, ...).
 
+  * Save selection state of packages to dpkg database (Closes: #137771)
+
+    Aptitude maintains a separate database (in "pkgstates" file), with a field
+    Dselect-State to keep track of its selected state in dpkg ("status" file).
+    This is updated upon start of aptitude or some operations, so aptitude is
+    aware of changes of this selected state made by other tools; but it was
+    never updated back to dpkg after the selection state changed in aptitude.
+    As a result, for example packages set "hold" in aptitude were then not
+    respected by other tools which do use dpkg selected states.
+
 - Bug fixes:
 
   * Disable strings gathered for translation (Closes: #790568)
