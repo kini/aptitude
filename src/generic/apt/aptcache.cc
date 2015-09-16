@@ -1632,14 +1632,22 @@ void aptitudeDepCache::MarkFromDselect(const PkgIterator &Pkg)
     {
       switch(Pkg->SelectedState)
 	{
-	case pkgCache::State::Unknown:
-	  break;
 	case pkgCache::State::Purge:
 	  if( (!Pkg.CurrentVer().end()) || !((*this)[Pkg].iFlags&Purge) )
 	    mark_delete(Pkg, true, false, NULL);
 	  else
 	    mark_keep(Pkg, false, false, NULL);
 	  break;
+	case pkgCache::State::Unknown:
+	  // previously ignored (no action, just a break), it was causing
+	  // problems not respecting actions taken with other tools (see #328616
+	  // and duplicates).  so instead, if it's unknown to dpkg, mark it for
+	  // removal -- moved next to DeInstall and fall through.
+	  //
+	  // ('purge' is more dangerous, one could loose configuration files if
+	  // accidentally something goes wrong)
+	  //
+	  //break;
 	case pkgCache::State::DeInstall:
 	  if(!Pkg.CurrentVer().end())
 	    mark_delete(Pkg, false, false, NULL);

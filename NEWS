@@ -51,6 +51,30 @@ Version 0.7.2 UNRELEASED
     As a result, for example packages set "hold" in aptitude were then not
     respected by other tools which do use dpkg selected states.
 
+  * Consider packages "unknown" to dpkg as not to install (Closes: #328616)
+
+    While aptitude tried to take into account the selected state of packages in
+    dpkg, the ones not present (with state "unknown", meaning never installed,
+    or purged) were ignored in aptitude, and the internal selected state was
+    used.  This was causing problems like not respecting actions taken with
+    other tools (see #328616 and duplicates) -- installing with aptitude and
+    then purging with either dpkg or apt (or higher level applications, like
+    puppet), meant that in the next run of aptitude it would try to install the
+    package again.
+
+    We now save the selected states of packages from aptitude to dpkg (another
+    feature added in this release), so the selected states are synchronised.  If
+    it's "unknown" to dpkg, we will assume that other tools uninstalled it in
+    between aptitude runs, and we will keep it uninstalled.
+
+    The behaviour of scheduled aptitude actions will be preserved: if a package
+    is selected to install but is not actually installed in the session,
+    aptitude saves the selection in dpkg as "install", so it will be attemped to
+    install in the next aptitude runs (or other tools honouring the selected
+    state in dpkg).  Or if a installed package is marked to purge with "aptitude
+    --schedule-only purge PKG", "dpkg --purge --pending" does honour the
+    request.
+
 - Bug fixes:
 
   * Disable strings gathered for translation (Closes: #790568)
