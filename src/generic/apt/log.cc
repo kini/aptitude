@@ -205,8 +205,7 @@ void log_changes()
   if(!logs.empty())
     {
       loglist changed_packages;
-      for(pkgCache::PkgIterator i
-	    = (*apt_cache_file)->PkgBegin(); !i.end(); i++)
+      for(pkgCache::PkgIterator i = (*apt_cache_file)->PkgBegin(); !i.end(); ++i)
 	{
 	  pkg_action_state s = find_pkg_state(i, *apt_cache_file);
 	  if(s != pkg_unchanged)
@@ -215,8 +214,7 @@ void log_changes()
 
       sort(changed_packages.begin(), changed_packages.end(), log_sorter());
 
-      for(vector<string>::iterator i
-	    = logs.begin(); i != logs.end(); ++i)
+      for(vector<string>::const_iterator i = logs.begin(); i != logs.end(); ++i)
 	do_log(*i, changed_packages);
     }
 }
