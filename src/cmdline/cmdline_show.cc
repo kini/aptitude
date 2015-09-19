@@ -116,10 +116,14 @@ static cwidget::fragment *dep_lst_frag(pkgCache::DepIterator dep,
   if(fragments.size()==0)
     return cw::fragf("");
   else
-    return cw::fragf("%s: %F",
-		 title.c_str(),
-		 indentbox(0, title.size()+2,
-			   flowbox(cw::join_fragments(fragments, L", "))));
+    {
+      // correctly calculate the indentation for multi-byte encoded strings
+      size_t rest_indent = cw::util::transcode(title).length() + 2;
+      return cw::fragf("%s: %F",
+		       title.c_str(),
+		       indentbox(0, rest_indent,
+				 flowbox(cw::join_fragments(fragments, L", "))));
+    }
 }
 
 typedef std::pair<std::string, std::string> pkgverpair;
@@ -180,10 +184,14 @@ static cwidget::fragment *prv_lst_frag(pkgCache::PrvIterator prv,
   if(fragments.size()==0)
     return cw::fragf("");
   else
-    return cw::fragf("%s: %F",
-		 title.c_str(),
-		 indentbox(0, title.size()+2,
-			   flowbox(cw::join_fragments(fragments, L", "))));
+    {
+      // correctly calculate the indentation for multi-byte encoded strings
+      size_t rest_indent = cw::util::transcode(title).length() + 2;
+      return cw::fragf("%s: %F",
+		       title.c_str(),
+		       indentbox(0, rest_indent,
+				 flowbox(cw::join_fragments(fragments, L", "))));
+    }
 }
 
 static cwidget::fragment *archive_lst_frag(pkgCache::VerFileIterator vf,
@@ -202,10 +210,14 @@ static cwidget::fragment *archive_lst_frag(pkgCache::VerFileIterator vf,
   if(fragments.size()==0)
     return cw::fragf("");
   else
-    return cw::fragf("%s: %F",
-		 title.c_str(),
-		 indentbox(0, title.size()+2,
-			   flowbox(cw::join_fragments(fragments, L", "))));
+    {
+      // correctly calculate the indentation for multi-byte encoded strings
+      size_t rest_indent = cw::util::transcode(title).length() + 2;
+      return cw::fragf("%s: %F",
+		       title.c_str(),
+		       indentbox(0, rest_indent,
+				 flowbox(cw::join_fragments(fragments, L", "))));
+    }
 }
 
 static const char *current_state_string(pkgCache::PkgIterator pkg, pkgCache::VerIterator ver)
