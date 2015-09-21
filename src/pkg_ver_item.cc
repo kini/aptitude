@@ -270,7 +270,7 @@ cw::column_disposition pkg_ver_columnizer::setup_column(const pkgCache::VerItera
 	    else
 	      return cw::column_disposition(" ", 0);
 	  }
-	else if(state.Upgrade())
+	else if(state.Upgrade() || state.Downgrade())
 	  {
 	    if(ver.ParentPkg().CurrentVer()==ver)
 	      return cw::column_disposition("d", 0);
