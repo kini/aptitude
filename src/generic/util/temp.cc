@@ -25,12 +25,13 @@
 #include <aptitude.h>
 #include <loggers.h>
 
-#include <stdlib.h>
-#include <string.h>
-
 #include <apt-pkg/error.h>
 
-#include <boost/random.hpp>
+#include <random>
+
+#include <cstdlib>
+#include <cstring>
+
 
 using aptitude::Loggers;
 namespace cw = cwidget;
@@ -61,9 +62,9 @@ namespace temp
     std::string *temp_base = NULL;
     // A private RNG used below; created when the temporary system is
     // first used and controlled by temp_state_mutex.  Using
-    // boost::random instead of random_r to make this code more
+    // std::random instead of random_r to make this code more
     // portable.
-    boost::mt19937 *temp_rng = NULL;
+    std::mt19937 *temp_rng = NULL;
 
     // Characters placed into the resulting file name.  A little
     // punctuation is sprinkled in, but only characters that have no
@@ -100,7 +101,7 @@ namespace temp
     // temporary file name.
     //
     // Returns an empty string if it can't find a unique name.
-    std::string mymktemp(std::string prefix)
+    std::string mymktemp(const std::string& prefix)
     {
       // Obviously arbitrary -- the main requirement is that it needs
       // to be big.
@@ -114,18 +115,16 @@ namespace temp
 
 
       if(temp_rng == NULL)
-        temp_rng = new boost::mt19937;
+        temp_rng = new std::mt19937;
 
-      boost::variate_generator<boost::mt19937&, boost::uniform_int<> >
-        random_char_idx(*temp_rng, boost::uniform_int<>(0, num_characters - 1));
-
+      std::uniform_int_distribution<> random_char_idx(0, num_characters - 1);
 
       for(int attempt = 0; attempt < num_retries; ++attempt)
         {
           std::string result = prefix;
 
           for(int i = 0; i < num_random_characters; ++i)
-            result += characters[random_char_idx()];
+            result += characters[random_char_idx(*temp_rng)];
 
           // Nested "if" statements for better debugging.
           if(access(result.c_str(), F_OK) != 0)
