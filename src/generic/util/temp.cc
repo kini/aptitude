@@ -1,6 +1,7 @@
 // temp.cc
 //
 //   Copyright (C) 2005, 2007, 2009-2010 Daniel Burrows
+//   Copyright (C) 2015 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -29,9 +30,7 @@
 
 #include <apt-pkg/error.h>
 
-#include <boost/format.hpp>
 #include <boost/random.hpp>
-#include <boost/scoped_array.hpp>
 
 using aptitude::Loggers;
 namespace cw = cwidget;
@@ -166,8 +165,6 @@ namespace temp
 	return;
       }
 
-    std::string prefix(initial_prefix);
-
     const char *tmpdir = getenv("TMPDIR");
 
     if(strempty(tmpdir) == true)
@@ -180,26 +177,19 @@ namespace temp
     // directory's name as a convenience for users, so they can
     // identify which aptitude created a given directory.  It's not
     // for security; that comes from mkdtemp().
-    prefix = ( boost::format("%s/%s-%s.%d:")
-	       % std::string(tmpdir)
-	       % prefix.c_str()
-	       % get_username()
-	       % getpid() ).str();
+    //
+    // format: "%s/%s-%s.%d:XXXXXX"
+    std::string tmpl_str = std::string(tmpdir) + "/" + initial_prefix + "-" + get_username() + "." + std::to_string(getpid()) + ":XXXXXX";
 
+    char tmpl[tmpl_str.length() + 1];
+    strcpy(tmpl, tmpl_str.c_str());
 
-    size_t bufsize = prefix.size() + 6 + 1;
-    boost::scoped_array<char> tmpl(new char[bufsize]);
-    strcpy(tmpl.get(), prefix.c_str());
-    strcat(tmpl.get(), "XXXXXX");
-
-
-    if(mkdtemp(tmpl.get()) == NULL)
+    if(mkdtemp(tmpl) == NULL)
       {
-	int errnum = errno;
-	std::string err = sstrerror(errnum);
-	LOG_ERROR(Loggers::getAptitudeTemp(),
-		  boost::format(_("Unable to create temporary directory from template \"%s\": %s"))
-		  % tmpl.get() % err);
+	std::string err = sstrerror(errno);
+	std::string errmsg = ssprintf("Unable to create temporary directory from template \"%s\": %s",
+				      tmpl_str.c_str(), err.c_str());
+	LOG_ERROR(Loggers::getAptitudeTemp(), errmsg);
 
 	return;
       }
@@ -212,7 +202,7 @@ namespace temp
 	created_atexit_handler = true;
       }
 
-    temp_base = new std::string(tmpl.get());
+    temp_base = new std::string(tmpl);
     LOG_INFO(Loggers::getAptitudeTemp(),
 	     "Initialized the temporary file module using the base directory "
 	     << *temp_base);
@@ -232,8 +222,6 @@ namespace temp
     temp_base = NULL;
   }
 
-
-
   void dir::impl::init_dir(const std::string &initial_prefix)
   {
     cw::threads::mutex::lock l(*temp_state_mutex);
@@ -249,36 +237,26 @@ namespace temp
     LOG_TRACE(Loggers::getAptitudeTemp(),
 	      "Creating a temporary directory with prefix " << initial_prefix);
 
-    std::string prefix(initial_prefix);
-
-    if(prefix.size() > 0 && prefix[0] == '/')
+    if(initial_prefix.size() > 0 && initial_prefix[0] == '/')
       throw TemporaryCreationFailure("Invalid attempt to create an absolutely named temporary directory.");
 
+    std::string tmpl_str = *temp_base + "/" + initial_prefix;
 
-    prefix = *temp_base + "/" + prefix;
+    char tmpl[tmpl_str.length() + 1];
+    strcpy(tmpl, tmpl_str.c_str());
 
-    size_t bufsize = prefix.size() + 6 + 1;
-    boost::scoped_array<char> tmpl(new char[bufsize]);
-    strcpy(tmpl.get(), prefix.c_str());
-    strcat(tmpl.get(), "XXXXXX");
-
-
-    if(mkdtemp(tmpl.get()) == NULL)
+    if(mkdtemp(tmpl) == NULL)
       {
-	int errnum = errno;
-	std::string err = sstrerror(errnum);
+	std::string err = sstrerror(errno);
+	std::string errmsg = ssprintf("Unable to create temporary directory from template \"%s\": %s",
+				      tmpl_str.c_str(), err.c_str());
 
-	LOG_FATAL(Loggers::getAptitudeTemp(),
-		  "Unable to create temporary directory from template \""
-		  << tmpl.get() << "\": " << err);
-
-	std::string errmsg = ssprintf(_("Unable to create temporary directory from template \"%s\": %s"),
-				      tmpl.get(), err.c_str());
+	LOG_FATAL(Loggers::getAptitudeTemp(), errmsg);
 
 	throw TemporaryCreationFailure(errmsg);
       }
 
-    dirname.assign(tmpl.get());
+    dirname.assign(tmpl_str);
 
     LOG_INFO(Loggers::getAptitudeTemp(),
 	     "Temporary directory created in " << dirname);

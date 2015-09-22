@@ -140,7 +140,6 @@ boost/preprocessor/repetition/enum_params.hpp dnl
 boost/preprocessor/repetition/repeat.hpp dnl
 boost/random.hpp dnl
 boost/range.hpp dnl
-boost/scoped_array.hpp dnl
 boost/test/unit_test.hpp dnl
 boost/type_traits/is_same.hpp dnl
 boost/unordered_map.hpp dnl

@@ -1,6 +1,7 @@
 // temp.h                                 -*-c++-*-
 //
 //   Copyright (C) 2005, 2007-2010 Daniel Burrows
+//   Copyright (C) 2015 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -24,7 +25,6 @@
 #include <string>
 
 #include <cwidget/generic/util/eassert.h>
-#include <cwidget/generic/util/exception.h>
 #include <cwidget/generic/threads/threads.h>
 
 /** \brief Code to support safely creating files in a temporary
