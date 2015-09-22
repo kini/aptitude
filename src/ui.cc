@@ -1237,7 +1237,7 @@ namespace
     
     if(rval != pkgPackageManager::Incomplete)
       {
-	cerr << _("Press Return to continue.") << endl;
+	cout << _("Press Return to continue.") << endl;
 	int c = getchar();
 
 	while(c != '\n'  && c != EOF)
