@@ -238,6 +238,12 @@ cw::column_disposition pkg_ver_columnizer::setup_column(const pkgCache::VerItera
 	  return cw::column_disposition(_("config-files"), 0);
 	case pkgCache::State::Installed:
 	  return cw::column_disposition(_("installed"), 0);
+#ifdef APT_HAS_TRIGGERS
+	case pkgCache::State::TriggersAwaited:
+	  return cw::column_disposition(_("triggers-awaited"), 0);
+	case pkgCache::State::TriggersPending:
+	  return cw::column_disposition(_("triggers-pending"), 0);
+#endif
 	default:
 	  return cw::column_disposition(_("ERROR"), 0);
 	}

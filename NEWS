@@ -46,6 +46,14 @@ Version 0.7.3 UNRELEASED
   * configure.ac: Remove checks for boost/scoped_array.hpp and boost/random.hpp,
     not used anymore -- a few seconds less per compilation
 
+  * In file pkg_ver_item.cc, function pkg_ver_columnizer::setup_column(), the
+    switch/case handling for longstate was missing the options added in 2007 for
+    APT_HAS_TRIGGERS, present for stageflag case and both cases in
+    pkg_columnizer::setup_column() of pkg_columnizer.cc.
+
+    (In other words, it was missing in 1 of these 4 places where it is
+    necessary).
+
 
 [2015-09-17]
 Version 0.7.2
