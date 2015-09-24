@@ -109,8 +109,8 @@ void pkg_grouppolicy_info::setup_package_info(const pkgCache::PkgIterator &pkg,
 #endif
 
       cw::fragment *tags = make_tags_fragment(pkg);
-      if(tags != NULL)
-	frags.push_back(cw::fragf("%n%F", tags));
+      if (tags)
+	frags.push_back(tags);
 
       // Can I use something other than a clipbox below?
 
