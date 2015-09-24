@@ -500,6 +500,28 @@ bool aptitudeDepCache::build_selection_list(OpProgress &Prog, bool WithLock,
 		  if(!do_initselections)
 		    MarkKeep(pkg, false);
 		}
+
+	      // if the package is already in the version that we wanted to
+	      // target, but pkgstates still lists as "upgrade" with a candidate
+	      // version (downgrades always do, upgrades not always), mark as
+	      // dirty to update pkgstates, and reset "pkg_state".  otherwise:
+	      //
+	      // - if pkgstates is not written at most at the end of the current
+	      // session, the packages downgraded do not show up as "upgradable"
+	      // until there is an update forced for other reasons (see #787658
+	      // and #714429), even in subsequent invokations of aptitude
+	      //
+	      // - without resetting "pkg_state" it's marked for "upgrade" (or
+	      // "downgrade") again down in this function, and while for
+	      // "upgrades" it is not a problem, with "downgrades" it will not
+	      // show as upgradable in the current interactive session.
+	      std::string installed_ver = pkg.CurVersion() ? pkg.CurVersion() : "";
+	      if (pkg_state.upgrade && installed_ver == candver)
+		{
+		  pkg_state.upgrade = false;
+		  pkg_state.candver = "";
+		  dirty = true;
+		}
 	    }
 	  amt+=section.size();
 	  Prog.OverallProgress(amt, file_size, 1, _("Reading extended state information"));
@@ -553,15 +575,17 @@ bool aptitudeDepCache::build_selection_list(OpProgress &Prog, bool WithLock,
 	      MarkInstall(i, false);
 	    }
 	  else
-	    if(i.CurrentVer().end())
-	      MarkInstall(i, false);
-	    else
-	      {
-		SetReInstall(i, estate.reinstall);
+	    {
+	      if(i.CurrentVer().end())
+		MarkInstall(i, false);
+	      else
+		{
+		  SetReInstall(i, estate.reinstall);
 
-		if(estate.upgrade && state.Upgradable())
-		  MarkInstall(i, false);
-	      }
+		  if(estate.upgrade && state.Upgradable())
+		    MarkInstall(i, false);
+		}
+	    }
 	  break;
 	case pkgCache::State::Hold:
 	  if(!do_initselections)

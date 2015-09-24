@@ -11,6 +11,25 @@ Version 0.7.3 UNRELEASED
     In package view/info screen, it was not handling this action and not showing
     anything in this case.
 
+  * Update internal state for upgrades/downgrades with target version after the
+    action is performed (Closes: #787658, #714429)
+
+    Thanks to David Kalnischkies and Julian Andres Klode from APT team for their
+    help, clues and patience.  It took some serious effort to get to this fix,
+    which in the end is quite modest in terms of code changes.
+
+    Internal state was neither reset nor written to disk until other packages'
+    states changed, so aptitude marked the same action on the packages as
+    pending to be performed again and again (but the action had already been
+    taken, so there was no observable effect in terms of installations).
+
+    However, this meant that the packages that were downgraded to older versions
+    when newer were still available (e.g., mixing stable and unstable), was not
+    shown as "Upgradable" neither in the current sessions nor in subsequent
+    sessions (under Upgradable subtree in interactive mode; or command line like
+    "aptitude search ~U"), until the file pkgstates was written to disk because
+    of changes in other packages.
+
 - User visible changes:
 
   * Make boundaries of sessions in the log file more clear (Closes: #269275)
