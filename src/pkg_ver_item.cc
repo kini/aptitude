@@ -1,6 +1,7 @@
 // pkg_ver_item.cc
 //
 //  Copyright 1999-2005, 2007-2008, 2010 Daniel Burrows
+//  Copyright 2015 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -172,7 +173,9 @@ cw::column_disposition pkg_ver_columnizer::setup_column(const pkgCache::VerItera
       if(ver.end())
 	return cw::column_disposition("", 0);
 
-      if(ver.ParentPkg().CurrentVer()!=ver)
+      // packages with state pkgCache::State::ConfigFiles don't seem to have
+      // valid CurrentVer(), so check specifically for this
+      if(!ver.ParentPkg().CurrentVer().end() && (ver.ParentPkg().CurrentVer() != ver))
 	return cw::column_disposition("p", 0);
 
       if((*apt_cache_file)[ver.ParentPkg()].NowBroken())
@@ -210,7 +213,9 @@ cw::column_disposition pkg_ver_columnizer::setup_column(const pkgCache::VerItera
       if(ver.end())
 	return cw::column_disposition("", 0);
 
-      if(ver.ParentPkg().CurrentVer()!=ver)
+      // packages with state pkgCache::State::ConfigFiles don't seem to have
+      // valid CurrentVer(), so check specifically for this
+      if(!ver.ParentPkg().CurrentVer().end() && (ver.ParentPkg().CurrentVer() != ver))
 	return cw::column_disposition(_("purged"), 0);
 
       if((*apt_cache_file)[ver.ParentPkg()].NowBroken())
