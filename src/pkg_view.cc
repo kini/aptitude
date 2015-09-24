@@ -247,7 +247,6 @@ public:
 
     cw::fragment *frag=make_desc_fragment(newdesc);
 
-#ifdef APT_HAS_HOMEPAGE
     cw::fragment *homepage;
     if(!ver.end())
       {
@@ -260,9 +259,6 @@ public:
       }
     else
       homepage = cw::fragf("");
-#else
-    cw::fragment *homepage = cw::fragf("");
-#endif
 
     cw::fragment *tags=make_tags_fragment(pkg);
     if(tags != NULL)

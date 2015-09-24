@@ -220,12 +220,10 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
 	    return cw::column_disposition("c", 0);
 	  case pkgCache::State::Installed:
 	    return cw::column_disposition("i", 0);
-#ifdef APT_HAS_TRIGGERS
 	  case pkgCache::State::TriggersAwaited:
 	    return cw::column_disposition("W", 0);
 	  case pkgCache::State::TriggersPending:
 	    return cw::column_disposition("T", 0);
-#endif
 	  default:
 	    return cw::column_disposition("E", 0);
 	  }
@@ -256,12 +254,10 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
 	    return cw::column_disposition(_("config-files"), 0);
 	  case pkgCache::State::Installed:
 	    return cw::column_disposition(_("installed"), 0);
-#ifdef APT_HAS_TRIGGERS
 	  case pkgCache::State::TriggersAwaited:
 	    return cw::column_disposition(_("triggers-awaited"), 0);
 	  case pkgCache::State::TriggersPending:
 	    return cw::column_disposition(_("triggers-pending"), 0);
-#endif
 	  default:
 	    return cw::column_disposition(_("ERROR"), 0);
 	  }

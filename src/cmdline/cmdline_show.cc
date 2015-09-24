@@ -237,12 +237,10 @@ static const char *current_state_string(pkgCache::PkgIterator pkg, pkgCache::Ver
       return _("partially installed");
     case pkgCache::State::ConfigFiles:
       return _("not installed (configuration files remain)");
-#ifdef APT_HAS_TRIGGERS
     case pkgCache::State::TriggersAwaited:
       return _("awaiting trigger processing by other package(s)");
     case pkgCache::State::TriggersPending:
       return _("awaiting trigger processing");
-#endif
     case pkgCache::State::Installed:
       return _("installed");
     default:
@@ -487,11 +485,9 @@ cw::fragment *version_file_fragment(const pkgCache::VerIterator &ver,
 			    get_short_description(ver, apt_package_records).c_str()));
   fragments.push_back(indentbox(1, 1, make_desc_fragment(get_long_description(ver, apt_package_records))));
 
-#ifdef APT_HAS_HOMEPAGE
   if(rec.Homepage() != "")
     fragments.push_back(cw::dropbox(cwidget::text_fragment(_("Homepage: ")),
 				cw::hardwrapbox(cwidget::text_fragment(rec.Homepage()))));
-#endif
 
   cw::fragment *tags = make_tags_fragment(pkg);
   if(tags)

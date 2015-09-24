@@ -602,10 +602,8 @@ pkg_action_state find_pkg_state(pkgCache::PkgIterator pkg,
   // States where --configure fixes things.
   else if(pkg->CurrentState == pkgCache::State::UnPacked ||
 	  pkg->CurrentState == pkgCache::State::HalfConfigured
-#ifdef APT_HAS_TRIGGERS
 	  || pkg->CurrentState == pkgCache::State::TriggersAwaited
 	  || pkg->CurrentState == pkgCache::State::TriggersPending
-#endif
 	  )
     return pkg_unconfigured;
 
@@ -1168,29 +1166,12 @@ std::wstring get_short_description(const pkgCache::VerIterator &ver,
   if(ver.end() || ver.FileList().end() || records == NULL)
     return std::wstring();
 
-#ifndef HAVE_DDTP
   pkgCache::VerFileIterator vf = ver.FileList();
 
   if(vf.end())
     return std::wstring();
   else
     return cw::util::transcode(records->Lookup(vf).ShortDesc());
-#else
-  pkgCache::DescIterator d = ver.TranslatedDescription();
-
-  if(d.end())
-    return std::wstring();
-
-  pkgCache::DescFileIterator df = d.FileList();
-
-  if(df.end())
-    return std::wstring();
-  else
-    // apt "helpfully" cw::util::transcodes the description for us, instead of
-    // providing direct access to it.  So I need to assume that the
-    // description is encoded in the current locale.
-    return cwidget::util::transcode(records->Lookup(df).ShortDesc());
-#endif
 }
 
 std::wstring get_long_description(const pkgCache::VerIterator &ver,
@@ -1199,26 +1180,12 @@ std::wstring get_long_description(const pkgCache::VerIterator &ver,
   if(ver.end() || ver.FileList().end() || records == NULL)
     return std::wstring();
 
-#ifndef HAVE_DDTP
   pkgCache::VerFileIterator vf = ver.FileList();
 
   if(vf.end())
     return std::wstring();
   else
     return cw::util::transcode(records->Lookup(vf).LongDesc());
-#else
-  pkgCache::DescIterator d = ver.TranslatedDescription();
-
-  if(d.end())
-    return std::wstring();
-
-  pkgCache::DescFileIterator df = d.FileList();
-
-  if(df.end())
-    return std::wstring();
-  else
-    return cwidget::util::transcode(records->Lookup(df).LongDesc());
-#endif
 }
 
 const char *multiarch_type(unsigned char type)

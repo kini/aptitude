@@ -102,11 +102,9 @@ void pkg_grouppolicy_info::setup_package_info(const pkgCache::PkgIterator &pkg,
 				    _("Description: "), shortdesc.c_str())));
       frags.push_back(indentbox(2, 2, make_desc_fragment(desc)));
 
-#ifdef APT_HAS_HOMEPAGE
       if(rec.Homepage() != "")
 	frags.push_back(cw::dropbox(cw::fragf("%B%s%b", _("Homepage: ")),
 				cw::hardwrapbox(cw::text_fragment(rec.Homepage()))));
-#endif
 
       cw::fragment *tags = make_tags_fragment(pkg);
       if (tags)

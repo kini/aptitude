@@ -459,29 +459,37 @@ AC_CHECK_DECL(setlocale, [AC_DEFINE([HAVE_SETLOCALE], [], [Define if setlocale i
 
 AC_MSG_CHECKING([whether apt supports ddtp])
 
-AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <apt-pkg/pkgcache.h>]],
-                                   [[pkgCache::DescIterator d;]])],
-                  AC_MSG_RESULT([yes])
-		  AC_DEFINE([HAVE_DDTP], [], [Set to true if apt is DDTP-enabled]),
-		  AC_MSG_RESULT([no]))
 
-AC_MSG_CHECKING([whether apt supports the Homepage: field])
+dnl ============================================================================
+dnl Disabled, but leaving them as models of future checks
+dnl ============================================================================
 
-AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <apt-pkg/pkgrecords.h>]],
-				  [[  pkgRecords::Parser *p = NULL;]]
-				  [[  if(0) p->Homepage();]])],
-		   AC_MSG_RESULT([yes])
-		   AC_DEFINE([APT_HAS_HOMEPAGE], [], [Set to true if apt supports the Homepage: field]),
-		   AC_MSG_RESULT([no]))
+dnl AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <apt-pkg/pkgcache.h>]],
+dnl                                    [[pkgCache::DescIterator d;]])],
+dnl                   AC_MSG_RESULT([yes])
+dnl 		  AC_DEFINE([HAVE_DDTP], [], [Set to true if apt is DDTP-enabled]),
+dnl 		  AC_MSG_RESULT([no]))
 
-AC_MSG_CHECKING([whether apt supports dpkg triggers])
+dnl AC_MSG_CHECKING([whether apt supports the Homepage: field])
 
-AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <apt-pkg/pkgcache.h>]],
-                                   [[pkgCache::State::TriggersAwaited;]]
-                                   [[pkgCache::State::TriggersPending;]])],
-		  AC_MSG_RESULT([yes])
-		  AC_DEFINE([APT_HAS_TRIGGERS], [], [Set to true if apt supports dpkg trigger states]),
-		  AC_MSG_RESULT([no]))
+dnl AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <apt-pkg/pkgrecords.h>]],
+dnl 				  [[  pkgRecords::Parser *p = NULL;]]
+dnl 				  [[  if(0) p->Homepage();]])],
+dnl 		   AC_MSG_RESULT([yes])
+dnl 		   AC_DEFINE([APT_HAS_HOMEPAGE], [], [Set to true if apt supports the Homepage: field]),
+dnl 		   AC_MSG_RESULT([no]))
+
+dnl AC_MSG_CHECKING([whether apt supports dpkg triggers])
+
+dnl AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <apt-pkg/pkgcache.h>]],
+dnl                                    [[pkgCache::State::TriggersAwaited;]]
+dnl                                    [[pkgCache::State::TriggersPending;]])],
+dnl 		  AC_MSG_RESULT([yes])
+dnl 		  AC_DEFINE([APT_HAS_TRIGGERS], [], [Set to true if apt supports dpkg trigger states]),
+dnl 		  AC_MSG_RESULT([no]))
+
+dnl ============================================================================
+
 
 # Try to guess what namespace the hash stuff is in (maybe I should just
 # use rbltrees instead in most places?)

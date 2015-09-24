@@ -70,12 +70,10 @@ namespace gui
         return half_installed_columns;
       case pkgCache::State::ConfigFiles:
         return config_files_columns;
-  #ifdef APT_HAS_TRIGGERS
       case pkgCache::State::TriggersAwaited:
         return triggers_awaited_columns;
       case pkgCache::State::TriggersPending:
         return triggers_pending_columns;
-  #endif
       case pkgCache::State::Installed:
         return installed_columns;
       default:
