@@ -35,6 +35,32 @@ Version 0.7.3 UNRELEASED
 
   * Correctly detect state of vers/pkg when is ConfigFiles (Closes: #698768)
 
+  * [cmdline] Show "RECOMMENDED but will not be installed" on pipes and redirs
+    (Closes: #647474)
+
+    The change was requested in #452202 in 2007 to not show this message and was
+    applied, but after that there are at least 3 separate requests (#647474,
+    #587676 and #720074) asking to show the same messages independently if the
+    output is an interactive terminal, a pipe or a redirection to a file, all
+    citing the lack of this message.  (Makes sense, because it is one of the
+    most prominent messages that users see, and also because this way of hiding
+    messages is almost never used elsewhere in the code).
+
+    In principle, "quiet" shouldn't make a difference when using ttys or
+    pipes/files, but it does because it's primarily tied to the "progress"
+    messages appearing all around the command line code; so in main.cc quiet is
+    set to "1" when the output is not a tty.
+
+    I think that the best solution by now is to revert the behaviour and simply
+    show the message whenever there are packages to show.  The only harm is if
+    people complain again that it's too verbose, but probably nobody is using
+    "-q" in practice to avoid having this message printed.
+
+    A proper implementation would involve to clean-up the mess of quiet/verbose
+    and convert it to only one single variable, and act verbosely accordinly,
+    and perhaps tie the condition of showing progress of operations on another
+    variable/mechanism.
+
 - User visible changes:
 
   * Make boundaries of sessions in the log file more clear (Closes: #269275)
