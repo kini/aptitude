@@ -1,6 +1,7 @@
 // pkg_node.cc
 //
 //  Copyright 1999, 2000, 2002, 2005 Daniel Burrows
+//  Copyright 2014-2015 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,10 +17,6 @@
 //  along with this program; see the file COPYING.  If not, write to
 //  the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 //  Boston, MA 02111-1307, USA.
-//
-//  Implementations of stuff in pkg_node.h
-
-#include <cwidget/config/keybindings.h>
 
 #include "pkg_node.h"
 
@@ -31,6 +28,7 @@
 
 #include <generic/util/undo.h>
 
+#include <cwidget/config/keybindings.h>
 #include <cwidget/widgets/tree.h>
 
 namespace cw = cwidget;
@@ -112,13 +110,11 @@ bool pkg_tree_node::package_enabled()
 bool pkg_tree_node::package_install()
 {
   return package_action(&pkg_tree_node::select);
-
 }
 
 bool pkg_tree_node::package_reinstall()
 {
   return package_action(&pkg_tree_node::reinstall);
-
 }
 
 bool pkg_tree_node::package_remove()
