@@ -1,6 +1,7 @@
 // pkg_item.h  -*-c++-*-
 //
 //  Copyright 1999-2005, 2007 Daniel Burrows
+//  Copyright 2014-2015 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -69,7 +70,7 @@ public:
   virtual void remove(undo_group *undo);
   virtual void purge(undo_group *undo);
   virtual void reinstall(undo_group *undo);
-  virtual void set_auto(bool isauto, undo_group *undo);
+  virtual void set_auto(bool value, undo_group *undo);
   virtual void forbid_upgrade(undo_group *undo);
 
   virtual cwidget::style get_highlight_style();

@@ -1,7 +1,7 @@
 // pkg_ver_item.h (This is -*-c++-*-)
 //
 //  Copyright 1999-2002, 2004-2005, 2007-2008 Daniel Burrows
-//  Copyright 2015 Manuel A. Fernandez Montecelo
+//  Copyright 2014-2015 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -98,7 +98,7 @@ public:
   virtual void remove(undo_group *undo);
   virtual void purge(undo_group *undo);
   virtual void reinstall(undo_group *undo);
-  virtual void set_auto(bool isauto, undo_group *undo);
+  virtual void set_auto(bool value, undo_group *undo);
 
   virtual void forbid_version(undo_group *undo);
 
