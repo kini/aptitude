@@ -518,11 +518,11 @@ pkg_ver_item::pkg_ver_item(const pkgCache::VerIterator &_version, pkg_signal *_s
   highlighted_changed.connect(sigc::mem_fun(this, &pkg_ver_item::do_highlighted_changed));
 }
 
-#define MAYBE_HIGHLIGHTED(x) (highlighted ? (x "Highlighted") : (x))
-
 cw::style pkg_ver_item::ver_style(pkgCache::VerIterator version,
 			      bool highlighted)
 {
+#define MAYBE_HIGHLIGHTED(x) (highlighted ? (x "Highlighted") : (x))
+
   pkgCache::PkgIterator pkg=version.ParentPkg();
   pkgDepCache::StateCache &state=(*apt_cache_file)[pkg];
 
@@ -551,6 +551,8 @@ cw::style pkg_ver_item::ver_style(pkgCache::VerIterator version,
 
   else
     return cw::get_style(MAYBE_HIGHLIGHTED("PkgIsInstalled"));
+
+#undef MAYBE_HIGHLIGHTED
 }
 
 void pkg_ver_item::paint(cw::tree *win, int y, bool hierarchical,

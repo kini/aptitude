@@ -250,10 +250,10 @@ cw::style pkg_item::get_normal_style()
   return cw::treeitem::get_normal_style() + pkg_style(package, false);
 }
 
-#define MAYBE_HIGHLIGHTED(x) (highlighted ? (x "Highlighted") : (x))
-
 cw::style pkg_item::pkg_style(pkgCache::PkgIterator package, bool highlighted)
 {
+#define MAYBE_HIGHLIGHTED(x) (highlighted ? (x "Highlighted") : (x))
+
   if(package.VersionList().end())
     {
       bool present_now=false, present_inst=false;
@@ -303,6 +303,8 @@ cw::style pkg_item::pkg_style(pkgCache::PkgIterator package, bool highlighted)
       else
 	return cw::get_style(MAYBE_HIGHLIGHTED("PkgIsInstalled"));
     }
+
+#undef MAYBE_HIGHLIGHTED
 }
 
 void pkg_item::paint(cw::tree *win, int y, bool hierarchical, const cw::style &st)
