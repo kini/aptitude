@@ -1,6 +1,7 @@
 // pkg_subtree.h (this is -*-c++-*-)
 //
 //  Copyright 1999-2002, 2004-2005, 2007-2008 Daniel Burrows
+//  Copyright 2015 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -78,6 +79,7 @@ public:
   virtual void purge(undo_group *undo);
   virtual void reinstall(undo_group *undo);
   virtual void set_auto(bool isauto, undo_group *undo);
+  virtual void forbid_upgrade(undo_group *undo);
 
   /** \brief Set the parent of this tree for the purposes of package counting.
    *

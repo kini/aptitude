@@ -99,8 +99,7 @@ public:
   virtual void purge(undo_group *undo);
   virtual void reinstall(undo_group *undo);
   virtual void set_auto(bool value, undo_group *undo);
-
-  virtual void forbid_version(undo_group *undo);
+  virtual void forbid_upgrade(undo_group *undo);
 
   void show_information();
 

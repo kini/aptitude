@@ -348,16 +348,6 @@ bool pkg_item::dispatch_key(const cw::config::key &k, cw::tree *owner)
       else
 	delete grp;
     }
-  else if(bindings->key_matches(k, "ForbidUpgrade"))
-    {
-      undo_group *grp=new apt_undo_group;
-      forbid_upgrade(grp);
-
-      if(!grp->empty())
-	apt_undos->add_item(grp);
-      else
-	delete grp;
-    }
   else if(bindings->key_matches(k, "BugReport"))
     {
       // Try to report a bug on the package.  (ew quoting ew)

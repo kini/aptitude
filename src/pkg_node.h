@@ -51,14 +51,15 @@ class pkg_tree_node:virtual public cwidget::widgets::treeitem, public menu_redir
    */
   bool package_action(void (pkg_tree_node::* action)(undo_group *));
 public:
-  virtual void select(undo_group *undo)=0;
-  virtual void hold(undo_group *undo)=0;
-  virtual void keep(undo_group *undo)=0;
-  virtual void remove(undo_group *undo)=0;
-  virtual void purge(undo_group *undo)=0;
-  virtual void reinstall(undo_group *undo)=0;
+  virtual void select(undo_group *undo) = 0;
+  virtual void hold(undo_group *undo) = 0;
+  virtual void keep(undo_group *undo) = 0;
+  virtual void remove(undo_group *undo) = 0;
+  virtual void purge(undo_group *undo) = 0;
+  virtual void reinstall(undo_group *undo) = 0;
   // set_auto is idempotent!  No stupid toggling stuff.
-  virtual void set_auto(bool value, undo_group *undo)=0;
+  virtual void set_auto(bool value, undo_group *undo) = 0;
+  virtual void forbid_upgrade(undo_group *undo) = 0;
 
   void mark_auto(undo_group *undo) {set_auto(true, undo);}
   void unmark_auto(undo_group *undo) {set_auto(false, undo);}

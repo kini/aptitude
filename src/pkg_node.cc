@@ -66,6 +66,8 @@ bool pkg_tree_node::dispatch_key(const cw::config::key &k, cw::tree *owner)
     set_auto(true, grp);
   else if(bindings->key_matches(k, "ClearAuto"))
     set_auto(false, grp);
+  else if(bindings->key_matches(k, "ForbidUpgrade"))
+    forbid_upgrade(grp);
   else
     {
       delete grp;

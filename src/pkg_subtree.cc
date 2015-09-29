@@ -1,6 +1,7 @@
 // pkg_subtree.cc
 //
 //  Copyright 1999-2005, 2007-2008 Daniel Burrows
+//  Copyright 2015 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,8 +17,6 @@
 //  along with this program; see the file COPYING.  If not, write to
 //  the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 //  Boston, MA 02111-1307, USA.
-//
-//  (trivial :) ) implementations for pkg_subtree.h
 
 #include "pkg_subtree.h"
 
@@ -121,6 +120,11 @@ void pkg_subtree::set_auto(bool isauto, undo_group *undo)
 
   for(child_iterator i=get_children_begin(); i!=get_children_end(); i++)
     (*i)->set_auto(isauto, undo);
+}
+
+void pkg_subtree::forbid_upgrade(undo_group *undo)
+{
+  // no implementation of this action for subtrees
 }
 
 void pkg_subtree::inc_num_packages()

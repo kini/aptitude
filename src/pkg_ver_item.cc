@@ -676,7 +676,7 @@ void pkg_ver_item::set_auto(bool value, undo_group *undo)
     }
 }
 
-void pkg_ver_item::forbid_version(undo_group *undo)
+void pkg_ver_item::forbid_upgrade(undo_group *undo)
 {
   if(version!=version.ParentPkg().CurrentVer())
     (*apt_cache_file)->forbid_upgrade(version.ParentPkg(), version.VerStr(), undo);
@@ -724,18 +724,6 @@ bool pkg_ver_item::dispatch_key(const cw::config::key &k, cw::tree *owner)
   else if(bindings->key_matches(k, "Changelog"))
     {
       view_changelog(version);
-      return true;
-    }
-  else if(bindings->key_matches(k, "ForbidUpgrade"))
-    {
-      undo_group *grp=new apt_undo_group;
-      forbid_version(grp);
-
-      if(!grp->empty())
-	apt_undos->add_item(grp);
-      else
-	delete grp;
-
       return true;
     }
   else if(bindings->key_matches(k, "BugReport"))
@@ -787,7 +775,7 @@ bool pkg_ver_item::package_forbid()
 {
   undo_group *grp = new apt_undo_group;
 
-  forbid_version(grp);
+  forbid_upgrade(grp);
 
   if(!grp->empty())
     apt_undos->add_item(grp);
