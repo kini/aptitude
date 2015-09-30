@@ -1231,6 +1231,15 @@ void aptitudeDepCache::internal_mark_delete(const PkgIterator &Pkg,
 					    bool Purge,
 					    bool unused_delete)
 {
+  // honour ::Purge-Unused in the main entry point for removing packages, it
+  // should catch cases of automatically installed and unused packages not
+  // purged (#724034 and others)
+  bool purge_unused = aptcfg->FindB(PACKAGE "::Purge-Unused", false);
+  if (unused_delete && purge_unused)
+    {
+      Purge = true;
+    }
+
   dirty=true;
 
   bool previously_to_delete=(*this)[Pkg].Delete();
