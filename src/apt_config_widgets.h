@@ -25,8 +25,6 @@
 #include <cwidget/widgets/editline.h>
 #include <cwidget/widgets/radiogroup.h>
 
-#include <sigc++/object.h>
-
 #include <string>
 #include <vector>
 
