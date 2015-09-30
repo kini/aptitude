@@ -1,6 +1,7 @@
 // apt.h  -*-c++-*-
 //
 //  Copyright 1999-2002, 2004-2005, 2007-2010 Daniel Burrows
+//  Copyright 2015 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -264,6 +265,57 @@ pkgCache::VerIterator install_version(const pkgCache::PkgIterator &pkg,
  */
 pkgCache::DepIterator is_conflicted(const pkgCache::VerIterator &ver,
 				    aptitudeDepCache &cache);
+
+/** Check if the auto-installed package can be removed, or if installed or
+ * to-be-installed packages depend on it.
+ *
+ * @param pkg The package to check
+ *
+ * @cache Dependency cache
+ *
+ * @param follow_recommends Whether to follow recommends
+ *
+ * @param follow_suggests Whether to follow suggests
+ *
+ * @return Whether the action is allowed or not.
+ */
+bool can_remove_autoinstalled(const pkgCache::PkgIterator& pkg,
+			      aptitudeDepCache& cache,
+			      bool follow_recommends,
+			      bool follow_suggests);
+
+/** Check if package is virtual
+ *
+ * @param pkg The package to check
+ *
+ * @return Whether the package is virtual or not
+ */
+inline bool is_virtual(const pkgCache::PkgIterator& pkg)
+{
+  return (pkg.VersionList().end() && ! pkg.ProvidesList().end());
+}
+
+/** Check if package is installed
+ *
+ * @param pkg The package to check
+ *
+ * @return Whether the package is installed or not
+ */
+inline bool is_installed(const pkgCache::PkgIterator& pkg)
+{
+  return (pkg->CurrentState != pkgCache::State::NotInstalled && pkg->CurrentState != pkgCache::State::ConfigFiles);
+}
+
+/** Check if package is auto installed
+ *
+ * @param state State of the package to check
+ *
+ * @return Whether the package is auto installed or not
+ */
+inline bool is_auto_installed(const pkgDepCache::StateCache& state)
+{
+  return (state.Flags & pkgCache::Flag::Auto);
+}
 
 /** A pair (veriterator,verfile) -- used for building a list of
  *  versions sorted by file location.
