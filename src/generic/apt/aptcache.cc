@@ -1152,10 +1152,14 @@ void aptitudeDepCache::cleanup_after_change(undo_group *undo,
 	      PkgState[pkg->ID].Garbage != backup_state.PkgState[pkg->ID].Garbage ||
 	      package_states[pkg->ID].user_tags != backup_state.AptitudeState[pkg->ID].user_tags ||
 	      package_states[pkg->ID].new_package != backup_state.AptitudeState[pkg->ID].new_package)
-	visibly_changed = true;
+	{
+	  visibly_changed = true;
+	}
 
       if(visibly_changed && changed_packages != NULL)
-	changed_packages->insert(pkg);
+	{
+	  changed_packages->insert(pkg);
+	}
     }
 }
 
@@ -1250,6 +1254,107 @@ void aptitudeDepCache::internal_mark_delete(const PkgIterator &Pkg,
 	get_ext_state(Pkg).remove_reason=unused;
       else
 	get_ext_state(Pkg).remove_reason=manual;
+    }
+
+  // after marking a package for delete, check all the dependencies to see if
+  // they can be pro-actively marked for removal (because no other package
+  // depends on them).
+  //
+  // apt sometimes marks them as "Garbage", and so sweep() routines catch them
+  // later and they get removed within the same aptitude run, but sometimes it
+  // is not so, and they are only marked for removal in future sessions (see
+  // #637257, #478116 -- among many others).  so here is an attempt to directly
+  // mark for delete depends which seem safe to remove, because they are
+  // automatically installed and don't have other remaining rdeps.
+
+  if (!aptcfg->FindB(PACKAGE "::Delete-Unused", true))
+    return;
+
+  if (Pkg.CurrentVer().end())
+    return;
+
+  // from now and for the remaining of this function, these are "unused
+  // deletes", so set variable accordingly
+  unused_delete = true;
+
+  // not to purge unused lightly, can cause data loss -- see comments in #661188
+  Purge = aptcfg->FindB(PACKAGE "::Purge-Unused", false);
+
+  bool follow_recommends = aptcfg->FindB("Apt::Install-Recommends", true) || aptcfg->FindB(PACKAGE "::Keep-Recommends", false);
+  bool follow_suggests   = aptcfg->FindB(PACKAGE "::Keep-Suggests", false) || aptcfg->FindB(PACKAGE "::Suggests-Important", false);
+
+  for (pkgCache::DepIterator dep = Pkg.CurrentVer().DependsList(); !dep.end(); ++dep)
+    {
+      // if not a valid target, not consider
+      auto dep_pkg = dep.TargetPkg();
+      if (dep_pkg.end())
+	{
+	  continue;
+	}
+
+      // consider only these type of dependencies
+      if (! ((dep->Type == pkgCache::Dep::Depends) ||
+	     (dep->Type == pkgCache::Dep::PreDepends) ||
+	     (dep->Type == pkgCache::Dep::Recommends && follow_recommends) ||
+	     (dep->Type == pkgCache::Dep::Suggests   && follow_suggests)))
+	{
+	  continue;
+	}
+
+      // special case for virtual packages
+      //
+      // if the considered dependency is a virtual package, look if both the
+      // virtual and provider packages can be removed (if they do not have other
+      // rdeps installed, etc)
+      if (is_virtual(dep_pkg))
+	{
+	  // consider all provided virtual packages
+	  for (pkgCache::PrvIterator dep_prv = dep_pkg.ProvidesList(); !dep_prv.end(); ++dep_prv)
+	    {
+	      // virtual package itself
+	      if (! can_remove_autoinstalled(dep_pkg, (*this), follow_recommends, follow_suggests)) {
+		continue;
+	      }
+
+	      // real package
+	      if (! can_remove_autoinstalled(dep_prv.OwnerPkg(), (*this), follow_recommends, follow_suggests)) {
+		continue;
+	      }
+
+	      // if we reach here, can delete the real package providing the
+	      // dependency
+	      internal_mark_delete(dep_prv.OwnerPkg(), Purge, unused_delete);
+	    }
+
+	  // it was a virtual package -- so stop processing the considered
+	  // dependency
+	  continue;
+	}
+
+      // if not virtual and no current version installed, no need to consider
+      auto dep_ver = dep_pkg.CurrentVer();
+      if (dep_ver.end())
+	{
+	  continue;
+	}
+
+      // consider only automatically installed dependencies, or dependencies
+      // which are not required on their own right
+      pkgDepCache::StateCache& state = (*this)[dep_pkg];
+      bool is_auto = is_auto_installed(state);
+      bool is_not_required = ! ((state.Flags & pkgCache::Flag::Essential) ||
+				(state.Flags & pkgCache::Flag::Important) ||
+				(dep_ver->Priority == pkgCache::State::Important) ||
+				(dep_ver->Priority == pkgCache::State::Required));
+
+      if (is_installed(dep_pkg) && is_auto && is_not_required)
+	{
+	  if (! can_remove_autoinstalled(dep_pkg, (*this), follow_recommends, follow_suggests)) {
+	    continue;
+	  }
+
+	  internal_mark_delete(dep_pkg, Purge, unused_delete);
+	}
     }
 }
 
@@ -1900,14 +2005,22 @@ namespace
     for(pkgCache::DepIterator dep = maybeOrphan.RevDependsList();
 	!dep.end(); ++dep)
       {
-	if(dep.ParentPkg() != maybeOrphan &&
-	   (dep->Type == pkgCache::Dep::Depends ||
-	    dep->Type == pkgCache::Dep::PreDepends))
+	if ((dep.ParentPkg() != maybeOrphan) &&
+	    (dep->Type == pkgCache::Dep::Depends || dep->Type == pkgCache::Dep::PreDepends))
 	  {
+	    // only consider installed or to be installed packages
+	    const pkgDepCache::StateCache& state = cache[dep.ParentPkg()];
+	    if ( ! (state.Install() || (is_installed(dep.ParentPkg()) && ! state.Delete())))
+	      {
+		continue;
+	      }
+
 	    if(_system->VS->CheckDep(maybeOrphanCurrentVer.VerStr(),
 				     dep->CompareOp,
 				     dep.TargetVer()))
-	      trace_not_orphaned(maybeOrphan, reinstated, cache, not_orphaned);
+	      {
+		trace_not_orphaned(maybeOrphan, reinstated, cache, not_orphaned);
+	      }
 	  }
       }
 
@@ -1917,14 +2030,22 @@ namespace
       for(pkgCache::DepIterator dep = prv.ParentPkg().RevDependsList();
 	  !dep.end(); ++dep)
 	{
-	  if(dep.ParentPkg() != maybeOrphan &&
-	     (dep->Type == pkgCache::Dep::Depends ||
-	      dep->Type == pkgCache::Dep::PreDepends))
+	  if ((dep.ParentPkg() != maybeOrphan) &&
+	      (dep->Type == pkgCache::Dep::Depends || dep->Type == pkgCache::Dep::PreDepends))
 	    {
+	      // only consider installed or to be installed packages
+	      const pkgDepCache::StateCache& state = cache[dep.ParentPkg()];
+	      if ( ! (state.Install() || (is_installed(dep.ParentPkg()) && ! state.Delete())))
+		{
+		  continue;
+		}
+
 	      if(_system->VS->CheckDep(prv.ProvideVersion(),
 				       dep->CompareOp,
 				       dep.TargetVer()))
-		trace_not_orphaned(maybeOrphan, reinstated, cache, not_orphaned);
+		{
+		  trace_not_orphaned(maybeOrphan, reinstated, cache, not_orphaned);
+		}
 	    }
 	}
   }
@@ -2014,7 +2135,6 @@ void aptitudeDepCache::sweep()
 	    {
 	      LOG_DEBUG(logger, "aptitudeDepCache::sweep(): provisionally scheduling "
 			<< pkg.FullName(false) << " for reinstatement.");
-
 
 	      reinstated.insert(pkg);
 	    }

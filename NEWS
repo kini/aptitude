@@ -66,6 +66,30 @@ Version 0.7.3 UNRELEASED
     Now it will advance the selection to the next line after marking a package
     with 'F', if that option is enabled.
 
+  * Remove unneeded automatically installed packages in the same action
+    (Closes: #478116, #564545, #637257, #368037, #486454, #738517, #789803,
+    #779999, #756507, #759764)
+
+    There were some cases where manually installed packages were removed/purged,
+    but dependencies that were needed only by these packages (marked as
+    automatically installed, and unused after the removal of the main package)
+    were not removed as part of the the same "action", due to interactions
+    between aptitude (in find_not_orphaned()) and libapt.
+
+    The packages were detected as "garbage" in subsequent runs of apt (offering
+    to "autoremove" them), aptitude in the command line, or further actions
+    within the interactive session of aptitude; but nevertheless this caused
+    numerous complaints about aptitude not removing the "cruft" (sometimes
+    assuming that because it was not removed immediately, it will not be removed
+    later either).
+
+    Now, as part of the removal of a package and unless the option
+    "::Delete-Unused" is set to true (defaults to false); aptitude pro-actively
+    marks for removal the dependencies of the package marked as automatic and
+    not used by other packages; and find_not_orphaned() was modified to only
+    have into account installed packages or to-be-installed packages to prevent
+    removals.
+
 - User visible changes:
 
   * Make boundaries of sessions in the log file more clear (Closes: #269275)
