@@ -1532,12 +1532,17 @@ void aptitudeDepCache::mark_auto_installed(const PkgIterator &Pkg,
       return;
     }
 
-  action_group group(*this, undo);
+  // it is faster to check first
+  bool current_value = is_auto_installed((*this)[Pkg]);
+  if (set_auto != current_value)
+    {
+      action_group group(*this, undo);
 
-  pre_package_state_changed();
-  dirty=true;
+      pre_package_state_changed();
+      dirty=true;
 
-  MarkAuto(Pkg, set_auto);
+      MarkAuto(Pkg, set_auto);
+    }
 }
 
 // Undoers for the tag manipulators below.
