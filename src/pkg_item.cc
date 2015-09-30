@@ -222,7 +222,8 @@ void pkg_item::forbid_upgrade(undo_group *undo)
 
 void pkg_item::set_auto(bool value, undo_group *undo)
 {
-  bool current_value = (*apt_cache_file)[package].Flags & pkgCache::Flag::Auto;
+  // it is faster to check first
+  bool current_value = is_auto_installed((*apt_cache_file)[package]);
 
   if (value != current_value)
     {

@@ -668,7 +668,8 @@ void pkg_ver_item::reinstall(undo_group *undo)
 
 void pkg_ver_item::set_auto(bool value, undo_group *undo)
 {
-  bool current_value = (*apt_cache_file)[version.ParentPkg()].Flags & pkgCache::Flag::Auto;
+  // it is faster to check first
+  bool current_value = is_auto_installed((*apt_cache_file)[version.ParentPkg()]);
 
   if (value != current_value)
     {
