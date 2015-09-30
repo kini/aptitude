@@ -1096,13 +1096,6 @@ void aptitudeDepCache::cleanup_after_change(undo_group *undo,
 	  // hard to track down bugs like #432411.
 	  pre_package_state_changed();
 
-	  int n=pkg->ID;
-	  n=n;
-	  char curM=PkgState[pkg->ID].Mode;
-	  curM=curM;
-	  char oldM=backup_state.PkgState[pkg->ID].Mode;
-	  oldM=oldM;
-
 	  if(alter_stickies &&
 	     PkgState[pkg->ID].Mode!=backup_state.PkgState[pkg->ID].Mode &&
 	     package_states[pkg->ID].selection_state==backup_state.AptitudeState[pkg->ID].selection_state)
