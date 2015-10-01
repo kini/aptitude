@@ -693,7 +693,7 @@ int main(int argc, char *argv[])
   bool simulate = aptcfg->FindB(PACKAGE "::CmdLine::Simulate", false) ||
     aptcfg->FindB(PACKAGE "::Simulate", false);
   bool download_only=aptcfg->FindB(PACKAGE "::CmdLine::Download-Only", false);;
-  bool arch_only = aptcfg->FindB("Apt::Get::Arch-Only", false);
+  bool arch_only = aptcfg->FindB("APT::Get::Arch-Only", false);
 
   bool update_only=false, install_only=false, queue_only=false;
   bool autoclean_only = false;
@@ -821,11 +821,11 @@ int main(int argc, char *argv[])
 	  seen_quiet = true;
 	  break;
 	case 'r':
-	  aptcfg->SetNoUser("Apt::Install-Recommends", "true");
+	  aptcfg->SetNoUser("APT::Install-Recommends", "true");
 	  break;
 	case 'R':
-	  aptcfg->SetNoUser("Apt::Install-Recommends", "false");
-	  aptcfg->SetNoUser("Apt::AutoRemove::RecommendsImportant", "true");
+	  aptcfg->SetNoUser("APT::Install-Recommends", "false");
+	  aptcfg->SetNoUser("APT::AutoRemove::RecommendsImportant", "true");
 	  break;
 	case 't':
 	  aptcfg->SetNoUser("APT::Default-Release", optarg);

@@ -185,7 +185,7 @@ resolver_manager::resolver_manager(aptitudeCacheFile *_cache_file,
   (*cache_file)->pre_package_state_changed.connect(sigc::mem_fun(this, &resolver_manager::discard_resolver));
   (*cache_file)->package_state_changed.connect(sigc::mem_fun(this, &resolver_manager::maybe_create_resolver));
 
-  aptcfg->connect("Apt::Install-Recommends",
+  aptcfg->connect("APT::Install-Recommends",
 		  sigc::mem_fun(this,
 				&resolver_manager::discard_resolver));
 

@@ -4761,7 +4761,7 @@ msgstr ""
 msgid ""
 "More precisely: they will be removed when there is no path via Depends, "
 "PreDepends, or Recommends to them from a manually installed package.  If "
-"<link linkend='configApt-AutoRemove-SuggestsImportant'>Apt::AutoRemove::"
+"<link linkend='configApt-AutoRemove-SuggestsImportant'>APT::AutoRemove::"
 "SuggestsImportant</link> is true, a Suggests relationship is also enough to "
 "keep a package installed."
 msgstr ""
@@ -4885,7 +4885,7 @@ msgstr ""
 #: en/aptitude.xml:4054
 msgid ""
 "If the configuration option <link linkend='configAptInstall-"
-"Recommends'><literal>Apt::Install-Recommends</literal></link> is "
+"Recommends'><literal>APT::Install-Recommends</literal></link> is "
 "<literal>true</literal>, &aptitude; will always attempt to fulfill "
 "<quote>new</quote> and <quote>previously satisfied</quote> recommendations; "
 "all others will be ignored by immediate resolution.  If that option is "
@@ -13124,7 +13124,7 @@ msgstr ""
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:10698
-msgid "<literal>Apt::AutoRemove::RecommendsImportant</literal>"
+msgid "<literal>APT::AutoRemove::RecommendsImportant</literal>"
 msgstr ""
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
@@ -13145,14 +13145,14 @@ msgid ""
 "If this option is <literal>true</literal>, then &aptitude; will not consider "
 "packages to be unused (and thus will not automatically remove them) as long "
 "as any installed package recommends them, even if <literal><link "
-"linkend='configAptInstall-Recommends'>Apt::Install-Recommends</link></"
+"linkend='configAptInstall-Recommends'>APT::Install-Recommends</link></"
 "literal> is <literal>false</literal>.  For more information, see <xref "
 "linkend='secAutoInstall'/>."
 msgstr ""
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:10714
-msgid "<literal>Apt::AutoRemove::SuggestsImportant</literal>"
+msgid "<literal>APT::AutoRemove::SuggestsImportant</literal>"
 msgstr ""
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
@@ -13166,13 +13166,13 @@ msgstr ""
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:10727
-msgid "<literal>Apt::Get::List-Cleanup</literal>"
+msgid "<literal>APT::Get::List-Cleanup</literal>"
 msgstr ""
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:10731
 msgid ""
-"A synonym for <literal><link linkend='configApt-ListCleanup'>Apt::List-"
+"A synonym for <literal><link linkend='configApt-ListCleanup'>APT::List-"
 "Cleanup</link></literal>.  If either of these options is set to "
 "<literal>false</literal>, &aptitude; will not delete old package list files "
 "after downloading a new set of package lists."
@@ -13180,13 +13180,13 @@ msgstr ""
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:10741
-msgid "<literal>Apt::List-Cleanup</literal>"
+msgid "<literal>APT::List-Cleanup</literal>"
 msgstr ""
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:10745
 msgid ""
-"A synonym for <literal><link linkend='configApt-Get-ListCleanup'>Apt::Get::"
+"A synonym for <literal><link linkend='configApt-Get-ListCleanup'>APT::Get::"
 "List-Cleanup</link></literal>.  If either of these options is set to "
 "<literal>false</literal>, &aptitude; will not delete old package list files "
 "after downloading a new set of package lists."
@@ -13194,7 +13194,7 @@ msgstr ""
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:10755
-msgid "<literal>Apt::Install-Recommends</literal>"
+msgid "<literal>APT::Install-Recommends</literal>"
 msgstr ""
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
@@ -13418,7 +13418,7 @@ msgstr ""
 msgid ""
 "In command-line mode, causes &aptitude; to ignore the installation of <link "
 "linkend='secTrust'>untrusted packages</link>.  This is a synonym for "
-"<literal>Apt::Get::AllowUnauthenticated</literal>."
+"<literal>APT::Get::AllowUnauthenticated</literal>."
 msgstr ""
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
@@ -13891,10 +13891,10 @@ msgid ""
 "In previous versions of &aptitude;, the setting <literal>Aptitude::"
 "Recommends-Important</literal> caused recommendations to be installed "
 "automatically, the same way that <literal><link linkend='configAptInstall-"
-"Recommends'>Apt::Install-Recommends</link></literal> does today.  If this "
+"Recommends'>APT::Install-Recommends</link></literal> does today.  If this "
 "option is set to <literal>false</literal> and <literal>Aptitude::Recommends-"
 "Important</literal> is also set to <literal>false</literal>, &aptitude; will "
-"set <literal><link linkend='configAptInstall-Recommends'>Apt::Install-"
+"set <literal><link linkend='configAptInstall-Recommends'>APT::Install-"
 "Recommends</link></literal> to <literal>false</literal> and set "
 "<literal>Aptitude::Ignore-Recommends-Important</literal> to <literal>true</"
 "literal> on startup."
@@ -13909,10 +13909,10 @@ msgstr ""
 #: en/aptitude.xml:11372
 msgid ""
 "This is an obsolete option; use <literal><link linkend='configApt-AutoRemove-"
-"RecommendsImportant'>Apt::AutoRemove::RecommendsImportant</link></literal> "
+"RecommendsImportant'>APT::AutoRemove::RecommendsImportant</link></literal> "
 "instead.  Setting this option to <literal>true</literal> has the same effect "
 "as setting <literal><link linkend='configApt-AutoRemove-"
-"RecommendsImportant'>Apt::AutoRemove::RecommendsImportant</link></literal> "
+"RecommendsImportant'>APT::AutoRemove::RecommendsImportant</link></literal> "
 "to <literal>true</literal>."
 msgstr ""
 
@@ -13925,10 +13925,10 @@ msgstr ""
 #: en/aptitude.xml:11388 en/aptitude.xml:12129
 msgid ""
 "This is an obsolete option; use <literal><link linkend='configApt-AutoRemove-"
-"SuggestsImportant'>Apt::AutoRemove::SuggestsImportant</link></literal> "
+"SuggestsImportant'>APT::AutoRemove::SuggestsImportant</link></literal> "
 "instead.  Setting this option to <literal>true</literal> has the same effect "
 "as setting <literal><link linkend='configApt-AutoRemove-"
-"SuggestsImportant'>Apt::AutoRemove::SuggestsImportant</link></literal> to "
+"SuggestsImportant'>APT::AutoRemove::SuggestsImportant</link></literal> to "
 "<literal>true</literal>."
 msgstr ""
 
@@ -14728,9 +14728,9 @@ msgstr ""
 #: en/aptitude.xml:12007
 msgid ""
 "This is an obsolete configuration option that has been superseded by <link "
-"linkend='configAptInstall-Recommends'><literal>Apt::Install-Recommends</"
+"linkend='configAptInstall-Recommends'><literal>APT::Install-Recommends</"
 "literal></link>.  On startup, &aptitude; will copy <literal>Aptitude::"
-"Recommends-Important</literal> (if it exists) to <literal>Apt::Install-"
+"Recommends-Important</literal> (if it exists) to <literal>APT::Install-"
 "Recommends</literal> and then clear <literal>Aptitude::Recommends-Important</"
 "literal> in your user configuration file."
 msgstr ""
@@ -18589,19 +18589,19 @@ msgstr ""
 #, fuzzy
 #| msgid ""
 #| "This corresponds to the pair of configuration options <literal><link "
-#| "linkend='configAptInstall-Recommends'>Apt::Install-Recommends</link></"
+#| "linkend='configAptInstall-Recommends'>APT::Install-Recommends</link></"
 #| "literal> and <literal><link linkend='configApt-AutoRemove-"
-#| "RecommendsImportant'>Apt::AutoRemove::InstallRecommends</link></literal>."
+#| "RecommendsImportant'>APT::AutoRemove::InstallRecommends</link></literal>."
 msgid ""
 "This corresponds to the pair of configuration options <literal><link "
-"linkend='configAptInstall-Recommends'>Apt::Install-Recommends</link></"
+"linkend='configAptInstall-Recommends'>APT::Install-Recommends</link></"
 "literal> and <literal><link linkend='configApt-AutoRemove-"
-"RecommendsImportant'>Apt::AutoRemove::RecommendsImportant</link></literal>."
+"RecommendsImportant'>APT::AutoRemove::RecommendsImportant</link></literal>."
 msgstr ""
 "Jest to odpowiednik opcji konfiguracyjnych <literal><link "
-"linkend='configAptInstall-Recommends'>Apt::Install-Recommends</link></"
+"linkend='configAptInstall-Recommends'>APT::Install-Recommends</link></"
 "literal> i <literal><link linkend='configApt-AutoRemove-"
-"RecommendsImportant'>Apt::AutoRemove::InstallRecommends</link></literal>."
+"RecommendsImportant'>APT::AutoRemove::InstallRecommends</link></literal>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: en/manpage.xml:1712
@@ -18623,11 +18623,11 @@ msgstr ""
 #: en/manpage.xml:1721
 msgid ""
 "This corresponds to the configuration option <literal><link "
-"linkend='configAptInstall-Recommends'>Apt::Install-Recommends</link></"
+"linkend='configAptInstall-Recommends'>APT::Install-Recommends</link></"
 "literal>"
 msgstr ""
 "Jest to odpowiednik opcji konfiguracyjnej <literal><link "
-"linkend='configAptInstall-Recommends'>Apt::Install-Recommends</link></"
+"linkend='configAptInstall-Recommends'>APT::Install-Recommends</link></"
 "literal>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>

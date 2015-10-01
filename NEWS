@@ -100,6 +100,15 @@ Version 0.7.3 UNRELEASED
 
   * [curses] Print message when starting to perform actions (Closes: #323371)
 
+  * Use uppercase APT:: for apt config vars, for consistency (Closes: #519425)
+
+    Both APT:: and Apt:: (the other common form that we were using) are valid,
+    in fact they are case-agnostic.  But for internal consistency and specially
+    for consistency with APT documentation (apt.conf), use the uppercase form.
+    
+    This mostly affects documentation, but also some code and translations.  It
+    was substituted automatically in all translations.
+
 - Internal changes:
 
   * temp.cc: simplify code and messages and reduce the use of boost libs

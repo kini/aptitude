@@ -1125,7 +1125,7 @@ static bool internal_is_interesting_dep(const pkgCache::DepIterator &d,
   else if(const_cast<pkgCache::DepIterator &>(d).IsCritical())
     return true;
   else if(d->Type != pkgCache::Dep::Recommends ||
-	  !aptcfg->FindB("Apt::Install-Recommends", true))
+	  !aptcfg->FindB("APT::Install-Recommends", true))
     return false;
   else
     {

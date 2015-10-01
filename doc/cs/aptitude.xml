@@ -9376,7 +9376,7 @@ a <citerefentry><refentrytitle>apt.conf</refentrytitle>
     <segtitle>Popis</segtitle>
 
     <seglistitem id="configAptInstall-Recommends">
-      <seg><literal>Apt::Install-Recommends</literal></seg>
+      <seg><literal>APT::Install-Recommends</literal></seg>
       <seg><literal>true</literal></seg>
       <seg>
 
@@ -9540,7 +9540,7 @@ závislostí poškozených balíků. To je ekvivalentní k parametru
 
 Způsobí, že &aptitude; bude v příkazovém režimu ignorovat instalaci
 <link linkend="secTrust">nedůvěryhodných balíků</link>. Jedná se
-o synonymum k <literal>Apt::Get::AllowUnauthenticated</literal>.
+o synonymum k <literal>APT::Get::AllowUnauthenticated</literal>.
 
       </seg>
     </seglistitem>
@@ -9890,18 +9890,18 @@ programu.
 
 Tato volba pomáhá k migraci ze starší volby
 <literal>Aptitude::Recommends-Important</literal> na novější
-<literal><link linkend="configAptInstall-Recommends">Apt::Install-Recommends</link></literal>.
+<literal><link linkend="configAptInstall-Recommends">APT::Install-Recommends</link></literal>.
 
 V předchozích verzích &aptitude; způsobovalo nastavení
 <literal>Aptitude::Recommends-Important</literal> to stejné, co nyní
 dělá volba
-<literal><link linkend="configAptInstall-Recommends">Apt::Install-Recommends</link></literal>,
+<literal><link linkend="configAptInstall-Recommends">APT::Install-Recommends</link></literal>,
 a sice, že se doporučené balíky instalují automaticky.
 
 Pokud mají tato volba a volba <literal>Aptitude::Recommends-Important</literal>
 zároveň hodnotu <literal>false</literal>, nastaví &aptitude; při
 příštím startu volbu
-<literal><link linkend="configAptInstall-Recommends">Apt::Install-Recommends</link></literal>
+<literal><link linkend="configAptInstall-Recommends">APT::Install-Recommends</link></literal>
 na hodnotu <literal>false</literal> a volbu
 <literal>Aptitude::Ignore-Recommends-Important</literal> na hodnotu
 <literal>true</literal>.
@@ -9935,7 +9935,7 @@ objevil.
 Má-li volba hodnotu <literal>true</literal>, budou balíky ponechány v
 systému tak dlouho, dokud je bude doporučovat některý z instalovaných
 balíků. A to i v případě, že má volba
-<literal><link linkend="configAptInstall-Recommends">Apt::Install-Recommends</link></literal>
+<literal><link linkend="configAptInstall-Recommends">APT::Install-Recommends</link></literal>
 hodnotu <literal>false</literal>. Více se o automatickém odstraňování
 dozvíte v části <xref linkend="secAutoInstall"/>.
 
@@ -10420,10 +10420,10 @@ ZTRÁTU DAT! POKUD PŘESNĚ NEVÍTE, CO DĚLÁTE, NEZAPÍNEJTE JI!</emphasis>
       <seg>
 
 Toto je zastaralá volba, která byla nahrazena volbou
-<link linkend="configAptInstall-Recommends"><literal>Apt::Install-Recommends</literal></link>.
+<link linkend="configAptInstall-Recommends"><literal>APT::Install-Recommends</literal></link>.
 &aptitude; při startu zkopíruje ve vašem konfiguračním souboru
 <literal>Aptitude::Recommends-Important</literal> (pokud existuje) do
-<literal>Apt::Install-Recommends</literal> a poté
+<literal>APT::Install-Recommends</literal> a poté
 <literal>Aptitude::Recommends-Important</literal> vyčistí.
 
       </seg>
@@ -12740,7 +12740,7 @@ Doporučené balíky nainstalované dříve nebudou odstraněny.
     </para><para>
 
 Odpovídá konfiguračním položkám
-<literal><link linkend="configAptInstall-Recommends">Apt::Install-Recommends</link></literal>
+<literal><link linkend="configAptInstall-Recommends">APT::Install-Recommends</link></literal>
 a <literal><link linkend="configKeep-Recommends">Aptitude::Keep-Recommends</link></literal>.
 
     </para></listitem>
@@ -12758,7 +12758,7 @@ a <filename>~/.aptitude/config</filename>.)
 
     </para><para>
 
-Konfigurační položka <literal><link linkend="configAptInstall-Recommends">Apt::Install-Recommends</link></literal>.
+Konfigurační položka <literal><link linkend="configAptInstall-Recommends">APT::Install-Recommends</link></literal>.
 
 
     </para></listitem>

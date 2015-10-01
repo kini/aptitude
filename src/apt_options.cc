@@ -376,7 +376,7 @@ option_item dependency_options[]={
 		 "packages automatically\" is enabled, packages "
 		 "that are recommended by an installed package "
 		 "will not be automatically removed."),
-	      "Apt::Install-Recommends", true),
+	      "APT::Install-Recommends", true),
   option_item(N_("Remove unused packages automatically"),
 	      N_("If this option is enabled, packages that are "
 		 "automatically installed and that no manually "

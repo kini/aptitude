@@ -541,11 +541,11 @@ static bool prompt_trust(const std::shared_ptr<terminal_metrics> &term_metrics)
 	  return true;
 	}
 
-      if(aptcfg->FindB("Apt::Get::AllowUnauthenticated", false))
+      if(aptcfg->FindB("APT::Get::AllowUnauthenticated", false))
 	{
 	  printf("%s",
 		 _("*** WARNING ***   Ignoring these trust violations because\n"
-		   "                  Apt::Get::AllowUnauthenticated is 'true'!\n"));
+		   "                  APT::Get::AllowUnauthenticated is 'true'!\n"));
 	  return true;
 	}
 

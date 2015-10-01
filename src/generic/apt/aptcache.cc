@@ -199,7 +199,7 @@ aptitudeDepCache::aptitudeDepCache(pkgCache *Cache, Policy *Plcy)
 {
   // When the "install recommended packages" flag changes, collect garbage.
 #if 0
-  aptcfg->connect("Apt::Install-Recommends",
+  aptcfg->connect("APT::Install-Recommends",
 		  sigc::bind(sigc::mem_fun(*this,
 					   &pkgDepCache::MarkAndSweep),
 			     (undo_group *) NULL));
@@ -1282,7 +1282,7 @@ void aptitudeDepCache::internal_mark_delete(const PkgIterator &Pkg,
   // not to purge unused lightly, can cause data loss -- see comments in #661188
   Purge = aptcfg->FindB(PACKAGE "::Purge-Unused", false);
 
-  bool follow_recommends = aptcfg->FindB("Apt::Install-Recommends", true) || aptcfg->FindB(PACKAGE "::Keep-Recommends", false);
+  bool follow_recommends = aptcfg->FindB("APT::Install-Recommends", true) || aptcfg->FindB(PACKAGE "::Keep-Recommends", false);
   bool follow_suggests   = aptcfg->FindB(PACKAGE "::Keep-Suggests", false) || aptcfg->FindB(PACKAGE "::Suggests-Important", false);
 
   for (pkgCache::DepIterator dep = Pkg.CurrentVer().DependsList(); !dep.end(); ++dep)
@@ -2453,7 +2453,7 @@ bool aptitudeDepCache::is_held(const PkgIterator &pkg)
 bool aptitudeDepCache::MarkFollowsRecommends()
 {
   return pkgDepCache::MarkFollowsRecommends() ||
-    aptcfg->FindB("Apt::Install-Recommends", true) ||
+    aptcfg->FindB("APT::Install-Recommends", true) ||
     aptcfg->FindB(PACKAGE "::Keep-Recommends", false);
 }
 

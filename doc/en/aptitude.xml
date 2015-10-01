@@ -3960,7 +3960,7 @@ iuAU wesnoth-data                                  +930kB  0.8.7-1    0.8.8-1.0w
 	      More precisely: they will be removed when there is no
 	      path via Depends, PreDepends, or Recommends to them from
 	      a manually installed package.  If <link
-	      linkend='configApt-AutoRemove-SuggestsImportant'>Apt::AutoRemove::SuggestsImportant</link>
+	      linkend='configApt-AutoRemove-SuggestsImportant'>APT::AutoRemove::SuggestsImportant</link>
 	      is true, a Suggests relationship is also enough to keep
 	      a package installed.
 	    </para>
@@ -4073,7 +4073,7 @@ iuAU wesnoth-data                                  +930kB  0.8.7-1    0.8.8-1.0w
 
 	    <para>
 	      If the configuration option <link
-	      linkend='configAptInstall-Recommends'><literal>Apt::Install-Recommends</literal></link>
+	      linkend='configAptInstall-Recommends'><literal>APT::Install-Recommends</literal></link>
 	      is <literal>true</literal>, &aptitude; will always
 	      attempt to fulfill <quote>new</quote> and
 	      <quote>previously satisfied</quote> recommendations; all
@@ -10782,7 +10782,7 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 	    <segtitle>Description</segtitle>
 
 	    <seglistitem id='configApt-AutoRemove-RecommendsImportant'>
-	      <seg><literal>Apt::AutoRemove::RecommendsImportant</literal></seg>
+	      <seg><literal>APT::AutoRemove::RecommendsImportant</literal></seg>
 	      <seg><literal>true</literal></seg>
 
 	      <seg>
@@ -10791,14 +10791,14 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 		(and thus will not automatically remove them) as long
 		as any installed package recommends them, even if
 		<literal><link
-		linkend='configAptInstall-Recommends'>Apt::Install-Recommends</link></literal>
+		linkend='configAptInstall-Recommends'>APT::Install-Recommends</link></literal>
 		is <literal>false</literal>.  For more information,
 		see <xref linkend='secAutoInstall'/>.
 	      </seg>
 	    </seglistitem>
 
 	    <seglistitem id='configApt-AutoRemove-SuggestsImportant'>
-	      <seg><literal>Apt::AutoRemove::SuggestsImportant</literal></seg>
+	      <seg><literal>APT::AutoRemove::SuggestsImportant</literal></seg>
 	      <seg><literal>true</literal></seg>
 
 	      <seg>
@@ -10811,12 +10811,12 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 	    </seglistitem>
 
 	    <seglistitem id='configApt-Get-ListCleanup'>
-	      <seg><literal>Apt::Get::List-Cleanup</literal></seg>
+	      <seg><literal>APT::Get::List-Cleanup</literal></seg>
 	      <seg><literal>true</literal></seg>
 
 	      <seg>
 		A synonym for <literal><link
-		linkend='configApt-ListCleanup'>Apt::List-Cleanup</link></literal>.
+		linkend='configApt-ListCleanup'>APT::List-Cleanup</link></literal>.
 		If either of these options is set to
 		<literal>false</literal>, &aptitude; will not delete
 		old package list files after downloading a new set of
@@ -10825,12 +10825,12 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 	    </seglistitem>
 
 	    <seglistitem id='configApt-ListCleanup'>
-	      <seg><literal>Apt::List-Cleanup</literal></seg>
+	      <seg><literal>APT::List-Cleanup</literal></seg>
 	      <seg><literal>true</literal></seg>
 
 	      <seg>
 		A synonym for <literal><link
-		linkend='configApt-Get-ListCleanup'>Apt::Get::List-Cleanup</link></literal>.
+		linkend='configApt-Get-ListCleanup'>APT::Get::List-Cleanup</link></literal>.
 		If either of these options is set to
 		<literal>false</literal>, &aptitude; will not delete
 		old package list files after downloading a new set of
@@ -10839,7 +10839,7 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 	    </seglistitem>
 
 	    <seglistitem id='configAptInstall-Recommends'>
-	      <seg><literal>Apt::Install-Recommends</literal></seg>
+	      <seg><literal>APT::Install-Recommends</literal></seg>
 	      <seg><literal>true</literal></seg>
 
 	      <seg>
@@ -11029,7 +11029,7 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 		In command-line mode, causes &aptitude; to ignore the
 		installation of <link linkend='secTrust'>untrusted
 		packages</link>.  This is a synonym for
-		<literal>Apt::Get::AllowUnauthenticated</literal>.
+		<literal>APT::Get::AllowUnauthenticated</literal>.
 	      </seg>
 	    </seglistitem>
 
@@ -11437,13 +11437,13 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 		<literal>Aptitude::Recommends-Important</literal>
 		caused recommendations to be installed automatically,
 		the same way that <literal><link
-		linkend='configAptInstall-Recommends'>Apt::Install-Recommends</link></literal>
+		linkend='configAptInstall-Recommends'>APT::Install-Recommends</link></literal>
 		does today.  If this option is set to
 		<literal>false</literal> and
 		<literal>Aptitude::Recommends-Important</literal> is
 		also set to <literal>false</literal>, &aptitude; will
 		set <literal><link
-		linkend='configAptInstall-Recommends'>Apt::Install-Recommends</link></literal>
+		linkend='configAptInstall-Recommends'>APT::Install-Recommends</link></literal>
 		to <literal>false</literal> and set
 		<literal>Aptitude::Ignore-Recommends-Important</literal>
 		to <literal>true</literal> on startup.
@@ -11457,11 +11457,11 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 
 	      <seg>
 		This is an obsolete option; use <literal><link
-		linkend='configApt-AutoRemove-RecommendsImportant'>Apt::AutoRemove::RecommendsImportant</link></literal>
+		linkend='configApt-AutoRemove-RecommendsImportant'>APT::AutoRemove::RecommendsImportant</link></literal>
 		instead.  Setting this option to
 		<literal>true</literal> has the same effect as setting
 		<literal><link
-		linkend='configApt-AutoRemove-RecommendsImportant'>Apt::AutoRemove::RecommendsImportant</link></literal>
+		linkend='configApt-AutoRemove-RecommendsImportant'>APT::AutoRemove::RecommendsImportant</link></literal>
 		to <literal>true</literal>.
 	      </seg>
 	    </seglistitem>
@@ -11473,11 +11473,11 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 
 	      <seg>
 		This is an obsolete option; use <literal><link
-		linkend='configApt-AutoRemove-SuggestsImportant'>Apt::AutoRemove::SuggestsImportant</link></literal>
+		linkend='configApt-AutoRemove-SuggestsImportant'>APT::AutoRemove::SuggestsImportant</link></literal>
 		instead.  Setting this option to
 		<literal>true</literal> has the same effect as setting
 		<literal><link
-		linkend='configApt-AutoRemove-SuggestsImportant'>Apt::AutoRemove::SuggestsImportant</link></literal>
+		linkend='configApt-AutoRemove-SuggestsImportant'>APT::AutoRemove::SuggestsImportant</link></literal>
 		to <literal>true</literal>.
 	      </seg>
 	    </seglistitem>
@@ -12093,11 +12093,11 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 	      <seg>
 		This is an obsolete configuration option that has been
 		superseded by <link
-		linkend='configAptInstall-Recommends'><literal>Apt::Install-Recommends</literal></link>.
+		linkend='configAptInstall-Recommends'><literal>APT::Install-Recommends</literal></link>.
 		On startup, &aptitude; will copy
 		<literal>Aptitude::Recommends-Important</literal> (if
 		it exists) to
-		<literal>Apt::Install-Recommends</literal> and then
+		<literal>APT::Install-Recommends</literal> and then
 		clear
 		<literal>Aptitude::Recommends-Important</literal> in
 		your user configuration file.
@@ -12214,11 +12214,11 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 
 	      <seg>
 		This is an obsolete option; use <literal><link
-		linkend='configApt-AutoRemove-SuggestsImportant'>Apt::AutoRemove::SuggestsImportant</link></literal>
+		linkend='configApt-AutoRemove-SuggestsImportant'>APT::AutoRemove::SuggestsImportant</link></literal>
 		instead.  Setting this option to
 		<literal>true</literal> has the same effect as setting
 		<literal><link
-		linkend='configApt-AutoRemove-SuggestsImportant'>Apt::AutoRemove::SuggestsImportant</link></literal>
+		linkend='configApt-AutoRemove-SuggestsImportant'>APT::AutoRemove::SuggestsImportant</link></literal>
 		to <literal>true</literal>.
 	      </seg>
 	    </seglistitem>
