@@ -285,8 +285,8 @@ option_item misc_options[]={
 		 "upgrade."),
 	      PACKAGE "::Auto-Upgrade", false),
   option_item(N_("Remove obsolete package files after downloading new package lists"),
-	      N_("If this option is enabled, then after every "
-		 "install run, aptitude will delete from the package "
+	      N_("If this option is enabled, then after package lists "
+		 "are updated aptitude will delete from the package "
 		 "cache any package files that can no longer be "
 		 "downloaded from any archive in sources.list."),
 	      PACKAGE "::AutoClean-After-Update", false),
