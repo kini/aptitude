@@ -14,6 +14,44 @@
 
 using namespace std;
 
+
+/** Helper function for other functions in this file showing information about
+ * broken packages, to print an explanation about the installability of the
+ * package provided.
+ *
+ * For example, a broken package might be so because it conflicts with a package
+ * that remains installed, or depends on a version of a package not to be
+ * installed, or depends on a package but the user requested it to be removed,
+ * etc.
+ *
+ * @pkg The package to consider
+ */
+void print_installation_explanation(const pkgCache::PkgIterator& pkg)
+{
+  pkgCache::VerIterator ver = (*apt_cache_file)[pkg].InstVerIter(*apt_cache_file);
+
+  if (!ver.end()) // ok, it's installable.
+    {
+      if ((*apt_cache_file)[pkg].Install())
+	printf(_("but %s is to be installed."),
+	       ver.VerStr());
+      else if ((*apt_cache_file)[pkg].Upgradable())
+	printf(_("but %s is installed and it is kept back."),
+	       pkg.CurrentVer().VerStr());
+      else
+	printf(_("but %s is installed."),
+	       pkg.CurrentVer().VerStr());
+    }
+  else
+    {
+      pkgCache::VerIterator cand = (*apt_cache_file)[pkg].CandidateVerIter(*apt_cache_file);
+      if (cand.end())
+	printf(_("but it is not installable."));
+      else
+	printf(_("but it is not going to be installed."));
+    }
+}
+
 void show_broken_deps(const pkgCache::PkgIterator& pkg)
 {
   string pkg_name_segment = string(" ") + pkg.FullName(true) + " :";
@@ -51,8 +89,9 @@ void show_broken_deps(const pkgCache::PkgIterator& pkg)
 
 	      is_first_dep = false;
 
+	      size_t indent_dep = strlen(dep.DepType()) + 3;
 	      if (!is_first_of_or)
-		for (unsigned int i = 0; i < (strlen(dep.DepType()) + 3); ++i)
+		for (size_t i = 0; i < indent_dep; ++i)
 		  printf(" ");
 	      else
 		printf(" %s: ", first.DepType());
@@ -64,40 +103,35 @@ void show_broken_deps(const pkgCache::PkgIterator& pkg)
 	      if (first.TargetVer())
 		printf(" (%s %s)", first.CompType(), first.TargetVer());
 
-	      // FIXME: handle virtual packages sanely.
 	      pkgCache::PkgIterator target = first.TargetPkg();
 	      // Don't skip real packages which are provided.
 	      if (!target.VersionList().end())
 		{
 		  printf(" ");
-
-		  pkgCache::VerIterator ver = (*apt_cache_file)[target].InstVerIter(*apt_cache_file);
-
-		  if (!ver.end()) // ok, it's installable.
-		    {
-		      if ((*apt_cache_file)[target].Install())
-			printf(_("but %s is to be installed."),
-			       ver.VerStr());
-		      else if ((*apt_cache_file)[target].Upgradable())
-			printf(_("but %s is installed and it is kept back."),
-			       target.CurrentVer().VerStr());
-		      else
-			printf(_("but %s is installed."),
-			       target.CurrentVer().VerStr());
-		    }
-		  else
-		    {
-		      pkgCache::VerIterator cand = (*apt_cache_file)[target].CandidateVerIter(*apt_cache_file);
-		      if (cand.end())
-			printf(_("but it is not installable."));
-		      else
-			printf(_("but it is not going to be installed."));
-		    }
+		  print_installation_explanation(target);
 		}
 	      else
 		{
-		  // FIXME: do something sensible here!
-		  printf(_(" which is a virtual package."));
+		  if (target.ProvidesList().end())
+		    {
+		      printf(_(" which is a virtual package and is not provided by any available package.\n"));
+		    }
+		  else
+		    {
+		      printf(_(" which is a virtual package, provided by:\n"));
+
+		      for (pkgCache::PrvIterator prv = target.ProvidesList(); !prv.end(); ++prv)
+			{
+			  pkgCache::PkgIterator prv_pkg = prv.OwnerPkg();
+			  if (!prv_pkg.end())
+			    {
+			      for (size_t i = 0; i < (indent + indent_dep); ++i)
+				printf(" ");
+			      printf(" - %s, ", prv_pkg.FullName(true).c_str());
+			      print_installation_explanation(prv_pkg);
+			    }
+			}
+		    }
 		}
 
 	      if (first != dep)
