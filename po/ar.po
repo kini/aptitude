@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude_po\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2015-09-16 20:11+0100\n"
+"POT-Creation-Date: 2015-10-07 15:48+0100\n"
 "PO-Revision-Date: 2012-06-03 13:13+0800\n"
 "Last-Translator: Ossama M. Khayat <okhayat@yahoo.com>\n"
 "Language-Team: Arabic <support@arabeyes.org>\n"
@@ -312,8 +312,8 @@ msgstr "إزالة الملفات الملغاة بعد تنزيل لوائح ا
 
 #: src/apt_options.cc:288
 msgid ""
-"If this option is enabled, then after every install run, aptitude will "
-"delete from the package cache any package files that can no longer be "
+"If this option is enabled, then after package lists are updated aptitude "
+"will delete from the package cache any package files that can no longer be "
 "downloaded from any archive in sources.list."
 msgstr ""
 
@@ -819,7 +819,7 @@ msgid "Del %s* %spartial/*\n"
 msgstr "حذف %s* %spartial/*\n"
 
 #: src/cmdline/cmdline_clean.cc:78 src/cmdline/cmdline_clean.cc:149
-#: src/ui.cc:1808 src/ui.cc:1896
+#: src/ui.cc:1811 src/ui.cc:1899
 #, fuzzy
 msgid "Unable to lock the download directory"
 msgstr ""
@@ -1052,17 +1052,17 @@ msgstr "ستتم ترقية الحزم التالية:"
 msgid "The following partially installed packages will be configured:"
 msgstr "ستتم ترقية الحزم التالية:"
 
-#: src/cmdline/cmdline_prompt.cc:459 src/ui.cc:1595
+#: src/cmdline/cmdline_prompt.cc:459 src/ui.cc:1598
 #, c-format
 msgid "The following ESSENTIAL packages will be REMOVED!\n"
 msgstr "الحزم الأساسيّة التالية سيتم إزالتها!\n"
 
-#: src/cmdline/cmdline_prompt.cc:468 src/ui.cc:1610
+#: src/cmdline/cmdline_prompt.cc:468 src/ui.cc:1613
 #, c-format
 msgid "The following ESSENTIAL packages will be BROKEN by this action:\n"
 msgstr "ستصبح الحزم الأساسية التالية معطوبة بسبب هذا العمل:\n"
 
-#: src/cmdline/cmdline_prompt.cc:478 src/ui.cc:1623
+#: src/cmdline/cmdline_prompt.cc:478 src/ui.cc:1626
 #, c-format
 msgid ""
 "WARNING: Performing this action will probably cause your system to break!\n"
@@ -1075,7 +1075,7 @@ msgstr ""
 msgid "I am aware that this is a very bad idea"
 msgstr "أعلم أن هذه فكرة سيئة جداً"
 
-#: src/cmdline/cmdline_prompt.cc:484 src/ui.cc:1624
+#: src/cmdline/cmdline_prompt.cc:484 src/ui.cc:1627
 #, c-format
 msgid "To continue, type the phrase \"%s\":\n"
 msgstr "للاستمرار، اكتب الجملة \"%s\":\n"
@@ -1149,118 +1149,118 @@ msgstr "للاستمرار، اكتب \"%s\"; للتجاهل، اكتب \"%s\": 
 msgid "Unrecognized input.  Enter either \"%s\" or \"%s\".\n"
 msgstr "لا يمكن التعرف على المدخلات.  أدخل إما \"%s\" أو \"%s\".\n"
 
-#: src/cmdline/cmdline_prompt.cc:707
+#: src/cmdline/cmdline_prompt.cc:705
 #, c-format
 msgid "The following packages are RECOMMENDED but will NOT be installed:\n"
 msgstr "الحزم التالية مقترحة ولكن لن يتم تثبيتها:\n"
 
-#: src/cmdline/cmdline_prompt.cc:713
+#: src/cmdline/cmdline_prompt.cc:711
 #, c-format
 msgid "The following packages are SUGGESTED but will NOT be installed:\n"
 msgstr "الحزم التالية مقترحة ولكن لن يتم تثبيتها:\n"
 
-#: src/cmdline/cmdline_prompt.cc:719
+#: src/cmdline/cmdline_prompt.cc:717
 #, c-format
 msgid "No packages will be installed, upgraded, or removed.\n"
 msgstr "لن يتم تثبيت، أو ترقية، أو إزالة أية حزم.\n"
 
-#: src/cmdline/cmdline_prompt.cc:721
+#: src/cmdline/cmdline_prompt.cc:719
 #, c-format
 msgid "%lu packages upgraded, %lu newly installed, "
 msgstr "%lu حزمة تمت ترقيتها، و%lu حزمة جديدة تم تثبيتها، "
 
-#: src/cmdline/cmdline_prompt.cc:725
+#: src/cmdline/cmdline_prompt.cc:723
 #, c-format
 msgid "%lu reinstalled, "
 msgstr "%lu تمت إعادة تثبيتها، "
 
-#: src/cmdline/cmdline_prompt.cc:727
+#: src/cmdline/cmdline_prompt.cc:725
 #, c-format
 msgid "%lu downgraded, "
 msgstr "%lu تم تثبيطها، "
 
-#: src/cmdline/cmdline_prompt.cc:729
+#: src/cmdline/cmdline_prompt.cc:727
 #, c-format
 msgid "%lu to remove and %lu not upgraded.\n"
 msgstr "%lu سيتم إزالتها و %lu لم يتم ترقيتها.\n"
 
-#: src/cmdline/cmdline_prompt.cc:736
+#: src/cmdline/cmdline_prompt.cc:734
 #, c-format
 msgid "Need to get %sB/%sB of archives. "
 msgstr "نحتاج إلى جلب %sب/%sب من الأرشيف. "
 
-#: src/cmdline/cmdline_prompt.cc:739
+#: src/cmdline/cmdline_prompt.cc:737
 #, c-format
 msgid "Need to get %sB of archives. "
 msgstr "يجب جلب %sب من الأرشيف. "
 
-#: src/cmdline/cmdline_prompt.cc:746
+#: src/cmdline/cmdline_prompt.cc:744
 #, c-format
 msgid "After unpacking %sB will be used.\n"
 msgstr "فك فك التغليف سيستخدم %sب.\n"
 
-#: src/cmdline/cmdline_prompt.cc:749
+#: src/cmdline/cmdline_prompt.cc:747
 #, c-format
 msgid "After unpacking %sB will be freed.\n"
 msgstr "فك فك التغليف سيفرغ %sب.\n"
 
-#: src/cmdline/cmdline_prompt.cc:771
+#: src/cmdline/cmdline_prompt.cc:769
 #, c-format
 msgid "No packages to show -- enter the package names on the line after 'i'.\n"
 msgstr "ليست هناك حزم لإظهارها -- أدخل أسماء الحزم على السطر بعد 'i'.\n"
 
-#: src/cmdline/cmdline_prompt.cc:777 src/cmdline/cmdline_prompt.cc:792
-#: src/pkg_item.cc:410 src/ui.cc:1240
+#: src/cmdline/cmdline_prompt.cc:775 src/cmdline/cmdline_prompt.cc:790
+#: src/pkg_item.cc:407 src/ui.cc:1243
 msgid "Press Return to continue."
 msgstr "إضغط زر الإدخال للاستمرار."
 
-#: src/cmdline/cmdline_prompt.cc:788
+#: src/cmdline/cmdline_prompt.cc:786
 #, c-format
 msgid "No packages found -- enter the package names on the line after 'c'.\n"
 msgstr "لم يعثر على أية حزم -- أدخل أسماء الحزم على السطر بعد 'c'.\n"
 
-#: src/cmdline/cmdline_prompt.cc:803
+#: src/cmdline/cmdline_prompt.cc:801
 #, c-format
 msgid ""
 "No packages found -- enter zero or more roots of the search followed by the "
 "package to justify.\n"
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:836
+#: src/cmdline/cmdline_prompt.cc:834
 #, c-format
 msgid "y: %F"
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:838
+#: src/cmdline/cmdline_prompt.cc:836
 msgid "continue with the installation"
 msgstr "الاستمرار بالتثبيت"
 
-#: src/cmdline/cmdline_prompt.cc:840
+#: src/cmdline/cmdline_prompt.cc:838
 #, c-format
 msgid "n: %F"
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:842
+#: src/cmdline/cmdline_prompt.cc:840
 msgid "abort and quit"
 msgstr "الإجهاض والخروج"
 
-#: src/cmdline/cmdline_prompt.cc:844
+#: src/cmdline/cmdline_prompt.cc:842
 #, c-format
 msgid "i: %F"
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:846
+#: src/cmdline/cmdline_prompt.cc:844
 msgid ""
 "show information about one or more packages; the package names should follow "
 "the 'i'"
 msgstr "إظهار معلومات حول واحد أو أكثر من الحزم؛ أسماء الحزم يجب أن تتبع 'i'"
 
-#: src/cmdline/cmdline_prompt.cc:848
+#: src/cmdline/cmdline_prompt.cc:846
 #, c-format
 msgid "c: %F"
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:850
+#: src/cmdline/cmdline_prompt.cc:848
 msgid ""
 "show the Debian changelogs of one or more packages; the package names should "
 "follow the 'c'"
@@ -1268,63 +1268,63 @@ msgstr ""
 "إظهار سجلات تغيير ديبيان لواحد أو أكثر من الحزم؛ يجب أن تتبع أسماء الحزم "
 "الحرف 'c'"
 
-#: src/cmdline/cmdline_prompt.cc:852
+#: src/cmdline/cmdline_prompt.cc:850
 #, c-format
 msgid "d: %F"
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:854
+#: src/cmdline/cmdline_prompt.cc:852
 msgid "toggle the display of dependency information"
 msgstr "عكس عرض معلومات المعتمدات"
 
-#: src/cmdline/cmdline_prompt.cc:856
+#: src/cmdline/cmdline_prompt.cc:854
 #, c-format
 msgid "s: %F"
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:858
+#: src/cmdline/cmdline_prompt.cc:856
 msgid "toggle the display of changes in package sizes"
 msgstr "عكس عرض التغييرات في أحجام الحزم"
 
-#: src/cmdline/cmdline_prompt.cc:860
+#: src/cmdline/cmdline_prompt.cc:858
 #, c-format
 msgid "v: %F"
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:862
+#: src/cmdline/cmdline_prompt.cc:860
 msgid "toggle the display of version numbers"
 msgstr "عكس عرض أرقام النسخ"
 
-#: src/cmdline/cmdline_prompt.cc:864
+#: src/cmdline/cmdline_prompt.cc:862
 #, c-format
 msgid "w: %F"
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:866
+#: src/cmdline/cmdline_prompt.cc:864
 msgid ""
 "try to find a reason for installing a single package, or explain why "
 "installing one package should lead to installing another package."
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:869
+#: src/cmdline/cmdline_prompt.cc:867
 #, c-format
 msgid "r: %F"
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:871
+#: src/cmdline/cmdline_prompt.cc:869
 msgid "run the automatic dependency resolver to fix the broken dependencies."
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:873
+#: src/cmdline/cmdline_prompt.cc:871
 #, c-format
 msgid "e: %F"
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:875
+#: src/cmdline/cmdline_prompt.cc:873
 msgid "enter the full visual interface"
 msgstr "دخول الواجهة المرئية الكاملة"
 
-#: src/cmdline/cmdline_prompt.cc:878
+#: src/cmdline/cmdline_prompt.cc:876
 msgid ""
 "You may also specify modification to the actions which will be taken.  To do "
 "so, type an action character followed by one or more package names (or "
@@ -1335,45 +1335,45 @@ msgstr ""
 "الإجراء متبوعاً بواحد أو أكثر من أسماء الحزم (أو التعابير). سيطبق الإجراء على "
 "جميع الحزم التي تسردها. الإجراءات التالية هي المتوفرة:"
 
-#: src/cmdline/cmdline_prompt.cc:885 src/cmdline/cmdline_resolver.cc:262
+#: src/cmdline/cmdline_prompt.cc:883 src/cmdline/cmdline_resolver.cc:262
 msgid "'+' to install packages"
 msgstr "'+' لتثبيت الحزم"
 
-#: src/cmdline/cmdline_prompt.cc:888 src/cmdline/cmdline_resolver.cc:264
+#: src/cmdline/cmdline_prompt.cc:886 src/cmdline/cmdline_resolver.cc:264
 msgid ""
 "'+M' to install packages and immediately flag them as automatically installed"
 msgstr "'+M' لتثبيت الحزم ولتوّه سيشار إليها كمثبّتة تلقائيا"
 
-#: src/cmdline/cmdline_prompt.cc:890 src/cmdline/cmdline_resolver.cc:266
+#: src/cmdline/cmdline_prompt.cc:888 src/cmdline/cmdline_resolver.cc:266
 msgid "'-' to remove packages"
 msgstr "'-' لإزالة الحزم"
 
-#: src/cmdline/cmdline_prompt.cc:892 src/cmdline/cmdline_resolver.cc:268
+#: src/cmdline/cmdline_prompt.cc:890 src/cmdline/cmdline_resolver.cc:268
 msgid "'_' to purge packages"
 msgstr "'_' لتنظيف الحزم"
 
-#: src/cmdline/cmdline_prompt.cc:894 src/cmdline/cmdline_resolver.cc:270
+#: src/cmdline/cmdline_prompt.cc:892 src/cmdline/cmdline_resolver.cc:270
 msgid "'=' to place packages on hold"
 msgstr "'=' لوضع الحزم قيد الإبقاء"
 
-#: src/cmdline/cmdline_prompt.cc:896 src/cmdline/cmdline_resolver.cc:272
+#: src/cmdline/cmdline_prompt.cc:894 src/cmdline/cmdline_resolver.cc:272
 msgid ""
 "':' to keep packages in their current state without placing them on hold"
 msgstr "':' لإبقاء الحزم على وضعها الحالي دون جعلها في وضع الإبقاء"
 
-#: src/cmdline/cmdline_prompt.cc:898 src/cmdline/cmdline_resolver.cc:274
+#: src/cmdline/cmdline_prompt.cc:896 src/cmdline/cmdline_resolver.cc:274
 msgid "'&M' to mark packages as automatically installed"
 msgstr "'&M' لتحديد الحزم بالتثبيت التلقائي"
 
-#: src/cmdline/cmdline_prompt.cc:900 src/cmdline/cmdline_resolver.cc:276
+#: src/cmdline/cmdline_prompt.cc:898 src/cmdline/cmdline_resolver.cc:276
 msgid "'&m' to mark packages as manually installed"
 msgstr "'&m' لتحديد الحزم بالتثبيت اليدوي"
 
-#: src/cmdline/cmdline_prompt.cc:902
+#: src/cmdline/cmdline_prompt.cc:900
 msgid "'&BD' to install the build-dependencies of a package."
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:905
+#: src/cmdline/cmdline_prompt.cc:903
 msgid ""
 "In the list of actions to be performed, some packages will be followed by "
 "one or more characters enclosed in braces; for instance: \"aptitude{u}\".  "
@@ -1381,53 +1381,53 @@ msgid ""
 "can include any combination of the following:"
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:909
+#: src/cmdline/cmdline_prompt.cc:907
 #, fuzzy
 msgid "'a': the package was automatically installed or removed."
 msgstr "'&M' لتحديد الحزم بالتثبيت التلقائي"
 
-#: src/cmdline/cmdline_prompt.cc:911
+#: src/cmdline/cmdline_prompt.cc:909
 msgid ""
 "'b': some of the package's dependencies are violated by the proposed changes."
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:913
+#: src/cmdline/cmdline_prompt.cc:911
 msgid "'p': the package will be purged in addition to being removed."
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:915
+#: src/cmdline/cmdline_prompt.cc:913
 msgid "'u': the package is being removed because it is unused."
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:920
+#: src/cmdline/cmdline_prompt.cc:918
 msgid "Commands:"
 msgstr "أوامر:"
 
-#: src/cmdline/cmdline_prompt.cc:1036
+#: src/cmdline/cmdline_prompt.cc:1034
 msgid ""
 "aptitude failed to find a solution to these dependencies.  You can solve "
 "them yourself by hand or type 'n' to quit."
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:1055
+#: src/cmdline/cmdline_prompt.cc:1053
 msgid "Do you want to continue? [Y/n/?] "
 msgstr "هل تريد الاستمرار؟ [Y/n/?] "
 
-#: src/cmdline/cmdline_prompt.cc:1056
+#: src/cmdline/cmdline_prompt.cc:1054
 msgid "Resolve these dependencies by hand? [N/+/-/_/:/?] "
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:1074
+#: src/cmdline/cmdline_prompt.cc:1072
 msgid "Invalid response.  Please enter a valid command or '?' for help.\n"
 msgstr "ردّ غير صالح.  رجاء أدخل أمراً صالحاً أ '؟' للمساعدة.\n"
 
-#: src/cmdline/cmdline_prompt.cc:1080
+#: src/cmdline/cmdline_prompt.cc:1078
 msgid ""
 "Enter a package management command (such as '+ package' to install a "
 "package), 'R' to attempt automatic dependency resolution or 'N' to abort."
 msgstr ""
 
-#: src/cmdline/cmdline_prompt.cc:1112
+#: src/cmdline/cmdline_prompt.cc:1110
 #, c-format
 msgid ""
 "\n"
@@ -1438,7 +1438,7 @@ msgstr ""
 "سوف تظهر معلومات المعتمدات.\n"
 "\n"
 
-#: src/cmdline/cmdline_prompt.cc:1114
+#: src/cmdline/cmdline_prompt.cc:1112
 #, c-format
 msgid ""
 "\n"
@@ -1449,7 +1449,7 @@ msgstr ""
 "لن تظهر معلومات المعتمدات.\n"
 "\n"
 
-#: src/cmdline/cmdline_prompt.cc:1120
+#: src/cmdline/cmdline_prompt.cc:1118
 #, c-format
 msgid ""
 "\n"
@@ -1460,7 +1460,7 @@ msgstr ""
 "ستظهر معلومات النسخة.\n"
 "\n"
 
-#: src/cmdline/cmdline_prompt.cc:1122
+#: src/cmdline/cmdline_prompt.cc:1120
 #, c-format
 msgid ""
 "\n"
@@ -1471,7 +1471,7 @@ msgstr ""
 "لن تظهر معلومات النسخة.\n"
 "\n"
 
-#: src/cmdline/cmdline_prompt.cc:1127
+#: src/cmdline/cmdline_prompt.cc:1125
 #, c-format
 msgid ""
 "\n"
@@ -1482,7 +1482,7 @@ msgstr ""
 "ستظهر تغييرات الحجم.\n"
 "\n"
 
-#: src/cmdline/cmdline_prompt.cc:1129
+#: src/cmdline/cmdline_prompt.cc:1127
 #, c-format
 msgid ""
 "\n"
@@ -1494,7 +1494,7 @@ msgstr ""
 "\n"
 
 #: src/cmdline/cmdline_resolver.cc:144 src/cmdline/cmdline_resolver.cc:997
-#: src/generic/apt/apt.cc:268
+#: src/generic/apt/apt.cc:269
 #, c-format
 msgid "Unable to open %s for writing"
 msgstr "تعذر فتح %s للتسجيل"
@@ -1783,7 +1783,7 @@ msgstr ""
 msgid "The following commands are available:"
 msgstr "الأوامر التالية متوفّرة:"
 
-#: src/cmdline/cmdline_resolver.cc:994 src/ui.cc:2337
+#: src/cmdline/cmdline_resolver.cc:994 src/ui.cc:2340
 msgid "File to write resolver state to: "
 msgstr "اسم الملف المطلوب تسجيل وضع المحلّل إليه:"
 
@@ -1842,290 +1842,296 @@ msgstr "فشل تنفيذ iconv على%s.\n"
 msgid "search: You must provide at least one search term\n"
 msgstr "البحث: يجب أن تعطي كلمة بحث واحدة على الأقل\n"
 
-#: src/cmdline/cmdline_show_broken.cc:81
+#: src/cmdline/cmdline_show_broken.cc:36
 #, c-format
 msgid "but %s is to be installed."
 msgstr "إلا أنه يجب تثبيت %s."
 
-#: src/cmdline/cmdline_show_broken.cc:84
+#: src/cmdline/cmdline_show_broken.cc:39
 #, c-format
 msgid "but %s is installed and it is kept back."
 msgstr "إلا أن %s مثبتة ومُبقاة."
 
-#: src/cmdline/cmdline_show_broken.cc:87
+#: src/cmdline/cmdline_show_broken.cc:42
 #, c-format
 msgid "but %s is installed."
 msgstr "إلا أنّ %s مثبتة."
 
-#: src/cmdline/cmdline_show_broken.cc:94
+#: src/cmdline/cmdline_show_broken.cc:49
 #, fuzzy, c-format
 msgid "but it is not installable."
 msgstr "إلا أنّها غير قابلة للتثبيت"
 
-#: src/cmdline/cmdline_show_broken.cc:96
+#: src/cmdline/cmdline_show_broken.cc:51
 #, fuzzy, c-format
 msgid "but it is not going to be installed."
 msgstr "إلا أنه يجب تثبيت %s."
 
-#: src/cmdline/cmdline_show_broken.cc:101
-#, c-format
-msgid " which is a virtual package."
-msgstr " والتي هي حزمة وهمية."
+#: src/cmdline/cmdline_show_broken.cc:117
+#, fuzzy, c-format
+msgid ""
+" which is a virtual package and is not provided by any available package.\n"
+msgstr "\"%s\" هي حزمة وهميّة توفّرها:\n"
 
-#: src/cmdline/cmdline_show_broken.cc:104
+#: src/cmdline/cmdline_show_broken.cc:121
+#, fuzzy, c-format
+msgid " which is a virtual package, provided by:\n"
+msgstr "\"%s\" هي حزمة وهميّة توفّرها:\n"
+
+#: src/cmdline/cmdline_show_broken.cc:138
 #, c-format
 msgid " or"
 msgstr " أو"
 
-#: src/cmdline/cmdline_show_broken.cc:127
+#: src/cmdline/cmdline_show_broken.cc:160
 #, c-format
 msgid "The following packages have unmet dependencies:\n"
 msgstr "الحزم التالية لها معتمدات غير متوفرة:\n"
 
-#: src/cmdline/cmdline_show.cc:197 src/cmdline/cmdline_show.cc:447
+#: src/cmdline/cmdline_show.cc:196 src/cmdline/cmdline_show.cc:448
 #: src/cmdline/cmdline_versions.cc:225 src/gtk/resolver.cc:1192
 #: src/solution_fragment.cc:64
 msgid "<NULL>"
 msgstr "<NULL>"
 
-#: src/cmdline/cmdline_show.cc:214 src/cmdline/cmdline_show.cc:219
+#: src/cmdline/cmdline_show.cc:217 src/cmdline/cmdline_show.cc:222
 #: src/qt/widgets/packages_tab.cc:73
 msgid "not installed"
 msgstr "غير مثبتة"
 
-#: src/cmdline/cmdline_show.cc:221 src/pkg_columnizer.cc:250
-#: src/pkg_ver_item.cc:227
+#: src/cmdline/cmdline_show.cc:224 src/pkg_columnizer.cc:249
+#: src/pkg_ver_item.cc:228
 msgid "unpacked"
 msgstr "مُستخرجة"
 
-#: src/cmdline/cmdline_show.cc:223
+#: src/cmdline/cmdline_show.cc:226
 msgid "partially configured"
 msgstr "مُهيّئة جزئياً"
 
-#: src/cmdline/cmdline_show.cc:225
+#: src/cmdline/cmdline_show.cc:228
 msgid "partially installed"
 msgstr "مُثبّتة جزئياً"
 
-#: src/cmdline/cmdline_show.cc:227
+#: src/cmdline/cmdline_show.cc:230
 msgid "not installed (configuration files remain)"
 msgstr "غير مثبتة (بقيت ملفات التهيئة)"
 
-#: src/cmdline/cmdline_show.cc:230
+#: src/cmdline/cmdline_show.cc:232
 msgid "awaiting trigger processing by other package(s)"
 msgstr ""
 
-#: src/cmdline/cmdline_show.cc:232
+#: src/cmdline/cmdline_show.cc:234
 msgid "awaiting trigger processing"
 msgstr ""
 
-#: src/cmdline/cmdline_show.cc:235 src/pkg_columnizer.cc:258
-#: src/pkg_ver_item.cc:235 src/qt/widgets/packages_tab.cc:72
+#: src/cmdline/cmdline_show.cc:236 src/pkg_columnizer.cc:257
+#: src/pkg_ver_item.cc:236 src/qt/widgets/packages_tab.cc:72
 msgid "installed"
 msgstr "مُثبّتة"
 
-#: src/cmdline/cmdline_show.cc:258
+#: src/cmdline/cmdline_show.cc:259
 #, c-format
 msgid "%s; will be purged because nothing depends on it"
 msgstr "%s، سيتم إزالتها بالكامل لعدم اعتماد أية حزمة عليها"
 
-#: src/cmdline/cmdline_show.cc:260 src/cmdline/cmdline_show.cc:356
+#: src/cmdline/cmdline_show.cc:261 src/cmdline/cmdline_show.cc:357
 #, c-format
 msgid "%s; will be purged"
 msgstr "%s، سيتم إزالتها بالكامل"
 
-#: src/cmdline/cmdline_show.cc:265
+#: src/cmdline/cmdline_show.cc:266
 #, c-format
 msgid "%s; will be removed because nothing depends on it"
 msgstr "%s، ستتم إزالتها لعدم اعتماد أية حزمة عليها:"
 
-#: src/cmdline/cmdline_show.cc:267
+#: src/cmdline/cmdline_show.cc:268
 #, c-format
 msgid "%s; will be removed"
 msgstr "%s، سيتم إزالتها"
 
-#: src/cmdline/cmdline_show.cc:285
+#: src/cmdline/cmdline_show.cc:286
 #, c-format
 msgid "%s%s; will be downgraded [%s -> %s]"
 msgstr "%s%s، سيتم تثبيطها [%s -> %s]"
 
-#: src/cmdline/cmdline_show.cc:288
+#: src/cmdline/cmdline_show.cc:289
 #, c-format
 msgid "%s%s; will be upgraded [%s -> %s]"
 msgstr "%s%s، سيتم ترقيتها [%s -> %s]"
 
-#: src/cmdline/cmdline_show.cc:297
+#: src/cmdline/cmdline_show.cc:298
 msgid "not a real package"
 msgstr "ليست حزمة حقيقيّة"
 
-#: src/cmdline/cmdline_show.cc:310
+#: src/cmdline/cmdline_show.cc:311
 msgid " [held]"
 msgstr " [أبقيت]"
 
-#: src/cmdline/cmdline_show.cc:324
+#: src/cmdline/cmdline_show.cc:325
 #, fuzzy, c-format
 msgid "%s%s; will be installed"
 msgstr "%s; سيتم تثبيتها"
 
-#: src/cmdline/cmdline_show.cc:326
+#: src/cmdline/cmdline_show.cc:327
 #, fuzzy, c-format
 msgid "%s%s; will be installed automatically"
 msgstr "%s; سيتم تثبيتها آلياً"
 
-#: src/cmdline/cmdline_show.cc:346
+#: src/cmdline/cmdline_show.cc:347
 #, c-format
 msgid "%s; version %s will be installed"
 msgstr "%s، النسخة %s سيتم تثبيتها"
 
-#: src/cmdline/cmdline_show.cc:350
+#: src/cmdline/cmdline_show.cc:351
 #, c-format
 msgid "%s; version %s will be installed automatically"
 msgstr "%s، النسخة %s سيتم تثبيتها تلقائياً"
 
-#: src/cmdline/cmdline_show.cc:376 src/cmdline/cmdline_show.cc:399
+#: src/cmdline/cmdline_show.cc:377 src/cmdline/cmdline_show.cc:400
 msgid "Package: "
 msgstr "الحزمة: "
 
-#: src/cmdline/cmdline_show.cc:377 src/cmdline/cmdline_show.cc:407
-#: src/pkg_columnizer.cc:92
+#: src/cmdline/cmdline_show.cc:378 src/cmdline/cmdline_show.cc:408
+#: src/pkg_columnizer.cc:93
 msgid "State"
 msgstr "الوضع"
 
-#: src/cmdline/cmdline_show.cc:378 src/cmdline/cmdline_show.cc:471
+#: src/cmdline/cmdline_show.cc:379 src/cmdline/cmdline_show.cc:472
 msgid "Provided by"
 msgstr "توفّرها"
 
-#: src/cmdline/cmdline_show.cc:401 src/pkg_info_screen.cc:120
+#: src/cmdline/cmdline_show.cc:402 src/pkg_info_screen.cc:118
 msgid "Essential: "
 msgstr "أساسي: "
 
-#: src/cmdline/cmdline_show.cc:401 src/cmdline/cmdline_show.cc:405
-#: src/cmdline/cmdline_show.cc:416 src/pkg_info_screen.cc:120
+#: src/cmdline/cmdline_show.cc:402 src/cmdline/cmdline_show.cc:406
+#: src/cmdline/cmdline_show.cc:417 src/pkg_info_screen.cc:118
 msgid "yes"
 msgstr "نعم"
 
-#: src/cmdline/cmdline_show.cc:405
+#: src/cmdline/cmdline_show.cc:406
 msgid "New"
 msgstr "جديدة"
 
-#: src/cmdline/cmdline_show.cc:410 src/gtk/gui.cc:98
+#: src/cmdline/cmdline_show.cc:411 src/gtk/gui.cc:98
 msgid "Forbidden version"
 msgstr "نسخة ممنوعة"
 
-#: src/cmdline/cmdline_show.cc:414
+#: src/cmdline/cmdline_show.cc:415
 msgid "Automatically installed"
 msgstr "مُثبّتة تلقائياً"
 
-#: src/cmdline/cmdline_show.cc:416
+#: src/cmdline/cmdline_show.cc:417
 msgid "no"
 msgstr "لا"
 
-#: src/cmdline/cmdline_show.cc:420 src/pkg_info_screen.cc:125
+#: src/cmdline/cmdline_show.cc:421 src/pkg_info_screen.cc:123
 msgid "Multi-Arch: "
 msgstr ""
 
-#: src/cmdline/cmdline_show.cc:422 src/gtk/entitysummary.cc:361
+#: src/cmdline/cmdline_show.cc:423 src/gtk/entitysummary.cc:361
 #: src/gtk/previewtab.cc:230
 msgid "Version: "
 msgstr "النسخة: "
 
-#: src/cmdline/cmdline_show.cc:423 src/pkg_info_screen.cc:146
+#: src/cmdline/cmdline_show.cc:424 src/pkg_info_screen.cc:144
 msgid "Priority: "
 msgstr "الأولوية: "
 
-#: src/cmdline/cmdline_show.cc:424 src/cmdline/cmdline_show.cc:426
+#: src/cmdline/cmdline_show.cc:425 src/cmdline/cmdline_show.cc:427
 msgid "N/A"
 msgstr "لا تنطبق"
 
-#: src/cmdline/cmdline_show.cc:425 src/pkg_info_screen.cc:147
+#: src/cmdline/cmdline_show.cc:426 src/pkg_info_screen.cc:145
 msgid "Section: "
 msgstr "المقطع: "
 
-#: src/cmdline/cmdline_show.cc:427 src/pkg_info_screen.cc:148
+#: src/cmdline/cmdline_show.cc:428 src/pkg_info_screen.cc:146
 msgid "Maintainer: "
 msgstr "المسؤول:"
 
-#: src/cmdline/cmdline_show.cc:429 src/pkg_info_screen.cc:149
+#: src/cmdline/cmdline_show.cc:430 src/pkg_info_screen.cc:147
 msgid "Architecture: "
 msgstr "البنية: "
 
-#: src/cmdline/cmdline_show.cc:432 src/pkg_info_screen.cc:151
+#: src/cmdline/cmdline_show.cc:433 src/pkg_info_screen.cc:149
 msgid "Uncompressed Size: "
 msgstr "الحجم الغير مرصوص: "
 
-#: src/cmdline/cmdline_show.cc:436 src/pkg_info_screen.cc:150
+#: src/cmdline/cmdline_show.cc:437 src/pkg_info_screen.cc:148
 msgid "Compressed Size: "
 msgstr "الحجم المرصوص: "
 
-#: src/cmdline/cmdline_show.cc:438
+#: src/cmdline/cmdline_show.cc:439
 msgid "Filename: "
 msgstr "اسم الملف: "
 
-#: src/cmdline/cmdline_show.cc:440
+#: src/cmdline/cmdline_show.cc:441
 msgid "MD5sum: "
 msgstr "MD5sum: "
 
-#: src/cmdline/cmdline_show.cc:444 src/cmdline/cmdline_show.cc:447
+#: src/cmdline/cmdline_show.cc:445 src/cmdline/cmdline_show.cc:448
 #: src/gtk/entityview.cc:606
 msgid "Archive"
 msgstr "أرشيف"
 
-#: src/cmdline/cmdline_show.cc:452
+#: src/cmdline/cmdline_show.cc:453
 msgid "Depends"
 msgstr "يعتمد على"
 
-#: src/cmdline/cmdline_show.cc:454
+#: src/cmdline/cmdline_show.cc:455
 msgid "PreDepends"
 msgstr "يعتمد مسبقاً على"
 
-#: src/cmdline/cmdline_show.cc:456 src/cmdline/cmdline_why.cc:290
+#: src/cmdline/cmdline_show.cc:457 src/cmdline/cmdline_why.cc:290
 msgid "Recommends"
 msgstr "يوصي"
 
-#: src/cmdline/cmdline_show.cc:458 src/cmdline/cmdline_why.cc:293
+#: src/cmdline/cmdline_show.cc:459 src/cmdline/cmdline_why.cc:293
 msgid "Suggests"
 msgstr "يقترح"
 
-#: src/cmdline/cmdline_show.cc:460
+#: src/cmdline/cmdline_show.cc:461
 msgid "Conflicts"
 msgstr "يُعارض"
 
-#: src/cmdline/cmdline_show.cc:462
+#: src/cmdline/cmdline_show.cc:463
 msgid "Breaks"
 msgstr ""
 
-#: src/cmdline/cmdline_show.cc:464
+#: src/cmdline/cmdline_show.cc:465
 msgid "Replaces"
 msgstr "يستبدل"
 
-#: src/cmdline/cmdline_show.cc:466
+#: src/cmdline/cmdline_show.cc:467
 msgid "Obsoletes"
 msgstr "يُلغي"
 
-#: src/cmdline/cmdline_show.cc:468
+#: src/cmdline/cmdline_show.cc:469
 msgid "Enhances"
 msgstr ""
 
-#: src/cmdline/cmdline_show.cc:470 src/cmdline/cmdline_why.cc:221
+#: src/cmdline/cmdline_show.cc:471 src/cmdline/cmdline_why.cc:221
 #: src/cmdline/cmdline_why.cc:1622 src/gtk/dependency_chains_tab.cc:207
 msgid "Provides"
 msgstr "يُوفّر"
 
-#: src/cmdline/cmdline_show.cc:474 src/gtk/entitysummary.cc:369
-#: src/gtk/info.cc:716 src/gtk/previewtab.cc:238 src/pkg_info_screen.cc:102
+#: src/cmdline/cmdline_show.cc:475 src/gtk/entitysummary.cc:369
+#: src/gtk/info.cc:714 src/gtk/previewtab.cc:238 src/pkg_info_screen.cc:102
 msgid "Description: "
 msgstr "الوصف: "
 
-#: src/cmdline/cmdline_show.cc:480 src/pkg_info_screen.cc:107
-#: src/pkg_view.cc:258
+#: src/cmdline/cmdline_show.cc:480 src/pkg_info_screen.cc:106
+#: src/pkg_view.cc:257
 msgid "Homepage: "
 msgstr ""
 
-#: src/cmdline/cmdline_show.cc:574
+#: src/cmdline/cmdline_show.cc:573
 #, c-format
 msgid "Unable to locate package %s"
 msgstr "تعذر العثور على الحزمة %s"
 
-#: src/cmdline/cmdline_show.cc:595
+#: src/cmdline/cmdline_show.cc:594
 #, c-format
 msgid "Unable to parse pattern %s"
 msgstr "تعذر إعراب الصيغة %s"
@@ -2139,7 +2145,7 @@ msgstr "سيقوم بتنزيل/تثبيت/إزالة الحزم.\n"
 msgid "Internal Error, Ordering didn't finish"
 msgstr "خطأ داخلي، لم ينته الترتيب"
 
-#: src/cmdline/cmdline_update.cc:43 src/ui.cc:1732 src/ui.cc:1901
+#: src/cmdline/cmdline_update.cc:43 src/ui.cc:1735 src/ui.cc:1904
 msgid "Deleting obsolete downloaded files"
 msgstr "حذف الملفات المنزلة الملغاة"
 
@@ -2571,71 +2577,71 @@ msgstr "سلسلة أحرف غير منهاة بعد %s"
 msgid "Can't open Aptitude extended state file"
 msgstr "تعذر فتح ملف وضع Aptitude التفصيلي"
 
-#: src/generic/apt/aptcache.cc:409 src/generic/apt/aptcache.cc:505
-#: src/generic/apt/aptcache.cc:507
+#: src/generic/apt/aptcache.cc:409 src/generic/apt/aptcache.cc:527
+#: src/generic/apt/aptcache.cc:529
 msgid "Reading extended state information"
 msgstr "قراءة معلومات الوضع التفصيلية"
 
-#: src/generic/apt/aptcache.cc:513 src/generic/apt/aptcache.cc:595
-#: src/generic/apt/aptcache.cc:598
+#: src/generic/apt/aptcache.cc:535 src/generic/apt/aptcache.cc:619
+#: src/generic/apt/aptcache.cc:622
 msgid "Initializing package states"
 msgstr "تمهيد أحوال الحزم"
 
-#: src/generic/apt/aptcache.cc:759
+#: src/generic/apt/aptcache.cc:783
 msgid "Cannot open Aptitude state file"
 msgstr "تعذر فتح ملف وضع Aptitude"
 
-#: src/generic/apt/aptcache.cc:763 src/generic/apt/aptcache.cc:896
-#: src/generic/apt/aptcache.cc:899
+#: src/generic/apt/aptcache.cc:787 src/generic/apt/aptcache.cc:920
+#: src/generic/apt/aptcache.cc:923
 msgid "Writing extended state information"
 msgstr "تسجيل معلومات الوضع التفصيلية"
 
-#: src/generic/apt/aptcache.cc:887
+#: src/generic/apt/aptcache.cc:911
 msgid "Couldn't write state file"
 msgstr "تعذر تسجيل ملف الوضع"
 
-#: src/generic/apt/aptcache.cc:904
+#: src/generic/apt/aptcache.cc:928
 msgid "Error writing state file"
 msgstr "خطأ في تسجيل ملف الوضع"
 
-#: src/generic/apt/aptcache.cc:922
+#: src/generic/apt/aptcache.cc:946
 #, c-format
 msgid "failed to remove %s"
 msgstr "تعذرت إزالة %s"
 
-#: src/generic/apt/aptcache.cc:929
+#: src/generic/apt/aptcache.cc:953
 #, c-format
 msgid "failed to rename %s to %s"
 msgstr "فشل تغيير اسم %s إلى %s"
 
-#: src/generic/apt/aptcache.cc:937
+#: src/generic/apt/aptcache.cc:961
 #, c-format
 msgid "couldn't replace %s with %s"
 msgstr "تعذر استبدال %s بـ%s"
 
-#: src/generic/apt/aptcache.cc:955
+#: src/generic/apt/aptcache.cc:979
 #: src/generic/apt/download_install_manager.cc:219
 msgid ""
 "Could not regain the system lock!  (Perhaps another apt or dpkg is running?)"
 msgstr "تعذر الحصول على قفل النظام! (قد يكون apt أو dpkg آخر يعمل؟)"
 
-#: src/generic/apt/aptcache.cc:958
+#: src/generic/apt/aptcache.cc:982
 msgid "failed to save selections to dpkg database"
 msgstr ""
 
-#: src/generic/apt/aptcache.cc:1578
+#: src/generic/apt/aptcache.cc:1714
 msgid "Unable to correct dependencies, some packages cannot be installed"
 msgstr "تعذر تصحيح المعتمدات، لذا لن يمكن تثبيت بعض الحزم"
 
-#: src/generic/apt/aptcache.cc:2236
+#: src/generic/apt/aptcache.cc:2386
 msgid "The list of sources could not be read."
 msgstr "تعذرت قراءة لائحة المصادر."
 
-#: src/generic/apt/aptcache.cc:2243
+#: src/generic/apt/aptcache.cc:2393
 msgid "The package lists or status file could not be parsed or opened."
 msgstr "لوائح الحزم أو ملف الوضع تعذر إعرابه أو فتحه."
 
-#: src/generic/apt/aptcache.cc:2246
+#: src/generic/apt/aptcache.cc:2396
 msgid "You may want to update the package lists to correct these missing files"
 msgstr "قد ترغب بتحديث لوائح الحزم لتصحيح هذه الملفات المفقودة"
 
@@ -2649,21 +2655,21 @@ msgstr "قد ترغب بتحديث لوائح الحزم لتصحيح هذه ا�
 #. indicated by translating "Localized defaults|" below to
 #. "aptitude-defaults.ww".  If you use this mechanism, you should
 #. also add your defaults file to pkgdata_DATA in Makefile.am.
-#: src/generic/apt/apt.cc:167
+#: src/generic/apt/apt.cc:168
 msgid "Localized defaults|"
 msgstr ""
 
-#: src/generic/apt/apt.cc:240
+#: src/generic/apt/apt.cc:241
 #, c-format
 msgid "%s is readable but not writable; unable to write configuration file."
 msgstr "%s قابل للقراءة فقط وليس للكتابة; تعذرت كتابة ملف التهيئة"
 
-#: src/generic/apt/apt.cc:285
+#: src/generic/apt/apt.cc:286
 #, c-format
 msgid "Unable to replace %s with new configuration file"
 msgstr "تعذر استبدال %s بملف التهيئة الجديد"
 
-#: src/generic/apt/apt.cc:436
+#: src/generic/apt/apt.cc:437
 #, fuzzy
 msgid ""
 "Could not lock the cache file; this usually means that dpkg or another apt "
@@ -2673,31 +2679,31 @@ msgstr ""
 "تعذر قفل ملف المخزن. سيتم فتحه بوضع القراءة فقط;أي تغييرات سوف تقوم بها على "
 "حالة الحزم لن يتم حفظها!"
 
-#: src/generic/apt/apt.cc:1230
+#: src/generic/apt/apt.cc:1253
 msgid "foreign"
 msgstr ""
 
-#: src/generic/apt/apt.cc:1232
+#: src/generic/apt/apt.cc:1255
 msgid "same"
 msgstr ""
 
-#: src/generic/apt/apt.cc:1235
+#: src/generic/apt/apt.cc:1258
 msgid "allowed"
 msgstr ""
 
-#: src/generic/apt/apt.cc:1324
+#: src/generic/apt/apt.cc:1347
 msgid "main"
 msgstr "رئيسي"
 
-#: src/generic/apt/apt.cc:1324
+#: src/generic/apt/apt.cc:1347
 msgid "contrib"
 msgstr ""
 
-#: src/generic/apt/apt.cc:1324
+#: src/generic/apt/apt.cc:1347
 msgid "non-free"
 msgstr ""
 
-#: src/generic/apt/apt.cc:1324
+#: src/generic/apt/apt.cc:1347
 msgid "non-US"
 msgstr ""
 
@@ -2883,10 +2889,15 @@ msgid "log report"
 msgstr "تقرير التسجيل"
 
 #: src/generic/apt/log.cc:74
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "IMPORTANT: this log only lists intended actions; actions which fail due "
+#| "to\n"
+#| "dpkg problems may not be completed.\n"
+#| "\n"
 msgid ""
-"IMPORTANT: this log only lists intended actions; actions which fail due to\n"
-"dpkg problems may not be completed.\n"
+"  IMPORTANT: this log only lists intended actions; actions which fail\n"
+"  due to dpkg problems may not be completed.\n"
 "\n"
 msgstr ""
 "هام: هذا السجل يعدّد فقط الأعمال المقصودة؛ الأعمال التي أخفقت بسبب \n"
@@ -2908,91 +2919,84 @@ msgstr "%s بايت من مساحة القرص سيتم استخدامها\n"
 msgid "%sB of disk space will be freed\n"
 msgstr "%s بايت من مساحة القرص سيتم تفريغها\n"
 
-#: src/generic/apt/log.cc:94
+#: src/generic/apt/log.cc:93
 msgid "INSTALL"
 msgstr "تثبيت"
 
-#: src/generic/apt/log.cc:95
+#: src/generic/apt/log.cc:94
 msgid "REMOVE"
 msgstr "إزالة"
 
-#: src/generic/apt/log.cc:96
+#: src/generic/apt/log.cc:95
 msgid "UPGRADE"
 msgstr ""
 
-#: src/generic/apt/log.cc:97
+#: src/generic/apt/log.cc:96
 msgid "DOWNGRADE"
 msgstr ""
 
-#: src/generic/apt/log.cc:98
+#: src/generic/apt/log.cc:97
 msgid "REINSTALL"
 msgstr "إعادة تثبيت"
 
-#: src/generic/apt/log.cc:99
+#: src/generic/apt/log.cc:98
 msgid "HOLD"
 msgstr "إمساك"
 
-#: src/generic/apt/log.cc:100
+#: src/generic/apt/log.cc:99
 msgid "BROKEN"
 msgstr "معطوب"
 
-#: src/generic/apt/log.cc:101
+#: src/generic/apt/log.cc:100
 msgid "REMOVE, NOT USED"
 msgstr "إزالة، غير مستخدم"
 
-#: src/generic/apt/log.cc:102
+#: src/generic/apt/log.cc:101
 msgid "REMOVE, DEPENDENCIES"
 msgstr "إزالة، معتمدات"
 
-#: src/generic/apt/log.cc:103
+#: src/generic/apt/log.cc:102
 msgid "INSTALL, DEPENDENCIES"
 msgstr "تثبيت، معتمدات"
 
-#: src/generic/apt/log.cc:104
+#: src/generic/apt/log.cc:103
 msgid "HOLD, DEPENDENCIES"
 msgstr "إمساك، معتمدات"
 
-#: src/generic/apt/log.cc:105
+#: src/generic/apt/log.cc:104
 msgid "UNCONFIGURED"
 msgstr ""
 
-#: src/generic/apt/log.cc:106
+#: src/generic/apt/log.cc:105
 msgid "????????"
 msgstr "????????"
 
-#: src/generic/apt/log.cc:109 src/generic/apt/log.cc:110
+#: src/generic/apt/log.cc:108 src/generic/apt/log.cc:109
 #, fuzzy
 #| msgid "No resolution found."
 msgid "(no version found)"
 msgstr "لم يعثر على حل."
 
-#: src/generic/apt/log.cc:126 src/generic/apt/log.cc:139
+#: src/generic/apt/log.cc:125 src/generic/apt/log.cc:138
 #, fuzzy, c-format
 #| msgid "[%s] %s\n"
 msgid "[%s] %s %s\n"
 msgstr "[%s] %s\n"
 
-#: src/generic/apt/log.cc:147
+#: src/generic/apt/log.cc:146
 #, fuzzy, c-format
 #| msgid "[UPGRADE] %s %s -> %s\n"
 msgid "[%s] %s %s -> %s\n"
 msgstr "[ترقية] %s %s -> %s\n"
 
-#: src/generic/apt/log.cc:156
+#: src/generic/apt/log.cc:155
 #, c-format
 msgid "[%s] %s\n"
 msgstr "[%s] %s\n"
 
-#: src/generic/apt/log.cc:161
-#, c-format
-msgid ""
-"===============================================================================\n"
-"\n"
-"Log complete.\n"
+#: src/generic/apt/log.cc:162
+msgid "Log complete."
 msgstr ""
-"===============================================================================\n"
-"\n"
-"اكتمل التسجيل.\n"
 
 #: src/generic/apt/matching/match.cc:3083
 #: src/generic/apt/matching/match.cc:3200
@@ -3246,12 +3250,7 @@ msgstr " أو"
 msgid "Unexpected %s"
 msgstr "')' غير متوقع"
 
-#: src/generic/util/temp.cc:201 src/generic/util/temp.cc:275
-#, c-format
-msgid "Unable to create temporary directory from template \"%s\": %s"
-msgstr "تعذر إنشاء دليل مؤقت من القالب \"%s\": %s"
-
-#: src/generic/util/temp.cc:342
+#: src/generic/util/temp.cc:319
 #, fuzzy, c-format
 msgid "Unable to create temporary filename from prefix \"%s\""
 msgstr "تعذر إنشاء دليل مؤقت من القالب \"%s\": %s"
@@ -3291,46 +3290,46 @@ msgstr ""
 msgid "_File"
 msgstr "إغلاق"
 
-#: src/gtk/aptitude.glade:28 src/gtk/aptitude.glade:2274 src/ui.cc:2368
+#: src/gtk/aptitude.glade:28 src/gtk/aptitude.glade:2274 src/ui.cc:2371
 msgid "Perform all pending installs and removals"
 msgstr "إجراء كل عمليات التثبيت والإزالة المؤخَّرة"
 
-#: src/gtk/aptitude.glade:38 src/gtk/aptitude.glade:2285 src/ui.cc:2371
+#: src/gtk/aptitude.glade:38 src/gtk/aptitude.glade:2285 src/ui.cc:2374
 msgid "Check for new versions of packages"
 msgstr "التحقق من وجود نسخ جديدة من الحزم"
 
-#: src/gtk/aptitude.glade:53 src/gtk/aptitude.glade:2301 src/ui.cc:2376
+#: src/gtk/aptitude.glade:53 src/gtk/aptitude.glade:2301 src/ui.cc:2379
 msgid "Mark all upgradable packages which are not held for upgrade"
 msgstr "تعليم كل الحزم القابلة للترقية والتي ليست مبقاة للترقية"
 
-#: src/gtk/aptitude.glade:63 src/gtk/aptitude.glade:2312 src/ui.cc:2381
+#: src/gtk/aptitude.glade:63 src/gtk/aptitude.glade:2312 src/ui.cc:2384
 msgid "Forget which packages are \"new\""
 msgstr "نسيان أيّ الحزم هي \"جديدة\""
 
-#: src/gtk/aptitude.glade:72 src/gtk/aptitude.glade:2322 src/ui.cc:2385
+#: src/gtk/aptitude.glade:72 src/gtk/aptitude.glade:2322 src/ui.cc:2388
 msgid "Cancel all pending installations, removals, holds, and upgrades."
 msgstr "إلغاء جميع التثبيتات، والإزالات، والإبقاءات، والترقيات المؤجلة."
 
-#: src/gtk/aptitude.glade:81 src/gtk/aptitude.glade:2332 src/ui.cc:2389
+#: src/gtk/aptitude.glade:81 src/gtk/aptitude.glade:2332 src/ui.cc:2392
 msgid "Delete package files which were previously downloaded"
 msgstr "حذف ملفات الحزم التي تم تنزيلها من قبل"
 
-#: src/gtk/aptitude.glade:90 src/gtk/aptitude.glade:2342 src/ui.cc:2393
+#: src/gtk/aptitude.glade:90 src/gtk/aptitude.glade:2342 src/ui.cc:2396
 msgid "Delete package files which can no longer be downloaded"
 msgstr "حذف ملفات الحزم التي لا يمكن تنزيلها بعد الآن"
 
-#: src/gtk/aptitude.glade:104 src/gtk/aptitude.glade:2357 src/ui.cc:2400
+#: src/gtk/aptitude.glade:104 src/gtk/aptitude.glade:2357 src/ui.cc:2403
 msgid "Reload the package cache"
 msgstr "إعادة تحميل مخزن الحزم"
 
-#: src/gtk/aptitude.glade:118 src/gtk/aptitude.glade:2372 src/ui.cc:2410
+#: src/gtk/aptitude.glade:118 src/gtk/aptitude.glade:2372 src/ui.cc:2413
 #, fuzzy
 msgid "Restart the program as root; your settings will be preserved"
 msgstr ""
 "استخدم 'su' كي تصبح المستخدم root؛ سيقوم هذا بإعادة تشغيل البرنامج، ولكن "
 "سيتم الإبقاء على إعداداتك"
 
-#: src/gtk/aptitude.glade:127 src/gtk/aptitude.glade:2382 src/ui.cc:2413
+#: src/gtk/aptitude.glade:127 src/gtk/aptitude.glade:2382 src/ui.cc:2416
 msgid "Exit the program"
 msgstr "الخروج من البرنامج"
 
@@ -3338,7 +3337,7 @@ msgstr "الخروج من البرنامج"
 msgid "E_dit"
 msgstr ""
 
-#: src/gtk/aptitude.glade:148 src/gtk/aptitude.glade:2404 src/ui.cc:2420
+#: src/gtk/aptitude.glade:148 src/gtk/aptitude.glade:2404 src/ui.cc:2423
 msgid "Undo the last package operation or group of operations"
 msgstr "التراجع عن آخر عملية حزمة أو مجموعة من العمليات"
 
@@ -3387,12 +3386,12 @@ msgid "Packages"
 msgstr "الحزم"
 
 #: src/gtk/aptitude.glade:358 src/gtk/aptitude.glade:2617 src/gtk/gui.cc:1033
-#: src/gtk/previewtab.cc:118 src/qt/tabs_manager.cc:220 src/ui.cc:1416
+#: src/gtk/previewtab.cc:118 src/qt/tabs_manager.cc:220 src/ui.cc:1419
 msgid "Preview"
 msgstr "معاينة"
 
 #: src/gtk/aptitude.glade:369 src/gtk/aptitude.glade:2628 src/gtk/gui.cc:1028
-#: src/qt/tabs_manager.cc:263 src/ui.cc:2810
+#: src/qt/tabs_manager.cc:263 src/ui.cc:2813
 msgid "Resolver"
 msgstr "مقدم الحلول"
 
@@ -3805,8 +3804,8 @@ msgstr "إغلاق"
 msgid "Already downloaded"
 msgstr "حذف الملفات المنزلة"
 
-#: src/gtk/download.cc:248 src/gtk/entityview.cc:397 src/pkg_columnizer.cc:94
-#: src/pkg_view.cc:647
+#: src/gtk/download.cc:248 src/gtk/entityview.cc:397 src/pkg_columnizer.cc:95
+#: src/pkg_view.cc:643
 msgid "Description"
 msgstr "الوصف"
 
@@ -4025,7 +4024,7 @@ msgstr "رفض إزالة %s"
 msgid "Icons showing the current and future status of this package."
 msgstr ""
 
-#: src/gtk/entityview.cc:564 src/pkg_columnizer.cc:103
+#: src/gtk/entityview.cc:564 src/pkg_columnizer.cc:104
 msgid "Auto"
 msgstr "تلقائي"
 
@@ -4149,7 +4148,7 @@ msgstr "تصفية لائحة الحزم"
 msgid "Download already running."
 msgstr "جاري التحميل..."
 
-#: src/gtk/gui.cc:300 src/gtk/gui.cc:948 src/ui.cc:1547 src/ui.cc:1786
+#: src/gtk/gui.cc:300 src/gtk/gui.cc:948 src/ui.cc:1550 src/ui.cc:1789
 msgid "A package-list update or install run is already taking place."
 msgstr "هناك عملية تحديث أو تثبيت حزم تجري حالياً."
 
@@ -4210,7 +4209,7 @@ msgstr "ليست هناك حزم معطوبة"
 msgid "Asking whether to replace the configuration file %s"
 msgstr "تعذر استبدال %s بملف التهيئة الجديد"
 
-#: src/gtk/gui.cc:962 src/ui.cc:1287
+#: src/gtk/gui.cc:962 src/ui.cc:1290
 msgid "Downloading packages"
 msgstr "تنزيل الحزم"
 
@@ -4327,42 +4326,42 @@ msgstr ""
 msgid "Unable to load the user interface definition file %s/aptitude.glade."
 msgstr ""
 
-#: src/gtk/info.cc:161 src/gtk/pkgview.cc:169
+#: src/gtk/info.cc:159 src/gtk/pkgview.cc:167
 msgid "Current status"
 msgstr ""
 
-#: src/gtk/info.cc:163 src/gtk/pkgview.cc:171
+#: src/gtk/info.cc:161 src/gtk/pkgview.cc:169
 msgid "Selected status"
 msgstr ""
 
-#: src/gtk/info.cc:496
+#: src/gtk/info.cc:494
 #, fuzzy
 msgid "Not available"
 msgstr "غير مثبتة"
 
-#: src/gtk/info.cc:545
+#: src/gtk/info.cc:543
 msgid "Package information: version list"
 msgstr ""
 
-#: src/gtk/info.cc:555
+#: src/gtk/info.cc:553
 #, fuzzy
 msgid "Package information: dependency list"
 msgstr "الحزم التي تعتمد على %s"
 
-#: src/gtk/info.cc:597
+#: src/gtk/info.cc:595
 msgid "Please wait; reloading cache..."
 msgstr ""
 
-#: src/gtk/info.cc:779
+#: src/gtk/info.cc:777
 #, fuzzy
 msgid "Info"
 msgstr "لا"
 
 #: src/gtk/packageinformation.cc:104 src/gtk/packageinformation.cc:106
-#: src/pkg_columnizer.cc:354 src/pkg_columnizer.cc:375
-#: src/pkg_columnizer.cc:382 src/pkg_grouppolicy.cc:269
-#: src/pkg_info_screen.cc:146 src/pkg_info_screen.cc:147
-#: src/pkg_ver_item.cc:345 src/pkg_ver_item.cc:379 src/qt/package.cc:226
+#: src/pkg_columnizer.cc:351 src/pkg_columnizer.cc:372
+#: src/pkg_columnizer.cc:379 src/pkg_grouppolicy.cc:269
+#: src/pkg_info_screen.cc:144 src/pkg_info_screen.cc:145
+#: src/pkg_ver_item.cc:350 src/pkg_ver_item.cc:384 src/qt/package.cc:226
 #: src/qt/version.cc:117
 msgid "Unknown"
 msgstr "مجهول"
@@ -4381,41 +4380,41 @@ msgstr ""
 msgid "Packages: "
 msgstr "الحزمة: "
 
-#: src/gtk/pkgview.cc:224
+#: src/gtk/pkgview.cc:222
 #, fuzzy, c-format
 msgid "%s was installed automatically."
 msgstr "%s; سيتم تثبيتها آلياً"
 
-#: src/gtk/pkgview.cc:227
+#: src/gtk/pkgview.cc:225
 #, fuzzy, c-format
 msgid "%s is being installed automatically."
 msgstr "%s; سيتم تثبيتها آلياً"
 
-#: src/gtk/pkgview.cc:235
+#: src/gtk/pkgview.cc:233
 #, fuzzy, c-format
 msgid "%s was installed manually."
 msgstr "%s; سيتم تثبيتها آلياً"
 
-#: src/gtk/pkgview.cc:238
+#: src/gtk/pkgview.cc:236
 #, fuzzy, c-format
 msgid "%s is being installed manually."
 msgstr "%s; سيتم تثبيتها آلياً"
 
-#: src/gtk/pkgview.cc:401
+#: src/gtk/pkgview.cc:399
 msgid "Cache reloading, please wait..."
 msgstr ""
 
-#: src/gtk/pkgview.cc:607
+#: src/gtk/pkgview.cc:605
 #, fuzzy
 msgid "Searching..."
 msgstr "بحث"
 
-#: src/gtk/pkgview.cc:718
+#: src/gtk/pkgview.cc:716
 #, fuzzy
 msgid "Finalizing view"
 msgstr "بناء العرض"
 
-#: src/gtk/pkgview.cc:718 src/pkg_tree.cc:204 src/pkg_tree.cc:215
+#: src/gtk/pkgview.cc:716 src/pkg_tree.cc:204 src/pkg_tree.cc:215
 #: src/pkg_tree.cc:226 src/pkg_tree.cc:238
 msgid "Building view"
 msgstr "بناء العرض"
@@ -5756,7 +5755,7 @@ msgstr "البحث عن: "
 msgid "Search backwards for: "
 msgstr "البحث رجوعاً عن:"
 
-#: src/mine/cmine.cc:115 src/mine/cmine.cc:154 src/ui.cc:1791
+#: src/mine/cmine.cc:115 src/mine/cmine.cc:154 src/ui.cc:1794
 msgid "Minesweeper"
 msgstr "كانسة الألغام"
 
@@ -5872,233 +5871,233 @@ msgstr "mine-help.txt"
 msgid "Encoding of mine-help.txt|UTF-8"
 msgstr "ترميز mine-help.txt|UTF-8"
 
-#: src/pkg_columnizer.cc:86
+#: src/pkg_columnizer.cc:87
 #, fuzzy
 msgid "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 1 10 9 12 30 17 15"
 msgstr "30 6 6 1 1 40 14 14 11 10 35 9 10 2 1 1 10 12 30 15 15"
 
-#: src/pkg_columnizer.cc:89 src/ui.cc:2809
+#: src/pkg_columnizer.cc:90 src/ui.cc:2812
 msgid "Package"
 msgstr "حزمة"
 
-#: src/pkg_columnizer.cc:90
+#: src/pkg_columnizer.cc:91
 msgid "InstSz"
 msgstr "InstSz"
 
-#: src/pkg_columnizer.cc:91
+#: src/pkg_columnizer.cc:92
 msgid "DebSz"
 msgstr "DebSz"
 
-#: src/pkg_columnizer.cc:93
+#: src/pkg_columnizer.cc:94
 msgid "Action"
 msgstr "عمل"
 
-#: src/pkg_columnizer.cc:95
+#: src/pkg_columnizer.cc:96
 msgid "InstVer"
 msgstr "InstVer"
 
-#: src/pkg_columnizer.cc:96
+#: src/pkg_columnizer.cc:97
 msgid "CandVer"
 msgstr "CandVer"
 
-#: src/pkg_columnizer.cc:97
+#: src/pkg_columnizer.cc:98
 msgid "LongState"
 msgstr "LongState"
 
-#: src/pkg_columnizer.cc:98
+#: src/pkg_columnizer.cc:99
 msgid "LongAction"
 msgstr "LongAction"
 
-#: src/pkg_columnizer.cc:99 src/qt/widgets/packages_tab.cc:105
+#: src/pkg_columnizer.cc:100 src/qt/widgets/packages_tab.cc:105
 msgid "Maintainer"
 msgstr "المسؤول"
 
-#: src/pkg_columnizer.cc:100
+#: src/pkg_columnizer.cc:101
 msgid "Priority"
 msgstr "أولوية"
 
-#: src/pkg_columnizer.cc:101
+#: src/pkg_columnizer.cc:102
 msgid "Section"
 msgstr "مقطع"
 
-#: src/pkg_columnizer.cc:102
+#: src/pkg_columnizer.cc:103
 msgid "RC"
 msgstr "RC"
 
-#: src/pkg_columnizer.cc:104
+#: src/pkg_columnizer.cc:105
 msgid "Tag"
 msgstr "علامة"
 
-#: src/pkg_columnizer.cc:107
+#: src/pkg_columnizer.cc:108
 msgid "ProgName"
 msgstr "اسم البرنامج"
 
-#: src/pkg_columnizer.cc:108
+#: src/pkg_columnizer.cc:109
 msgid "ProgVer"
 msgstr "نسخة البرنامج"
 
-#: src/pkg_columnizer.cc:109
+#: src/pkg_columnizer.cc:110
 msgid "#Broken"
 msgstr "#معطوب"
 
-#: src/pkg_columnizer.cc:110
+#: src/pkg_columnizer.cc:111
 msgid "DiskUsage"
 msgstr "المساحة المستخدمة"
 
-#: src/pkg_columnizer.cc:111
+#: src/pkg_columnizer.cc:112
 msgid "DownloadSize"
 msgstr "حجم التنزيل"
 
-#: src/pkg_columnizer.cc:139 src/pkg_columnizer.cc:151 src/pkg_ver_item.cc:99
-#: src/pkg_ver_item.cc:164
+#: src/pkg_columnizer.cc:140 src/pkg_columnizer.cc:152 src/pkg_ver_item.cc:98
+#: src/pkg_ver_item.cc:163
 msgid "<N/A>"
 msgstr "<N/A>"
 
-#: src/pkg_columnizer.cc:181 src/pkg_columnizer.cc:192
+#: src/pkg_columnizer.cc:182 src/pkg_columnizer.cc:193
 msgid "<none>"
 msgstr "<none>"
 
-#: src/pkg_columnizer.cc:238 src/pkg_grouppolicy.cc:264
+#: src/pkg_columnizer.cc:237 src/pkg_grouppolicy.cc:264
 #: src/pkg_grouppolicy.cc:1673 src/qt/package.cc:236
 #: src/qt/widgets/packages_tab.cc:73
 msgid "virtual"
 msgstr "وهمي"
 
-#: src/pkg_columnizer.cc:245 src/pkg_ver_item.cc:214 src/pkg_ver_item.cc:222
+#: src/pkg_columnizer.cc:244 src/pkg_ver_item.cc:215 src/pkg_ver_item.cc:223
 msgid "purged"
 msgstr "مُزال"
 
-#: src/pkg_columnizer.cc:252 src/pkg_ver_item.cc:229
+#: src/pkg_columnizer.cc:251 src/pkg_ver_item.cc:230
 msgid "half-config"
 msgstr "نصف مهيّأ"
 
-#: src/pkg_columnizer.cc:254 src/pkg_ver_item.cc:231
+#: src/pkg_columnizer.cc:253 src/pkg_ver_item.cc:232
 msgid "half-install"
 msgstr "نصف مثبت"
 
-#: src/pkg_columnizer.cc:256 src/pkg_ver_item.cc:233
+#: src/pkg_columnizer.cc:255 src/pkg_ver_item.cc:234
 msgid "config-files"
 msgstr "ملفات التهيئة"
 
-#: src/pkg_columnizer.cc:261
+#: src/pkg_columnizer.cc:259 src/pkg_ver_item.cc:238
 msgid "triggers-awaited"
 msgstr ""
 
-#: src/pkg_columnizer.cc:263
+#: src/pkg_columnizer.cc:261 src/pkg_ver_item.cc:240
 msgid "triggers-pending"
 msgstr ""
 
-#: src/pkg_columnizer.cc:266 src/pkg_columnizer.cc:551 src/pkg_ver_item.cc:237
+#: src/pkg_columnizer.cc:263 src/pkg_columnizer.cc:548 src/pkg_ver_item.cc:242
 msgid "ERROR"
 msgstr "خطأ"
 
-#: src/pkg_columnizer.cc:313 src/pkg_ver_item.cc:295
+#: src/pkg_columnizer.cc:310 src/pkg_ver_item.cc:300
 msgid "hold"
 msgstr "إبقاء"
 
-#: src/pkg_columnizer.cc:316
+#: src/pkg_columnizer.cc:313
 msgid "forbidden upgrade"
 msgstr "ترقية ممنوعة"
 
-#: src/pkg_columnizer.cc:318
+#: src/pkg_columnizer.cc:315
 msgid "purge"
 msgstr "إزالة"
 
-#: src/pkg_columnizer.cc:318 src/pkg_ver_item.cc:319
+#: src/pkg_columnizer.cc:315 src/pkg_ver_item.cc:324
 msgid "delete"
 msgstr "حذف"
 
-#: src/pkg_columnizer.cc:320 src/pkg_ver_item.cc:217 src/pkg_ver_item.cc:301
+#: src/pkg_columnizer.cc:317 src/pkg_ver_item.cc:218 src/pkg_ver_item.cc:306
 msgid "broken"
 msgstr "معطوب"
 
-#: src/pkg_columnizer.cc:322 src/pkg_ver_item.cc:305 src/pkg_ver_item.cc:312
-#: src/pkg_ver_item.cc:321
+#: src/pkg_columnizer.cc:319 src/pkg_ver_item.cc:310 src/pkg_ver_item.cc:317
+#: src/pkg_ver_item.cc:326
 msgid "install"
 msgstr "تثبيت"
 
-#: src/pkg_columnizer.cc:324
+#: src/pkg_columnizer.cc:321
 msgid "reinstall"
 msgstr "إعادة تثبيت"
 
-#: src/pkg_columnizer.cc:326
+#: src/pkg_columnizer.cc:323
 msgid "upgrade"
 msgstr "ترقية"
 
-#: src/pkg_columnizer.cc:328 src/pkg_columnizer.cc:330 src/pkg_ver_item.cc:307
-#: src/pkg_ver_item.cc:314 src/pkg_ver_item.cc:323 src/pkg_ver_item.cc:326
+#: src/pkg_columnizer.cc:325 src/pkg_columnizer.cc:327 src/pkg_ver_item.cc:312
+#: src/pkg_ver_item.cc:319 src/pkg_ver_item.cc:328 src/pkg_ver_item.cc:331
 msgid "none"
 msgstr "لاشيء"
 
 #. TRANSLATORS: Imp = Important
-#: src/pkg_columnizer.cc:362 src/pkg_ver_item.cc:354
+#: src/pkg_columnizer.cc:359 src/pkg_ver_item.cc:359
 msgid "Imp"
 msgstr "مهم"
 
 #. TRANSLATORS: Req = Required
-#: src/pkg_columnizer.cc:364 src/pkg_ver_item.cc:357
+#: src/pkg_columnizer.cc:361 src/pkg_ver_item.cc:362
 msgid "Req"
 msgstr "مطلوب"
 
 #. TRANSLATORS: Std = Standard
-#: src/pkg_columnizer.cc:366 src/pkg_ver_item.cc:360
+#: src/pkg_columnizer.cc:363 src/pkg_ver_item.cc:365
 msgid "Std"
 msgstr "قياسي"
 
 #. TRANSLATORS: Opt = Optional
-#: src/pkg_columnizer.cc:368 src/pkg_ver_item.cc:363
+#: src/pkg_columnizer.cc:365 src/pkg_ver_item.cc:368
 msgid "Opt"
 msgstr "اختياري"
 
 #. TRANSLATORS: Xtr = Extra
-#: src/pkg_columnizer.cc:370 src/pkg_ver_item.cc:366
+#: src/pkg_columnizer.cc:367 src/pkg_ver_item.cc:371
 msgid "Xtr"
 msgstr "Xtr"
 
-#: src/pkg_columnizer.cc:372 src/pkg_ver_item.cc:368
+#: src/pkg_columnizer.cc:369 src/pkg_ver_item.cc:373
 msgid "ERR"
 msgstr "خطأ"
 
-#: src/pkg_columnizer.cc:394
+#: src/pkg_columnizer.cc:391
 #, c-format
 msgid "#Broken: %ld"
 msgstr "#معطوب: %ld"
 
-#: src/pkg_columnizer.cc:409
+#: src/pkg_columnizer.cc:406
 #, c-format
 msgid "Will use %sB of disk space"
 msgstr "سيتم استخدام %sبايت من مساحة القرص"
 
-#: src/pkg_columnizer.cc:417
+#: src/pkg_columnizer.cc:414
 #, c-format
 msgid "Will free %sB of disk space"
 msgstr "سوف يفرغ %sبايت من مساحة القرص"
 
-#: src/pkg_columnizer.cc:431
+#: src/pkg_columnizer.cc:428
 #, c-format
 msgid "DL Size: %sB"
 msgstr "حجم التنزيل %sبايت"
 
 #. TRANSLATORS: Hostname
-#: src/pkg_columnizer.cc:499
+#: src/pkg_columnizer.cc:496
 msgid "HN too long"
 msgstr "HN طويلة جداً"
 
-#: src/pkg_columnizer.cc:677
+#: src/pkg_columnizer.cc:674
 #, c-format
 msgid "Using default for %s string: '%s'"
 msgstr ""
 
-#: src/pkg_columnizer.cc:682 src/pkg_columnizer.cc:694
+#: src/pkg_columnizer.cc:679 src/pkg_columnizer.cc:691
 #, fuzzy, c-format
 msgid "Unable to transcode package display format after \"%ls\""
 msgstr "تعذر تحميل نسق إظهار الحزمة بعد \"%ls\""
 
-#: src/pkg_columnizer.cc:701
+#: src/pkg_columnizer.cc:698
 msgid "Internal error: Default column string is unparsable"
 msgstr "خطأ داخلي: نص العمود الافتراضي غير قابل للقراءة"
 
-#: src/pkg_columnizer.cc:728
+#: src/pkg_columnizer.cc:725
 #, c-format
 msgid "Forbidden character in position %zu of %s string: '%s'"
 msgstr ""
@@ -6262,26 +6261,26 @@ msgid ""
 "database is not present (installing debtags may correct this problem)."
 msgstr ""
 
-#: src/pkg_info_screen.cc:152
+#: src/pkg_info_screen.cc:150
 msgid "Source Package: "
 msgstr "الحزمة المصدرية: "
 
-#: src/pkg_info_screen.cc:162
+#: src/pkg_info_screen.cc:160
 #, c-format
 msgid "Package names provided by %s"
 msgstr "أسماء الحزم التي يوفرها %s"
 
-#: src/pkg_info_screen.cc:175
+#: src/pkg_info_screen.cc:173
 #, c-format
 msgid "Packages which depend on %s"
 msgstr "الحزم التي تعتمد على %s"
 
-#: src/pkg_info_screen.cc:181
+#: src/pkg_info_screen.cc:179
 #, fuzzy, c-format
 msgid "Versions of %s"
 msgstr "النسخ"
 
-#: src/pkg_item.cc:87
+#: src/pkg_item.cc:86
 #, c-format
 msgid ""
 "%s is an essential package!%n%nAre you sure you want to remove it?%nType "
@@ -6290,12 +6289,12 @@ msgstr ""
 "%s %n%n هي حزمة أساسية! هل أنت متأكّد من أنك تريد إزالتها؟ اطبع %n '%s' إن "
 "كنت كذلك."
 
-#: src/pkg_item.cc:372 src/pkg_ver_item.cc:748
+#: src/pkg_item.cc:369 src/pkg_ver_item.cc:749
 #, c-format
 msgid "Reporting a bug in %s:\n"
 msgstr "جاري تقرير خليل في %s:\n"
 
-#: src/pkg_item.cc:392
+#: src/pkg_item.cc:389
 msgid ""
 "You are not root and I cannot find any way to become root.  To reconfigure "
 "this package, install the menu package, the login package, or run aptitude "
@@ -6304,12 +6303,12 @@ msgstr ""
 "أنت لست المستخدم root ولا أعلم أية طريقة كي تصبح كذلك. كي تعيد تهيئة هذه "
 "الحزمة، قم بتثبيت حزمة menu، وحزمة login، أو قم بتشغيل aptitude كمستخدم root."
 
-#: src/pkg_item.cc:400
+#: src/pkg_item.cc:397
 #, c-format
 msgid "Reconfiguring %s\n"
 msgstr "إعادة تهيئة %s\n"
 
-#: src/pkg_subtree.cc:159
+#: src/pkg_subtree.cc:163
 #, c-format
 msgid "This group contains %d package."
 msgid_plural "This group contains %d packages."
@@ -6355,30 +6354,30 @@ msgid ""
 "removed will appear in this space."
 msgstr "إن اخترت حزمة، فإن شرحاً عن وضعها الحالي سيظهر في هذه المساحة."
 
-#: src/pkg_view.cc:569
+#: src/pkg_view.cc:565
 msgid "make_package_view: error in arguments -- two main widgets??"
 msgstr "make_package_view: خطأ في المعطيات -- هناك أكثر من widget؟؟"
 
-#: src/pkg_view.cc:575
+#: src/pkg_view.cc:571
 msgid ""
 "make_package_view: error in arguments -- bad column list for static item"
 msgstr "make_package_view: خطأ في المعطيات -- قائمة عمودية خاطئة للعنصر الثابت"
 
-#: src/pkg_view.cc:650
+#: src/pkg_view.cc:646
 #, fuzzy
 msgid "Related Dependencies"
 msgstr "إرضاء المعتمدات"
 
-#: src/pkg_view.cc:653
+#: src/pkg_view.cc:649
 #, fuzzy
 msgid "Why Installed"
 msgstr "مُثبّتة"
 
-#: src/pkg_view.cc:672
+#: src/pkg_view.cc:668
 msgid "make_package_view: bad argument!"
 msgstr "make_package_view: مُعطى سيّء!"
 
-#: src/pkg_view.cc:724
+#: src/pkg_view.cc:720
 msgid "make_package_view: no main widget found"
 msgstr "make_package_view: لم يعثر على widge أساسيّة"
 
@@ -6855,7 +6854,7 @@ msgstr "تحميل المخزن"
 msgid "Really quit Aptitude?"
 msgstr "حقاً تريد الخروج من Aptitude؟"
 
-#: src/ui.cc:713 src/ui.cc:2570
+#: src/ui.cc:713 src/ui.cc:2573
 msgid "Change the behavior of aptitude"
 msgstr ""
 
@@ -6977,7 +6976,7 @@ msgstr ""
 msgid "License"
 msgstr "^الرخصة"
 
-#: src/ui.cc:1107 src/ui.cc:2662
+#: src/ui.cc:1107 src/ui.cc:2665
 #, fuzzy
 msgid "View the terms under which you may copy and distribute aptitude"
 msgstr "عرض الشروط التي يمكنك نسخ البرنامج ضمنها"
@@ -6999,7 +6998,7 @@ msgstr ""
 msgid "View a brief introduction to aptitude"
 msgstr ""
 
-#: src/ui.cc:1137 src/ui.cc:2814
+#: src/ui.cc:1137 src/ui.cc:2817
 msgid "Help"
 msgstr "مساعدة"
 
@@ -7028,7 +7027,7 @@ msgstr "تحديد يدوي"
 msgid "FAQ"
 msgstr "FAQ"
 
-#: src/ui.cc:1168 src/ui.cc:2654
+#: src/ui.cc:1168 src/ui.cc:2657
 msgid "View a list of frequently asked questions"
 msgstr "عرض لائحة بالأسئلة الأكثر طرحاً"
 
@@ -7068,15 +7067,19 @@ msgstr ""
 "مهمة ومن الآمن مسحها.%n%nهل تريدإزالة هذا الدليل وجميع محتوياته؟  إن قمت "
 "باختيار \"لا\"، سوف لن ترى هذه الرسالة مجدداً."
 
-#: src/ui.cc:1288
+#: src/ui.cc:1237
+msgid "Performing actions..."
+msgstr ""
+
+#: src/ui.cc:1291
 msgid "View the progress of the package download"
 msgstr "عرض سريان تحميل الحزم"
 
-#: src/ui.cc:1289
+#: src/ui.cc:1292
 msgid "Package Download"
 msgstr "تنزيل الحزمة"
 
-#: src/ui.cc:1336
+#: src/ui.cc:1339
 msgid ""
 "%BWARNING%b: untrusted versions of the following packages will be installed!"
 "%n%nUntrusted packages could %Bcompromise your system's security%b.  You "
@@ -7087,42 +7090,42 @@ msgstr ""
 "%Bتعرّض أمن نظامك إلى خطر%b. قم بتثبيتها فقط في حالة إذا ما كنت متأكّد  أنه "
 "هذا ما تريد القيام به. %n%n"
 
-#: src/ui.cc:1342
+#: src/ui.cc:1345
 msgid "  %S*%N %s [version %s]%n"
 msgstr "  %S*%N %s [النسخة %s]%n"
 
-#: src/ui.cc:1348
+#: src/ui.cc:1351
 msgid "Really Continue"
 msgstr "استمر بالفعل"
 
-#: src/ui.cc:1350
+#: src/ui.cc:1353
 msgid "Abort Installation"
 msgstr "إجهاض التثبيت"
 
-#: src/ui.cc:1414
+#: src/ui.cc:1417
 msgid "Preview of package installation"
 msgstr "معاينة تثبيت الحزم"
 
-#: src/ui.cc:1415
+#: src/ui.cc:1418
 msgid "View and/or adjust the actions that will be performed"
 msgstr "عرض و/أو تعديل الأعمال التي ستتم"
 
-#: src/ui.cc:1477
+#: src/ui.cc:1480
 msgid "Some packages were broken and have been fixed:"
 msgstr "بعض الحزم كانت معطوبة وتمّ إصلاحها:"
 
-#: src/ui.cc:1485
+#: src/ui.cc:1488
 msgid "No solution to these dependency problems exists!"
 msgstr "لا يوجد حل لمشكلة هذه المعتمدات!"
 
-#: src/ui.cc:1491
+#: src/ui.cc:1494
 #, c-format
 msgid ""
 "Ran out of time while trying to resolve dependencies (press \"%s\" to try "
 "harder)"
 msgstr "نفذ الوقت أثناء محاولة حل المعتمدات (اضغط \"%s\" للمحاولة بجهد)"
 
-#: src/ui.cc:1537
+#: src/ui.cc:1540
 msgid ""
 "Installing/removing packages requires administrative privileges, which you "
 "currently do not have.  Would you like to change to the root account?"
@@ -7130,19 +7133,19 @@ msgstr ""
 "تثبيت/إزالة الحزم بتطلب صلاحيات إداريّة، والتي لا تملكها حاليّاً.  هل تود "
 "التغيّر إلى حساب root؟"
 
-#: src/ui.cc:1540 src/ui.cc:1779 src/ui.cc:1840 src/ui.cc:1935
+#: src/ui.cc:1543 src/ui.cc:1782 src/ui.cc:1843 src/ui.cc:1938
 msgid "Become root"
 msgstr "تحوُّل إلى root"
 
-#: src/ui.cc:1542 src/ui.cc:1781 src/ui.cc:1842 src/ui.cc:1937
+#: src/ui.cc:1545 src/ui.cc:1784 src/ui.cc:1845 src/ui.cc:1940
 msgid "Don't become root"
 msgstr "لا تحوّل إلى root"
 
-#: src/ui.cc:1663
+#: src/ui.cc:1666
 msgid "No packages are scheduled to be installed, removed, or upgraded."
 msgstr "لم يتمّ جدولة تثبيت، أو إزالة أو ترقية أيّة حزم."
 
-#: src/ui.cc:1669
+#: src/ui.cc:1672
 msgid ""
 "No packages will be installed, removed or upgraded.  Some packages could be "
 "upgraded, but you have not chosen to upgrade them.  Type \"U\" to prepare an "
@@ -7151,19 +7154,19 @@ msgstr ""
 "لن يتم تثبيت، أو إزالة أو ترقية أيّة حزم. يمكن ترقية بعض الحزم، إلا أنّك لم "
 "تختر ترقيتها. اكتب \"U\" كي تحضّر الترقية."
 
-#: src/ui.cc:1749
+#: src/ui.cc:1752
 msgid "Updating package lists"
 msgstr "تحديث لوائح الحزم"
 
-#: src/ui.cc:1750
+#: src/ui.cc:1753
 msgid "View the progress of the package list update"
 msgstr "عرض سريان تحديث لائحة الحزم"
 
-#: src/ui.cc:1751
+#: src/ui.cc:1754
 msgid "List Update"
 msgstr "تحديث القائمة"
 
-#: src/ui.cc:1776
+#: src/ui.cc:1779
 msgid ""
 "Updating the package lists requires administrative privileges, which you "
 "currently do not have.  Would you like to change to the root account?"
@@ -7171,23 +7174,23 @@ msgstr ""
 "تحديث لوائح الحزم يتطلب صلاحيات إداريّة، والتي لا تملكها حاليّاً.  هل تود "
 "التغيّر إلى حساب المستخدم root؟"
 
-#: src/ui.cc:1791 src/ui.cc:2405
+#: src/ui.cc:1794 src/ui.cc:2408
 msgid "Waste time trying to find mines"
 msgstr "إضاعة الوقت بمحاولة البحث عن الألغام"
 
-#: src/ui.cc:1798 src/ui.cc:1886
+#: src/ui.cc:1801 src/ui.cc:1889
 msgid "Cleaning while a download is in progress is not allowed"
 msgstr "التنظيف أثناء القيام بالتنزيل غير مسموح به"
 
-#: src/ui.cc:1813
+#: src/ui.cc:1816
 msgid "Deleting downloaded files"
 msgstr "حذف الملفات المنزلة"
 
-#: src/ui.cc:1827
+#: src/ui.cc:1830
 msgid "Downloaded package files have been deleted"
 msgstr "تم حذف ملفات الحزم المنزلة"
 
-#: src/ui.cc:1837
+#: src/ui.cc:1840
 #, fuzzy
 msgid ""
 "Cleaning the package cache requires administrative privileges, which you "
@@ -7196,11 +7199,11 @@ msgstr ""
 "تحديث لوائح الحزم يتطلب صلاحيات إداريّة، والتي لا تملكها حاليّاً.  هل تود "
 "التغيّر إلى حساب المستخدم root؟"
 
-#: src/ui.cc:1883
+#: src/ui.cc:1886
 msgid "The apt cache file is not available; cannot auto-clean."
 msgstr "ملف مخزن apt ليس متوفراً; التنظيف التلقائي غير ممكن"
 
-#: src/ui.cc:1921
+#: src/ui.cc:1924
 #, c-format
 msgid ""
 "Obsolete downloaded package files have been deleted, freeing %sB of disk "
@@ -7208,7 +7211,7 @@ msgid ""
 msgstr ""
 "ملفات الحزم المنزلة الملغاة تم حذفها، ما جعل %s بايت من مساحة القرص فارغة."
 
-#: src/ui.cc:1932
+#: src/ui.cc:1935
 #, fuzzy
 msgid ""
 "Deleting obsolete files requires administrative privileges, which you "
@@ -7217,141 +7220,141 @@ msgstr ""
 "تحديث لوائح الحزم يتطلب صلاحيات إداريّة، والتي لا تملكها حاليّاً.  هل تود "
 "التغيّر إلى حساب المستخدم root؟"
 
-#: src/ui.cc:2034
+#: src/ui.cc:2037
 msgid "No more solutions."
 msgstr "لا مزيد من الحلول."
 
-#: src/ui.cc:2242
+#: src/ui.cc:2245
 msgid "Unable to find a solution to apply."
 msgstr "تعذر ايجاد حلّ للاستعمال."
 
-#: src/ui.cc:2248
+#: src/ui.cc:2251
 msgid "Ran out of time while trying to find a solution."
 msgstr "نفذ الوقت أثناء محاولة البحث عن حل."
 
-#: src/ui.cc:2308 src/ui.cc:2310
+#: src/ui.cc:2311 src/ui.cc:2313
 msgid "Resolve Dependencies"
 msgstr "إرضاء المعتمدات"
 
-#: src/ui.cc:2309
+#: src/ui.cc:2312
 msgid "Search for solutions to unsatisfied dependencies"
 msgstr "البحث عن حلول للمعتمدات الغير الغير مستوفاة"
 
-#: src/ui.cc:2321
+#: src/ui.cc:2324
 #, c-format
 msgid "Unable to open %ls"
 msgstr "تعذر فتح %ls"
 
-#: src/ui.cc:2327
+#: src/ui.cc:2330
 msgid "Error while dumping resolver state"
 msgstr "خطأ أثناء حفظ حالة مقدم الحلول"
 
-#: src/ui.cc:2367
+#: src/ui.cc:2370
 msgid "^Install/remove packages"
 msgstr "^تثبيت/إزالة الحزم"
 
-#: src/ui.cc:2370
+#: src/ui.cc:2373
 msgid "^Update package list"
 msgstr "^تحديث لائحة الحزم"
 
-#: src/ui.cc:2375
+#: src/ui.cc:2378
 msgid "Mark Up^gradable"
 msgstr "تعليم ال^قابلة للترقية"
 
-#: src/ui.cc:2380
+#: src/ui.cc:2383
 msgid "^Forget new packages"
 msgstr "^نسيان الحزم الجديدة"
 
-#: src/ui.cc:2384
+#: src/ui.cc:2387
 msgid "Canc^el pending actions"
 msgstr "إل^غاء الأعمال المؤجلة"
 
-#: src/ui.cc:2388
+#: src/ui.cc:2391
 msgid "^Clean package cache"
 msgstr "^تنظيف مخزن الحزم"
 
-#: src/ui.cc:2392
+#: src/ui.cc:2395
 msgid "Clean ^obsolete files"
 msgstr "حذف الملفاة ال^ملغية"
 
-#: src/ui.cc:2399
+#: src/ui.cc:2402
 msgid "^Reload package cache"
 msgstr "^إعادة تحميل مخزن الحزم"
 
-#: src/ui.cc:2404
+#: src/ui.cc:2407
 msgid "^Play Minesweeper"
 msgstr "^لعب كانسة الألغام"
 
-#: src/ui.cc:2409
+#: src/ui.cc:2412
 msgid "^Become root"
 msgstr "^تحوّل إلى root"
 
-#: src/ui.cc:2412
+#: src/ui.cc:2415
 msgid "^Quit"
 msgstr "^خروج"
 
-#: src/ui.cc:2419 src/ui.cc:2808
+#: src/ui.cc:2422 src/ui.cc:2811
 msgid "Undo"
 msgstr "تراجع"
 
-#: src/ui.cc:2428
+#: src/ui.cc:2431
 msgid "^Install"
 msgstr "^تثبيت"
 
-#: src/ui.cc:2429
+#: src/ui.cc:2432
 msgid "Flag the currently selected package for installation or upgrade"
 msgstr "تعليم الحزمة المحددة حالياً للتثبيت أو الترقية"
 
-#: src/ui.cc:2432
+#: src/ui.cc:2435
 #, fuzzy
 msgid "R^einstall"
 msgstr "إعادة التثبيت"
 
-#: src/ui.cc:2433
+#: src/ui.cc:2436
 #, fuzzy
 msgid "Flag the currently selected package for reinstallation"
 msgstr "تعليم الحزمة المحددة حالياً للتثبيت أو الترقية"
 
-#: src/ui.cc:2436
+#: src/ui.cc:2439
 msgid "^Remove"
 msgstr "إ^زالة"
 
-#: src/ui.cc:2437
+#: src/ui.cc:2440
 msgid "Flag the currently selected package for removal"
 msgstr "تعليم الحزمة المحددة حالياً للإزالة"
 
-#: src/ui.cc:2440
+#: src/ui.cc:2443
 msgid "^Purge"
 msgstr "^إلغاء"
 
-#: src/ui.cc:2441
+#: src/ui.cc:2444
 msgid ""
 "Flag the currently selected package and its configuration files for removal"
 msgstr "تعليم الحزمة المحددة حالياً وملفات تهيئتها للإزالة"
 
-#: src/ui.cc:2444
+#: src/ui.cc:2447
 msgid "^Keep"
 msgstr "^محافظة"
 
-#: src/ui.cc:2445
+#: src/ui.cc:2448
 msgid "Cancel any action on the selected package"
 msgstr "إلغاء أيّ عمل على الحزمة المحددة"
 
-#: src/ui.cc:2448
+#: src/ui.cc:2451
 msgid "^Hold"
 msgstr "إ^بقاء"
 
-#: src/ui.cc:2449
+#: src/ui.cc:2452
 msgid ""
 "Cancel any action on the selected package, and protect it from future "
 "upgrades"
 msgstr "إلغاء أي عمل على الحزمة المحددة، وحمايتها من الترقيات المستقبليّة"
 
-#: src/ui.cc:2452
+#: src/ui.cc:2455
 msgid "Mark ^Auto"
 msgstr "تحديد ^تلقائي"
 
-#: src/ui.cc:2453
+#: src/ui.cc:2456
 msgid ""
 "Mark the selected package as having been automatically installed; it will "
 "automatically be removed if no other packages depend on it"
@@ -7359,11 +7362,11 @@ msgstr ""
 "تحديد الحزمة المختارة على أنها ثُبتت تلقائيّاً؛ سوف يتم إزالتها إن لم تعتمد "
 "عليها أية حزمة أخرى"
 
-#: src/ui.cc:2456
+#: src/ui.cc:2459
 msgid "Mark ^Manual"
 msgstr "تحديد ^يدوي"
 
-#: src/ui.cc:2457
+#: src/ui.cc:2460
 msgid ""
 "Mark the selected package as having been manually installed; it will not be "
 "removed unless you manually remove it"
@@ -7371,11 +7374,11 @@ msgstr ""
 "تعليم الحزمة المحدّدة على أنها ثُبتت يدويّاً؛ لن يتم إزالتها إلا إن قمت بذلك "
 "يدوياً"
 
-#: src/ui.cc:2460
+#: src/ui.cc:2463
 msgid "^Forbid Version"
 msgstr "^منع النسخة"
 
-#: src/ui.cc:2461
+#: src/ui.cc:2464
 msgid ""
 "Forbid the candidate version of the selected package from being installed; "
 "newer versions of the package will be installed as usual"
@@ -7383,338 +7386,338 @@ msgstr ""
 "منع تثبيت النسخة المرشحة من الحزمة المحددة؛ أما النسخ الأجدد من الحزمة فسيتم "
 "تثبيتها كالعادة"
 
-#: src/ui.cc:2465
+#: src/ui.cc:2468
 msgid "I^nformation"
 msgstr "^معلومات"
 
-#: src/ui.cc:2466
+#: src/ui.cc:2469
 msgid "Display more information about the selected package"
 msgstr "عرض مزيد من المعلومات حول الحزمة المحدّدة"
 
-#: src/ui.cc:2469
+#: src/ui.cc:2472
 msgid "C^ycle Package Information"
 msgstr ""
 
-#: src/ui.cc:2470
+#: src/ui.cc:2473
 msgid ""
 "Cycle through the modes of the package information area: it can show the "
 "package's long description, a summary of its dependency status, or an "
 "analysis of why the package is required."
 msgstr ""
 
-#: src/ui.cc:2473
+#: src/ui.cc:2476
 msgid "^Changelog"
 msgstr "^سجل التغيير"
 
-#: src/ui.cc:2474
+#: src/ui.cc:2477
 msgid "Display the Debian changelog of the selected package"
 msgstr "عرض سجل تغيير دبيان للحزمة المحدّدة"
 
-#: src/ui.cc:2481
+#: src/ui.cc:2484
 msgid "^Examine Solution"
 msgstr "^فحص الحلّ"
 
-#: src/ui.cc:2482
+#: src/ui.cc:2485
 msgid "Examine the currently selected solution to the dependency problems."
 msgstr "فحص الحل المحدد حالياً لمشاكل المعتمدات."
 
-#: src/ui.cc:2485
+#: src/ui.cc:2488
 msgid "Apply ^Solution"
 msgstr "تنفيذ ال^حل"
 
-#: src/ui.cc:2486
+#: src/ui.cc:2489
 msgid "Perform the actions contained in the currently selected solution."
 msgstr "تنفيذ الأعمال المشمولة في الحل المحدد الحالي."
 
-#: src/ui.cc:2489
+#: src/ui.cc:2492
 msgid "^Next Solution"
 msgstr "ال^حل التالي"
 
-#: src/ui.cc:2490
+#: src/ui.cc:2493
 msgid "Select the next solution to the dependency problems."
 msgstr "اختيار الحل التالي لمشاكل المعتمدات."
 
-#: src/ui.cc:2493
+#: src/ui.cc:2496
 msgid "^Previous Solution"
 msgstr "الحل ال^سابق"
 
-#: src/ui.cc:2494
+#: src/ui.cc:2497
 msgid "Select the previous solution to the dependency problems."
 msgstr "اختيار الحل السابق لمشاكل المعتمدات"
 
-#: src/ui.cc:2497
+#: src/ui.cc:2500
 msgid "^First Solution"
 msgstr "الح^ل الأول"
 
-#: src/ui.cc:2498
+#: src/ui.cc:2501
 msgid "Select the first solution to the dependency problems."
 msgstr "اختيار الحل الأول لمشاكل المعتمدات"
 
-#: src/ui.cc:2501
+#: src/ui.cc:2504
 msgid "^Last Solution"
 msgstr "الحل الأ^خير"
 
-#: src/ui.cc:2502
+#: src/ui.cc:2505
 msgid ""
 "Select the last solution to the dependency problems that has been generated "
 "so far."
 msgstr "اختيار الحل الأخير لمشاكل المعتمدات والتي تم إيجادها حتى الآن."
 
-#: src/ui.cc:2508
+#: src/ui.cc:2511
 msgid "Toggle ^Rejected"
 msgstr "عكس المرفو^ضة"
 
-#: src/ui.cc:2509
+#: src/ui.cc:2512
 msgid "Toggle whether the currently selected action is rejected."
 msgstr "عكس ما إذا كان العمل المحدد حالياً مرفوضاً."
 
-#: src/ui.cc:2513
+#: src/ui.cc:2516
 msgid "Toggle ^Approved"
 msgstr "عكس ال^مقبول"
 
-#: src/ui.cc:2514
+#: src/ui.cc:2517
 msgid "Toggle whether the currently selected action is approved."
 msgstr "عكس ما إذا كان العمل المحدد حالياً مقبولاً."
 
-#: src/ui.cc:2518
+#: src/ui.cc:2521
 msgid "^View Target"
 msgstr "^عرض الهدف"
 
-#: src/ui.cc:2519
+#: src/ui.cc:2522
 msgid "View the package which will be affected by the selected action"
 msgstr "عرض الحزمة التي ستتأثر بالعمل المحدد"
 
-#: src/ui.cc:2525
+#: src/ui.cc:2528
 msgid "Reject Breaking ^Holds"
 msgstr ""
 
-#: src/ui.cc:2527
+#: src/ui.cc:2530
 msgid ""
 "Reject all actions that would change the state of held packages or install "
 "forbidden versions"
 msgstr ""
 
-#: src/ui.cc:2535
+#: src/ui.cc:2538
 msgid "^Find"
 msgstr "^بحث"
 
-#: src/ui.cc:2536
+#: src/ui.cc:2539
 msgid "Search forwards"
 msgstr "البحث قدماً"
 
-#: src/ui.cc:2539
+#: src/ui.cc:2542
 msgid "^Find Backwards"
 msgstr "البحث ر^جوعاً"
 
-#: src/ui.cc:2540
+#: src/ui.cc:2543
 msgid "Search backwards"
 msgstr "البحث رجوعاً"
 
-#: src/ui.cc:2543
+#: src/ui.cc:2546
 msgid "Find ^Again"
 msgstr "البحث ^مجدّداً"
 
-#: src/ui.cc:2544
+#: src/ui.cc:2547
 msgid "Repeat the last search"
 msgstr "تكرار البحث الأخير"
 
-#: src/ui.cc:2547
+#: src/ui.cc:2550
 #, fuzzy
 msgid "Find Again ^Backwards"
 msgstr "البحث ر^جوعاً"
 
-#: src/ui.cc:2548
+#: src/ui.cc:2551
 #, fuzzy
 msgid "Repeat the last search in the opposite direction"
 msgstr "تكرار البحث الأخير"
 
-#: src/ui.cc:2552
+#: src/ui.cc:2555
 msgid "^Limit Display"
 msgstr "^حدّ العرض"
 
-#: src/ui.cc:2553
+#: src/ui.cc:2556
 msgid "Apply a filter to the package list"
 msgstr "تصفية لائحة الحزم"
 
-#: src/ui.cc:2556
+#: src/ui.cc:2559
 msgid "^Un-Limit Display"
 msgstr "إ^زالة حدّ العرض"
 
-#: src/ui.cc:2557
+#: src/ui.cc:2560
 msgid "Remove the filter from the package list"
 msgstr "إزالة التصفية من لائحة الحزم"
 
-#: src/ui.cc:2561
+#: src/ui.cc:2564
 msgid "Find ^Broken"
 msgstr "عثور على ^معطوبة"
 
-#: src/ui.cc:2562
+#: src/ui.cc:2565
 msgid "Find the next package with unsatisfied dependencies"
 msgstr "العثور على الحزمة التالية ذات المعتمدات الغير مستوفية"
 
-#: src/ui.cc:2569
+#: src/ui.cc:2572
 #, fuzzy
 msgid "^Preferences"
 msgstr "يعتمد مسبقاً على"
 
-#: src/ui.cc:2574
+#: src/ui.cc:2577
 msgid "^UI options"
 msgstr "خيارات ^واجهة المستخدم"
 
-#: src/ui.cc:2575
+#: src/ui.cc:2578
 msgid "Change the settings which affect the user interface"
 msgstr "تغيير الإعدادات التي تؤثر على واجهة المستخدم"
 
-#: src/ui.cc:2578
+#: src/ui.cc:2581
 msgid "^Dependency handling"
 msgstr "إ^دارة المعتمدات"
 
-#: src/ui.cc:2579
+#: src/ui.cc:2582
 msgid "Change the settings which affect how package dependencies are handled"
 msgstr "تغيير الإعدادات التي تؤثر على كيفية التعامل مع معتمدات الحزم"
 
-#: src/ui.cc:2582
+#: src/ui.cc:2585
 msgid "^Miscellaneous"
 msgstr "^متفرقات"
 
-#: src/ui.cc:2583
+#: src/ui.cc:2586
 msgid "Change miscellaneous program settings"
 msgstr "تغيير إعدادات البرنامج المختلفة"
 
-#: src/ui.cc:2589
+#: src/ui.cc:2592
 msgid "^Revert options"
 msgstr "^استعادة الخيارات"
 
-#: src/ui.cc:2590
+#: src/ui.cc:2593
 msgid "Reset all settings to the system defaults"
 msgstr "إعادة كل الإعدادات إلى افتراضيّات النظام"
 
-#: src/ui.cc:2601
+#: src/ui.cc:2604
 msgid "^Next"
 msgstr "^تالي"
 
-#: src/ui.cc:2602
+#: src/ui.cc:2605
 msgid "View next display"
 msgstr "عرض الشاشة التالية"
 
-#: src/ui.cc:2605
+#: src/ui.cc:2608
 msgid "^Prev"
 msgstr "^سابق"
 
-#: src/ui.cc:2606
+#: src/ui.cc:2609
 msgid "View previous display"
 msgstr "عرض الشاشة السابقة"
 
-#: src/ui.cc:2609
+#: src/ui.cc:2612
 msgid "^Close"
 msgstr "^إغلاق"
 
-#: src/ui.cc:2610
+#: src/ui.cc:2613
 msgid "Close this display"
 msgstr "إغلاق هذه الشاشة"
 
-#: src/ui.cc:2615
+#: src/ui.cc:2618
 msgid "New Package ^View"
 msgstr "^عرض حزم جديد"
 
-#: src/ui.cc:2616
+#: src/ui.cc:2619
 msgid "Create a new default package view"
 msgstr "إنشاء عرض حزم افتراضي جديد"
 
-#: src/ui.cc:2619
+#: src/ui.cc:2622
 msgid "Audit ^Recommendations"
 msgstr "التدقيق بالتو^صيات"
 
-#: src/ui.cc:2620
+#: src/ui.cc:2623
 msgid ""
 "View packages which it is recommended that you install, but which are not "
 "currently installed."
 msgstr "عرض الحزم التي نوصيك بتثبيتها، ولكن التي ليست مثبتة حالياً."
 
-#: src/ui.cc:2623
+#: src/ui.cc:2626
 msgid "New ^Flat Package List"
 msgstr "قائمة حزم ^شاملة جديدة"
 
-#: src/ui.cc:2624
+#: src/ui.cc:2627
 msgid "View all the packages on the system in a single uncategorized list"
 msgstr "عرض جميع الحزم على النظام في قائمة واحدة غير مصنفة"
 
-#: src/ui.cc:2627
+#: src/ui.cc:2630
 msgid "New ^Debtags Browser"
 msgstr "مستعر^ض Debtags جديد"
 
-#: src/ui.cc:2629
+#: src/ui.cc:2632
 msgid "Browse packages using Debtags data"
 msgstr "استعراض الحزم باستخدام بيانات Debtags"
 
-#: src/ui.cc:2632
+#: src/ui.cc:2635
 #, fuzzy
 #| msgid "New Package ^View"
 msgid "New ^Source Package View"
 msgstr "^عرض حزم جديد"
 
-#: src/ui.cc:2634
+#: src/ui.cc:2637
 msgid "Create a new package view, grouped by source package"
 msgstr ""
 
-#: src/ui.cc:2642
+#: src/ui.cc:2645
 msgid "^About"
 msgstr "^حول"
 
-#: src/ui.cc:2643
+#: src/ui.cc:2646
 msgid "View information about this program"
 msgstr "عرض معلومات حول هذا البرنامج"
 
-#: src/ui.cc:2646
+#: src/ui.cc:2649
 msgid "^Help"
 msgstr "^مساعدة"
 
-#: src/ui.cc:2647
+#: src/ui.cc:2650
 msgid "View the on-line help"
 msgstr "عرض المساعدة الفورية"
 
-#: src/ui.cc:2649
+#: src/ui.cc:2652
 msgid "User's ^Manual"
 msgstr "دليل ال^مستخدم"
 
-#: src/ui.cc:2650
+#: src/ui.cc:2653
 msgid "View the detailed program manual"
 msgstr "عرض دليل البرنامج المفصّل"
 
-#: src/ui.cc:2653
+#: src/ui.cc:2656
 msgid "^FAQ"
 msgstr "^FAQ"
 
-#: src/ui.cc:2657
+#: src/ui.cc:2660
 msgid "^News"
 msgstr "أ^خبار"
 
-#: src/ui.cc:2658
+#: src/ui.cc:2661
 #, fuzzy
 msgid "View the important changes made in each version of "
 msgstr "عرض التغييرات المهمة التي تمت في كل نسخة من"
 
-#: src/ui.cc:2661
+#: src/ui.cc:2664
 msgid "^License"
 msgstr "^الرخصة"
 
-#: src/ui.cc:2807
+#: src/ui.cc:2810
 msgid "Actions"
 msgstr "أعمال"
 
-#: src/ui.cc:2811
+#: src/ui.cc:2814
 msgid "Search"
 msgstr "بحث"
 
-#: src/ui.cc:2812
+#: src/ui.cc:2815
 msgid "Options"
 msgstr "خيارات"
 
-#: src/ui.cc:2813
+#: src/ui.cc:2816
 msgid "Views"
 msgstr "عروض"
 
-#: src/ui.cc:2879
+#: src/ui.cc:2882
 #, fuzzy, c-format
 msgid ""
 "%ls: Menu  %ls: Help  %ls: Quit  %ls: Update  %ls: Preview/Download/Install/"
@@ -7722,11 +7725,11 @@ msgid ""
 msgstr ""
 "%ls: قائمة  %ls: مساعدة  %ls: خروج  %ls: تحديث  %ls: تحميل/تثبيت/إزالة حزم"
 
-#: src/ui.cc:3249
+#: src/ui.cc:3252
 msgid "yes_key"
 msgstr "y"
 
-#: src/ui.cc:3250
+#: src/ui.cc:3253
 msgid "no_key"
 msgstr "n"
 
@@ -7757,6 +7760,21 @@ msgstr "تنزيل سجل التغيير"
 #: src/view_changelog.cc:415
 msgid "You can only view changelogs of official Debian packages."
 msgstr "يمكنك عرض سجلات تغيير حزم دبيان الرسميّة فقط."
+
+#~ msgid " which is a virtual package."
+#~ msgstr " والتي هي حزمة وهمية."
+
+#~ msgid ""
+#~ "===============================================================================\n"
+#~ "\n"
+#~ "Log complete.\n"
+#~ msgstr ""
+#~ "===============================================================================\n"
+#~ "\n"
+#~ "اكتمل التسجيل.\n"
+
+#~ msgid "Unable to create temporary directory from template \"%s\": %s"
+#~ msgstr "تعذر إنشاء دليل مؤقت من القالب \"%s\": %s"
 
 #~ msgid "[DOWNGRADE] %s %s -> %s\n"
 #~ msgstr "[تثبيط] %s %s -> %s\n"
