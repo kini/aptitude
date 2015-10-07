@@ -1,6 +1,7 @@
 // cmdline_show.cc                               -*-c++-*-
 //
 // Copyright (C) 2004, 2010 Daniel Burrows
+// Copyright (C) 2015 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -144,44 +145,34 @@ static cwidget::fragment *prv_lst_frag(pkgCache::PrvIterator prv,
   using cwidget::fragment;
   using cwidget::fragf;
 
+  std::set<pkgverpair, package_version_pair_cmp> packagevers;
+
+  for ( ; !prv.end(); ++prv)
+    {
+      string name = reverse ? prv.OwnerPkg().Name() : prv.ParentPkg().Name();
+      const char* version = reverse ? prv.OwnerVer().VerStr() : prv.ProvideVersion();
+
+      if (version)
+	packagevers.insert(pkgverpair(name, version));
+      else
+	packagevers.insert(pkgverpair(name, ""));
+    }
+
   vector<cw::fragment *> fragments;
 
-  if(reverse && verbose >= 1)
+  for (const auto& it : packagevers)
     {
-      std::set<pkgverpair, package_version_pair_cmp> packagevers;
-
-      for( ; !prv.end(); ++prv)
+      if (it.second.empty())
 	{
-	  const string name   = prv.OwnerPkg().FullName(true);
-	  const char *version = prv.OwnerVer().VerStr();
-
-	  if(version != NULL)
-	    packagevers.insert(pkgverpair(name, version));
-	  else
-	    packagevers.insert(pkgverpair(name, ""));
+	  fragments.push_back(cw::fragf("%s", it.first.c_str()));
 	}
-
-      for(std::set<pkgverpair>::const_iterator it = packagevers.begin();
-	  it != packagevers.end(); ++it)
-	fragments.push_back(cw::fragf("%s (%s)", it->first.c_str(), it->second.c_str()));
-    }
-  else
-    {
-      std::set<std::string> packages;
-
-      for( ; !prv.end(); ++prv)
+      else
 	{
-	  string name = reverse ? prv.OwnerPkg().Name() : prv.ParentPkg().Name();
-
-	  packages.insert(name);
+	  fragments.push_back(cw::fragf("%s (%s)", it.first.c_str(), it.second.c_str()));
 	}
-
-      for(std::set<std::string>::const_iterator it = packages.begin();
-	  it != packages.end(); ++it)
-	fragments.push_back(cwidget::text_fragment(*it));
     }
 
-  if(fragments.size()==0)
+  if (fragments.empty())
     return cw::fragf("");
   else
     {
