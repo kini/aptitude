@@ -239,7 +239,7 @@ namespace temp
     if(initial_prefix.size() > 0 && initial_prefix[0] == '/')
       throw TemporaryCreationFailure("Invalid attempt to create an absolutely named temporary directory.");
 
-    std::string tmpl_str = *temp_base + "/" + initial_prefix;
+    std::string tmpl_str = *temp_base + "/" + initial_prefix + "XXXXXX";
 
     char tmpl[tmpl_str.length() + 1];
     strcpy(tmpl, tmpl_str.c_str());
@@ -255,7 +255,7 @@ namespace temp
 	throw TemporaryCreationFailure(errmsg);
       }
 
-    dirname.assign(tmpl_str);
+    dirname.assign(tmpl);
 
     LOG_INFO(Loggers::getAptitudeTemp(),
 	     "Temporary directory created in " << dirname);
