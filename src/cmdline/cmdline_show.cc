@@ -150,12 +150,16 @@ static cwidget::fragment *prv_lst_frag(pkgCache::PrvIterator prv,
   for ( ; !prv.end(); ++prv)
     {
       string name = reverse ? prv.OwnerPkg().Name() : prv.ParentPkg().Name();
-      const char* version = reverse ? prv.OwnerVer().VerStr() : prv.ProvideVersion();
+      string version;
+      const char* version_charp = reverse ? prv.OwnerVer().VerStr() : prv.ProvideVersion();
+      if (version_charp)
+	{
+	  // versioned provides have the '=' symbol, and only that one at the
+	  // moment, and it is hardcoded in dpkg and apt -- so joining the club
+	  version = string("= ") + version_charp;
+	}
 
-      if (version)
-	packagevers.insert(pkgverpair(name, version));
-      else
-	packagevers.insert(pkgverpair(name, ""));
+      packagevers.insert(pkgverpair(name, version));
     }
 
   vector<cw::fragment *> fragments;
