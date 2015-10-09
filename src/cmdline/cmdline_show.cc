@@ -77,7 +77,7 @@ ostream &operator<<(ostream &out, const cwidget::fragment_contents &contents)
 }
 
 static cwidget::fragment *dep_lst_frag(pkgCache::DepIterator dep,
-				       string title, pkgCache::Dep::DepType T)
+				       const string& title, pkgCache::Dep::DepType T)
 {
   using cwidget::fragment;
   using cwidget::fragf;
@@ -211,7 +211,7 @@ static cwidget::fragment *archive_lst_frag(pkgCache::VerFileIterator vf,
     }
 }
 
-static const char *current_state_string(pkgCache::PkgIterator pkg, pkgCache::VerIterator ver)
+static const char *current_state_string(const pkgCache::PkgIterator& pkg, const pkgCache::VerIterator& ver)
 {
   if(!ver.end() && ver != pkg.CurrentVer())
     return _("not installed");
@@ -550,7 +550,7 @@ bool do_cmdline_show_target(const pkgCache::PkgIterator &pkg,
   return true;
 }
 
-bool do_cmdline_show(string s, int verbose, const std::shared_ptr<terminal_metrics> &term_metrics)
+bool do_cmdline_show(const string& s, int verbose, const std::shared_ptr<terminal_metrics> &term_metrics)
 {
   cmdline_version_source source;
   string name, sourcestr;

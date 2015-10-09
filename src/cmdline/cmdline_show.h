@@ -57,7 +57,8 @@ cwidget::fragment *version_file_fragment(const pkgCache::VerIterator &ver,
 					 int verbose);
 
 /** Run the "show" operation on a single argument, presented as a string. */
-bool do_cmdline_show(std::string s, int verbose,
+bool do_cmdline_show(const std::string& s,
+		     int verbose,
                      const std::shared_ptr<aptitude::cmdline::terminal_metrics> &term_metrics);
 
 /** The "show" user command. */
