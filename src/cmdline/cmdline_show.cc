@@ -127,16 +127,6 @@ static cwidget::fragment *dep_lst_frag(pkgCache::DepIterator dep,
     }
 }
 
-typedef std::pair<std::string, std::string> pkgverpair;
-struct package_version_pair_cmp
-{
-  bool operator()(const pkgverpair &x, const pkgverpair &y) const
-  {
-    return x.first < y.first
-      || _system->VS->CmpVersion(x.second, y.second) < 0;
-  }
-};
-
 static cwidget::fragment *prv_lst_frag(pkgCache::PrvIterator prv,
 				       bool reverse,
 				       int verbose,
@@ -145,35 +135,34 @@ static cwidget::fragment *prv_lst_frag(pkgCache::PrvIterator prv,
   using cwidget::fragment;
   using cwidget::fragf;
 
-  std::set<pkgverpair, package_version_pair_cmp> packagevers;
+  std::vector<std::string> packagevers;
 
   for ( ; !prv.end(); ++prv)
     {
       string name = reverse ? prv.OwnerPkg().Name() : prv.ParentPkg().Name();
-      string version;
-      const char* version_charp = reverse ? prv.OwnerVer().VerStr() : prv.ProvideVersion();
-      if (version_charp)
+      const char* version = reverse ? prv.OwnerVer().VerStr() : prv.ProvideVersion();
+
+      if (version)
 	{
 	  // versioned provides have the '=' symbol, and only that one at the
 	  // moment, and it is hardcoded in dpkg and apt -- so joining the club
-	  version = string("= ") + version_charp;
-	}
+	  const char* symbol = reverse ? "" : "= ";
 
-      packagevers.insert(pkgverpair(name, version));
+	  packagevers.push_back(name + " (" + symbol + version + ")");
+	}
+      else
+	{
+	  packagevers.push_back(name);
+	}
     }
+
+  std::sort(packagevers.begin(), packagevers.end());
 
   vector<cw::fragment *> fragments;
 
   for (const auto& it : packagevers)
     {
-      if (it.second.empty())
-	{
-	  fragments.push_back(cw::fragf("%s", it.first.c_str()));
-	}
-      else
-	{
-	  fragments.push_back(cw::fragf("%s (%s)", it.first.c_str(), it.second.c_str()));
-	}
+      fragments.push_back(cw::fragf("%s", it.c_str()));
     }
 
   if (fragments.empty())
