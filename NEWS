@@ -9,6 +9,25 @@ Version 0.7.4 UNRELEASED
     and apt, so doing the same to avoid possible confusion among users, as
     suggested by David Kalnischkies from APT Team.
 
+  * [cmdline] "show" now shows arch of packages in multi-arch systems
+
+    Until now, it was not appending the arch in Depends and other places, so
+    there was output like:
+
+      Package: dput-ng
+      ...
+      Conflicts: dput, dput
+      Replaces: dput, dput
+      Provides: dput
+
+    Now this shows:
+
+      Package: dput-ng
+      ...
+      Conflicts: dput, dput:i386
+      Replaces: dput, dput:i386
+      Provides: dput
+
 
 [2015-10-07]
 Version 0.7.3

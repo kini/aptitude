@@ -102,8 +102,8 @@ static cwidget::fragment *dep_lst_frag(pkgCache::DepIterator dep,
 	      verfrag=cw::fragf("");
 
 	    or_fragments.push_back(cw::fragf("%s%F",
-					 start.TargetPkg().Name(),
-					 verfrag));
+					     start.TargetPkg().FullName(true).c_str(),
+					     verfrag));
 
 	    if(start==end)
 	      break;
@@ -139,7 +139,7 @@ static cwidget::fragment *prv_lst_frag(pkgCache::PrvIterator prv,
 
   for ( ; !prv.end(); ++prv)
     {
-      string name = reverse ? prv.OwnerPkg().Name() : prv.ParentPkg().Name();
+      string name = reverse ? prv.OwnerPkg().FullName(true) : prv.ParentPkg().FullName(true);
       const char* version = reverse ? prv.OwnerVer().VerStr() : prv.ProvideVersion();
 
       if (version)
@@ -367,7 +367,7 @@ static void show_package(pkgCache::PkgIterator pkg, int verbose,
 {
   vector<cw::fragment *> fragments;
 
-  fragments.push_back(cw::fragf("%s%s%n", _("Package: "), pkg.Name()));
+  fragments.push_back(cw::fragf("%s%s%n", _("Package: "), pkg.FullName(true).c_str()));
   fragments.push_back(cw::fragf("%s: %F%n", _("State"), state_fragment(pkg, pkgCache::VerIterator())));
   fragments.push_back(prv_lst_frag(pkg.ProvidesList(), true, verbose, _("Provided by")));
 
@@ -390,7 +390,7 @@ cw::fragment *version_file_fragment(const pkgCache::VerIterator &ver,
   aptitudeDepCache::aptitude_state &estate=(*apt_cache_file)->get_ext_state(pkg);
   pkgDepCache::StateCache &state = (*apt_cache_file)[pkg];
 
-  fragments.push_back(cw::fragf("%s%s%n", _("Package: "), pkg.Name()));
+  fragments.push_back(cw::fragf("%s%s%n", _("Package: "), pkg.FullName(true).c_str()));
   if((pkg->Flags & pkgCache::Flag::Essential)==pkgCache::Flag::Essential)
     fragments.push_back(cw::fragf("%s%s%n", _("Essential: "),  _("yes")));
 
