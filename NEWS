@@ -1,6 +1,15 @@
 [2015-10-xx]
 Version 0.7.4 UNRELEASED
 
+- Bug fixes:
+
+  * Retrieve again long descriptions (Closes: #801460)
+
+    When disabling the #ifdef of HAVE_DDTP, it was done the wrong way around and
+    the old code (untested for many years) compiled fine and didn't cause
+    errors, but didn't retrieve long descriptions anymore (it did for short
+    ones).
+
 - User visible changes:
 
   * [cmdline] In versioned provides, include '=' symbol (Closes: #767393)

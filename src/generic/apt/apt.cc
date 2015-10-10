@@ -1222,12 +1222,20 @@ std::wstring get_short_description(const pkgCache::VerIterator &ver,
   if(ver.end() || ver.FileList().end() || records == NULL)
     return std::wstring();
 
-  pkgCache::VerFileIterator vf = ver.FileList();
+  pkgCache::DescIterator d = ver.TranslatedDescription();
 
-  if(vf.end())
+  if(d.end())
+    return std::wstring();
+
+  pkgCache::DescFileIterator df = d.FileList();
+
+  if(df.end())
     return std::wstring();
   else
-    return cw::util::transcode(records->Lookup(vf).ShortDesc());
+    // apt "helpfully" cw::util::transcodes the description for us, instead of
+    // providing direct access to it.  So I need to assume that the
+    // description is encoded in the current locale.
+    return cwidget::util::transcode(records->Lookup(df).ShortDesc());
 }
 
 std::wstring get_long_description(const pkgCache::VerIterator &ver,
@@ -1236,12 +1244,17 @@ std::wstring get_long_description(const pkgCache::VerIterator &ver,
   if(ver.end() || ver.FileList().end() || records == NULL)
     return std::wstring();
 
-  pkgCache::VerFileIterator vf = ver.FileList();
+  pkgCache::DescIterator d = ver.TranslatedDescription();
 
-  if(vf.end())
+  if(d.end())
+    return std::wstring();
+
+  pkgCache::DescFileIterator df = d.FileList();
+
+  if(df.end())
     return std::wstring();
   else
-    return cw::util::transcode(records->Lookup(vf).LongDesc());
+    return cwidget::util::transcode(records->Lookup(df).LongDesc());
 }
 
 const char *multiarch_type(unsigned char type)
