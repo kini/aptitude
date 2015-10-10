@@ -262,7 +262,7 @@ public:
 
     cw::fragment *tags=make_tags_fragment(pkg);
     if(tags != NULL)
-      tags = cw::fragf("%n%n%F", tags);
+      tags = cw::fragf("%F", tags);
     else
       tags = cw::fragf("");
 
