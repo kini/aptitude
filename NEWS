@@ -28,6 +28,14 @@ Version 0.7.4 UNRELEASED
       Replaces: dput, dput:i386
       Provides: dput
 
+- Internal changes:
+
+  * In internal_mark_delete(), also check for auto-installability property of
+    real packages providing virtual packages to stop them being marked for
+    deletion.  can_remove_autoinstalled() checks for this anyway, but the
+    implementation could change in the future, and it shouldn't hurt to double
+    check.
+
 
 [2015-10-07]
 Version 0.7.3

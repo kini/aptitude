@@ -1319,7 +1319,8 @@ void aptitudeDepCache::internal_mark_delete(const PkgIterator &Pkg,
 	      }
 
 	      // real package
-	      if (! can_remove_autoinstalled(dep_prv.OwnerPkg(), (*this), follow_recommends, follow_suggests)) {
+	      if (! is_auto_installed((*this)[dep_prv.OwnerPkg()]) ||
+		  ! can_remove_autoinstalled(dep_prv.OwnerPkg(), (*this), follow_recommends, follow_suggests)) {
 		continue;
 	      }
 
