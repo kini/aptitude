@@ -292,7 +292,10 @@ bool can_remove_autoinstalled(const pkgCache::PkgIterator& pkg,
  */
 inline bool is_virtual(const pkgCache::PkgIterator& pkg)
 {
-  return (pkg.VersionList().end() && ! pkg.ProvidesList().end());
+  if (pkg.end())
+    return false;
+  else
+    return (pkg.VersionList().end() && ! pkg.ProvidesList().end());
 }
 
 /** Check if package is installed
