@@ -32,6 +32,7 @@
 
 #include <cwidget/config/keybindings.h>
 #include <cwidget/fragment.h>
+#include <cwidget/generic/util/ssprintf.h>
 #include <cwidget/generic/util/transcode.h>
 #include <cwidget/toplevel.h>
 #include <cwidget/widgets/label.h>
@@ -241,6 +242,59 @@ public:
   void set_package(const pkgCache::PkgIterator &pkg,
 		   const pkgCache::VerIterator &ver)
   {
+    // special handling of virtual packages: show the list of packages providing
+    // the virtual package instead of having the bottom half of the screen
+    // completely empty -- see #103964
+    if (is_virtual(pkg))
+      {
+	std::string text;
+
+	// code adapted from similar case in cmdline_show.cc, consider all
+	// providers of the virtual package
+	for (pkgCache::PrvIterator prv = pkg.ProvidesList(); !prv.end(); ++prv)
+	  {
+	    string name = prv.OwnerPkg().FullName(true);
+	    const char* version = prv.OwnerVer().VerStr();
+	    const char* provide_version = prv.ProvideVersion();
+
+	    // specially formatted to show like a list in the description of
+	    // packages (to reuse the same parsing)
+	    text += cwidget::util::ssprintf("\n  * %s (%s)", name.c_str(), version);
+
+	    if (provide_version)
+	      {
+		// versioned provides have the '=' symbol, and only that one at the
+		// moment, and it is hardcoded in dpkg and apt -- so joining the club
+		const char* symbol = "= ";
+
+		text += cwidget::util::ssprintf(" %s %s (%s%s)",
+						_("provides"),
+						pkg.FullName(true).c_str(),
+						symbol,
+						provide_version);
+	      }
+	  }
+
+	// specially formatted as description of packages (to reuse the same
+	// parsing) -- the initial line is like a "fake short description"
+	std::string first_line;
+	std::string fake_desc;
+	if (text.empty())
+	  {
+	    first_line = _("Virtual package not provided by any package.");
+	    fake_desc = "\n " + first_line + "\n";
+	  }
+	else
+	  {
+	    first_line = _("Virtual package provided by:");
+	    fake_desc = "\n " + first_line + "\n ." + text;
+	  }
+
+	set_fragment(make_desc_fragment(cwidget::util::transcode(fake_desc)));
+
+	return;
+      }
+
     // Check against pkg.end() to hack around #339533; if ver is a
     // default iterator, pkg.end() is true.
     wstring newdesc(pkg.end() ? L"" : get_long_description(ver, apt_package_records));
