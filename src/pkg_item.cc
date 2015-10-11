@@ -404,7 +404,7 @@ bool pkg_item::dispatch_key(const cw::config::key &k, cw::tree *owner)
 
 	      if(system(buf) != 0) { /* FIXME: ignore? */ }
 
-	      cerr << _("Press Return to continue.") << endl;
+	      cout << _("Press Return to continue.") << endl;
 	      getchar();
 
 	      cw::toplevel::resume();
