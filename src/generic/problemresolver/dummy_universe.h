@@ -21,16 +21,15 @@
 #ifndef DUMMY_UNIVERSE_H
 #define DUMMY_UNIVERSE_H
 
+#include <cwidget/generic/util/eassert.h>
+#include <cwidget/generic/util/exception.h>
+
+#include <functional>
 #include <iostream>
 #include <map>
 #include <set>
 #include <string>
 #include <vector>
-
-#include <cwidget/generic/util/eassert.h>
-#include <cwidget/generic/util/exception.h>
-
-#include <boost/functional/hash.hpp>
 
 /** \brief A package dependency universe
  *
@@ -324,7 +323,7 @@ public:
 
     std::size_t get_hash_value() const
     {
-      boost::hash<const dummy_package *> hasher;
+      std::hash<const dummy_package *> hasher;
       return hasher(real_package);
     }
 
@@ -384,7 +383,7 @@ public:
 
     std::size_t get_hash_value() const
     {
-      boost::hash<const dummy_version *> hasher;
+      std::hash<const dummy_version *> hasher;
       return hasher(real_version);
     }
 
@@ -460,7 +459,7 @@ public:
 
     std::size_t get_hash_value() const
     {
-      boost::hash<const dummy_dep *> hasher;
+      std::hash<const dummy_dep *> hasher;
       return hasher(real_dep);
     }
 
