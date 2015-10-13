@@ -29,8 +29,6 @@
 
 #include <generic/util/util.h>
 
-#include <boost/lexical_cast.hpp>
-
 #include <cwidget/fragment.h>
 #include <cwidget/generic/util/transcode.h>
 
@@ -260,7 +258,7 @@ namespace
     {
       if(ids_out != NULL)
 	{
-	  std::string key = boost::lexical_cast<std::string>(next_id);
+	  std::string key = std::to_string(next_id);
 	  id_fragments.push_back(cw::fragf("%s)", key.c_str()));
 	  (*ids_out)[key] = c;
 

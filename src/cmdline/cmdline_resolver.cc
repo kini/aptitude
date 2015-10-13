@@ -43,8 +43,6 @@
 
 
 // System includes:
-#include <boost/lexical_cast.hpp>
-
 #include <cwidget/fragment.h>
 #include <cwidget/generic/util/ssprintf.h>
 
@@ -103,7 +101,7 @@ static cw::fragment *solution_story(const aptitude_solution &s,
 
       for(std::vector<choice>::size_type i = 0; i < choices.size(); ++i)
 	{
-	  std::string key = boost::lexical_cast<std::string>(i + 1);
+	  std::string key = std::to_string(i + 1);
 	  id_fragments.push_back(NULL);
 	  id_fragments.push_back(cw::fragf("%s)", key.c_str()));
 	  (*ids)[key] = choices[i];
