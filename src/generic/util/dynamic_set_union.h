@@ -25,9 +25,8 @@
 
 #include <sigc++/signal.h>
 
-#include <boost/unordered_map.hpp>
-
 #include <memory>
+#include <unordered_map>
 
 namespace aptitude
 {
@@ -41,7 +40,7 @@ namespace aptitude
       : public dynamic_set<T>,
         public std::enable_shared_from_this<dynamic_set_union<T> >
     {
-      typedef boost::unordered_map<T, int> value_counts_t;
+      typedef std::unordered_map<T, int> value_counts_t;
 
       // Counts how many times each element occurs.  By assumption,
       // individual sets can contain an element only once, so this
@@ -51,7 +50,7 @@ namespace aptitude
 
       // Keeps sets contained in this union alive, and also stores the
       // connections binding each set to this object's handlers.
-      typedef boost::unordered_multimap<std::shared_ptr<dynamic_set<T> >,
+      typedef std::unordered_multimap<std::shared_ptr<dynamic_set<T> >,
                                         sigc::connection>
       contained_sets_t;
 

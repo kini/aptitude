@@ -43,13 +43,13 @@
 #include <apt-pkg/aptconfiguration.h>
 
 #include <boost/format.hpp>
-#include <boost/unordered_map.hpp>
 
 #include <sigc++/bind.h>
 
 #include <cwidget/generic/util/ref_ptr.h>
 
 #include <memory>
+#include <unordered_map>
 #include <vector>
 
 namespace cw = cwidget;
@@ -422,7 +422,7 @@ namespace
 
     if(group_by_policy != NULL)
       {
-        typedef boost::unordered_map<std::string, std::shared_ptr<results_list> >
+        typedef std::unordered_map<std::string, std::shared_ptr<results_list> >
           results_by_group_map;
 
         results_by_group_map by_groups;

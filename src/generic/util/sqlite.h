@@ -33,9 +33,9 @@
 #include <boost/multi_index/hashed_index.hpp>
 #include <boost/multi_index/sequenced_index.hpp>
 #include <boost/multi_index/member.hpp>
-#include <boost/unordered_set.hpp>
 
 #include <memory>
+#include <unordered_set>
 
 // C++ wrapper for sqlite to handle tracking and releasing resources.
 
@@ -81,10 +81,10 @@ namespace aptitude
       // constructor and destructor of the statement class.  When the
       // database itself is destroyed, this is used to invalidate all
       // the statement objects.
-      boost::unordered_set<statement *> active_statements;
+      std::unordered_set<statement *> active_statements;
 
       // Similarly, a set of active blob objects.
-      boost::unordered_set<blob *> active_blobs;
+      std::unordered_set<blob *> active_blobs;
 
 
 

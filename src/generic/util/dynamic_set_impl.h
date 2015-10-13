@@ -24,11 +24,10 @@
 #include "dynamic_set.h"
 #include "enumerator.h"
 
-#include <boost/unordered_set.hpp>
-
 #include <sigc++/signal.h>
 
 #include <memory>
+#include <unordered_set>
 
 namespace aptitude
 {
@@ -36,7 +35,7 @@ namespace aptitude
   {
     /** \brief A dynamic set based on hash tables.
      *
-     *  Entries in the set must be compatible with boost::hash
+     *  Entries in the set must be compatible with std::hash
      *  and must support operator==.
      */
     template<typename T>
@@ -44,7 +43,7 @@ namespace aptitude
       : public std::enable_shared_from_this<dynamic_set_impl<T> >,
         public writable_dynamic_set<T>
     {
-      boost::unordered_set<T> values;
+      std::unordered_set<T> values;
       sigc::signal<void, T> signal_inserted;
       sigc::signal<void, T> signal_removed;
 
@@ -105,7 +104,7 @@ namespace aptitude
     template<typename T>
     void dynamic_set_impl<T>::insert(const T &t)
     {
-      std::pair<typename boost::unordered_set<T>::iterator, bool>
+      std::pair<typename std::unordered_set<T>::iterator, bool>
         insert_result = values.insert(t);
 
       if(insert_result.second)
@@ -129,7 +128,7 @@ namespace aptitude
     template<typename T>
     std::shared_ptr<enumerator<T> > dynamic_set_impl<T>::enumerate()
     {
-      typedef typename boost::unordered_set<T>::const_iterator Iter;
+      typedef typename std::unordered_set<T>::const_iterator Iter;
       typedef iterator_enumerator_with_keepalive<Iter, dynamic_set_impl<T> > Enum;
 
       return std::make_shared<Enum>(values.begin(),

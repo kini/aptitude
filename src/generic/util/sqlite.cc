@@ -69,7 +69,7 @@ namespace aptitude
     {
       // NULL out the handles of all outstanding statements, to avoid
       // trying to access freed objects.
-      for(boost::unordered_set<statement *>::const_iterator
+      for(std::unordered_set<statement *>::const_iterator
 	    it = active_statements.begin();
 	  it != active_statements.end(); ++it)
 	{
@@ -88,7 +88,7 @@ namespace aptitude
 	}
 
       // Close all active blobs on the database.
-      for(boost::unordered_set<blob *>::const_iterator
+      for(std::unordered_set<blob *>::const_iterator
 	    it = active_blobs.begin();
 	  it != active_blobs.end(); ++it)
 	{

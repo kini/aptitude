@@ -37,16 +37,16 @@
 
 #include <xapian.h>
 
-#include <boost/unordered_map.hpp>
-
 #include "serialize.h"
 #include "../config_signal.h"
 
 #include <algorithm>
 #include <memory>
+#include <unordered_map>
+
 
 using aptitude::util::progress_info;
-using boost::unordered_map;
+using std::unordered_map;
 using cwidget::util::transcode;
 using cwidget::util::ref_ptr;
 

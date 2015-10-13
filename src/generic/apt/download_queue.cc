@@ -31,13 +31,13 @@
 #include <apt-pkg/acquire-worker.h>
 #include <apt-pkg/strutl.h>
 
+#include <sigc++/bind.h>
+
 #include <boost/format.hpp>
-#include <boost/unordered_map.hpp>
 
 #include <list>
 #include <memory>
-
-#include <sigc++/bind.h>
+#include <unordered_map>
 
 namespace cw = cwidget;
 
@@ -587,7 +587,7 @@ namespace aptitude
 	  // case, so we have to signal the hit manually.
 	  cw::threads::mutex::lock l(state_mutex);
 
-	  boost::unordered_map<std::string, std::shared_ptr<active_download_info> >::iterator
+	  std::unordered_map<std::string, std::shared_ptr<active_download_info> >::iterator
 	    found = active_downloads.find(item.URI);
 	  if(found != active_downloads.end())
 	    {
@@ -632,7 +632,7 @@ namespace aptitude
 		continue;
 
 	      const std::string &uri = w->CurrentItem->URI;
-	      boost::unordered_map<std::string, std::shared_ptr<active_download_info> >::iterator
+	      std::unordered_map<std::string, std::shared_ptr<active_download_info> >::iterator
 		found = active_downloads.find(uri);
 
 	      if(found != active_downloads.end())
@@ -677,7 +677,7 @@ namespace aptitude
       static std::deque<std::shared_ptr<download_request_impl> > cancel_requests;
 
       // Tracks the active downloads, if any, for various URIs.
-      static boost::unordered_map<std::string, std::shared_ptr<active_download_info> > active_downloads;
+      static std::unordered_map<std::string, std::shared_ptr<active_download_info> > active_downloads;
 
       // The single instance of this object (or NULL if there is no
       // active thread).
@@ -916,7 +916,7 @@ namespace aptitude
 	    return;
 	  }
 
-	boost::unordered_map<std::string, std::shared_ptr<active_download_info> >::iterator
+	std::unordered_map<std::string, std::shared_ptr<active_download_info> >::iterator
 	  found = active_downloads.find(uri);
 
 	if(found != active_downloads.end())
@@ -983,7 +983,7 @@ namespace aptitude
 
     std::deque<std::shared_ptr<download_request_impl> > download_thread::cancel_requests;
 
-    boost::unordered_map<std::string, std::shared_ptr<active_download_info> > download_thread::active_downloads;
+    std::unordered_map<std::string, std::shared_ptr<active_download_info> > download_thread::active_downloads;
 
     bool download_thread::shutdown_queue = false;
 

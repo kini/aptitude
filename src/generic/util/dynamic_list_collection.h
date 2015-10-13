@@ -23,20 +23,20 @@
 #include "dynamic_list.h"
 #include "dynamic_list_impl.h"
 
+#include <cwidget/generic/util/eassert.h>
+
+#include <sigc++/bind.h>
+#include <sigc++/connection.h>
+
 #include <boost/functional/hash.hpp>
 #include <boost/multi_index_container.hpp>
 #include <boost/multi_index/hashed_index.hpp>
 #include <boost/multi_index/member.hpp>
 #include <boost/multi_index/mem_fun.hpp>
 #include <boost/multi_index/random_access_index.hpp>
-#include <boost/unordered_map.hpp>
-
-#include <cwidget/generic/util/eassert.h>
-
-#include <sigc++/bind.h>
-#include <sigc++/connection.h>
 
 #include <memory>
+#include <unordered_map>
 
 namespace aptitude
 {
@@ -52,7 +52,7 @@ namespace aptitude
     template<typename T>
     class dynamic_list_collection : public dynamic_list<T>
     {
-      typedef boost::unordered_multimap<std::shared_ptr<dynamic_list<T> >,
+      typedef std::unordered_multimap<std::shared_ptr<dynamic_list<T> >,
                                         sigc::connection>
       sub_list_connections;
 

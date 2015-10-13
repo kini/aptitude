@@ -31,10 +31,10 @@
 #include "aptitude.h"
 
 // System includes
-#include <boost/unordered_map.hpp>
-#include <boost/unordered_set.hpp>
-
 #include <QtGui/QApplication>
+
+#include <unordered_map>
+#include <unordered_set>
 
 namespace aptitude
 {
@@ -62,15 +62,15 @@ namespace aptitude
 	 */
 	resolver_tab *resolver;
 
-	boost::unordered_map<tab_widget *, boost::unordered_set<packages_tab *> > active_packages_tabs;
+	std::unordered_map<tab_widget *, std::unordered_set<packages_tab *> > active_packages_tabs;
 
 	/** \brief List of all opened package_info tabs.
 	 *   \todo shouldn't this be unordered_map?
 	 */
-	boost::unordered_set<package_info_tab *> package_info_tabs;
+	std::unordered_set<package_info_tab *> package_info_tabs;
 
 	/** \brief List of all registered tab_widgets. */
-	boost::unordered_set<tab_widget *> tab_widgets;
+	std::unordered_set<tab_widget *> tab_widgets;
 
 	/** \brief Update tabs close button for given tab_widget. */
 	void update_packages_tabs_closability(tab_widget *tabs);
@@ -159,13 +159,13 @@ namespace aptitude
 
       void tabs_manager::tabs_manager_impl::update_packages_tabs_closability(tab_widget *tabs)
       {
-	const boost::unordered_set<packages_tab *> &packages_tabs = active_packages_tabs[tabs];
+	const std::unordered_set<packages_tab *> &packages_tabs = active_packages_tabs[tabs];
 
 	if(packages_tabs.size() == 1)
 	  tabs->set_tab_closable((*packages_tabs.begin()), false);
 	else if(packages_tabs.size() == 2)
 	{
-	  for(boost::unordered_set<packages_tab *>::const_iterator it =
+	  for(std::unordered_set<packages_tab *>::const_iterator it =
 	      packages_tabs.begin(); it != packages_tabs.end(); ++it)
 	    tabs->set_tab_closable(*it, true);
 	}
