@@ -104,17 +104,20 @@ public:
 
     if(prev_iflags&ReInstall)
       owner->internal_mark_install(pkg, false, true);
-    else switch(prev_mode)
+    else
       {
-      case ModeDelete:
-	owner->internal_mark_delete(pkg, prev_iflags & Purge, prev_removereason == unused);
-	break;
-      case ModeKeep:
-	owner->internal_mark_keep(pkg, prev_iflags & AutoKept, prev_selection_state == pkgCache::State::Hold);
-	break;
-      case ModeInstall:
-	owner->internal_mark_install(pkg, false, false);
-	break;
+	switch (prev_mode)
+	  {
+	  case ModeDelete:
+	    owner->internal_mark_delete(pkg, prev_iflags & Purge, prev_removereason == unused);
+	    break;
+	  case ModeKeep:
+	    owner->internal_mark_keep(pkg, prev_iflags & AutoKept, prev_selection_state == pkgCache::State::Hold);
+	    break;
+	  case ModeInstall:
+	    owner->internal_mark_install(pkg, false, false);
+	    break;
+	  }
       }
 
     // make sure that everything is really set.
