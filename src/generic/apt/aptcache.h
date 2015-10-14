@@ -330,7 +330,22 @@ private:
    * package's auto flag is set properly.
    */
   void internal_mark_install(const PkgIterator &Pkg, bool AutoInst, bool ReInstall);
+
+  /** Internally marking packages for deletion -- main entry point
+   */
   void internal_mark_delete(const PkgIterator &Pkg, bool Purge, bool unused_delete);
+  /** Internally marking packages for deletion -- recursive
+   *
+   * When following reverse dependencies to see if they are automatically
+   * installed and unused (so they can be pro-actively marked for deletion as
+   * well), the function calls itself recursively.  In this case, it uses this
+   * version with an extra parameter to detect when packages were already
+   * visited, to avoid infinite loops in the case of circular dependencies (bug
+   * #801430).
+   */
+  void internal_mark_delete(const PkgIterator &Pkg, bool Purge, bool unused_delete,
+			    std::vector<unsigned int>& unused_already_visited);
+
   void internal_mark_keep(const PkgIterator &Pkg, bool Automatic, bool SetHold);
 
   /** Handle changing package states to take into account the garbage

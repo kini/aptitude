@@ -19,6 +19,15 @@ Version 0.7.4 UNRELEASED
     errors, but didn't retrieve long descriptions anymore (it did for short
     ones).
 
+  * Fix for circular dependencies in internal_mark_delete() (Closes: #801430)
+
+    Under some circumstances, when following reverse dependencies of packages to
+    be deleted to see if they are automatically installed and unused (so they
+    can be pro-actively marked for deletion as well), the function calls itself
+    recursively.  In this case, it uses this version with an extra parameter to
+    detect when packages were already visited, to avoid infinite loops in the
+    case of circular dependencies (bug #801430).
+
 - User visible changes:
 
   * [cmdline] In versioned provides, include '=' symbol (Closes: #767393)
