@@ -364,6 +364,33 @@ namespace aptitude
       return rval;
     }
 
+    bool remove_non_recursive(const std::string& path, bool ignore_if_not_exists)
+    {
+      int result = std::remove(path.c_str());
+      if (result != 0)
+	{
+	  // error removing file happened
+
+	  if (ignore_if_not_exists && (errno == ENOENT))
+	    {
+	      // that's OK, ignore "file not found"
+	      return true;
+	    }
+	  else
+	    {
+	      _error->Errno("remove_non_recursive",
+			    _("Unable to remove \"%s\": %s"),
+			    path.c_str(),
+			    sstrerror(errno).c_str());
+	      return false;
+	    }
+	}
+      else
+	{
+	  return true;
+	}
+    }
+
     bool recursive_remdir(const std::string &dirname)
     {
       struct stat stbuf;

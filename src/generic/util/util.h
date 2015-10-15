@@ -115,6 +115,18 @@ namespace aptitude
      */
     bool recursive_remdir(const std::string &dirname);
 
+    /** Remove the given file/directory (non recursive if it is the latter).
+     *  Behaves like rm -f.
+     *
+     *  Errors are logged to _error.
+     *
+     *  @param path The file/directory to remove.
+     *  @param ignore_if_not_exists Ignore errors if the path does not exist
+     *
+     *  @return \b true if successful, \b false otherwise.
+     */
+    bool remove_non_recursive(const std::string& path, bool ignore_if_not_exists = false);
+
     /** Make a directory and all of its parents.
      *
      *  \param dirname  the directory to make.
