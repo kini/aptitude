@@ -1,6 +1,7 @@
 // main.cc  (neé testscr.cc)
 //
 //  Copyright 1999-2011 Daniel Burrows
+//  Copyright 2014-2015 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -1205,6 +1206,25 @@ int main(int argc, char *argv[])
 		   (!strcasecmp(argv[optind], "build-dep")) ||
 		   (!strcasecmp(argv[optind], "build-depends")))
 	    {
+	      // require at least one argument in addition to the command
+	      if ( (!strcasecmp(argv[optind], "hold")) ||
+		   (!strcasecmp(argv[optind], "unhold")) ||
+		   (!strcasecmp(argv[optind], "markauto")) ||
+		   (!strcasecmp(argv[optind], "unmarkauto")) ||
+		   (!strcasecmp(argv[optind], "forbid-version")) ||
+		   (!strcasecmp(argv[optind], "keep")) ||
+		   (!strcasecmp(argv[optind], "build-dep")) ||
+		   (!strcasecmp(argv[optind], "build-depends")))
+		{
+		  int num_args = argc-optind;
+		  if (num_args < 2)
+		    {
+		      fprintf(stderr, _("Command \"%s\" needs arguments\n"), argv[optind]);
+		      int error_status = 1;
+		      return error_status;
+		    }
+		}
+
 	      return cmdline_do_action(argc-optind, argv+optind,
 				       status_fname,
 				       simulate, assume_yes, download_only,
