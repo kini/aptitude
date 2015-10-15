@@ -290,6 +290,8 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
 	  return cw::column_disposition("r", 0);
 	else if(state.Upgrade())
 	  return cw::column_disposition("u", 0);
+	else if(state.Downgrade())
+	  return cw::column_disposition("w", 0);
 	else if(pkg.CurrentVer().end())
 	  return cw::column_disposition(" ", 0);
 	else

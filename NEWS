@@ -55,6 +55,16 @@ Version 0.7.4 UNRELEASED
       Replaces: dput, dput:i386
       Provides: dput
 
+  * [curses] Use 'w' in action column for package downgrades (Closes: #801310)
+
+    In the column that shows the action selected for the packages (between
+    current installation state and automatically installed), e.g. in the main
+    package view and the preview screen before installing of the curses
+    interface, there was no character for downgrades.  There was 'u' for
+    upgrades, 'd' for removals, 'p' for purges, 'h' for holds, etc., but the
+    action character for downgrades was missing, so the column was left empty --
+    as it was an specific background colour until recently.
+
 - Internal changes:
 
   * In internal_mark_delete(), also check for auto-installability property of
