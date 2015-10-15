@@ -262,11 +262,15 @@ void apt_dumpcfg(const char *root)
       cfgloc += "/config";
     }
 
-  ofstream f((cfgloc+".new").c_str());
+  // perhaps should use generic/util/temp.* or be implemented in a better way,
+  // but this is better than what was before (see #764046)
+  string cfgloc_new = cfgloc + ".new-" + std::to_string(getpid());
+
+  ofstream f(cfgloc_new.c_str());
 
   if(!f)
     {
-      _error->Errno("apt_init", _("Unable to open %s for writing"), cfgloc.c_str());
+      _error->Errno("apt_init", _("Unable to open %s for writing"), cfgloc_new.c_str());
       return;
     }
 
@@ -281,7 +285,7 @@ void apt_dumpcfg(const char *root)
 
   f.close();
 
-  if(rename((cfgloc+".new").c_str(), cfgloc.c_str())!=0)
+  if (rename(cfgloc_new.c_str(), cfgloc.c_str()) != 0)
     {
       _error->Errno("apt_init", _("Unable to replace %s with new configuration file"), cfgloc.c_str());
       return;
