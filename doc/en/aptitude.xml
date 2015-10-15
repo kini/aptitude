@@ -120,6 +120,7 @@
   <!ENTITY Sreverse-dep "<literal><link linkend='searchReverseDep'>?reverse-<replaceable>depType</replaceable></link></literal>">
 
   <!ENTITY Sreverse-depends "<literal><link linkend='searchReverseDep'>?reverse-depends</link></literal>">
+  <!ENTITY Sreverse-provides "<literal><link linkend='searchReverseDep'>?reverse-provides</link></literal>">
   <!ENTITY Sreverse-recommends "<literal><link linkend='searchReverseDep'>?reverse-recommends</link></literal>">
   <!ENTITY Sreverse-suggests "<literal><link linkend='searchReverseDep'>?reverse-suggests</link></literal>">
 
@@ -6993,8 +6994,7 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 	    <para>
 	      This term matches any package.  For instance,
 	      <quote><literal>&Sinstalled;&Sprovides;(&Strue;)</literal></quote>
-	      matches installed packages which are provided by any
-	      package.
+	      matches installed packages which provide any package.
 	    </para>
 	  </listitem>
 	</varlistentry>
@@ -7087,14 +7087,12 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 
 	  <listitem>
 	    <para>
-	      Matches any package which is purely virtual: that is,
-	      its name is provided by a package or mentioned in a
-	      dependency, but no package of that name exists.  For
+	      Matches any package which is purely virtual: that is, its name is
+	      provided by a package, but no package of that name exists.  For
 	      instance,
-	      <quote><literal>?virtual!&Sprovides;(&Strue;)</literal></quote>
-	      matches packages which are virtual and are not provided
-	      by any package: ie, packages which are depended upon but
-	      do not exist.
+	      <quote><literal>?virtual&Sreverse-provides;(&Sinstalled;)</literal></quote>
+	      matches virtual packages which are provided by any installed
+	      package.
 	    </para>
 	  </listitem>
 	</varlistentry>
