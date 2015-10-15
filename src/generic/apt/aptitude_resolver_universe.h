@@ -84,7 +84,7 @@ public:
 
   std::size_t get_hash_value() const
   {
-    boost::hash<const pkgCache::Package *> hasher;
+    std::hash<const pkgCache::Package *> hasher;
     return hasher(pkg);
   }
 
