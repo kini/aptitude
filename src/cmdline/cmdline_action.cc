@@ -414,20 +414,49 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
       (*apt_cache_file)->mark_delete(pkg, true, false, NULL);
       break;
     case cmdline_hold:
-      (*apt_cache_file)->mark_keep(pkg, false, true, NULL);
+      {
+	if (verbose > 0)
+	  printf(_("Setting package %s on hold\n"), pkg.FullName(true).c_str());
+
+	(*apt_cache_file)->mark_keep(pkg, false, true, NULL);
+      }
       break;
     case cmdline_keep:
-      (*apt_cache_file)->mark_keep(pkg, false, false, NULL);
+      {
+	if (verbose > 0)
+	  printf(_("Marking package %s as keep\n"), pkg.FullName(true).c_str());
+
+	(*apt_cache_file)->mark_keep(pkg, false, false, NULL);
+      }
       break;
     case cmdline_unhold:
       if(pkg_state.Keep())
-	(*apt_cache_file)->mark_keep(pkg, false, false, NULL);
+	{
+	  if (verbose > 0)
+	    printf(_("Setting package %s as not on hold\n"), pkg.FullName(true).c_str());
+
+	  (*apt_cache_file)->mark_keep(pkg, false, false, NULL);
+	}
+      else
+	{
+	  printf(_("Package %s is not on hold\n"), pkg.FullName(true).c_str());
+	}
       break;
     case cmdline_markauto:
-      (*apt_cache_file)->mark_auto_installed(pkg, true, NULL);
+      {
+	if (verbose > 0)
+	  printf(_("Marking package %s as automatically installed\n"), pkg.FullName(true).c_str());
+
+	(*apt_cache_file)->mark_auto_installed(pkg, true, NULL);
+      }
       break;
     case cmdline_unmarkauto:
-      (*apt_cache_file)->mark_auto_installed(pkg, false, NULL);
+      {
+	if (verbose > 0)
+	  printf(_("Unmarking package %s as automatically installed\n"), pkg.FullName(true).c_str());
+
+	(*apt_cache_file)->mark_auto_installed(pkg, false, NULL);
+      }
       break;
     case cmdline_forbid_version:
       if(source!=cmdline_version_cand)
