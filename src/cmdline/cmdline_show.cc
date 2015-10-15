@@ -475,7 +475,7 @@ cw::fragment *version_file_fragment(const pkgCache::VerIterator &ver,
 
   cw::fragment *tags = make_tags_fragment(pkg);
   if(tags)
-    fragments.push_back(cw::fragf("%n%F", tags));
+    fragments.push_back(cw::fragf("%F", tags));
 
   return cw::sequence_fragment(fragments);
 }
