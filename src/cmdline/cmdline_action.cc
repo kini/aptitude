@@ -433,7 +433,7 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
       if(source!=cmdline_version_cand)
 	{
 	  if (verbose > 0)
-	    printf(_("Forbidding version %s of package %s\n"), sourcestr.c_str(), pkg.FullName(true).c_str());
+	    printf(_("Marking version %s of package %s as forbidden\n"), sourcestr.c_str(), pkg.FullName(true).c_str());
 
 	  (*apt_cache_file)->forbid_upgrade(pkg, sourcestr, NULL);
 	}
@@ -444,7 +444,7 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 	  if(!curver.end() && !candver.end() && curver!=candver)
 	    {
 	      if (verbose > 0)
-		printf(_("Forbidding version %s of package %s\n"), candver.VerStr(), pkg.FullName(true).c_str());
+		printf(_("Marking version %s of package %s as forbidden %s\n"), candver.VerStr(), pkg.FullName(true).c_str());
 
 	      (*apt_cache_file)->forbid_upgrade(pkg, candver.VerStr(), NULL);
 	    }
