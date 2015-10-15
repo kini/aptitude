@@ -109,7 +109,7 @@ cw::fragment *make_tags_fragment(const pkgCache::PkgIterator &pkg)
 
   const tag_set s(get_tags(pkg));
 
-  vector<cw::fragment *> rval;
+  vector<cw::fragment *> fragments;
   if(s.empty() == false)
     {
       vector<cw::fragment *> tags;
@@ -121,8 +121,8 @@ cw::fragment *make_tags_fragment(const pkgCache::PkgIterator &pkg)
 	  tags.push_back(cw::text_fragment(name));
 	}
 
-      rval.push_back(dropbox(cw::fragf("%B%s: %b", _("Tags")),
-                             wrapbox(cw::join_fragments(tags, L", "))));
+      fragments.push_back(dropbox(cw::fragf("%B%s: %b", _("Tags")),
+				  wrapbox(cw::join_fragments(tags, L", "))));
     }
 
   typedef aptitudeDepCache::user_tag user_tag;
@@ -136,12 +136,9 @@ cw::fragment *make_tags_fragment(const pkgCache::PkgIterator &pkg)
 	  tags.push_back(cw::text_fragment((*apt_cache_file)->deref_user_tag(*it)));
 	}
 
-      rval.push_back(dropbox(cw::fragf("%B%s: %b", _("User Tags")),
-			     wrapbox(cw::join_fragments(tags, L", "))));
+      fragments.push_back(dropbox(cw::fragf("%B%s: %b", _("User Tags")),
+				  wrapbox(cw::join_fragments(tags, L", "))));
     }
 
-  if(!rval.empty())
-    return cw::join_fragments(rval, L"\n");
-  else
-    return NULL;
+  return cw::sequence_fragment(fragments);
 }
