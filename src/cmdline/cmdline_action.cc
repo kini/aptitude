@@ -1,6 +1,7 @@
 // cmdline_action.cc
 //
 //  Copyright 2004 Daniel Burrows
+//  Copyright 2015 Manuel A. Fernandez Montecelo
 
 #include "cmdline_action.h"
 #include "cmdline_util.h"
@@ -430,13 +431,23 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
       break;
     case cmdline_forbid_version:
       if(source!=cmdline_version_cand)
-	(*apt_cache_file)->forbid_upgrade(pkg, sourcestr, NULL);
+	{
+	  if (verbose > 0)
+	    printf(_("Forbidding version %s of package %s\n"), sourcestr.c_str(), pkg.FullName(true).c_str());
+
+	  (*apt_cache_file)->forbid_upgrade(pkg, sourcestr, NULL);
+	}
       else
 	{
-	  pkgCache::VerIterator curver=pkg.CurrentVer();
+	  pkgCache::VerIterator curver = pkg.CurrentVer();
 	  pkgCache::VerIterator candver = pkg_state.CandidateVerIter(*apt_cache_file);
 	  if(!curver.end() && !candver.end() && curver!=candver)
-	    (*apt_cache_file)->forbid_upgrade(pkg, candver.VerStr(), NULL);
+	    {
+	      if (verbose > 0)
+		printf(_("Forbidding version %s of package %s\n"), candver.VerStr(), pkg.FullName(true).c_str());
+
+	      (*apt_cache_file)->forbid_upgrade(pkg, candver.VerStr(), NULL);
+	    }
 	}
       break;
     case cmdline_build_depends:
