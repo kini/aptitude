@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2015-10-16 00:02+0100\n"
+"POT-Creation-Date: 2015-10-16 00:29+0100\n"
 "PO-Revision-Date: 2012-02-23 16:55+0800\n"
 "Last-Translator: Asho Yeh <ashoyeh@gmail.com>\n"
 "Language-Team: Chinese/Traditional <zh-l10n@linux.org.tw>\n"
@@ -747,37 +747,72 @@ msgstr ""
 "Package %s 將不會升級, 無法升級\n"
 "\n"
 
-#: src/cmdline/cmdline_action.cc:436 src/cmdline/cmdline_action.cc:447
+#: src/cmdline/cmdline_action.cc:419
+#, fuzzy, c-format
+#| msgid "'=' to place packages on hold"
+msgid "Setting package %s on hold\n"
+msgstr "“=”將套件置於保持狀態"
+
+#: src/cmdline/cmdline_action.cc:427
+#, fuzzy, c-format
+#| msgid "Updating package lists"
+msgid "Marking package %s as keep\n"
+msgstr "正在更新套件列表"
+
+#: src/cmdline/cmdline_action.cc:436
+#, c-format
+msgid "Setting package %s as not on hold\n"
+msgstr ""
+
+#: src/cmdline/cmdline_action.cc:442
+#, fuzzy, c-format
+#| msgid "Packages which depend on %s"
+msgid "Package %s is not on hold\n"
+msgstr "依賴於 %s 的套件"
+
+#: src/cmdline/cmdline_action.cc:448
+#, fuzzy, c-format
+#| msgid "'&M' to mark packages as automatically installed"
+msgid "Marking package %s as automatically installed\n"
+msgstr "按'&M'將套件標記為自動安裝"
+
+#: src/cmdline/cmdline_action.cc:456
+#, fuzzy, c-format
+#| msgid "'&M' to mark packages as automatically installed"
+msgid "Unmarking package %s as automatically installed\n"
+msgstr "按'&M'將套件標記為自動安裝"
+
+#: src/cmdline/cmdline_action.cc:465 src/cmdline/cmdline_action.cc:476
 #, fuzzy, c-format
 #| msgid "Check for new versions of packages"
-msgid "Forbidding version %s of package %s\n"
+msgid "Marking version %s of package %s as forbidden\n"
 msgstr "正在檢查新版本的套件"
 
-#: src/cmdline/cmdline_action.cc:499
+#: src/cmdline/cmdline_action.cc:528
 #, c-format
 msgid "Note: selecting the task \"%s: %s\" for installation\n"
 msgstr "附註: 選擇安裝作業 \"%s: %s\"\n"
 
-#: src/cmdline/cmdline_action.cc:529
+#: src/cmdline/cmdline_action.cc:558
 #, c-format
 msgid ""
 "You can only specify a package version with an 'install' command or a "
 "'forbid-version' command.\n"
 msgstr "您只能在“install”或“forbid-version”命令中指定一個套件的版本。\n"
 
-#: src/cmdline/cmdline_action.cc:538
+#: src/cmdline/cmdline_action.cc:567
 #, c-format
 msgid "You can only specify a package archive with an 'install' command.\n"
 msgstr "您只能使用 'install' 指令指定套件歸檔\n"
 
-#: src/cmdline/cmdline_action.cc:578
+#: src/cmdline/cmdline_action.cc:607
 #, fuzzy, c-format
 msgid ""
 "Couldn't find package \"%s\", and more than %zu\n"
 "packages contain \"%s\" in their name.\n"
 msgstr "無法找到套件 \"%s\"，而且超過 40 各套件名稱中包含 \"%s\"。\n"
 
-#: src/cmdline/cmdline_action.cc:582
+#: src/cmdline/cmdline_action.cc:611
 #, c-format
 msgid ""
 "Couldn't find package \"%s\".  However, the following\n"
@@ -786,12 +821,12 @@ msgstr ""
 "無法找到套件 \"%s\"。 然而，以下\n"
 "套件名稱中包含 \"%s\":\n"
 
-#: src/cmdline/cmdline_action.cc:604
+#: src/cmdline/cmdline_action.cc:633
 #, c-format
 msgid "Couldn't find any package whose name or description matched \"%s\"\n"
 msgstr "無法找到任何套件的名稱或敘述含有 \"%s\"\n"
 
-#: src/cmdline/cmdline_action.cc:607
+#: src/cmdline/cmdline_action.cc:636
 #, fuzzy, c-format
 msgid ""
 "Couldn't find any package matching \"%s\", and more than %zu\n"
@@ -800,7 +835,7 @@ msgstr ""
 "無法找到任何套件吻合 \"%s\"，而且超過 40 各套件的敘述包含\n"
 "了 \"%s\"。\n"
 
-#: src/cmdline/cmdline_action.cc:611
+#: src/cmdline/cmdline_action.cc:640
 #, c-format
 msgid ""
 "Couldn't find any package matching \"%s\".  However, the following\n"
@@ -809,7 +844,7 @@ msgstr ""
 "無法找到任何套件吻合 \"%s\"。 然而，以下的套件敘述中包含\n"
 "\"%s\":\n"
 
-#: src/cmdline/cmdline_action.cc:753
+#: src/cmdline/cmdline_action.cc:782
 #, c-format
 msgid "Bad action character '%c'\n"
 msgstr "錯誤的動作指令鍵 '%c'\n"

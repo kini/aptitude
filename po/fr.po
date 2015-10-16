@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2015-10-16 00:02+0100\n"
+"POT-Creation-Date: 2015-10-16 00:29+0100\n"
 "PO-Revision-Date: 2012-11-15 10:11-0400\n"
 "Last-Translator: Jean-Baka Domelevo Entfellner <domelevo@gmail.com>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -830,18 +830,55 @@ msgstr ""
 "Le paquet %s n'est pas susceptible d'être mis à jour, l'interdiction de mise "
 "à jour n'est pas possible.\n"
 
-#: src/cmdline/cmdline_action.cc:436 src/cmdline/cmdline_action.cc:447
+#: src/cmdline/cmdline_action.cc:419
+#, fuzzy, c-format
+#| msgid "'=' to place packages on hold"
+msgid "Setting package %s on hold\n"
+msgstr "« = » pour figer des paquets"
+
+#: src/cmdline/cmdline_action.cc:427
+#, fuzzy, c-format
+#| msgid "Updating package lists"
+msgid "Marking package %s as keep\n"
+msgstr "Mise à jour des listes de paquets"
+
+#: src/cmdline/cmdline_action.cc:436
+#, c-format
+msgid "Setting package %s as not on hold\n"
+msgstr ""
+
+#: src/cmdline/cmdline_action.cc:442
+#, fuzzy, c-format
+#| msgid "Packages which depend on %s"
+msgid "Package %s is not on hold\n"
+msgstr "Paquets dépendants de %s"
+
+#: src/cmdline/cmdline_action.cc:448
+#, fuzzy, c-format
+#| msgid "'&M' to mark packages as automatically installed"
+msgid "Marking package %s as automatically installed\n"
+msgstr ""
+"« &M » pour marquer des paquets comme ayant été installés automatiquement"
+
+#: src/cmdline/cmdline_action.cc:456
+#, fuzzy, c-format
+#| msgid "'&M' to mark packages as automatically installed"
+msgid "Unmarking package %s as automatically installed\n"
+msgstr ""
+"« &M » pour marquer des paquets comme ayant été installés automatiquement"
+
+#: src/cmdline/cmdline_action.cc:465 src/cmdline/cmdline_action.cc:476
 #, fuzzy, c-format
 #| msgid "Check for new versions of packages"
-msgid "Forbidding version %s of package %s\n"
+msgid "Marking version %s of package %s as forbidden\n"
 msgstr "Vérifier s'il existe de nouvelles versions des paquets"
 
-#: src/cmdline/cmdline_action.cc:499
+#: src/cmdline/cmdline_action.cc:528
 #, c-format
 msgid "Note: selecting the task \"%s: %s\" for installation\n"
 msgstr "Note : sélection de la tâche « %s : %s » pour installation\n"
 
-#: src/cmdline/cmdline_action.cc:529
+#: src/cmdline/cmdline_action.cc:558
 #, c-format
 msgid ""
 "You can only specify a package version with an 'install' command or a "
@@ -850,14 +887,14 @@ msgstr ""
 "Vous ne pouvez préciser une version de paquet qu'avec une commande "
 "« install » ou « forbid-version ».\n"
 
-#: src/cmdline/cmdline_action.cc:538
+#: src/cmdline/cmdline_action.cc:567
 #, c-format
 msgid "You can only specify a package archive with an 'install' command.\n"
 msgstr ""
 "Vous ne pouvez préciser une archive de paquet qu'avec une commande "
 "« install »I\n"
 
-#: src/cmdline/cmdline_action.cc:578
+#: src/cmdline/cmdline_action.cc:607
 #, fuzzy, c-format
 msgid ""
 "Couldn't find package \"%s\", and more than %zu\n"
@@ -866,7 +903,7 @@ msgstr ""
 "Impossible de trouver le paquet « %s » et plus de 40\n"
 "paquets comportent « %s » dans leur nom.\n"
 
-#: src/cmdline/cmdline_action.cc:582
+#: src/cmdline/cmdline_action.cc:611
 #, c-format
 msgid ""
 "Couldn't find package \"%s\".  However, the following\n"
@@ -875,14 +912,14 @@ msgstr ""
 "Impossible de trouver le paquet « %s ». Cependant, les\n"
 "paquets suivants comportent « %s » dans leur nom :\n"
 
-#: src/cmdline/cmdline_action.cc:604
+#: src/cmdline/cmdline_action.cc:633
 #, c-format
 msgid "Couldn't find any package whose name or description matched \"%s\"\n"
 msgstr ""
 "Impossible de trouver un paquet dont le nom ou la description corresponde à "
 "« %s »\n"
 
-#: src/cmdline/cmdline_action.cc:607
+#: src/cmdline/cmdline_action.cc:636
 #, fuzzy, c-format
 msgid ""
 "Couldn't find any package matching \"%s\", and more than %zu\n"
@@ -891,7 +928,7 @@ msgstr ""
 "Impossible de trouver un paquet correspondant à « %s »\n"
 "et plus de 40 paquets comportent « %s » dans leur description.\n"
 
-#: src/cmdline/cmdline_action.cc:611
+#: src/cmdline/cmdline_action.cc:640
 #, c-format
 msgid ""
 "Couldn't find any package matching \"%s\".  However, the following\n"
@@ -900,7 +937,7 @@ msgstr ""
 "Impossible de trouver un paquet correspondant à « %s ». Cependant,\n"
 "les paquets suivants comportent « %s » dans leur description :\n"
 
-#: src/cmdline/cmdline_action.cc:753
+#: src/cmdline/cmdline_action.cc:782
 #, c-format
 msgid "Bad action character '%c'\n"
 msgstr "Le caractère « %c » ne correspond à aucune action connue\n"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2015-10-16 00:02+0100\n"
+"POT-Creation-Date: 2015-10-16 00:29+0100\n"
 "PO-Revision-Date: 2014-08-15 16:37+0200\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -797,18 +797,53 @@ msgstr "Balík %s není nainstalován, nelze tedy zakázat aktualizaci\n"
 msgid "Package %s is not upgradable, cannot forbid an upgrade\n"
 msgstr "Balík %s není aktualizovatelný, nelze tedy zakázat aktualizaci\n"
 
-#: src/cmdline/cmdline_action.cc:436 src/cmdline/cmdline_action.cc:447
+#: src/cmdline/cmdline_action.cc:419
+#, fuzzy, c-format
+#| msgid "'=' to place packages on hold"
+msgid "Setting package %s on hold\n"
+msgstr "„=“ pro podržení balíků v aktuální verzi"
+
+#: src/cmdline/cmdline_action.cc:427
+#, fuzzy, c-format
+#| msgid "Updating package lists"
+msgid "Marking package %s as keep\n"
+msgstr "Aktualizují se seznamy balíků"
+
+#: src/cmdline/cmdline_action.cc:436
+#, c-format
+msgid "Setting package %s as not on hold\n"
+msgstr ""
+
+#: src/cmdline/cmdline_action.cc:442
+#, fuzzy, c-format
+#| msgid "Packages which depend on %s"
+msgid "Package %s is not on hold\n"
+msgstr "Balíky, které závisí na %s"
+
+#: src/cmdline/cmdline_action.cc:448
+#, fuzzy, c-format
+#| msgid "'&M' to mark packages as automatically installed"
+msgid "Marking package %s as automatically installed\n"
+msgstr "„&M“ pro označení balíků jako instalované automaticky"
+
+#: src/cmdline/cmdline_action.cc:456
+#, fuzzy, c-format
+#| msgid "'&M' to mark packages as automatically installed"
+msgid "Unmarking package %s as automatically installed\n"
+msgstr "„&M“ pro označení balíků jako instalované automaticky"
+
+#: src/cmdline/cmdline_action.cc:465 src/cmdline/cmdline_action.cc:476
 #, fuzzy, c-format
 #| msgid "Check for new versions of packages"
-msgid "Forbidding version %s of package %s\n"
+msgid "Marking version %s of package %s as forbidden\n"
 msgstr "Zjistí, zda nejsou k dispozici novější verze balíků"
 
-#: src/cmdline/cmdline_action.cc:499
+#: src/cmdline/cmdline_action.cc:528
 #, c-format
 msgid "Note: selecting the task \"%s: %s\" for installation\n"
 msgstr "Pozn: vybírám pro instalaci úlohu „%s: %s“\n"
 
-#: src/cmdline/cmdline_action.cc:529
+#: src/cmdline/cmdline_action.cc:558
 #, c-format
 msgid ""
 "You can only specify a package version with an 'install' command or a "
@@ -816,12 +851,12 @@ msgid ""
 msgstr ""
 "Verzi balíku můžete zadat jen s příkazem „install“ nebo „forbid-version“.\n"
 
-#: src/cmdline/cmdline_action.cc:538
+#: src/cmdline/cmdline_action.cc:567
 #, c-format
 msgid "You can only specify a package archive with an 'install' command.\n"
 msgstr "Archiv balíku můžete zadat jen s příkazem „install“.\n"
 
-#: src/cmdline/cmdline_action.cc:578
+#: src/cmdline/cmdline_action.cc:607
 #, fuzzy, c-format
 msgid ""
 "Couldn't find package \"%s\", and more than %zu\n"
@@ -830,7 +865,7 @@ msgstr ""
 "Nemohl jsem najít balík „%s“ a více než 40\n"
 "balíků obsahuje „%s“ ve svém názvu.\n"
 
-#: src/cmdline/cmdline_action.cc:582
+#: src/cmdline/cmdline_action.cc:611
 #, c-format
 msgid ""
 "Couldn't find package \"%s\".  However, the following\n"
@@ -839,12 +874,12 @@ msgstr ""
 "Nemohl jsem najít balík „%s“, ale následující balíky\n"
 "obsahují „%s“ ve svém názvu:\n"
 
-#: src/cmdline/cmdline_action.cc:604
+#: src/cmdline/cmdline_action.cc:633
 #, c-format
 msgid "Couldn't find any package whose name or description matched \"%s\"\n"
 msgstr "Nemohl jsem najít balík, jehož název nebo popis se shoduje s „%s“\n"
 
-#: src/cmdline/cmdline_action.cc:607
+#: src/cmdline/cmdline_action.cc:636
 #, fuzzy, c-format
 msgid ""
 "Couldn't find any package matching \"%s\", and more than %zu\n"
@@ -853,7 +888,7 @@ msgstr ""
 "Nemohl jsem najít balík vyhovující „%s“ a více než 40\n"
 "balíků obsahuje „%s“ ve svém popisu.\n"
 
-#: src/cmdline/cmdline_action.cc:611
+#: src/cmdline/cmdline_action.cc:640
 #, c-format
 msgid ""
 "Couldn't find any package matching \"%s\".  However, the following\n"
@@ -862,7 +897,7 @@ msgstr ""
 "Nemohl jsem najít balík vyhovující „%s“, ale následující balíky\n"
 "obsahují „%s“ ve svém popisu:\n"
 
-#: src/cmdline/cmdline_action.cc:753
+#: src/cmdline/cmdline_action.cc:782
 #, c-format
 msgid "Bad action character '%c'\n"
 msgstr "Chybná akce „%c“\n"

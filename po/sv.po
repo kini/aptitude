@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2015-10-16 00:02+0100\n"
+"POT-Creation-Date: 2015-10-16 00:29+0100\n"
 "PO-Revision-Date: 2015-06-01 13:57+0100\n"
 "Last-Translator: Josef Andersson <josef.andersson@fripost.org>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -812,18 +812,53 @@ msgstr ""
 "Paketet %s är inte uppgraderingsbart, kan därför inte förbjuda en "
 "uppgradering\n"
 
-#: src/cmdline/cmdline_action.cc:436 src/cmdline/cmdline_action.cc:447
+#: src/cmdline/cmdline_action.cc:419
+#, fuzzy, c-format
+#| msgid "'=' to place packages on hold"
+msgid "Setting package %s on hold\n"
+msgstr "”=” för att hålla tillbaka paket"
+
+#: src/cmdline/cmdline_action.cc:427
+#, fuzzy, c-format
+#| msgid "Updating package lists"
+msgid "Marking package %s as keep\n"
+msgstr "Uppdaterar paketlistor"
+
+#: src/cmdline/cmdline_action.cc:436
+#, c-format
+msgid "Setting package %s as not on hold\n"
+msgstr ""
+
+#: src/cmdline/cmdline_action.cc:442
+#, fuzzy, c-format
+#| msgid "Packages which depend on %s"
+msgid "Package %s is not on hold\n"
+msgstr "Paket som är beroende av %s"
+
+#: src/cmdline/cmdline_action.cc:448
+#, fuzzy, c-format
+#| msgid "'&M' to mark packages as automatically installed"
+msgid "Marking package %s as automatically installed\n"
+msgstr "”&M” för att markera paket som automatiskt installerade"
+
+#: src/cmdline/cmdline_action.cc:456
+#, fuzzy, c-format
+#| msgid "'&M' to mark packages as automatically installed"
+msgid "Unmarking package %s as automatically installed\n"
+msgstr "”&M” för att markera paket som automatiskt installerade"
+
+#: src/cmdline/cmdline_action.cc:465 src/cmdline/cmdline_action.cc:476
 #, fuzzy, c-format
 #| msgid "Check for new versions of packages"
-msgid "Forbidding version %s of package %s\n"
+msgid "Marking version %s of package %s as forbidden\n"
 msgstr "Leta efter nya versioner av paket"
 
-#: src/cmdline/cmdline_action.cc:499
+#: src/cmdline/cmdline_action.cc:528
 #, c-format
 msgid "Note: selecting the task \"%s: %s\" for installation\n"
 msgstr "Notera: väljer funktionen ”%s: %s” för installation\n"
 
-#: src/cmdline/cmdline_action.cc:529
+#: src/cmdline/cmdline_action.cc:558
 #, c-format
 msgid ""
 "You can only specify a package version with an 'install' command or a "
@@ -832,12 +867,12 @@ msgstr ""
 "Du kan endast ange en paketversion med ett ”install”-kommando eller ett "
 "”forbid-version”-kommando.\n"
 
-#: src/cmdline/cmdline_action.cc:538
+#: src/cmdline/cmdline_action.cc:567
 #, c-format
 msgid "You can only specify a package archive with an 'install' command.\n"
 msgstr "Du kan endast ange ett paketarkiv med ett ”install”-kommando.\n"
 
-#: src/cmdline/cmdline_action.cc:578
+#: src/cmdline/cmdline_action.cc:607
 #, fuzzy, c-format
 msgid ""
 "Couldn't find package \"%s\", and more than %zu\n"
@@ -846,7 +881,7 @@ msgstr ""
 "Kunde inte hitta paketet ”%s” och mer än 40\n"
 "paket innehåller ”%s” i sina namn.\n"
 
-#: src/cmdline/cmdline_action.cc:582
+#: src/cmdline/cmdline_action.cc:611
 #, c-format
 msgid ""
 "Couldn't find package \"%s\".  However, the following\n"
@@ -855,13 +890,13 @@ msgstr ""
 "Kunde inte hitta paketet ”%s”.  Dock så innehåller\n"
 "följande paket ”%s” i sina namn:\n"
 
-#: src/cmdline/cmdline_action.cc:604
+#: src/cmdline/cmdline_action.cc:633
 #, c-format
 msgid "Couldn't find any package whose name or description matched \"%s\"\n"
 msgstr ""
 "Kunde inte hitta några paket vars namn eller beskrivning matchade ”%s”\n"
 
-#: src/cmdline/cmdline_action.cc:607
+#: src/cmdline/cmdline_action.cc:636
 #, fuzzy, c-format
 msgid ""
 "Couldn't find any package matching \"%s\", and more than %zu\n"
@@ -870,7 +905,7 @@ msgstr ""
 "Kunde inte hitta några paket som matchade ”%s”, och mer än\n"
 "40 paket innehåller ”%s” i sina beskrivningar.\n"
 
-#: src/cmdline/cmdline_action.cc:611
+#: src/cmdline/cmdline_action.cc:640
 #, c-format
 msgid ""
 "Couldn't find any package matching \"%s\".  However, the following\n"
@@ -879,7 +914,7 @@ msgstr ""
 "Kunde inte hitta några paket som matchade ”%s”.  Dock innehåller\n"
 "följande paket ”%s” i sina beskrivningar:\n"
 
-#: src/cmdline/cmdline_action.cc:753
+#: src/cmdline/cmdline_action.cc:782
 #, c-format
 msgid "Bad action character '%c'\n"
 msgstr "Felaktigt åtgärdstecken ”%c”\n"

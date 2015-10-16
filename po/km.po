@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude_po_km\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2015-10-16 00:02+0100\n"
+"POT-Creation-Date: 2015-10-16 00:29+0100\n"
 "PO-Revision-Date: 2012-06-03 12:26+0800\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -688,18 +688,53 @@ msgstr "កញ្ចប់ %s មិន​ត្រូវ​បាន​ដំ�
 msgid "Package %s is not upgradable, cannot forbid an upgrade\n"
 msgstr "កញ្ចប់ %s មិន​អាច​ធ្វើ​ឲ្យ​ប្រសើរ​បាន​ឡើយ ដូច្នេះ​មិន​អាច​ហាម​កុំ​ឲ្យ​ធ្វើ​ឲ្យ​ប្រសើរ​បាន​ឡើយ\n"
 
-#: src/cmdline/cmdline_action.cc:436 src/cmdline/cmdline_action.cc:447
+#: src/cmdline/cmdline_action.cc:419
+#, fuzzy, c-format
+#| msgid "'=' to place packages on hold"
+msgid "Setting package %s on hold\n"
+msgstr "'=' ដាក់​កញ្ចប់​នៅ​ក្នុង​ស្ថានភាព​រង់ចាំ"
+
+#: src/cmdline/cmdline_action.cc:427
+#, fuzzy, c-format
+#| msgid "Updating package lists"
+msgid "Marking package %s as keep\n"
+msgstr "ធ្វើ​ឲ្យ​បញ្ជី​កញ្ចប់​ទាន់​សម័យ"
+
+#: src/cmdline/cmdline_action.cc:436
+#, c-format
+msgid "Setting package %s as not on hold\n"
+msgstr ""
+
+#: src/cmdline/cmdline_action.cc:442
+#, fuzzy, c-format
+#| msgid "Packages which depend on %s"
+msgid "Package %s is not on hold\n"
+msgstr "កញ្ចប់​ដែល​អាស្រ័យ​លើ​%s"
+
+#: src/cmdline/cmdline_action.cc:448
+#, fuzzy, c-format
+#| msgid "'&M' to mark packages as automatically installed"
+msgid "Marking package %s as automatically installed\n"
+msgstr "'&M' ដើម្បី​សម្គាល់​កញ្ចប់​ថា​បាន​ដំឡើង​ដោយ​ស្វ័យប្រវត្តិ"
+
+#: src/cmdline/cmdline_action.cc:456
+#, fuzzy, c-format
+#| msgid "'&M' to mark packages as automatically installed"
+msgid "Unmarking package %s as automatically installed\n"
+msgstr "'&M' ដើម្បី​សម្គាល់​កញ្ចប់​ថា​បាន​ដំឡើង​ដោយ​ស្វ័យប្រវត្តិ"
+
+#: src/cmdline/cmdline_action.cc:465 src/cmdline/cmdline_action.cc:476
 #, fuzzy, c-format
 #| msgid "Check for new versions of packages"
-msgid "Forbidding version %s of package %s\n"
+msgid "Marking version %s of package %s as forbidden\n"
 msgstr "ពិនិត្យរក​កំណែ​ថ្មី​របស់​កញ្ចប់"
 
-#: src/cmdline/cmdline_action.cc:499
+#: src/cmdline/cmdline_action.cc:528
 #, c-format
 msgid "Note: selecting the task \"%s: %s\" for installation\n"
 msgstr "ចំណាំ ៖ ជ្រើស​ភារកិច្ច​​ \"%s ៖ %s\" សម្រាប់​ការ​ដំឡើង​\n"
 
-#: src/cmdline/cmdline_action.cc:529
+#: src/cmdline/cmdline_action.cc:558
 #, c-format
 msgid ""
 "You can only specify a package version with an 'install' command or a "
@@ -707,12 +742,12 @@ msgid ""
 msgstr ""
 "អ្នក​អាច​បញ្ជាក់​តែ​កំណែ​កញ្ចប់ ដោយ​ប្រើ​ពាក្យបញ្ជា 'install' ឬ 'forbid-version' ប៉ុណ្ណោះ ។\n"
 
-#: src/cmdline/cmdline_action.cc:538
+#: src/cmdline/cmdline_action.cc:567
 #, c-format
 msgid "You can only specify a package archive with an 'install' command.\n"
 msgstr "អ្នក​អាច​បញ្ជាក់​តែ​ប័ណ្ណសារ​កញ្ចប់ ដោយ​ប្រើ​ពាក្យបញ្ជា 'install' ប៉ុណ្ណោះ ។\n"
 
-#: src/cmdline/cmdline_action.cc:578
+#: src/cmdline/cmdline_action.cc:607
 #, fuzzy, c-format
 msgid ""
 "Couldn't find package \"%s\", and more than %zu\n"
@@ -721,7 +756,7 @@ msgstr ""
 "មិន​អាច​រកក​ញ្ចប់​ \"%s\" ឃើញ​ឡើយ ហើយ​មាន​កញ្ចប់​ជាង ៤០\n"
 "ដែល​មាន \"%s\" នៅ​ក្នុង​ឈ្មោះ​របស់​ពួក​វា ។\n"
 
-#: src/cmdline/cmdline_action.cc:582
+#: src/cmdline/cmdline_action.cc:611
 #, c-format
 msgid ""
 "Couldn't find package \"%s\".  However, the following\n"
@@ -730,12 +765,12 @@ msgstr ""
 "មិន​អាច​រក​កញ្ចប់​ \"%s\" ឃើញ​ឡើយ ។ ទោះ​យ៉ាង​ណា\n"
 "កញ្ចប់​ខាង​ក្រោម​មាន \"%s\" នៅ​ក្នុង​ឈ្មោះ​របស់​ពួក​វា ៖\n"
 
-#: src/cmdline/cmdline_action.cc:604
+#: src/cmdline/cmdline_action.cc:633
 #, c-format
 msgid "Couldn't find any package whose name or description matched \"%s\"\n"
 msgstr "មិន​អាច​រកឃើញ​កញ្ចប់ ដែល​ឈ្មោះ ឬ សេចក្ដីពណ៌នា​របស់​វា​ដូច \"%s\"\n"
 
-#: src/cmdline/cmdline_action.cc:607
+#: src/cmdline/cmdline_action.cc:636
 #, fuzzy, c-format
 msgid ""
 "Couldn't find any package matching \"%s\", and more than %zu\n"
@@ -744,7 +779,7 @@ msgstr ""
 "មិន​អាច​រកឃើញ​កញ្ចប់​ដែល​ដូច \"%s\" ឡើយ ហើយ​មាន​កញ្ចប់\n"
 "ច្រើន​ជាង ៤០ មាន \"%s\" នៅ​ក្នុង​សេចក្ដី​ពណ៌នា​របស់​ពួកវា ។\n"
 
-#: src/cmdline/cmdline_action.cc:611
+#: src/cmdline/cmdline_action.cc:640
 #, c-format
 msgid ""
 "Couldn't find any package matching \"%s\".  However, the following\n"
@@ -753,7 +788,7 @@ msgstr ""
 "មិន​អាច​រក​កញ្ចប់​ដូច \"%s\" ឡើយ ។ ទោះ​យ៉ាង​ណា កញ្ចប់​ខាង​ក្រោម\n"
 "មាន \"%s\" នៅ​ក្នុង​ការ​ពិពណ៌នា​របស់​ពួក​វា ៖\n"
 
-#: src/cmdline/cmdline_action.cc:753
+#: src/cmdline/cmdline_action.cc:782
 #, c-format
 msgid "Bad action character '%c'\n"
 msgstr "តួអក្សរ​អំពើ '%c' មិន​ត្រឹមត្រូវ\n"

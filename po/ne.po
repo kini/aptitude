@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude_po_ne\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2015-10-16 00:02+0100\n"
+"POT-Creation-Date: 2015-10-16 00:29+0100\n"
 "PO-Revision-Date: 2012-06-03 12:27+0800\n"
 "Last-Translator: Nabin Gautam <nabin@mpp.org.np>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -694,18 +694,53 @@ msgstr "प्याकेज %s स्थापना भएन, एउटा �
 msgid "Package %s is not upgradable, cannot forbid an upgrade\n"
 msgstr "प्याकेज %s स्तरवृद्धियोग्य छैन, एउटा स्तरवृद्धि गर्न रोक्न सक्दैन\n"
 
-#: src/cmdline/cmdline_action.cc:436 src/cmdline/cmdline_action.cc:447
+#: src/cmdline/cmdline_action.cc:419
+#, fuzzy, c-format
+#| msgid "'=' to place packages on hold"
+msgid "Setting package %s on hold\n"
+msgstr "'=' समाउनेमा प्याकेजहरू राख्नुहोस्"
+
+#: src/cmdline/cmdline_action.cc:427
+#, fuzzy, c-format
+#| msgid "Updating package lists"
+msgid "Marking package %s as keep\n"
+msgstr "प्याकेज सूची अद्यावधिक गर्दै"
+
+#: src/cmdline/cmdline_action.cc:436
+#, c-format
+msgid "Setting package %s as not on hold\n"
+msgstr ""
+
+#: src/cmdline/cmdline_action.cc:442
+#, fuzzy, c-format
+#| msgid "Packages which depend on %s"
+msgid "Package %s is not on hold\n"
+msgstr "%s मा भर पर्ने प्याकेजहरू"
+
+#: src/cmdline/cmdline_action.cc:448
+#, fuzzy, c-format
+#| msgid "'&M' to mark packages as automatically installed"
+msgid "Marking package %s as automatically installed\n"
+msgstr "'&M' प्याकेजहरू म्यानुल्ली स्थापना भएकोमा चिनो गर्न"
+
+#: src/cmdline/cmdline_action.cc:456
+#, fuzzy, c-format
+#| msgid "'&M' to mark packages as automatically installed"
+msgid "Unmarking package %s as automatically installed\n"
+msgstr "'&M' प्याकेजहरू म्यानुल्ली स्थापना भएकोमा चिनो गर्न"
+
+#: src/cmdline/cmdline_action.cc:465 src/cmdline/cmdline_action.cc:476
 #, fuzzy, c-format
 #| msgid "Check for new versions of packages"
-msgid "Forbidding version %s of package %s\n"
+msgid "Marking version %s of package %s as forbidden\n"
 msgstr "प्याकेजहरुको नयाँ संस्करणका लागि जाँच गर्नुहोस्"
 
-#: src/cmdline/cmdline_action.cc:499
+#: src/cmdline/cmdline_action.cc:528
 #, c-format
 msgid "Note: selecting the task \"%s: %s\" for installation\n"
 msgstr "द्रष्टब्य: स्थापनाको लागि कार्य \"%s: %s\" चयन गरिदैछ\n"
 
-#: src/cmdline/cmdline_action.cc:529
+#: src/cmdline/cmdline_action.cc:558
 #, c-format
 msgid ""
 "You can only specify a package version with an 'install' command or a "
@@ -714,12 +749,12 @@ msgstr ""
 "तपाईँ एउटा 'स्थापना' आदेश वा 'निषेधित-संस्करण' आदेश संगै प्याकेज संस्करण मात्र निर्दिष्ट गर्न "
 "सक्नुहुन्छ ।\n"
 
-#: src/cmdline/cmdline_action.cc:538
+#: src/cmdline/cmdline_action.cc:567
 #, c-format
 msgid "You can only specify a package archive with an 'install' command.\n"
 msgstr "तपाईँ 'स्थापना' आदेश संगै प्याकेज संग्रह मात्र निर्दिष्ट गर्नुहोस् ।\n"
 
-#: src/cmdline/cmdline_action.cc:578
+#: src/cmdline/cmdline_action.cc:607
 #, fuzzy, c-format
 msgid ""
 "Couldn't find package \"%s\", and more than %zu\n"
@@ -728,7 +763,7 @@ msgstr ""
 "\"%s\" प्याकेज फेला पार्न सकिएन, र तिनीहरुको नाममा ४० प्याकेजहरू भन्दा\n"
 " बढी \"%s\" समविष्ट छ ।\n"
 
-#: src/cmdline/cmdline_action.cc:582
+#: src/cmdline/cmdline_action.cc:611
 #, c-format
 msgid ""
 "Couldn't find package \"%s\".  However, the following\n"
@@ -737,12 +772,12 @@ msgstr ""
 "\"%s\" प्याकेज फेला पार्न सकिएन । जे भए पनि, तिनीहरुको नाममा निम्न\n"
 " प्याकेजहरू \"%s\" समविष्ट छन् ।\n"
 
-#: src/cmdline/cmdline_action.cc:604
+#: src/cmdline/cmdline_action.cc:633
 #, c-format
 msgid "Couldn't find any package whose name or description matched \"%s\"\n"
 msgstr "नाम वा वर्णन मेल खाने कुनै प्याकेज फेला परेन \"%s\"\n"
 
-#: src/cmdline/cmdline_action.cc:607
+#: src/cmdline/cmdline_action.cc:636
 #, fuzzy, c-format
 msgid ""
 "Couldn't find any package matching \"%s\", and more than %zu\n"
@@ -751,7 +786,7 @@ msgstr ""
 "कुनै मेल खाने प्याकेज फेला परेन \"%s\", र तिनीहरुको वर्णनमा ४० भन्दा बढी \n"
 " प्याकेजहरू \"%s\" समविष्ट छन् ।\n"
 
-#: src/cmdline/cmdline_action.cc:611
+#: src/cmdline/cmdline_action.cc:640
 #, c-format
 msgid ""
 "Couldn't find any package matching \"%s\".  However, the following\n"
@@ -760,7 +795,7 @@ msgstr ""
 "\"%s\" संग मेल खाने कुनै प्याकेज फेला परेन । जे भए पनि, तिनीहरुको वर्णनमा\n"
 " निम्न प्याकेजहरू \"%s\" समाविष्ट हुन्छन्:\n"
 
-#: src/cmdline/cmdline_action.cc:753
+#: src/cmdline/cmdline_action.cc:782
 #, c-format
 msgid "Bad action character '%c'\n"
 msgstr "खराब कार्य क्यारेक्टर '%c'\n"

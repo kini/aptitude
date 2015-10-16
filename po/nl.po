@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2015-10-16 00:02+0100\n"
+"POT-Creation-Date: 2015-10-16 00:29+0100\n"
 "PO-Revision-Date: 2015-09-14 17:38+0200\n"
 "Last-Translator: Frans Spiesschaert <Frans.Spiesschaert@yucom.be>\n"
 "Language-Team: Debian Dutch l10n Team <debian-l10n-dutch@lists.debian.org>\n"
@@ -838,18 +838,53 @@ msgstr ""
 "Pakket %s kan niet opgewaardeerd worden, kan een opwaardering niet "
 "verbieden\n"
 
-#: src/cmdline/cmdline_action.cc:436 src/cmdline/cmdline_action.cc:447
+#: src/cmdline/cmdline_action.cc:419
+#, fuzzy, c-format
+#| msgid "'=' to place packages on hold"
+msgid "Setting package %s on hold\n"
+msgstr "'=' om pakketten vast te houden"
+
+#: src/cmdline/cmdline_action.cc:427
+#, fuzzy, c-format
+#| msgid "Updating package lists"
+msgid "Marking package %s as keep\n"
+msgstr "Bijwerken van pakketlijsten"
+
+#: src/cmdline/cmdline_action.cc:436
+#, c-format
+msgid "Setting package %s as not on hold\n"
+msgstr ""
+
+#: src/cmdline/cmdline_action.cc:442
+#, fuzzy, c-format
+#| msgid "Packages which depend on %s"
+msgid "Package %s is not on hold\n"
+msgstr "Pakketten die afhangen van %s"
+
+#: src/cmdline/cmdline_action.cc:448
+#, fuzzy, c-format
+#| msgid "'&M' to mark packages as automatically installed"
+msgid "Marking package %s as automatically installed\n"
+msgstr " '&M' om pakketten als automatisch geïnstalleerd te markeren"
+
+#: src/cmdline/cmdline_action.cc:456
+#, fuzzy, c-format
+#| msgid "'&M' to mark packages as automatically installed"
+msgid "Unmarking package %s as automatically installed\n"
+msgstr " '&M' om pakketten als automatisch geïnstalleerd te markeren"
+
+#: src/cmdline/cmdline_action.cc:465 src/cmdline/cmdline_action.cc:476
 #, fuzzy, c-format
 #| msgid "Check for new versions of packages"
-msgid "Forbidding version %s of package %s\n"
+msgid "Marking version %s of package %s as forbidden\n"
 msgstr "Controleer op nieuwe versies van pakketten"
 
-#: src/cmdline/cmdline_action.cc:499
+#: src/cmdline/cmdline_action.cc:528
 #, c-format
 msgid "Note: selecting the task \"%s: %s\" for installation\n"
 msgstr "Opmerking: de taak \"%s: %s\" wordt geselecteerd voor installatie\n"
 
-#: src/cmdline/cmdline_action.cc:529
+#: src/cmdline/cmdline_action.cc:558
 #, c-format
 msgid ""
 "You can only specify a package version with an 'install' command or a "
@@ -858,13 +893,13 @@ msgstr ""
 "U kunt enkel een pakketversie aangeven bij een opdracht 'installeren' of een "
 "opdracht 'verbied versie'.\n"
 
-#: src/cmdline/cmdline_action.cc:538
+#: src/cmdline/cmdline_action.cc:567
 #, c-format
 msgid "You can only specify a package archive with an 'install' command.\n"
 msgstr ""
 "U kunt enkel een pakketarchief aangeven bij een opdracht 'installeren'.\n"
 
-#: src/cmdline/cmdline_action.cc:578
+#: src/cmdline/cmdline_action.cc:607
 #, c-format
 msgid ""
 "Couldn't find package \"%s\", and more than %zu\n"
@@ -873,7 +908,7 @@ msgstr ""
 "Kon pakket \"%s\" niet vinden en meer dan %zu\n"
 "pakketten hebben \"%s\" in hun naam.\n"
 
-#: src/cmdline/cmdline_action.cc:582
+#: src/cmdline/cmdline_action.cc:611
 #, c-format
 msgid ""
 "Couldn't find package \"%s\".  However, the following\n"
@@ -882,14 +917,14 @@ msgstr ""
 "Kon pakket \"%s\" niet vinden. Wel hebben de volgende\n"
 "pakketten \"%s\" in hun naam:\n"
 
-#: src/cmdline/cmdline_action.cc:604
+#: src/cmdline/cmdline_action.cc:633
 #, c-format
 msgid "Couldn't find any package whose name or description matched \"%s\"\n"
 msgstr ""
 "Geen enkel pakket gevonden waarvan de naam of de beschrijving overeenkomen "
 "met \"%s\"\n"
 
-#: src/cmdline/cmdline_action.cc:607
+#: src/cmdline/cmdline_action.cc:636
 #, c-format
 msgid ""
 "Couldn't find any package matching \"%s\", and more than %zu\n"
@@ -898,7 +933,7 @@ msgstr ""
 "Geen enkel pakket gevonden dat overeenkomt met \"%s\" en meer dan %zu\n"
 "pakketten hebben \"%s\" in hun beschrijving.\n"
 
-#: src/cmdline/cmdline_action.cc:611
+#: src/cmdline/cmdline_action.cc:640
 #, c-format
 msgid ""
 "Couldn't find any package matching \"%s\".  However, the following\n"
@@ -907,7 +942,7 @@ msgstr ""
 "Geen enkel pakket gevonden dat overeenkomt met \"%s\". Wel hebben de\n"
 "volgende pakketten \"%s\" in hun beschrijving:\n"
 
-#: src/cmdline/cmdline_action.cc:753
+#: src/cmdline/cmdline_action.cc:782
 #, c-format
 msgid "Bad action character '%c'\n"
 msgstr "Slecht actieteken '%c'\n"

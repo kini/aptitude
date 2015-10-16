@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2015-10-16 00:02+0100\n"
+"POT-Creation-Date: 2015-10-16 00:29+0100\n"
 "PO-Revision-Date: 2012-06-03 12:23+0800\n"
 "Last-Translator: quad-nrg.net <yodesy@quad-nrg.net>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -825,18 +825,53 @@ msgid "Package %s is not upgradable, cannot forbid an upgrade\n"
 msgstr ""
 "Το πακέτο %s δεν είναι αναβαθμίσιμο, δεν μπορεί να απαγορευτεί αναβάθμιση\n"
 
-#: src/cmdline/cmdline_action.cc:436 src/cmdline/cmdline_action.cc:447
+#: src/cmdline/cmdline_action.cc:419
+#, fuzzy, c-format
+#| msgid "'=' to place packages on hold"
+msgid "Setting package %s on hold\n"
+msgstr "'=' διατήρηση των πακέτων σε αναμονή"
+
+#: src/cmdline/cmdline_action.cc:427
+#, fuzzy, c-format
+#| msgid "Updating package lists"
+msgid "Marking package %s as keep\n"
+msgstr "Ανανέωση της λίστας πακέτων"
+
+#: src/cmdline/cmdline_action.cc:436
+#, c-format
+msgid "Setting package %s as not on hold\n"
+msgstr ""
+
+#: src/cmdline/cmdline_action.cc:442
+#, fuzzy, c-format
+#| msgid "Packages which depend on %s"
+msgid "Package %s is not on hold\n"
+msgstr "Πακέτα που εξαρτώνται από το %s"
+
+#: src/cmdline/cmdline_action.cc:448
+#, fuzzy, c-format
+#| msgid "'&M' to mark packages as automatically installed"
+msgid "Marking package %s as automatically installed\n"
+msgstr "'&M' επισήμανση πακέτων σαν αυτόματα εγκατεστημμένων"
+
+#: src/cmdline/cmdline_action.cc:456
+#, fuzzy, c-format
+#| msgid "'&M' to mark packages as automatically installed"
+msgid "Unmarking package %s as automatically installed\n"
+msgstr "'&M' επισήμανση πακέτων σαν αυτόματα εγκατεστημμένων"
+
+#: src/cmdline/cmdline_action.cc:465 src/cmdline/cmdline_action.cc:476
 #, fuzzy, c-format
 #| msgid "Check for new versions of packages"
-msgid "Forbidding version %s of package %s\n"
+msgid "Marking version %s of package %s as forbidden\n"
 msgstr "Έλεγχος για νέες εκδόσεις πακέτων"
 
-#: src/cmdline/cmdline_action.cc:499
+#: src/cmdline/cmdline_action.cc:528
 #, c-format
 msgid "Note: selecting the task \"%s: %s\" for installation\n"
 msgstr "Σημείωση: επιλέχθηκε ο σκοπός \"%s: %s\" για εγκατάσταση\n"
 
-#: src/cmdline/cmdline_action.cc:529
+#: src/cmdline/cmdline_action.cc:558
 #, c-format
 msgid ""
 "You can only specify a package version with an 'install' command or a "
@@ -845,14 +880,14 @@ msgstr ""
 "Μπορείτε να προσδιορίσετε την έκδοση ενός πακέτου μόνο με μια εντολή "
 "'install' ή μια εντολή 'forbid-version'.\n"
 
-#: src/cmdline/cmdline_action.cc:538
+#: src/cmdline/cmdline_action.cc:567
 #, c-format
 msgid "You can only specify a package archive with an 'install' command.\n"
 msgstr ""
 "Δεν μπορείτε να καθορίσετε όνομα αρχείου πακέτου με την εντολή "
 "εγκατάστασης.\n"
 
-#: src/cmdline/cmdline_action.cc:578
+#: src/cmdline/cmdline_action.cc:607
 #, fuzzy, c-format
 msgid ""
 "Couldn't find package \"%s\", and more than %zu\n"
@@ -861,7 +896,7 @@ msgstr ""
 "Δεν βρέθηκε το πακέτο \"%s\", και περισσότερα από 40\n"
 "πακέτα περιέχουν το \"%s\" στο όνομά τους.\n"
 
-#: src/cmdline/cmdline_action.cc:582
+#: src/cmdline/cmdline_action.cc:611
 #, c-format
 msgid ""
 "Couldn't find package \"%s\".  However, the following\n"
@@ -870,12 +905,12 @@ msgstr ""
 "Δεν βρέθηκε το πακέτο \"%s\".  Πάραυτα τα ακόλουθα\n"
 "πακέτα περιέχουν \"%s\" στο όνομά τους:\n"
 
-#: src/cmdline/cmdline_action.cc:604
+#: src/cmdline/cmdline_action.cc:633
 #, c-format
 msgid "Couldn't find any package whose name or description matched \"%s\"\n"
 msgstr "Δεν βρέθηκε πακέτο με όνομα ή περιγραφή που να ταιριάζει στο \"%s\"\n"
 
-#: src/cmdline/cmdline_action.cc:607
+#: src/cmdline/cmdline_action.cc:636
 #, fuzzy, c-format
 msgid ""
 "Couldn't find any package matching \"%s\", and more than %zu\n"
@@ -884,7 +919,7 @@ msgstr ""
 "Δεν βρέθηκε πακέτο να ταιριάζει στο \"%s\", και περισσότερα από 40\n"
 "πακέτα περιέχουν το \"%s\" στην περιγραφή τους.\n"
 
-#: src/cmdline/cmdline_action.cc:611
+#: src/cmdline/cmdline_action.cc:640
 #, c-format
 msgid ""
 "Couldn't find any package matching \"%s\".  However, the following\n"
@@ -893,7 +928,7 @@ msgstr ""
 "Δεν βρέθηκε πακέτο να ταιριάζει στο \"%s\".  Πάραυτα, τα ακόλουθα\n"
 "πακέτα περιέχουν το \"%s\" στην περιγραφή τους:\n"
 
-#: src/cmdline/cmdline_action.cc:753
+#: src/cmdline/cmdline_action.cc:782
 #, c-format
 msgid "Bad action character '%c'\n"
 msgstr "Κακός χαρακτήρας ενέργειας '%c'\n"

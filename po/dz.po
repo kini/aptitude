@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2015-10-16 00:02+0100\n"
+"POT-Creation-Date: 2015-10-16 00:29+0100\n"
 "PO-Revision-Date: 2012-06-03 13:17+0800\n"
 "Last-Translator: Tshewang Norbu <bumthap2006@hotmail.com>\n"
 "Language-Team: Dzongkha <pgeyleg@dit.gov.bt>\n"
@@ -696,18 +696,53 @@ msgstr "ཐུམ་སྒྲིལ་ %s དེ་གཞི་བཙུགས�
 msgid "Package %s is not upgradable, cannot forbid an upgrade\n"
 msgstr "ཐུམ་སྒྲིལ་ %s དེ་ཡར་བསྐྱེད་མ་འབད་བར་ཡོདཔ་ལས་ ཡར་བསྐྱེད་དེ་བཀག་དམ་འབད་མི་ཚུགས། \n"
 
-#: src/cmdline/cmdline_action.cc:436 src/cmdline/cmdline_action.cc:447
+#: src/cmdline/cmdline_action.cc:419
+#, fuzzy, c-format
+#| msgid "'=' to place packages on hold"
+msgid "Setting package %s on hold\n"
+msgstr "ཐུམ་སྒྲིལ་ཚུ་འཆང་ནིའི་གུར་ཞབག་ནིའི་དོན་ལུ་ '='"
+
+#: src/cmdline/cmdline_action.cc:427
+#, fuzzy, c-format
+#| msgid "Updating package lists"
+msgid "Marking package %s as keep\n"
+msgstr "ཐུམ་སྒྲིལ་གྱི་ཐོ་ཡིག་ཚུ་དུས་མཐུན་བཟོ་དོ།"
+
+#: src/cmdline/cmdline_action.cc:436
+#, c-format
+msgid "Setting package %s as not on hold\n"
+msgstr ""
+
+#: src/cmdline/cmdline_action.cc:442
+#, fuzzy, c-format
+#| msgid "Packages which depend on %s"
+msgid "Package %s is not on hold\n"
+msgstr "%sདེ་ལུ་བརྟེན་མི་ཐུམ་སྒྲིལ་ཚུ།"
+
+#: src/cmdline/cmdline_action.cc:448
+#, fuzzy, c-format
+#| msgid "'&M' to mark packages as automatically installed"
+msgid "Marking package %s as automatically installed\n"
+msgstr "རང་བཞིན་གྱིས་གཞི་བཙུགས་འབད་དེ་ཡོདཔ་བཟུམ་སྦེ་རྟགས་བཀལ་ནིའི་དོན་ལུ་ '&M'"
+
+#: src/cmdline/cmdline_action.cc:456
+#, fuzzy, c-format
+#| msgid "'&M' to mark packages as automatically installed"
+msgid "Unmarking package %s as automatically installed\n"
+msgstr "རང་བཞིན་གྱིས་གཞི་བཙུགས་འབད་དེ་ཡོདཔ་བཟུམ་སྦེ་རྟགས་བཀལ་ནིའི་དོན་ལུ་ '&M'"
+
+#: src/cmdline/cmdline_action.cc:465 src/cmdline/cmdline_action.cc:476
 #, fuzzy, c-format
 #| msgid "Check for new versions of packages"
-msgid "Forbidding version %s of package %s\n"
+msgid "Marking version %s of package %s as forbidden\n"
 msgstr "ཐུམ་སྒྲིལ་ཚུ་གི་ཐོན་རིམ་གསརཔ་ཚུ་གི་དོན་ལུ་ཞིབ་དཔྱད་འབད།"
 
-#: src/cmdline/cmdline_action.cc:499
+#: src/cmdline/cmdline_action.cc:528
 #, c-format
 msgid "Note: selecting the task \"%s: %s\" for installation\n"
 msgstr "དྲན་འཛིན: གཞིི་བཙུགས་ཀྱི་དོན་ལུ་ ལཱ་གཡོག ་\"%s: %s\" དེ་སེལ་འཐུ་འབད་དོ། \n"
 
-#: src/cmdline/cmdline_action.cc:529
+#: src/cmdline/cmdline_action.cc:558
 #, c-format
 msgid ""
 "You can only specify a package version with an 'install' command or a "
@@ -716,13 +751,13 @@ msgstr ""
 "ཁྱོད་ཀྱིས་ཐུམ་སྒྲིལ་ཐོན་རིམ་དེ་ 'install' བརྡ་བཀོད་ཡང་ན་ 'forbid-version' བརྡ་བཀོད་དང་གཅིག་"
 "ཁར་རྐྱངམ་ཅིག་གསལ་བཀོཀད་འབད་ཚུགས། \n"
 
-#: src/cmdline/cmdline_action.cc:538
+#: src/cmdline/cmdline_action.cc:567
 #, c-format
 msgid "You can only specify a package archive with an 'install' command.\n"
 msgstr ""
 "ཁྱོད་ཀྱིས་ ཐུམ་སྒྲིལ་ཡིག་མཛོད་དེ་ 'install' བརྡ་བཀོད་དང་གཅིག་ཁར་རྐྱངམ་ཅིག་གསལ་བཀོད་འབད་ཚུགས། \n"
 
-#: src/cmdline/cmdline_action.cc:578
+#: src/cmdline/cmdline_action.cc:607
 #, fuzzy, c-format
 msgid ""
 "Couldn't find package \"%s\", and more than %zu\n"
@@ -731,7 +766,7 @@ msgstr ""
 "ཐུམ་སྒྲིལ་ \"%s\",དེ་ཐོབ་མ་ཚུགས། ༤༠་ལས་ལྷག་པའི་ \n"
 "ཐུམ་སྒྲིལ་ཚུ་གི་མིང་ནང་ལུ་ \"%s\" དེ་ཡོདཔ་ཨིན། \n"
 
-#: src/cmdline/cmdline_action.cc:582
+#: src/cmdline/cmdline_action.cc:611
 #, c-format
 msgid ""
 "Couldn't find package \"%s\".  However, the following\n"
@@ -740,12 +775,12 @@ msgstr ""
 "ཐུམ་སྒྲིལ་་\"%s\" དེ་ཐོབ་མ་ཚུགས། ཨིན་རུང་ འོག་གི་\n"
 "ཐུམ་སྒྲིལ་ཚུ་གི་མིང་ནང་ལུ་ \"%s\"དེ་ཡོདཔ་ཨིན:\n"
 
-#: src/cmdline/cmdline_action.cc:604
+#: src/cmdline/cmdline_action.cc:633
 #, c-format
 msgid "Couldn't find any package whose name or description matched \"%s\"\n"
 msgstr "ཐུམ་སྒྲིལ་གྱི་མིིང་ཡང་ན་ འགྲེལ་བཤད་ཀྱིས་ \"%s\" དང་མཐུན་སྒྲིག་ཡོད་མི་ག་ཡང་མ་ཐོབ། \n"
 
-#: src/cmdline/cmdline_action.cc:607
+#: src/cmdline/cmdline_action.cc:636
 #, fuzzy, c-format
 msgid ""
 "Couldn't find any package matching \"%s\", and more than %zu\n"
@@ -754,7 +789,7 @@ msgstr ""
 "\"%s\"དང་མཐུན་སྒྲིག་ཡོད་མི་ཐུམ་སྒྲིལ་ག་ཡང་མ་ཐོབ། ཐུམ་སྒྲིལ་༤༠་ལས་ལྷག་ཙམ་ཅིག་གི་\n"
 "འགྲེལ་བཤད་ནང་ལུ་\"%s\"་དེ་ཡོདཔ་ཨིན། \n"
 
-#: src/cmdline/cmdline_action.cc:611
+#: src/cmdline/cmdline_action.cc:640
 #, c-format
 msgid ""
 "Couldn't find any package matching \"%s\".  However, the following\n"
@@ -763,7 +798,7 @@ msgstr ""
 "\"%s\"དང་མཐུན་སྒྲིག་ཡོད་མི་ཐུམ་སྒྲིལ་ཅིག་ཡང་མ་ཐོབ། ཨིན་རུང་ འོག་གི་ \n"
 "ཐུམ་སྒྲིག་ཚུ་གི་འགྲེལ་བཤད་ཚུ་ནང་ལུ་ \"%s\" ཡོདཔ་ཨིན:\n"
 
-#: src/cmdline/cmdline_action.cc:753
+#: src/cmdline/cmdline_action.cc:782
 #, c-format
 msgid "Bad action character '%c'\n"
 msgstr "ཡིག་འབྲུའིི་བྱ་བ་བྱང་ཉེས།'%c'\n"
