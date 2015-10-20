@@ -28,8 +28,6 @@
 
 #include <iostream>
 
-#include <boost/unordered_map.hpp>
-
 #include <generic/util/compare3.h>
 #include <generic/util/immset.h>
 #include <generic/util/maybe.h>
