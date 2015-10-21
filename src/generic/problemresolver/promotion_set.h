@@ -489,8 +489,7 @@ private:
     static void do_drop(std::vector<entry_ref> &entries,
 			const entry_ref &victim)
     {
-      typename std::vector<entry_ref>::iterator new_end =
-	std::remove(entries.begin(), entries.end(), victim);
+      auto new_end = std::remove(entries.begin(), entries.end(), victim);
       entries.erase(new_end, entries.end());
     }
 
@@ -517,16 +516,14 @@ private:
 		if(!c.get_from_dep_source())
 		  {
 		    do_drop(index_entry->not_from_dep_source_entries, victim);
-		    for(typename boost::unordered_map<dep, std::vector<entry_ref> >::iterator
-			  it = index_entry->from_dep_source_entries.begin();
+		    for(auto it = index_entry->from_dep_source_entries.begin();
 			it != index_entry->from_dep_source_entries.end();
 			++it)
 		      do_drop(it->second, victim);
 		  }
 		else
 		  {
-		    const typename boost::unordered_map<dep, std::vector<entry_ref> >::iterator
-		      found = index_entry->from_dep_source_entries.find(c.get_dep());
+		    const auto found = index_entry->from_dep_source_entries.find(c.get_dep());
 		    if(found != index_entry->from_dep_source_entries.end())
 		      do_drop(found->second, victim);
 		  }
@@ -536,8 +533,7 @@ private:
 
 	case choice::break_soft_dep:
 	  {
-	    const typename boost::unordered_map<dep, break_soft_dep_index_entry>::iterator
-	      found = break_soft_dep_index.find(c.get_dep());
+	    const auto found = break_soft_dep_index.find(c.get_dep());
 	    if(found != break_soft_dep_index.end())
 	      do_drop(found->second, victim);
 	  }
@@ -681,8 +677,7 @@ private:
 		}
 	      else
 		{
-		  typename boost::unordered_map<dep, std::vector<entry_ref> >::const_iterator found =
-		    index_entry->from_dep_source_entries.find(c.get_dep());
+		  auto found = index_entry->from_dep_source_entries.find(c.get_dep());
 
 		  if(found != index_entry->from_dep_source_entries.end())
 		    {
@@ -715,8 +710,7 @@ private:
 
       case choice::break_soft_dep:
 	{
-	  typename boost::unordered_map<dep, break_soft_dep_index_entry>::const_iterator found =
-	    break_soft_dep_index.find(c.get_dep());
+	  const auto found = break_soft_dep_index.find(c.get_dep());
 	  if(found == break_soft_dep_index.end())
 	    {
 	      LOG_TRACE(logger, "find_index_list(" << c
@@ -832,8 +826,7 @@ private:
 	}
       else
 	{
-	  for(typename std::vector<entry_ref>::const_iterator it = entries->begin();
-	      it != entries->end(); ++it)
+	  for(auto it = entries->cbegin(); it != entries->cend(); ++it)
 	    if(!op(*it))
 	      return false;
 
@@ -1102,11 +1095,7 @@ public:
     {
       if(!output_domain.for_each_key_contained_in(c, not_f<T>()))
 	{
-	  typedef typename boost::unordered_map<choice, promotion>::iterator
-	    out_iterator;
-
-	  std::pair<out_iterator, out_iterator> found =
-	    output.equal_range(c);
+	  auto found = output.equal_range(c);
 
 	  if(found.first == found.second)
 	    output.insert(found.first, std::make_pair(c, p));
@@ -1206,9 +1195,7 @@ public:
 
       if(entries != NULL)
 	{
-	  for(typename std::vector<entry_ref>::const_iterator
-		it = entries->begin();
-	      it != entries->end(); ++it)
+	  for(auto it = entries->cbegin(); it != entries->cend(); ++it)
 	    {
 	      const promotion &p((*it)->p);
 
@@ -1219,9 +1206,7 @@ public:
 		  // c, or else it wouldn't be indexed under c.
 		  eassert(p.get_choices().get_containing_choice(c, p_c));
 
-		  typedef typename boost::unordered_map<choice, promotion>::iterator out_iterator;
-		  std::pair<out_iterator, out_iterator> found =
-		    output.equal_range(p_c);
+		  auto found = output.equal_range(p_c);
 
 		  if(found.first == found.second)
 		    output.insert(found.first, std::make_pair(p_c, p));
@@ -1394,8 +1379,7 @@ private:
 	{
 	case choice::install_version:
 	  {
-	    typename boost::unordered_map<version, choice>::const_iterator found =
-	      choices_by_install_version.find(c.get_ver());
+	    const auto found = choices_by_install_version.find(c.get_ver());
 
 	    bool ok = false;
 	    if(found == choices_by_install_version.end())
@@ -1427,8 +1411,7 @@ private:
 
 	case choice::break_soft_dep:
 	  {
-	    typename boost::unordered_set<dep>::const_iterator found =
-	      broken_soft_deps.find(c.get_dep());
+	    const auto found = broken_soft_deps.find(c.get_dep());
 
 	    if(found == broken_soft_deps.end())
 	      {
@@ -1493,8 +1476,7 @@ public:
 	LOG_TRACE(logger, "find_highest_promotion_containing: Matching indexed entries for " << c << " to the local index.");
 
 	promotion rval;
-	for(typename std::vector<entry_ref>::const_iterator it = index_entries->begin();
-	    it != index_entries->end(); ++it)
+	for(auto it = index_entries->cbegin(); it != index_entries->cend(); ++it)
 	  {
 	    bool contains_match = false;
 	    int num_mismatches = 0;
@@ -1592,8 +1574,7 @@ public:
 
 	LOG_TRACE(logger, "find_highest_incipient_promotion_containing: Matching indexed entries for " << c << " to the local index.");
 
-	for(typename std::vector<entry_ref>::const_iterator it = index_entries->begin();
-	    it != index_entries->end(); ++it)
+	for(auto it = index_entries->cbegin(); it != index_entries->cend(); ++it)
 	  {
 	    const promotion &p((*it)->p);
 
@@ -1724,8 +1705,7 @@ private:
 			       boost::unordered_set<dep> &broken_soft_deps,
 			       const logging::LoggerPtr &logger)
   {
-    for(typename std::list<entry>::const_iterator it = cost_entries.begin();
-	it != cost_entries.end(); ++it)
+    for(auto it = cost_entries.cbegin(); it != cost_entries.cend(); ++it)
       collect_indexers(*it, installed_versions, broken_soft_deps, logger);
   }
 
@@ -1739,13 +1719,12 @@ private:
   {
     if(logger->isEnabledFor(logging::TRACE_LEVEL))
       {
-	for(typename std::vector<entry_ref>::const_iterator it =
-	      entries.begin(); it != entries.end(); ++it)
+	for(auto it = entries.cbegin(); it != entries.cend(); ++it)
 	  if(pred(*it))
 	    LOG_TRACE(logger, "  Removing " << (*it)->p);
       }
 
-    typename std::vector<entry_ref>::iterator new_end = std::remove_if(entries.begin(), entries.end(), pred);
+    auto new_end = std::remove_if(entries.begin(), entries.end(), pred);
     entries.erase(new_end, entries.end());
   }
 
@@ -1761,8 +1740,7 @@ private:
   void drop_install_version_index_entries(const boost::unordered_set<version> &installed_versions,
 					  const Pred &pred)
   {
-    for(typename boost::unordered_set<version>::const_iterator it = installed_versions.begin();
-	it != installed_versions.end(); ++it)
+    for(auto it = installed_versions.cbegin(); it != installed_versions.cend(); ++it)
       {
 	install_version_index_entry *index_entry(install_version_index[it->get_id()]);
 
@@ -1772,11 +1750,8 @@ private:
 	    erase_vector_entries(index_entry->not_from_dep_source_entries,
 				 logger, pred);
 	    bool from_dep_source_map_empty = true;
-	    for(typename boost::unordered_map<dep, std::vector<entry_ref> >::iterator
-		  from_dep_source_it
-		  = index_entry->from_dep_source_entries.begin();
-		from_dep_source_it !=
-		  index_entry->from_dep_source_entries.end();
+	    for(auto from_dep_source_it = index_entry->from_dep_source_entries.begin();
+		from_dep_source_it != index_entry->from_dep_source_entries.end();
 		++from_dep_source_it)
 	      {
 		erase_vector_entries(from_dep_source_it->second, logger, pred);
@@ -1802,11 +1777,9 @@ private:
   void drop_broken_soft_dep_index_entries(const boost::unordered_set<dep> &broken_soft_deps,
 					  const Pred &pred)
   {
-    for(typename boost::unordered_set<dep>::iterator it = broken_soft_deps.begin();
-	it != broken_soft_deps.end(); ++it)
+    for(auto it = broken_soft_deps.begin(); it != broken_soft_deps.end(); ++it)
       {
-	typename boost::unordered_map<dep, break_soft_dep_index_entry>::iterator
-	  found = break_soft_dep_index.find(*it);
+	auto found = break_soft_dep_index.find(*it);
 
 	if(found == break_soft_dep_index.end())
 	  // Indicates an inconsistency in the book-keeping.
@@ -1874,8 +1847,7 @@ private:
 	      {
 		LOG_TRACE(logger, "Inserting " << c << " into the not-from-dep-source-list.");
 		index_entry->not_from_dep_source_entries.push_back(new_entry);
-		for(typename boost::unordered_map<dep, std::vector<entry_ref> >::iterator
-		      from_dep_source_it = index_entry->from_dep_source_entries.begin();
+		for(auto from_dep_source_it = index_entry->from_dep_source_entries.begin();
 		    from_dep_source_it != index_entry->from_dep_source_entries.end();
 		    ++from_dep_source_it)
 		  {
@@ -1885,8 +1857,7 @@ private:
 	      }
 	    else
 	      {
-		typename boost::unordered_map<dep, std::vector<entry_ref> >::iterator found =
-		  index_entry->from_dep_source_entries.find(c.get_dep());
+		auto found = index_entry->from_dep_source_entries.find(c.get_dep());
 
 		if(found == index_entry->from_dep_source_entries.end())
 		  {
@@ -1913,8 +1884,7 @@ private:
 	    // We could just do a straightforward insertion, but doing
 	    // things this way lets us provide better debug traces
 	    // (more info about when memory is being allocated).
-	    typename boost::unordered_map<dep, break_soft_dep_index_entry>::iterator found =
-	      break_soft_dep_index.find(d);
+	    auto found = break_soft_dep_index.find(d);
 
 	    if(found == break_soft_dep_index.end())
 	      {
@@ -1997,8 +1967,7 @@ public:
 	  boost::unordered_set<version> installed_versions;
 	  boost::unordered_set<dep> broken_soft_deps;
 
-	  for(typename std::vector<entry_ref>::const_iterator it = superseded_entries.begin();
-	      it != superseded_entries.end(); ++it)
+	  for(auto it = superseded_entries.cbegin(); it != superseded_entries.cend(); ++it)
 	    collect_indexers(**it, installed_versions, broken_soft_deps, logger);
 
 	  LOG_TRACE(logger, "Removing index entries associated with the superseded entries.");
@@ -2009,8 +1978,7 @@ public:
 	  // stable as long as we don't modify the lists that contain
 	  // them.
 	  boost::unordered_set<const entry *> superseded_entries_set;
-	  for(typename std::vector<entry_ref>::const_iterator it = superseded_entries.begin();
-	      it != superseded_entries.end(); ++it)
+	  for(auto it = superseded_entries.cbegin(); it != superseded_entries.cend(); ++it)
 	    superseded_entries_set.insert(&**it);
 	  entry_ref_in_dropped_set_pred dropped_f(superseded_entries_set);
 	  drop_install_version_index_entries(installed_versions,
@@ -2020,8 +1988,7 @@ public:
 	}
 
 	LOG_TRACE(logger, "Removing the superseded entries themselves.");
-	for(typename std::vector<entry_ref>::const_iterator it = superseded_entries.begin();
-	    it != superseded_entries.end(); ++it)
+	for(auto it = superseded_entries.cbegin(); it != superseded_entries.cend(); ++it)
 	  {
 	    entry_ref ent(*it);
 	    LOG_TRACE(logger, "Removing " << ent->p);
@@ -2087,8 +2054,7 @@ template<typename PackageUniverse>
 std::ostream &operator<<(std::ostream &out, const generic_promotion_set<PackageUniverse> &s)
 {
   out << "{";
-  for(typename generic_promotion_set<PackageUniverse>::const_iterator it =
-	s.begin(); it != s.end(); ++it)
+  for(auto it = s.cbegin(); it != s.cend(); ++it)
     {
       if(it != s.begin())
 	out << ", ";
