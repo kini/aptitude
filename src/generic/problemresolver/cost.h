@@ -24,10 +24,12 @@
 
 #include <generic/util/compare3.h>
 
+#include <boost/flyweight.hpp>
+
 #include <iosfwd>
 #include <stdexcept>
 
-#include <boost/flyweight.hpp>
+
 /** \brief Represents the value of a single component of a solution's
  *  cost.
  *
