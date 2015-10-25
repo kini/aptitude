@@ -119,7 +119,7 @@ namespace
 			for(pkgCache::VerIterator ver = pkg.VersionList();
 			    !ver.end(); ++ver)
 			  {
-			    if(!_system->VS->CheckDep(ver.VerStr(), it->Op, it->Version.c_str()))
+			    if(!_system->VS->CheckDep(ver.VerStr(), it2->Op, it2->Version.c_str()))
 			      continue;
 
 			    for(pkgCache::VerFileIterator vf = ver.FileList();
@@ -203,7 +203,7 @@ namespace
 		if((it2->Op & ~pkgCache::Dep::Or) != pkgCache::Dep::NoOp)
 		  {
 		    build_dep_description += " (";
-		    build_dep_description += pkgCache::CompType(it2->Type);
+		    build_dep_description += pkgCache::CompType(it2->Op);
 		    build_dep_description += " ";
 		    build_dep_description += it2->Version;
 		    build_dep_description += ")";

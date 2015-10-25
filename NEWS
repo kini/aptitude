@@ -6,6 +6,20 @@ Version 0.7.5 UNRELEASED
   * [cmdline] Print version of provider of virtual package in conflicts/broken
     (Closes: #802943)
 
+  * [cmdline] Fix problems in 'build-depends' causing malfunctions
+    (Closes: #802532)
+
+    - Fix problem in which alternative dependencies of uninstalled packages were
+      not resolved and satisfied properly, causing "Unable to satisfy
+      dependencies", when they were actually installable.  Due to a
+      mistake/typo, the possible packages were always compared against versions
+      of one of the alternatives (the last one), instead of comparing the proper
+      package-version of each alternative.
+
+    - Messages about build-depends conflicts (unable to satisfy dependencies)
+      now show version comparison operators.  There was a mistake in the
+      variable to print (dependency type rather than operator).
+
 
 [2015-10-16]
 Version 0.7.4
