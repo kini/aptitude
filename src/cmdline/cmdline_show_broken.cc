@@ -123,12 +123,15 @@ void show_broken_deps(const pkgCache::PkgIterator& pkg)
 		      for (pkgCache::PrvIterator prv = target.ProvidesList(); !prv.end(); ++prv)
 			{
 			  pkgCache::PkgIterator prv_pkg = prv.OwnerPkg();
-			  if (!prv_pkg.end())
+			  pkgCache::VerIterator prv_ver = prv.OwnerVer();
+			  if (!prv_pkg.end() && !prv_ver.end())
 			    {
+			      std::string prv_ver_str = prv_ver.VerStr() ? (string(" (") + prv_ver.VerStr() + ")") : "";
 			      for (size_t i = 0; i < (indent + indent_dep); ++i)
 				printf(" ");
-			      printf(" - %s, ", prv_pkg.FullName(true).c_str());
+			      printf(" - %s%s, ", prv_pkg.FullName(true).c_str(), prv_ver_str.c_str());
 			      print_installation_explanation(prv_pkg);
+			      printf("\n");
 			    }
 			}
 		    }
