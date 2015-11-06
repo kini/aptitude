@@ -189,7 +189,8 @@ static void usage()
   printf("\n");
   printf(_("       aptitude [options] <action> ..."));
   printf("\n");
-  printf(_("  Actions (if none is specified, aptitude will enter interactive mode):\n\n"));
+  printf("\n");
+  printf(_("Actions (if none is specified, aptitude will enter interactive mode):\n\n"));
   printf(_(" install      - Install/upgrade packages.\n"));
   printf(_(" remove       - Remove packages.\n"));
   printf(_(" purge        - Remove packages and their configuration files.\n"));
@@ -217,7 +218,7 @@ static void usage()
            "                with the given package, or why one or more packages would\n"
            "                lead to a conflict with the given package if installed.\n"));
   printf("\n");
-  printf(_("  Options:\n"));
+  printf(_("Options:\n"));
   printf(_(" -h             This help text.\n"));
 #ifdef HAVE_GTK
   printf(_(" --gui          Use the GTK GUI even if disabled in the configuration.\n"));
@@ -250,6 +251,8 @@ static void usage()
   printf(_("                  (terminal interface only)\n"));
   printf(_(" -i             Perform an install run on startup.\n"));
   printf(_("                  (terminal interface only)\n"));
+  printf("\n");
+  printf(_(" See the manual page for a complete list and description of all the options.\n"));
   printf("\n");
   printf(_("                  This aptitude does not have Super Cow Powers.\n"));
 }
