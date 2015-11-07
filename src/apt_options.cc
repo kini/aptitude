@@ -296,7 +296,7 @@ option_item misc_options[]={
 		 "should only need to change this if the changelogs move "
 		 "to a different URL."),
 	      "APT::Changelogs::Server",
-	      "http://packages.debian.org/changelogs"),
+	      "http://metadata.ftp-master.debian.org/changelogs"),
   option_item(N_("Display a preview of what will be done before doing it"),
 	      N_("If this option is enabled, then when you ask "
 		 "aptitude to perform an install run, it will "
