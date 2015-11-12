@@ -91,7 +91,9 @@ bool download_install_manager::prepare(OpProgress &progress,
      _error->PendingError())
     {
       _error->Error(_("Internal error: couldn't generate list of packages to download"));
-      _error->Notice(_("Perhaps the package lists are out of date, please try 'aptitude update' (or equivalent) first"));
+      // has to be an Error (not e.g. Notice), otherwise "DumpError" (which
+      // later phases rely on) doesn't include the following message
+      _error->Error(_("Perhaps the package lists are out of date, please try 'aptitude update' (or equivalent) first"));
 
       delete fetcher;
       fetcher = NULL;
