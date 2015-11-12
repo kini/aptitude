@@ -615,7 +615,7 @@ bool cmdline_show_preview(bool as_upgrade, pkgset &to_install,
                           const std::shared_ptr<terminal_metrics> &term_metrics)
 {
   pkgvector lists[num_pkg_action_states];
-  pkgvector recommended, suggested;
+  pkgvector recommended, suggested, not_upgraded;
   pkgvector extra_install, extra_remove;
   unsigned long Upgrade=0, Downgrade=0, Install=0, ReInstall=0;
 
@@ -656,6 +656,10 @@ bool cmdline_show_preview(bool as_upgrade, pkgset &to_install,
 	      else if(package_suggested(pkg))
 		suggested.push_back(pkg);
 	    }
+	  break;
+	case pkg_hold:
+	case pkg_auto_hold:
+	  not_upgraded.push_back(pkg);
 	  break;
 	default:
 	  break;
@@ -711,6 +715,12 @@ bool cmdline_show_preview(bool as_upgrade, pkgset &to_install,
     {
       printf(_("The following packages are SUGGESTED but will NOT be installed:\n"));
       cmdline_show_instinfo(suggested, verbose, showvers, showdeps, showsize, false, showwhy, term_metrics);
+    }
+
+  if (verbose>0 && ! not_upgraded.empty())
+    {
+      printf(_("The following packages will NOT be UPGRADED:\n"));
+      cmdline_show_instinfo(not_upgraded, verbose, showvers, showdeps, showsize, false, showwhy, term_metrics);
     }
 
   if((*apt_cache_file)->DelCount() == 0 &&
