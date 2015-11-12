@@ -656,6 +656,7 @@ bool cmdline_show_preview(bool as_upgrade, pkgset &to_install,
 	      else if(package_suggested(pkg))
 		suggested.push_back(pkg);
 	    }
+	  break;
 	default:
 	  break;
 	}
