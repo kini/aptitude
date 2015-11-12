@@ -98,7 +98,7 @@ bool get_archive(pkgAcquire *Owner, pkgSourceList *Sources,
       if (PkgFile.empty() == true)
          return _error->Error(_("The package index files are corrupted. No Filename: "
                               "field for package %s."),
-                              Version.ParentPkg().Name());
+                              Version.ParentPkg().FullName().c_str());
 
       string DestFile = directory + "/" + flNotDir(StoreFilename);
 
