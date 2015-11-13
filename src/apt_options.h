@@ -1,6 +1,7 @@
 // apt_options.h
 //
 //  Copyright 2000 Daniel Burrows
+//  Copyright (C) 2015 Manuel A. Fernandez Montecelo
 //
 
 #ifndef APT_OPTIONS_H

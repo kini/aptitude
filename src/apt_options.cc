@@ -1,6 +1,7 @@
 // apt_options.cc
 //
 //   Copyright (C) 2000, 2007-2008 Daniel Burrows
+//   Copyright (C) 2015 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -576,6 +577,19 @@ option_item dependency_options[]={
 	    tree->connect_key("DescriptionDown", &cw::config::global_bindings,
 			      sigc::mem_fun(*desc_area.unsafe_get_ref(),
 					    &cw::text_layout::line_down));
+
+	    // for #453853.  has to be done at the same time for all elements,
+	    // or perhaps there should be a group of all the elements in the
+	    // bottom half of the screen
+	    tree->connect_key("ShowHideDescription", &cw::config::global_bindings,
+				   sigc::mem_fun(*desc_area.unsafe_get_ref(),
+						 &cw::widget::toggle_visible));
+	    tree->connect_key("ShowHideDescription", &cw::config::global_bindings,
+				   sigc::mem_fun(*desc_area_scrollbar.unsafe_get_ref(),
+						 &cw::widget::toggle_visible));
+	    tree->connect_key("ShowHideDescription", &cw::config::global_bindings,
+				   sigc::mem_fun(*middle_label.unsafe_get_ref(),
+						 &cw::widget::toggle_visible));
 	  }
 
 	public:

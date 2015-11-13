@@ -1,6 +1,7 @@
 // solution_screen.cc
 //
 //   Copyright (C) 2005, 2007-2009 Daniel Burrows
+//   Copyright (C) 2015 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -619,11 +620,6 @@ cw::widget_ref make_solution_screen()
   examiner->connect_menu_signals();
   create_menu_bindings(info_tree.unsafe_get_ref(), info_tree);
 
-
-  info_tree->connect_key("ShowHideDescription", &cw::config::global_bindings,
-			 sigc::mem_fun(info_tree.unsafe_get_ref(),
-				       &cw::widget::toggle_visible));
-
   l->set_bg_style(cw::get_style("Status"));
 
   rval->add_widget_opts(examiner,
@@ -644,6 +640,15 @@ cw::widget_ref make_solution_screen()
     resman->state_changed.connect(sigc::bind(sigc::ptr_fun(&maybe_remove_examiner),
 					     rval.weak_ref()));
 
+  // for #453853.  has to be done at the same time for all elements, or perhaps
+  // there should be a group of all the elements in the bottom half of the
+  // screen
+  rval->connect_key("ShowHideDescription", &cw::config::global_bindings,
+		    sigc::mem_fun(*info_tree.unsafe_get_ref(),
+				  &cw::widget::toggle_visible));
+  rval->connect_key("ShowHideDescription", &cw::config::global_bindings,
+		    sigc::mem_fun(*l.unsafe_get_ref(),
+				  &cw::widget::toggle_visible));
 
   l->show();
   examiner->show();
