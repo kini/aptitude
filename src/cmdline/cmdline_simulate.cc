@@ -49,12 +49,14 @@ int cmdline_simulate(bool as_upgrade,
 		     pkgPolicy &policy, bool arch_only, bool download_only,
                      const std::shared_ptr<terminal_metrics> &term_metrics)
 {
+  bool simulate_only = true;
+
   if(!cmdline_do_prompt(as_upgrade,
 			to_install, to_hold, to_remove, to_purge,
 			showvers, showdeps, showsize, showwhy,
 			always_prompt, verbose,
 			assume_yes, force_no_change,
-			policy, arch_only, download_only,
+			policy, arch_only, download_only, simulate_only,
                         term_metrics))
     {
       printf(_("Abort.\n"));

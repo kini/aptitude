@@ -433,7 +433,7 @@ string prompt_string(const string &prompt)
  *  fat warning message about them.  Returns false if the user doesn't
  *  want to continue.
  */
-static bool prompt_essential(const std::shared_ptr<terminal_metrics> &term_metrics)
+static bool prompt_essential(bool simulate_only, const std::shared_ptr<terminal_metrics> &term_metrics)
 {
   pkgvector todelete, whatsbroken;
   bool ok=true;
@@ -478,21 +478,32 @@ static bool prompt_essential(const std::shared_ptr<terminal_metrics> &term_metri
     {
       printf(_("WARNING: Performing this action will probably cause your system to break!\n         Do NOT continue unless you know EXACTLY what you are doing!\n"));
 
-      string untranslated_prompt = N_("I am aware that this is a very bad idea");
-      string prompt = _(untranslated_prompt.c_str());
-      char buf[1024];
+      if (simulate_only)
+	{
+	  printf("\n");
+	  printf(_("Ignoring confirmation in Simulation mode (subsequent actions will not have effects)\n"));
+	  printf(_("Press any key to continue...\n"));
+	  cin.get();
+	  return true;
+	}
+      else
+	{
+	  string untranslated_prompt = N_("I am aware that this is a very bad idea");
+	  string prompt = _(untranslated_prompt.c_str());
+	  char buf[1024];
 
-      printf(_("To continue, type the phrase \"%s\":\n"), prompt.c_str());
-      cin.getline(buf, 1023);
-      bool rval = (prompt == buf || untranslated_prompt == buf);
+	  printf(_("To continue, type the phrase \"%s\":\n"), prompt.c_str());
+	  cin.getline(buf, 1023);
+	  bool rval = (prompt == buf || untranslated_prompt == buf);
 
-      while(!cin && !cin.eof())
-	cin.getline(buf, 1023);
+	  while(!cin && !cin.eof())
+	    cin.getline(buf, 1023);
 
-      if(!cin)
-	throw StdinEOFException();
+	  if(!cin)
+	    throw StdinEOFException();
 
-      return rval;
+	  return rval;
+	}
     }
 
   return true;
@@ -948,6 +959,7 @@ bool cmdline_do_prompt(bool as_upgrade,
 		       pkgPolicy &policy,
 		       bool arch_only,
 		       bool download_only,
+		       bool simulate_only,
                        const std::shared_ptr<terminal_metrics> &term_metrics)
 {
   bool exit=false;
@@ -1186,7 +1198,7 @@ bool cmdline_do_prompt(bool as_upgrade,
 	}
 
       // Note: only show the prompt if we're planning to continue.
-      if(rval && (!prompt_essential(term_metrics) || !prompt_trust(term_metrics)))
+      if(rval && (!prompt_essential(simulate_only, term_metrics) || !prompt_trust(term_metrics)))
 	{
 	  rval=false;
 	  exit=true;

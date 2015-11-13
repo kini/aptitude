@@ -83,6 +83,7 @@ bool cmdline_do_prompt(bool as_upgrade,
 		       pkgPolicy &policy,
 		       bool arch_only,
 		       bool download_only,
+		       bool simulate_only,
                        const std::shared_ptr<aptitude::cmdline::terminal_metrics> &term_metrics);
 
 bool cmdline_show_preview(bool as_upgrade, pkgset &to_install,

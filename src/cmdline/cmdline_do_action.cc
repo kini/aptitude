@@ -381,7 +381,7 @@ int cmdline_do_action(int argc, char *argv[],
 			    showvers, showdeps, showsize, showwhy,
 			    always_prompt, verbose, assume_yes,
 			    !fix_broken,
-			    policy, arch_only, download_only, term))
+			    policy, arch_only, download_only, simulate, term))
 	{
 	  printf(_("Abort.\n"));
 	  return 1;
