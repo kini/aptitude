@@ -861,8 +861,8 @@ void do_new_package_view(OpProgress &progress)
 
   if(aptcfg->Exists(PACKAGE "::UI::Default-Grouping"))
     {
-      grpstr=aptcfg->Find(PACKAGE "::UI::Default-Grouping");
-      grp=parse_grouppolicy(grpstr);
+      grpstr = aptcfg->Find(PACKAGE "::UI::Default-Grouping", default_grpstr);
+      grp = parse_grouppolicy(grpstr);
     }
 
   if(!grp) // Fallback
