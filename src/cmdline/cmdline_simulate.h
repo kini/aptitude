@@ -1,6 +1,7 @@
 // cmdline_simulate.h               -*-c++-*-
 //
 // Copyright (C) 2004, 2010 Daniel Burrows
+// Copyright (C) 2015 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -70,7 +71,7 @@ int cmdline_simulate(bool as_upgrade,
 		     bool showsize, bool showwhy,
 		     bool always_prompt, int verbose,
 		     bool assume_yes, bool force_no_change,
-		     pkgPolicy &policy, bool arch_only,
+		     pkgPolicy &policy, bool arch_only, bool download_only,
                      const std::shared_ptr<aptitude::cmdline::terminal_metrics> &term_metrics);
 
 

@@ -1,6 +1,7 @@
 // cmdline_prompt.h                     -*-c++-*-
 //
 // Copyright (C) 2004, 2010 Daniel Burrows
+// Copyright (C) 2014-2015 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -81,6 +82,7 @@ bool cmdline_do_prompt(bool as_upgrade,
 		       bool force_no_change,
 		       pkgPolicy &policy,
 		       bool arch_only,
+		       bool download_only,
                        const std::shared_ptr<aptitude::cmdline::terminal_metrics> &term_metrics);
 
 bool cmdline_show_preview(bool as_upgrade, pkgset &to_install,

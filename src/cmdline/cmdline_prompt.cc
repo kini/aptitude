@@ -1,6 +1,7 @@
 // cmdline_prompt.cc
 //
 // Copyright (C) 2010-2011 Daniel Burrows
+// Copyright (C) 2014-2015 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -946,6 +947,7 @@ bool cmdline_do_prompt(bool as_upgrade,
 		       bool force_no_change,
 		       pkgPolicy &policy,
 		       bool arch_only,
+		       bool download_only,
                        const std::shared_ptr<terminal_metrics> &term_metrics)
 {
   bool exit=false;
@@ -1052,6 +1054,11 @@ bool cmdline_do_prompt(bool as_upgrade,
 
 		  show_broken();
 		}
+	    }
+
+	  if ((verbose > 0) && download_only)
+	    {
+	      printf(_("Note: Using 'Download Only' mode, no other actions will be performed.\n"));
 	    }
 
 	  while(!valid_response)

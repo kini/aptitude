@@ -1,6 +1,7 @@
 // cmdline_do_action.cc
 //
 //  Copyright (C) 2004, 2010 Daniel Burrows
+//  Copyright (C) 2014-2015 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -359,7 +360,7 @@ int cmdline_do_action(int argc, char *argv[],
 			    showsize, showwhy,
 			    always_prompt, verbose, assume_yes,
 			    !fix_broken,
-			    policy, arch_only,
+			    policy, arch_only, download_only,
                             term);
   else if(queue_only)
     {
@@ -380,7 +381,7 @@ int cmdline_do_action(int argc, char *argv[],
 			    showvers, showdeps, showsize, showwhy,
 			    always_prompt, verbose, assume_yes,
 			    !fix_broken,
-			    policy, arch_only, term))
+			    policy, arch_only, download_only, term))
 	{
 	  printf(_("Abort.\n"));
 	  return 1;

@@ -1,6 +1,7 @@
 // cmdline_do_action.h                            -*-c++-*-
 //
 //  Copyright 2004 Daniel Burrows
+//  Copyright (C) 2014-2015 Manuel A. Fernandez Montecelo
 
 #ifndef CMDLINE_DO_ACTION_H
 #define CMDLINE_DO_ACTION_H
