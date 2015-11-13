@@ -1250,6 +1250,22 @@ std::string get_uri(const pkgCache::VerIterator& ver,
   return string{};
 }
 
+std::string get_origin(const pkgCache::VerIterator& ver,
+		       const pkgRecords* records)
+{
+  if (ver.end() || ver.FileList().end() || records == nullptr)
+    return string{};
+
+  if (ver.Downloadable())
+    {
+      return ver.RelStr();
+    }
+  else
+    {
+      return _("(local)");
+    }
+}
+
 std::wstring get_short_description(const pkgCache::VerIterator &ver,
 				   pkgRecords *records)
 {

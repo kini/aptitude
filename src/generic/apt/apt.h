@@ -231,6 +231,16 @@ void surrounding_or(pkgCache::DepIterator dep,
 std::string get_uri(const pkgCache::VerIterator& ver,
 		    const pkgRecords* records);
 
+/** Get Origin of a package version
+ *
+ * @param ver The package version
+ * @param records The package records
+ *
+ * @return The requested value
+ */
+std::string get_origin(const pkgCache::VerIterator& ver,
+		       const pkgRecords* records);
+
 /** \return a short description string corresponding to the given
  *  version.
  */
