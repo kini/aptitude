@@ -1262,7 +1262,7 @@ std::string get_origin(const pkgCache::VerIterator& ver,
     }
   else
     {
-      return _("(local)");
+      return _("(installed locally)");
     }
 }
 
