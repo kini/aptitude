@@ -80,8 +80,6 @@ void pkg_grouppolicy_info::setup_package_info(const pkgCache::PkgIterator &pkg,
 					      pkg_item_with_generic_subtree *tree,
 					      pkg_signal *sig)
 {
-  char buf[256];
-  
   if(!ver.end())
     {
       pkgRecords::Parser &rec=apt_package_records->Lookup(ver.FileList());
@@ -171,8 +169,8 @@ void pkg_grouppolicy_info::setup_package_info(const pkgCache::PkgIterator &pkg,
       // Note: reverse provides show up in the version list
       if(!ver.ProvidesList().end())
 	{
-	  snprintf(buf, 256, _("Package names provided by %s"), pkg.FullName(true).c_str());
-	  pkg_subtree *prvtree=new pkg_subtree(cw::util::transcode(buf));
+	  string msg = cwidget::util::ssprintf(_("Package names provided by %s"), pkg.FullName(true).c_str());
+	  pkg_subtree *prvtree=new pkg_subtree(cw::util::transcode(msg));
 
 	  for(pkgCache::PrvIterator prv=ver.ProvidesList(); !prv.end(); ++prv)
 	    {
@@ -184,8 +182,8 @@ void pkg_grouppolicy_info::setup_package_info(const pkgCache::PkgIterator &pkg,
 	}
     }
 
-  snprintf(buf, 256, _("Packages which depend on %s"), pkg.FullName(true).c_str());
-  pkg_subtree *revtree=new pkg_subtree(cw::util::transcode(buf));
+  string msg = cwidget::util::ssprintf(_("Packages which depend on %s"), pkg.FullName(true).c_str());
+  pkg_subtree *revtree=new pkg_subtree(cw::util::transcode(msg));
   setup_package_deps<pkg_subtree>(pkg, ver, revtree, sig, true);
   tree->add_child(revtree);
 
