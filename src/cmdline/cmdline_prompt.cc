@@ -570,7 +570,7 @@ static bool prompt_trust(const std::shared_ptr<terminal_metrics> &term_metrics)
       const string fallback_okstr = "Yes";
       const string fallback_abortstr = "No";
 
-      while(1)
+      while (true)
 	{
 	  printf(_("Do you want to ignore this warning and proceed anyway?\n"));
 	  printf(_("To continue, enter \"%s\"; to abort, enter \"%s\": "), okstr.c_str(), abortstr.c_str());
