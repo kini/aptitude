@@ -1078,6 +1078,12 @@ bool cmdline_do_prompt(bool as_upgrade,
 	      valid_response=true;
 	      fflush(stdout);
 
+	      if (simulate_only)
+		{
+		  // no newline, printed before the next message in the same line
+		  printf(_("\nNote: Using 'Simulate' mode.\n"));
+		}
+
 	      string prompt =
 		!have_broken
 		    ? _("Do you want to continue? [Y/n/?] ")
