@@ -1,6 +1,7 @@
 // pkg_info_screen.cc
 //
 //  Copyright 2000-2002, 2004-2005, 2007-2008 Daniel Burrows
+//  Copyright 2015 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -149,6 +150,19 @@ void pkg_grouppolicy_info::setup_package_info(const pkgCache::PkgIterator &pkg,
 					_("Uncompressed Size: "), SizeToStr(ver->InstalledSize).c_str(),
 					_("Source Package: "), source_package.c_str()
 				      )));
+
+      std::string origin = get_origin(ver, apt_package_records);
+      frags.push_back(clipbox(cw::fragf("%B%s%b%s%n",
+					_("Origin: "), origin.c_str()
+					)));
+
+      std::string origin_uri = get_uri(ver, apt_package_records);
+      if (!origin_uri.empty())
+	{
+	  frags.push_back(clipbox(cw::fragf("%B%s%b%s%n",
+					    _("Origin URI: "), origin_uri.c_str()
+					    )));
+	}
 
       tree->add_child(new cw::layout_item(cw::sequence_fragment(frags)));
 
