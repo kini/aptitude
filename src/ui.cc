@@ -575,7 +575,10 @@ static void do_su_to_root(string args)
       if(!WIFEXITED(status) || WEXITSTATUS(status))
 	{
 	  _error->Error("%s",
-			_("Subprocess exited with an error -- did you type your password correctly?"));
+			_("Subprocess exited with an error, probably due to one of these reasons:\n"
+			  " - incorrect password,\n"
+			  " - insufficient permissions to become root, or\n"
+			  " - root login disabled"));
 	  cw::toplevel::resume();
 	  check_apt_errors();
 	  // We have to clear these out or the cache won't reload properly (?)
