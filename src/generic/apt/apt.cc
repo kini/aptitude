@@ -1220,6 +1220,36 @@ bool is_interesting_dep(const pkgCache::DepIterator &d,
     }
 }
 
+std::string get_uri(const pkgCache::VerIterator& ver,
+		    const pkgRecords* records)
+{
+  if (ver.end() || ver.FileList().end() || records == nullptr)
+    return string{};
+
+  for (auto vfi = ver.FileList(); !vfi.end(); ++vfi)
+    {
+      // match against source list
+      pkgIndexFile* index = nullptr;
+      if (apt_source_list->FindIndex(vfi.File(), index) == false)
+	continue;
+
+      // get package record
+      pkgRecords::Parser& parse = apt_package_records->Lookup(vfi);
+      if (_error->PendingError())
+	continue;
+
+      string pkg_file = parse.FileName();
+      if (pkg_file.empty())
+	continue;
+
+      string uri = index->ArchiveURI(pkg_file);
+
+      return uri;
+    }
+
+  return string{};
+}
+
 std::wstring get_short_description(const pkgCache::VerIterator &ver,
 				   pkgRecords *records)
 {
