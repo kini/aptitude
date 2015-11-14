@@ -1266,6 +1266,17 @@ std::string get_origin(const pkgCache::VerIterator& ver,
     }
 }
 
+pkgCache::VerIterator get_candidate_version(const pkgCache::PkgIterator& pkg)
+{
+  if (apt_cache_file && ! pkg.end())
+    {
+      return (*apt_cache_file)[pkg].CandidateVerIter(*apt_cache_file);
+    }
+
+  // default return
+  return pkgCache::VerIterator();
+}
+
 std::wstring get_short_description(const pkgCache::VerIterator &ver,
 				   pkgRecords *records)
 {

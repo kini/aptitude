@@ -241,6 +241,14 @@ std::string get_uri(const pkgCache::VerIterator& ver,
 std::string get_origin(const pkgCache::VerIterator& ver,
 		       const pkgRecords* records);
 
+/** Get candidate version (iterator) of a package (iterator)
+ *
+ * @param pkg The package iterator
+ *
+ * @return The requested value
+ */
+pkgCache::VerIterator get_candidate_version(const pkgCache::PkgIterator& pkg);
+
 /** \return a short description string corresponding to the given
  *  version.
  */
