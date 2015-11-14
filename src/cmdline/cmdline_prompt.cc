@@ -212,6 +212,11 @@ namespace
       mode = show_requiring_packages;
     summarize_reasons(reasons, mode, reason_strings);
 
+    // it seems that sometimes the code reaches here despite having nothing to
+    // show -- see #576584
+    if (reason_strings.empty())
+      return "";
+
     std::string rval = "(";
     if(mode == show_requiring_packages)
       rval += "for ";
