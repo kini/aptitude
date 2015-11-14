@@ -141,8 +141,16 @@ namespace
       {
         column_parameters *p =
           new aptitude::cmdline::search_result_column_parameters(it->second);
+
+	// get candidate or, if does not exist, current version
+	auto ver_it = get_candidate_version(it->first);
+	if (ver_it.end())
+	  {
+	    ver_it = it->first.CurrentVer();
+	  }
+
         pkg_item::pkg_columnizer columnizer(it->first,
-                                            it->first.VersionList(),
+                                            ver_it,
                                             columns,
                                             0);
         if(disable_columns)
