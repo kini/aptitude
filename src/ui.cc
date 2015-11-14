@@ -201,7 +201,7 @@ sigc::signal1<void, bool> install_finished;
 sigc::signal1<void, bool> update_finished;
 
 const char *default_pkgstatusdisplay="%d";
-const char *default_pkgheaderdisplay="%N %n #%B %u %o";
+const char *default_pkgheaderdisplay="%N %n @ %H #%B %u %o";
 const char *default_grpstr="task,status,section(subdirs,passthrough),section(topdir)";
 // TRANSLATORS: This string is a confirmation message, which users
 // (especially CJK users) should be able to input without input
