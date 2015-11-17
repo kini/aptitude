@@ -41,6 +41,17 @@ Version 0.7.5 UNRELEASED
     rather than a random version to show information about the package
     (Closes: #490593)
 
+  * Check that the config files are valid, otherwise exit (Closes: #472701)
+
+    Upon reading the configuration files it did not check if they were valid,
+    and for "~/.aptitude/config" it was writing it back immediately.  The
+    writing stopped at the point of the reading failure (instead of just
+    skipping the problematic parts), so part of the previous configuration file
+    was lost.
+
+    It is safer (and not too onerous) to ask the user to fix the configuration
+    file before continuing, rather than stomping on valid configuration values.
+
 - User visible changes:
 
   * [cmdline] Minor improvements to help (Closes: #497136)

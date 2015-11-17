@@ -104,6 +104,29 @@ bool get_apt_knows_about_rootdir()
   return apt_knows_about_rootdir;
 }
 
+/** Read and check that the config file doesn't contain errors, otherwise exit.
+ *
+ * See #472701 for the motivation.  Upon reading the configuration file
+ * (especially "~/.aptitude/config"), it was writing it back immediately, and
+ * the writing stopped at the point of the reading failure (instead of just
+ * skipping the problematic parts), so part of the previous configuration file
+ * was lost.
+ *
+ * It is safer (and not too onerous) to ask the user to fix the configuration
+ * before continuing, rather than stomping on valid configuration values.
+ */
+void readconfigfile_or_die(Configuration& config, const std::string& path)
+{
+  bool config_ok = ReadConfigFile(config, path);
+
+  if (!config_ok)
+    {
+      _error->Error(_("Configuration file '%s' is not correct, please fix it"), path.c_str());
+      _error->DumpErrors();
+      exit(EXIT_FAILURE);
+    }
+}
+
 void apt_preinit(const char *rootdir)
 {
   logging::LoggerPtr logger(Loggers::getAptitudeAptGlobals());
@@ -148,12 +171,11 @@ void apt_preinit(const char *rootdir)
       user_config->Set("RootDir", rootdir);
     }
 
-  ReadConfigFile(*theme_config, PKGDATADIR "/aptitude-defaults");
+  readconfigfile_or_die(*theme_config, PKGDATADIR "/aptitude-defaults");
 
   pkgInitConfig(*_config);
 
-
-  ReadConfigFile(*_config, PKGDATADIR "/section-descriptions");
+  readconfigfile_or_die(*_config, PKGDATADIR "/section-descriptions");
 
   // TRANSLATORS: Set this string to the name of a configuration
   // file in $pkgdatadir/aptitude that overrides defaults for your
@@ -166,8 +188,10 @@ void apt_preinit(const char *rootdir)
   // "aptitude-defaults.ww".  If you use this mechanism, you should
   // also add your defaults file to pkgdata_DATA in Makefile.am.
   std::string localized_config_name = P_("Localized defaults|");
-  if(localized_config_name.size() > 0)
-    ReadConfigFile(*_config, PKGDATADIR "/" + localized_config_name);
+  if (localized_config_name.size() > 0)
+    {
+      readconfigfile_or_die(*_config, string(PKGDATADIR "/") + localized_config_name);
+    }
 
   pkgInitSystem(*_config, _system);
 
@@ -188,8 +212,8 @@ void apt_preinit(const char *rootdir)
 
   if(!cfgloc.empty() && access(cfgloc.c_str(), R_OK) == 0)
     {
-      ReadConfigFile(*user_config, cfgloc);
-      ReadConfigFile(*_config, cfgloc);
+      readconfigfile_or_die(*user_config, cfgloc);
+      readconfigfile_or_die(*_config, cfgloc);
     }
 
   aptcfg=new signalling_config(user_config, _config, theme_config);
