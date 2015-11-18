@@ -26,6 +26,7 @@
 #include <loggers.h>
 
 #include "aptitude_resolver_universe.h"
+#include "config_file.h"
 #include "config_signal.h"
 #include "download_queue.h"
 #include "resolver_manager.h"
@@ -51,7 +52,9 @@
 #include <apt-pkg/sourcelist.h>
 #include <apt-pkg/version.h>
 
+#include <exception>
 #include <fstream>
+#include <sstream>
 
 #include <signal.h>
 #include <unistd.h>
@@ -250,68 +253,26 @@ void apt_preinit(const char *rootdir)
 
 void apt_dumpcfg(const char *root)
 {
-  string cfgloc;
-
-  const char *HOME = getenv("HOME");
-  if(strempty(HOME) == false)
-    {
-      string tmp(HOME);
-      tmp += "/.aptitude";
-      if(access(tmp.c_str(), W_OK) == 0)
-	cfgloc = tmp + "/config";
-      else if(access(tmp.c_str(), R_OK | X_OK) == 0)
-	{
-	  // The squashed-root case.
-	  _error->Error(_("%s is readable but not writable; unable to write configuration file."),
-			tmp.c_str());
-	  return;
-	}
-    }
-
-  if(cfgloc.empty())
-    {
-      cfgloc = get_homedir();
-
-      if(cfgloc.empty())
-	return;
-
-      cfgloc += "/.aptitude";
-
-      if(mkdir(cfgloc.c_str(), 0700)<0 && errno != EEXIST)
-	{
-	  _error->Errno("mkdir", "%s", cfgloc.c_str());
-	  return;
-	}
-
-      cfgloc += "/config";
-    }
-
-  // perhaps should use generic/util/temp.* or be implemented in a better way,
-  // but this is better than what was before (see #764046)
-  string cfgloc_new = cfgloc + ".new-" + std::to_string(getpid());
-
-  ofstream f(cfgloc_new.c_str());
-
-  if(!f)
-    {
-      _error->Errno("apt_init", _("Unable to open %s for writing"), cfgloc_new.c_str());
-      return;
-    }
-
   // Don't write RootDir to the user's configuration file -- it causes
   // horrible confusion.
   std::string rootDir(_config->Find("RootDir", ""));
   _config->Clear("RootDir");
 
-  aptcfg->Dump(f);
+  std::ostringstream content;
+  aptcfg->Dump(content);
 
   _config->Set("RootDir", rootDir);
 
-  f.close();
-
-  if (rename(cfgloc_new.c_str(), cfgloc.c_str()) != 0)
+  try
     {
-      _error->Errno("apt_init", _("Unable to replace %s with new configuration file"), cfgloc.c_str());
+      if ( ! aptitude::apt::ConfigFile::write(content.str()) )
+	{
+	  throw std::runtime_error("");
+	}
+    }
+  catch (...)
+    {
+      _error->Errno("apt_dumpcfg", _("Error saving configuration file"));
       return;
     }
 }
