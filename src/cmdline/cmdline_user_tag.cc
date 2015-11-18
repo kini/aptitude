@@ -164,14 +164,37 @@ namespace aptitude
 	    }
 	}
 
+      // check for root/permissions -- needs to lock before
+      // (*apt_cache_file)->save_selection_list() below, see #725272
+      {
+	apt_cache_file->GainLock();
+
+	if (_error->PendingError())
+	  {
+	    _error->DumpErrors();
+	    return -1;
+	  }
+      }
+
+      int exit_status = 0;
+
       std::shared_ptr<OpProgress> text_progress = make_text_progress(false, term, term, term);
-      if(!(*apt_cache_file)->save_selection_list(*text_progress))
-	return 1;
+      if (!(*apt_cache_file)->save_selection_list(*text_progress))
+	{
+	  exit_status = 1;
+	}
 
-      if(!all_ok)
-	return 2;
+      if (!all_ok)
+	{
+	  exit_status = 2;
+	}
 
-      return 0;
+      if (_error->PendingError())
+	{
+	  _error->DumpErrors();
+	}
+
+      return exit_status;
     }
   }
 }
