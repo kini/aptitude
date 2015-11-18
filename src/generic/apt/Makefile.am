@@ -30,6 +30,8 @@ libgeneric_apt_a_SOURCES = \
         apt_undo_group.h    \
 	changelog_parse.cc  \
 	changelog_parse.h   \
+        config_file.cc      \
+        config_file.h       \
         config_signal.cc    \
         config_signal.h     \
 	desc_parse.cc       \
