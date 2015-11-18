@@ -2054,7 +2054,7 @@ template<typename PackageUniverse>
 std::ostream &operator<<(std::ostream &out, const generic_promotion_set<PackageUniverse> &s)
 {
   out << "{";
-  for(auto it = s.cbegin(); it != s.cend(); ++it)
+  for(auto it = s.begin(); it != s.end(); ++it)
     {
       if(it != s.begin())
 	out << ", ";
