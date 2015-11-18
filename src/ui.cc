@@ -500,7 +500,7 @@ static void do_su_to_root(string args)
 	  cmdbuf << argv0 << " --no-gui -S "
 		 << statusname.get_name() << " "
 		 << args;
-	  execl(root_program.c_str(), root_program.c_str(), "-c", cmdbuf.str().c_str(), NULL);
+	  execl(root_program.c_str(), root_program.c_str(), "--login", "-c", cmdbuf.str().c_str(), NULL);
 
 	  exit(1);
 	}
