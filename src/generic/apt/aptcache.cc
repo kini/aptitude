@@ -783,7 +783,11 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
   fchmod(newstate.Fd(), 0644);
 
   if(!newstate.IsOpen())
-    _error->Error(_("Cannot open Aptitude state file"));
+    {
+      _error->Error(_("Cannot open Aptitude state file"));
+      prog.Done();
+      return false;
+    }
   else
     {
       int num=0;
