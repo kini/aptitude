@@ -84,6 +84,7 @@ AC_CHECK_HEADERS( dnl
 boost/algorithm/string.hpp dnl
 boost/algorithm/string/join.hpp dnl
 boost/compressed_pair.hpp dnl
+boost/filesystem.hpp dnl
 boost/flyweight/hashed_factory.hpp dnl
 boost/flyweight.hpp dnl
 boost/format.hpp dnl
@@ -150,6 +151,8 @@ boost/variant.hpp dnl
 
 AX_BOOST_BASE()
 AX_BOOST_IOSTREAMS
+AX_BOOST_FILESYSTEM
+AX_BOOST_SYSTEM
 
 AC_MSG_CHECKING([the calling convertion of boost::fusion::fold])
 # Test the order of arguments to the function passed into fold; this
@@ -364,7 +367,7 @@ then
 fi
 
 CXXFLAGS="$CXXFLAGS $SIGC_CFLAGS $CWIDGET_CFLAGS $ept_CFLAGS $SQLITE3_CFLAGS $XAPIAN_CXXFLAGS"
-LIBS="$LIBS $SIGC_LIBS $CWIDGET_LIBS $ept_LIBS $SQLITE3_LIBS $BOOST_IOSTREAMS_LIB $XAPIAN_LIBS"
+LIBS="$LIBS $SIGC_LIBS $CWIDGET_LIBS $ept_LIBS $SQLITE3_LIBS $BOOST_IOSTREAMS_LIB $BOOST_FILESYSTEM_LIB $BOOST_SYSTEM_LIB $XAPIAN_LIBS"
 CPPFLAGS="$CPPFLAGS $BOOST_CPPFLAGS"
 LDFLAGS="$LDFLAGS $BOOST_LDFLAGS"
 
