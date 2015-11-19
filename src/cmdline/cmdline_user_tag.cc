@@ -53,32 +53,47 @@ namespace aptitude
     {
       enum user_tag_action { action_add, action_remove };
 
-      void do_user_tag(user_tag_action act,
+      void print_result(user_tag_action act,
+			const std::string& tag,
+			const pkgCache::PkgIterator& pkg,
+			int verbose,
+			bool operation_result)
+      {
+	const char* action_str = (act == action_add) ? _("add") : _("remove");
+	if (operation_result && verbose>0)
+	  {
+	    fprintf(stderr, _("Applied user-tag operation '%s %s' to: %s\n"),
+		    action_str, tag.c_str(), pkg.FullName(true).c_str());
+	  }
+	else if (!operation_result)
+	  {
+	    fprintf(stderr, _("Failed to apply user-tag operation '%s %s' to: %s\n"),
+		    action_str, tag.c_str(), pkg.FullName(true).c_str());
+	  }
+      }
+
+      bool do_user_tag(user_tag_action act,
 		       const std::string &tag,
 		       const pkgCache::PkgIterator &pkg,
 		       int verbose)
       {
+	bool op_result = false;
 	switch(act)
 	  {
 	  case action_add:
-	    if(verbose > 0)
-				// Sometimes also "user-tag" is used!
-	      printf(_("Adding user tag \"%s\" to the package \"%s\".\n"),
-		     tag.c_str(), pkg.Name());
-
-	    (*apt_cache_file)->attach_user_tag(pkg, tag, NULL);
+	    op_result = (*apt_cache_file)->attach_user_tag(pkg, tag, NULL);
 	    break;
 	  case action_remove:
-	    if(verbose > 0)
-	      printf(_("Removing user tag \"%s\" from the package \"%s\".\n"),
-		     tag.c_str(), pkg.Name());
-
-	    (*apt_cache_file)->detach_user_tag(pkg, tag, NULL);
+	    op_result = (*apt_cache_file)->detach_user_tag(pkg, tag, NULL);
 	    break;
 	  default:
 	    fprintf(stderr, "Internal error: bad user tag action %d.", act);
+	    return false;
 	    break;
 	  }
+
+	print_result(act, tag, pkg, verbose, op_result);
+	return op_result;
       }
     }
 
@@ -134,7 +149,13 @@ namespace aptitude
 		  all_ok = false;
 		}
 	      else
-		do_user_tag(action, tag, pkg, verbose);
+		{
+		  bool result = do_user_tag(action, tag, pkg, verbose);
+		  if (!result)
+		    {
+		      all_ok = false;
+		    }
+		}
 	    }
 	  else
 	    {
@@ -159,7 +180,13 @@ namespace aptitude
 
 		  for(std::vector<std::pair<pkgCache::PkgIterator, ref_ptr<structural_match> > >::const_iterator
 			it = matches.begin(); it != matches.end(); ++it)
-		    do_user_tag(action, tag, it->first, verbose);
+		    {
+		      bool result = do_user_tag(action, tag, it->first, verbose);
+		      if (!result)
+			{
+			  all_ok = false;
+			}
+		    }
 		}
 	    }
 	}
