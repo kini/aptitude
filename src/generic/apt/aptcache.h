@@ -465,8 +465,10 @@ public:
    *
    *  The tag will be added to the user_tags member of the package's
    *  extended state.
+   *
+   * @return Whether the operation succeeded or not
    */
-  void attach_user_tag(const PkgIterator &pkg, const std::string &tag,
+  bool attach_user_tag(const PkgIterator &pkg, const std::string &tag,
 		       undo_group *undo);
 
   /** \brief Remove a tag from a package.
@@ -474,8 +476,10 @@ public:
    *  The tag will be removed from the user_tags member of the
    *  package's extended state.  If it isn't already present, nothing
    *  will happen.
+   *
+   * @return Whether the operation succeeded or not
    */
-  void detach_user_tag(const PkgIterator &pkg, const std::string &tag,
+  bool detach_user_tag(const PkgIterator &pkg, const std::string &tag,
 		       undo_group *undo);
 
   // Marks the given package as having been autoinstalled (so it will be

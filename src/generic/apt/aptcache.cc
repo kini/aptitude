@@ -1630,7 +1630,7 @@ namespace
   };
 }
 
-void aptitudeDepCache::attach_user_tag(const PkgIterator &pkg,
+bool aptitudeDepCache::attach_user_tag(const PkgIterator &pkg,
 				       const std::string &tag,
 				       undo_group *undo)
 {
@@ -1638,7 +1638,7 @@ void aptitudeDepCache::attach_user_tag(const PkgIterator &pkg,
     {
       if(group_level == 0)
 	read_only_fail();
-      return;
+      return false;
     }
 
   // Find the tag in our cache or add it.
@@ -1661,10 +1661,16 @@ void aptitudeDepCache::attach_user_tag(const PkgIterator &pkg,
       dirty = true;
       if(undo != NULL)
 	undo->add_item(new attach_user_tag_undoer(this, pkg, tag));
+
+      return true;
+    }
+  else
+    {
+      return false;
     }
 }
 
-void aptitudeDepCache::detach_user_tag(const PkgIterator &pkg,
+bool aptitudeDepCache::detach_user_tag(const PkgIterator &pkg,
 				       const std::string &tag,
 				       undo_group *undo)
 {
@@ -1672,14 +1678,14 @@ void aptitudeDepCache::detach_user_tag(const PkgIterator &pkg,
     {
       if(group_level == 0)
 	read_only_fail();
-      return;
+      return false;
     }
 
   std::map<std::string, user_tag_reference>::const_iterator found =
     user_tags_index.find(tag);
 
   if(found == user_tags_index.end())
-    return;
+    return false;
 
   std::set<user_tag>::size_type num_erased =
     get_ext_state(pkg).user_tags.erase(user_tag(found->second));
@@ -1689,6 +1695,12 @@ void aptitudeDepCache::detach_user_tag(const PkgIterator &pkg,
       dirty = true;
       if(undo != NULL)
 	undo->add_item(new detach_user_tag_undoer(this, pkg, tag));
+
+      return true;
+    }
+  else
+    {
+      return false;
     }
 }
 
