@@ -105,6 +105,21 @@ bool do_log(const string &log,
 	default:                action_tag = _("????????"); break;
 	}
 
+      // distinguish between remove and purge, see #705612
+      //
+      // The ultimate cause is that "pkg_action_state" doesn't distinguish
+      // between these and doesn't have it as "variation" (like
+      // "pkg_auto_remove", for example it could be "pkg_remove_purge"), so we
+      // have to do this extra check.
+      //
+      // "pkg_action_state" is a quite central structure so it cannot be changed
+      // lightly, there are multiple implications.
+      if (i->second == pkg_remove &&
+	  (*apt_cache_file)->get_ext_state(i->first).selection_state == pkgCache::State::Purge)
+	{
+	  action_tag += _(" (PURGE)");
+	}
+
       std::string cur_verstr  = _("(no version found)");
       std::string cand_verstr = _("(no version found)");
       auto candver_it = (*apt_cache_file)[i->first].CandidateVerIter(*apt_cache_file);
