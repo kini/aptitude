@@ -1,10 +1,35 @@
 [2015-11-xx]
 Version 0.7.5 UNRELEASED
 
-- Bug fixes:
+- New features:
+
+  * [curses] Show Origin and URI in pkg info screen
+    (Closes: #294040, #457794, #513622, #611515)
 
   * [cmdline] Print version of provider of virtual package in conflicts/broken
     (Closes: #802943)
+
+  * [cmdline] Show packages that will not be upgraded with verbose>0
+    (Closes: #553577)
+
+  * [cmdline] Notify of 'Download Only' mode before confirmation to continue,
+    with verbose>0 (Closes: #804287)
+
+  * [cmdline] When simulating do not prompt for removal of essential packages
+    (Closes: #613049)
+
+  * [cmdline] When simulating, add notice before confirmation to continue
+    actions (Closes: #173277)
+
+  * Use XDG_CACHE_HOME spec instead of ~/.aptitude/cache (Closes: #671780)
+
+  * Print useful message when package lists are out of date (Closes: #758764)
+
+  * [curses] Allow to hide bottom half in several screens (Closes: #453853)
+
+  * [curses] Show hostname on header line (Closes: #398101)
+
+- Bug fixes:
 
   * [cmdline] Fix problems in 'build-depends' causing malfunctions
     (Closes: #802532)
@@ -20,22 +45,10 @@ Version 0.7.5 UNRELEASED
       now show version comparison operators.  There was a mistake in the
       variable to print (dependency type rather than operator).
 
-  * [cmdline] Show packages that will not be upgraded with verbose>0
-    (Closes: #553577)
-
   * [curses] Use default string for Default-Grouping when config is empty
     (Closes: #405970)
 
   * [curses] Improve message when becoming root fails (Closes: #516854)
-
-  * [cmdline] Notify of 'Download Only' mode before confirmation to continue,
-    with verbose>0 (Closes: #804287)
-
-  * [cmdline] When simulating do not prompt for removal of essential packages
-    (Closes: #613049)
-
-  * [cmdline] When simulating, add notice before confirmation to continue
-    actions (Closes: #173277)
 
   * [cmdline] For "search", use candidate or, if does not exist, current version
     rather than a random version to show information about the package
@@ -59,22 +72,11 @@ Version 0.7.5 UNRELEASED
 
   * Return an error if adding/removing tags without "root" (Closes: #725272)
 
-  * Use XDG_CACHE_HOME spec instead of ~/.aptitude/cache (Closes: #671780)
-
 - User visible changes:
 
   * [cmdline] Minor improvements to help (Closes: #497136)
 
-  * [curses] Show Origin and URI in pkg info screen
-    (Closes: #294040, #457794, #513622, #611515)
-
-  * Print useful message when package lists are out of date (Closes: #758764)
-
-  * [curses] Allow to hide bottom half in several screens (Closes: #453853)
-
   * [cmdline] Hide Show-Why reasons when the string is empty (Closes: #576584)
-
-  * [curses] Show hostname on header line (Closes: #398101)
 
 - Internal changes:
 
