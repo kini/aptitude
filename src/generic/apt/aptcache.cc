@@ -1656,7 +1656,7 @@ bool aptitudeDepCache::attach_user_tag(const PkgIterator &pkg,
   std::pair<std::set<user_tag>::const_iterator, bool> insert_result =
     get_ext_state(pkg).user_tags.insert(user_tag(found->second));
 
-  if(insert_result.second)
+  if (insert_result.second)
     {
       dirty = true;
       if(undo != NULL)
@@ -1666,7 +1666,16 @@ bool aptitudeDepCache::attach_user_tag(const PkgIterator &pkg,
     }
   else
     {
-      return false;
+      auto found = user_tags_index.find(tag);
+      if (found != user_tags_index.end())
+	{
+	  // tag already present, return "OK"
+	  return true;
+	}
+      else
+	{
+	  return false;
+	}
     }
 }
 
