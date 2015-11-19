@@ -52,6 +52,8 @@
 #include <apt-pkg/sourcelist.h>
 #include <apt-pkg/version.h>
 
+#include <boost/filesystem.hpp>
+
 #include <exception>
 #include <fstream>
 #include <sstream>
@@ -65,6 +67,7 @@ using namespace std;
 using aptitude::Loggers;
 
 namespace cw = cwidget;
+namespace fs = boost::filesystem;
 
 enum interesting_state {uncached = 0, uninteresting, interesting};
 static interesting_state *cached_deps_interesting = NULL;
@@ -463,37 +466,119 @@ void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
 
   LOG_TRACE(logger, "Initializing the download cache.");
   // Open the download cache.  By default, it goes in
-  // ~/.aptitude/cache; it has 512Kb of in-memory cache and 10MB of
-  // on-disk cache.
-  const char *HOME = getenv("HOME");
-  if(strempty(HOME) == false)
-    {
-      std::string download_cache_file_name = string(HOME) + "/.aptitude/cache";
-      const int download_cache_memory_size =
-	aptcfg->FindI(PACKAGE "::UI::DownloadCache::MemorySize", 512 * 1024);
-      const int download_cache_disk_size   =
-	aptcfg->FindI(PACKAGE "::UI::DownloadCache::DiskSize", 10 * 1024 * 1024);
-      try
-	{
-	  download_cache = aptitude::util::file_cache::create(download_cache_file_name,
-							      download_cache_memory_size,
-							      download_cache_disk_size);
-	}
-      catch(cwidget::util::Exception &ex)
-	{
-	  LOG_WARN(logger,
-		   "Can't open the file cache \""
-		   << download_cache_file_name
-		   << "\": " << ex.errmsg());
-	}
-      catch(std::exception &ex)
-	{
-	  LOG_WARN(logger,
-		   "Can't open the file cache \""
-		   << download_cache_file_name
-		   << "\": " << ex.what());
-	}
-    }
+  // ~/.cache/aptitude/metadata-download; it has 512Kb of in-memory cache and
+  // 10MB of on-disk cache.
+  {
+    // remove old path, if exists, so if config is empty and there are no other
+    // files, ~/.aptitude can also be removed
+    try
+      {
+	const char* env_HOME = getenv("HOME");
+	if ( ! strempty(env_HOME))
+	  {
+	    string old_file = string(env_HOME) + "/.aptitude/cache";
+	    fs::remove(old_file);
+	  }
+      }
+    catch (const fs::filesystem_error& e)
+      {
+	// ignore exceptions, if the file does not exist or we cannot remove it,
+	// it doesn't matter
+      }
+
+    // get xdg_cache_home directory to use
+    const char* env_XDG_CACHE_HOME = getenv("XDG_CACHE_HOME");
+    string xdg_cache_home;
+    if ( ! strempty(env_XDG_CACHE_HOME))
+      {
+	xdg_cache_home = string(env_XDG_CACHE_HOME);
+      }
+    else
+      {
+	const char* env_HOME = getenv("HOME");
+	string home = (! strempty(env_HOME)) ? string(env_HOME) : get_homedir();
+	if ( ! home.empty())
+	  {
+	    xdg_cache_home = string(env_HOME);
+	  }
+      }
+
+    // if directory to be used could be gathered, create the path if needed
+    std::string download_cache_dir;
+    if (!xdg_cache_home.empty())
+      {
+	// if dir does not exist, create default $XDG_CACHE_HOME with the right
+	// permisisons (0700) according to the spec -- see
+	// http://standards.freedesktop.org/basedir-spec/latest/ar01s03.html and
+	// http://standards.freedesktop.org/basedir-spec/latest/ar01s04.html
+	if ( ! fs::is_directory(xdg_cache_home) )
+	  {
+	    mode_t previous_umask = umask(0077);
+
+	    try
+	      {
+		fs::create_directory(xdg_cache_home);
+	      }
+	    catch (const fs::filesystem_error& e)
+	      {
+		_error->Error(_("Could not create directory: %s: %s"), xdg_cache_home.c_str(), e.what());
+	      }
+
+	    umask(previous_umask);
+	  }
+
+	// if the directory exist, continue to the next step
+	if ( fs::is_directory(xdg_cache_home) )
+	  {
+	    download_cache_dir = xdg_cache_home + "/aptitude";
+	  }
+      }
+
+    // if directory to be used could be gathered, create full path if needed,
+    // then assign filename
+    std::string download_cache_file_name;
+    if (!download_cache_dir.empty())
+      {
+	try
+	  {
+	    fs::create_directories(download_cache_dir);
+	    download_cache_file_name = download_cache_dir + "/metadata-download";
+	  }
+	catch (const fs::filesystem_error& e)
+	  {
+	    _error->Error(_("Could not create directories: %s: %s"), download_cache_dir.c_str(), e.what());
+	  }
+      }
+
+    // do create the cache file
+    if (!download_cache_file_name.empty())
+      {
+	const int download_cache_memory_size =
+	  aptcfg->FindI(PACKAGE "::UI::DownloadCache::MemorySize", 512 * 1024);
+	const int download_cache_disk_size   =
+	  aptcfg->FindI(PACKAGE "::UI::DownloadCache::DiskSize", 10 * 1024 * 1024);
+	try
+	  {
+	    download_cache = aptitude::util::file_cache::create(download_cache_file_name,
+								download_cache_memory_size,
+								download_cache_disk_size);
+	  }
+	catch(cwidget::util::Exception &ex)
+	  {
+	    LOG_WARN(logger,
+		     "Can't open the file cache \""
+		     << download_cache_file_name
+		     << "\": " << ex.errmsg());
+	  }
+	catch(std::exception &ex)
+	  {
+	    LOG_WARN(logger,
+		     "Can't open the file cache \""
+		     << download_cache_file_name
+		     << "\": " << ex.what());
+	  }
+      }
+  }
 
   LOG_DEBUG(logger, "Emitting cache_reloaded().");
   cache_reloaded();
