@@ -451,12 +451,17 @@ public:
    */
   void get_upgradable(bool ignore_removed, std::set<pkgCache::PkgIterator> &upgradable);
 
+  /** Marks this package to be install, and all other packages to be kept.
+   *
+   *  The "keep" on the other packages, however, is NOT sticky and will NOT be
+   *  saved in the extended state file! (this is a bit of a hack..)  (this could
+   *  be fairly easily emulated; it's a convenience routine)
+   */
   void mark_single_install(const PkgIterator &pkg, undo_group *undo);
-  // Marks this package to be install, and all other packages to be kept.
-  //  The "keep" on the other packages, however, is NOT sticky and will NOT
-  // be saved in the extended state file! (this is a bit of a hack..)
-  // (this could be fairly easily emulated; it's a convenience routine)
 
+  /** Marks the given package as having been autoinstalled (so it will be
+   *  removed automatically) or having been installed manually.
+   */
   void mark_auto_installed(const PkgIterator &pkg,
 			   bool set_auto,
 			   undo_group *undo);
@@ -481,9 +486,6 @@ public:
    */
   bool detach_user_tag(const PkgIterator &pkg, const std::string &tag,
 		       undo_group *undo);
-
-  // Marks the given package as having been autoinstalled (so it will be
-  // removed automatically) or having been installed manually.
 
   /** Retrieve the read-only flag. */
   bool get_read_only() const { return read_only; }
