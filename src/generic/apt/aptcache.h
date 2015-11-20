@@ -487,6 +487,12 @@ public:
   bool detach_user_tag(const PkgIterator &pkg, const std::string &tag,
 		       undo_group *undo);
 
+  /** Get user tags from a package
+   *
+   * @return The requested value
+   */
+  std::vector<std::string> get_user_tags(const PkgIterator& pkg);
+
   /** Retrieve the read-only flag. */
   bool get_read_only() const { return read_only; }
 

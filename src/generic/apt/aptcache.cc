@@ -826,14 +826,7 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
 
 		// Put the usertags in sorted order so we get
 		// predictable outputs.
-		std::vector<std::string> tmp;
-		tmp.reserve(estate.user_tags.size());
-
-		for(std::set<user_tag>::const_iterator it
-		      = estate.user_tags.begin(); it != estate.user_tags.end(); ++it)
-		  tmp.push_back(deref_user_tag(*it));
-
-		std::sort(tmp.begin(), tmp.end());
+		std::vector<std::string> tmp = get_user_tags(i);
 
 		bool first = true;
 		// Append user tags to the field, using double-quotes
@@ -1711,6 +1704,23 @@ bool aptitudeDepCache::detach_user_tag(const PkgIterator &pkg,
     {
       return false;
     }
+}
+
+std::vector<std::string> aptitudeDepCache::get_user_tags(const PkgIterator& pkg)
+{
+  auto estate = get_ext_state(pkg);
+
+  std::vector<std::string> all_tags;
+  all_tags.reserve(estate.user_tags.size());
+
+  for (const auto& it : estate.user_tags)
+    {
+      all_tags.push_back(deref_user_tag(it));
+    }
+
+  std::sort(all_tags.begin(), all_tags.end());
+
+  return all_tags;
 }
 
 bool aptitudeDepCache::all_upgrade(bool with_autoinst, undo_group *undo)
