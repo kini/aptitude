@@ -175,7 +175,7 @@ namespace
       //   the VerIterator; much faster than parsing the pkgRecord
       //
       // - defaults to package name, no need to check if it's empty
-      output.push_back(ver.SourcePkgName() + " " + ver.SourceVerStr());
+      output.push_back(std::string(ver.SourcePkgName()) + " " + ver.SourceVerStr());
 #else
       // I don't think FileList() *can* be invalid; this is just
       // paranoia.

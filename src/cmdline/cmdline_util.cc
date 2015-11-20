@@ -680,7 +680,7 @@ namespace aptitude
 	      //
 	      // - defaults to package name, no need to check if it's empty
 	      source_package_name = ver.SourcePkgName();
-	      source_version = ver.SourceVerStr();
+	      std::string source_version = ver.SourceVerStr();
 
 	      rval = find_source_package(source_package_name, source_version);
 #else
