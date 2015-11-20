@@ -215,6 +215,9 @@ static void usage()
   printf(_(" why             Explain why a particular package should be installed.\n"));
   printf(_(" why-not         Explain why a particular package cannot be installed.\n"));
   printf("\n");
+  printf(_(" add-user-tag    Add user tag to packages/patterns.\n"));
+  printf(_(" remove-user-tag Remove user tag from packages/patterns.\n"));
+  printf("\n");
   printf(_("Options:\n"));
   printf(_(" -h              This help text.\n"));
 #ifdef HAVE_GTK
