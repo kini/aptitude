@@ -191,70 +191,67 @@ static void usage()
   printf("\n");
   printf("\n");
   printf(_("Actions (if none is specified, aptitude will enter interactive mode):\n\n"));
-  printf(_(" install      - Install/upgrade packages.\n"));
-  printf(_(" remove       - Remove packages.\n"));
-  printf(_(" purge        - Remove packages and their configuration files.\n"));
-  printf(_(" hold         - Place packages on hold.\n"));
-  printf(_(" unhold       - Cancel a hold command for a package.\n"));
-  printf(_(" markauto     - Mark packages as having been automatically installed.\n"));
-  printf(_(" unmarkauto   - Mark packages as having been manually installed.\n"));
-  printf(_(" forbid-version - Forbid aptitude from upgrading to a specific package version.\n"));
-  printf(_(" update       - Download lists of new/upgradable packages.\n"));
-  printf(_(" safe-upgrade - Perform a safe upgrade.\n"));
-  printf(_(" full-upgrade - Perform an upgrade, possibly installing and removing packages.\n"));
-  printf(_(" build-dep    - Install the build-dependencies of packages.\n"));
-  printf(_(" forget-new   - Forget what packages are \"new\".\n"));
-  printf(_(" search       - Search for a package by name and/or expression.\n"));
-  printf(_(" show         - Display detailed information about a package.\n"));
-  printf(_(" versions     - Displays the versions of specified packages.\n"));
-  printf(_(" clean        - Erase downloaded package files.\n"));
-  printf(_(" autoclean    - Erase old downloaded package files.\n"));
-  printf(_(" changelog    - View a package's changelog.\n"));
-  printf(_(" download     - Download the .deb file for a package.\n"));
-  printf(_(" reinstall    - Download and (possibly) reinstall a currently installed package.\n"));
-  printf(_(" why          - Show the manually installed packages that require a package, or\n"
-           "                why one or more packages would require the given package.\n"));
-  printf(_(" why-not      - Show the manually installed packages that lead to a conflict\n"
-           "                with the given package, or why one or more packages would\n"
-           "                lead to a conflict with the given package if installed.\n"));
+  printf(_(" install         Install/upgrade packages.\n"));
+  printf(_(" remove          Remove packages.\n"));
+  printf(_(" purge           Remove packages and their configuration files.\n"));
+  printf(_(" hold            Place packages on hold.\n"));
+  printf(_(" unhold          Cancel a hold command for a package.\n"));
+  printf(_(" markauto        Mark packages as having been automatically installed.\n"));
+  printf(_(" unmarkauto      Mark packages as having been manually installed.\n"));
+  printf(_(" forbid-version  Forbid aptitude from upgrading to a specific package version.\n"));
+  printf(_(" update          Download lists of new/upgradable packages.\n"));
+  printf(_(" safe-upgrade    Perform a safe upgrade.\n"));
+  printf(_(" full-upgrade    Perform an upgrade, possibly installing and removing packages.\n"));
+  printf(_(" build-dep       Install the build-dependencies of packages.\n"));
+  printf(_(" forget-new      Forget what packages are \"new\".\n"));
+  printf(_(" search          Search for a package by name and/or expression.\n"));
+  printf(_(" show            Display detailed information about a package.\n"));
+  printf(_(" versions        Displays the versions of specified packages.\n"));
+  printf(_(" clean           Erase downloaded package files.\n"));
+  printf(_(" autoclean       Erase old downloaded package files.\n"));
+  printf(_(" changelog       View a package's changelog.\n"));
+  printf(_(" download        Download the .deb file for a package.\n"));
+  printf(_(" reinstall       Reinstall a currently installed package.\n"));
+  printf(_(" why             Explain why a particular package should be installed.\n"));
+  printf(_(" why-not         Explain why a particular package cannot be installed.\n"));
   printf("\n");
   printf(_("Options:\n"));
-  printf(_(" -h             This help text.\n"));
+  printf(_(" -h              This help text.\n"));
 #ifdef HAVE_GTK
-  printf(_(" --gui          Use the GTK GUI even if disabled in the configuration.\n"));
+  printf(_(" --gui           Use the GTK GUI even if disabled in the configuration.\n"));
 #endif
-  printf(_(" --no-gui       Do not use the GTK GUI even if available.\n"));
+  printf(_(" --no-gui        Do not use the GTK GUI even if available.\n"));
 #ifdef HAVE_QT
-  printf(_(" --qt           Use the Qt GUI.\n"));
-  printf(_(" --no-qt        Do not use the Qt GUI even if enabled in the configuration.\n"));
+  printf(_(" --qt            Use the Qt GUI.\n"));
+  printf(_(" --no-qt         Do not use the Qt GUI even if enabled in the configuration.\n"));
 #endif
-  printf(_(" -s             Simulate actions, but do not actually perform them.\n"));
-  printf(_(" -d             Only download packages, do not install or remove anything.\n"));
-  printf(_(" -P             Always prompt for confirmation of actions.\n"));
-  printf(_(" -y             Assume that the answer to simple yes/no questions is 'yes'.\n"));
-  printf(_(" -F format      Specify a format for displaying search results; see the manual.\n"));
-  printf(_(" -O order       Specify how search results should be sorted; see the manual.\n"));
-  printf(_(" -w width       Specify the display width for formatting search results.\n"));
-  printf(_(" -f             Aggressively try to fix broken packages.\n"));
-  printf(_(" -V             Show which versions of packages are to be installed.\n"));
-  printf(_(" -D             Show the dependencies of automatically changed packages.\n"));
-  printf(_(" -Z             Show the change in installed size of each package.\n"));
-  printf(_(" -v             Display extra information. (may be supplied multiple times).\n"));
-  printf(_(" -t [release]   Set the release from which packages should be installed.\n"));
-  printf(_(" -q             In command-line mode, suppress the incremental progress\n"
-           "                indicators.\n"));
-  printf(_(" -o key=val     Directly set the configuration option named 'key'.\n"));
+  printf(_(" -s              Simulate actions, but do not actually perform them.\n"));
+  printf(_(" -d              Only download packages, do not install or remove anything.\n"));
+  printf(_(" -P              Always prompt for confirmation of actions.\n"));
+  printf(_(" -y              Assume that the answer to simple yes/no questions is 'yes'.\n"));
+  printf(_(" -F format       Specify a format for displaying search results; see the manual.\n"));
+  printf(_(" -O order        Specify how search results should be sorted; see the manual.\n"));
+  printf(_(" -w width        Specify the display width for formatting search results.\n"));
+  printf(_(" -f              Aggressively try to fix broken packages.\n"));
+  printf(_(" -V              Show which versions of packages are to be installed.\n"));
+  printf(_(" -D              Show the dependencies of automatically changed packages.\n"));
+  printf(_(" -Z              Show the change in installed size of each package.\n"));
+  printf(_(" -v              Display extra information. (may be supplied multiple times).\n"));
+  printf(_(" -t [release]    Set the release from which packages should be installed.\n"));
+  printf(_(" -q              In command-line mode, suppress the incremental progress\n"
+           "                 indicators.\n"));
+  printf(_(" -o key=val      Directly set the configuration option named 'key'.\n"));
   printf(_(" --with(out)-recommends	Specify whether or not to treat recommends as\n"
-           "                strong dependencies.\n"));
-  printf(_(" -S fname       Read the aptitude extended status info from fname.\n"));
-  printf(_(" -u             Download new package lists on startup.\n"));
+           "                            strong dependencies.\n"));
+  printf(_(" -S fname        Read the aptitude extended status info from fname.\n"));
+  printf(_(" -u              Download new package lists on startup.\n"));
   printf(_("                  (terminal interface only)\n"));
-  printf(_(" -i             Perform an install run on startup.\n"));
+  printf(_(" -i              Perform an install run on startup.\n"));
   printf(_("                  (terminal interface only)\n"));
   printf("\n");
-  printf(_(" See the manual page for a complete list and description of all the options.\n"));
+  printf(_("See the manual page for a complete list and description of all the options.\n"));
   printf("\n");
-  printf(_("                  This aptitude does not have Super Cow Powers.\n"));
+  printf(_("This aptitude does not have Super Cow Powers.\n"));
 }
 
 // This handles options with no single-character equivalent
