@@ -483,6 +483,11 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
       if(!visible_ver.end())
 	{
 	  string buf = archives_text(visible_ver, true, ",");
+	  // see #349413 -- say 'now' for obsolete/local installed packages only
+	  if (buf.empty())
+	    {
+	      buf = archives_text(visible_ver, false, ",");
+	    }
 	  return cw::column_disposition(buf,0);
 	}
       else
