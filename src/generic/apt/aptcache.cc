@@ -1708,6 +1708,10 @@ bool aptitudeDepCache::detach_user_tag(const PkgIterator &pkg,
 
 std::vector<std::string> aptitudeDepCache::get_user_tags(const PkgIterator& pkg)
 {
+  // sanity check
+  if (pkg.end())
+    return {};
+
   auto estate = get_ext_state(pkg);
 
   std::vector<std::string> all_tags;
