@@ -383,8 +383,10 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
       break;
     case progname:
       return cw::column_disposition(PACKAGE, 0);
+      break;
     case progver:
       return cw::column_disposition(VERSION, 0);
+      break;
     case brokencount:
       if(apt_cache_file && (*apt_cache_file)->BrokenCount()>0)
 	{
@@ -459,6 +461,7 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
 	else
 	  return cw::column_disposition("", 0);
       }
+      break;
     case autoset:
       // Display the "auto" flag UNLESS the package has been removed
       // or purged already and is not presently being installed.
@@ -495,6 +498,7 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
       else
 	return cw::column_disposition("", 0);
 
+      break;
     case hostname:
       {
 	char buf[256];
@@ -553,6 +557,7 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
 	else
 	  return cw::column_disposition("U", 0);
       }
+      break;
     default:
       return cw::column_disposition(_("ERROR"), 0);
     }
