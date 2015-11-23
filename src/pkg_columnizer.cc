@@ -64,7 +64,7 @@ cw::config::column_type_defaults pkg_item::pkg_columnizer::defaults[pkg_columniz
   {10, false, true},    // section
   {2, false, false},    // revdepcount
   {1, false, false},    // autoset
-  {1, false, false},    // tagged
+  {30, false, false},   // tagged (also user-tags)
   {10, true, true},     // archive
   {9, false, false},    // sizechange
   {strlen(PACKAGE), false, false},  // progname
@@ -84,7 +84,7 @@ cw::config::column_type_defaults pkg_item::pkg_columnizer::defaults[pkg_columniz
 //
 // You can't set default widths for the program name and version here (those
 // strings aren't affected by translation, for one thing)
-const char *default_widths = N_("30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 1 10 9 12 30 17 15");
+const char *default_widths = N_("30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 30 10 9 12 30 17 15");
 
 const char *pkg_item::pkg_columnizer::column_names[pkg_columnizer::numtypes]=
   {N_("Package"),
@@ -102,7 +102,7 @@ const char *pkg_item::pkg_columnizer::column_names[pkg_columnizer::numtypes]=
    N_("Section"),
    N_("RC"),
    N_("Auto"),
-   N_("Tag"),
+   N_("Tag/user-tags"),
 
    // These don't make sense with headers, but whatever:
    N_("ProgName"),
@@ -475,11 +475,26 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
 
       break;
     case tagged:
-      if(!pkg.end() && (*apt_cache_file)->get_ext_state(pkg).tagged)
-	return cw::column_disposition("*", 0);
-      else
-	return cw::column_disposition("", 0);
+      {
+	string tagged_str = "";
 
+	// old "tagged" (actually unused)
+	if (!pkg.end() && (*apt_cache_file)->get_ext_state(pkg).tagged)
+	  tagged_str = "*";
+
+	// reuse field also for user-tags (some parts of #498442 and #665824)
+	for (const string& s : (*apt_cache_file)->get_user_tags(pkg))
+	  {
+	    if (tagged_str == "*")
+	      tagged_str += " ";
+	    else if (!tagged_str.empty())
+	      tagged_str += ", ";
+
+	    tagged_str += s;
+	  }
+
+	return cw::column_disposition(tagged_str, 0);
+      }
       break;
 
     case archive:
