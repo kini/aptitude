@@ -482,11 +482,13 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
     case archive:
       if(!visible_ver.end())
 	{
-	  string buf = archives_text(visible_ver, true, ",");
+	  bool ignore_local = true;
+	  string buf = archives_text(visible_ver, ignore_local, ",");
 	  // see #349413 -- say 'now' for obsolete/local installed packages only
 	  if (buf.empty())
 	    {
-	      buf = archives_text(visible_ver, false, ",");
+	      ignore_local = false;
+	      buf = archives_text(visible_ver, ignore_local, ",");
 	    }
 	  return cw::column_disposition(buf,0);
 	}
