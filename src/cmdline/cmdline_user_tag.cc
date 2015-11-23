@@ -1,6 +1,7 @@
 // cmdline_user_tag.cc
 //
 //   Copyright (C) 2008-2010 Daniel Burrows
+//   Copyright (C) 2015 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -87,7 +88,7 @@ namespace aptitude
 	    op_result = (*apt_cache_file)->detach_user_tag(pkg, tag, NULL);
 	    break;
 	  default:
-	    fprintf(stderr, "Internal error: bad user tag action %d.", act);
+	    fprintf(stderr, "Internal error: bad user tag action %d", act);
 	    return false;
 	    break;
 	  }
@@ -102,11 +103,14 @@ namespace aptitude
       const std::shared_ptr<terminal_io> term = create_terminal();
 
       user_tag_action action = (user_tag_action)-1;
-
-      if(strcmp(argv[0], "add-user-tag") == 0)
-	action = action_add;
-      else if(strcmp(argv[0], "remove-user-tag") == 0)
-	action = action_remove;
+      if (strcmp(argv[0], "add-user-tag") == 0)
+	{
+	  action = action_add;
+	}
+      else if (strcmp(argv[0], "remove-user-tag") == 0)
+	{
+	  action = action_remove;
+	}
       else
 	{
 	  fprintf(stderr, "Internal error: cmdline_user_tag encountered an unknown command name \"%s\"\n",
@@ -114,18 +118,16 @@ namespace aptitude
 	  return -1;
 	}
 
-      if(argc < 3)
+      if (argc < 3)
 	{
 	  fprintf(stderr,
-		  _("%s: too few arguments; expected at least a tag name and a package.\n"),
+		  _("%s: too few arguments; expected at least a tag name and a package or pattern\n"),
 		  argv[0]);
 	  return -1;
 	}
 
       _error->DumpErrors();
-
       OpProgress progress;
-
       apt_init(&progress, true);
       if(_error->PendingError())
 	{
@@ -133,10 +135,11 @@ namespace aptitude
 	  return -1;
 	}
 
-      std::string tag(argv[1]);
+      std::string tag = argv[1];
+      int argc_start = 2;
 
       bool all_ok = true;
-      for(int i = 2; i < argc; ++i)
+      for (int i = argc_start; i < argc; ++i)
 	{
 	  if(!aptitude::matching::is_pattern(argv[i]))
 	    {
@@ -181,7 +184,8 @@ namespace aptitude
 		  for(std::vector<std::pair<pkgCache::PkgIterator, ref_ptr<structural_match> > >::const_iterator
 			it = matches.begin(); it != matches.end(); ++it)
 		    {
-		      bool result = do_user_tag(action, tag, it->first, verbose);
+		      const pkgCache::PkgIterator& pkg = it->first;
+		      bool result = do_user_tag(action, tag, pkg, verbose);
 		      if (!result)
 			{
 			  all_ok = false;
