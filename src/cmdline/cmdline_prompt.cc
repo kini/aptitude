@@ -1085,7 +1085,6 @@ bool cmdline_do_prompt(bool as_upgrade,
 
 	      if (simulate_only)
 		{
-		  // no newline, printed before the next message in the same line
 		  printf(_("\nNote: Using 'Simulate' mode.\n"));
 		}
 
