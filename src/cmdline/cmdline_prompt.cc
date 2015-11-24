@@ -1085,7 +1085,8 @@ bool cmdline_do_prompt(bool as_upgrade,
 
 	      if (simulate_only)
 		{
-		  printf(_("\nNote: Using 'Simulate' mode.\n"));
+		  printf("\n");
+		  printf(_("Note: Using 'Simulate' mode.\n"));
 		}
 
 	      string prompt =
