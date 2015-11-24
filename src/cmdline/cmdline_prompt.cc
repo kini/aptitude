@@ -1073,8 +1073,9 @@ bool cmdline_do_prompt(bool as_upgrade,
 		}
 	    }
 
-	  if ((verbose > 0) && download_only)
+	  if (download_only)
 	    {
+	      printf("\n");
 	      printf(_("Note: Using 'Download Only' mode, no other actions will be performed.\n"));
 	    }
 
