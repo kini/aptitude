@@ -418,8 +418,6 @@ cw::fragment *reason_fragment(const pkgCache::PkgIterator &pkg, bool &breakage)
   pkgCache::VerIterator candver=state.CandidateVerIter(*apt_cache_file);
   pkgCache::VerIterator instver=state.InstVerIter(*apt_cache_file);	
 
-  // TODO: get non-lame text...some of these are just placeholders and
-  // should be reworded before release.
   switch(actionstate)
     {
     case pkg_unused_remove:
