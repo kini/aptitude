@@ -14,10 +14,13 @@
 
 #include <cwidget/config/colors.h>
 #include <cwidget/fragment.h>
+#include <cwidget/generic/util/ssprintf.h>
 
 #include <set>
 
 using namespace std;
+
+using cwidget::util::ssprintf;
 
 namespace cw = cwidget;
 
@@ -269,10 +272,78 @@ cw::fragment *dep_or_frag(pkgCache::PkgIterator pkg,
   else
     sec=string(sec, 0, sec.find('/'));
 
-  return cw::fragf(_("%F%s %F %F"),
+  // get info about rdep -- show lines of the form (enhanced since: #642800):
+  //
+  // The following packages depend on cpp-5 and will be broken by its removal:
+  //
+  // * cpp (upgraded, 4:5.2.1-6 -> 4:5.2.1-8) depends on cpp-5 (>= 5.2.1-13~)
+  // * gcc-5 (held/unchanged, 5.2.1-26) depends on cpp-5 (= 5.2.1-26)
+  auto rdep_pkg = dep.ParentPkg();
+  pkgCache::VerIterator rdep_candver = get_candidate_version(rdep_pkg);
+  pkgCache::VerIterator rdep_instver = rdep_pkg.CurrentVer();
+  std::string rdep_instver_str, rdep_candver_str;
+  if ( ! rdep_instver.end() && rdep_instver.VerStr() )
+    {
+      rdep_instver_str = rdep_instver.VerStr();
+    }
+  if ( ! rdep_candver.end() && rdep_candver.VerStr() )
+    {
+      rdep_candver_str = rdep_candver.VerStr();
+    }
+  std::string rdep_targetver_str;
+  std::string rdep_actionstate_str;
+  bool ignore_broken = true;
+  pkg_action_state rdep_actionstate = find_pkg_state(rdep_pkg, *apt_cache_file, ignore_broken);
+  switch (rdep_actionstate)
+    {
+    case pkg_unused_remove:
+    case pkg_auto_remove:
+    case pkg_remove:
+      rdep_actionstate_str = _("removed");
+      rdep_targetver_str = ssprintf("%s -> %s", rdep_instver_str.c_str(), _("none"));
+      break;
+    case pkg_auto_install:
+    case pkg_install:
+      rdep_actionstate_str = _("installed");
+      rdep_targetver_str = ssprintf("%s -> %s", _("none"), rdep_candver_str.c_str());
+      break;
+    case pkg_auto_hold:
+    case pkg_unchanged:
+    case pkg_hold:
+      rdep_actionstate_str = _("held/unchanged");
+      rdep_targetver_str = rdep_instver_str.c_str();
+      break;
+    case pkg_broken:
+      rdep_actionstate_str = _("broken");
+      rdep_targetver_str = rdep_instver_str.c_str();
+      break;
+    case pkg_downgrade:
+      rdep_actionstate_str = _("downgraded");
+      rdep_targetver_str = ssprintf("%s -> %s", rdep_instver_str.c_str(), rdep_candver_str.c_str());
+      break;
+    case pkg_reinstall:
+      rdep_actionstate_str = _("reinstalled");
+      rdep_targetver_str = rdep_instver_str.c_str();
+      break;
+    case pkg_upgrade:
+      rdep_actionstate_str = _("upgraded");
+      rdep_targetver_str = ssprintf("%s -> %s", rdep_instver_str.c_str(), rdep_candver_str.c_str());
+      break;
+    case pkg_unconfigured:
+      rdep_actionstate_str = _("unconfigured");
+      rdep_targetver_str = rdep_instver_str.c_str();
+      break;
+    default:
+      rdep_actionstate_str = "internal-error";
+      rdep_targetver_str = "internal-error";
+    }
+
+  return cw::fragf(_("%F%s (%s, %s) %F %F"),
 		   cw::text_fragment(dep.ParentPkg().FullName(true),
 				     pkg_item::pkg_style(dep.ParentPkg(), false)),
 		   sec.empty() || sec=="main"?"":(" ["+sec+']').c_str(),
+		   rdep_actionstate_str.c_str(),
+		   rdep_targetver_str.c_str(),
 		   depname_frag(dep),
 		   cw::sequence_fragment(fragments));
 }

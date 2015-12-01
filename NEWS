@@ -38,6 +38,16 @@ Version 0.7.5 UNRELEASED
   * Add format strings for Source (%E), Architecture (%e) and Origin (%O)
     (Closes: #248561, #604982, #760608)
 
+  * [curses] Provide more info about broken packages in solution screen
+    (Closes: #642800)
+
+    This screen will now show the extra "(action, version/s involved)":
+
+      The following packages depend on cpp-5 and will be broken by its removal:
+
+      * cpp (upgraded, 4:5.2.1-6 -> 4:5.2.1-8) depends on cpp-5 (>= 5.2.1-13~)
+      * gcc-5 (held/unchanged, 5.2.1-26) depends on cpp-5 (= 5.2.1-26)
+
 - Bug fixes:
 
   * [cmdline] Fix problems in 'build-depends' causing malfunctions
