@@ -1,6 +1,7 @@
 // reason_fragment.cc
 //
 //  Copyright 2004 Daniel Burrows
+//  Copyright 2015 Manuel A. Fernandez Montecelo
 
 #include "reason_fragment.h"
 
