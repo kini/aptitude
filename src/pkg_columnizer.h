@@ -66,7 +66,7 @@ public:
   enum types {name, installed_size, debsize, stateflag, actionflag,
 	      description, currver, candver, longstate, longaction,
 	      maintainer, priority, shortpriority, section, revdepcount,
-	      autoset, tagged, archive, sizechange,
+	      autoset, tagged, source, architecture, origin, archive, sizechange,
 
               progname, progver, brokencount, diskusage, downloadsize,
 	      pin_priority, hostname, trust_state, numtypes};

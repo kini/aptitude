@@ -65,6 +65,9 @@ cw::config::column_type_defaults pkg_item::pkg_columnizer::defaults[pkg_columniz
   {2, false, false},    // revdepcount
   {1, false, false},    // autoset
   {30, false, false},   // tagged (also user-tags)
+  {30, false, false},   // source
+  {10, false, false},   // architecture
+  {30, false, false},   // origin
   {10, true, true},     // archive
   {9, false, false},    // sizechange
   {strlen(PACKAGE), false, false},  // progname
@@ -84,7 +87,7 @@ cw::config::column_type_defaults pkg_item::pkg_columnizer::defaults[pkg_columniz
 //
 // You can't set default widths for the program name and version here (those
 // strings aren't affected by translation, for one thing)
-const char *default_widths = N_("30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 30 10 9 12 30 17 15");
+const char *default_widths = N_("30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 30 30 10 30 10 9 12 30 17 15");
 
 const char *pkg_item::pkg_columnizer::column_names[pkg_columnizer::numtypes]=
   {N_("Package"),
@@ -103,6 +106,9 @@ const char *pkg_item::pkg_columnizer::column_names[pkg_columnizer::numtypes]=
    N_("RC"),
    N_("Auto"),
    N_("Tag/user-tags"),
+   N_("Source"),
+   N_("Architecture"),
+   N_("Origin"),
 
    // These don't make sense with headers, but whatever:
    N_("ProgName"),
@@ -497,6 +503,48 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
       }
       break;
 
+    case source:
+      {
+	std::string source_package_str;
+#if APT_PKG_MAJOR >= 5
+	// with apt-1.1:
+	//
+	// - SourcePkg (and Version) are in the binary cache and available via
+	//   the VerIterator; much faster than parsing the pkgRecord
+	//
+	// - defaults to package name, no need to check if it's empty
+	if ( !visible_ver.end() )
+	  {
+	    source_package_str = visible_ver.SourcePkgName();
+	  }
+#else
+	pkgRecords::Parser &rec=apt_package_records->Lookup(visible_ver.FileList());
+	source_package_str = rec.SourcePkg().empty() ? pkg.Name() : rec.SourcePkg();
+#endif
+
+	return cw::column_disposition(source_package_str, 0);
+      }
+      break;
+
+    case architecture:
+      {
+	std::string architecture_str;
+	if ( !visible_ver.end() )
+	  {
+	    architecture_str = visible_ver.Arch();
+	  }
+
+	return cw::column_disposition(architecture_str, 0);
+      }
+      break;
+
+    case origin:
+      {
+	std::string origin_str = get_origin(visible_ver, apt_package_records);
+	return cw::column_disposition(origin_str, 0);
+      }
+      break;
+
     case archive:
       if(!visible_ver.end())
 	{
@@ -621,6 +669,12 @@ int pkg_item::pkg_columnizer::parse_column_type(char id)
       return tagged;
     case 't': // like apt-get -t
       return archive;
+    case 'E':
+      return source;
+    case 'e':
+      return architecture;
+    case 'O':
+      return origin;
 
     case 'B':
       return brokencount;
@@ -658,7 +712,7 @@ public:
 void pkg_item::pkg_columnizer::init_formatting()
 {
   sscanf(_(default_widths),
-	 "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",
+	 "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",
 	 &defaults[name].width,
 	 &defaults[installed_size].width,
 	 &defaults[debsize].width,
@@ -675,6 +729,9 @@ void pkg_item::pkg_columnizer::init_formatting()
 	 &defaults[revdepcount].width,
 	 &defaults[autoset].width,
 	 &defaults[tagged].width,
+	 &defaults[source].width,
+	 &defaults[architecture].width,
+	 &defaults[origin].width,
 	 &defaults[archive].width,
 	 &defaults[sizechange].width,
 	 &defaults[brokencount].width,

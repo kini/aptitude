@@ -422,6 +422,11 @@ cw::column_disposition pkg_ver_columnizer::setup_column(const pkgCache::VerItera
 	else
 	  return cw::column_disposition("U", 0);
       }
+
+    case source:
+    case architecture:
+    case origin:
+      // fall through
     default:
       return pkg_columnizer::setup_column(ver.ParentPkg(),
 					  ver,
