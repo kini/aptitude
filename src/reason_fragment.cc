@@ -517,13 +517,13 @@ cw::fragment *reason_fragment(const pkgCache::PkgIterator &pkg, bool &breakage)
     }
 
 
-  if(!reasons.empty())
-    fragments.push_back(cw::sequence_fragment(cw::newline_fragment(),
-					      cw::newline_fragment(),
-					      NULL));
+  if (!reasons.empty())
+    {
+      fragments.push_back(cw::sequence_fragment(cw::newline_fragment(),
+						NULL));
+    }
 
   fragments.push_back(reasonsfrag(pkg, reasons));
-
   reasons.clear();
 
   infer_reverse_breakage(pkg, reasons);
@@ -533,7 +533,6 @@ cw::fragment *reason_fragment(const pkgCache::PkgIterator &pkg, bool &breakage)
       breakage=true;
 
       fragments.push_back(cw::sequence_fragment(cw::newline_fragment(),
-						cw::newline_fragment(),
 						NULL));
 
       // It will end up un-installed.
@@ -633,7 +632,6 @@ cw::fragment *reason_fragment(const pkgCache::PkgIterator &pkg, bool &breakage)
 	}
 
       fragments.push_back(cw::sequence_fragment(cw::newline_fragment(),
-						cw::newline_fragment(),
 						NULL));
 
       fragments.push_back(reasonsfrag(pkg, reasons));
