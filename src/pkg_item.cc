@@ -376,6 +376,25 @@ bool pkg_item::dispatch_key(const cw::config::key &k, cw::tree *owner)
     // Don't bother with my internal su-to-root stuff here, since I don't
     // need to touch the package lists in the subprocess.
     {
+      // see #474876 -- aptitude: selections lost by package reconfiguration
+      bool pending_actions = false;
+      if ((*apt_cache_file)->is_dirty())
+	{
+	  progress_ref p = gen_progress_bar();
+	  bool saved_ok = (*apt_cache_file)->save_selection_list(*p->get_progress().unsafe_get_ref());
+	  p->destroy();
+
+	  if (saved_ok)
+	    {
+	      pending_actions = false;
+	    }
+	  else
+	    {
+	      pending_actions = true;
+	      popup_widget(cw::dialogs::ok(cw::text_fragment(_("Pending actions could not be saved and would be lost, reconfiguring packages is not allowed at this point."))));
+	    }
+	}
+
       // Try to do *something*.
       const char *sucmd=NULL;
 
@@ -388,7 +407,7 @@ bool pkg_item::dispatch_key(const cw::config::key &k, cw::tree *owner)
       else
 	popup_widget(cw::dialogs::ok(cw::text_fragment(_("You are not root and I cannot find any way to become root.  To reconfigure this package, install the menu package, the login package, or run aptitude as root."))));
 
-      if(sucmd)
+      if (sucmd && !pending_actions)
 	{
 	  cw::toplevel::suspend();
 
