@@ -125,15 +125,13 @@ cw::fragment *make_tags_fragment(const pkgCache::PkgIterator &pkg)
 				  wrapbox(cw::join_fragments(tags, L", "))));
     }
 
-  typedef aptitudeDepCache::user_tag user_tag;
-  const set<user_tag> &user_tags((*apt_cache_file)->get_ext_state(pkg).user_tags);
-  if(!user_tags.empty())
+  std::vector<std::string> pkg_user_tags = (*apt_cache_file)->get_user_tags(pkg);
+  if (!pkg_user_tags.empty())
     {
       vector<cw::fragment *> tags;
-      for(set<user_tag>::const_iterator it = user_tags.begin();
-	  it != user_tags.end(); ++it)
+      for (const std::string& tag : pkg_user_tags)
 	{
-	  tags.push_back(cw::text_fragment((*apt_cache_file)->deref_user_tag(*it)));
+	  tags.push_back(cw::text_fragment(tag));
 	}
 
       fragments.push_back(dropbox(cw::fragf("%B%s: %b", _("User Tags")),
