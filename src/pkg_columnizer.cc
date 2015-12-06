@@ -445,6 +445,8 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
       break;
     case pin_priority:
       {
+	// sibling implementation of the one in pkg_ver_item.cc
+
 	// empty by default
 	string pin_priority_str;
 
