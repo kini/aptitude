@@ -98,42 +98,29 @@ cw::column_disposition pkg_ver_columnizer::setup_column(const pkgCache::VerItera
 	return cw::column_disposition(_("<N/A>"), 0);
 
       break;
-
     case pin_priority:
       {
-	if(apt_cache_file && !ver.end())
+	// sibling implementation of the one in pkg_columnizer.cc
+
+	// empty by default
+	string pin_priority_str;
+
+	pkgPolicy* policy = dynamic_cast<pkgPolicy *>(&(*apt_cache_file)->GetPolicy());
+
+	if (apt_cache_file && policy && !ver.end())
 	  {
-	    char buf[256];
+	    signed short priority = policy->GetPriority(ver);
 
-	    pkgPolicy *policy=dynamic_cast<pkgPolicy *>(&(*apt_cache_file)->GetPolicy());
-
-	    if(!policy)
-	      return cw::column_disposition("", 0);
-
-	    pkgCache::VerFileIterator vf=ver.FileList();
-
-	    if(vf.end())
-	      return cw::column_disposition("", 0);
-
-	    signed short priority=policy->GetPriority(vf.File());
-
-	    ++vf;
-
-	    // Find the highest priority for this version.
-	    while(!vf.end())
+	    if (priority != 0)
 	      {
-		priority=max(priority, policy->GetPriority(vf.File()));
-		++vf;
+		pin_priority_str = std::to_string(priority);
 	      }
-
-	    snprintf(buf, 256, "%d", priority);
-
-	    return cw::column_disposition(buf, 0);
 	  }
-	else
-	  return cw::column_disposition("", 0);
-      }
 
+	// return whatever was gathered
+	return cw::column_disposition(pin_priority_str, 0);
+      }
+      break;
     case sizechange:
       if(ver.end())
 	return cw::column_disposition("", 0);
