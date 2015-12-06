@@ -9,6 +9,8 @@
 #include "aptitude.h"
 #include "generic/apt/apt.h"
 
+#include <cwidget/generic/util/ssprintf.h>
+
 #include <cstdio>
 #include <cstring>
 
@@ -126,10 +128,24 @@ void show_broken_deps(const pkgCache::PkgIterator& pkg)
 			  pkgCache::VerIterator prv_ver = prv.OwnerVer();
 			  if (!prv_pkg.end() && !prv_ver.end())
 			    {
-			      std::string prv_ver_str = prv_ver.VerStr() ? (string(" (") + prv_ver.VerStr() + ")") : "";
+			      // version of the package providing the virtual
+			      // package
+			      std::string prv_candver_str = prv_pkg.CandVersion() ? (string(" (") + prv_pkg.CandVersion() + ")") : "";
+
+			      // versioned provides, show only if exist and
+			      // doesn't match (if it's a special version for
+			      // the virtual package)
+			      std::string prv_ver_str = "";
+			      if (prv_ver.VerStr() &&
+				  prv_pkg.CandVersion() &&
+				  string(prv_ver.VerStr()) != string(prv_pkg.CandVersion()))
+				{
+				  prv_ver_str = cwidget::util::ssprintf(_(" provides %s=%s"), target.FullName(true).c_str(), prv_ver.VerStr());
+				}
+
 			      for (size_t i = 0; i < (indent + indent_dep); ++i)
 				printf(" ");
-			      printf(" - %s%s, ", prv_pkg.FullName(true).c_str(), prv_ver_str.c_str());
+			      printf("- %s%s%s, ", prv_pkg.FullName(true).c_str(), prv_candver_str.c_str(), prv_ver_str.c_str());
 			      print_installation_explanation(prv_pkg);
 			      printf("\n");
 			    }
