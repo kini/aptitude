@@ -445,27 +445,23 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
       break;
     case pin_priority:
       {
-	if(apt_cache_file && !pkg.end())
+	// empty by default
+	string pin_priority_str;
+
+	pkgPolicy* policy = dynamic_cast<pkgPolicy *>(&(*apt_cache_file)->GetPolicy());
+
+	if (apt_cache_file && policy && !pkg.end())
 	  {
-	    char buf[256];
+	    signed short priority = policy->GetPriority(pkg);
 
-	    pkgPolicy *policy=dynamic_cast<pkgPolicy *>(&(*apt_cache_file)->GetPolicy());
-
-	    if(!policy)
-	      return cw::column_disposition("", 0);
-
-	    // Not quite sure what this indicates
-	    signed short priority=policy->GetPriority(pkg);
-
-	    if(priority==0)
-	      return cw::column_disposition("", 0);
-
-	    snprintf(buf, 256, "%d", priority);
-
-	    return cw::column_disposition(buf, 0);
+	    if (priority != 0)
+	      {
+		pin_priority_str = std::to_string(priority);
+	      }
 	  }
-	else
-	  return cw::column_disposition("", 0);
+
+	// return whatever was gathered
+	return cw::column_disposition(pin_priority_str, 0);
       }
       break;
     case autoset:
