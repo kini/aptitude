@@ -1,6 +1,7 @@
 // pkg_changelog.cc
 //
 //  Copyright 2000, 2004-2005, 2008-2009 Daniel Burrows
+//  Copyright 2015 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -659,5 +660,25 @@ get_changelog(const pkgCache::VerIterator &ver,
 		       std::make_shared<slot_callbacks>(success, failure),
 		       post_thunk);
 }
+
+bool check_valid_origin(const pkgCache::VerIterator& ver)
+{
+  for (pkgCache::VerFileIterator vf = ver.FileList(); !vf.end(); ++vf)
+    {
+      if (!vf.File().end() &&
+	  vf.File().Origin() &&
+	  (string("Debian") == vf.File().Origin() ||
+	   string("Debian Backports") == vf.File().Origin()))
+	{
+	  return true;
+	}
+    }
+
+  _error->Error(_("%s version %s is not an official Debian package, cannot display its changelog."),
+		ver.ParentPkg().FullName(true).c_str(),
+		ver.VerStr());
+  return false;
+}
+
 }
 }

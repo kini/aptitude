@@ -1,6 +1,7 @@
 // pkg_changelog.h    -*-c++-*-
 //
 //  Copyright 2000, 2005, 2008-2009 Daniel Burrows
+//  Copyright 2015 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -131,6 +132,14 @@ namespace aptitude
 		  post_thunk_f post_thunk,
 		  const sigc::slot<void, temp::name> &success,
 		  const sigc::slot<void, std::string> &failure);
+
+    /** Check whether it's a valid Origin (otherwise the URL is not known)
+     *
+     * It also emits _error->Error() that can be shown by the caller
+     *
+     * @return Result of the check
+     */
+    bool check_valid_origin(const pkgCache::VerIterator& ver);
   }
 }
 

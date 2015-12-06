@@ -326,22 +326,12 @@ void do_cmdline_changelog(const vector<string> &packages,
 	  pkgCache::VerIterator ver=cmdline_find_ver(pkg,
 						     source, sourcestr);
 
-	  if(!ver.end())
+	  if (!ver.end())
 	    {
-	      // Move this to a central location and just display an
-	      // apt error?
-	      bool in_debian=false;
-
-	      for(pkgCache::VerFileIterator vf=ver.FileList();
-		  !vf.end() && !in_debian; ++vf)
-		if(!vf.File().end() && vf.File().Origin()!=NULL &&
-		   (strcmp(vf.File().Origin(), "Debian")==0 ||
-		    strcmp(vf.File().Origin(), "Debian Backports")==0))
-		  in_debian=true;
-
-	      if(!in_debian)
+	      // check if we know the origin
+	      if ( ! aptitude::apt::check_valid_origin(ver) )
 		{
-		  _error->Error(_("%s is not an official Debian package, cannot display its changelog."), input.c_str());
+		  _error->DumpErrors();
 		  continue;
 		}
 

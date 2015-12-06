@@ -385,10 +385,7 @@ public:
 
 void view_changelog(pkgCache::VerIterator ver)
 {
-  bool in_debian=false;
-
   string pkgname = ver.ParentPkg().Name();
-
 
   pkgCache::VerIterator curver = ver.ParentPkg().CurrentVer();
   std::string current_source_ver;
@@ -403,17 +400,10 @@ void view_changelog(pkgCache::VerIterator ver)
 	: current_source_rec.SourceVer();
     }
 
-  // TODO: add a configurable association between origins and changelog URLs.
-  for(pkgCache::VerFileIterator vf=ver.FileList();
-      !vf.end() && !in_debian; ++vf)
-    if(!vf.File().end() && vf.File().Origin()!=NULL &&
-       strcmp(vf.File().Origin(), "Debian")==0)
-      in_debian=true;
-
-  if(!in_debian)
+  // check if we know the origin
+  if ( ! aptitude::apt::check_valid_origin(ver) )
     {
-      show_message(_("You can only view changelogs of official Debian packages."),
-		   NULL, cw::get_style("Error"));
+      check_apt_errors();
       return;
     }
 
