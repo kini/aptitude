@@ -63,12 +63,12 @@ namespace aptitude
 	const char* action_str = (act == action_add) ? _("add") : _("remove");
 	if (operation_result && verbose>0)
 	  {
-	    fprintf(stderr, _("Applied user-tag operation '%s %s' to: %s\n"),
+	    fprintf(stderr, _("Applied user-tag operation '%s' '%s' to: %s\n"),
 		    action_str, tag.c_str(), pkg.FullName(true).c_str());
 	  }
 	else if (!operation_result)
 	  {
-	    fprintf(stderr, _("Failed to apply user-tag operation '%s %s' to: %s\n"),
+	    fprintf(stderr, _("Failed to apply user-tag operation '%s' '%s' to: %s\n"),
 		    action_str, tag.c_str(), pkg.FullName(true).c_str());
 	  }
       }
