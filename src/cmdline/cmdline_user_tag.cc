@@ -220,9 +220,9 @@ namespace aptitude
 	  exit_status = 2;
 	}
 
-      if (_error->PendingError())
+      if (!_error->empty(GlobalError::MsgType::NOTICE))
 	{
-	  _error->DumpErrors();
+	  _error->DumpErrors(GlobalError::MsgType::NOTICE);
 	}
 
       return exit_status;
