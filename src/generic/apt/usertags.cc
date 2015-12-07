@@ -56,13 +56,12 @@ bool parse_user_tag(std::string& out,
 }
 
 
-bool user_tag_collection::check_valid(const std::string& tag, std::string::size_type& error_position)
+bool user_tag_collection::check_valid(const std::string& tag)
 {
   // empty is invalid
   if (tag.empty())
     {
       _error->Error(_("Invalid empty user-tag"));
-      error_position = 0;
       return false;
     }
 
@@ -72,7 +71,6 @@ bool user_tag_collection::check_valid(const std::string& tag, std::string::size_
       if (! std::isgraph(tag[i]))
 	{
 	  _error->Error(_("Invalid character in user-tag at position %zu (use only printable characters and no spaces)"), i);
-	  error_position = i;
 	  return false;
 	}
     }

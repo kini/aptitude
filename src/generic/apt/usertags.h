@@ -106,7 +106,7 @@ class user_tag_collection
    * "Tags" don't contain non-printable characters, tabs, newlines or whitespace
    * in general (including simple spaces)
    */
-  static bool check_valid(const std::string& tag, std::string::size_type& error_position);
+  static bool check_valid(const std::string& tag);
 
 private:
 
