@@ -71,4 +71,6 @@ libgeneric_apt_a_SOURCES = \
         tags.cc             \
         tags.h              \
         tasks.cc            \
-        tasks.h
+        tasks.h             \
+        usertags.cc         \
+        usertags.h
