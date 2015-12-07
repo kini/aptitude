@@ -91,18 +91,38 @@ bool user_tag_collection::parse(std::set<user_tag>& tags,
 	{
 	  return false;
 	}
-
-      typedef std::map<std::string, user_tag_reference>::const_iterator	user_tags_index_iterator;
-      user_tags_index_iterator found = user_tags_index.find(tag);
-      if (found == user_tags_index.end())
+      else
 	{
-	  user_tag_reference loc(user_tags.size());
-	  user_tags.push_back(tag);
-	  std::pair<user_tags_index_iterator, bool> tmp(user_tags_index.insert(std::make_pair(tag, loc)));
-	  found = tmp.first;
+	  user_tag_reference ref;
+	  add(tag, ref);
+	  tags.insert(user_tag{ref});
 	}
-      tags.insert(user_tag(found->second));
     }
 
   return true;
+}
+
+
+bool user_tag_collection::add(const std::string& tag, user_tag_reference& ref)
+{
+  bool added = false;
+
+  typedef std::map<std::string, user_tag_reference>::const_iterator user_tags_index_iterator;
+
+  // try to find if already there, otherwise insert
+  user_tags_index_iterator found = user_tags_index.find(tag);
+  if (found == user_tags_index.end())
+    {
+      user_tag_reference loc(user_tags.size());
+      user_tags.push_back(tag);
+
+      std::pair<user_tags_index_iterator, bool> insert_result(user_tags_index.insert(std::make_pair(tag, loc)));
+      found = insert_result.first;
+      added = insert_result.second;
+    }
+
+  // either the found one or the newly inserted
+  ref = found->second;
+
+  return added;
 }

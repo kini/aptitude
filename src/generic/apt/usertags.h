@@ -71,6 +71,9 @@ class user_tag
 
 
 /** Collection of user tags
+ *
+ * It is implemented as a collection of strings plus references pointing to
+ * them, to save space (many packages can share the same tag(s)).
  */
 class user_tag_collection
 {
@@ -79,10 +82,36 @@ class user_tag_collection
  public:
 
   /** Get tag string from reference
+   *
+   * @returns User tag as string, empty if not valid
    */
-  const std::string& deref_user_tag(const user_tag& tag) const
+  std::string deref_user_tag(const user_tag& tag) const
   {
-    return user_tags[tag.tag_num];
+    if (tag.tag_num < 0 || static_cast<size_t>(tag.tag_num) >= user_tags.size())
+      {
+	return {};
+      }
+    else
+      {
+	return user_tags[tag.tag_num];
+      }
+  }
+
+  /** Get tag reference from string
+   *
+   * @returns User tag reference, -1 if not valid
+   */
+  user_tag_reference get_ref(const std::string& tag) const
+  {
+    auto it = user_tags_index.find(tag);
+    if (it != user_tags_index.end())
+      {
+	return it->second;
+      }
+    else
+      {
+	return -1;
+      }
   }
 
   /** Clear the state */
@@ -100,6 +129,17 @@ class user_tag_collection
   bool parse(std::set<user_tag>& tags,
 	     const char *& start, const char* end,
 	     const std::string& package_name);
+
+  /** Add tag to collection
+   *
+   * @param tag Tag to add
+   *
+   * @param ref User tag reference of the tag added (or the one present, if
+   *            previously there)
+   *
+   * @return Whether the operation succeeded
+   */
+  bool add(const std::string& tag, user_tag_reference& ref);
 
   /** Check if the tag is valid/allowed
    *
