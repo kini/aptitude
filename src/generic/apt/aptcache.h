@@ -23,6 +23,8 @@
 
 #include <config.h>
 
+#include "usertags.h"
+
 #include <cwidget/generic/util/bool_accumulate.h>
 
 #include <apt-pkg/depcache.h>
@@ -35,6 +37,7 @@
 #include <map>
 #include <set>
 #include <vector>
+
 
 /** \brief Replacements for the Apt cache and dependency cache file classes
  * 
@@ -58,38 +61,11 @@ template<typename PackageUniverse> class generic_solution;
 
 class aptitudeDepCache:public pkgDepCache, public sigc::trackable
 {
-  typedef int user_tag_reference;
-
 public:
   /** This is a general enum that's used for several purposes by the
    *  extended state.  Not every value is valid in every case.
    */
   enum changed_reason {manual, user_auto, libapt, from_resolver, unused};
-
-  /** \brief An opaque type used to store references into the
-   *  user-tags list.
-   *
-   *  We only store one copy of each tag string, to save space.
-   */
-  class user_tag
-  {
-    friend class aptitudeDepCache;
-    user_tag_reference tag_num;
-    explicit user_tag(const user_tag_reference &_tag_num) : tag_num(_tag_num)
-    {
-    }
-
-  public:
-    bool operator==(const user_tag &other) const
-    {
-      return tag_num == other.tag_num;
-    }
-
-    bool operator<(const user_tag &other) const
-    {
-      return tag_num < other.tag_num;
-    }
-  };
 
   /** This structure augments the basic depCache state structure to
    *  support special aptitude features.
@@ -210,6 +186,9 @@ public:
    */
   bool read_only;
 
+  /** Collection of all user tags */
+  user_tag_collection user_tags;
+
   // Some internal classes for undo information
   class apt_undoer;
   class forget_undoer;
@@ -250,33 +229,8 @@ public:
     friend class aptitudeDepCache;
   };
 
-  const std::string &deref_user_tag(const user_tag &tag) const
-  {
-    return user_tags[tag.tag_num];
-  }
 private:
-  void parse_user_tags(std::set<user_tag> &tags,
-		       const char *&start, const char *end,
-		       const std::string &package_name);
-
   aptitude_state *package_states;
-  // To speed the program up and save memory, I only store one copy of
-  // each distinct tag, and keep a reference to this list.  The list
-  // is not managed especially intelligently: if you repeatedly add
-  // and remove never-before-seen tags to a package, it will grow
-  // without bound.  I don't consider this a problem, because users
-  // are unlikely to add "very many" (say, more than a few hundred)
-  // tags in a single session.  If it does become a problem, tags can
-  // be reference-counted, at the expense of maintaining an explicit
-  // free list.
-  std::vector<std::string> user_tags;
-  // Stores the reference corresponding to each string.
-  std::map<std::string, user_tag_reference> user_tags_index;
-  // Read a set of user tags from the given string region
-  // and write the tags into the index and into the given
-  // set of tags.
-  void parse_usertags(std::set<user_tag_reference> &tags,
-		      const char *&start, const char *end);
 
   int lock;
   // The lock on the extra-info file.

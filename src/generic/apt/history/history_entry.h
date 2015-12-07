@@ -25,6 +25,7 @@
 #include <apt-pkg/pkgcache.h> // For enumerations.
 
 #include <generic/apt/aptcache.h>
+#include <generic/apt/usertags.h>
 
 #include <cwidget/generic/util/exception.h>
 #include <cwidget/generic/util/ref_ptr.h>
@@ -638,7 +639,7 @@ namespace aptitude
 
       std::vector<resolver_action> resolver_actions;
 
-      std::set<aptitudeDepCache::user_tag> old_user_tags, new_user_tags;
+      std::set<user_tag> old_user_tags, new_user_tags;
 
       std::vector<cwidget::util::ref_ptr<entry> > sub_entries;
 

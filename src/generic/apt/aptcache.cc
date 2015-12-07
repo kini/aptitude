@@ -239,94 +239,6 @@ void aptitudeDepCache::set_read_only(bool new_read_only)
   read_only = new_read_only;
 }
 
-namespace
-{
-  // User tag syntax:
-  // 
-  // Tag-List ::= Tag+
-  // Tag      ::= regexp([^[:space:]]) | regexp("([^\\"]|\\.)")
-  bool parse_user_tag(std::string &out,
-		      const char *&start, const char *end,
-		      const std::string &package_name)
-  {
-    const char * const initial_start = start;
-    while(start != end && isspace(*start))
-      ++start;
-
-    if(start == end)
-      return false;
-    else if(*start != '"')
-      {
-	while(start != end && !isspace(*start))
-	  {
-	    out += *start;
-	    ++start;
-	  }
-	return true;
-      }
-    else
-      {
-	++start;
-	while(start != end && *start != '"')
-	  {
-	    if(*start == '\\')
-	      {
-		++start;
-		if(start == end)
-		  return _error->Error(_("Error parsing a user-tag for the package %s: unexpected end-of-line following %s."),
-				       package_name.c_str(),
-				       (std::string("\"") + std::string(initial_start, start)).c_str());
-		else
-		  {
-		    out += *start;
-		    ++start;
-		  }
-	      }
-	    else
-	      {
-		out += *start;
-		++start;
-	      }
-	  }
-
-	if(start == end)
-	  return _error->Error(_("Unterminated '\"' in the user-tags list of the package %s."),
-			       package_name.c_str());
-	else
-	  {
-	    ++start;
-	    return true;
-	  }
-      }
-  }
-}
-
-void aptitudeDepCache::parse_user_tags(std::set<user_tag> &tags,
-				       const char *&start, const char *end,
-				       const std::string &package_name)
-{
-  while(start != end)
-    {
-      while(start != end && isspace(*start))
-	++start;
-
-      std::string tag;
-      parse_user_tag(tag, start, end, package_name);
-
-      typedef std::map<std::string, user_tag_reference>::const_iterator
-	user_tags_index_iterator;
-      user_tags_index_iterator found = user_tags_index.find(tag);
-      if(found == user_tags_index.end())
-	{
-	  user_tag_reference loc(user_tags.size());
-	  user_tags.push_back(tag);
-	  std::pair<user_tags_index_iterator, bool> tmp(user_tags_index.insert(std::make_pair(tag, loc)));
-	  found = tmp.first;
-	}
-      tags.insert(user_tag(found->second));
-    }
-}
-
 bool aptitudeDepCache::build_selection_list(OpProgress &Prog, bool WithLock,
 					    bool do_initselections,
 					    const char *status_fname)
@@ -473,9 +385,16 @@ bool aptitudeDepCache::build_selection_list(OpProgress &Prog, bool WithLock,
 
 	      {
 		const char *start, *end;
-		if(section.Find("User-Tags", start, end))
-		  parse_user_tags(pkg_state.user_tags, start, end,
-				  package_name);
+		if (section.Find("User-Tags", start, end))
+		  {
+		    bool parse_ok = user_tags.parse(pkg_state.user_tags, start, end,
+						    package_name);
+		    if (!parse_ok)
+		      {
+			_error->Error(_("Cannot parse user-tags for package: %s: '%s'"), pkg.FullName(true).c_str(), string(start, end).c_str());
+			// do not return now, loading would hang
+		      }
+		  }
 	      }
 
 	      if(do_dselect && pkg->SelectedState != last_dselect_state)
@@ -820,47 +739,18 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
 
 	    // Build the list of usertags for this package.
 	    std::string user_tags;
-	    if(!estate.user_tags.empty())
+	    if (!estate.user_tags.empty())
 	      {
-		user_tags = "User-Tags: ";
+		user_tags = "User-Tags:";
 
-		// Put the usertags in sorted order so we get
-		// predictable outputs.
-		std::vector<std::string> tmp = get_user_tags(i);
+		// get sorted usertags so we get predictable outputs
+		std::vector<std::string> sorted_pkg_user_tags = get_user_tags(i);
 
-		bool first = true;
-		// Append user tags to the field, using double-quotes
-		// if the tag contains spaces or double-quotes.
-		for(std::vector<std::string>::const_iterator it = tmp.begin();
-		    it != tmp.end(); ++it)
+		// append user tags to the field
+		for (const auto& tag : sorted_pkg_user_tags)
 		  {
-		    if(first)
-		      first = false;
-		    else
-		      user_tags.push_back(' ');
-
-		    if(it->find_first_of(" \"\\") != std::string::npos)
-		      {
-			user_tags.push_back('"');
-			for(std::string::const_iterator tag_it = it->begin();
-			    tag_it != it->end(); ++tag_it)
-			  {
-			    switch(*tag_it)
-			      {
-			      case '"':
-			      case '\\':
-				user_tags.push_back('\\');
-				user_tags.push_back(*tag_it);
-				break;
-			      default:
-				user_tags.push_back(*tag_it);
-				break;
-			      }
-			  }
-			user_tags.push_back('"');
-		      }
-		    else
-		      user_tags.insert(user_tags.size(), *it);
+		    user_tags.push_back(' ');
+		    user_tags += tag;
 		  }
 
 		user_tags.push_back('\n');
@@ -1634,39 +1524,39 @@ bool aptitudeDepCache::attach_user_tag(const PkgIterator &pkg,
       return false;
     }
 
-  // Find the tag in our cache or add it.
-  typedef std::map<std::string, user_tag_reference>::const_iterator index_ref;
-  index_ref found = user_tags_index.find(tag);
-
-  if(found == user_tags_index.end())
+  // check for valid tag
+  if ( ! user_tags.check_valid(tag) )
     {
-      user_tag_reference loc = user_tags.size();
-      user_tags.push_back(tag);
-      std::pair<index_ref, bool> tmp(user_tags_index.insert(std::make_pair(tag, loc)));
-      found = tmp.first;
+      return false;
     }
 
-  std::pair<std::set<user_tag>::const_iterator, bool> insert_result =
-    get_ext_state(pkg).user_tags.insert(user_tag(found->second));
+  // find the tag in cache or add it
+  user_tag_reference ref;
+  user_tags.add(tag, ref);
 
-  if (insert_result.second)
+  // try to add to package
+  aptitude_state& estate = get_ext_state(pkg);
+  auto found = estate.user_tags.find(user_tag{ref});
+  if (found != estate.user_tags.end())
     {
-      dirty = true;
-      if(undo != NULL)
-	undo->add_item(new attach_user_tag_undoer(this, pkg, tag));
-
+      // tag already present, return "OK"
+      _error->Notice(_("User-tag '%s' already present for %s"), tag.c_str(), pkg.FullName(true).c_str());
       return true;
     }
   else
     {
-      auto found = user_tags_index.find(tag);
-      if (found != user_tags_index.end())
+      auto insert_result = estate.user_tags.insert(user_tag{ref});
+      if (insert_result.second)
 	{
-	  // tag already present, return "OK"
+	  dirty = true;
+	  if (undo != NULL)
+	    undo->add_item(new attach_user_tag_undoer(this, pkg, tag));
+
 	  return true;
 	}
       else
 	{
+	  _error->Error(_("Could not add user-tag '%s' to package %s"), tag.c_str(), pkg.FullName(true).c_str());
 	  return false;
 	}
     }
@@ -1683,26 +1573,34 @@ bool aptitudeDepCache::detach_user_tag(const PkgIterator &pkg,
       return false;
     }
 
-  std::map<std::string, user_tag_reference>::const_iterator found =
-    user_tags_index.find(tag);
-
-  if(found == user_tags_index.end())
-    return false;
-
-  std::set<user_tag>::size_type num_erased =
-    get_ext_state(pkg).user_tags.erase(user_tag(found->second));
-
-  if(num_erased > 0)
+  // check for valid tag
+  if ( ! user_tags.check_valid(tag) )
     {
-      dirty = true;
-      if(undo != NULL)
-	undo->add_item(new detach_user_tag_undoer(this, pkg, tag));
+      return false;
+    }
 
-      return true;
+  user_tag_reference tag_ref = user_tags.get_ref(tag);
+  if (tag_ref < 0)
+    {
+      _error->Error(_("Could not find valid user-tag '%s'"), tag.c_str());
+      return false;
     }
   else
     {
-      return false;
+      std::set<user_tag>::size_type num_erased = get_ext_state(pkg).user_tags.erase(user_tag{tag_ref});
+      if (num_erased > 0)
+	{
+	  dirty = true;
+	  if(undo != NULL)
+	    undo->add_item(new detach_user_tag_undoer(this, pkg, tag));
+
+	  return true;
+	}
+      else
+	{
+	  _error->Error(_("Could not remove user-tag '%s' from package %s"), tag.c_str(), pkg.FullName(true).c_str());
+	  return false;
+	}
     }
 }
 
@@ -1719,7 +1617,7 @@ std::vector<std::string> aptitudeDepCache::get_user_tags(const PkgIterator& pkg)
 
   for (const auto& it : estate.user_tags)
     {
-      all_tags.push_back(deref_user_tag(it));
+      all_tags.push_back(user_tags.deref_user_tag(it));
     }
 
   std::sort(all_tags.begin(), all_tags.end());

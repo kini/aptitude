@@ -58,6 +58,9 @@ bool parse_user_tag(std::string& out,
 
 bool user_tag_collection::check_valid(const std::string& tag)
 {
+  // check valid characters, it is a reasonable request that "tags" don't
+  // contain tabs, newlines or even spaces (see #792601)
+
   // empty is invalid
   if (tag.empty())
     {

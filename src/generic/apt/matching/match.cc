@@ -24,6 +24,7 @@
 #include <generic/apt/apt.h>
 #include <generic/apt/tags.h>
 #include <generic/apt/tasks.h>
+#include <generic/apt/usertags.h>
 #include <generic/util/progress_info.h>
 #include <generic/util/util.h>
 
@@ -291,14 +292,14 @@ namespace aptitude
     // collected in one place.
     class search_cache::implementation : public search_cache
     {
-      typedef std::map<std::pair<ref_ptr<pattern>, aptitudeDepCache::user_tag>, ref_ptr<match> > user_tag_match_map;
+      typedef std::map<std::pair<ref_ptr<pattern>, user_tag>, ref_ptr<match> > user_tag_match_map;
 
       user_tag_match_map user_tag_matches;
 
       struct compare_user_tag_match_by_tag
       {
-	bool operator()(const std::pair<aptitudeDepCache::user_tag, ref_ptr<match> > &p1,
-			const std::pair<aptitudeDepCache::user_tag, ref_ptr<match> > &p2) const
+	bool operator()(const std::pair<user_tag, ref_ptr<match> > &p1,
+			const std::pair<user_tag, ref_ptr<match> > &p2) const
 	{
 	  return p1.first < p2.first;
 	}
@@ -402,11 +403,11 @@ namespace aptitude
       // the match up using the internal cache; otherwise, it creates
       // a new cache entry for the given pattern and tag.
       ref_ptr<match> find_user_tag_match(const ref_ptr<pattern> &p,
-					 aptitudeDepCache::user_tag tag,
+					 user_tag tag,
 					 const aptitudeDepCache &cache,
 					 bool debug)
       {
-	std::pair<ref_ptr<pattern>, aptitudeDepCache::user_tag>
+	std::pair<ref_ptr<pattern>, user_tag>
 	  key(std::make_pair(p, tag));
 	user_tag_match_map::iterator cached_match(user_tag_matches.find(key));
 
@@ -414,7 +415,7 @@ namespace aptitude
 	  {
 	    ref_ptr<match> m = evaluate_regexp(p,
 					       p->get_user_tag_regex_info(),
-					       cache.deref_user_tag(tag).c_str(),
+					       cache.user_tags.deref_user_tag(tag).c_str(),
 					       debug);
 
 	    user_tag_matches[key] = m;
@@ -1734,13 +1735,13 @@ namespace aptitude
 	      pkgCache::PkgIterator pkg =
 		target.get_package_iterator(cache);
 
-	      const std::set<aptitudeDepCache::user_tag> &user_tags =
+	      const std::set<user_tag> &user_tags =
 		cache.get_ext_state(pkg).user_tags;
 
-	      for(std::set<aptitudeDepCache::user_tag>::const_iterator it =
+	      for(std::set<user_tag>::const_iterator it =
 		    user_tags.begin(); it != user_tags.end(); ++it)
 		{
-		  aptitudeDepCache::user_tag tag(*it);
+		  user_tag tag(*it);
 
 		  ref_ptr<match> m(search_info->find_user_tag_match(p,
 								    tag,
