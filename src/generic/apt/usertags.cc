@@ -31,13 +31,13 @@
 // User tag syntax:
 // 
 // Tag-List ::= Tag+
-// Tag      ::= regexp([^[:space:]])
+// Tag      ::= regexp([^[:space:]]) | regexp([^[,]])
 bool parse_user_tag(std::string& out,
 		    const char *& start, const char* end,
 		    const std::string& package_name)
 {
   // consume whitespace
-  while (start != end && isspace(*start))
+  while (start != end && (isspace(*start) || (*start == ',')))
     ++start;
 
   if (start == end)
@@ -46,7 +46,7 @@ bool parse_user_tag(std::string& out,
     }
   else
     {
-      while (start != end && !isspace(*start))
+      while (start != end && !isspace(*start) && (*start != ','))
 	{
 	  out += *start;
 	  ++start;
@@ -68,9 +68,9 @@ bool user_tag_collection::check_valid(const std::string& tag)
   // check for invalid/unallowed characters
   for (size_t i = 0; i < tag.size(); ++i)
     {
-      if (! std::isgraph(tag[i]))
+      if (! std::isgraph(tag[i]) || tag[i] == ',')
 	{
-	  _error->Error(_("Invalid character in user-tag at position %zu (use only printable characters and no spaces)"), i);
+	  _error->Error(_("Invalid character in user-tag at position %zu (use only printable characters and no spaces or comma)"), i);
 	  return false;
 	}
     }
