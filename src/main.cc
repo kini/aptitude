@@ -148,8 +148,9 @@ std::string handle_wtomb_error(int error,
 
 static void show_version()
 {
-  printf(_("%s %s compiled at %s %s\n"),
-	   PACKAGE, VERSION, __DATE__, __TIME__);
+  // don't use __DATE__ or __TIME__, for reproducible builds
+  printf("%s %s\n", PACKAGE, VERSION);
+
 #ifdef __GNUC__
   printf(_("Compiler: g++ %s\n"), __VERSION__);
 #endif
