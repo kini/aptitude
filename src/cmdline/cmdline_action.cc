@@ -306,8 +306,8 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
     }
 
   pkgCache::VerIterator ver=pkg.CurrentVer();
-  if(action==cmdline_install || action == cmdline_installauto)
-    ver=cmdline_find_ver(pkg, source, sourcestr);
+  if (action==cmdline_install || action == cmdline_installauto || action == cmdline_upgrade)
+    ver = cmdline_find_ver(pkg, source, sourcestr);
 
   pkgDepCache::StateCache &pkg_state((*apt_cache_file)[pkg]);
 
@@ -323,8 +323,11 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 	       ver.VerStr());
       break;
     case cmdline_upgrade:
-      if(pkg_state.Status == 1)
-	to_install.insert(pkg);
+      // allow downgrades when pinned high -- see #344700, #348679
+      if (pkg.CurrentVer() != ver)
+	{
+	  to_install.insert(pkg);
+	}
       else if(pkg_state.Status > 1)
 	{
 	  printf(_("%s is not currently installed, so it will not be upgraded.\n"),
@@ -403,9 +406,9 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 	(*apt_cache_file)->mark_auto_installed(pkg, true, NULL);
       break;
     case cmdline_upgrade:
-      if(pkg_state.Status == 1)
-	(*apt_cache_file)->mark_install(pkg, allow_auto && aptcfg->FindB(PACKAGE "::Auto-Install", true),
-					false, NULL);
+      (*apt_cache_file)->set_candidate_version(ver, NULL);
+      (*apt_cache_file)->mark_install(pkg, allow_auto && aptcfg->FindB(PACKAGE "::Auto-Install", true),
+				      false, NULL);
       break;
     case cmdline_remove:
       (*apt_cache_file)->mark_delete(pkg, false, false, NULL);

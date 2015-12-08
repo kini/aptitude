@@ -624,7 +624,9 @@ void aptitudeDepCache::get_upgradable(bool ignore_removed,
 
       if(!ignore_removed)
 	{
-	  do_upgrade = state.Status > 0 && !is_held(p);
+	  // allow downgrades when pinned high -- see #344700, #348679
+	  do_upgrade = !is_held(p) && !GetCandidateVer(p).end() && (GetCandidateVer(p) != p.CurrentVer());
+
 	  if(do_upgrade)
 	    LOG_DEBUG(logger, p.FullName(false) << " is upgradable.");
 	  else
@@ -641,7 +643,8 @@ void aptitudeDepCache::get_upgradable(bool ignore_removed,
 
 	      // Fall through
 	    case pkgCache::State::Install:
-	      if(state.Status > 0 && !is_held(p))
+	      // allow downgrades when pinned high -- see #344700, #348679
+	      if (!is_held(p) && !GetCandidateVer(p).end() && (GetCandidateVer(p) != p.CurrentVer()))
 		{
 		  do_upgrade = true;
 		  LOG_TRACE(logger, p.FullName(false) << " is upgradable.");

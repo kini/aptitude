@@ -104,6 +104,16 @@ Version 0.7.5 UNRELEASED
 
   * Use new user-tags implementation, more secure (Closes: #792601)
 
+  * Upgrades can do downgrades when pinned high (>1000, see apt_preferences)
+    (Closes: #344700, #348679)
+
+    "install" did the correct thing, but the differet upgrade modes
+    (command-line and TUI/curses) did not consider to downgrade versions pinned
+    higher than 1000, as established in apt_preferences.  apt also behaves in
+    this way, so it improves compatibility.
+
+    Note that downgrading is highly discouraged in general, though.
+
 - User visible changes:
 
   * [cmdline] Minor improvements to help (Closes: #497136)
