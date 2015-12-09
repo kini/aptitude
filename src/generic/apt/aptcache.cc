@@ -611,7 +611,6 @@ void aptitudeDepCache::get_upgradable(bool ignore_removed,
 
   for(pkgCache::PkgIterator p = PkgBegin(); !p.end(); ++p)
     {
-      StateCache &state = (*this)[p];
       aptitude_state &estate = get_ext_state(p);
 
       if(p.CurrentVer().end())
