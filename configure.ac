@@ -666,9 +666,7 @@ AC_ARG_ENABLE(resolver-sanity-checks,
 	fi
 	)
 
-# We need -fno-strict-aliasing to avoid compiler errors that I can't
-# figure out how to fix.
-CXXFLAGS="$CXXFLAGS -fno-strict-aliasing -Wall $WERROR"
+CXXFLAGS="$CXXFLAGS -Wall $WERROR"
 
 AC_SUBST(SRCDIRS)
 AC_SUBST(DOCDIRS)
