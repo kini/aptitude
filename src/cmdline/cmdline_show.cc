@@ -425,14 +425,24 @@ cw::fragment *version_file_fragment(const pkgCache::VerIterator &ver,
 
   fragments.push_back(cw::fragf("%s%s%n", _("Uncompressed Size: "),
 			    SizeToStr(ver->InstalledSize).c_str()));
-  if(verbose>0)
+  if (verbose>0)
     {
       fragments.push_back(cw::fragf("%s%s%n", _("Compressed Size: "),
 				SizeToStr(ver->Size).c_str()));
       fragments.push_back(cw::fragf("%s%s%n", _("Filename: "),
 				rec.FileName().c_str()));
-      fragments.push_back(cw::fragf("%s%s%n", _("MD5sum: "),
-				rec.MD5Hash().c_str()));
+
+      // hashes (md5sum, sha*sum, etc)
+      std::vector<std::pair<std::string, std::string>> sorted_hashes;
+      for (const auto& it : rec.Hashes())
+	{
+	  sorted_hashes.push_back({ it.HashType(), it.HashValue() });
+	}
+      std::sort(sorted_hashes.begin(), sorted_hashes.end(), [](const auto& a, const auto& b) { return a.first < b.first; });
+      for (const auto& it : sorted_hashes)
+	{
+	  fragments.push_back(cw::fragf("%s: %s%n", it.first.c_str(), it.second.c_str()));
+	}
 
       if(verbose<2) // Show all archives in a list.
 	fragments.push_back(archive_lst_frag(ver.FileList(), _("Archive")));
