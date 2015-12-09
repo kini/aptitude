@@ -625,7 +625,7 @@ void aptitudeDepCache::get_upgradable(bool ignore_removed,
       if(!ignore_removed)
 	{
 	  // allow downgrades when pinned high -- see #344700, #348679
-	  do_upgrade = !is_held(p) && !GetCandidateVer(p).end() && (GetCandidateVer(p) != p.CurrentVer());
+	  do_upgrade = !is_held(p) && !GetCandidateVersion(p).end() && (GetCandidateVersion(p) != p.CurrentVer());
 
 	  if(do_upgrade)
 	    LOG_DEBUG(logger, p.FullName(false) << " is upgradable.");
@@ -644,7 +644,7 @@ void aptitudeDepCache::get_upgradable(bool ignore_removed,
 	      // Fall through
 	    case pkgCache::State::Install:
 	      // allow downgrades when pinned high -- see #344700, #348679
-	      if (!is_held(p) && !GetCandidateVer(p).end() && (GetCandidateVer(p) != p.CurrentVer()))
+	      if (!is_held(p) && !GetCandidateVersion(p).end() && (GetCandidateVersion(p) != p.CurrentVer()))
 		{
 		  do_upgrade = true;
 		  LOG_TRACE(logger, p.FullName(false) << " is upgradable.");
@@ -736,8 +736,8 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
 
 	    if(state.Install() &&
 	       !estate.candver.empty() &&
-	       (GetCandidateVer(i).end() ||
-		GetCandidateVer(i).VerStr() != estate.candver))
+	       (GetCandidateVersion(i).end() ||
+		GetCandidateVersion(i).VerStr() != estate.candver))
 	      tailstr = "Version: " + estate.candver + "\n";
 
 	    // Build the list of usertags for this package.
@@ -782,9 +782,9 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
 		std::string select_arch = i.Arch();
 
 		// all install, downgrade, upgrade, etc -- try to use candidate version
-		if (state.Install() && !GetCandidateVer(i).end())
+		if (state.Install() && !GetCandidateVersion(i).end())
 		  {
-		    select_arch = GetCandidateVer(i).Arch();
+		    select_arch = GetCandidateVersion(i).Arch();
 		  }
 		// all delete, purge, hold, keep etc -- try to use current version
 		else if (! i.CurrentVer().end())
@@ -1311,7 +1311,7 @@ void aptitudeDepCache::internal_mark_keep(const PkgIterator &Pkg, bool Automatic
   if(was_garbage_removed)
     MarkAuto(Pkg, false);
 
-  set_candidate_version(GetCandidateVer(Pkg), NULL);
+  set_candidate_version(GetCandidateVersion(Pkg), NULL);
 
   pkgDepCache::MarkKeep(Pkg, false, !Automatic);
   pkgDepCache::SetReInstall(Pkg, false);
@@ -1365,7 +1365,7 @@ void aptitudeDepCache::set_candidate_version(const VerIterator &ver,
 
       aptitude_state &estate = get_ext_state(ver.ParentPkg());
 
-      if(ver!=GetCandidateVer(ver.ParentPkg()))
+      if(ver!=GetCandidateVersion(ver.ParentPkg()))
 	estate.candver=ver.VerStr();
       else
 	estate.candver="";
