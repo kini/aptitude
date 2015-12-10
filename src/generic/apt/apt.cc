@@ -491,7 +491,7 @@ void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
     string xdg_cache_home;
     if ( ! strempty(env_XDG_CACHE_HOME))
       {
-	xdg_cache_home = string(env_XDG_CACHE_HOME);
+	xdg_cache_home = string(env_XDG_CACHE_HOME) + "/.cache";
       }
     else
       {
