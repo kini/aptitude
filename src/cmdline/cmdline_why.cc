@@ -1,6 +1,7 @@
 // cmdline_why.cc                                -*-c++-*-
 //
 //   Copyright (C) 2007-2010 Daniel Burrows
+//   Copyright (C) 2015 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -1181,10 +1182,42 @@ cw::fragment *do_why(const std::vector<cwidget::util::ref_ptr<pattern> > &leaves
     {
       success = false;
 
-      if(root_is_removal)
-	return cw::fragf(_("Unable to find a reason to remove %s.\n"), root.FullName(true).c_str());
+      std::vector<cw::fragment *> fragments;
+
+      pkgCache::VerIterator ver;
+
+      ver = root.CurrentVer();
+      if (!ver.end() && ver.VerStr())
+	{
+	  std::string message;
+	  if (is_auto_installed(root))
+	    message = _("Automatically installed, current version %s, priority %s\n");
+	  else
+	    message = _("Manually installed, current version %s, priority %s\n");
+
+	  fragments.push_back(cw::fragf(message.c_str(),
+					ver.VerStr(),
+					aptitude::apt::priority_to_string(static_cast<pkgCache::State::VerPriority>(ver->Priority), false).c_str()));
+	}
       else
-	return cw::fragf(_("Unable to find a reason to install %s.\n"), root.FullName(true).c_str());
+	{
+	  fragments.push_back(cw::fragf(_("Not currently installed\n")));
+	}
+
+      ver = (*apt_cache_file)->GetCandidateVersion(root);
+      if (!ver.end() && ver.VerStr() && ver != root.CurrentVer())
+	fragments.push_back(cw::fragf(_("The candidate version %s has priority %s\n"),
+				      ver.VerStr(),
+				      aptitude::apt::priority_to_string(static_cast<pkgCache::State::VerPriority>(ver->Priority), false).c_str()));
+
+      if (root_is_removal)
+	fragments.push_back(cw::fragf(_("No dependencies require to remove %s\n"), root.FullName(true).c_str()));
+      else
+	fragments.push_back(cw::fragf(_("No dependencies require to install %s\n"), root.FullName(true).c_str()));
+
+
+      return sequence_fragment(fragments);
+
     }
   else if(display_mode == aptitude::why::no_summary)
     return render_reason_columns(solutions, verbosity >= 1);

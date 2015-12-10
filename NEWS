@@ -5,6 +5,17 @@ Version 0.7.6 UNRELEASED
 
   * [cmdline] "show -v" shows all hashes, not only MD5Sum
 
+  * Improvements to "why"/"why-not" (Closes: #729349)
+
+    It now gives more information about installed versions, manually or
+    automatic installations and priority; instead of "Unable to find a reason to
+    install/remove" when no dependencies require or conflict with a pacakge.
+
+    This enhancement is not only for the command-line commands "why" and
+    "why-not" -- it is also for one of the info screens in the bottom half in
+    curses/TUI (cycling with 'i'), and typing 'w PKG' in command line prompts
+    when requesting confirmation.
+
 - Internal changes:
 
   * configure.ac: change order so aptitude CXXFLAGS, CPPFLAGS and LDFLAGS
