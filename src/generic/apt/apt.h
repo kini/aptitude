@@ -348,6 +348,17 @@ inline bool is_auto_installed(const pkgDepCache::StateCache& state)
   return (state.Flags & pkgCache::Flag::Auto);
 }
 
+/** Check if package is auto installed
+ *
+ * @param pkg Package to check
+ *
+ * @return Whether the package is auto installed or not
+ */
+inline bool is_auto_installed(const pkgCache::PkgIterator& pkg)
+{
+  return (apt_cache_file && is_auto_installed((*apt_cache_file)[pkg]));
+}
+
 /** A pair (veriterator,verfile) -- used for building a list of
  *  versions sorted by file location.
  */
