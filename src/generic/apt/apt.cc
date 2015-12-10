@@ -1438,6 +1438,47 @@ namespace aptitude
 {
   namespace apt
   {
+    std::string priority_to_string(const pkgCache::State::VerPriority priority, bool short_form)
+    {
+      if (short_form)
+	{
+	  switch (priority)
+	    {
+	    case pkgCache::State::Important:
+	      // TRANSLATORS: Imp = Important
+	      return _("Imp");
+	    case pkgCache::State::Required:
+	      // TRANSLATORS: Req = Required
+	      return _("Req");
+	    case pkgCache::State::Standard:
+	      // TRANSLATORS: Std = Standard
+	      return _("Std");
+	    case pkgCache::State::Optional:
+	      // TRANSLATORS: Opt = Optional
+	      return _("Opt");
+	    case pkgCache::State::Extra:
+	      // TRANSLATORS: Xtr = Extra
+	      return _("Xtr");
+	    default:
+	      return _("ERR");
+	    }
+	}
+      else
+	{
+	  // this comes translated from apt
+	  const char* str = pkgCache::Priority(priority);
+	  if (strempty(str))
+	    {
+	      return _("ERROR");
+	    }
+	  else
+	    {
+	      return str;
+	    }
+	}
+    }
+
+
     bool is_full_replacement(const pkgCache::DepIterator &dep)
     {
       if(dep.end())

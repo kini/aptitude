@@ -326,41 +326,6 @@ cw::column_disposition pkg_ver_columnizer::setup_column(const pkgCache::VerItera
 	return cw::column_disposition("", 0);
 
       return cw::column_disposition(apt_package_records->Lookup(ver.FileList()).Maintainer(), 0);
-    case priority:
-      if(ver.end())
-	return cw::column_disposition("", 0);
-
-      if(const_cast<pkgCache::VerIterator &>(ver).PriorityType() &&
-	 const_cast<pkgCache::VerIterator &>(ver).PriorityType()[0])
-	return cw::column_disposition(const_cast<pkgCache::VerIterator &>(ver).PriorityType(), 0);
-      else
-	return cw::column_disposition(_("Unknown"), 0);
-    case shortpriority:
-      if(ver.end())
-	return cw::column_disposition("", 0);
-
-      switch(ver->Priority)
-	{
-	case pkgCache::State::Important:
-	  // TRANSLATORS: Imp = Important
-	  return cw::column_disposition(_("Imp"), 0);
-	case pkgCache::State::Required:
-	  // TRANSLATORS: Req = Required
-	  return cw::column_disposition(_("Req"), 0);
-	case pkgCache::State::Standard:
-	  // TRANSLATORS: Std = Standard
-	  return cw::column_disposition(_("Std"), 0);
-	case pkgCache::State::Optional:
-	  // TRANSLATORS: Opt = Optional
-	  return cw::column_disposition(_("Opt"), 0);
-	case pkgCache::State::Extra:
-	  // TRANSLATORS: Xtr = Extra
-	  return cw::column_disposition(_("Xtr"), 0);
-	default:
-	  return cw::column_disposition(_("ERR"), 0);
-	}
-
-      break;
     case section:
       if(ver.end())
 	return cw::column_disposition("", 0);
@@ -410,6 +375,8 @@ cw::column_disposition pkg_ver_columnizer::setup_column(const pkgCache::VerItera
 	  return cw::column_disposition("U", 0);
       }
 
+    case priority:
+    case shortpriority:
     case source:
     case architecture:
     case origin:

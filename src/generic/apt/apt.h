@@ -505,6 +505,17 @@ namespace aptitude
 {
   namespace apt
   {
+    /** Translate from Priority type in apt to a string
+     *
+     * @param priority Priority
+     *
+     * @param short_form Whether to return three letter "code" instead of full
+     * name
+     *
+     * @return Priority as string
+     */
+    std::string priority_to_string(const pkgCache::State::VerPriority priority, bool short_form = false);
+
     /** \return \b true if the given dependency is a Replaces dependency
      *  and participates in a conflicts/provides/replaces relationship.
      *
