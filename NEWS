@@ -35,6 +35,20 @@ Version 0.7.6 UNRELEASED
 
   * New apt function: is_auto_installed(PkgIterator)
 
+  * Lazy initialisation and better encapsulation of metadata download cache
+
+    This avoids some problems in builders, like pbuilder (not all env vars are
+    cleaned, or for some reason the home of the user invoking aptitude inside
+    pbuilder does not exist), and when home or some specific directories are not
+    writable for some reason.
+
+    This "metadata download cache" is only necessary for screenshots (GTK+,
+    possibly Qt?, disabled for a long time and probably removed soon), and to
+    store successfully downloaded changelogs after the user explicitly requests
+    that operation in command line or TUI/curses mode -- which does not happen
+    in every session, and never at all like when autobuilders use aptitude as
+    resolver.
+
 - Documentation:
 
   * manpage:

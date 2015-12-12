@@ -483,7 +483,10 @@ namespace aptitude
 	    {
 	      LOG_TRACE(get_log_category(),
 			"Caching digested changelog as " << changelog_uri);
-	      download_cache->putItem(changelog_uri, digested.get_name());
+
+	      auto download_cache = get_download_cache();
+	      if (download_cache)
+		download_cache->putItem(changelog_uri, digested.get_name());
 	    }
 
 	  cw::util::ref_ptr<aptitude::apt::changelog> parsed =

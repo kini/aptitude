@@ -138,7 +138,7 @@ extern sigc::signal0<void> consume_errors;
 /** \brief Used to cache downloaded data, to avoid multiple
  *  downloads of items such as changelogs and screenshots.
  */
-extern std::shared_ptr<aptitude::util::file_cache> download_cache;
+std::shared_ptr<aptitude::util::file_cache> get_download_cache();
 
 void apt_dumpcfg(const char *root);
 // Dumps a subtree of the configuration to ~/.aptitude/config

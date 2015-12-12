@@ -93,6 +93,10 @@ sigc::signal0<void> consume_errors;
 
 static string apt_native_arch;
 
+// Access to the download_cache
+std::shared_ptr<aptitude::util::file_cache> download_cache;
+
+
 static void reset_interesting_dep_memoization()
 {
   delete[] cached_deps_interesting;
@@ -464,7 +468,22 @@ void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
   LOG_TRACE(logger, "Initializing global dependency resolver manager.");
   resman = new resolver_manager(new_file, imm::map<aptitude_resolver_package, aptitude_resolver_version>());
 
-  LOG_TRACE(logger, "Initializing the download cache.");
+  LOG_DEBUG(logger, "Emitting cache_reloaded().");
+  cache_reloaded();
+
+  LOG_TRACE(logger, "Done emitting cache_reloaded().");
+}
+
+std::shared_ptr<aptitude::util::file_cache> get_download_cache()
+{
+  // return if already initialised
+  if (download_cache)
+    return download_cache;
+
+  logging::LoggerPtr logger(Loggers::getAptitudeAptGlobals());
+
+  LOG_INFO(logger, "Loading download_cache.");
+
   // Open the download cache.  By default, it goes in
   // ~/.cache/aptitude/metadata-download; it has 512Kb of in-memory cache and
   // 10MB of on-disk cache.
@@ -497,9 +516,17 @@ void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
       {
 	const char* env_HOME = getenv("HOME");
 	string home = (! strempty(env_HOME)) ? string(env_HOME) : get_homedir();
-	if ( ! home.empty())
+	if (home.empty())
 	  {
-	    xdg_cache_home = string(env_HOME) + "/.cache";
+	    _error->Error(_("Could not establish home directory (username: '%s')"), get_username().c_str());
+	  }
+	else if ( ! fs::is_directory(home) )
+	  {
+	    _error->Error(_("Home directory does not exist or is not a directory: '%s')"), home.c_str());
+	  }
+	else
+	  {
+	    xdg_cache_home = home + "/.cache";
 	  }
       }
 
@@ -580,10 +607,7 @@ void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
       }
   }
 
-  LOG_DEBUG(logger, "Emitting cache_reloaded().");
-  cache_reloaded();
-
-  LOG_TRACE(logger, "Done emitting cache_reloaded().");
+  return download_cache;
 }
 
 void apt_reload_cache(OpProgress *progress_bar, bool do_initselections,

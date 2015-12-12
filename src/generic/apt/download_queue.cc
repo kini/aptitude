@@ -340,7 +340,10 @@ namespace aptitude
 		     << lastModifiedTimeStr << "]) : "
 		     << LookupTag(Message, "Message"));
 
-	    download_cache->putItem(job->get_uri(), job->get_filename().get_name(), lastModifiedTime);
+	    auto download_cache = get_download_cache();
+	    if (download_cache)
+	      download_cache->putItem(job->get_uri(), job->get_filename().get_name(), lastModifiedTime);
+
 	    job->invoke_success(job->get_filename());
 	  }
 
@@ -561,7 +564,8 @@ namespace aptitude
 
 	void process_job(const std::shared_ptr<start_request> &job)
 	{
-	  if(download_cache)
+	  auto download_cache = get_download_cache();
+	  if (download_cache)
 	    {
 	      time_t mtime;
 	      temp::name filename =

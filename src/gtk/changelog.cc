@@ -864,8 +864,9 @@ namespace gui
 		  << " under the cache URI "
 		  << uri);
 
-	predigested_file = download_cache->getItem(uri);
-	if(predigested_file.valid())
+	auto download_cache = get_download_cache();
+	predigested_file = download_cache && download_cache->getItem(uri);
+	if (predigested_file.valid())
 	  LOG_TRACE(logger, "Changelog preparation thread: found a predigested changelog for "
 		    << req->get_target_info()->get_source_package()
 		    << " " << req->get_target_info()->get_source_version()
