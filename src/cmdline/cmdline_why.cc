@@ -1354,6 +1354,18 @@ cw::fragment *do_why(const std::vector<std::string> &arguments,
   if(!interpret_why_args(arguments, matchers))
     return cw::text_fragment(_("Unable to parse some match patterns."));
 
+  // default matchers
+  if (matchers.empty())
+    {
+      cwidget::util::ref_ptr<pattern> p =
+	pattern::make_and(pattern::make_installed(),
+			  pattern::make_not(pattern::make_automatic()));
+      if (p.valid())
+	matchers.push_back(p);
+      else
+	return cw::text_fragment(_("Unable to parse the default match patterns."));
+    }
+
   cw::fragment *rval = do_why(matchers, pkg, display_mode,
 			      verbosity, root_is_removal,
                               callbacks,
