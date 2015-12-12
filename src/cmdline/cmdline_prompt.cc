@@ -842,7 +842,7 @@ static void cmdline_parse_why(string response,
 						false, false,
 						callbacks,
 						success));
-      if(frag.get() != NULL)
+      if (frag.get())
         {
           const unsigned int screen_width = term_metrics->get_screen_width();
           std::cout << frag->layout(screen_width, screen_width, cwidget::style());
