@@ -1297,20 +1297,25 @@ cw::fragment *do_why(const std::vector<cwidget::util::ref_ptr<pattern> > &leaves
     }
 }
 
-int do_why(const std::vector<cwidget::util::ref_ptr<pattern> > &leaves,
-	   const pkgCache::PkgIterator &root,
+int do_why(const std::vector<std::string>& arguments,
+	   const std::string& root,
 	   aptitude::why::roots_string_mode display_mode,
 	   int verbosity,
 	   bool root_is_removal,
-           const std::shared_ptr<terminal_metrics> &term_metrics)
+           const std::shared_ptr<terminal_metrics>& term_metrics)
 {
   bool success = false;
   const std::shared_ptr<why_callbacks> callbacks =
     make_cmdline_why_callbacks(verbosity, term_metrics);
-  std::unique_ptr<cw::fragment> f(do_why(leaves, root, display_mode,
-					 verbosity, root_is_removal,
+
+  std::unique_ptr<cw::fragment> f(do_why(arguments,
+					 root,
+					 display_mode,
+					 verbosity,
+					 root_is_removal,
 					 callbacks,
 					 success));
+
   const unsigned int screen_width = term_metrics->get_screen_width();
   // TODO: display each result as we find it.
   std::cout << f->layout(screen_width, screen_width, cw::style());
@@ -1347,11 +1352,11 @@ cw::fragment *do_why(const std::vector<std::string> &arguments,
   success = false;
 
   pkgCache::PkgIterator pkg((*apt_cache_file)->FindPkg(root.c_str()));
-  if(pkg.end())
+  if (pkg.end())
     return cw::fragf(_("No package named \"%s\" exists."), root.c_str());
 
   std::vector<cwidget::util::ref_ptr<pattern> > matchers;
-  if(!interpret_why_args(arguments, matchers))
+  if (!interpret_why_args(arguments, matchers))
     return cw::text_fragment(_("Unable to parse some match patterns."));
 
   // default matchers
@@ -1431,35 +1436,24 @@ int cmdline_why(int argc, char *argv[],
   std::vector<std::string> arguments;
   for(int i = 1; i + 1 < argc; ++i)
     arguments.push_back(argv[i]);
+
   std::vector<cwidget::util::ref_ptr<pattern> > matchers;
-  if(!interpret_why_args(arguments, matchers))
+  if (!interpret_why_args(arguments, matchers))
     parsing_arguments_failed = true;
-
-  if(matchers.empty())
-    {
-      cwidget::util::ref_ptr<pattern> p =
-	pattern::make_and(pattern::make_installed(),
-			  pattern::make_not(pattern::make_automatic()));
-      if(!p.valid())
-	parsing_arguments_failed = true;
-      else
-	matchers.push_back(p);
-    }
-
 
 
   _error->DumpErrors();
 
   int rval;
-  if(parsing_arguments_failed)
+  if (parsing_arguments_failed)
     rval = -1;
   else
-    rval = do_why(matchers,
-                  pkg,
-                  display_mode,
-                  verbosity,
-                  is_removal,
-                  term);
+    rval = do_why(arguments,
+		  pkgname,
+		  display_mode,
+		  verbosity,
+		  is_removal,
+		  term);
 
   return rval;
 }
