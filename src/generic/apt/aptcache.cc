@@ -1105,6 +1105,13 @@ void aptitudeDepCache::mark_delete(const PkgIterator &Pkg,
 				   bool unused_delete,
 				   undo_group *undo)
 {
+  // refuse to remove itself -- see #319782, #568548
+  if (!Pkg.end() && string("aptitude") == Pkg.Name())
+    {
+      _error->Error(_("Cannot remove aptitude within aptitude"));
+      return;
+    }
+
   if(read_only && !read_only_permission())
     {
       if(group_level == 0)
@@ -1132,6 +1139,13 @@ void aptitudeDepCache::internal_mark_delete(const PkgIterator &Pkg,
 					    bool unused_delete,
 					    std::vector<unsigned int>& unused_already_visited)
 {
+  // refuse to remove itself -- see #319782, #568548
+  if (!Pkg.end() && string("aptitude") == Pkg.Name())
+    {
+      _error->Error(_("Cannot remove aptitude within aptitude"));
+      return;
+    }
+
   // honour ::Purge-Unused in the main entry point for removing packages, it
   // should catch cases of automatically installed and unused packages not
   // purged (#724034 and others)
