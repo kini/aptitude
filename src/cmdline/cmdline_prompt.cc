@@ -825,8 +825,11 @@ static void cmdline_parse_why(string response,
   // assume response[0]=='w'
   splitws(response, arguments, 1, response.size());
 
-  if(arguments.empty())
-    printf(_("No packages found -- enter zero or more roots of the search followed by the package to justify.\n"));
+  if (arguments.empty())
+    {
+      printf(_("No packages found -- enter zero or more roots of the search followed by the package to justify.\n"));
+      printf("\n");
+    }
   else
     {
       bool success;
@@ -844,7 +847,9 @@ static void cmdline_parse_why(string response,
           const unsigned int screen_width = term_metrics->get_screen_width();
           std::cout << frag->layout(screen_width, screen_width, cwidget::style());
         }
+
       _error->DumpErrors();
+      std::cout << std::endl;
     }
 }
 
