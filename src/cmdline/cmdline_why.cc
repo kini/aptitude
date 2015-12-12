@@ -1157,6 +1157,36 @@ namespace aptitude
   }
 }
 
+bool interpret_why_args(const std::vector<std::string> &args,
+			std::vector<cwidget::util::ref_ptr<pattern> > &output)
+{
+  bool parsing_arguments_failed = false;
+
+  for(std::vector<std::string>::const_iterator it = args.begin();
+      it != args.end(); ++it)
+    {
+      // If there isn't a tilde, treat it as an exact package name.
+      cwidget::util::ref_ptr<pattern> p;
+      if(!aptitude::matching::is_pattern(*it))
+	{
+	  pkgCache::PkgIterator pkg = (*apt_cache_file)->FindPkg(*it);
+	  if(pkg.end())
+	    _error->Error(_("No package named \"%s\" exists."), it->c_str());
+	  else
+	    p = pattern::make_name(ssprintf("^%s$", pkg.Name()));
+	}
+      else
+	p = parse(*it);
+
+      if(!p.valid())
+	parsing_arguments_failed = true;
+      else
+	output.push_back(p);
+    }
+
+  return !parsing_arguments_failed;
+}
+
 cw::fragment *do_why(const std::vector<cwidget::util::ref_ptr<pattern> > &leaves,
 		 const pkgCache::PkgIterator &root,
 		     aptitude::why::roots_string_mode display_mode,
@@ -1304,36 +1334,6 @@ cw::fragment *do_why(const std::vector<cwidget::util::ref_ptr<pattern> > &leaves
                 root_is_removal,
                 callbacks,
                 success);
-}
-
-bool interpret_why_args(const std::vector<std::string> &args,
-			std::vector<cwidget::util::ref_ptr<pattern> > &output)
-{
-  bool parsing_arguments_failed = false;
-
-  for(std::vector<std::string>::const_iterator it = args.begin();
-      it != args.end(); ++it)
-    {
-      // If there isn't a tilde, treat it as an exact package name.
-      cwidget::util::ref_ptr<pattern> p;
-      if(!aptitude::matching::is_pattern(*it))
-	{
-	  pkgCache::PkgIterator pkg = (*apt_cache_file)->FindPkg(*it);
-	  if(pkg.end())
-	    _error->Error(_("No package named \"%s\" exists."), it->c_str());
-	  else
-	    p = pattern::make_name(ssprintf("^%s$", pkg.Name()));
-	}
-      else
-	p = parse(*it);
-
-      if(!p.valid())
-	parsing_arguments_failed = true;
-      else
-	output.push_back(p);
-    }
-
-  return !parsing_arguments_failed;
 }
 
 cw::fragment *do_why(const std::vector<std::string> &arguments,
