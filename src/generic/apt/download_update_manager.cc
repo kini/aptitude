@@ -187,16 +187,16 @@ void download_update_manager::finish(pkgAcquire::RunResult res,
   bool need_autoclean =
     aptcfg->FindB(PACKAGE "::AutoClean-After-Update", false);
 
-  if(need_forget_new || need_autoclean)
+  if (need_forget_new || need_autoclean)
     apt_load_cache(progress, true);
 
-  if(apt_cache_file != NULL && need_forget_new)
+  if (apt_cache_file && need_forget_new)
     {
-      (*apt_cache_file)->forget_new(NULL);
+      (*apt_cache_file)->forget_new(nullptr);
       post_forget_new_hook();
     }
 
-  if(apt_cache_file != NULL && need_autoclean)
+  if (apt_cache_file && need_autoclean)
     {
       pre_autoclean_hook();
 
