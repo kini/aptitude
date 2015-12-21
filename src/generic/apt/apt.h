@@ -551,6 +551,12 @@ namespace aptitude
     {
       return !is_native_arch(ver) && (strcmp(ver.Arch(), "all") != 0);
     }
+
+    /** Clean cache of downloaded packages from the canonical directory
+     *
+     * @return Whether the operation was successful
+     */
+    bool clean_cache_dir();
   }
 }
 

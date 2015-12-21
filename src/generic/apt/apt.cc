@@ -42,7 +42,9 @@
 
 #include <generic/util/undo.h>
 
+#include <apt-pkg/acquire.h>
 #include <apt-pkg/aptconfiguration.h>
+#include <apt-pkg/clean.h>
 #include <apt-pkg/configuration.h>
 #include <apt-pkg/depcache.h>
 #include <apt-pkg/error.h>
@@ -1577,5 +1579,38 @@ namespace aptitude
       const char *arch = ver.Arch();
       return apt_native_arch == arch || strcmp(arch, "all") == 0;
     }
+
+    bool clean_cache_dir()
+    {
+      string archivedir = aptcfg->FindDir("Dir::Cache::archives");
+
+      // lock the archive directory
+      FileFd lock;
+      if ( ! _config->FindB("Debug::NoLocking", false))
+	{
+	  lock.Fd(GetLock(archivedir + "lock"));
+	  if (_error->PendingError())
+	    {
+	      _error->Error(_("Unable to lock the download directory"));
+	      return false;
+	    }
+	}
+
+      // do clean
+      pkgAcquire fetcher;
+      fetcher.Clean(archivedir);
+      fetcher.Clean(archivedir+"partial/");
+
+      // return
+      if (_error->PendingError())
+	{
+	  return false;
+	}
+      else
+	{
+	  return true;
+	}
+    }
+
   }
 }
