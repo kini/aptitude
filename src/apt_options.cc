@@ -291,6 +291,11 @@ option_item misc_options[]={
 		 "cache any package files that can no longer be "
 		 "downloaded from any archive in sources.list."),
 	      PACKAGE "::AutoClean-After-Update", false),
+  option_item(N_("Remove all package files after successful operations (e.g. install)"),
+	      N_("If this option is enabled, then after packages are "
+		 "installed successfully (or similar operations) all "
+		 "the package files in the download area will be deleted."),
+	      PACKAGE "::Clean-After-Install", false),
   option_item(N_("URL to use to download changelogs"),
 	      N_("This option controls the server used to "
 		 "download changelogs.  You "

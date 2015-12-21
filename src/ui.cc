@@ -209,6 +209,36 @@ const char *default_grpstr="task,status,section(subdirs,passthrough),section(top
 const char *confirm_delete_essential_str=N_("Yes, I am aware this is a very bad idea");
 
 
+static void lists_autoclean_msg(std::weak_ptr<download_update_manager> m_weak)
+{
+  std::shared_ptr<download_update_manager> m(m_weak);
+
+  if(m.get() == NULL)
+    return;
+
+  cw::widget_ref msg = cw::center::create(cw::frame::create(cw::label::create(_("Deleting obsolete downloaded files"))));
+  m->post_autoclean_hook.connect(sigc::mem_fun(msg.unsafe_get_ref(),
+					       &cw::widget::destroy));
+
+  popup_widget(msg);
+  cw::toplevel::tryupdate();
+}
+
+static void clean_after_install_msg(std::weak_ptr<download_install_manager> m_weak)
+{
+  std::shared_ptr<download_install_manager> m(m_weak);
+
+  if(m.get() == NULL)
+    return;
+
+  cw::widget_ref msg = cw::center::create(cw::frame::create(cw::label::create(_("Deleting downloaded files"))));
+  m->post_clean_after_install_hook.connect(sigc::mem_fun(msg.unsafe_get_ref(),
+							 &cw::widget::destroy));
+
+  popup_widget(msg);
+  cw::toplevel::tryupdate();
+}
+
 void ui_start_download(bool hide_preview)
 {
   active_download = true;
@@ -1288,6 +1318,9 @@ void install_or_remove_packages()
 
   m->post_forget_new_hook.connect(package_states_changed.make_slot());
 
+  m->pre_clean_after_install_hook.connect(sigc::bind(sigc::ptr_fun(clean_after_install_msg),
+						     std::weak_ptr<download_install_manager>(m)));
+
   std::pair<download_signal_log *, download_list_ref>
     download_log_pair = gen_download_progress(false, false,
 					      _("Downloading packages"),
@@ -1728,21 +1761,6 @@ void do_package_run()
     }
 }
 
-static void lists_autoclean_msg(std::weak_ptr<download_update_manager> m_weak)
-{
-  std::shared_ptr<download_update_manager> m(m_weak);
-
-  if(m.get() == NULL)
-    return;
-
-  cw::widget_ref msg = cw::center::create(cw::frame::create(cw::label::create(_("Deleting obsolete downloaded files"))));
-  m->post_autoclean_hook.connect(sigc::mem_fun(msg.unsafe_get_ref(),
-					       &cw::widget::destroy));
-
-  popup_widget(msg);
-  cw::toplevel::tryupdate();
-}
-
 void really_do_update_lists()
 {
   std::shared_ptr<download_update_manager> m = std::make_shared<download_update_manager>();
@@ -1804,33 +1822,26 @@ static void really_do_clean()
     _error->Error(_("Cleaning while a download is in progress is not allowed"));
   else
     {
-      // Lock the archive directory
-      FileFd lock;
-      if (_config->FindB("Debug::NoLocking",false) == false)
-        {
-          lock.Fd(GetLock(_config->FindDir("Dir::Cache::archives") + "lock"));
-          if (_error->PendingError() == true)
-            {
-              _error->Error(_("Unable to lock the download directory"));
-              return;
-            }
-        }
-
+      // show message
       cw::widget_ref msg=cw::center::create(cw::frame::create(cw::label::create(_("Deleting downloaded files"))));
       msg->show_all();
       popup_widget(msg);
       cw::toplevel::tryupdate();
 
-      if(aptcfg)
-	{
-	  pkgAcquire fetcher;
-	  fetcher.Clean(aptcfg->FindDir("Dir::Cache::archives"));
-	  fetcher.Clean(aptcfg->FindDir("Dir::Cache::archives")+"partial/");
-	}
+      // do clean
+      bool result_ok = aptitude::apt::clean_cache_dir();
 
       msg->destroy();
 
-      show_message(_("Downloaded package files have been deleted"));
+      // results
+      if (result_ok)
+	{
+	  show_message(_("Downloaded package files have been deleted"));
+	}
+      else
+	{
+	  check_apt_errors();
+	}
     }
 }
 

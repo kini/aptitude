@@ -2244,7 +2244,7 @@ Abort.</screen>
 		    </entry>
 		  </row>
 
-		  <row>
+		  <row id='menuClean'>
 		    <entry>&actions-clean;</entry>
 		    <entry>
 		      Delete all the compressed packages that were
@@ -10939,10 +10939,13 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 	      <seg><literal>Aptitude::Autoclean-After-Update</literal></seg>
 	      <seg><literal>false</literal></seg>
 	      <seg>
-		If this option is <literal>true</literal>, &aptitude;
-		will clean up obsolete files (see <link
-		linkend='menuCleanObs'>&actions-clean-obs;</link>)
-		every time you update the package list.
+		If this option is <literal>true</literal>, &aptitude; will clean
+		up obsolete files (see <link
+		linkend='menuCleanObs'>&actions-clean-obs;</link>) every time
+		you update the package list.
+
+		This option is similar to <literal><link
+		linkend='configClean-After-Install'>Aptitude::Clean-After-Install</link></literal>.
 	      </seg>
 	    </seglistitem>
 
@@ -10988,6 +10991,20 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 		upgradable packages for upgrade when the program
 		starts, as if you had issued the command
 		<link linkend='menuUpgrade'>&actions-upgrade;</link>.
+	      </seg>
+	    </seglistitem>
+
+	    <seglistitem id='configClean-After-Install'>
+	      <seg><literal>Aptitude::Clean-After-Install</literal></seg>
+	      <seg><literal>false</literal></seg>
+	      <seg>
+		If this option is <literal>true</literal>, &aptitude; will clean
+		up all files in the package cache directory (see <link
+		linkend='menuClean'>&actions-clean;</link>) after successful
+		installation of packages (or similar operations).
+
+		This option is similar to <literal><link
+		linkend='configAutoclean-After-Update'>Aptitude::Autoclean-After-Update</link></literal>.
 	      </seg>
 	    </seglistitem>
 

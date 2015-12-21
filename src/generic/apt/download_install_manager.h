@@ -1,6 +1,7 @@
 // download_install_manager.h                          -*-c++-*-
 //
 //   Copyright (C) 2005, 2008, 2010 Daniel Burrows
+//   Copyright (C) 2015 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -146,6 +147,12 @@ public:
 
   /** Invoked after an automatic 'forget new' operation. */
   sigc::signal0<void> post_forget_new_hook;
+
+  /** Invoked before an automatic 'clean after install' operation. */
+  sigc::signal0<void> pre_clean_after_install_hook;
+
+  /** Invoked after an automatic 'clean after install' operation. */
+  sigc::signal0<void> post_clean_after_install_hook;
 };
 
 #endif

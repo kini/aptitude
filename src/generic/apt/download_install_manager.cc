@@ -1,6 +1,7 @@
 // download_install_manager.cc
 //
 //   Copyright (C) 2005-2011 Daniel Burrows
+//   Copyright (C) 2015 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -25,6 +26,8 @@
 
 #include <aptitude.h>
 
+#include <generic/apt/apt.h>
+
 #include <apt-pkg/acquire-item.h>
 #include <apt-pkg/dpkgpm.h>
 #include <apt-pkg/error.h>
@@ -36,6 +39,7 @@
 #include <signal.h>
 
 using namespace std;
+
 
 download_install_manager::download_install_manager(bool _download_only,
 						   const run_dpkg_in_terminal_func &_run_dpkg_in_terminal)
@@ -250,6 +254,23 @@ void download_install_manager::finish_post_dpkg(pkgPackageManager::OrderResult d
 	    }
 	}
     }
+
+    if (rval == success && !download_only)
+      {
+	if (aptcfg->FindB(PACKAGE "::Clean-After-Install", false))
+	  {
+	    pre_clean_after_install_hook();
+
+	    bool result_ok = aptitude::apt::clean_cache_dir();
+
+	    if (!result_ok)
+	      {
+		rval = failure;
+	      }
+
+	    post_clean_after_install_hook();
+	  }
+      }
 
   k(rval);
 }
