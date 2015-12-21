@@ -1,6 +1,7 @@
 // cmdline_clean.cc
 //
 // Copyright (C) 2004, 2010 Daniel Burrows
+// Copyright (C) 2015 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -69,30 +70,19 @@ int cmdline_clean(int argc, char *argv[], bool simulate)
       return 0;
     }
 
-  // Lock the archive directory
-  FileFd lock;
-  if (_config->FindB("Debug::NoLocking",false) == false)
-    {
-      lock.Fd(GetLock(archivedir + "lock"));
-      if (_error->PendingError() == true)
-        _error->Error(_("Unable to lock the download directory"));
-    }
+  // do clean
+  bool result_ok = aptitude::apt::clean_cache_dir();
 
-  if(_error->PendingError())
+  // results
+  if (result_ok)
+    {
+      return 0;
+    }
+  else
     {
       _error->DumpErrors();
       return -1;
     }
-
-  pkgAcquire fetcher;
-  fetcher.Clean(archivedir);
-  fetcher.Clean(archivedir+"partial/");
-
-  int rval=_error->PendingError() ? -1 : 0;
-
-  _error->DumpErrors();
-
-  return rval;
 }
 
 // Shamelessly stolen from apt-get:
