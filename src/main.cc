@@ -243,9 +243,9 @@ static void usage()
   printf(_(" -v              Display extra information. (may be supplied multiple times).\n"));
   printf(_(" -t [release]    Set the release from which packages should be installed.\n"));
   printf(_(" -q              In command-line mode, suppress the incremental progress\n"
-           "                 indicators.\n"));
+           "                  indicators.\n"));
   printf(_(" -o key=val      Directly set the configuration option named 'key'.\n"));
-  printf(_(" --with(out)-recommends	Specify whether or not to treat recommends as\n"
+  printf(_(" --with(out)-recommends     Specify whether or not to treat recommends as\n"
            "                            strong dependencies.\n"));
   printf(_(" -S fname        Read the aptitude extended status info from fname.\n"));
   printf(_(" -u              Download new package lists on startup.\n"));
