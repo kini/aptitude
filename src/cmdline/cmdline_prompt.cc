@@ -572,20 +572,20 @@ static bool prompt_trust(const std::shared_ptr<terminal_metrics> &term_metrics)
       // input methods.  Please include nothing but ASCII characters.
       // The text preceding the pipe character (|) will be ignored and
       // can be removed from your translation.
-      const string okstr    = P_("Go ahead and ignore the warning|Yes");
+      const string okstr    = P_("Go ahead and ignore the warning|yes");
       // TRANSLATORS: This string is a confirmation message, which
       // users (especially CJK users) should be able to input without
       // input methods.  Please include nothing but ASCII characters.
       // The text preceding the pipe character (|) will be ignored and
       // can be removed from your translation.
-      const string abortstr = P_("Abort instead of overriding the warning|No");
+      const string abortstr = P_("Abort instead of overriding the warning|no");
 
       // These strings are used to compare in a translation-invariant
       // way, so that "yes" and "no" are always valid inputs; if the
       // user can't enter the translated string for some reason,
       // he/she can always enter the fallback strings.
-      const string fallback_okstr = "Yes";
-      const string fallback_abortstr = "No";
+      const string fallback_okstr = "yes";
+      const string fallback_abortstr = "no";
 
       while (true)
 	{
