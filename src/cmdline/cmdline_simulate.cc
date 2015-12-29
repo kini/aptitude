@@ -70,7 +70,7 @@ int cmdline_simulate(bool as_upgrade,
     }
 
   pkgSimulate PM(*apt_cache_file);
-  pkgPackageManager::OrderResult Res=PM.DoInstall();
+  pkgPackageManager::OrderResult Res = PM.DoInstall(nullptr);
 
   if(Res==pkgPackageManager::Failed)
     return -1;
