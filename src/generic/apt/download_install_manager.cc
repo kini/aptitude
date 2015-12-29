@@ -174,7 +174,8 @@ pkgPackageManager::OrderResult download_install_manager::run_dpkg(int status_fd)
   sigfillset(&allsignals);
 
   pthread_sigmask(SIG_UNBLOCK, &allsignals, &oldsignals);
-  pkgPackageManager::OrderResult pmres = pm->DoInstallPostFork(status_fd);
+  APT::Progress::PackageManagerProgressFd progress(status_fd);
+  pkgPackageManager::OrderResult pmres = pm->DoInstallPostFork(&progress);
 
   switch(pmres)
     {
