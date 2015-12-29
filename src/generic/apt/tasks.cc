@@ -164,14 +164,15 @@ static void append_tasks(const pkgCache::PkgIterator &pkg,
 
   if(apt_package_records)
     {
-      const char *start,*stop;
-      pkgTagSection sec;
-
       // Pull out pointers to the underlying record.
+      const char *start,*stop;
       apt_package_records->Lookup(verfile).GetRec(start, stop);
 
       // Parse it as a section.
-      sec.Scan(start, stop-start+1);
+      pkgTagSection sec;
+      bool scan_ok = sec.Scan(start, stop-start+1);
+      if (!scan_ok)
+	return;
 
       string tasks=sec.FindS("Task");
 
