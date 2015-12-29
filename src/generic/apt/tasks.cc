@@ -2,6 +2,7 @@
 //
 //  Copyright (C) 2001 Daniel Burrows
 //  Copyright (C) 2012 Daniel Hartwig
+//  Copyright (C) 2015 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -30,14 +31,14 @@
 #include <cwidget/generic/util/eassert.h>
 #include <cwidget/generic/util/transcode.h>
 
-#include <errno.h>
-#include <ctype.h>
-
 #include <map>
 #include <vector>
 #include <iterator>
 #include <algorithm>
 #include <sstream>
+
+#include <cerrno>
+#include <cctype>
 
 namespace cw = cwidget;
 
