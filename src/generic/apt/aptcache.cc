@@ -2367,7 +2367,7 @@ bool aptitudeCacheFile::Open(OpProgress &Progress, bool do_initselections,
     return _error->Error(_("The list of sources could not be read."));
 
   // Read the caches:
-  bool Res=pkgMakeStatusCache(List, Progress, &Map, !WithLock);
+  bool Res = pkgCacheGenerator::MakeStatusCache(List, &Progress, &Map, !WithLock);
   Progress.Done();
 
   if(!Res)
