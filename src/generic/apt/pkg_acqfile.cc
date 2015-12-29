@@ -1,6 +1,7 @@
 // pkg_acqfile.cc
 //
 //  Copyright 2002, 2005 Daniel Burrows
+//  Copyright 2015 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -94,18 +95,20 @@ bool get_archive(pkgAcquire *Owner, pkgSourceList *Sources,
          return false;
 
       const string PkgFile = Parse.FileName();
-      const string MD5     = Parse.MD5Hash();
-      if (PkgFile.empty() == true)
-         return _error->Error(_("The package index files are corrupted. No Filename: "
-                              "field for package %s."),
-                              Version.ParentPkg().FullName().c_str());
+      const HashStringList hashes = Parse.Hashes();
+      if (PkgFile.empty())
+	{
+	  return _error->Error(_("The package index files are corrupted. No Filename: "
+				 "field for package %s."),
+			       Version.ParentPkg().FullName().c_str());
+	}
 
       string DestFile = directory + "/" + flNotDir(StoreFilename);
 
       // Create the item
       new pkgAcqFile(Owner,
 		     Index->ArchiveURI(PkgFile),
-		     MD5,
+		     hashes,
 		     Version->Size,
 		     Index->ArchiveInfo(Version),
 		     Version.ParentPkg().Name(),
