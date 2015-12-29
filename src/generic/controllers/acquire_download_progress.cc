@@ -152,9 +152,7 @@ namespace aptitude
                              it->CurrentItem->Owner->Complete,
                              it->CurrentItem->ShortDesc,
                              if_not_zero(it->CurrentItem->Owner->ID),
-                             it->CurrentItem->Owner->Mode == NULL
-                               ? ""
-                               : it->CurrentItem->Owner->Mode);
+                             it->CurrentItem->Owner->ActiveSubprocess);
 
               active_downloads.push_back(current_file);
             }
