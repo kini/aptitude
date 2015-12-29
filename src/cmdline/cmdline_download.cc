@@ -70,7 +70,7 @@ int cmdline_download(int argc, char *argv[])
     progress_display = create_cmdline_download_progress(term, term, term, term);
 
   pkgAcquire fetcher;
-  fetcher.Setup(progress_display.first);
+  fetcher.SetLog(progress_display.first);
   string filenames[(*apt_cache_file)->Head().PackageCount];
 
   for(int i=1; i<argc; ++i)

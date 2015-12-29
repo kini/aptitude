@@ -75,7 +75,8 @@ bool download_install_manager::prepare(OpProgress &progress,
     return false;
 
   fetcher = new pkgAcquire;
-  if(fetcher->Setup(&acqlog, aptcfg->FindDir("Dir::Cache::archives")) == false)
+  fetcher->SetLog(&acqlog);
+  if (fetcher->GetLock(aptcfg->FindDir("Dir::Cache::archives")) == false)
     {
       delete fetcher;
       fetcher = NULL;

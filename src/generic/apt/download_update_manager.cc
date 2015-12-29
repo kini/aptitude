@@ -76,7 +76,8 @@ bool download_update_manager::prepare(OpProgress &progress,
     return false;
 
   fetcher = new pkgAcquire();
-  if(fetcher->Setup(&acqlog, aptcfg->FindDir("Dir::State::Lists")) == false ||
+  fetcher->SetLog(&acqlog);
+  if(fetcher->GetLock(aptcfg->FindDir("Dir::State::Lists")) == false ||
      src_list.GetIndexes(fetcher) == false)
     {
       delete fetcher;

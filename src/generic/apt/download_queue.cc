@@ -943,7 +943,7 @@ namespace aptitude
 
 	    download_callback cb;
 	    pkgAcquire downloader;
-            downloader.Setup(&cb);
+            downloader.SetLog(&cb);
 
 	    for(std::deque<std::shared_ptr<start_request> >::const_iterator it =
 		  start_requests.begin();

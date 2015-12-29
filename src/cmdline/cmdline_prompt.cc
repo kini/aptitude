@@ -79,7 +79,7 @@ static bool get_fetchinfo(fetchinfo &f)
 {
   download_signal_log m;
   pkgAcquire fetcher;
-  fetcher.Setup(&m);
+  fetcher.SetLog(&m);
   pkgSourceList l;
   if(!l.ReadMainList())
     return _error->Error(_("Couldn't read list of sources"));
