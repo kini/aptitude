@@ -497,7 +497,14 @@ static bool prompt_essential(bool simulate_only, const std::shared_ptr<terminal_
 	  string prompt = _(untranslated_prompt.c_str());
 	  char buf[1024];
 
-	  printf(_("To continue, type the phrase \"%s\":\n"), prompt.c_str());
+	  if (prompt == untranslated_prompt)
+	    {
+	      printf(_("To continue, type the phrase \"%s\":\n"), prompt.c_str());
+	    }
+	  else
+	    {
+	      printf(_("To continue, type the phrase \"%s\" (or: \"%s\"):\n"), prompt.c_str(), untranslated_prompt.c_str());
+	    }
 	  cin.getline(buf, 1023);
 	  bool rval = (prompt == buf || untranslated_prompt == buf);
 
@@ -590,7 +597,18 @@ static bool prompt_trust(const std::shared_ptr<terminal_metrics> &term_metrics)
       while (true)
 	{
 	  printf(_("Do you want to ignore this warning and proceed anyway?\n"));
-	  printf(_("To continue, enter \"%s\"; to abort, enter \"%s\": "), okstr.c_str(), abortstr.c_str());
+	  if (okstr == fallback_okstr && abortstr == fallback_abortstr)
+	    {
+	      printf(_("To continue, enter \"%s\"; to abort, enter \"%s\": "), okstr.c_str(), abortstr.c_str());
+	    }
+	  else
+	    {
+	      printf(_("To continue, enter \"%s\" (or \"%s\"); to abort, enter \"%s\" (or \"%s\"): "),
+		     okstr.c_str(),
+		     fallback_okstr.c_str(),
+		     abortstr.c_str(),
+		     fallback_abortstr.c_str());
+	    }
 	  char buf[1024];
 	  cin.getline(buf, 1023);
 	  buf[1023]='\0';
@@ -598,16 +616,17 @@ static bool prompt_trust(const std::shared_ptr<terminal_metrics> &term_metrics)
 	  if(cin.eof())
 	    throw StdinEOFException();
 
-
 	  const bool is_ok =             strncasecmp(okstr.c_str(), buf, okstr.size()) == 0;
 	  const bool is_fallback_ok =    strncasecmp(fallback_okstr.c_str(), buf, fallback_okstr.size()) == 0;
 	  const bool is_abort =          strncasecmp(abortstr.c_str(), buf, abortstr.size()) == 0;
 	  const bool is_fallback_abort = strncasecmp(fallback_abortstr.c_str(), buf, fallback_abortstr.size()) == 0;
+	  const bool is_rpmatch_ok      = (rpmatch(buf) > 0);
+	  const bool is_rpmatch_invalid = (rpmatch(buf) < 0);
 
-	  const bool rval = is_ok || (is_fallback_ok && !is_abort);
+	  const bool rval = is_ok || (is_fallback_ok && !is_abort) || is_rpmatch_ok;
 
-	  if(!is_ok && !is_abort && !is_fallback_ok && !is_fallback_abort)
-	    printf(_("Unrecognized input.  Enter either \"%s\" or \"%s\".\n"), okstr.c_str(), abortstr.c_str());
+	  if ((!is_ok && !is_abort && !is_fallback_ok && !is_fallback_abort) && is_rpmatch_invalid)
+	    printf(_("Unrecognized input\n"));
 	  else
 	    return rval;
 	}
