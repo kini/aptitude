@@ -143,10 +143,23 @@ download_manager::result download_install_manager::finish_pre_dpkg(pkgAcquire::R
 	}
     }
 
-  if(failed && !pm->FixMissing())
+  const char* fix_missing_cstr = "APT::Get::Fix-Missing";
+  bool fix_missing = aptcfg->FindB(fix_missing_cstr, false);
+  if (failed)
     {
-      _error->Error(_("Unable to correct for unavailable packages"));
-      return failure;
+      if (fix_missing)
+	{
+	  if (!pm->FixMissing())
+	    {
+	      _error->Error(_("Unable to correct for unavailable packages"));
+	      return failure;
+	    }
+	}
+      else
+	{
+	  _error->Error(_("Unable to fetch some packages; try '-o %s' to continue with missing packages"), fix_missing_cstr);
+	  return failure;
+	}
     }
 
   log_changes();

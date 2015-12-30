@@ -307,7 +307,13 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 
   pkgCache::VerIterator ver=pkg.CurrentVer();
   if (action==cmdline_install || action == cmdline_installauto || action == cmdline_upgrade)
-    ver = cmdline_find_ver(pkg, source, sourcestr);
+    {
+      ver = cmdline_find_ver(pkg, source, sourcestr);
+      if (ver.end())
+	{
+	  return false;
+	}
+    }
 
   pkgDepCache::StateCache &pkg_state((*apt_cache_file)[pkg]);
 

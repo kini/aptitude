@@ -30,6 +30,17 @@ Version 0.7.6 UNRELEASED
   * [cmdline] Address prompt deficiencies related with translation and input
     methods (Closes: #475802)
 
+  * Abort with Failure (rather to continue with the installation) when packages
+    fail to be fetched -- except if APT::Get::Fix-Missing is present and set to
+    true.  When this happens, the actions in the command line also return with
+    non-zero status.  (Closes: #121313, #302784)
+
+  * [cmdline] Abort with Failure when actions cannot be taken
+    (Closes: #121313, #445034, #576212, #798320)
+
+    The Closes of #121313 overlap with other fixes, there are reports of each
+    case merged.
+
 - User visible changes:
 
   * [cmdline] Prompt dialog shows lowercase instead of capitalised "yes"/"no"
