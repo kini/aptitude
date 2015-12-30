@@ -335,7 +335,7 @@ int cmdline_do_action(int argc, char *argv[],
 	      cmdline_applyaction(it->second, seen_virtual_packages, it->first,
 				  to_install, to_hold, to_remove, to_purge,
 				  verbose, policy, arch_only, pass > 0,
-                                  term);
+				  term);
 	    }
 	}
     }
