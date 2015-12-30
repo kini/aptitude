@@ -607,11 +607,11 @@ bool cmdline_applyaction(string s,
 	    {
 	      // Don't overwhelm the user.
 	      if (possible.size() > package_limit)
-	        printf(_("Couldn't find package \"%s\", and more than %zu\npackages contain \"%s\" in their name.\n"),
+	        printf(_("Couldn't find package \"%s\", and more than %zu packages contain \"%s\" in their name\n"),
 		       package.c_str(), package_limit, package.c_str());
 	      else
 		{
-		  printf(_("Couldn't find package \"%s\".  However, the following\npackages contain \"%s\" in their name:\n"), package.c_str(), package.c_str());
+		  printf(_("Couldn't find package \"%s\".  However, the following packages contain \"%s\" in their name:\n"), package.c_str(), package.c_str());
 		  cmdline_show_pkglist(possible, term_metrics);
 		}
 	    }
@@ -636,11 +636,11 @@ bool cmdline_applyaction(string s,
 		printf(_("Couldn't find any package whose name or description matched \"%s\"\n"), package.c_str());
 	      else if (possible.size() > package_limit)
 		// Don't overwhelm the user.
-		printf(_("Couldn't find any package matching \"%s\", and more than %zu\npackages contain \"%s\" in their description.\n"),
+		printf(_("Couldn't find any package matching \"%s\", and more than %zu packages contain \"%s\" in their description\n"),
 		       package.c_str(), package_limit, package.c_str());
 	      else
 		{
-		  printf(_("Couldn't find any package matching \"%s\".  However, the following\npackages contain \"%s\" in their description:\n"), package.c_str(), package.c_str());
+		  printf(_("Couldn't find any package matching \"%s\".  However, the following packages contain \"%s\" in their description:\n"), package.c_str(), package.c_str());
 		  cmdline_show_pkglist(possible, term_metrics);
 		}
 	    }
