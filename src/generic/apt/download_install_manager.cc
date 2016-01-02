@@ -157,7 +157,7 @@ download_manager::result download_install_manager::finish_pre_dpkg(pkgAcquire::R
 	}
       else
 	{
-	  _error->Error(_("Unable to fetch some packages; try '-o %s' to continue with missing packages"), fix_missing_cstr);
+	  _error->Error(_("Unable to fetch some packages; try '-o %s=true' to continue with missing packages"), fix_missing_cstr);
 	  return failure;
 	}
     }
