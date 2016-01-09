@@ -398,8 +398,6 @@ void do_cmdline_changelog(const vector<string> &packages,
 	if(system((string(pager) + " " + filename.get_name()).c_str()) != 0)
           _error->Error(_("Couldn't run pager %s"), pager);
     }
-
-  _error->DumpErrors();
 }
 
 // TODO: fetch them all in one go.
@@ -412,7 +410,7 @@ int cmdline_changelog(int argc, char *argv[])
   OpProgress progress;
   apt_init(&progress, false);
 
-  if(_error->PendingError())
+  if (_error->PendingError())
     {
       _error->DumpErrors();
       return -1;
@@ -424,7 +422,11 @@ int cmdline_changelog(int argc, char *argv[])
 
   do_cmdline_changelog(packages, term);
 
-  _error->DumpErrors();
+  if (_error->PendingError())
+    {
+      _error->DumpErrors();
+      return -1;
+    }
 
   return 0;
 }

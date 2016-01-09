@@ -832,7 +832,13 @@ static void cmdline_parse_changelog(string response, const std::shared_ptr<termi
   if(packages.empty())
     printf(_("No packages found -- enter the package names on the line after 'c'.\n"));
   else
-    do_cmdline_changelog(packages, term_metrics);
+    {
+      do_cmdline_changelog(packages, term_metrics);
+      if (_error->PendingError())
+	{
+	  _error->DumpErrors();
+	}
+    }
 
   prompt_string(_("Press Return to continue."));
 }
