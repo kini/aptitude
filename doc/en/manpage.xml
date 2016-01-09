@@ -454,23 +454,28 @@
 
 	<listitem>
 	  <para>
-	    Forbid a package from being upgraded to a particular
-	    version.  This will prevent &aptitude; from
-	    automatically upgrading to this version, but will
-	    allow automatic upgrades to future versions.  By
-	    default, &aptitude; will select the version to which the
-	    package would normally be upgraded; you may override
-	    this selection by appending <quote><literal>=<replaceable>version</replaceable></literal></quote>
-	    to the package name: for instance, <quote><literal>aptitude forbid-version
-	    vim=1.2.3.broken-4</literal></quote>.
+	    Forbid a package from being upgraded to a particular version, while
+	    allowing automatic upgrades to future versions.  This is useful for
+	    example to avoid a known broken version of a package, without having
+	    to set and clear manual holds.
 	  </para>
 
 	  <para>
-	    This command is useful for avoiding broken versions of
-	    packages without having to set and clear manual holds.
-	    If you decide you really want the forbidden version
-	    after all, <quote><literal>aptitude install <replaceable>package</replaceable></literal></quote> will
-	    remove the ban.
+	    By default, &aptitude; will select the forbidden version to be the
+	    one which the package would normally be upgraded (the candidate
+	    version).  This may be overriden by appending
+	    <quote><literal>=<replaceable>version</replaceable></literal></quote>
+	    to the package name: for instance, <quote><literal>aptitude
+	    forbid-version vim=1.2.3.broken-4</literal></quote>.
+	  </para>
+
+	  <para>
+	    To revert the action, <quote><literal>aptitude install
+	    <replaceable>package</replaceable></literal></quote> will remove the
+	    ban.  To remove the forbidden version without installing the
+	    candidate version, the current version should be appended:
+	    <quote>install
+	    <replaceable>package</replaceable><literal>=<replaceable>version</replaceable></literal></quote>.
 	  </para>
 	</listitem>
       </varlistentry>
