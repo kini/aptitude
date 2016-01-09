@@ -128,44 +128,56 @@ namespace
 
     search_progress_display->done();
 
-    _error->DumpErrors();
-
-    std::sort(output.begin(), output.end(),
-              aptitude::cmdline::package_results_lt(sort_policy));
-
-    output.erase(std::unique(output.begin(), output.end(),
-                             aptitude::cmdline::package_results_eq()),
-                 output.end());
-
-    for(results_list::const_iterator it = output.begin(); it != output.end(); ++it)
+    int exit_status = 0;
+    if (_error->PendingError())
       {
-        column_parameters *p =
-          new aptitude::cmdline::search_result_column_parameters(it->second);
-
-	// get candidate or, if does not exist, current version
-	auto ver_it = get_candidate_version(it->first);
-	if (ver_it.end())
-	  {
-	    ver_it = it->first.CurrentVer();
-	  }
-
-        pkg_item::pkg_columnizer columnizer(it->first,
-                                            ver_it,
-                                            columns,
-                                            0);
-        if(disable_columns)
-          printf("%ls\n", aptitude::cmdline::de_columnize(columns, columnizer, *p).c_str());
-        else
-          printf("%ls\n",
-                 columnizer.layout_columns(format_width == -1 ? screen_width : format_width,
-                                           *p).c_str());
-
-        // Note that this deletes the whole result, so we can't re-use
-        // the list.
-        delete p;
+	_error->DumpErrors();
+	exit_status = -1;
       }
 
-    return 0;
+    if (output.empty())
+      {
+	exit_status = 1;
+      }
+    else
+      {
+	std::sort(output.begin(), output.end(),
+		  aptitude::cmdline::package_results_lt(sort_policy));
+
+	output.erase(std::unique(output.begin(), output.end(),
+				 aptitude::cmdline::package_results_eq()),
+		     output.end());
+
+	for(results_list::const_iterator it = output.begin(); it != output.end(); ++it)
+	  {
+	    column_parameters *p =
+	      new aptitude::cmdline::search_result_column_parameters(it->second);
+
+	    // get candidate or, if does not exist, current version
+	    auto ver_it = get_candidate_version(it->first);
+	    if (ver_it.end())
+	      {
+		ver_it = it->first.CurrentVer();
+	      }
+
+	    pkg_item::pkg_columnizer columnizer(it->first,
+						ver_it,
+						columns,
+						0);
+	    if(disable_columns)
+	      printf("%ls\n", aptitude::cmdline::de_columnize(columns, columnizer, *p).c_str());
+	    else
+	      printf("%ls\n",
+		     columnizer.layout_columns(format_width == -1 ? screen_width : format_width,
+					       *p).c_str());
+
+	    // Note that this deletes the whole result, so we can't re-use
+	    // the list.
+	    delete p;
+	  }
+      }
+
+    return exit_status;
   }
 }
 
