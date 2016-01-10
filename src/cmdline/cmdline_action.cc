@@ -52,7 +52,7 @@ namespace
 
     if(!sourcepkg.valid())
       {
-	printf(_("Unable to find the source package for \"%s\".\n"),
+	printf(_("Unable to find the source package for \"%s\"\n"),
 	       pkg.c_str());
 	return false;
       }
@@ -60,7 +60,7 @@ namespace
     if(apt_cache_file == NULL)
       {
 	// Should never happen.
-	printf("Sanity-check failed: apt_cache_file should not be NULL here.\n");
+	printf("Sanity-check failed: apt_cache_file should not be NULL here\n");
 	return false;
       }
 
@@ -209,7 +209,7 @@ namespace
 		    build_dep_description += ")";
 		  }
 	      }
-	    printf(_("Unable to satisfy the build-depends: %s.\n"),
+	    printf(_("Unable to satisfy the build-depends: %s\n"),
 		   build_dep_description.c_str());
 	  }
       }
@@ -246,7 +246,7 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 		  if(prv.OwnerPkg().CurrentVer()==prv.OwnerVer())
 		    {
 		      if(verbose>0)
-			printf(_("Note: \"%s\", providing the virtual package\n      \"%s\", is already installed.\n"),
+			printf(_("Note: \"%s\", providing the virtual package \"%s\", is already installed\n"),
 			       prv.OwnerPkg().FullName(true).c_str(),
                                pkg.FullName(true).c_str());
 		      return true;
@@ -254,7 +254,7 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 		  else if((*apt_cache_file)[prv.OwnerPkg()].InstVerIter(*apt_cache_file)==prv.OwnerVer())
 		    {
 		      if(verbose>0)
-			printf(_("Note: \"%s\", providing the virtual package\n      \"%s\", is already going to be installed.\n"),
+			printf(_("Note: \"%s\", providing the virtual package \"%s\", is already going to be installed\n"),
 			       prv.OwnerPkg().FullName(true).c_str(),
                                pkg.FullName(true).c_str());
 		      return true;
@@ -277,7 +277,7 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 	  if(cands.size()==0)
 	    {
 	      if(!seen_in_first_pass)
-		printf(_("\"%s\" exists in the package database, but it is not a\nreal package and no package provides it.\n"),
+		printf(_("\"%s\" exists in the package database, but it is not a real package and no package provides it\n"),
                        pkg.FullName(true).c_str());
 	      return false;
 	    }
@@ -296,7 +296,7 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 	    {
 	      if(!seen_in_first_pass)
 		{
-		  printf(_("Note: selecting \"%s\" instead of the\n      virtual package \"%s\"\n"),
+		  printf(_("Note: selecting \"%s\" instead of the virtual package \"%s\"\n"),
 			 cands[0].FullName(true).c_str(),
                          pkg.FullName(true).c_str());
 		}
@@ -336,18 +336,18 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 	}
       else if(pkg_state.Status > 1)
 	{
-	  printf(_("%s is not currently installed, so it will not be upgraded.\n"),
+	  printf(_("%s is not currently installed, so it will not be upgraded\n"),
                  pkg.FullName(true).c_str());
 	}
       else
-	printf(_("%s is already installed at the latest version (%s), so it will not be upgraded.\n"),
+	printf(_("%s is already installed at the latest version (%s), so it will not be upgraded\n"),
                pkg.FullName(true).c_str(),
 	       ver.VerStr());
       break;
 
     case cmdline_reinstall:
       if(pkg.CurrentVer().end())
-	printf(_("%s is not currently installed, so it will not be reinstalled.\n"),
+	printf(_("%s is not currently installed, so it will not be reinstalled\n"),
                pkg.FullName(true).c_str());
 
       break;
@@ -564,7 +564,7 @@ bool cmdline_applyaction(string s,
      action != cmdline_installauto &&
      action != cmdline_build_depends)
     {
-      printf(_("You can only specify a package version with an 'install' command or a 'forbid-version' command.\n"));
+      printf(_("You can only specify a package version with an 'install' command or a 'forbid-version' command\n"));
       return false;
     }
 
@@ -573,7 +573,7 @@ bool cmdline_applyaction(string s,
      action != cmdline_installauto &&
      action != cmdline_build_depends)
     {
-      printf(_("You can only specify a package archive with an 'install' command.\n"));
+      printf(_("You can only specify a package archive with an 'install' command\n"));
       return false;
     }
 
