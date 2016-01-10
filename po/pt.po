@@ -1,13 +1,13 @@
 # Portuguese (Portugal) Translation Project <traduz@debianpt.org>
 # Nuno Sénica, 2004
-# Miguel Figueiredo <elmig@debianpt.org>, 2005, 2006, 2007, 2008, 2009, 2010, 2014
+# Miguel Figueiredo <elmig@debianpt.org>, 2005-2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: aptitude\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
 "POT-Creation-Date: 2015-12-08 19:50+0000\n"
-"PO-Revision-Date: 2014-05-13 19:58+0100\n"
+"PO-Revision-Date: 2016-01-10 18:58+0000\n"
 "Last-Translator: Miguel Figueiredo <elmig@debianPT.org>\n"
 "Language-Team: Portuguese <traduz@debianpt.org>\n"
 "Language: pt\n"
@@ -366,7 +366,6 @@ msgstr ""
 "listas de pacotes"
 
 #: src/apt_options.cc:289
-#, fuzzy
 #| msgid ""
 #| "If this option is enabled, then after every install run, aptitude will "
 #| "delete from the package cache any package files that can no longer be "
@@ -376,10 +375,10 @@ msgid ""
 "will delete from the package cache any package files that can no longer be "
 "downloaded from any archive in sources.list."
 msgstr ""
-"Se esta opção estiver activa, após correr cada instalação, o aptitude irá "
-"apagar da cache de pacotes todos os ficheiros de pacotes aos quais já não "
-"possa ser feita a transferência a partir de nenhum dos arquivos em sources."
-"list."
+"Se esta opção estiver activa, então após serem actualizadas as listas de "
+"pacotes o aptitude irá apagar da cache de pacotes quaisquer ficheiros de "
+"pacotes que já não possam ser transferidos dos arquivos definidos em "
+"sources.list."
 
 #: src/apt_options.cc:294
 msgid "URL to use to download changelogs"
@@ -778,12 +777,12 @@ msgid "%s is not currently installed, so it will not be upgraded.\n"
 msgstr "%s não está actualmente instalado, portanto não será actualizado.\n"
 
 #: src/cmdline/cmdline_action.cc:337
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is already installed at the latest version (%s), so it will not be "
 "upgraded.\n"
 msgstr ""
-"%s já está instalado na última versão, por isso não será actualizado.\n"
+"%s já está instalado na última versão (%s), por isso não será actualizado.\n"
 
 #: src/cmdline/cmdline_action.cc:344
 #, c-format
@@ -796,17 +795,18 @@ msgid "Package %s is not installed, so it will not be removed\n"
 msgstr "O pacote %s não está instalado, portanto não será removido\n"
 
 #: src/cmdline/cmdline_action.cc:359
-#, fuzzy, c-format
+#, c-format
 msgid "Package %s is not installed, so it will not be purged\n"
-msgstr "O pacote %s não está instalado, portanto não será removido\n"
+msgstr "O pacote %s não está instalado, portanto não será purgado\n"
 
 #: src/cmdline/cmdline_action.cc:377
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Package %s is not installed, cannot be marked/unmarked as automatically "
 "installed\n"
 msgstr ""
-"O pacote %s não está instalado, não é possível proibir uma actualização\n"
+"O pacote %s não está instalado, não é possível (des)marcar como "
+"automaticamente instalado\n"
 
 #: src/cmdline/cmdline_action.cc:384
 #, c-format
@@ -821,50 +821,50 @@ msgstr ""
 "O pacote %s não é actualizável, não é possível proibir uma actualização\n"
 
 #: src/cmdline/cmdline_action.cc:422
-#, fuzzy, c-format
+#, c-format
 #| msgid "'=' to place packages on hold"
 msgid "Setting package %s on hold\n"
-msgstr "'=' para colocar pacotes em hold"
+msgstr "Definir pacote %s em hold\n"
 
 #: src/cmdline/cmdline_action.cc:430
-#, fuzzy, c-format
+#, c-format
 #| msgid "Updating package lists"
 msgid "Marking package %s as keep\n"
-msgstr "A actualizar as listas de pacotes"
+msgstr "A marcar pacote %s como keep\n"
 
 #: src/cmdline/cmdline_action.cc:439
 #, c-format
 msgid "Setting package %s as not on hold\n"
-msgstr ""
+msgstr "A definir pacote %s como não em hold\n"
 
 #: src/cmdline/cmdline_action.cc:445
-#, fuzzy, c-format
+#, c-format
 #| msgid "Packages which depend on %s"
 msgid "Package %s is not on hold\n"
-msgstr "Pacotes que dependem de %s"
+msgstr "Pacote %s não está em hold\n"
 
 #: src/cmdline/cmdline_action.cc:451
-#, fuzzy, c-format
+#,  c-format
 #| msgid "'&M' to mark packages as automatically installed"
 msgid "Marking package %s as automatically installed\n"
-msgstr "'&M' para marcar pacotes como automaticamente instalados"
+msgstr "A marcar o pacote %s como automaticamente instalado\n"
 
 #: src/cmdline/cmdline_action.cc:459
-#, fuzzy, c-format
+#,  c-format
 #| msgid "'&M' to mark packages as automatically installed"
 msgid "Unmarking package %s as automatically installed\n"
-msgstr "'&M' para marcar pacotes como automaticamente instalados"
+msgstr "A desmarcar o pacote %s como automaticamente instalado\n"
 
 #: src/cmdline/cmdline_action.cc:468 src/cmdline/cmdline_action.cc:479
-#, fuzzy, c-format
+#,  c-format
 #| msgid "Check for new versions of packages"
 msgid "Marking version %s of package %s as forbidden\n"
-msgstr "Procurar por novas versões de pacotes"
+msgstr "A marcar a versão %s do pacote %s como proibida\n"
 
 #: src/cmdline/cmdline_action.cc:531
 #, c-format
 msgid "Note: selecting the task \"%s: %s\" for installation\n"
-msgstr "Nota: a seleccionar a tarefa \"%s: %s\" para instalação\n"
+msgstr "Nota: a selecionar a tarefa \"%s: %s\" para instalação\n"
 
 #: src/cmdline/cmdline_action.cc:561
 #, c-format
@@ -882,12 +882,12 @@ msgstr ""
 "Só pode especificar um repositório de pacotes com o comando 'install'.\n"
 
 #: src/cmdline/cmdline_action.cc:610
-#, fuzzy, c-format
+#,  c-format
 msgid ""
 "Couldn't find package \"%s\", and more than %zu\n"
 "packages contain \"%s\" in their name.\n"
 msgstr ""
-"Não foi possível encontrar o pacote \"%s\", e mais de 40\n"
+"Não foi possível encontrar o pacote \"%s\", e mais de %zu\n"
 "pacotes contêm \"%s\" no seu nome.\n"
 
 #: src/cmdline/cmdline_action.cc:614
@@ -907,13 +907,13 @@ msgstr ""
 "coincida com \"%s\"\n"
 
 #: src/cmdline/cmdline_action.cc:639
-#, fuzzy, c-format
+#,  c-format
 msgid ""
 "Couldn't find any package matching \"%s\", and more than %zu\n"
 "packages contain \"%s\" in their description.\n"
 msgstr ""
-"Não foi possível encontrar nenhum pacote que coincida com \"%s\", e\n"
-"mais de 40 pacotes contêm \"%s\" na sua descrição.\n"
+"Não foi possível encontrar nenhum pacote que coincida com \"%s\", e mais de "
+"%zu pacotes contêm \"%s\" na sua descrição.\n"
 
 #: src/cmdline/cmdline_action.cc:643
 #, c-format
@@ -1240,12 +1240,14 @@ msgid ""
 "Ignoring confirmation in Simulation mode (subsequent actions will not have "
 "effects)\n"
 msgstr ""
+"A ignorar a confirmação no modo de Simulação (as ações subsequentes não "
+"terão efeito)\n"
 
 #: src/cmdline/cmdline_prompt.cc:490
-#, fuzzy, c-format
+#,  c-format
 #| msgid "Press return to continue.\n"
 msgid "Press any key to continue...\n"
-msgstr "Pressione Enter para continuar.\n"
+msgstr "Pressione qualquer tecla para continuar...\n"
 
 #: src/cmdline/cmdline_prompt.cc:496
 msgid "I am aware that this is a very bad idea"
@@ -1333,10 +1335,10 @@ msgid "The following packages are SUGGESTED but will NOT be installed:\n"
 msgstr "Os seguintes pacotes são SUGERIDOS mas NÃO serão instalados:\n"
 
 #: src/cmdline/cmdline_prompt.cc:739
-#, fuzzy, c-format
+#,  c-format
 #| msgid "The following packages will be DOWNGRADED:"
 msgid "The following packages will NOT be UPGRADED:\n"
-msgstr "Os seguintes pacotes serão alterados para uma versão ANTERIOR:"
+msgstr "Os seguintes pacotes não serão ACTUALIZADOS:\n"
 
 #: src/cmdline/cmdline_prompt.cc:745
 #, c-format
@@ -1612,12 +1614,13 @@ msgstr ""
 #: src/cmdline/cmdline_prompt.cc:1079
 #, c-format
 msgid "Note: Using 'Download Only' mode, no other actions will be performed.\n"
-msgstr ""
+msgstr "Nota: a utilizar modo 'Apenas Download', não serão tomadas outras "
+"ações.\n"
 
 #: src/cmdline/cmdline_prompt.cc:1090
 #, c-format
 msgid "Note: Using 'Simulate' mode.\n"
-msgstr ""
+msgstr "Nota: a utilizar modo 'Simular'.\n"
 
 #: src/cmdline/cmdline_prompt.cc:1095
 msgid "Do you want to continue? [Y/n/?] "
@@ -2118,23 +2121,24 @@ msgid "but it is not going to be installed."
 msgstr "mas não vai ser instalado."
 
 #: src/cmdline/cmdline_show_broken.cc:119
-#, fuzzy, c-format
+#,  c-format
 #| msgid "%s is a virtual package provided by:\n"
 msgid ""
 " which is a virtual package and is not provided by any available package.\n"
-msgstr "%s é um pacote virtual disponibilizado por:\n"
+msgstr ""
+" que é um pacote virtual e não é disponibilizado por qualquer pacote disponível.\n"
 
 #: src/cmdline/cmdline_show_broken.cc:123
-#, fuzzy, c-format
+#,  c-format
 #| msgid "%s is a virtual package provided by:\n"
 msgid " which is a virtual package, provided by:\n"
-msgstr "%s é um pacote virtual disponibilizado por:\n"
+msgstr " que é um pacote virtual, disponibilizado por:\n"
 
 #: src/cmdline/cmdline_show_broken.cc:143
-#, fuzzy, c-format
+#,  c-format
 #| msgid "Provides"
 msgid " provides %s=%s"
-msgstr "Disponibiliza"
+msgstr " disponibiliza %s=%s"
 
 #: src/cmdline/cmdline_show_broken.cc:157
 #, c-format
@@ -2415,33 +2419,32 @@ msgstr "E: O comando update não leva argumentos\n"
 
 #: src/cmdline/cmdline_user_tag.cc:63
 msgid "add"
-msgstr ""
+msgstr "acrescentar"
 
 #: src/cmdline/cmdline_user_tag.cc:63
-#, fuzzy
 #| msgid "Remove"
 msgid "remove"
-msgstr "Remover"
+msgstr "remover"
 
 #: src/cmdline/cmdline_user_tag.cc:66
 #, c-format
 msgid "Applied user-tag operation '%s' '%s' to: %s\n"
-msgstr ""
+msgstr "Aplicada a operação de user-tag '%s0 '%s' a: %s\n"
 
 #: src/cmdline/cmdline_user_tag.cc:71
 #, c-format
 msgid "Failed to apply user-tag operation '%s' '%s' to: %s\n"
-msgstr ""
+msgstr "Falhou aplicar a operação de user-tag '%s' '%s' a: %s\n"
 
 #: src/cmdline/cmdline_user_tag.cc:124
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: too few arguments; expected at least a tag name and a package.\n"
 msgid ""
 "%s: too few arguments; expected at least a tag name and a package or "
 "pattern\n"
 msgstr ""
-"%s: argumentos insuficientes; esperado pelo menos um nome de 'tag' e um "
-"pacote.\n"
+"%s: argumentos insuficientes; esperado pelo menos um nome de tag e um pacote "
+"ou um padrão\n"
 
 #: src/cmdline/cmdline_util.cc:166
 #, c-format
@@ -2480,25 +2483,25 @@ msgid "Couldn't find task '%s'"
 msgstr "Não foi possível encontrar a tarefa '%s'"
 
 #: src/cmdline/cmdline_util.cc:360
-#, fuzzy, c-format
+#,  c-format
 msgid "%d (%+d) broken"
 msgid_plural "%d (%+d) broken"
-msgstr[0] "%d estrago [%+d]"
-msgstr[1] "%d estragados [%+d]"
+msgstr[0] "%d (%+d) estragado"
+msgstr[1] "%d (%+d) estragados"
 
 #: src/cmdline/cmdline_util.cc:374
-#, fuzzy, c-format
+#,  c-format
 msgid "%d (%+d) upgradable"
 msgid_plural "%d (%+d) upgradable"
-msgstr[0] "%d actualização"
-msgstr[1] "%d actualizações"
+msgstr[0] "%d (%+d) actualizável"
+msgstr[1] "%d (%+d) actualizáveis"
 
 #: src/cmdline/cmdline_util.cc:388
 #, c-format
 msgid "%d (%+d) new"
 msgid_plural "%d (%+d) new"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d (%+d) novo"
+msgstr[1] "%d (%+d) novos"
 
 #: src/cmdline/cmdline_util.cc:399
 #, c-format
@@ -2835,7 +2838,7 @@ msgstr "A ler informações estendidas de estado"
 #: src/generic/apt/aptcache.cc:394
 #, c-format
 msgid "Cannot parse user-tags for package: %s: '%s'"
-msgstr ""
+msgstr "Não pode analisar os user-tags para o pacote: %s: '%s'"
 
 #: src/generic/apt/aptcache.cc:457 src/generic/apt/aptcache.cc:541
 #: src/generic/apt/aptcache.cc:544
@@ -2884,30 +2887,30 @@ msgstr ""
 
 #: src/generic/apt/aptcache.cc:875
 msgid "failed to save selections to dpkg database"
-msgstr ""
+msgstr "falhou gravar as seleções na base de dados do dpkg"
 
 #: src/generic/apt/aptcache.cc:1546
 #, c-format
 msgid "User-tag '%s' already present for %s"
-msgstr ""
+msgstr "User-tab '%s' já está presente para %s"
 
 #: src/generic/apt/aptcache.cc:1562
-#, fuzzy, c-format
+#, c-format
 #| msgid "Adding user tag \"%s\" to the package \"%s\".\n"
 msgid "Could not add user-tag '%s' to package %s"
-msgstr "A acrescentar o 'tag' \"%s\" ao pacote \"%s\".\n"
+msgstr "Não pode acrescentar o user-tag '%s' ao pacote %s"
 
 #: src/generic/apt/aptcache.cc:1588
-#, fuzzy, c-format
+#, c-format
 #| msgid "Couldn't find task '%s'"
 msgid "Could not find valid user-tag '%s'"
-msgstr "Não foi possível encontrar a tarefa '%s'"
+msgstr "Não pode encontrar um user-tag '%s' válido"
 
 #: src/generic/apt/aptcache.cc:1604
-#, fuzzy, c-format
+#, c-format
 #| msgid "Removing user tag \"%s\" from the package \"%s\".\n"
 msgid "Could not remove user-tag '%s' from package %s"
-msgstr "A remover o 'tag' \"%s\" do pacote \"%s\".\n"
+msgstr "Não pode remover o user-tag '%s' do pacote %s"
 
 #: src/generic/apt/aptcache.cc:1682
 msgid "Unable to correct dependencies, some packages cannot be installed"
@@ -2932,10 +2935,10 @@ msgstr ""
 "falta"
 
 #: src/generic/apt/apt.cc:130
-#, fuzzy, c-format
+#, c-format
 #| msgid "Configuration files and data remain"
 msgid "Configuration file '%s' is not correct, please fix it"
-msgstr "Ficheiros de configuração e dados restantes"
+msgstr "O ficheiro de configuração '%s' não está correcto, por favor corrija-o"
 
 #. TRANSLATORS: Set this string to the name of a configuration
 #. file in $pkgdatadir/aptitude that overrides defaults for your
@@ -2952,14 +2955,11 @@ msgid "Localized defaults|"
 msgstr "Pré-definições traduzidas|"
 
 #: src/generic/apt/apt.cc:278
-#, fuzzy
 #| msgid ""
 #| "Replace configuration file\n"
 #| "'%s'?"
 msgid "Error saving configuration file"
-msgstr ""
-"Substituir ficheiros de configuração\n"
-"'%s'?"
+msgstr "Erro ao guardar o ficheiro de configuração"
 
 #: src/generic/apt/apt.cc:429
 msgid ""
@@ -2973,22 +2973,21 @@ msgstr ""
 "pacotes NÃO serão preservadas!"
 
 #: src/generic/apt/apt.cc:524
-#, fuzzy, c-format
+#, c-format
 #| msgid "Couldn't chroot into %s for %s"
 msgid "Could not create directory: %s: %s"
-msgstr "Não foi possível fazer chroot em %s para %s"
+msgstr "Não foi possível criar directório: %s: %s"
 
 #: src/generic/apt/apt.cc:549
-#, fuzzy, c-format
+#, c-format
 #| msgid "Couldn't clean out list directories"
 msgid "Could not create directories: %s: %s"
-msgstr "Não foi possível limpar a lista de directórios"
+msgstr "Não foi possível criar directórios: %s: %s"
 
 #: src/generic/apt/apt.cc:1335
-#, fuzzy
 #| msgid "installed locally"
 msgid "(installed locally)"
-msgstr "instalado localmente"
+msgstr "(instalado localmente)"
 
 #: src/generic/apt/apt.cc:1397
 msgid "foreign"
@@ -3092,61 +3091,61 @@ msgstr ""
 "\", ou um número inteiro)."
 
 #: src/generic/apt/config_file.cc:59
-#, fuzzy, c-format
+#, c-format
 #| msgid "Could not open file \"%s\""
 msgid "Could not remove old configuration file: %s"
-msgstr "Não foi possível abrir ficheiro \"%s\""
+msgstr "Não foi possível remover o ficheiro de configuração antigo: %s"
 
 #: src/generic/apt/config_file.cc:91
-#, fuzzy, c-format
+#, c-format
 #| msgid "Asking whether to replace the configuration file %s"
 msgid "Could not get the content of the old configuration file: %s"
-msgstr "Perguntar se é para substituir o ficheiro de configuração %s"
+msgstr "Não foi possível obter o conteúdo do ficheiro de configuração antigo: %s"
 
 #: src/generic/apt/config_file.cc:111
-#, fuzzy, c-format
+#, c-format
 #| msgid "Configuration files and data remain"
 msgid "Old configuration file is not a regular file: %s"
-msgstr "Ficheiros de configuração e dados restantes"
+msgstr "O antigo ficheiro de configuração não é um ficheiro normal: %s"
 
 #: src/generic/apt/config_file.cc:122
 #, c-format
 msgid "Directory does not exist and could not create it: %s"
-msgstr ""
+msgstr "O directório não existe e não foi possível criá-lo: %s"
 
 #: src/generic/apt/config_file.cc:181
 #, c-format
 msgid "File is unexpectedly large (> %zu bytes): %s"
-msgstr ""
+msgstr "O ficheiro é inesperadamente grande (> %zu bytes): %s"
 
 #: src/generic/apt/config_file.cc:195
-#, fuzzy, c-format
+#, c-format
 #| msgid "Asking whether to replace the configuration file %s"
 msgid "Error reading from old configuration file: %s"
-msgstr "Perguntar se é para substituir o ficheiro de configuração %s"
+msgstr "Erro ao ler do antigo ficheiro de configuração: %s"
 
 #: src/generic/apt/config_file.cc:226
-#, fuzzy, c-format
+#, c-format
 #| msgid "Error writing state file"
 msgid "Error writing to file: %s"
-msgstr "Erro ao escrever o ficheiro do estado"
+msgstr "Erro ao escrever para o ficheiro: %s"
 
 #: src/generic/apt/config_file.cc:251
-#, fuzzy, c-format
+#,  c-format
 #| msgid "Could not open file \"%s\""
 msgid "Could not remove file: %s"
-msgstr "Não foi possível abrir ficheiro \"%s\""
+msgstr "Não foi possível remover o ficheiro: %s"
 
 #: src/generic/apt/config_file.cc:257
 #, c-format
 msgid "Will not remove file, it is not a regular file: %s"
-msgstr ""
+msgstr "Não irá remover o ficheiro, não é um ficheiro normal: %s"
 
 #: src/generic/apt/config_file.cc:264
-#, fuzzy, c-format
+#,  c-format
 #| msgid "Error writing state file"
 msgid "Error removing file: %s"
-msgstr "Erro ao escrever o ficheiro do estado"
+msgstr "Erro ao remover o ficheiro: %s"
 
 #: src/generic/apt/download_install_manager.cc:60
 msgid ""
@@ -3164,6 +3163,8 @@ msgid ""
 "Perhaps the package lists are out of date, please try 'aptitude update' (or "
 "equivalent) first"
 msgstr ""
+"Possivelmente as listas de pacotes estão desatualizadas, por favor tente "
+"primeiro 'aptitude update' (ou equivalente)"
 
 #: src/generic/apt/download_install_manager.cc:123
 #: src/generic/apt/download_update_manager.cc:130
@@ -3216,17 +3217,18 @@ msgstr "Esperou por %s mas não estava lá"
 
 #: src/generic/apt/dpkg_selections.cc:106
 msgid "Failed to create pipe for dpkg selections."
-msgstr ""
+msgstr "Falhou criar pipe para as seleções do dpkg."
 
 #: src/generic/apt/dpkg_selections.cc:114
 msgid "Failed to fork process for dpkg selections."
-msgstr ""
+msgstr "Falhou fazer fork ao processo para as selecções do dpkg."
 
 #: src/generic/apt/dpkg_selections.cc:191
 #, c-format
 msgid ""
 "Failed to execute process to save dpkg selections, waitpid error: %d: '%s'"
 msgstr ""
+"Falhou executar o processo para salvar as seleções do dpkg, erro de waitpid: %d: '%s'"
 
 #: src/generic/apt/dpkg_selections.cc:205
 #, c-format
@@ -3234,20 +3236,23 @@ msgid ""
 "Failed to execute process to save dpkg selections, dpkg or trying to execute "
 "it exited with status/errno: %d"
 msgstr ""
+"Falhou executar o processo para salvar as seleções do dpkg, do dpkg ou a "
+"tentativa de executar saiu com status/errno: %d"
 
 #: src/generic/apt/dpkg_selections.cc:210
-#, fuzzy, c-format
+#,  c-format
 msgid ""
 "Failed to execute process to save dpkg selections, dpkg killed by signal: %d"
 msgstr ""
-"Não foi possível criar o ficheiro de saída: processo-filho morto pelo sinal "
-"%d."
+"Falhou ao executar o processo para gravar as selelecções do dpkg, o dpkg recebeu kill pelo sinal: %d"
 
 #: src/generic/apt/dpkg_selections.cc:215
 msgid ""
 "Failed to execute process to save dpkg selections, dpkg exited with unknown "
 "problem"
 msgstr ""
+"Falhou executar o processo para gravar as selecções do dpkg, o dpkg saiu "
+"com um problema desconhecido"
 
 #: src/generic/apt/dump_packages.cc:539 src/generic/apt/dump_packages.cc:629
 #, c-format
@@ -3279,7 +3284,7 @@ msgid "log report"
 msgstr "relatório de log"
 
 #: src/generic/apt/log.cc:74
-#, fuzzy, c-format
+#,  c-format
 #| msgid ""
 #| "IMPORTANT: this log only lists intended actions; actions which fail due "
 #| "to\n"
@@ -3290,7 +3295,7 @@ msgid ""
 "  due to dpkg problems may not be completed.\n"
 "\n"
 msgstr ""
-"IMPORTANTE: este log lista apenas as acções pretendidas; as acções que "
+"  IMPORTANTE: este log apenas lista as acções pretendidas; as acções que\n"
 "falham devido a problemas do dpkg podem não estar completas.\n"
 "\n"
 
@@ -3319,11 +3324,11 @@ msgstr "REMOVER"
 
 #: src/generic/apt/log.cc:95
 msgid "UPGRADE"
-msgstr ""
+msgstr "ACTUALIZAR"
 
 #: src/generic/apt/log.cc:96
 msgid "DOWNGRADE"
-msgstr ""
+msgstr "DOWNGRADE"
 
 #: src/generic/apt/log.cc:97
 msgid "REINSTALL"
@@ -3363,22 +3368,21 @@ msgstr "????????"
 
 #: src/generic/apt/log.cc:120
 msgid " (PURGE)"
-msgstr ""
+msgstr " (PURGAR)"
 
 #: src/generic/apt/log.cc:123 src/generic/apt/log.cc:124
-#, fuzzy
 msgid "(no version found)"
-msgstr "Não foi encontrada nenhuma resolução."
+msgstr "(não foi encontrada versão)"
 
 #: src/generic/apt/log.cc:140 src/generic/apt/log.cc:153
-#, fuzzy, c-format
+#,  c-format
 msgid "[%s] %s %s\n"
-msgstr "[%s] %s\n"
+msgstr "[%s] %s %s\n"
 
 #: src/generic/apt/log.cc:161
-#, fuzzy, c-format
+#, c-format
 msgid "[%s] %s %s -> %s\n"
-msgstr "[ACTUALIZAR] %s %s -> %s\n"
+msgstr "[%s] %s %s -> %s\n"
 
 #: src/generic/apt/log.cc:170
 #, c-format
@@ -3386,10 +3390,9 @@ msgid "[%s] %s\n"
 msgstr "[%s] %s\n"
 
 #: src/generic/apt/log.cc:177
-#, fuzzy
 #| msgid "Completed"
 msgid "Log complete."
-msgstr "Terminado"
+msgstr "Log terminado."
 
 #: src/generic/apt/matching/match.cc:3084
 #: src/generic/apt/matching/match.cc:3201
@@ -3520,13 +3523,14 @@ msgid "Failed to download changelogs: unexpected exception."
 msgstr "Falhou a transferência de changelogs: excepção inesperada"
 
 #: src/generic/apt/pkg_changelog.cc:677
-#, fuzzy, c-format
+#,  c-format
 #| msgid "%s is not an official Debian package, cannot display its changelog."
 msgid ""
 "%s version %s is not an official Debian package, cannot display its "
 "changelog."
 msgstr ""
-"%s não é um pacote oficial Debian, não é possível mostrar o seu 'changelog'."
+"%s versão %s não é um pacote oficial Debian, não é possível mostrar o seu "
+"changelog."
 
 #: src/generic/apt/resolver_manager.cc:488
 #, c-format
@@ -3568,7 +3572,7 @@ msgstr "A ler as descrições das tarefas"
 
 #: src/generic/apt/usertags.cc:67
 msgid "Invalid empty user-tag"
-msgstr ""
+msgstr "User-tag vazio inválido"
 
 #: src/generic/apt/usertags.cc:76
 #, c-format
@@ -3576,6 +3580,8 @@ msgid ""
 "Invalid character in user-tag at position %zu (use only printable characters "
 "and no spaces or comma)"
 msgstr ""
+"Caractere inválido em user-tab na posição %zu (utilizar apenas caracteres "
+"imprimíveis e sem espaços ou vírgula)"
 
 #: src/generic/controllers/search_input.cc:109 src/gtk/packagestab.cc:60
 msgid "Parse error"
@@ -3674,10 +3680,10 @@ msgstr ""
 "\""
 
 #: src/generic/util/util.cc:382
-#, fuzzy, c-format
+#, c-format
 #| msgid "Unable to remove \"%s\""
 msgid "Unable to remove \"%s\": %s"
-msgstr "Não foi possível remover \"%s\""
+msgstr "Não foi possível remover \"%s\": %s"
 
 #: src/generic/util/util.cc:399
 #, c-format
@@ -5453,9 +5459,9 @@ msgstr ""
 "'filtro'"
 
 #: src/load_grouppolicy.cc:552
-#, fuzzy, c-format
+#, c-format
 msgid "Bad mode name '%s' (use 'binary' or 'source')"
-msgstr "Nome de secção '%s' inválido (use 'none', 'topdir' ou 'subdir')"
+msgstr "Nome de modo errado '%s' (utilize 'binary' ou 'source')"
 
 #: src/load_grouppolicy.cc:650
 #, c-format
@@ -5468,7 +5474,7 @@ msgid "Unable to parse pattern after \"%s\""
 msgstr "Não foi possível processar padrão após \"%s\""
 
 #: src/load_grouppolicy.cc:711
-#, fuzzy, c-format
+#, c-format
 msgid "Unexpected empty tree title after \"%s\""
 msgstr "Título de árvore vazio inesperado após \"%s\""
 
@@ -5645,7 +5651,7 @@ msgid "       aptitude [options] <action> ..."
 msgstr "       aptitude [opções] <acção> ..."
 
 #: src/main.cc:194
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| "  Actions (if none is specified, aptitude will enter interactive mode):\n"
 #| "\n"
@@ -5653,58 +5659,57 @@ msgid ""
 "Actions (if none is specified, aptitude will enter interactive mode):\n"
 "\n"
 msgstr ""
-"  Acções (se não for especificada, o aptitude irá entrar no modo "
+"Acções (se não for especificada nenhuma, o aptitude irá entrar no modo "
 "interactivo):\n"
 "\n"
 
 #: src/main.cc:195
-#, fuzzy, c-format
+#, c-format
 #| msgid " install      - Install/upgrade packages.\n"
 msgid " install         Install/upgrade packages.\n"
-msgstr " install      - Instalar/actualizar pacotes.\n"
+msgstr " install       Instalar/actualizar pacotes.\n"
 
 #: src/main.cc:196
-#, fuzzy, c-format
+#, c-format
 #| msgid " remove       - Remove packages.\n"
 msgid " remove          Remove packages.\n"
-msgstr " remove       - Remover pacotes.\n"
+msgstr " remove        Remover pacotes.\n"
 
 #: src/main.cc:197
-#, fuzzy, c-format
+#, c-format
 #| msgid " purge        - Remove packages and their configuration files.\n"
 msgid " purge           Remove packages and their configuration files.\n"
-msgstr " purge        - Remover pacotes e os seus ficheiros de configuração.\n"
+msgstr " purge         Remover pacotes e os seus ficheiros de configuração.\n"
 
 #: src/main.cc:198
-#, fuzzy, c-format
+#, c-format
 #| msgid " hold         - Place packages on hold.\n"
 msgid " hold            Place packages on hold.\n"
-msgstr " hold         - Manter pacotes na versão actual.\n"
+msgstr " hold          Manter pacotes na versão actual.\n"
 
 #: src/main.cc:199
-#, fuzzy, c-format
+#, c-format
 #| msgid " unhold       - Cancel a hold command for a package.\n"
 msgid " unhold          Cancel a hold command for a package.\n"
-msgstr " unhold       - Cancelar o comando hold para um pacote.\n"
+msgstr " unhold        Cancelar o comando hold para um pacote.\n"
 
 #: src/main.cc:200
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| " markauto     - Mark packages as having been automatically installed.\n"
 msgid ""
 " markauto        Mark packages as having been automatically installed.\n"
 msgstr ""
-" markauto     - Marcar pacotes como tendo sido automaticamente instalados.\n"
+" markauto      Marcar pacotes como tendo sido automaticamente instalados.\n"
 
 #: src/main.cc:201
-#, fuzzy, c-format
+#, c-format
 #| msgid " unmarkauto   - Mark packages as having been manually installed.\n"
 msgid " unmarkauto      Mark packages as having been manually installed.\n"
-msgstr ""
-" unmarkauto   - Marcar pacotes como tendo sido manualmente instalados.\n"
+msgstr " unmarkauto    Marcar pacotes como tendo sido manualmente instalados.\n"
 
 #: src/main.cc:202
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| " forbid-version - Forbid aptitude from upgrading to a specific package "
 #| "version.\n"
@@ -5712,23 +5717,23 @@ msgid ""
 " forbid-version  Forbid aptitude from upgrading to a specific package "
 "version.\n"
 msgstr ""
-" forbid-version - Proibir o aptitude de actualizar para uma versão "
+" forbid-version  Proibir o aptitude de actualizar para uma versão "
 "específica de um pacote.\n"
 
 #: src/main.cc:203
-#, fuzzy, c-format
+#, c-format
 #| msgid " update       - Download lists of new/upgradable packages.\n"
 msgid " update          Download lists of new/upgradable packages.\n"
-msgstr " update       - Transferir as listas de pacotes novos/actualizáveis.\n"
+msgstr " update        Transferir as listas de pacotes novos/actualizáveis.\n"
 
 #: src/main.cc:204
-#, fuzzy, c-format
+#, c-format
 #| msgid " safe-upgrade - Perform a safe upgrade.\n"
 msgid " safe-upgrade    Perform a safe upgrade.\n"
-msgstr " safe-upgrade - Executar uma actualização segura.\n"
+msgstr " safe-upgrade  Executar uma actualização segura.\n"
 
 #: src/main.cc:205
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| " full-upgrade - Perform an upgrade, possibly installing and removing "
 #| "packages.\n"
@@ -5736,138 +5741,134 @@ msgid ""
 " full-upgrade    Perform an upgrade, possibly installing and removing "
 "packages.\n"
 msgstr ""
-" full-upgrade - Executar uma actualização, possivelmente instalando e "
-"removendo\n"
-"                pacotes.\n"
+" full-upgrade  Executar uma actualização, possivelmente instalando e "
+"removendo pacotes.\n"
 
 #: src/main.cc:206
-#, fuzzy, c-format
+#, c-format
 #| msgid " build-dep    - Install the build-dependencies of packages.\n"
 msgid " build-dep       Install the build-dependencies of packages.\n"
-msgstr " build-dep    - Instalar as dependências de compilação de pacotes.\n"
+msgstr " build-dep     Instalar as dependências de compilação de pacotes.\n"
 
 #: src/main.cc:207
-#, fuzzy, c-format
+#, c-format
 #| msgid " forget-new   - Forget what packages are \"new\".\n"
 msgid " forget-new      Forget what packages are \"new\".\n"
-msgstr " forget-new   - Esquecer quais os pacotes que são \"novos\".\n"
+msgstr " forget-new    Esquecer quais os pacotes que são \"novos\".\n"
 
 #: src/main.cc:208
-#, fuzzy, c-format
+#, c-format
 #| msgid " search       - Search for a package by name and/or expression.\n"
 msgid " search          Search for a package by name and/or expression.\n"
-msgstr " search       - Procurar um pacote por nome e/ou expressão.\n"
+msgstr " search        Procurar um pacote por nome e/ou expressão.\n"
 
 #: src/main.cc:209
-#, fuzzy, c-format
+#, c-format
 #| msgid " show         - Display detailed information about a package.\n"
 msgid " show            Display detailed information about a package.\n"
-msgstr " show         - Mostrar informação detalhada acerca de um pacote.\n"
+msgstr " show          Mostrar informação detalhada acerca de um pacote.\n"
 
 #: src/main.cc:210
-#, fuzzy, c-format
+#, c-format
 #| msgid " versions     - Displays the versions of specified packages.\n"
 msgid " versions        Displays the versions of specified packages.\n"
-msgstr " versions      - Mostrar as versões dos pacotes especificados.\n"
+msgstr " versions       Mostrar as versões dos pacotes especificados.\n"
 
 #: src/main.cc:211
-#, fuzzy, c-format
+#, c-format
 #| msgid " clean        - Erase downloaded package files.\n"
 msgid " clean           Erase downloaded package files.\n"
-msgstr " clean        - Apagar ficheiros de pacotes já transferidos.\n"
+msgstr " clean         Apagar ficheiros de pacotes já transferidos.\n"
 
 #: src/main.cc:212
-#, fuzzy, c-format
+#, c-format
 #| msgid " autoclean    - Erase old downloaded package files.\n"
 msgid " autoclean       Erase old downloaded package files.\n"
-msgstr " autoclean    - Apagar ficheiros antigos de pacotes transferidos.\n"
+msgstr " autoclean     Apagar ficheiros antigos de pacotes transferidos.\n"
 
 #: src/main.cc:213
-#, fuzzy, c-format
+#, c-format
 #| msgid " changelog    - View a package's changelog.\n"
 msgid " changelog       View a package's changelog.\n"
-msgstr " changelog    - Ver o registo de alterações de um pacote.\n"
+msgstr " changelog     Ver o registo de alterações de um pacote.\n"
 
 #: src/main.cc:214
-#, fuzzy, c-format
+#, c-format
 #| msgid " download     - Download the .deb file for a package.\n"
 msgid " download        Download the .deb file for a package.\n"
-msgstr " download     - Transferir o ficheiro .deb para um pacote.\n"
+msgstr " download      Transferir o ficheiro .deb para um pacote.\n"
 
 #: src/main.cc:215
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| " reinstall    - Download and (possibly) reinstall a currently installed "
 #| "package.\n"
 msgid " reinstall       Reinstall a currently installed package.\n"
-msgstr ""
-" reinstall    - Transferir e (possivelmente) reinstalar um pacote "
-"actualmente\n"
-"                instalado.\n"
+msgstr " reinstall     Reinstalar um pacote que esteja instalado.\n"
 
 #: src/main.cc:216
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| " -V             Show which versions of packages are to be installed.\n"
 msgid ""
 " why             Explain why a particular package should be installed.\n"
 msgstr ""
-" -V             Exibir quais as versões de pacotes que irão ser instalados.\n"
+" why             Explicar porque um determinado pacote deve ser instalado.\n"
 
 #: src/main.cc:217
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| " -V             Show which versions of packages are to be installed.\n"
 msgid ""
 " why-not         Explain why a particular package cannot be installed.\n"
 msgstr ""
-" -V             Exibir quais as versões de pacotes que irão ser instalados.\n"
+" why-not         Explicar porque um determinado pacote não pode ser instalado.\n"
 
 #: src/main.cc:219
 #, c-format
 msgid " add-user-tag    Add user tag to packages/patterns.\n"
-msgstr ""
+msgstr " add-user-tag    Acrescentar user tag aos pacotes/padrões.\n"
 
 #: src/main.cc:220
 #, c-format
 msgid " remove-user-tag Remove user tag from packages/patterns.\n"
-msgstr ""
+msgstr "remover-user-tag Remover user tag de pacotes/paadrões.\n"
 
 #: src/main.cc:222
-#, fuzzy, c-format
+#, c-format
 #| msgid "  Options:\n"
 msgid "Options:\n"
-msgstr "  Opções:\n"
+msgstr "Opções:\n"
 
 #: src/main.cc:223
-#, fuzzy, c-format
+#, c-format
 #| msgid " -h             This help text.\n"
 msgid " -h              This help text.\n"
-msgstr " -h             Este texto de ajuda.\n"
+msgstr " -h              Este texto de ajuda.\n"
 
 #: src/main.cc:225
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| " --gui          Use the GTK GUI even if disabled in the configuration.\n"
 msgid ""
 " --gui           Use the GTK GUI even if disabled in the configuration.\n"
 msgstr ""
-" --gui\t\t Utilizar o GUI GTK mesmo que desabilitado na configuração.\n"
+" --gui		  Utilizar o GUI GTK mesmo que desabilitado na configuração.\n"
 
 #: src/main.cc:227
-#, fuzzy, c-format
+#, c-format
 #| msgid " --no-gui       Do not use the GTK GUI even if available.\n"
 msgid " --no-gui        Do not use the GTK GUI even if available.\n"
-msgstr " --no-gui \tNão utilizar o GUI GTK mesmo que disponível.\n"
+msgstr " --no-gui        Não utilizar o GUI GTK mesmo que disponível.\n"
 
 #: src/main.cc:229
-#, fuzzy, c-format
+#, c-format
 #| msgid " --qt           Use the Qt GUI.\n"
 msgid " --qt            Use the Qt GUI.\n"
-msgstr " --qt           Utilizar o GUI Qt\n"
+msgstr " --qt            Utilizar o GUI Qt\n"
 
 #: src/main.cc:230
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| " --no-qt        Do not use the Qt GUI even if enabled in the "
 #| "configuration.\n"
@@ -5875,33 +5876,33 @@ msgid ""
 " --no-qt         Do not use the Qt GUI even if enabled in the "
 "configuration.\n"
 msgstr ""
-" --no-qt        Não utilizar o GUI Qt mesmo que habilitado na configuração.\n"
+" --no-qt         Não utilizar o GUI Qt mesmo que habilitado na configuração.\n"
 
 #: src/main.cc:232
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| " -s             Simulate actions, but do not actually perform them.\n"
 msgid " -s              Simulate actions, but do not actually perform them.\n"
-msgstr " -s             Simular acções, sem as executar.\n"
+msgstr " -s              Simular acções, mas sem as executar.\n"
 
 #: src/main.cc:233
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| " -d             Only download packages, do not install or remove "
 #| "anything.\n"
 msgid ""
 " -d              Only download packages, do not install or remove anything.\n"
 msgstr ""
-" -d             Transferir apenas os pacotes, não instalar ou remover nada.\n"
+" -d              Transferir apenas os pacotes, não instalar ou remover nada.\n"
 
 #: src/main.cc:234
-#, fuzzy, c-format
+#, c-format
 #| msgid " -P             Always prompt for confirmation of actions.\n"
 msgid " -P              Always prompt for confirmation of actions.\n"
-msgstr " -P             Pedir sempre por confirmação ou acções.\n"
+msgstr " -P              Pedir sempre por confirmação das acções.\n"
 
 #: src/main.cc:235
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| " -y             Assume that the answer to simple yes/no questions is "
 #| "'yes'.\n"
@@ -5909,11 +5910,10 @@ msgid ""
 " -y              Assume that the answer to simple yes/no questions is "
 "'yes'.\n"
 msgstr ""
-" -y             Assumir que a resposta é 'sim' para perguntas simples de sim/"
-"não.\n"
+" -y              Assumir que a resposta a perguntas simples de sim/não é 'sim'.\n"
 
 #: src/main.cc:236
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| " -F format      Specify a format for displaying search results; see the "
 #| "manual.\n"
@@ -5921,11 +5921,11 @@ msgid ""
 " -F format       Specify a format for displaying search results; see the "
 "manual.\n"
 msgstr ""
-" -F formato      Especificar um formato para exibição dos resultados da\n"
-"                 pesquisa; ver o manual.\n"
+" -F formato      Especificar um formato para exibição dos resultados da "
+"pesquisa; ver o manual.\n"
 
 #: src/main.cc:237
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| " -O order       Specify how search results should be sorted; see the "
 #| "manual.\n"
@@ -5933,54 +5933,47 @@ msgid ""
 " -O order        Specify how search results should be sorted; see the "
 "manual.\n"
 msgstr ""
-" -O ordem       Especifica como os resultados das pesquisas devem ser\n"
-"                ordenados; ver o manual.\n"
+" -O ordem        Especifica como os resultados das pesquisas devem ser ordenados; ver o manual.\n"
 
 #: src/main.cc:238
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| " -w width       Specify the display width for formatting search results.\n"
 msgid ""
 " -w width        Specify the display width for formatting search results.\n"
 msgstr ""
-" -w largura      Especifica a largura de exibição para formatar os "
-"resultados\n"
-"                 de pesquisa.\n"
+" -w largura      Especifica a largura de exibição para formatar os resultados das pesquisas.\n"
 
 #: src/main.cc:239
-#, fuzzy, c-format
+#, c-format
 #| msgid " -f             Aggressively try to fix broken packages.\n"
 msgid " -f              Aggressively try to fix broken packages.\n"
-msgstr ""
-" -f             Tentar agressivamente corrigir os pacotes com problemas.\n"
+msgstr " -f              Tentar agressivamente corrigir os pacotes com problemas.\n"
 
 #: src/main.cc:240
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| " -V             Show which versions of packages are to be installed.\n"
 msgid " -V              Show which versions of packages are to be installed.\n"
-msgstr ""
-" -V             Exibir quais as versões de pacotes que irão ser instalados.\n"
+msgstr " -V              Mostrar quais as versões de pacotes que irão ser instalados.\n"
 
 #: src/main.cc:241
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| " -D             Show the dependencies of automatically changed packages.\n"
 msgid ""
 " -D              Show the dependencies of automatically changed packages.\n"
 msgstr ""
-" -D             Exibir as dependências dos pacotes modificados "
-"automaticamente.\n"
+" -D              Mostrar as dependências dos pacotes modificados automaticamente.\n"
 
 #: src/main.cc:242
-#, fuzzy, c-format
+#, c-format
 #| msgid " -Z             Show the change in installed size of each package.\n"
 msgid " -Z              Show the change in installed size of each package.\n"
-msgstr ""
-" -Z             Mostrar a alteração no tamanho instalado de cada pacote.\n"
+msgstr " -Z              Mostrar a alteração no tamanho instalado de cada pacote.\n"
 
 #: src/main.cc:243
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| " -v             Display extra information. (may be supplied multiple "
 #| "times).\n"
@@ -5988,19 +5981,19 @@ msgid ""
 " -v              Display extra information. (may be supplied multiple "
 "times).\n"
 msgstr ""
-" -v             Exibir informação extra. (pode ser fornecido várias vezes).\n"
+" -v              Mostrar informação extra. (pode ser fornecido várias vezes).\n"
 
 #: src/main.cc:244
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| " -t [release]   Set the release from which packages should be installed.\n"
 msgid ""
 " -t [release]    Set the release from which packages should be installed.\n"
 msgstr ""
-" -t [release]   Define de que distribuição os pacotes devem ser instalados.\n"
+" -t [release]    Define de que distribuição os pacotes devem ser instalados.\n"
 
 #: src/main.cc:245
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| " -q             In command-line mode, suppress the incremental progress\n"
 #| "                indicators.\n"
@@ -6008,18 +6001,16 @@ msgid ""
 " -q              In command-line mode, suppress the incremental progress\n"
 "                 indicators.\n"
 msgstr ""
-" -q             No modo de linha de comandos, suprimir os indicadores\n"
-"                incrementais de progresso.\n"
+" -q              No modo de linha de comandos, suprimir os indicadores de progresso incrementais.\n"
 
 #: src/main.cc:247
-#, fuzzy, c-format
+#, c-format
 #| msgid " -o key=val     Directly set the configuration option named 'key'.\n"
 msgid " -o key=val      Directly set the configuration option named 'key'.\n"
-msgstr ""
-" -o key=val     Define directamente a opção de configuração chamada 'key'.\n"
+msgstr " -o key=val      Definir directamente a opção de configuração chamada 'key'.\n"
 
 #: src/main.cc:248
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| " --with(out)-recommends\tSpecify whether or not to treat recommends as\n"
 #| "                strong dependencies.\n"
@@ -6027,21 +6018,20 @@ msgid ""
 " --with(out)-recommends\tSpecify whether or not to treat recommends as\n"
 "                            strong dependencies.\n"
 msgstr ""
-" --with(out)-recommends\tEspecifica se as recomendações devem ser \n"
-"                tratadas como dependências fortes.\n"
+" --with(out)-recommends\tEspecificar se as recomendações devem, ou não, ser "
+"tratadas como dependências fortes.\n"
 
 #: src/main.cc:250
-#, fuzzy, c-format
+#, c-format
 #| msgid " -S fname       Read the aptitude extended status info from fname.\n"
 msgid " -S fname        Read the aptitude extended status info from fname.\n"
-msgstr ""
-" -S fname       Lê a informação de estado estendido do aptitude do fname.\n"
+msgstr " -S fname        Lê a informação de estado estendido do aptitude a partir de fname.\n"
 
 #: src/main.cc:251
-#, fuzzy, c-format
+#, c-format
 #| msgid " -u             Download new package lists on startup.\n"
 msgid " -u              Download new package lists on startup.\n"
-msgstr " -u             Transferir novas listas de pacotes no arranque.\n"
+msgstr " -u              Transferir novas listas de pacotes no arranque.\n"
 
 #: src/main.cc:252 src/main.cc:254
 #, c-format
@@ -6049,22 +6039,23 @@ msgid "                  (terminal interface only)\n"
 msgstr "                  (apenas interface de terminal)\n"
 
 #: src/main.cc:253
-#, fuzzy, c-format
+#, c-format
 #| msgid " -i             Perform an install run on startup.\n"
 msgid " -i              Perform an install run on startup.\n"
-msgstr " -i             Executa uma execução de instalação no arranque.\n"
+msgstr " -i              Executar uma execução de instalação no arranque.\n"
 
 #: src/main.cc:256
 #, c-format
 msgid ""
 "See the manual page for a complete list and description of all the options.\n"
 msgstr ""
+"Veja a página do manual para uma lista completa e descrições de todas as opções.\n"
 
 #: src/main.cc:258
-#, fuzzy, c-format
+#, c-format
 #| msgid "                  This aptitude does not have Super Cow Powers.\n"
 msgid "This aptitude does not have Super Cow Powers.\n"
-msgstr "                  Este aptitude não tem Poderes de Super Vaca.\n"
+msgstr "Este aptitude não tem Poderes de Super Vaca.\n"
 
 #. TRANSLATORS: This is a log level that the user can pass on
 #. the command-line or set in the configuration file.
@@ -6238,10 +6229,10 @@ msgid "-u, -i, and --clean-on-startup may not be specified with a command"
 msgstr "-u,-i e --clean-on-startup não podem ser especificadas com um comando"
 
 #: src/main.cc:1226
-#, fuzzy, c-format
+#, c-format
 #| msgid "E: The %s command takes no arguments\n"
 msgid "Command \"%s\" needs arguments\n"
-msgstr "E: O comando %s não leva argumentos\n"
+msgstr "O comando \"%s\" necessita de argumentos\n"
 
 #: src/main.cc:1284
 #, c-format
@@ -6388,10 +6379,9 @@ msgid "Encoding of mine-help.txt|UTF-8"
 msgstr "Codificação de mine-help.txt|UTF-8"
 
 #: src/pkg_columnizer.cc:90
-#, fuzzy
 #| msgid "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 1 10 9 12 30 17 15"
 msgid "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 30 30 10 30 10 9 12 30 17 15"
-msgstr "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 1 10 9 12 30 17 15"
+msgstr "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 30 30 10 30 10 9 12 30 17 15"
 
 #: src/pkg_columnizer.cc:93 src/ui.cc:2815
 msgid "Package"
@@ -6443,23 +6433,21 @@ msgstr "RC"
 
 #: src/pkg_columnizer.cc:108
 msgid "Tag/user-tags"
-msgstr ""
+msgstr "Tag/user-tags"
 
 #: src/pkg_columnizer.cc:109
-#, fuzzy
 #| msgid "Source: "
 msgid "Source"
-msgstr "Fonte: "
+msgstr "Fonte"
 
 #: src/pkg_columnizer.cc:110
-#, fuzzy
 #| msgid "Architecture: "
 msgid "Architecture"
-msgstr "Arquitectura: "
+msgstr "Arquitectura"
 
 #: src/pkg_columnizer.cc:111
 msgid "Origin"
-msgstr ""
+msgstr "Origem"
 
 #: src/pkg_columnizer.cc:114
 msgid "ProgName"
@@ -6621,7 +6609,7 @@ msgstr "HN muito grande"
 #: src/pkg_columnizer.cc:758
 #, c-format
 msgid "Using default for %s string: '%s'"
-msgstr ""
+msgstr "Acrescentar pré-definição para a strin %s: '%s'"
 
 #: src/pkg_columnizer.cc:763 src/pkg_columnizer.cc:775
 #, c-format
@@ -6637,7 +6625,7 @@ msgstr "Erro interno: String de coluna padrão não é interpretável"
 #: src/pkg_columnizer.cc:809
 #, c-format
 msgid "Forbidden character in position %zu of %s string: '%s'"
-msgstr ""
+msgstr "Caractere proíbido na posição %zu da string %s: '%s'"
 
 #: src/pkg_grouppolicy.cc:274 src/pkg_grouppolicy.cc:1036
 msgid "Tasks"
@@ -6815,11 +6803,11 @@ msgstr "Pacote de Fonte: "
 
 #: src/pkg_info_screen.cc:154
 msgid "Origin: "
-msgstr ""
+msgstr "Origem: "
 
 #: src/pkg_info_screen.cc:161
 msgid "Origin URI: "
-msgstr ""
+msgstr "URI de origem:"
 
 #: src/pkg_info_screen.cc:172
 #, c-format
@@ -6855,6 +6843,8 @@ msgid ""
 "Pending actions could not be saved and would be lost, reconfiguring packages "
 "is not allowed at this point."
 msgstr ""
+"Ações pendentes não podem ser salvas e seriam perdidas, neste altura não é "
+"permitido reconfigurar pacotes."
 
 #: src/pkg_item.cc:408
 msgid ""
@@ -6916,22 +6906,19 @@ msgstr ""
 "instalado ou removido."
 
 #: src/pkg_view.cc:271
-#, fuzzy
 #| msgid "Provides"
 msgid "provides"
-msgstr "Disponibiliza"
+msgstr "disponibiliza"
 
 #: src/pkg_view.cc:284
-#, fuzzy
 #| msgid "%s is a virtual package provided by:\n"
 msgid "Virtual package not provided by any package."
-msgstr "%s é um pacote virtual disponibilizado por:\n"
+msgstr "O pacote virtual não é disponibilizado por qualquer pacote."
 
 #: src/pkg_view.cc:289
-#, fuzzy
 #| msgid "%s is a virtual package provided by:\n"
 msgid "Virtual package provided by:"
-msgstr "%s é um pacote virtual disponibilizado por:\n"
+msgstr "Pacote virtual disponibilizado por:"
 
 #: src/pkg_view.cc:619
 msgid "make_package_view: error in arguments -- two main widgets??"
@@ -7050,42 +7037,38 @@ msgid " (provided by %F)"
 msgstr " (disponibilizado por %F)"
 
 #: src/reason_fragment.cc:303
-#, fuzzy
 #| msgid "Remove"
 msgid "removed"
-msgstr "Remover"
+msgstr "removido"
 
 #: src/reason_fragment.cc:314
-#, fuzzy
 #| msgid "Unchanged"
 msgid "held/unchanged"
-msgstr "Sem alterações"
+msgstr "mantido/inalterado"
 
 #: src/reason_fragment.cc:322 src/reason_fragment.cc:607
 msgid "downgraded"
 msgstr "feito downgrade"
 
 #: src/reason_fragment.cc:326
-#, fuzzy
 #| msgid "installed"
 msgid "reinstalled"
-msgstr "instalado"
+msgstr "reinstalado"
 
 #: src/reason_fragment.cc:330 src/reason_fragment.cc:607
 msgid "upgraded"
 msgstr "actualizados"
 
 #: src/reason_fragment.cc:334
-#, fuzzy
 #| msgid "Half-configured"
 msgid "unconfigured"
-msgstr "Parcialmente-configurado"
+msgstr "por configurar"
 
 #: src/reason_fragment.cc:342
-#, fuzzy, c-format
+#, c-format
 #| msgid "%F%s %F %F"
 msgid "%F%s (%s, %s) %F %F"
-msgstr "%F%s %F %F"
+msgstr "%F%s (%s, %s) %F %F"
 
 #: src/reason_fragment.cc:393
 msgid ""
@@ -7472,6 +7455,10 @@ msgid ""
 " - insufficient permissions to become root, or\n"
 " - root login disabled"
 msgstr ""
+"O subprocesso saiu com um erro, provavelmente devido a uma destas razões:\n"
+" - palavra-passe incorrecta,\n"
+" - permissões insuficientes para se tornar root, ou\n"
+" - login de root desabilitado"
 
 #: src/ui.cc:620
 msgid "Loading cache"
@@ -7494,7 +7481,7 @@ msgstr ""
 #: src/ui.cc:797
 #, c-format
 msgid "Using default value for %s string: '%s'"
-msgstr ""
+msgstr "A utilizar o valor predefinido para a string %s: '%s'"
 
 #: src/ui.cc:888
 msgid "View available packages and choose actions to perform"
@@ -7513,36 +7500,32 @@ msgid "Recommendations"
 msgstr "Recomendações"
 
 #: src/ui.cc:934 src/ui.cc:936
-#, fuzzy
 msgid "Packages (flat)"
-msgstr "Pacotes: "
+msgstr "Pacotes (simples)"
 
 #: src/ui.cc:935
-#, fuzzy
 msgid ""
 "View available packages (flat, no grouping) and choose actions to perform"
-msgstr "Visualizar os pacotes disponíveis e escolher as acções a executar"
+msgstr ""
+"Visualizar os pacotes disponíveis (simples, sem agrupar) e escolher as "
+"acções a executar"
 
 #: src/ui.cc:962 src/ui.cc:964
-#, fuzzy
 msgid "Packages (debtags)"
-msgstr "Pacotes: "
+msgstr "Pacotes (debtags)"
 
 #: src/ui.cc:963
-#, fuzzy
 msgid ""
 "View available packages (debtags grouping) and choose actions to perform"
-msgstr "Visualizar os pacotes disponíveis e escolher as acções a executar"
+msgstr "Visualizar os pacotes disponíveis (agrupado por debtags) e escolher as acções a executar"
 
 #: src/ui.cc:982 src/ui.cc:984
-#, fuzzy
 msgid "Packages (source)"
-msgstr "Pacotes: "
+msgstr "Pacotes (fonte) "
 
 #: src/ui.cc:983
-#, fuzzy
 msgid "View available packages (source grouping) and choose actions to perform"
-msgstr "Visualizar os pacotes disponíveis e escolher as acções a executar"
+msgstr "Visualizar os pacotes disponíveis (agrupado por código-fonte) e escolher as acções a executar"
 
 #: src/ui.cc:1005
 #, c-format
@@ -7693,10 +7676,9 @@ msgstr ""
 "\", não verá esta mensagem novamente."
 
 #: src/ui.cc:1240
-#, fuzzy
 #| msgid "Perform Changes"
 msgid "Performing actions..."
-msgstr "Fazer Alterações"
+msgstr "A executar ações..."
 
 #: src/ui.cc:1294
 msgid "View the progress of the package download"
@@ -8298,13 +8280,12 @@ msgid "Browse packages using Debtags data"
 msgstr "Navegar por pacotes utilizando os dados Debtags"
 
 #: src/ui.cc:2638
-#, fuzzy
 msgid "New ^Source Package View"
-msgstr "Nova ^Visão de Pacote"
+msgstr "Nova ^Vista de Pacote-fonte "
 
 #: src/ui.cc:2640
 msgid "Create a new package view, grouped by source package"
-msgstr ""
+msgstr "Criar uma nova vista de pacotes, agrupada por pacotes de código-fonte"
 
 #: src/ui.cc:2648
 msgid "^About"
@@ -8363,13 +8344,12 @@ msgid "Views"
 msgstr "Vistas"
 
 #: src/ui.cc:2885
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%ls: Menu  %ls: Help  %ls: Quit  %ls: Update  %ls: Preview/Download/Install/"
 "Remove Pkgs"
 msgstr ""
-"%ls: Menu  %ls: Ajuda  %ls: Sair  %ls: Actualizar  %ls: Download/Instalar/"
-"Remover "
+"%ls: Menu  %ls: Ajuda  %ls: Sair  %ls: Actualizar  %ls: Visualizar/Download/Instalar/Remover Pacotes"
 
 #: src/ui.cc:3255
 msgid "yes_key"
