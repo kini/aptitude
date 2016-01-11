@@ -35,22 +35,22 @@ void print_installation_explanation(const pkgCache::PkgIterator& pkg)
   if (!ver.end()) // ok, it's installable.
     {
       if ((*apt_cache_file)[pkg].Install())
-	printf(_("but %s is to be installed."),
+	printf(_("but %s is to be installed"),
 	       ver.VerStr());
       else if ((*apt_cache_file)[pkg].Upgradable())
-	printf(_("but %s is installed and it is kept back."),
+	printf(_("but %s is installed and it is kept back"),
 	       pkg.CurrentVer().VerStr());
       else
-	printf(_("but %s is installed."),
+	printf(_("but %s is installed"),
 	       pkg.CurrentVer().VerStr());
     }
   else
     {
       pkgCache::VerIterator cand = (*apt_cache_file)[pkg].CandidateVerIter(*apt_cache_file);
       if (cand.end())
-	printf(_("but it is not installable."));
+	printf(_("but it is not installable"));
       else
-	printf(_("but it is not going to be installed."));
+	printf(_("but it is not going to be installed"));
     }
 }
 
@@ -116,7 +116,7 @@ void show_broken_deps(const pkgCache::PkgIterator& pkg)
 		{
 		  if (target.ProvidesList().end())
 		    {
-		      printf(_(" which is a virtual package and is not provided by any available package.\n"));
+		      printf(_(" which is a virtual package and is not provided by any available package\n"));
 		    }
 		  else
 		    {
