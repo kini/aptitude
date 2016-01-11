@@ -51,6 +51,14 @@ Version 0.7.6 UNRELEASED
   * Fix problem showing versioned provides of virtual packages in error message
     (it was showing candidate or version of the provider "real" package instead)
 
+  * Fix problem showing the actual version of the package providing the virtual
+    package in error message
+
+    It was showing the candidate version of the provider, rather than the
+    version actually providing the virtual package -- the candidate version, and
+    in general different versions, do not necessarily provide the same virtual
+    packages.
+
 - User visible changes:
 
   * [cmdline] Prompt dialog shows lowercase instead of capitalised "yes"/"no"

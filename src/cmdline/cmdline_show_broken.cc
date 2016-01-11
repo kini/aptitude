@@ -130,7 +130,7 @@ void show_broken_deps(const pkgCache::PkgIterator& pkg)
 			    {
 			      // version of the package providing the virtual
 			      // package
-			      std::string prv_candver_str = prv_pkg.CandVersion() ? (string(" (") + prv_pkg.CandVersion() + ")") : "";
+			      std::string prv_pkg_ver_str = prv_ver.VerStr() ? (string(" (") + prv_ver.VerStr() + ")") : "";
 
 			      // versioned provides, show only if exist and
 			      // doesn't match (if it's a special version for
@@ -145,7 +145,7 @@ void show_broken_deps(const pkgCache::PkgIterator& pkg)
 
 			      for (size_t i = 0; i < (indent + indent_dep); ++i)
 				printf(" ");
-			      printf("- %s%s%s, ", prv_pkg.FullName(true).c_str(), prv_candver_str.c_str(), prv_versioned_str.c_str());
+			      printf("- %s%s%s, ", prv_pkg.FullName(true).c_str(), prv_pkg_ver_str.c_str(), prv_versioned_str.c_str());
 			      print_installation_explanation(prv_pkg);
 			      printf("\n");
 			    }
