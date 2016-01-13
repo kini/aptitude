@@ -166,7 +166,8 @@ void download_list::paint(const cw::style &st)
   int y=0;
   unsigned int where=start;
   int width,height;
-  const cw::style progress_style = st + cw::get_style("DownloadProgressStatus");
+  const cw::style progress_style_item = st + cw::get_style("DownloadProgress");
+  const cw::style progress_style_status = st + cw::get_style("DownloadProgressStatus");
   getmaxyx(height, width);
 
   // Display the completed items
@@ -202,7 +203,7 @@ void download_list::paint(const cw::style &st)
 		   min<wstring::size_type>(startx, workers[where].msg.size()));
 
       show_string_as_progbar(0, y, disp,
-			     progress_style, st,
+			     progress_style_item, st,
 			     width1, width);
 
       y++;
@@ -274,7 +275,7 @@ void download_list::paint(const cw::style &st)
   show_string_as_progbar(0,
 			 height-1,
 			 output,
-			 progress_style,
+			 progress_style_status,
 			 cw::get_style("Status"),
 			 barsize,
 			 width);
