@@ -1,6 +1,7 @@
 // download_list.cc
 //
 //   Copyright (C) 2001-2005, 2008 Daniel Burrows
+//   Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -379,10 +380,12 @@ void download_list::Done(pkgAcquire::ItemDesc &itmdesc,
 {
   cw::widget_ref tmpref(this);
 
-  if(display_messages)
+  if (display_messages)
     {
-      msgs.push_back(msg(cw::util::transcode(itmdesc.Description + " " + _("[Downloaded]")),
-			 cw::get_style("DownloadProgress")));
+      std::string acquire_action = _("[Downloaded]");
+      cw::style acquire_action_style = cw::get_style("DownloadProgress");
+      msgs.push_back(msg(cw::util::transcode(itmdesc.Description + " " + acquire_action),
+			 acquire_action_style));
 
       sync_top();
 
