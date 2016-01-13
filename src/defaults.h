@@ -1,6 +1,7 @@
 // defaults.h
 //
 //  Copyright 1999 Daniel Burrows
+//  Copyright 2015-2016 Manuel A. Fernandez Montecelo
 //
 
 #ifndef DEFAULTS_H

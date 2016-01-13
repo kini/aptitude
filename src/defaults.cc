@@ -1,6 +1,7 @@
 // defaults.cc
 //
 //  Copyright 1999 Daniel Burrows
+//  Copyright 2015-2016 Manuel A. Fernandez Montecelo
 //
 //  Defaults for Aptitude.
 
@@ -106,6 +107,7 @@ static void init_styles()
   cw::set_style("Progress", cw::style_fg(COLOR_BLUE)+cw::style_bg(COLOR_YELLOW));
   cw::set_style("DownloadProgress", cw::style_fg(COLOR_BLUE)+cw::style_bg(COLOR_YELLOW));
   cw::set_style("DownloadHit", cw::style_fg(COLOR_BLACK)+cw::style_bg(COLOR_GREEN));
+  cw::set_style("DownloadProgressStatus", cw::style_fg(COLOR_WHITE)+cw::style_bg(COLOR_YELLOW));
 
   cw::set_style("ChangelogNewerVersion", cw::style_attrs_on(A_BOLD));
   cw::set_style("Bullet", cw::style_fg(COLOR_YELLOW)+cw::style_attrs_on(A_BOLD));

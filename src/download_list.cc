@@ -166,7 +166,7 @@ void download_list::paint(const cw::style &st)
   int y=0;
   unsigned int where=start;
   int width,height;
-  const cw::style progress_style = st + cw::get_style("DownloadProgress");
+  const cw::style progress_style = st + cw::get_style("DownloadProgressStatus");
   getmaxyx(height, width);
 
   // Display the completed items
