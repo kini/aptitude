@@ -7018,6 +7018,22 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 	      This term matches any installed package which can be
 	      upgraded.
 	    </para>
+
+	    <note>
+	      <para>
+		Note that this only tests whether there are upgrades available
+		for a package, not whether an upgrade <emphasis>could</emphasis>
+		be performed (with actions such as
+		<literal>safe-upgrade</literal> or
+		<literal>full-upgrade</literal>).
+	      </para>
+	      <para>
+		For instance, there can be upgrades available for several
+		packages, but maybe the upgraded versions of a subset conflict
+		with each other, so they cannot be co-installed or not all of
+		them upgraded at the same time.
+	      </para>
+	    </note>
 	  </listitem>
 	</varlistentry>
 
