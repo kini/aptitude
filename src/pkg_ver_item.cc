@@ -1,7 +1,7 @@
 // pkg_ver_item.cc
 //
 //  Copyright 1999-2005, 2007-2008, 2010 Daniel Burrows
-//  Copyright 2014-2015 Manuel A. Fernandez Montecelo
+//  Copyright 2014-2016 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -607,7 +607,15 @@ void pkg_ver_item::hold(undo_group *undo)
 
 void pkg_ver_item::keep(undo_group *undo)
 {
-  // Do nothing for now.
+  // copied from pkg_item::keep()
+
+  auto package = version.ParentPkg();
+
+  // Keep, don't hold, the package.
+  (*apt_cache_file)->mark_keep(package,
+			       false,
+			       false,
+			       undo);
 }
 
 void pkg_ver_item::purge(undo_group *undo)
@@ -767,4 +775,3 @@ bool pkg_ver_item::package_information()
   show_information();
   return true;
 }
-

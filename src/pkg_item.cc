@@ -1,7 +1,7 @@
 // pkg_item.cc
 //
 // Copyright 1999-2005, 2007-2009 Daniel Burrows
-// Copyright 2014-2015 Manuel A. Fernandez Montecelo
+// Copyright 2014-2016 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -159,6 +159,8 @@ void pkg_item::hold(undo_group *undo)
 
 void pkg_item::keep(undo_group *undo)
 {
+  // copied to pkg_ver_item::keep()
+
   // Keep, don't hold, the package.
   (*apt_cache_file)->mark_keep(package,
 			       false,
