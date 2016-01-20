@@ -534,7 +534,7 @@ group_by_option parse_group_by_option(const std::string &option)
     return group_by_source_version;
 
   else
-    throw GroupByParseException((boost::format(_("Invalid package grouping mode \"%s\" (should be \"auto\", \"none\", \"package\", or \"source-package\")"))
+    throw GroupByParseException((boost::format(_("Invalid package grouping mode \"%s\" (should be \"auto\", \"none\", \"package\", \"source-package\" or \"source-version\")"))
                                  % option).str());
 }
 
