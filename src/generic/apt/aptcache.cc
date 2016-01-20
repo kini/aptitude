@@ -729,7 +729,7 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
 	    bool auto_new_install = (i.CurrentVer().end() &&
 				     state.Install() &&
 				     ((state.Flags & Flag::Auto) != 0));
-	    string autostr = auto_new_install ? "Auto-New-Install: yes\n" : "";
+	    string autostr = (auto_new_install || estate.previously_auto_package) ? "Auto-New-Install: yes\n" : "";
 
 	    string tailstr;
 

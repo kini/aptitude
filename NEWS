@@ -79,6 +79,16 @@ Version 0.7.6 UNRELEASED
     apt to fix #572364 (a change of a default in a parameter in
     pkgDepCache::writeStateFile() to ignore packages marked as deleted).
 
+  * Avoid loss of automatic flags when package actions are scheduled multiple
+    times before taking place
+    (Closes: #563877)
+
+    aptitude has a mechanism to store information about packages-to-be-installed
+    that are pulled in automatically, when apt doesn't save that information
+    (#435079, commit 1193257d).  When scheduling actions multiple times, it was
+    not taking this extra information into account, so the new scheduled actions
+    ruined the automatically-installed flag of packages previously scheduled.
+
 - User visible changes:
 
   * [cmdline] Prompt dialog shows lowercase instead of capitalised "yes"/"no"
