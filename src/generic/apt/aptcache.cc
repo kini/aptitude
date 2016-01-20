@@ -685,7 +685,7 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
   // Ow, that sucks.  The solution will be to write the apt states to
   // a separate file.
   if(status_fname == NULL)
-    writeStateFile(&prog);
+    writeStateFile(&prog, false);
 
   // helper class to save selection state of packages to dpkg database
   aptitude::apt::dpkg::DpkgSelections dpkg_selections;

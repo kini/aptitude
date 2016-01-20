@@ -68,6 +68,17 @@ Version 0.7.6 UNRELEASED
     in general different versions, do not necessarily provide the same virtual
     packages.
 
+  * Avoid loss of automatic flags when packages are marked for removal but not
+    removed immediately, and the state is saved in between
+    (Closes: #686573, #718802, #787663)
+
+    Thanks to David Kalnischkies for the investigation and suggestion to fix
+    this.
+
+    It started to happen in aptitude after 2010 due to a change that happened in
+    apt to fix #572364 (a change of a default in a parameter in
+    pkgDepCache::writeStateFile() to ignore packages marked as deleted).
+
 - User visible changes:
 
   * [cmdline] Prompt dialog shows lowercase instead of capitalised "yes"/"no"
