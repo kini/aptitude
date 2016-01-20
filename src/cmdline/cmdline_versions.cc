@@ -1,6 +1,7 @@
 // cmdline_versions.cc
 //
 // Copyright (C) 2010 Daniel Burrows
+// Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -512,36 +513,27 @@ const char *GroupByParseException::what() const throw ()
 
 group_by_option parse_group_by_option(const std::string &option)
 {
-  // TRANSLATORS: if you add synonyms to the possible values here,
-  // please also use the translations in your manpage and in the error
-  // string below.
-  if(option == "archive" ||
-     option == P_("--group-by|archive"))
+  // TRANSLATORS: These are not translatable anymore
+
+  if(option == "archive")
     return group_by_archive;
 
-  else if(option == "auto" ||
-          option == P_("--group-by|auto"))
+  else if(option == "auto")
     return group_by_auto;
 
-  else if(option == "none" ||
-          option == P_("--group-by|none"))
+  else if(option == "none")
     return group_by_none;
 
-  else if(option == "package" ||
-          option == P_("--group-by|package"))
+  else if(option == "package")
     return group_by_package;
 
-  else if(option == "source-package" ||
-          option == P_("--group-by|source-package"))
+  else if(option == "source-package")
     return group_by_source_package;
 
-  else if(option == "source-version" ||
-          option == P_("--group-by|source-version"))
+  else if(option == "source-version")
     return group_by_source_version;
 
   else
-    // TRANSLATORS: --group-by is the argument name and shouldn't
-    // be translated.
     throw GroupByParseException((boost::format(_("Invalid package grouping mode \"%s\" (should be \"auto\", \"none\", \"package\", or \"source-package\")"))
                                  % option).str());
 }
