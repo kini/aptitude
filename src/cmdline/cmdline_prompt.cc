@@ -1,7 +1,7 @@
 // cmdline_prompt.cc
 //
 // Copyright (C) 2010-2011 Daniel Burrows
-// Copyright (C) 2014-2015 Manuel A. Fernandez Montecelo
+// Copyright (C) 2014-2016 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
