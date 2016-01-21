@@ -1,7 +1,7 @@
 // pkg_info_screen.h     -*-c++-*-
 //
 //  Copyright 2000, 2005 Daniel Burrows
-//  Copyright 2015 Manuel A. Fernandez Montecelo
+//  Copyright 2015-2016 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -27,7 +27,9 @@
 #include "apt_info_tree.h"
 
 #include <apt-pkg/cacheiterators.h>
+
 #include <string>
+
 
 /** \brief Gathers package information and provides code to display it
  *

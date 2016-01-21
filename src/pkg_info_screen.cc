@@ -1,7 +1,7 @@
 // pkg_info_screen.cc
 //
 //  Copyright 2000-2002, 2004-2005, 2007-2008 Daniel Burrows
-//  Copyright 2015 Manuel A. Fernandez Montecelo
+//  Copyright 2015-2016 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -90,7 +90,7 @@ void pkg_grouppolicy_info::setup_package_info(const pkgCache::PkgIterator &pkg,
       vector<cw::fragment*> frags;
 
       cw::fragment *untrusted_warning=make_untrusted_warning(ver);
-      if(untrusted_warning != NULL)
+      if (untrusted_warning)
 	{
 	  frags.push_back(untrusted_warning);
 	  frags.push_back(cw::newline_fragment());
