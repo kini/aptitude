@@ -604,7 +604,7 @@ int cmdline_versions(int argc, char *argv[], const char *status_fname,
 
   apt_init(&progress, true, status_fname);
 
-  if(_error->PendingError())
+  if (_error->PendingError())
     {
       _error->DumpErrors();
       return -1;
@@ -616,15 +616,35 @@ int cmdline_versions(int argc, char *argv[], const char *status_fname,
     {
       const char * const arg = argv[i];
 
-      cw::util::ref_ptr<m::pattern> m = m::parse(arg);
-      if(!m.valid())
+      cw::util::ref_ptr<m::pattern> m;
+      if (m::is_pattern(arg))
 	{
-	  _error->DumpErrors();
-
-	  return -1;
+	  m = m::parse(arg);
+	}
+      else
+	{
+	  pkgCache::PkgIterator pkg = (*apt_cache_file)->FindPkg(arg);
+	  if (!pkg.end())
+	    {
+	      m = m::pattern::make_exact_name(pkg.Name());
+	    }
 	}
 
-      matchers.push_back(m);
+      if (m.valid())
+	{
+	  matchers.push_back(m);
+	}
+      else
+	{
+	  _error->Error(_("Argument is neither a package name nor a pattern: '%s'"), arg);
+	}
+    }
+
+  // check for errors after parsing arguments
+  if (_error->PendingError())
+    {
+      _error->DumpErrors();
+      return -1;
     }
 
   return do_search_versions(matchers,
