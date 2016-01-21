@@ -1,6 +1,7 @@
 // dep_item.h (This is -*-c++-*-)
 //
 //  Copyright 1999, 2000, 2001, 2005 Daniel Burrows
+//  Copyright 2016 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -79,5 +80,6 @@ public:
 };
 
 typedef cwidget::util::ref_ptr<pkg_dep_screen> pkg_dep_screen_ref;
+
 
 #endif

@@ -1,6 +1,7 @@
 // dep_item.cc
 //
 //  Copyright 1999-2005, 2008 Daniel Burrows
+//  Copyright 2016 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -32,6 +33,7 @@
 #include <generic/apt/config_signal.h>
 
 #include <apt-pkg/version.h>
+
 
 using namespace std;
 namespace cw = cwidget;
@@ -218,6 +220,30 @@ pkg_grouppolicy *pkg_grouppolicy_dep_factory::instantiate(pkg_signal *_sig,
   return new pkg_grouppolicy_dep(_sig, _desc_sig);
 }
 
+/**
+ * Establish an explicit, more sensible order for the children of the subtree
+ * with dependencies -- see #808882
+ */
+unsigned char get_dependency_explicit_order(const pkgCache::Dep::DepType& deptype)
+{
+  unsigned char explicit_order = 0;
+  switch (deptype)
+    {
+    case pkgCache::Dep::PreDepends:	explicit_order =  1; break;
+    case pkgCache::Dep::Depends:	explicit_order =  2; break;
+    case pkgCache::Dep::Recommends:	explicit_order =  3; break;
+    case pkgCache::Dep::Suggests:	explicit_order =  4; break;
+    case pkgCache::Dep::Enhances:	explicit_order =  5; break;
+    case pkgCache::Dep::Conflicts:	explicit_order =  6; break;
+    case pkgCache::Dep::DpkgBreaks:	explicit_order =  7; break;
+    case pkgCache::Dep::Replaces:	explicit_order =  8; break;
+    case pkgCache::Dep::Obsoletes:	explicit_order =  9; break;
+    default:				explicit_order = 99; break;
+    };
+
+  return explicit_order;
+}
+
 cw::treeitem *pkg_dep_screen::setup_new_root(const pkgCache::PkgIterator &pkg,
 					     const pkgCache::VerIterator &ver)
 {
@@ -295,8 +321,9 @@ void setup_package_deps(const pkgCache::PkgIterator &pkg,
       tree_map::iterator found=subtrees.find(D.DepType());
       if(found==subtrees.end())
 	{
-	  subtree = new pkg_subtree(cw::util::transcode(D.DepType()),
-				    true);
+	  subtree = new pkg_subtree_with_order(cw::util::transcode(D.DepType()),
+					       get_dependency_explicit_order(static_cast<pkgCache::Dep::DepType>(D->Type)),
+					       true);
 	  subtrees[D.DepType()]=subtree;
 	  tree->add_child(subtree);
 
@@ -335,8 +362,9 @@ void setup_package_deps(const pkgCache::PkgIterator &pkg,
 		tree_map::iterator found=subtrees.find(D.DepType());
 		if(found==subtrees.end())
 		  {
-		    subtree = new pkg_subtree(cw::util::transcode(D.DepType()),
-					      true);
+		    subtree = new pkg_subtree_with_order(cw::util::transcode(D.DepType()),
+							 get_dependency_explicit_order(static_cast<pkgCache::Dep::DepType>(D->Type)),
+							 true);
 		    subtrees[D.DepType()]=subtree;
 		    tree->add_child(subtree);
 		  }
@@ -355,6 +383,13 @@ void setup_package_deps(const pkgCache::PkgIterator &pkg,
       i != subtrees.end(); ++i)
     i->second->sort(sorter);
   delete policy;
+
+  // sort the children subtrees (dependency type) -- see #808882
+  {
+    std::unique_ptr<pkg_sortpolicy> policy { pkg_sortpolicy_name(nullptr, false) };
+    pkg_sortpolicy_wrapper sorter(policy.get());
+    tree->sort(sorter);
+  }
 }
 
 template void setup_package_deps<pkg_subtree>(const pkgCache::PkgIterator &pkg,
