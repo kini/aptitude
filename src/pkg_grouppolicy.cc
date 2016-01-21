@@ -1,7 +1,7 @@
 // pkg_grouppolicy.cc
 //
 //  Copyright 1999-2005, 2007-2010 Daniel Burrows
-//  Copyright 2012-2015 Manuel A. Fernandez Montecelo
+//  Copyright 2012-2016 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -57,34 +57,6 @@ using cw::util::ref_ptr;
 pkg_grouppolicy_factory::~pkg_grouppolicy_factory()
 {
 }
-
-// This special tree munges its tag to allow an integer to be prepended to it.
-// Ok, it's a dreadful hack.  I admit it.
-class pkg_subtree_with_order:public pkg_subtree
-{
-  wstring my_tag;
-public:
-  pkg_subtree_with_order(wstring name, wstring description,
-			 sigc::signal1<void, std::wstring> *_info_signal,
-			 unsigned char order, bool expand=false)
-    :pkg_subtree(name, description, _info_signal, expand)
-  {
-    my_tag+=order;
-    my_tag+=pkg_subtree::tag();
-  }
-
-  pkg_subtree_with_order(wstring name, unsigned char order, bool expand=false)
-    :pkg_subtree(name, expand)
-  {
-    my_tag+=order;
-    my_tag+=pkg_subtree::tag();
-  }
-
-  virtual const wchar_t *tag()
-  {
-    return my_tag.c_str();
-  }
-};
 
 // The following class is a special policy which is used to terminate a
 // policy chain:

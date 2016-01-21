@@ -1,7 +1,7 @@
 // pkg_subtree.h (this is -*-c++-*-)
 //
 //  Copyright 1999-2002, 2004-2005, 2007-2008 Daniel Burrows
-//  Copyright 2015 Manuel A. Fernandez Montecelo
+//  Copyright 2015-2016 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -22,14 +22,15 @@
 #ifndef PKG_SUBTREE_H
 #define PKG_SUBTREE_H
 
-#include <cwidget/widgets/subtree.h>
-
-#include "pkg_node.h"
-
 /** \brief A subtree which contains packages (and other subtrees)
  * 
  *  \file pkg_subtree.h
  */
+
+#include "pkg_node.h"
+
+#include <cwidget/widgets/subtree.h>
+
 
 class pkg_subtree:public cwidget::widgets::subtree<pkg_tree_node>,
 		  public pkg_tree_node
@@ -112,5 +113,37 @@ public:
 
   bool dispatch_key(const cwidget::config::key &k, cwidget::widgets::tree *owner);
 };
+
+
+/**
+ * (Daniel Burrows): This special tree munges its tag to allow an integer to be
+ * prepended to it.  Ok, it's a dreadful hack.  I admit it.
+ */
+class pkg_subtree_with_order:public pkg_subtree
+{
+  std::wstring my_tag;
+public:
+  pkg_subtree_with_order(std::wstring name, std::wstring description,
+			 sigc::signal1<void, std::wstring> *_info_signal,
+			 unsigned char order, bool expand=false)
+    :pkg_subtree(name, description, _info_signal, expand)
+  {
+    my_tag+=order;
+    my_tag+=pkg_subtree::tag();
+  }
+
+  pkg_subtree_with_order(std::wstring name, unsigned char order, bool expand=false)
+    :pkg_subtree(name, expand)
+  {
+    my_tag+=order;
+    my_tag+=pkg_subtree::tag();
+  }
+
+  virtual const wchar_t *tag()
+  {
+    return my_tag.c_str();
+  }
+};
+
 
 #endif
