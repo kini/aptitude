@@ -34,6 +34,8 @@
 
 #include <apt-pkg/version.h>
 
+#include <memory>
+
 
 using namespace std;
 namespace cw = cwidget;
@@ -316,9 +318,8 @@ void setup_package_deps(const pkgCache::PkgIterator &pkg,
 	    }
 	}
 
-      pkg_subtree *subtree;
-
-      tree_map::iterator found=subtrees.find(D.DepType());
+      pkg_subtree* subtree = nullptr;
+      tree_map::iterator found = subtrees.find(D.DepType());
       if(found==subtrees.end())
 	{
 	  subtree = new pkg_subtree_with_order(cw::util::transcode(D.DepType()),
@@ -358,8 +359,8 @@ void setup_package_deps(const pkgCache::PkgIterator &pkg,
 	  {
 	    if(_system->VS->CheckDep(i.ProvideVersion(), D->CompareOp, D.TargetVer()))
 	      {
-		pkg_subtree *subtree;
-		tree_map::iterator found=subtrees.find(D.DepType());
+		pkg_subtree* subtree = nullptr;
+		tree_map::iterator found = subtrees.find(D.DepType());
 		if(found==subtrees.end())
 		  {
 		    subtree = new pkg_subtree_with_order(cw::util::transcode(D.DepType()),
@@ -377,12 +378,12 @@ void setup_package_deps(const pkgCache::PkgIterator &pkg,
 	  }
       }
 
-  pkg_sortpolicy *policy = pkg_sortpolicy_name(pkg_sortpolicy_ver(NULL, false), false);
-  pkg_sortpolicy_wrapper sorter(policy);
+  // sort packages within subtrees
+  std::unique_ptr<pkg_sortpolicy> policy { pkg_sortpolicy_name(pkg_sortpolicy_ver(nullptr, false), false) };
+  pkg_sortpolicy_wrapper sorter(policy.get());
   for(tree_map::const_iterator i = subtrees.begin();
       i != subtrees.end(); ++i)
     i->second->sort(sorter);
-  delete policy;
 
   // sort the children subtrees (dependency type) -- see #808882
   {
