@@ -100,6 +100,13 @@ Version 0.7.6 UNRELEASED
     ruining all auto-installed flags and holds
     (Closes: #537735, #576319)
 
+   * Reinstate auto-installed flag when marking packages to keep in apt cache
+     (Closes: #508428)
+
+     There were situations like for example in conflicts/solution resolver, that
+     after applying the solution "Keep at current version", sometimes packages
+     had their auto-installed flag cleared.
+
 - User visible changes:
 
   * [cmdline] Prompt dialog shows lowercase instead of capitalised "yes"/"no"

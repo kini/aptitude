@@ -1,7 +1,7 @@
 // aptcache.cc
 //
 //  Copyright 1999-2009, 2011 Daniel Burrows
-//  Copyright 2015 Manuel A. Fernandez Montecelo
+//  Copyright 2015-2016 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -1329,6 +1329,10 @@ void aptitudeDepCache::internal_mark_keep(const PkgIterator &Pkg, bool Automatic
   pkgDepCache::MarkKeep(Pkg, false, !Automatic);
   pkgDepCache::SetReInstall(Pkg, false);
   get_ext_state(Pkg).reinstall=false;
+
+  // explicitly mark auto-installed, sometimes apt does not apply it properly in
+  // some cases -- see #508428
+  pkgDepCache::MarkAuto(Pkg, Automatic);
 
   if(Pkg.CurrentVer().end())
     {
