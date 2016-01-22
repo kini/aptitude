@@ -613,7 +613,7 @@ void pkg_ver_item::keep(undo_group *undo)
 
   // Keep, don't hold, the package.
   (*apt_cache_file)->mark_keep(package,
-			       false,
+			       is_auto_installed(package),
 			       false,
 			       undo);
 }
