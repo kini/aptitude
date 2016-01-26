@@ -1216,6 +1216,12 @@ int main(int argc, char *argv[])
 		    }
 		}
 
+	      if (aptitude::util::is_dumb_terminal())
+		{
+		  aptitude::util::print_ncurses_dumb_terminal();
+		  exit(EXIT_FAILURE);
+		}
+
 	      return cmdline_do_action(argc-optind, argv+optind,
 				       status_fname,
 				       simulate, assume_yes, download_only,
@@ -1317,6 +1323,12 @@ int main(int argc, char *argv[])
     }
 #endif
 
+  if (aptitude::util::is_dumb_terminal())
+    {
+      aptitude::util::print_ncurses_dumb_terminal();
+      exit(EXIT_FAILURE);
+    }
+  else
     {
       ui_init();
 
