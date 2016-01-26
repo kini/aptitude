@@ -2,6 +2,7 @@
 //
 //   Copyright (C) 2005, 2007, 2009-2010 Daniel Burrows
 //   Copyright (C) 2014 Daniel Hartwig
+//   Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -134,6 +135,12 @@ namespace aptitude
      *  otherwise.
      */
     bool mkdir_parents(const std::string &dirname, mode_t mode);
+
+    /** Check whether we are in a dumb term
+     *
+     *  @return The requested value
+     */
+    bool is_dumb_terminal();
   }
 }
 
