@@ -1,7 +1,7 @@
 /** \file cmdline_progress.cc */    // -*-c++-*-
 
-
 // Copyright (C) 2010 Daniel Burrows
+// Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -32,6 +32,8 @@
 
 #include <generic/controllers/acquire_download_progress.h>
 
+#include <generic/util/util.h>
+
 #include <sigc++/adaptors/bind.h>
 #include <sigc++/functors/mem_fun.h>
 #include <sigc++/functors/ptr_fun.h>
@@ -54,7 +56,7 @@ namespace aptitude
 
       const int quiet = aptcfg->FindI("Quiet", 0);
       const bool display_messages = quiet <= 1;
-      const bool hide_status = quiet > 0;
+      const bool hide_status = (quiet > 0) || aptitude::util::is_dumb_terminal();
 
       const std::shared_ptr<transient_message> message =
         create_transient_message(term_locale, term_metrics, term_output);
