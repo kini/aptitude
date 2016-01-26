@@ -1,7 +1,7 @@
 // cmdline_show.cc                               -*-c++-*-
 //
 // Copyright (C) 2004, 2010 Daniel Burrows
-// Copyright (C) 2015 Manuel A. Fernandez Montecelo
+// Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -40,6 +40,7 @@
 // System includes:
 #include <cwidget/fragment.h>
 #include <cwidget/generic/util/transcode.h>
+#include <cwidget/generic/util/ssprintf.h>
 
 #include <apt-pkg/error.h>
 #include <apt-pkg/init.h>
@@ -58,6 +59,7 @@ using aptitude::cmdline::terminal_io;
 using aptitude::cmdline::terminal_metrics;
 using cwidget::fragf;
 using cwidget::fragment;
+using cwidget::util::ssprintf;
 using namespace std;
 
 ostream &operator<<(ostream &out, const cwidget::fragment_contents &contents)
@@ -204,10 +206,15 @@ static cwidget::fragment *archive_lst_frag(pkgCache::VerFileIterator vf,
     }
 }
 
-static const char *current_state_string(const pkgCache::PkgIterator& pkg, const pkgCache::VerIterator& ver)
+std::string current_state_string(const pkgCache::PkgIterator& pkg, const pkgCache::VerIterator& ver)
 {
-  if(!ver.end() && ver != pkg.CurrentVer())
-    return _("not installed");
+  if (!ver.end() && ver != pkg.CurrentVer())
+    {
+      return ssprintf(_("%s (%s), upgrade available (%s)"),
+		      current_state_string(pkg, pkg.CurrentVer()).c_str(),
+		      pkg.CurrentVer().VerStr(),
+		      ver.VerStr());
+    }
 
   switch(pkg->CurrentState)
     {
@@ -296,7 +303,8 @@ static cwidget::fragment *state_fragment(pkgCache::PkgIterator pkg, pkgCache::Ve
   pkgDepCache::StateCache &state=(*apt_cache_file)[pkg];
   aptitudeDepCache::aptitude_state &estate=(*apt_cache_file)->get_ext_state(pkg);
 
-  const char *statestr=current_state_string(pkg, ver);
+  std::string state_str = current_state_string(pkg, ver);
+  const char* statestr = state_str.c_str();
 
   const char *holdstr="";
 
@@ -530,10 +538,6 @@ bool do_cmdline_show_target(const pkgCache::PkgIterator &pkg,
 {
   if(verbose == 0 || has_explicit_source)
     {
-      // HACK: default to current-or-candidate behavior.  This should be
-      // done in a more up-front way :-(.
-      if(source == cmdline_version_cand)
-	source = cmdline_version_curr_or_cand;
       pkgCache::VerIterator ver = cmdline_find_ver(pkg, source, sourcestr);
 
       if(ver.end())
