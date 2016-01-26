@@ -141,6 +141,11 @@ namespace aptitude
      *  @return The requested value
      */
     bool is_dumb_terminal();
+
+    /** Print message about not being possible to use ncurses mode when inside
+     * dumb terminals
+     */
+    void print_ncurses_dumb_terminal();
   }
 }
 

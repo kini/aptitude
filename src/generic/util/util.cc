@@ -480,5 +480,10 @@ namespace aptitude
 
       return dumbTERM;
     }
+
+    void print_ncurses_dumb_terminal()
+    {
+      fprintf(stderr, _("%s cannot run in ncurses mode with terminal type \"dumb\"\n"), PACKAGE);
+    }
   }
 }
