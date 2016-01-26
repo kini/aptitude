@@ -104,7 +104,7 @@ namespace aptitude
 	{
 	  LOG_TRACE(Loggers::getAptitudeChangelog(),
 		    "No changelog information for " << ver.ParentPkg().Name()
-		    << ": it isn't available from any archive.");
+		    << ": it isn't available from any archive");
 	  return std::shared_ptr<changelog_info>();
 	}
 
@@ -198,7 +198,7 @@ namespace aptitude
 	  if(finished)
 	    LOG_WARN(Loggers::getAptitudeChangelog(),
 		     "Not adding " << uri << " to the queue for " << short_description
-		     << ": the item is no longer active.");
+		     << ": the item is no longer active");
 	  else
 	    {
 	      LOG_INFO(Loggers::getAptitudeChangelog(),
@@ -216,11 +216,11 @@ namespace aptitude
 	  if(started)
 	    LOG_TRACE(Loggers::getAptitudeChangelog(),
 		      "Not starting to download " << short_description
-		      << ": it is already started.");
+		      << ": it is already started");
 	  else if(finished)
 	    LOG_TRACE(Loggers::getAptitudeChangelog(),
 		      "Not starting to download " << short_description
-		      << ": it already finished downloading.");
+		      << ": it already finished downloading");
 	  else
 	    {
 	      const std::string &uri(uris.front());
@@ -244,7 +244,7 @@ namespace aptitude
 	    LOG_TRACE(Loggers::getAptitudeChangelog(),
 		      "Not signaling success for the download to "
 		      << filename.get_name()
-		      << " for " << short_description << ": the item is no longer active.");
+		      << " for " << short_description << ": the item is no longer active");
 	  else
 	    {
 	      LOG_TRACE(Loggers::getAptitudeChangelog(),
@@ -272,7 +272,7 @@ namespace aptitude
 	      LOG_TRACE(Loggers::getAptitudeChangelog(),
 			"Not signaling failure for the download of "
 			<< short_description
-			<< ": the item is no longer active.");
+			<< ": the item is no longer active");
 
 	      return;
 	    }
@@ -342,7 +342,7 @@ namespace aptitude
 	      LOG_TRACE(Loggers::getAptitudeChangelog(),
 			"Not canceling the download of "
 			<< short_description
-			<< ": the item is no longer active.");
+			<< ": the item is no longer active");
 
 	      return;
 	    }
@@ -599,7 +599,7 @@ namespace aptitude
 	  catch(...)
 	    {
 	      LOG_FATAL(logger, "Failed to download changelogs: unexpected exception type");
-	      download.post_failure(cw::util::ssprintf(_("Failed to download changelogs: unexpected exception.")));
+	      download.post_failure(cw::util::ssprintf(_("Failed to download changelogs: unexpected exception")));
 	    }
 	}
       };
