@@ -901,7 +901,15 @@ int main(int argc, char *argv[])
 	      queue_only=true;
 	      break;
 	    case OPTION_PURGE_UNUSED:
-	      aptcfg->Set(PACKAGE "::Purge-Unused", "true");
+	      if (string("--purge-unused") == argv[optind-1])
+		{
+		  aptcfg->Set(PACKAGE "::Purge-Unused", "true");
+		}
+	      else
+		{
+		  fprintf(stderr, _("Invalid option \"%s\" (only \"--purge-unused\" is valid).  Perhaps you want the \"purge\" action?\n"), argv[optind-1]);
+		  exit(EXIT_FAILURE);
+		}
 	      break;
 	    case OPTION_ADD_USER_TAG:
 	    case OPTION_REMOVE_USER_TAG:
