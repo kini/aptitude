@@ -674,7 +674,7 @@ bool check_valid_origin(const pkgCache::VerIterator& ver)
 	}
     }
 
-  _error->Error(_("%s version %s is not an official Debian package, cannot display its changelog."),
+  _error->Error(_("Cannot display changelog: Origin of %s version %s is unknown (maybe not an official Debian package; if it is, try to \"update\" package lists)"),
 		ver.ParentPkg().FullName(true).c_str(),
 		ver.VerStr());
   return false;
