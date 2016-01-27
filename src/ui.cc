@@ -1378,9 +1378,11 @@ static void check_package_trust()
 
       for(vector<pkgCache::VerIterator>::const_iterator i=untrusted.begin();
 	  i!=untrusted.end(); ++i)
-	frags.push_back(clipbox(cw::fragf(_("  %S*%N %s [version %s]%n"),
-				      "Bullet",
-					  i->ParentPkg().FullName(true).c_str(), i->VerStr())));
+	frags.push_back(clipbox(cw::fragf(_("  %S*%N %s [version %s] %s%n"),
+					  "Bullet",
+					  i->ParentPkg().FullName(true).c_str(),
+					  i->VerStr(),
+					  get_uri(*i, apt_package_records).c_str())));
 
       main_stacked->add_visible_widget(cw::dialogs::yesno(cw::sequence_fragment(frags),
 						       cw::util::arg(sigc::ptr_fun(install_or_remove_packages)),

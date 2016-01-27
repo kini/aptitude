@@ -527,7 +527,7 @@ static bool prompt_essential(bool simulate_only, const std::shared_ptr<terminal_
  */
 static bool prompt_trust(const std::shared_ptr<terminal_metrics> &term_metrics)
 {
-  pkgvector untrusted;
+  std::vector<pkgCache::VerIterator> untrusted_versions;
 
   for(pkgCache::PkgIterator pkg=(*apt_cache_file)->PkgBegin();
       !pkg.end(); ++pkg)
@@ -541,18 +541,25 @@ static bool prompt_trust(const std::shared_ptr<terminal_metrics> &term_metrics)
 
 	  if((curr.end() || package_trusted(curr)) &&
 	     !package_trusted(cand))
-	    untrusted.push_back(pkg);
+	    {
+	      untrusted_versions.push_back(cand);
+	    }
 	}
     }
 
-  if(!untrusted.empty())
+  if(!untrusted_versions.empty())
     {
       printf(_("WARNING: untrusted versions of the following packages will be installed!\n\n"
 	       "Untrusted packages could compromise your system's security.\n"
 	       "You should only proceed with the installation if you are certain that\n"
 	       "this is what you want to do.\n\n"));
 
-      cmdline_show_pkglist(untrusted, term_metrics);
+      for (auto it : untrusted_versions)
+	{
+	  printf("  %s %s\n",
+		 it.ParentPkg().FullName(true).c_str(),
+		 get_uri(it, apt_package_records).c_str());
+	}
 
       printf("\n");
 
