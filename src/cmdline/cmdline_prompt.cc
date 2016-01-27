@@ -826,7 +826,12 @@ static void cmdline_parse_show(string response,
 	it != packages.end(); ++it)
       do_cmdline_show(*it, verbose, term_metrics);
 
-  prompt_string(_("Press Return to continue."));
+  try {
+    prompt_string(_("Press Return to continue."));
+  }
+  catch (...) {
+    // ignore all exceptions
+  }
 }
 
 // Erm.  Merge w/ above?
@@ -847,7 +852,12 @@ static void cmdline_parse_changelog(string response, const std::shared_ptr<termi
 	}
     }
 
-  prompt_string(_("Press Return to continue."));
+  try {
+    prompt_string(_("Press Return to continue."));
+  }
+  catch (...) {
+    // ignore all exceptions
+  }
 }
 
 static void cmdline_parse_why(string response,
@@ -1132,8 +1142,16 @@ bool cmdline_do_prompt(bool as_upgrade,
 		    ? _("Do you want to continue? [Y/n/?] ")
 		    : _("Resolve these dependencies by hand? [N/+/-/_/:/?] ");
 
-	      string response=prompt_string(prompt);
-	      string::size_type loc=0;
+	      string response;
+	      string::size_type loc = 0;
+	      try {
+		response = prompt_string(prompt);
+	      }
+	      catch (...) {
+		// ignore all exceptions, default to "no"
+		response = "n";
+		printf(_("%s (stdin unavailable)\n"), response.c_str());
+	      }
 
 	      while(loc<response.size() && isspace(response[loc]))
 		++loc;
