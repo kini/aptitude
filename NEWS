@@ -33,6 +33,16 @@ Version 0.7.6 UNRELEASED
     It does not explain why they are untrusted (libapt does not seem to provide
     much information) but at least is a better hint than just the package name.
 
+  * [curses] In package info screen, "Packages depending on [this]" are further
+    split based on the virtual (provided) packages that they depend upon
+    (Closes: #159584, #760610)
+
+    This helps to avoid the reverse dependencies listed multiple times within
+    the same subtree, as it was happening until now; but specially to vastly
+    improve the use-case to find out which packages depend not on this package
+    directly, but on virtual packages also provided by this package (so perhaps
+    an alternative can be installed).
+
 - Bug fixes:
 
   * Properly set a default for $XDG_CACHE_HOME if not set. (Closes: #807545)

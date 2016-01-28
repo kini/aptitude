@@ -32,6 +32,8 @@
 #include <generic/apt/apt.h>
 #include <generic/apt/config_signal.h>
 
+#include <cwidget/generic/util/ssprintf.h>
+
 #include <apt-pkg/version.h>
 
 #include <memory>
@@ -359,18 +361,20 @@ void setup_package_deps(const pkgCache::PkgIterator &pkg,
 	  {
 	    if(_system->VS->CheckDep(i.ProvideVersion(), D->CompareOp, D.TargetVer()))
 	      {
+		string subtree_name = cw::util::ssprintf(_("%s on provided %s"), D.DepType(), i.ParentPkg().FullName(true).c_str());
+
 		pkg_subtree* subtree = nullptr;
-		tree_map::iterator found = subtrees.find(D.DepType());
-		if(found==subtrees.end())
+		tree_map::iterator found = subtrees.find(subtree_name);
+		if (found==subtrees.end())
 		  {
-		    subtree = new pkg_subtree_with_order(cw::util::transcode(D.DepType()),
+		    subtree = new pkg_subtree_with_order(cw::util::transcode(subtree_name),
 							 get_dependency_explicit_order(static_cast<pkgCache::Dep::DepType>(D->Type)),
 							 true);
-		    subtrees[D.DepType()]=subtree;
+		    subtrees[subtree_name] = subtree;
 		    tree->add_child(subtree);
 		  }
 		else
-		  subtree=found->second;
+		  subtree = found->second;
 
 		subtree->add_child(new pkg_ver_item(D.ParentVer(), sig, true));
 		subtree->inc_num_packages();
