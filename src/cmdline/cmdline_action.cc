@@ -1,7 +1,7 @@
 // cmdline_action.cc
 //
 //  Copyright 2004 Daniel Burrows
-//  Copyright 2015 Manuel A. Fernandez Montecelo
+//  Copyright 2015-2016 Manuel A. Fernandez Montecelo
 
 #include "cmdline_action.h"
 #include "cmdline_util.h"
@@ -611,13 +611,14 @@ bool cmdline_applyaction(string s,
 	  size_t package_limit = 40;
 	  if(!possible.empty())
 	    {
+	      printf(_("Couldn't find any package whose name is \"%s\", but there are %zu packages which contain \"%s\" in their name:\n"),
+		       package.c_str(), possible.size(), package.c_str());
+
 	      // Don't overwhelm the user.
 	      if (possible.size() > package_limit)
-	        printf(_("Couldn't find package \"%s\", and more than %zu packages contain \"%s\" in their name\n"),
-		       package.c_str(), package_limit, package.c_str());
+		printf(_("  (too many to show, the limit is %zu)\n"), package_limit);
 	      else
 		{
-		  printf(_("Couldn't find package \"%s\".  However, the following packages contain \"%s\" in their name:\n"), package.c_str(), package.c_str());
 		  cmdline_show_pkglist(possible, term_metrics);
 		}
 	    }
@@ -640,14 +641,16 @@ bool cmdline_applyaction(string s,
 
 	      if(possible.empty())
 		printf(_("Couldn't find any package whose name or description matched \"%s\"\n"), package.c_str());
-	      else if (possible.size() > package_limit)
-		// Don't overwhelm the user.
-		printf(_("Couldn't find any package matching \"%s\", and more than %zu packages contain \"%s\" in their description\n"),
-		       package.c_str(), package_limit, package.c_str());
 	      else
 		{
-		  printf(_("Couldn't find any package matching \"%s\".  However, the following packages contain \"%s\" in their description:\n"), package.c_str(), package.c_str());
-		  cmdline_show_pkglist(possible, term_metrics);
+		  printf(_("Couldn't find any package matching \"%s\", but there are %zu packages which contain \"%s\" in their description:\n"),
+			 package.c_str(), possible.size(), package.c_str());
+
+		  // Don't overwhelm the user.
+		  if (possible.size() > package_limit)
+		    printf(_("  (too many to show, the limit is %zu)\n"), package_limit);
+		  else
+		    cmdline_show_pkglist(possible, term_metrics);
 		}
 	    }
 
