@@ -103,6 +103,7 @@ std::list<package_view_item> *load_pkgview(std::string cfggroup)
 				    pkg_item::pkg_columnizer::defaults);
 	  if(!tmp.columns)
 	    {
+	      _error->Error(_("Couldn't parse layout: error parsing column definitions"));
 	      delete rval;
 	      return NULL;
 	    }

@@ -232,6 +232,7 @@ int cmdline_search(int argc, char *argv[], const char *status_fname,
 
   if(columns.get() == NULL)
     {
+      fprintf(stderr, _("%s: Could not parse column definitions: '%ls'\n"), "search", wdisplay_format.c_str());
       _error->DumpErrors();
       return -1;
     }
