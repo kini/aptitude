@@ -1,6 +1,7 @@
 // cmdline_search.h                         -*-c++-*-
 //
-//   Copyright 2004 Daniel Burrows
+// Copyright 2004 Daniel Burrows
+// Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 
 #ifndef CMDLINE_SEARCH_H
 #define CMDLINE_SEARCH_H

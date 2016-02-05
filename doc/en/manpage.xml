@@ -2206,9 +2206,16 @@ The following packages will be REMOVED:
 
 	<listitem>
 	  <para>
-	    Specify the display width which should be used for
-	    output from the <literal>search</literal> command (by
-	    default, the terminal width is used).
+	    Specify the display width which should be used for output from the
+	    <literal>search</literal> and <literal>versions</literal> commands
+	    (in the command line).
+	  </para>
+
+	  <para>
+	    By default and when the output is seen directly in a terminal, the
+	    terminal width is used.  When the output is redirected or piped, a
+	    very large "unlimited" line width is used, and this option is
+	    ignored.
 	  </para>
 
 	  <para>

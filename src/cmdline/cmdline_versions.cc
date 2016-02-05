@@ -238,7 +238,8 @@ namespace
                                int format_width,
                                const unsigned int screen_width,
                                bool disable_columns,
-                               bool show_package_names)
+                               bool show_package_names,
+			       const std::shared_ptr<terminal_output> &term_output)
   {
     for(std::vector<std::pair<pkgCache::VerIterator, cw::util::ref_ptr<m::structural_match> > >::const_iterator it = output.begin();
         it != output.end(); ++it)
@@ -248,12 +249,15 @@ namespace
                                       show_package_names,
                                       columns,
                                       0);
-        if(disable_columns)
-          printf("%ls\n", aptitude::cmdline::de_columnize(columns, columnizer, *p).c_str());
-        else
-          printf("%ls\n",
-                 columnizer.layout_columns(format_width == -1 ? screen_width : format_width,
-                                           *p).c_str());
+
+	// do not truncate to 80 cols on redirections, pipes, etc -- see
+	// #445206, #775671
+	std::wstring line;
+	if (disable_columns || !term_output->output_is_a_terminal())
+	  line = aptitude::cmdline::de_columnize(columns, columnizer, *p);
+	else
+	  line = columnizer.layout_columns(format_width == -1 ? screen_width : format_width, *p);
+	printf("%ls\n", line.c_str());
       }
   }
 
@@ -482,7 +486,8 @@ namespace
                                     format_width,
                                     screen_width,
                                     disable_columns,
-                                    do_show_package_names);
+                                    do_show_package_names,
+				    term_output);
           }
       }
     else
@@ -491,7 +496,8 @@ namespace
                               format_width,
                               screen_width,
                               disable_columns,
-                              do_show_package_names);
+                              do_show_package_names,
+			      term_output);
 
     return return_value;
   }

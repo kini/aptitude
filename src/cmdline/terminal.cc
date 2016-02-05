@@ -2,6 +2,7 @@
 
 
 // Copyright (C) 2010 Daniel Burrows
+// Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -115,9 +116,20 @@ namespace aptitude
         if (ioctl(1, TIOCGWINSZ, &ws) != -1 && ws.ws_col >= 5)
           return ws.ws_col;
         else
-          // \todo Should we distinguish between "can't read a
-          // terminal size" and "read a tiny terminal size"?
-          return 80;
+	  {
+	    // \todo Should we distinguish between "can't read a
+	    // terminal size" and "read a tiny terminal size"?
+
+	    // See #445206, #775671: limiting arbitrarily to "return 80;" as
+	    // before is not very good, some lines got truncated in perfectly
+	    // normal situations.
+	    //
+	    // Using the native size of int (32 or 64-bit in modern machines) is
+	    // probably unneded and maybe creates some performance problems if
+	    // the application misbehaves, so limit to 64K (16-bit limit) for
+	    // the time being.
+	    return UINT16_MAX;
+	  }
       }
 
       int terminal_impl::wcwidth(wchar_t ch)

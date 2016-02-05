@@ -2,6 +2,7 @@
 //
 //
 // Copyright (C) 2004, 2010 Daniel Burrows
+// Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -164,12 +165,15 @@ namespace
 						ver_it,
 						columns,
 						0);
-	    if(disable_columns)
-	      printf("%ls\n", aptitude::cmdline::de_columnize(columns, columnizer, *p).c_str());
+
+	    // do not truncate to 80 cols on redirections, pipes, etc -- see
+	    // #445206, #775671
+	    std::wstring line;
+	    if (disable_columns || !term_output->output_is_a_terminal())
+	      line = aptitude::cmdline::de_columnize(columns, columnizer, *p);
 	    else
-	      printf("%ls\n",
-		     columnizer.layout_columns(format_width == -1 ? screen_width : format_width,
-					       *p).c_str());
+	      line = columnizer.layout_columns(format_width == -1 ? screen_width : format_width, *p);
+	    printf("%ls\n", line.c_str());
 
 	    // Note that this deletes the whole result, so we can't re-use
 	    // the list.

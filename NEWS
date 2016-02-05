@@ -43,6 +43,12 @@ Version 0.7.6 UNRELEASED
     directly, but on virtual packages also provided by this package (so perhaps
     an alternative can be installed).
 
+  * [cmdline] "search" and "versions" do not truncate columns with
+    redirections/pipes (Closes: #445206)
+
+    It will behave as passing "--disable-columns" without column limit (large
+    enough number for all practical purposes).
+
 - Bug fixes:
 
   * Properly set a default for $XDG_CACHE_HOME if not set. (Closes: #807545)
