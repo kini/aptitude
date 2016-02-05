@@ -1,6 +1,7 @@
 // changelog_parse.cc
 //
 //   Copyright (C) 2005, 2008-2009, 2011 Daniel Burrows
+//   Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -25,23 +26,22 @@
 #include "apt.h"
 #include "desc_render.h"
 
-#include <apt-pkg/fileutl.h>
-#include <apt-pkg/tagfile.h>
-#include <apt-pkg/strutl.h>
-
-#include <stdlib.h>
-
+#include <generic/util/file_cache.h>
+#include <generic/util/job_queue_thread.h>
 #include <generic/util/temp.h>
+#include <generic/util/util.h>
 
 #include <cwidget/fragment.h>
 #include <cwidget/generic/util/ssprintf.h>
 #include <cwidget/generic/util/transcode.h>
 
-#include <generic/util/file_cache.h>
-#include <generic/util/job_queue_thread.h>
-#include <generic/util/util.h>
+#include <apt-pkg/fileutl.h>
+#include <apt-pkg/tagfile.h>
+#include <apt-pkg/strutl.h>
 
 #include <memory>
+
+#include <cstdlib>
 
 namespace cw = cwidget;
 

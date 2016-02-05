@@ -1,6 +1,7 @@
 // changelog_parse.h                        -*-c++-*-
 //
 //   Copyright (C) 2005, 2008-2009 Daniel Burrows
+//   Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -20,17 +21,18 @@
 #ifndef CHANGELOG_PARSE_H
 #define CHANGELOG_PARSE_H
 
-#include <time.h>
-
-#include <apt-pkg/pkgcache.h>
-
-#include <vector>
-
-#include <cwidget/generic/util/ref_ptr.h>
-
 #include <generic/util/post_thunk.h>
 #include <generic/util/refcounted_base.h>
 #include <generic/util/safe_slot.h>
+
+#include <apt-pkg/pkgcache.h>
+
+#include <cwidget/generic/util/ref_ptr.h>
+
+#include <vector>
+
+#include <ctime>
+
 
 /** \file changelog_parse.h
  */
