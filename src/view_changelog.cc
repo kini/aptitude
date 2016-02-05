@@ -1,6 +1,7 @@
 // view_changelog.cc
 //
 //   Copyright (C) 2004-2005, 2007-2010 Daniel Burrows
+//   Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -41,6 +42,7 @@
 #include <generic/apt/download_queue.h>
 
 #include <generic/util/util.h>
+#include <generic/util/temp.h>
 
 #include <sigc++/adaptors/bind.h>
 #include <sigc++/functors/mem_fun.h>
@@ -159,6 +161,8 @@ cw::fragment *render_changelog(const cw::util::ref_ptr<aptitude::apt::changelog>
 
 class pkg_changelog_screen : public cw::file_pager, public menu_redirect
 {
+  std::string changelog_filename;
+
   bool last_search_forwards;
 
   void do_search()
@@ -202,10 +206,10 @@ class pkg_changelog_screen : public cw::file_pager, public menu_redirect
   }
 
 protected:
-  pkg_changelog_screen(const temp::name &filename,
+  pkg_changelog_screen(const std::string& filename,
 		       int x = 0, int y = 0,
 		       int width = 0, int height = 0):
-    cw::file_pager(filename.get_name()), last_search_forwards(true)
+    cw::file_pager(filename), changelog_filename(filename), last_search_forwards(true)
   {
     connect_key("Search", &cw::config::global_bindings,
 		sigc::mem_fun(*this, &pkg_changelog_screen::do_search));
@@ -219,7 +223,7 @@ protected:
 
 public:
   static cw::util::ref_ptr<pkg_changelog_screen>
-  create(const temp::name &filename,
+  create(const std::string& filename,
 	 int x = 0, int y = 0, int width = 0, int height = 0)
   {
     cw::util::ref_ptr<pkg_changelog_screen>
@@ -264,7 +268,7 @@ public:
 typedef cw::util::ref_ptr<pkg_changelog_screen> pkg_changelog_screen_ref;
 
 
-static void do_view_changelog(temp::name n,
+static void do_view_changelog(const string& filename,
 			      string pkgname,
 			      string curverstr)
 {
@@ -273,7 +277,7 @@ static void do_view_changelog(temp::name n,
   string tablabel = ssprintf(_("%s changes"), pkgname.c_str());
   string desclabel = _("View the list of changes made to this Debian package.");
 
-  cw::util::ref_ptr<aptitude::apt::changelog> changelog(aptitude::apt::parse_changelog(n));
+  cw::util::ref_ptr<aptitude::apt::changelog> changelog(aptitude::apt::parse_changelog(filename));
   cw::fragment *f = changelog.valid() ? render_changelog(changelog, curverstr) : NULL;
 
   cw::table_ref           t = cw::table::create();
@@ -296,7 +300,7 @@ static void do_view_changelog(temp::name n,
     }
   else
     {
-      pkg_changelog_screen_ref cs = pkg_changelog_screen::create(n);
+      pkg_changelog_screen_ref cs = pkg_changelog_screen::create(changelog->get_filename());
       cw::scrollbar_ref          s = cw::scrollbar::create(cw::scrollbar::VERTICAL);
 
       cs->line_changed.connect(sigc::mem_fun(s.unsafe_get_ref(), &cw::scrollbar::set_slider));
@@ -349,7 +353,7 @@ public:
       download_progress->destroy();
   }
 
-  void success(const temp::name &filename)
+  void success(const std::string& filename)
   {
     if(download_progress.valid())
       {
@@ -360,7 +364,7 @@ public:
     do_view_changelog(filename, pkgname, curverstr);
   }
 
-  void failure(const std::string &msg)
+  void failure(const std::string& msg)
   {
     if(download_progress.valid())
       {
@@ -372,7 +376,7 @@ public:
                           pkgname.c_str(), msg.c_str()));
   }
 
-  void partial_download(const temp::name &name,
+  void partial_download(const std::string& filename,
 			unsigned long long currentSize,
 			unsigned long long totalSize)
   {

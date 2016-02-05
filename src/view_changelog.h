@@ -1,7 +1,7 @@
 // view_changelog.h
 //
 //   Copyright 2004 Daniel Burrows
-//
+//   Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 
 #ifndef VIEW_CHANGELOG_H
 #define VIEW_CHANGELOG_H

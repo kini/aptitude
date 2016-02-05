@@ -300,6 +300,8 @@ namespace aptitude
 							maintainer,
 							date));
 	    }
+
+	  filename = digest.Name();
 	}
     }
 
@@ -318,7 +320,7 @@ namespace aptitude
 	}
     }
 
-    temp::name digest_changelog(const temp::name &changelog,
+    temp::name digest_changelog(const std::string& filename,
 				const std::string &from)
     {
       temp::name rval("parsedchangelog");
@@ -337,7 +339,7 @@ namespace aptitude
       std::string cmd =
 	cw::util::ssprintf("/usr/bin/parsechangelog --format rfc822 %s -l %s > %s 2> /dev/null",
 			   version_fragment.c_str(),
-			   changelog.get_name().c_str(),
+			   filename.c_str(),
 			   rval.get_name().c_str());
 
       if(system(cmd.c_str()) == 0)
@@ -346,10 +348,10 @@ namespace aptitude
 	return temp::name();
     }
 
-    cw::util::ref_ptr<changelog> parse_changelog(const temp::name &file,
+    cw::util::ref_ptr<changelog> parse_changelog(const std::string& filename,
 						 const std::string &from)
     {
-      temp::name digested = digest_changelog(file, from);
+      temp::name digested = digest_changelog(filename, from);
       return parse_digested_changelog(digested);
     }
 
@@ -474,7 +476,7 @@ namespace aptitude
 	  if(job->get_digested())
 	    digested = job->get_name();
 	  else
-	    digested = aptitude::apt::digest_changelog(job->get_name(), job->get_from());
+	    digested = aptitude::apt::digest_changelog(job->get_name().get_name(), job->get_from());
 
 	  // Note that we don't re-cache the digested
 	  // changelog if it was retrieved from the cache

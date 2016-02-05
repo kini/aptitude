@@ -208,6 +208,8 @@ namespace aptitude
     {
       std::vector<cwidget::util::ref_ptr<changelog_entry> > entries;
 
+      std::string filename;
+
       changelog(FileFd &file);
 
     public:
@@ -223,12 +225,14 @@ namespace aptitude
       size_type size() const { return entries.size(); }
       const_iterator begin() const { return entries.begin(); }
       const_iterator end() const { return entries.end(); }
+
+      std::string get_filename() const { return filename; }
     };
 
     /** \brief Given a Debian changelog, parse it and generate a new
      *  file containing the changelog in an RFC822-style format.
      */
-    temp::name digest_changelog(const temp::name &changelog,
+    temp::name digest_changelog(const std::string& filename,
 				const std::string &from);
 
     /** \brief Given a digested changelog as produced by
@@ -249,7 +253,7 @@ namespace aptitude
      *                If non-empty, nothing earlier than this version
      *                will be returned.
      */
-    cwidget::util::ref_ptr<changelog> parse_changelog(const temp::name &file,
+    cwidget::util::ref_ptr<changelog> parse_changelog(const std::string& filename,
 						      const std::string &from = "");
 
 

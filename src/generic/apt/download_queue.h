@@ -2,6 +2,7 @@
 
 
 // Copyright (C) 2009-2010 Daniel Burrows
+// Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -22,7 +23,6 @@
 #define DOWNLOAD_QUEUE_H
 
 #include <generic/util/post_thunk.h>
-#include <generic/util/temp.h>
 
 #include <sigc++/slot.h>
 
@@ -49,7 +49,7 @@ namespace aptitude
      *
      *  \param filename The file into which the item was downloaded.
      */
-    virtual void success(const temp::name &filename) = 0;
+    virtual void success(const std::string& filename) = 0;
 
     /** \brief The callback invoked when the download fails.
      *
@@ -70,7 +70,7 @@ namespace aptitude
      *
      *  The default implementation does nothing.
      */
-    virtual void partial_download(const temp::name &filename,
+    virtual void partial_download(const std::string& filename,
 				  unsigned long long currentSize,
 				  unsigned long long totalSize)
     {
