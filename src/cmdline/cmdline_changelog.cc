@@ -1,6 +1,7 @@
 // cmdline_changelog.cc
 //
 // Copyright (C) 2004, 2010 Daniel Burrows
+// Copyright (C) 2014-2016 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -43,6 +44,7 @@
 #include <apt-pkg/sourcelist.h>
 #include <apt-pkg/srcrecords.h>
 
+#include <boost/filesystem.hpp>
 #include <boost/format.hpp>
 
 #include <sigc++/adaptors/bind.h>
@@ -57,6 +59,8 @@ using namespace std;
 using aptitude::cmdline::create_terminal;
 using aptitude::cmdline::terminal_io;
 using aptitude::cmdline::terminal_metrics;
+
+namespace fs = boost::filesystem;
 
 namespace
 {
@@ -82,7 +86,7 @@ namespace
     {
     }
 
-    void partial_download(const temp::name &name,
+    void partial_download(const std::string& filename,
 			  unsigned long long currentSize,
 			  unsigned long long totalSize)
     {
@@ -121,7 +125,7 @@ namespace
 	std::cout << '\r' << BlankLine << '\r' << Buffer << std::flush;
     }
 
-    void success(const temp::name &filename)
+    void success(const std::string& filename)
     {
       if(!quiet)
 	std::cout << "\r"
@@ -144,25 +148,23 @@ namespace
 
   class changelog_download_callbacks : public single_download_progress
   {
-    // Where to store the changelog file, if any.
-    temp::name &out_changelog_file;
-
   public:
-    changelog_download_callbacks(temp::name &_out_changelog_file,
-				 const std::string &short_description,
+    // Where to store the changelog file, if any.
+    std::string out_changelog_file;
+
+    changelog_download_callbacks(const std::string &short_description,
                                  const std::shared_ptr<terminal_metrics> &term_metrics)
       : single_download_progress(short_description,
 				 aptcfg->FindI("Quiet", 0) > 0,
-                                 term_metrics),
-	out_changelog_file(_out_changelog_file)
+                                 term_metrics)
     {
     }
 
-    void success(const temp::name &name)
+    void success(const std::string& filename)
     {
-      single_download_progress::success(name);
+      single_download_progress::success(filename);
 
-      out_changelog_file = name;
+      out_changelog_file = filename;
 
       aptitude::cmdline::exit_main();
     }
@@ -174,7 +176,6 @@ namespace
       _error->Error(_("Changelog download failed: %s"), msg.c_str());
       _error->DumpErrors();
 
-      out_changelog_file = temp::name();
       aptitude::cmdline::exit_main();
     }
   };
@@ -186,42 +187,45 @@ namespace
    *  \param out_changelog_file  Where to store the resulting file.
    *  \param term_metrics Data about the terminal
    *
+   *  @return File path of the changelog, empty if invalid
+   *
    *  This routine exits once the download is complete.
    */
-  void get_changelog(const std::shared_ptr<aptitude::apt::changelog_info>& info,
-		     temp::name &out_changelog_file,
-		     const std::shared_ptr<terminal_metrics> &term_metrics)
+  std::string get_changelog(const std::shared_ptr<aptitude::apt::changelog_info>& info,
+			    const std::shared_ptr<terminal_metrics> &term_metrics)
   {
     const std::string short_description = cwidget::util::ssprintf(_("Changelog of %s"), info->get_display_name().c_str());
 
-    std::shared_ptr<changelog_download_callbacks>
-      callbacks = std::make_shared<changelog_download_callbacks>(std::ref(out_changelog_file),
-								   short_description,
-                                                                   term_metrics);
+    auto callbacks = std::make_shared<changelog_download_callbacks>(short_description,
+								    term_metrics);
 
     aptitude::apt::get_changelog(info, callbacks, aptitude::cmdline::post_thunk);
 
     aptitude::cmdline::main_loop();
+
+    std::string changelog_filepath = callbacks->out_changelog_file;
+    if (fs::is_regular_file(changelog_filepath))
+      return changelog_filepath;
+    else
+      return "";
   }
 
   /** \brief Get a package's changelog.
    *
    *  \param ver Version iterator for which to get the changelog
-   *  \param out_changelog_file  Where to store the resulting file.
    *  \param term_metrics Data about the terminal
+   *
+   *  @return File path of the changelog, empty if invalid
    *
    *  This routine exits once the download is complete.
    */
-  void get_changelog(const pkgCache::VerIterator &ver,
-		     temp::name &out_changelog_file,
-                     const std::shared_ptr<terminal_metrics> &term_metrics)
+  std::string get_changelog(const pkgCache::VerIterator &ver,
+			    const std::shared_ptr<terminal_metrics> &term_metrics)
   {
     std::shared_ptr<aptitude::apt::changelog_info> info =
       aptitude::apt::changelog_info::create(ver);
 
-    get_changelog(info,
-		  out_changelog_file,
-		  term_metrics);
+    return get_changelog(info, term_metrics);
   }
 
   /** \brief download a source package's changelog.
@@ -232,32 +236,30 @@ namespace
    *  \param name the name of the package that the user provided
    *              (e.g., the binary package that the changelog command
    *               was executed on)
-   *  \param out_changelog_file  Where to store the resulting file.
+   *
+   *  @return File path of the changelog, empty if invalid
    *
    *  This routine exits once the download is complete.
    */
-  void get_changelog_from_source(const std::string &srcpkg,
-				 const std::string &ver,
-				 const std::string &section,
-				 const std::string &name,
-				 temp::name &out_changelog_file,
-                                 const std::shared_ptr<terminal_metrics> &term_metrics)
+  std::string get_changelog_from_source(const std::string &srcpkg,
+					const std::string &ver,
+					const std::string &section,
+					const std::string &name,
+					const std::shared_ptr<terminal_metrics> &term_metrics)
   {
     std::shared_ptr<aptitude::apt::changelog_info> info =
       aptitude::apt::changelog_info::create(srcpkg, ver, section, name);
 
-    get_changelog(info,
-		  out_changelog_file,
-		  term_metrics);
+    return get_changelog(info, term_metrics);
   }
 
 /** Try to find a particular package version without knowing the
  *  section that it occurs in.  The resulting name will be invalid if
  *  no changelog could be found.
  */
-temp::name changelog_by_version(const std::string &pkg,
-				const std::string &ver,
-                                const std::shared_ptr<terminal_metrics> &term_metrics)
+std::string changelog_by_version(const std::string &pkg,
+				 const std::string &ver,
+				 const std::shared_ptr<terminal_metrics> &term_metrics)
 {
   // Try forcing the particular version that was
   // selected, using various sections.  FIXME: relies
@@ -265,21 +267,21 @@ temp::name changelog_by_version(const std::string &pkg,
   // works; in particular, that it only cares whether
   // "section" has a first component.
 
-  temp::name rval;
+  std::string filename;
 
-  get_changelog_from_source(pkg, ver, "", pkg, rval, term_metrics);
+  filename = get_changelog_from_source(pkg, ver, "", pkg, term_metrics);
 
-  if(!rval.valid())
+  if (!fs::is_regular_file(filename))
     {
-      get_changelog_from_source(pkg, ver, "contrib/foo", pkg, rval, term_metrics);
+      filename = get_changelog_from_source(pkg, ver, "contrib/foo", pkg, term_metrics);
     }
 
-  if(!rval.valid())
+  if (!fs::is_regular_file(filename))
     {
-      get_changelog_from_source(pkg, ver, "non-free/foo", pkg, rval, term_metrics);
+      filename = get_changelog_from_source(pkg, ver, "non-free/foo", pkg, term_metrics);
     }
 
-  return rval;
+  return filename;
 }
 }
 
@@ -316,7 +318,7 @@ void do_cmdline_changelog(const vector<string> &packages,
 
       pkgCache::PkgIterator pkg=(*apt_cache_file)->FindPkg(package);
 
-      temp::name filename;
+      std::string filename;
 
       // For real packages/versions, we can do a sanity check on the
       // version and warn the user if it looks like it doesn't have a
@@ -335,11 +337,11 @@ void do_cmdline_changelog(const vector<string> &packages,
 		  continue;
 		}
 
-              get_changelog(ver, filename, term_metrics);
+              filename = get_changelog(ver, term_metrics);
 	    }
         }
 
-      if(!filename.valid())
+      if (!fs::is_regular_file(filename))
         {
 	  aptitude::cmdline::source_package p =
 	    aptitude::cmdline::find_source_package(package,
@@ -354,7 +356,6 @@ void do_cmdline_changelog(const vector<string> &packages,
 					p.get_version(),
 					p.get_section(),
 					p.get_package(),
-					filename,
                                         term_metrics);
 	    }
 	  else
@@ -391,11 +392,11 @@ void do_cmdline_changelog(const vector<string> &packages,
 	    }
 	}
 
-      if(!filename.valid())
+      if (!fs::is_regular_file(filename))
 	_error->Error(_("Couldn't find a changelog for %s"), input.c_str());
       else
 	// Run the user's pager.
-	if(system((string(pager) + " " + filename.get_name()).c_str()) != 0)
+	if (system((string(pager) + " " + filename).c_str()) != 0)
           _error->Error(_("Couldn't run pager %s"), pager);
     }
 }
