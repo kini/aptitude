@@ -136,6 +136,42 @@ Version 0.7.6 UNRELEASED
   * Brief explanation when column definitions could not be parsed
     (Closes: #813319)
 
+  * Do not download changelogs when they are already being downloaded
+    (Closes: #810020)
+
+    Until now, pending changelogs kept being queued (e.g. pressing 'C'
+    repeatedly in the curses interface spawned many downloads), and in the
+    latest versions of apt (>= 1.1) it caused aptitude to crash.  In previous
+    versions of aptitude/apt I did not crash, but it caused weird errors
+    ("download queue being destroyed").  Maybe internal changes within apt cause
+    now crashes when they were errors before (not necessarily apt's fault, maybe
+    it's a misuse from aptitude).
+
+    The errors already seen in previous versions seem to be caused by aptitude
+    code, for example because all downloads with the same URI are deleted from
+    some internal structures of aptitude.  With this "fix" at least repeated
+    downloads are not repeated (*), which is a nice feature in general, and
+    seems to solve this problem.
+
+      (*) Still, sometimes the changelog is downloaded and shown twice, maybe
+      this is because of sync problems between background threads, or maybe
+      because sometimes the download happens so fast that the first is already
+      downloaded by the time that the second is queued (this fix only prevents
+      to queue when "to-be-started" or "active-downloads", not when it was
+      downloaded previously).
+
+    More in general, the code related with downloading files/changelogs is
+    incredibly complex and entangled, spans many files and dozens of classes
+    nested again and using inheritences and overlapping code, and it uses a
+    home-grown implementation of threads in cwidget copied or based on POSIX
+    threads.  After several multi-hour sessions trying to analyse the point of
+    the crash and improve this situation, and failing to wrap my head around it,
+    I think that it's probably better to implement a new way to download
+    changelogs, which I believe that can be simplified significantly, and
+    hopefully in this case other problems will be easier to fix, and we can
+    start to use pkgAcqChangelog and avoid the warnings about not being able to
+    change the user to "_apt".  But this has to wait for another release.
+
 - User visible changes:
 
   * [cmdline] Prompt dialog shows lowercase instead of capitalised "yes"/"no"

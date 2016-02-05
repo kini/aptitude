@@ -819,6 +819,28 @@ namespace aptitude
 	    return rval;
 	  }
 
+	// check whether it's already being downloaded
+	{
+	  bool found_start = false;
+	  for (auto sr : start_requests)
+	    {
+	      if (uri == sr->get_uri())
+		{
+		  found_start = true;
+		  break;
+		}
+	    }
+
+	  auto found_active = active_downloads.find(uri);
+
+	  if (found_start || (found_active != active_downloads.end()))
+	    {
+	      LOG_WARN(Loggers::getAptitudeDownloadQueue(),
+		       "Not starting a job to download " << uri << ": already being downloaded.");
+	      return rval;
+	    }
+	}
+
 	std::shared_ptr<start_request> start =
 	  std::make_shared<start_request>(uri, short_description,
 					  temp::name("aptitudeDownload").get_name(),
