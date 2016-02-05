@@ -1,7 +1,7 @@
 // pkg_changelog.h    -*-c++-*-
 //
 //  Copyright 2000, 2005, 2008-2009 Daniel Burrows
-//  Copyright 2015 Manuel A. Fernandez Montecelo
+//  Copyright 2015-2016 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -23,18 +23,17 @@
 #ifndef PKG_CHANGELOG_H
 #define PKG_CHANGELOG_H
 
-#include <map>
-#include <string>
-
 #include <generic/util/post_thunk.h>
-#include <generic/util/temp.h>
 
 #include <apt-pkg/pkgcache.h>
 
 #include <sigc++/signal.h>
 #include <sigc++/slot.h>
 
+#include <map>
 #include <memory>
+#include <string>
+
 
 /** \brief Routines to download a Debian changelog for a given package.
  *
@@ -130,7 +129,7 @@ namespace aptitude
     std::shared_ptr<download_request>
     get_changelog(const pkgCache::VerIterator &ver,
 		  post_thunk_f post_thunk,
-		  const sigc::slot<void, temp::name> &success,
+		  const sigc::slot<void, std::string> &success,
 		  const sigc::slot<void, std::string> &failure);
 
     /** Check whether it's a valid Origin (otherwise the URL is not known)

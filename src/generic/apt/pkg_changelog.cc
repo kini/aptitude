@@ -1,7 +1,7 @@
 // pkg_changelog.cc
 //
 //  Copyright 2000, 2004-2005, 2008-2009 Daniel Burrows
-//  Copyright 2015 Manuel A. Fernandez Montecelo
+//  Copyright 2015-2016 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -23,6 +23,8 @@
 #include "apt.h"
 #include "config_signal.h"
 #include "download_queue.h"
+
+#include "generic/apt/download_queue_changelogs.h"
 
 #include <generic/util/job_queue_thread.h>
 
@@ -236,20 +238,20 @@ namespace aptitude
 	    }
 	}
 
-	void success(const temp::name &filename)
+	void success(const std::string& filename)
 	{
 	  cw::threads::mutex::lock l(state_mutex);
 
 	  if(finished)
 	    LOG_TRACE(Loggers::getAptitudeChangelog(),
 		      "Not signaling success for the download to "
-		      << filename.get_name()
+		      << filename
 		      << " for " << short_description << ": the item is no longer active");
 	  else
 	    {
 	      LOG_TRACE(Loggers::getAptitudeChangelog(),
 			"Signaling success for the download to "
-			<< filename.get_name()
+			<< filename
 			<< " for " << short_description);
 
 	      current_download.reset();
@@ -314,7 +316,7 @@ namespace aptitude
 	    }
 	}
 
-	void partial_download(const temp::name &filename,
+	void partial_download(const std::string& filename,
 			      unsigned long long currentSize,
 			      unsigned long long totalSize)
 	{
@@ -627,20 +629,20 @@ namespace
 {
   class slot_callbacks : public download_callbacks
   {
-    sigc::slot<void, temp::name> success_slot;
+    sigc::slot<void, std::string> success_slot;
     sigc::slot<void, std::string> failure_slot;
 
   public:
-    slot_callbacks(const sigc::slot<void, temp::name> &_success_slot,
+    slot_callbacks(const sigc::slot<void, std::string> &_success_slot,
 		   const sigc::slot<void, std::string> &_failure_slot)
       : success_slot(_success_slot),
 	failure_slot(_failure_slot)
     {
     }
 
-    void success(const temp::name &n)
+    void success(const std::string& filename)
     {
-      success_slot(n);
+      success_slot(filename);
     }
 
     void failure(const std::string &msg)
@@ -653,7 +655,7 @@ namespace
 std::shared_ptr<download_request>
 get_changelog(const pkgCache::VerIterator &ver,
 	      post_thunk_f post_thunk,
-	      const sigc::slot<void, temp::name> &success,
+	      const sigc::slot<void, std::string>& success,
 	      const sigc::slot<void, std::string> &failure)
 {
   return get_changelog(changelog_info::create(ver),
