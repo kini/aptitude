@@ -1,7 +1,7 @@
 // temp.cc
 //
 //   Copyright (C) 2005, 2007, 2009-2010 Daniel Burrows
-//   Copyright (C) 2015 Manuel A. Fernandez Montecelo
+//   Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -273,11 +273,14 @@ namespace temp
   }
 
 
+  std::string name::impl::get_base_dir() const
+  {
+    return parentdir;
+  };
+
   name::impl::impl(const std::string &_filename)
     : refcount(1)
   {
-    std::string parentdir;
-
     LOG_TRACE(Loggers::getAptitudeTemp(),
 	      "Creating temporary file name with base name " << _filename);
 
@@ -329,4 +332,3 @@ namespace temp
     unlink(filename.c_str());
   }
 }
-

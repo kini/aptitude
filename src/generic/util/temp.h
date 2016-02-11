@@ -1,7 +1,7 @@
 // temp.h                                 -*-c++-*-
 //
 //   Copyright (C) 2005, 2007-2010 Daniel Burrows
-//   Copyright (C) 2015 Manuel A. Fernandez Montecelo
+//   Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -270,10 +270,14 @@ namespace temp
 
     bool valid() const;
     std::string get_name() const;
+    std::string get_base_dir() const;
   };
 
   class name::impl
   {
+    /** The parent/base dir of this temporary object. */
+    std::string parentdir;
+
     /** The name of this temporary object. */
     std::string filename;
 
@@ -300,6 +304,9 @@ namespace temp
     {
       return filename;
     }
+
+    /** \return the temporary's base dir. */
+    std::string get_base_dir() const;
 
     /** Increment the reference count of this impl. */
     void incref()
@@ -370,6 +377,11 @@ namespace temp
   inline std::string name::get_name() const
   {
     return real_name->get_name();
+  }
+
+  inline std::string name::get_base_dir() const
+  {
+    return real_name->get_base_dir();
   }
 };
 
