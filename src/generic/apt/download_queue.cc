@@ -384,8 +384,17 @@ namespace aptitude
       {
       }
 
+      active_download_info(const std::shared_ptr<download_job> &_job)
+	: job(_job)
+      {
+      }
+
       const std::shared_ptr<download_job> &get_job() const { return job; }
-      void destroy_item() { destroy(); }
+      void destroy_item() {
+	if (!destroy.empty()) {
+	  destroy();
+	}
+      }
     };
 
     /** \brief Identifies a single download request; used to allow
