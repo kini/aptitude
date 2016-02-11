@@ -178,6 +178,27 @@ Version 0.7.6 UNRELEASED
     start to use pkgAcqChangelog and avoid the warnings about not being able to
     change the user to "_apt".  But this has to wait for another release.
 
+  * Fix so libapt can drop privileges to _apt:nogroup when downloading from the
+    network and use pkgAcqChangelog (Closes: #797527, #806595)
+
+    When downloading changelogs, aptitude was using temp::dirs which are owned
+    by root or the user launching aptitude, and libapt could not drop
+    privileges, causing unwanted annoying warnings (#806595).  Since aptitude
+    can run as root and normal users, it is also not possible to let libapt
+    create files and copy them later: when running as normal users, it is not
+    possible to access those files to copy them.  This was changed by letting
+    libapt to download to an intermediate place created by aptitude, and copy
+    the file afterwards.
+
+    Another change is that aptitude uses the specific functionality in libapt
+    for changelogs, pkgAcqChangelog, present since apt v1.1.
+
+    The whole set of classes dealing with download queues is very complex and
+    should probably be rewritten to adapt to real needs and adapt to changes in
+    apt over the years.  This is a quick way to fix this annoying item present
+    already for months, without ripping apart the whole download subsystem.  See
+    also comment of the other entry closing #810020.
+
 - User visible changes:
 
   * [cmdline] Prompt dialog shows lowercase instead of capitalised "yes"/"no"
