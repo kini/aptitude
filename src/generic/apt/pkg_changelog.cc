@@ -24,8 +24,6 @@
 #include "config_signal.h"
 #include "download_queue.h"
 
-#include "generic/apt/download_queue_changelogs.h"
-
 #include <generic/util/job_queue_thread.h>
 
 #include <aptitude.h>
@@ -566,7 +564,7 @@ namespace aptitude
 		    realsection.assign("main");
 
 		  string prefix;
-		
+
 		  if(source_package.size() > 3 &&
 		     source_package[0] == 'l' && source_package[1] == 'i' && source_package[2] == 'b')
 		    prefix = std::string("lib") + source_package[3];
