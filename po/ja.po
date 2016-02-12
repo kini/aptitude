@@ -541,10 +541,6 @@ msgstr ""
 
 #: src/apt_options.cc:289
 #, fuzzy
-#| msgid ""
-#| "If this option is enabled, then after every install run, aptitude will "
-#| "delete from the package cache any package files that can no longer be "
-#| "downloaded from any archive in sources.list."
 msgid ""
 "If this option is enabled, then after package lists are updated aptitude "
 "will delete from the package cache any package files that can no longer be "
@@ -985,14 +981,12 @@ msgstr "%s パッケージは更新可能ではないので更新を禁止でき
 
 #: src/cmdline/cmdline_action.cc:422
 #, fuzzy, c-format
-#| msgid "'=' to place packages on hold"
 msgid "Setting package %s on hold\n"
 msgstr "'=': パッケージを固定"
 
 # * Message used as 'title' for the ui_download_manager.
 #: src/cmdline/cmdline_action.cc:430
 #, fuzzy, c-format
-#| msgid "Updating package lists"
 msgid "Marking package %s as keep\n"
 msgstr "パッケージ一覧を更新中"
 
@@ -1003,26 +997,22 @@ msgstr ""
 
 #: src/cmdline/cmdline_action.cc:445
 #, fuzzy, c-format
-#| msgid "Packages which depend on %s"
 msgid "Package %s is not on hold\n"
 msgstr "%s に依存しているパッケージ"
 
 #: src/cmdline/cmdline_action.cc:451
 #, fuzzy, c-format
-#| msgid "'&M' to mark packages as automatically installed"
 msgid "Marking package %s as automatically installed\n"
 msgstr "'&M': 自動的にインストールされたという印をパッケージに添付"
 
 #: src/cmdline/cmdline_action.cc:459
 #, fuzzy, c-format
-#| msgid "'&M' to mark packages as automatically installed"
 msgid "Unmarking package %s as automatically installed\n"
 msgstr "'&M': 自動的にインストールされたという印をパッケージに添付"
 
 # * Description of an item.
 #: src/cmdline/cmdline_action.cc:468 src/cmdline/cmdline_action.cc:479
 #, fuzzy, c-format
-#| msgid "Check for new versions of packages"
 msgid "Marking version %s of package %s as forbidden\n"
 msgstr "パッケージの新しいバージョンがないか確認します"
 
@@ -1406,7 +1396,6 @@ msgstr ""
 
 #: src/cmdline/cmdline_prompt.cc:490
 #, fuzzy, c-format
-#| msgid "Press Return to continue."
 msgid "Press any key to continue...\n"
 msgstr "先に進むには Return を押してください。"
 
@@ -1500,7 +1489,6 @@ msgstr "以下のパッケージが提案されていますがインストール
 
 #: src/cmdline/cmdline_prompt.cc:739
 #, fuzzy, c-format
-#| msgid "The following packages will be DOWNGRADED:"
 msgid "The following packages will NOT be UPGRADED:\n"
 msgstr "以下のパッケージがダウングレードされます:"
 
@@ -2299,20 +2287,17 @@ msgstr "[インストールされません]"
 
 #: src/cmdline/cmdline_show_broken.cc:119
 #, fuzzy, c-format
-#| msgid "%s is a virtual package provided by:\n"
 msgid ""
 " which is a virtual package and is not provided by any available package.\n"
 msgstr "%s は、以下のパッケージから提供されている仮想パッケージです:\n"
 
 #: src/cmdline/cmdline_show_broken.cc:123
 #, fuzzy, c-format
-#| msgid "%s is a virtual package provided by:\n"
 msgid " which is a virtual package, provided by:\n"
 msgstr "%s は、以下のパッケージから提供されている仮想パッケージです:\n"
 
 #: src/cmdline/cmdline_show_broken.cc:143
 #, fuzzy, c-format
-#| msgid "Provides"
 msgid " provides %s=%s"
 msgstr "提供"
 
@@ -2600,7 +2585,6 @@ msgstr ""
 
 #: src/cmdline/cmdline_user_tag.cc:63
 #, fuzzy
-#| msgid "Remove"
 msgid "remove"
 msgstr "削除"
 
@@ -2616,7 +2600,6 @@ msgstr ""
 
 #: src/cmdline/cmdline_user_tag.cc:124
 #, fuzzy, c-format
-#| msgid "%s: too few arguments; expected at least a tag name and a package.\n"
 msgid ""
 "%s: too few arguments; expected at least a tag name and a package or "
 "pattern\n"
@@ -3067,19 +3050,16 @@ msgstr ""
 
 #: src/generic/apt/aptcache.cc:1562
 #, fuzzy, c-format
-#| msgid "Adding user tag \"%s\" to the package \"%s\".\n"
 msgid "Could not add user-tag '%s' to package %s"
 msgstr "パッケージ \"%2$s\" にユーザタグ \"%1$s\" を追加しています。\n"
 
 #: src/generic/apt/aptcache.cc:1588
 #, fuzzy, c-format
-#| msgid "Couldn't find task '%s'"
 msgid "Could not find valid user-tag '%s'"
 msgstr "タスク「%s」を見つけられませんでした"
 
 #: src/generic/apt/aptcache.cc:1604
 #, fuzzy, c-format
-#| msgid "Removing user tag \"%s\" from the package \"%s\".\n"
 msgid "Could not remove user-tag '%s' from package %s"
 msgstr "パッケージ \"%2$s\" からユーザタグ \"%1$s\" を削除しています。\n"
 
@@ -3106,7 +3086,6 @@ msgstr ""
 
 #: src/generic/apt/apt.cc:130
 #, fuzzy, c-format
-#| msgid "Configuration files and data remain"
 msgid "Configuration file '%s' is not correct, please fix it"
 msgstr "設定ファイルとデータが残っています"
 
@@ -3126,9 +3105,6 @@ msgstr "aptitude-defaults.ja"
 
 #: src/generic/apt/apt.cc:278
 #, fuzzy
-#| msgid ""
-#| "Replace configuration file\n"
-#| "'%s'?"
 msgid "Error saving configuration file"
 msgstr ""
 "設定ファイル '%s'\n"
@@ -3146,19 +3122,16 @@ msgstr ""
 
 #: src/generic/apt/apt.cc:524
 #, fuzzy, c-format
-#| msgid "Couldn't chroot into %s for %s"
 msgid "Could not create directory: %s: %s"
 msgstr "%s に chroot して %s を実行できませんでした"
 
 #: src/generic/apt/apt.cc:549
 #, fuzzy, c-format
-#| msgid "Couldn't clean out list directories"
 msgid "Could not create directories: %s: %s"
 msgstr "一覧ディレクトリを空にできませんでした"
 
 #: src/generic/apt/apt.cc:1335
 #, fuzzy
-#| msgid "installed locally"
 msgid "(installed locally)"
 msgstr "ローカル版をインストール済み"
 
@@ -3265,19 +3238,16 @@ msgstr ""
 
 #: src/generic/apt/config_file.cc:59
 #, fuzzy, c-format
-#| msgid "Could not open file \"%s\""
 msgid "Could not remove old configuration file: %s"
 msgstr "ファイル \"%s\" が開けません"
 
 #: src/generic/apt/config_file.cc:91
 #, fuzzy, c-format
-#| msgid "Asking whether to replace the configuration file %s"
 msgid "Could not get the content of the old configuration file: %s"
 msgstr "設定ファイル %s を置き換えるかどうかを尋ねます"
 
 #: src/generic/apt/config_file.cc:111
 #, fuzzy, c-format
-#| msgid "Configuration files and data remain"
 msgid "Old configuration file is not a regular file: %s"
 msgstr "設定ファイルとデータが残っています"
 
@@ -3293,19 +3263,16 @@ msgstr ""
 
 #: src/generic/apt/config_file.cc:195
 #, fuzzy, c-format
-#| msgid "Asking whether to replace the configuration file %s"
 msgid "Error reading from old configuration file: %s"
 msgstr "設定ファイル %s を置き換えるかどうかを尋ねます"
 
 #: src/generic/apt/config_file.cc:226
 #, fuzzy, c-format
-#| msgid "Error writing state file"
 msgid "Error writing to file: %s"
 msgstr "状態ファイルの書き込み時にエラーが生じました"
 
 #: src/generic/apt/config_file.cc:251
 #, fuzzy, c-format
-#| msgid "Could not open file \"%s\""
 msgid "Could not remove file: %s"
 msgstr "ファイル \"%s\" が開けません"
 
@@ -3316,7 +3283,6 @@ msgstr ""
 
 #: src/generic/apt/config_file.cc:264
 #, fuzzy, c-format
-#| msgid "Error writing state file"
 msgid "Error removing file: %s"
 msgstr "状態ファイルの書き込み時にエラーが生じました"
 
@@ -3452,11 +3418,6 @@ msgstr "ログ報告"
 # * Log message.
 #: src/generic/apt/log.cc:74
 #, fuzzy, c-format
-#| msgid ""
-#| "IMPORTANT: this log only lists intended actions; actions which fail due "
-#| "to\n"
-#| "dpkg problems may not be completed.\n"
-#| "\n"
 msgid ""
 "  IMPORTANT: this log only lists intended actions; actions which fail\n"
 "  due to dpkg problems may not be completed.\n"
@@ -3579,7 +3540,6 @@ msgstr "[%s] %s\n"
 
 #: src/generic/apt/log.cc:177
 #, fuzzy
-#| msgid "Completed"
 msgid "Log complete."
 msgstr "完了"
 
@@ -3712,7 +3672,6 @@ msgstr "変更履歴のダウンロードに失敗しました: 想定外の例�
 
 #: src/generic/apt/pkg_changelog.cc:677
 #, fuzzy, c-format
-#| msgid "%s is not an official Debian package, cannot display its changelog."
 msgid ""
 "%s version %s is not an official Debian package, cannot display its "
 "changelog."
@@ -3864,7 +3823,6 @@ msgstr "接頭部「%s」から一時ファイル名を作成できません"
 
 #: src/generic/util/util.cc:382
 #, fuzzy, c-format
-#| msgid "Unable to remove \"%s\""
 msgid "Unable to remove \"%s\": %s"
 msgstr "\"%s\" を削除できません"
 
@@ -5831,9 +5789,6 @@ msgstr "          aptitude [オプション] <アクション> ..."
 # * Description of action in the commandline help.
 #: src/main.cc:194
 #, fuzzy, c-format
-#| msgid ""
-#| "  Actions (if none is specified, aptitude will enter interactive mode):\n"
-#| "\n"
 msgid ""
 "Actions (if none is specified, aptitude will enter interactive mode):\n"
 "\n"
@@ -5845,43 +5800,36 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:195
 #, fuzzy, c-format
-#| msgid " install      - Install/upgrade packages.\n"
 msgid " install         Install/upgrade packages.\n"
 msgstr " install      - パッケージをインストール・更新します。\n"
 
 # * Description of action in the commandline help.
 #: src/main.cc:196
 #, fuzzy, c-format
-#| msgid " remove       - Remove packages.\n"
 msgid " remove          Remove packages.\n"
 msgstr " remove       - パッケージを削除します。\n"
 
 # * Description of action in the commandline help.
 #: src/main.cc:197
 #, fuzzy, c-format
-#| msgid " purge        - Remove packages and their configuration files.\n"
 msgid " purge           Remove packages and their configuration files.\n"
 msgstr " purge        - パッケージと設定ファイルを削除します。\n"
 
 # * Description of action in the commandline help.
 #: src/main.cc:198
 #, fuzzy, c-format
-#| msgid " hold         - Place packages on hold.\n"
 msgid " hold            Place packages on hold.\n"
 msgstr " hold         - パッケージを固定します。\n"
 
 # * Description of action in the commandline help.
 #: src/main.cc:199
 #, fuzzy, c-format
-#| msgid " unhold       - Cancel a hold command for a package.\n"
 msgid " unhold          Cancel a hold command for a package.\n"
 msgstr " unhold       - パッケージの固定を解除します。\n"
 
 # * Description of action in the commandline help.
 #: src/main.cc:200
 #, fuzzy, c-format
-#| msgid ""
-#| " markauto     - Mark packages as having been automatically installed.\n"
 msgid ""
 " markauto        Mark packages as having been automatically installed.\n"
 msgstr ""
@@ -5890,7 +5838,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:201
 #, fuzzy, c-format
-#| msgid " unmarkauto   - Mark packages as having been manually installed.\n"
 msgid " unmarkauto      Mark packages as having been manually installed.\n"
 msgstr ""
 " unmarkauto   - 手動でインストールされたという印をパッケージにつけます。\n"
@@ -5899,9 +5846,6 @@ msgstr ""
 # TRANSLATION-FIXME: 原文の文末のピリオドは不要
 #: src/main.cc:202
 #, fuzzy, c-format
-#| msgid ""
-#| " forbid-version - Forbid aptitude from upgrading to a specific package "
-#| "version.\n"
 msgid ""
 " forbid-version  Forbid aptitude from upgrading to a specific package "
 "version.\n"
@@ -5912,7 +5856,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:203
 #, fuzzy, c-format
-#| msgid " update       - Download lists of new/upgradable packages.\n"
 msgid " update          Download lists of new/upgradable packages.\n"
 msgstr ""
 " update       - 新規および更新可能なパッケージの一覧をダウンロードします。\n"
@@ -5920,16 +5863,12 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:204
 #, fuzzy, c-format
-#| msgid " safe-upgrade - Perform a safe upgrade.\n"
 msgid " safe-upgrade    Perform a safe upgrade.\n"
 msgstr " safe-upgrade - 安全な更新を行います。\n"
 
 # * Description of action in the commandline help.
 #: src/main.cc:205
 #, fuzzy, c-format
-#| msgid ""
-#| " full-upgrade - Perform an upgrade, possibly installing and removing "
-#| "packages.\n"
 msgid ""
 " full-upgrade    Perform an upgrade, possibly installing and removing "
 "packages.\n"
@@ -5939,49 +5878,42 @@ msgstr ""
 
 #: src/main.cc:206
 #, fuzzy, c-format
-#| msgid " build-dep    - Install the build-dependencies of packages.\n"
 msgid " build-dep       Install the build-dependencies of packages.\n"
 msgstr " build-dep    - パッケージの構築依存関係をインストールします。\n"
 
 # * Description of action in the commandline help.
 #: src/main.cc:207
 #, fuzzy, c-format
-#| msgid " forget-new   - Forget what packages are \"new\".\n"
 msgid " forget-new      Forget what packages are \"new\".\n"
 msgstr " forget-new   - どのパッケージが「新規」かの情報を消去します。\n"
 
 # * Description of action in the commandline help.
 #: src/main.cc:208
 #, fuzzy, c-format
-#| msgid " search       - Search for a package by name and/or expression.\n"
 msgid " search          Search for a package by name and/or expression.\n"
 msgstr " search       - 名前や正規表現でパッケージを検索します。\n"
 
 # * Description of action in the commandline help.
 #: src/main.cc:209
 #, fuzzy, c-format
-#| msgid " show         - Display detailed information about a package.\n"
 msgid " show            Display detailed information about a package.\n"
 msgstr " show         - パッケージについての詳細な情報を表示します。\n"
 
 # * Description of action in the commandline help.
 #: src/main.cc:210
 #, fuzzy, c-format
-#| msgid " versions     - Displays the versions of specified packages.\n"
 msgid " versions        Displays the versions of specified packages.\n"
 msgstr " versions     - 指定したパッケージのバージョンを表示します。\n"
 
 # * Description of action in the commandline help.
 #: src/main.cc:211
 #, fuzzy, c-format
-#| msgid " clean        - Erase downloaded package files.\n"
 msgid " clean           Erase downloaded package files.\n"
 msgstr " clean        - ダウンロード済みのパッケージファイルを消去します。\n"
 
 # * Description of action in the commandline help.
 #: src/main.cc:212
 #, fuzzy, c-format
-#| msgid " autoclean    - Erase old downloaded package files.\n"
 msgid " autoclean       Erase old downloaded package files.\n"
 msgstr ""
 " autoclean    - 古い、ダウンロード済みのパッケージファイルを消去します。\n"
@@ -5989,23 +5921,18 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:213
 #, fuzzy, c-format
-#| msgid " changelog    - View a package's changelog.\n"
 msgid " changelog       View a package's changelog.\n"
 msgstr " changelog    - パッケージの変更履歴を表示します。\n"
 
 # * Description of action in the commandline help.
 #: src/main.cc:214
 #, fuzzy, c-format
-#| msgid " download     - Download the .deb file for a package.\n"
 msgid " download        Download the .deb file for a package.\n"
 msgstr " download     - パッケージの .deb ファイルをダウンロードします。\n"
 
 # * Description of action in the commandline help.
 #: src/main.cc:215
 #, fuzzy, c-format
-#| msgid ""
-#| " reinstall    - Download and (possibly) reinstall a currently installed "
-#| "package.\n"
 msgid " reinstall       Reinstall a currently installed package.\n"
 msgstr ""
 " reinstall    - 現在インストールされているパッケージをダウンロードし (場合に"
@@ -6015,8 +5942,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:216
 #, fuzzy, c-format
-#| msgid ""
-#| " -V             Show which versions of packages are to be installed.\n"
 msgid ""
 " why             Explain why a particular package should be installed.\n"
 msgstr ""
@@ -6026,8 +5951,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:217
 #, fuzzy, c-format
-#| msgid ""
-#| " -V             Show which versions of packages are to be installed.\n"
 msgid ""
 " why-not         Explain why a particular package cannot be installed.\n"
 msgstr ""
@@ -6047,43 +5970,34 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:222
 #, fuzzy, c-format
-#| msgid "  Options:\n"
 msgid "Options:\n"
 msgstr "  オプション: \n"
 
 # * Description of action in the commandline help.
 #: src/main.cc:223
 #, fuzzy, c-format
-#| msgid " -h             This help text.\n"
 msgid " -h              This help text.\n"
 msgstr " -h                このヘルプの文章です。\n"
 
 #: src/main.cc:225
 #, fuzzy, c-format
-#| msgid ""
-#| " --gui          Use the GTK GUI even if disabled in the configuration.\n"
 msgid ""
 " --gui           Use the GTK GUI even if disabled in the configuration.\n"
 msgstr " --gui             設定で無効にされていても GTK GUIを使用します。\n"
 
 #: src/main.cc:227
 #, fuzzy, c-format
-#| msgid " --no-gui       Do not use the GTK GUI even if available.\n"
 msgid " --no-gui        Do not use the GTK GUI even if available.\n"
 msgstr " --no-gui          利用可能だとしても GTK GUI を使いません。\n"
 
 # * Description of action in the commandline help.
 #: src/main.cc:229
 #, fuzzy, c-format
-#| msgid " --qt           Use the Qt GUI.\n"
 msgid " --qt            Use the Qt GUI.\n"
 msgstr " --qt              Qt GUI を利用します。\n"
 
 #: src/main.cc:230
 #, fuzzy, c-format
-#| msgid ""
-#| " --no-qt        Do not use the Qt GUI even if enabled in the "
-#| "configuration.\n"
 msgid ""
 " --no-qt         Do not use the Qt GUI even if enabled in the "
 "configuration.\n"
@@ -6092,8 +6006,6 @@ msgstr " --no-qt           設定で無効にされていても Qt GUIを使用�
 # * Description of action in the commandline help.
 #: src/main.cc:232
 #, fuzzy, c-format
-#| msgid ""
-#| " -s             Simulate actions, but do not actually perform them.\n"
 msgid " -s              Simulate actions, but do not actually perform them.\n"
 msgstr ""
 " -s                アクションのシミュレートのみ行い、実際には実行しません。\n"
@@ -6101,9 +6013,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:233
 #, fuzzy, c-format
-#| msgid ""
-#| " -d             Only download packages, do not install or remove "
-#| "anything.\n"
 msgid ""
 " -d              Only download packages, do not install or remove anything.\n"
 msgstr ""
@@ -6113,7 +6022,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:234
 #, fuzzy, c-format
-#| msgid " -P             Always prompt for confirmation of actions.\n"
 msgid " -P              Always prompt for confirmation of actions.\n"
 msgstr ""
 " -P                アクションの確認のため、常にプロンプトを出します。\n"
@@ -6121,9 +6029,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:235
 #, fuzzy, c-format
-#| msgid ""
-#| " -y             Assume that the answer to simple yes/no questions is "
-#| "'yes'.\n"
 msgid ""
 " -y              Assume that the answer to simple yes/no questions is "
 "'yes'.\n"
@@ -6134,9 +6039,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:236
 #, fuzzy, c-format
-#| msgid ""
-#| " -F format      Specify a format for displaying search results; see the "
-#| "manual.\n"
 msgid ""
 " -F format       Specify a format for displaying search results; see the "
 "manual.\n"
@@ -6148,9 +6050,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:237
 #, fuzzy, c-format
-#| msgid ""
-#| " -O order       Specify how search results should be sorted; see the "
-#| "manual.\n"
 msgid ""
 " -O order        Specify how search results should be sorted; see the "
 "manual.\n"
@@ -6162,8 +6061,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:238
 #, fuzzy, c-format
-#| msgid ""
-#| " -w width       Specify the display width for formatting search results.\n"
 msgid ""
 " -w width        Specify the display width for formatting search results.\n"
 msgstr " -w <幅>           検索結果の表示フォーマットの幅を指定します。\n"
@@ -6171,7 +6068,6 @@ msgstr " -w <幅>           検索結果の表示フォーマットの幅を指�
 # * Description of action in the commandline help.
 #: src/main.cc:239
 #, fuzzy, c-format
-#| msgid " -f             Aggressively try to fix broken packages.\n"
 msgid " -f              Aggressively try to fix broken packages.\n"
 msgstr ""
 " -f                依存関係が壊れたパッケージを積極的に修復しようとします。\n"
@@ -6179,8 +6075,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:240
 #, fuzzy, c-format
-#| msgid ""
-#| " -V             Show which versions of packages are to be installed.\n"
 msgid " -V              Show which versions of packages are to be installed.\n"
 msgstr ""
 " -V                パッケージのどのバージョンがインストールされるか表示しま"
@@ -6189,8 +6083,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:241
 #, fuzzy, c-format
-#| msgid ""
-#| " -D             Show the dependencies of automatically changed packages.\n"
 msgid ""
 " -D              Show the dependencies of automatically changed packages.\n"
 msgstr ""
@@ -6199,7 +6091,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:242
 #, fuzzy, c-format
-#| msgid " -Z             Show the change in installed size of each package.\n"
 msgid " -Z              Show the change in installed size of each package.\n"
 msgstr ""
 " -Z                各パッケージのインストールサイズの変更を表示します。\n"
@@ -6207,9 +6098,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:243
 #, fuzzy, c-format
-#| msgid ""
-#| " -v             Display extra information. (may be supplied multiple "
-#| "times).\n"
 msgid ""
 " -v              Display extra information. (may be supplied multiple "
 "times).\n"
@@ -6219,8 +6107,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:244
 #, fuzzy, c-format
-#| msgid ""
-#| " -t [release]   Set the release from which packages should be installed.\n"
 msgid ""
 " -t [release]    Set the release from which packages should be installed.\n"
 msgstr ""
@@ -6229,9 +6115,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:245
 #, fuzzy, c-format
-#| msgid ""
-#| " -q             In command-line mode, suppress the incremental progress\n"
-#| "                indicators.\n"
 msgid ""
 " -q              In command-line mode, suppress the incremental progress\n"
 "                 indicators.\n"
@@ -6241,7 +6124,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:247
 #, fuzzy, c-format
-#| msgid " -o key=val     Directly set the configuration option named 'key'.\n"
 msgid " -o key=val      Directly set the configuration option named 'key'.\n"
 msgstr ""
 " -o <キー>=<値>    名前「<キー>」を持つ設定オプションを直接設定します。\n"
@@ -6249,9 +6131,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:248
 #, fuzzy, c-format
-#| msgid ""
-#| " --with(out)-recommends\tSpecify whether or not to treat recommends as\n"
-#| "                strong dependencies.\n"
 msgid ""
 " --with(out)-recommends\tSpecify whether or not to treat recommends as\n"
 "                            strong dependencies.\n"
@@ -6262,7 +6141,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:250
 #, fuzzy, c-format
-#| msgid " -S fname       Read the aptitude extended status info from fname.\n"
 msgid " -S fname        Read the aptitude extended status info from fname.\n"
 msgstr ""
 " -S <ファイル名>   ファイルから aptitude の拡張状態情報を読み込みます。\n"
@@ -6270,7 +6148,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:251
 #, fuzzy, c-format
-#| msgid " -u             Download new package lists on startup.\n"
 msgid " -u              Download new package lists on startup.\n"
 msgstr ""
 " -u                起動時に新しいパッケージ一覧をダウンロードします。\n"
@@ -6283,7 +6160,6 @@ msgstr "                     (端末インタフェースのみ)\n"
 # * Description of action in the commandline help.
 #: src/main.cc:253
 #, fuzzy, c-format
-#| msgid " -i             Perform an install run on startup.\n"
 msgid " -i              Perform an install run on startup.\n"
 msgstr " -i                起動時にインストールを行います。\n"
 
@@ -6296,7 +6172,6 @@ msgstr ""
 # * Description of action in the commandline help.
 #: src/main.cc:258
 #, fuzzy, c-format
-#| msgid "                  This aptitude does not have Super Cow Powers.\n"
 msgid "This aptitude does not have Super Cow Powers.\n"
 msgstr ""
 "                  この aptitude にはスーパー牛さんパワーなどはありません。\n"
@@ -6475,7 +6350,6 @@ msgstr "-u、-i、--clean-on-startup はコマンドとともに指定するこ�
 
 #: src/main.cc:1226
 #, fuzzy, c-format
-#| msgid "E: The clean command takes no arguments\n"
 msgid "Command \"%s\" needs arguments\n"
 msgstr "エラー: clean コマンドは引数をとりません\n"
 
@@ -6627,7 +6501,6 @@ msgstr "Encoding of mine-help-ja.txt|UTF-8"
 
 #: src/pkg_columnizer.cc:90
 #, fuzzy
-#| msgid "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 1 10 9 12 30 17 15"
 msgid "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 30 30 10 30 10 9 12 30 17 15"
 msgstr "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 1 10 9 12 30 17 15"
 
@@ -6685,13 +6558,11 @@ msgstr ""
 
 #: src/pkg_columnizer.cc:109
 #, fuzzy
-#| msgid "Source: "
 msgid "Source"
 msgstr "ソース: "
 
 #: src/pkg_columnizer.cc:110
 #, fuzzy
-#| msgid "Architecture: "
 msgid "Architecture"
 msgstr "アーキテクチャ: "
 
@@ -7150,19 +7021,16 @@ msgstr ""
 
 #: src/pkg_view.cc:271
 #, fuzzy
-#| msgid "Provides"
 msgid "provides"
 msgstr "提供"
 
 #: src/pkg_view.cc:284
 #, fuzzy
-#| msgid "%s is a virtual package provided by:\n"
 msgid "Virtual package not provided by any package."
 msgstr "%s は、以下のパッケージから提供されている仮想パッケージです:\n"
 
 #: src/pkg_view.cc:289
 #, fuzzy
-#| msgid "%s is a virtual package provided by:\n"
 msgid "Virtual package provided by:"
 msgstr "%s は、以下のパッケージから提供されている仮想パッケージです:\n"
 
@@ -7293,7 +7161,6 @@ msgstr " (%F で提供)"
 
 #: src/reason_fragment.cc:303
 #, fuzzy
-#| msgid "Remove"
 msgid "removed"
 msgstr "削除"
 
@@ -7307,7 +7174,6 @@ msgstr "ダウングレードされる"
 
 #: src/reason_fragment.cc:326
 #, fuzzy
-#| msgid "installed"
 msgid "reinstalled"
 msgstr "インストール済み"
 
@@ -7317,14 +7183,12 @@ msgstr "更新される"
 
 #: src/reason_fragment.cc:334
 #, fuzzy
-#| msgid "Half-configured"
 msgid "unconfigured"
 msgstr "設定未完了"
 
 # * Example: '%F%s depends on %F'
 #: src/reason_fragment.cc:342
 #, fuzzy, c-format
-#| msgid "%F%s %F %F"
 msgid "%F%s (%s, %s) %F %F"
 msgstr "%1$F%2$s %4$F %3$F"
 
@@ -7942,7 +7806,6 @@ msgstr ""
 
 #: src/ui.cc:1240
 #, fuzzy
-#| msgid "Perform Changes"
 msgid "Performing actions..."
 msgstr "変更を実施"
 
