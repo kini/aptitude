@@ -843,18 +843,6 @@ namespace aptitude
       }
 
       {
-	const std::string vendorList = get_valid_config("Dir::Etc::vendorlist", "file");
-	if (!vendorList.empty())
-	  copy_file(vendorList, outDir + "/" + vendorList);
-      }
-
-      {
-	const std::string vendorParts = get_valid_config("Dir::Etc::vendorparts", "dir");
-	if (!vendorParts.empty())
-	  recursive_copy_dir(vendorParts, outDir + "/" + vendorParts);
-      }
-
-      {
 	const std::string main = get_valid_config("Dir::Etc::main", "file");
 	if (!main.empty())
 	  copy_file(main, outDir + "/" + main);
