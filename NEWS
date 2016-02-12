@@ -199,6 +199,18 @@ Version 0.7.6 UNRELEASED
     already for months, without ripping apart the whole download subsystem.  See
     also comment of the other entry closing #810020.
 
+  * Improve support for trace dumps (Closes: #814408)
+
+    Probably due to changes in config variable handling from apt during the
+    years, this functionality (related with ::ProblemResolver::Trace-Directory
+    and ::ProblemResolver::Trace-File) was copying too many unrelated files,
+    including parts of the root fs and causing the temporary directory to
+    fill-up.
+
+    Improvements included to copy only the needed files, as well as trying to
+    safe-guard about similar problems with apt config values in the future.
+    Also, removed an extra block of code copying a directory twice by mistake.
+
 - User visible changes:
 
   * [cmdline] Prompt dialog shows lowercase instead of capitalised "yes"/"no"

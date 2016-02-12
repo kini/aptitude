@@ -1,6 +1,7 @@
 // dump_packages.cc     -*-c++-*-
 //
 //   Copyright (C) 2007, 2009 Daniel Burrows
+//   Copyright (C) 2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -570,7 +571,8 @@ namespace aptitude
 
     void copy_dir_truncated(const std::string &dir,
 			    const std::string &to,
-			    std::set<pkgCache::PkgIterator> visited_packages)
+			    std::set<pkgCache::PkgIterator> visited_packages,
+			    const std::vector<std::string>& exclude_files_matching = { "Release" , "i18n", "diff_Index", "lock" } )
     {
       std::vector<std::string> dir_files;
       get_directory_files(dir, dir_files);
@@ -586,7 +588,20 @@ namespace aptitude
       for(std::vector<std::string>::const_iterator it = dir_files.begin();
 	  it != dir_files.end(); ++it)
 	{
-	  if(*it == "." || *it == "..")
+	  if (*it == "." || *it == "..")
+	    continue;
+
+	  // ignore useless files, sometimes signed and not being parsable
+	  bool should_exclude = false;
+	  for (auto excl : exclude_files_matching)
+	    {
+	      if (it->find(excl) != std::string::npos)
+		{
+		  should_exclude = true;
+		  break;
+		}
+	    }
+	  if (should_exclude)
 	    continue;
 
 	  const std::string inFileName = dir + "/" + *it;
@@ -731,6 +746,32 @@ namespace aptitude
 		     visited_packages);
     }
 
+    /** Helper function to check for good values
+     *
+     * The comparison with the default string is loose (not exact comparison)
+     * because some versions of apt return "NOT-FOUND/", with the appended
+     * slash, for unknown values.
+     */
+    std::string get_valid_config(const std::string& config_str, const std::string& type)
+    {
+      const char* NOT_FOUND_cstr = "NOT-FOUND";
+
+      std::string config_value;
+      if (type == "file")
+	config_value = _config->FindFile(config_str.c_str(), NOT_FOUND_cstr);
+      else if (type == "dir")
+	config_value = _config->FindDir(config_str.c_str(), NOT_FOUND_cstr);
+
+      if (!config_value.empty() && (config_value.find(NOT_FOUND_cstr) == std::string::npos))
+	{
+	  return config_value;
+	}
+      else
+	{
+	  return {};
+	}
+    }
+
     // Make a truncated state snapshot.  We need to copy:
     //
     //   $(Dir::Aptitude::state)/pkgstates -- but a newly written
@@ -756,32 +797,25 @@ namespace aptitude
       }
 
       {
-	const std::string state_dir = _config->FindDir("Dir::state");
+	const std::string state_dir = get_valid_config("Dir::state", "dir");
 
-	if(!state_dir.empty())
+	if (!state_dir.empty())
 	  dump_truncated_apt_extended_states(visited_packages,
 					     outDir + "/" + state_dir);
       }
 
       {
-	const std::string lists = _config->FindDir("Dir::State::lists");
-	if(!lists.empty())
+	const std::string lists = get_valid_config("Dir::State::lists", "dir");
+	if (!lists.empty())
 	  copy_dir_truncated(lists, outDir + "/" + lists,
 			     visited_packages);
       }
 
       {
-	const std::string status = _config->FindFile("Dir::State::status");
-	if(!status.empty())
+	const std::string status = get_valid_config("Dir::State::status", "file");
+	if (!status.empty())
 	  copy_truncated(status, outDir + "/" + status,
 			 visited_packages);
-      }
-
-      {
-	const std::string lists = _config->FindFile("Dir::State::lists");
-	if(!lists.empty())
-	  copy_dir_truncated(lists, outDir + "/" + lists,
-			     visited_packages);
       }
 
       {
@@ -790,58 +824,58 @@ namespace aptitude
 	// awfully broad brush and fails if any of these have been
 	// renamed.
 
-	const std::string sourceList = _config->FindFile("Dir::Etc::status");
+	const std::string sourceList = get_valid_config("Dir::Etc::status", "file");
 
-	if(!sourceList.empty())
+	if (!sourceList.empty())
 	  copy_file(sourceList, outDir + "/" + sourceList);
       }
 
       {
-	const std::string sourceList = _config->FindFile("Dir::Etc::sourcelist");
-	if(!sourceList.empty())
+	const std::string sourceList = get_valid_config("Dir::Etc::sourcelist", "file");
+	if (!sourceList.empty())
 	  copy_file(sourceList, outDir + "/" + sourceList);
       }
 
       {
-	const std::string sourceParts = _config->FindDir("Dir::Etc::sourceparts");
-	if(!sourceParts.empty())
+	const std::string sourceParts = get_valid_config("Dir::Etc::sourceparts", "dir");
+	if (!sourceParts.empty())
 	  recursive_copy_dir(sourceParts, outDir + "/" + sourceParts);
       }
 
       {
-	const std::string vendorList = _config->FindFile("Dir::Etc::vendorlist");
-	if(!vendorList.empty())
+	const std::string vendorList = get_valid_config("Dir::Etc::vendorlist", "file");
+	if (!vendorList.empty())
 	  copy_file(vendorList, outDir + "/" + vendorList);
       }
 
       {
-	const std::string vendorParts = _config->FindDir("Dir::Etc::vendorparts");
-	if(!vendorParts.empty())
+	const std::string vendorParts = get_valid_config("Dir::Etc::vendorparts", "dir");
+	if (!vendorParts.empty())
 	  recursive_copy_dir(vendorParts, outDir + "/" + vendorParts);
       }
 
       {
-	const std::string main = _config->FindFile("Dir::Etc::main");
-	if(!main.empty())
+	const std::string main = get_valid_config("Dir::Etc::main", "file");
+	if (!main.empty())
 	  copy_file(main, outDir + "/" + main);
       }
 
       {
-	const std::string parts = _config->FindDir("Dir::Etc::parts");
-	if(!parts.empty())
+	const std::string parts = get_valid_config("Dir::Etc::parts", "dir");
+	if (!parts.empty())
 	  recursive_copy_dir(parts, outDir + "/" + parts);
       }
 
       {
-	const std::string preferences = _config->FindFile("Dir::Etc::preferences");
-	if(!preferences.empty())
+	const std::string preferences = get_valid_config("Dir::Etc::preferences", "file");
+	if (!preferences.empty())
 	  copy_truncated(preferences, outDir + "/" + preferences,
 			 visited_packages);
       }
 
       {
-	const std::string preferencesParts = _config->FindDir("Dir::Etc::preferencesparts");
-	if(!preferencesParts.empty())
+	const std::string preferencesParts = get_valid_config("Dir::Etc::preferencesparts", "dir");
+	if (!preferencesParts.empty())
 	  recursive_copy_dir(preferencesParts, outDir + "/" + preferencesParts);
       }
     }
