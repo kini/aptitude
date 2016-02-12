@@ -58,6 +58,7 @@ namespace aptitude
       const std::string source_version;
       const std::string section;
       const std::string display_name;
+      const std::string uri;
 
     public:
       /** \brief This constructor is public for make_shared; it should
@@ -67,11 +68,13 @@ namespace aptitude
       changelog_info(const std::string &_source_package,
 		     const std::string &_source_version,
 		     const std::string &_section,
-		     const std::string &_display_name)
+		     const std::string &_display_name,
+		     const std::string& _uri = "")
 	: source_package(_source_package),
 	  source_version(_source_version),
 	  section(_section),
-	  display_name(_display_name)
+	  display_name(_display_name),
+	  uri(_uri)
       {
       }
 
@@ -79,7 +82,8 @@ namespace aptitude
       create(const std::string &source_package,
 	     const std::string &source_version,
 	     const std::string &section,
-	     const std::string &display_name);
+	     const std::string &display_name,
+	     const std::string& uri = "");
 
       /** \brief Create a changelog_info structure that describes the
        *  changelog of the given package version.
@@ -104,6 +108,8 @@ namespace aptitude
        *  here.
        */
       const std::string &get_display_name() const { return display_name; }
+      /** \brief Retrieve the URI. */
+      const std::string& get_uri() const { return uri; }
     };
 
     /** \brief Start downloading a changelog.

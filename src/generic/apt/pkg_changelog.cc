@@ -40,6 +40,7 @@
 
 #include <sigc++/bind.h>
 
+#include <apt-pkg/acquire-item.h>
 #include <apt-pkg/sourcelist.h>
 
 #include <cwidget/generic/util/ssprintf.h>
@@ -88,12 +89,14 @@ namespace aptitude
     changelog_info::create(const std::string &source_package,
 			   const std::string &source_version,
 			   const std::string &section,
-			   const std::string &display_name)
+			   const std::string &display_name,
+			   const std::string& uri)
     {
       return std::make_shared<changelog_info>(source_package,
 					      source_version,
 					      section,
-					      display_name);
+					      display_name,
+					      uri);
     }
 
     std::shared_ptr<changelog_info>
@@ -137,7 +140,8 @@ namespace aptitude
       return std::make_shared<changelog_info>(source_package,
 					      source_version,
 					      ver.Section(),
-					      ver.ParentPkg().Name());
+					      ver.ParentPkg().Name(),
+					      pkgAcqChangelog::URI(ver));
     }
 
     namespace
@@ -223,7 +227,7 @@ namespace aptitude
 	    LOG_TRACE(Loggers::getAptitudeChangelog(),
 		      "Not starting to download " << short_description
 		      << ": it already finished downloading");
-	  else
+	  else if (!uris.empty())
 	    {
 	      const std::string &uri(uris.front());
 
@@ -235,6 +239,14 @@ namespace aptitude
 						shared_from_this(),
 						post_thunk);
 	      started = true;
+	    }
+	  else
+	    {
+	      LOG_INFO(Loggers::getAptitudeChangelog(),
+		       "No URIs to enqueue");
+	      started = true;
+	      l.release();
+	      failure(_("No URIs for this download"));
 	    }
 	}
 
@@ -543,46 +555,53 @@ namespace aptitude
 		      }
 		}
 
-	      string realsection;
+	      std::string uri = info.get_uri();
+	      if (uri.empty)
+		{
+		  string realsection;
 
-	      if(section.find('/') != section.npos)
-		realsection.assign(section, 0, section.find('/'));
-	      else
-		realsection.assign("main");
+		  if (section.find('/') != section.npos)
+		    realsection.assign(section, 0, section.find('/'));
+		  else
+		    realsection.assign("main");
 
-	      string prefix;
+		  string prefix;
+		
+		  if(source_package.size() > 3 &&
+		     source_package[0] == 'l' && source_package[1] == 'i' && source_package[2] == 'b')
+		    prefix = std::string("lib") + source_package[3];
+		  else
+		    prefix = source_package[0];
 
-	      if(source_package.size() > 3 &&
-		 source_package[0] == 'l' && source_package[1] == 'i' && source_package[2] == 'b')
-		prefix = std::string("lib") + source_package[3];
-	      else
-		prefix = source_package[0];
+		  string realver;
 
-	      string realver;
+		  if(source_version.find(':') != source_version.npos)
+		    realver.assign(source_version, source_version.find(':') + 1, source_version.npos);
+		  else
+		    realver = source_version;
 
-	      if(source_version.find(':') != source_version.npos)
-		realver.assign(source_version, source_version.find(':') + 1, source_version.npos);
-	      else
-		realver = source_version;
+		  // WATCH: apt/cmdline/apt-get.cc(DownloadChangelog)
+		  string server = aptcfg->Find("APT::Changelogs::Server",
+					       "http://metadata.ftp-master.debian.org/changelogs");
+		  string path = cw::util::ssprintf("%s/%s/%s/%s_%s",
+						   realsection.c_str(),
+						   prefix.c_str(),
+						   source_package.c_str(),
+						   source_package.c_str(),
+						   realver.c_str());
+		  uri = cw::util::ssprintf("%s/%s_changelog",
+					   server.c_str(),
+					   path.c_str());
+		}
 
-              // WATCH: apt/cmdline/apt-get.cc(DownloadChangelog)
-              string server = aptcfg->Find("APT::Changelogs::Server",
-                                           "http://metadata.ftp-master.debian.org/changelogs");
-	      string path = cw::util::ssprintf("%s/%s/%s/%s_%s",
-					      realsection.c_str(),
-					      prefix.c_str(),
-					      source_package.c_str(),
-					      source_package.c_str(),
-					      realver.c_str());
-              string uri = cw::util::ssprintf("%s/%s_changelog",
-                                              server.c_str(),
-                                              path.c_str());
-	      LOG_TRACE(logger,
-			"Adding " << uri
-			<< " as a URI for the changelog of " << source_package << " " << source_version);
+	      if (!uri.empty())
+		{
+		  LOG_TRACE(logger,
+			    "Adding " << uri
+			    << " as a URI for the changelog of " << source_package << " " << source_version);
 
-	      download.push_back(uri);
-
+		  download.push_back(uri);
+		}
 
 	      LOG_TRACE(logger,
 			"Starting to download " << short_description);

@@ -248,7 +248,7 @@ namespace
 					const std::shared_ptr<terminal_metrics> &term_metrics)
   {
     std::shared_ptr<aptitude::apt::changelog_info> info =
-      aptitude::apt::changelog_info::create(srcpkg, ver, section, name);
+      aptitude::apt::changelog_info::create(srcpkg, ver, section, name, "");
 
     return get_changelog(info, term_metrics);
   }
