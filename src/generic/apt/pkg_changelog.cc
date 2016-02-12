@@ -556,7 +556,7 @@ namespace aptitude
 		}
 
 	      std::string uri = info.get_uri();
-	      if (uri.empty)
+	      if (uri.empty())
 		{
 		  string realsection;
 
