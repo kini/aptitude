@@ -357,7 +357,7 @@ namespace aptitude
 	      fs::copy_file(DestFile, new_filename);
 	    } catch (fs::filesystem_error& e) {
 	      std::string error_str = std::string("Failed to copy file: ") + (e.what() ? e.what() : "unknown");
-	      _error->Error(error_str.c_str());
+	      _error->Error("%s", error_str.c_str());
 	      job->invoke_failure(error_str);
 	      job.reset();
 	      return;
@@ -705,7 +705,7 @@ namespace aptitude
 			fs::copy_file(itemdesc.Owner->DestFile, new_filename);
 		      } catch (fs::filesystem_error& e) {
 			std::string error_str = std::string("Failed to copy file: ") + (e.what() ? e.what() : "unknown");
-			_error->Error(error_str.c_str());
+			_error->Error("%s", error_str.c_str());
 			job->invoke_failure(error_str);
 			job->mark_finished();
 			return;
