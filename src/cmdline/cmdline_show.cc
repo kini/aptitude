@@ -208,7 +208,7 @@ static cwidget::fragment *archive_lst_frag(pkgCache::VerFileIterator vf,
 
 std::string current_state_string(const pkgCache::PkgIterator& pkg, const pkgCache::VerIterator& ver)
 {
-  if (!ver.end() && ver != pkg.CurrentVer())
+  if (!ver.end() && !pkg.CurrentVer().end() && ver != pkg.CurrentVer())
     {
       return ssprintf(_("%s (%s), upgrade available (%s)"),
 		      current_state_string(pkg, pkg.CurrentVer()).c_str(),
