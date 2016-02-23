@@ -73,8 +73,8 @@ cw::config::column_type_defaults pkg_item::pkg_columnizer::defaults[pkg_columniz
   {strlen(PACKAGE), false, false},  // progname
   {strlen(VERSION), false, false},  // progver
   {12, false, false},   // brokencount
-  {30, false, true},    // diskusage
-  {18, false, true},    // downloadsize
+  {22, false, true},    // diskusage, example (max): "Disk usage: -2,587 kB "
+  {18, false, true},    // downloadsize, example (max): "DL Size: 2,587 kB "
   {4, false, false},    // pin_priority
   {8, true, false},     // hostname
   {1, false, false}     // trust_state
@@ -86,7 +86,7 @@ cw::config::column_type_defaults pkg_item::pkg_columnizer::defaults[pkg_columniz
 // "progname" and "progver" are fixed (not affected by translation), and that
 // shortpriority, pin_priority and trust_state have also fixed sizes due to
 // being of numerical nature or size requirements that translators sould respect
-const char *default_widths = N_("30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 30 30 10 30 10 9 12 30 18 8");
+const char *default_widths = N_("30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 30 30 10 30 10 9 12 22 18 8");
 
 const char *pkg_item::pkg_columnizer::column_names[pkg_columnizer::numtypes]=
   {N_("Package"),
@@ -395,24 +395,14 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
       break;
     case diskusage:
       {
-	char buf[256];
-	if(apt_cache_file && (*apt_cache_file)->UsrSize()>0)
+	size_t bufsize = 256;
+	char buf[bufsize] = "";
+	if (apt_cache_file && ((*apt_cache_file)->UsrSize() != 0))
 	  {
-	    // Be translator-friendly -- breaking messages up like that is not
-	    // so good..
-	    snprintf(buf, 256, _("Will use %sB of disk space"), SizeToStr((*apt_cache_file)->UsrSize()).c_str());
-	    return cw::column_disposition(buf, 0);
+	    char sign = ((*apt_cache_file)->UsrSize() > 0) ? '+' : '-';
+	    snprintf(buf, bufsize, _("Disk usage: %c%sB"), sign, SizeToStr((*apt_cache_file)->UsrSize()).c_str());
 	  }
-	else if(apt_cache_file &&
-		(*apt_cache_file)->UsrSize()<0)
-	  {
-	    // Be translator-friendly -- breaking messages up like that is not
-	    // so good..
-	    snprintf(buf, 256, _("Will free %sB of disk space"), SizeToStr(-(*apt_cache_file)->UsrSize()).c_str());
-	    return cw::column_disposition(buf, 0);
-	  }
-	else
-	  return cw::column_disposition("", 0);
+	return cw::column_disposition(buf, 0);
       }
 
       break;
