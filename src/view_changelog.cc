@@ -300,7 +300,7 @@ static void do_view_changelog(const string& filename,
     }
   else
     {
-      pkg_changelog_screen_ref cs = pkg_changelog_screen::create(changelog->get_filename());
+      pkg_changelog_screen_ref cs = pkg_changelog_screen::create(filename);
       cw::scrollbar_ref          s = cw::scrollbar::create(cw::scrollbar::VERTICAL);
 
       cs->line_changed.connect(sigc::mem_fun(s.unsafe_get_ref(), &cw::scrollbar::set_slider));
