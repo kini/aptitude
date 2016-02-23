@@ -300,39 +300,39 @@ cw::fragment *dep_or_frag(pkgCache::PkgIterator pkg,
     case pkg_unused_remove:
     case pkg_auto_remove:
     case pkg_remove:
-      rdep_actionstate_str = _("removed");
-      rdep_targetver_str = ssprintf("%s -> %s", rdep_instver_str.c_str(), _("none"));
+      rdep_actionstate_str = _("remove");
+      rdep_targetver_str = rdep_instver_str;
       break;
     case pkg_auto_install:
     case pkg_install:
-      rdep_actionstate_str = _("installed");
-      rdep_targetver_str = ssprintf("%s -> %s", _("none"), rdep_candver_str.c_str());
+      rdep_actionstate_str = _("install");
+      rdep_targetver_str = rdep_candver_str;
       break;
     case pkg_auto_hold:
     case pkg_unchanged:
     case pkg_hold:
       rdep_actionstate_str = _("held/unchanged");
-      rdep_targetver_str = rdep_instver_str.c_str();
+      rdep_targetver_str = rdep_instver_str;
       break;
     case pkg_broken:
       rdep_actionstate_str = _("broken");
-      rdep_targetver_str = rdep_instver_str.c_str();
+      rdep_targetver_str = rdep_instver_str;
       break;
     case pkg_downgrade:
-      rdep_actionstate_str = _("downgraded");
+      rdep_actionstate_str = _("downgrade");
       rdep_targetver_str = ssprintf("%s -> %s", rdep_instver_str.c_str(), rdep_candver_str.c_str());
       break;
     case pkg_reinstall:
-      rdep_actionstate_str = _("reinstalled");
-      rdep_targetver_str = rdep_instver_str.c_str();
+      rdep_actionstate_str = _("reinstall");
+      rdep_targetver_str = rdep_instver_str;
       break;
     case pkg_upgrade:
-      rdep_actionstate_str = _("upgraded");
+      rdep_actionstate_str = _("upgrade");
       rdep_targetver_str = ssprintf("%s -> %s", rdep_instver_str.c_str(), rdep_candver_str.c_str());
       break;
     case pkg_unconfigured:
       rdep_actionstate_str = _("unconfigured");
-      rdep_targetver_str = rdep_instver_str.c_str();
+      rdep_targetver_str = rdep_instver_str;
       break;
     default:
       rdep_actionstate_str = "internal-error";
