@@ -5,6 +5,15 @@ Version 0.7.7 UNRELEASED
 
   * [cmdline] Fix crash with "show" and not installed packages (Closes: #815581)
 
+  * [curses] Fix for wrong width/properties of some columns in the columnizer,
+    incl. "hostname" rendered with 4 characters instead of 8 (Closes: #815554)
+
+    Some columns like shortpriority, pin_priority and trust_state should not be
+    present in default_widths due to their size being fixed and independent of
+    translations.  The mechanism is quite brittle, but maybe it's difficult to
+    get something more robust since it involves getting width values that depend
+    on width of translated strings.
+
 - Translation updates:
 
   * Dutch documentation translation by Frans Spiesschaert (Closes: #815183)
