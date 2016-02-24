@@ -384,29 +384,6 @@ bool pkg_item::dispatch_key(const cw::config::key &k, cw::tree *owner)
       else
 	delete grp;
     }
-  else if(bindings->key_matches(k, "BugReport"))
-    {
-      // Try to report a bug on the package.  (ew quoting ew)
-      string cmd=string("reportbug '")+package.Name()+"'";
-
-      // Default to reporting a bug on the current version.
-      pkgCache::VerIterator ver=package.CurrentVer();
-      if(ver.end())
-	ver=visible_version();
-      if(ver.end())
-	ver=package.VersionList();
-
-      if(!ver.end())
-	cmd+=string(" -V '")+ver.VerStr()+"'";
-
-      cw::toplevel::suspend();
-
-      printf(_("Reporting a bug in %s:\n"), package.Name());
-
-      if(system(cmd.c_str()) != 0) { /* ignore */ }
-
-      cw::toplevel::resume();
-    }
   else if(bindings->key_matches(k, "DpkgReconfigure"))
     // Don't bother with my internal su-to-root stuff here, since I don't
     // need to touch the package lists in the subprocess.

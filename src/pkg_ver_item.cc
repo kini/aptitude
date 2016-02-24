@@ -694,39 +694,6 @@ bool pkg_ver_item::dispatch_key(const cw::config::key &k, cw::tree *owner)
       view_changelog(version);
       return true;
     }
-  else if(bindings->key_matches(k, "BugReport"))
-    {
-      // Try to report a bug on the package.  (ew quoting ew)
-      string cmd=string("reportbug '")+version.ParentPkg().Name()+"' -V '"+version.VerStr()+"'";
-
-
-      struct sigaction oldact;
-      struct sigaction act;
-
-      memset(&act,0,sizeof(act));
-      act.sa_handler = SIG_DFL;
-      sigemptyset(&act.sa_mask);
-
-      sigaction(SIGCONT, &act, &oldact);
-
-      cw::toplevel::suspend();
-
-      apt_cache_file->ReleaseLock();
-
-      printf(_("Reporting a bug in %s:\n"), version.ParentPkg().Name());
-
-      if(system(cmd.c_str()) != 0) { /* ignore */ }
-
-      sigaction(SIGCONT, &oldact, NULL);
-
-      cw::toplevel::resume();
-
-      progress_ref p = gen_progress_bar();
-      apt_reload_cache(p->get_progress().unsafe_get_ref(), true);
-      p->destroy();
-
-      return true;
-    }
   else
     return pkg_tree_node::dispatch_key(k, owner);
 }
