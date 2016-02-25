@@ -41,6 +41,34 @@ Version 0.7.7 UNRELEASED
     Maybe some of the ones which still require it don't need it, but they are
     not used very often and leaving locking enabled is the default, safe option.
 
+- Internal changes:
+
+  * Support for most changes in recent versions of apt
+    (Closes: #687678, #687686, #687688, #687684)
+
+    aptitude had to be adapted already in the last few months for many of the
+    changes in recent versions of apt (up to 1.2.*), including some that
+    prevented compilation or caused warnings/errors to be emitted when
+    downloading changelogs, removed or deprecated API calls, and caused crashes
+    in some of the most unfortunate cases.
+
+    Keeping the above bugs open, several without any useful information, did not
+    help to make the needed changes happen after 3.5 years around; and Wheezy
+    and Jessie stable releases went out without these bugs being acted upon.
+    Some of the important remaining problems or bugs with actual useful
+    information will remain open.  Several, like aptitude not handling config
+    options '-o' correctly, are not blocking or related to "catch-up with
+    changes in apt" at all, but problems in aptitude in its own right.
+
+    In general, changes of apt will keep coming continuously, maybe making some
+    of the changes in previous releases irrelevant, so as time goes on these
+    older and generic "to-dos" without useful information make less and less
+    sense to keep around.
+
+    So marking those bugs as closed in this release -- the changes that they
+    mention and that are not covered by specific bugs is basically complete, up
+    to 1.2.*.
+
 - Translation updates:
 
   * Dutch documentation translation by Frans Spiesschaert (Closes: #815183)
