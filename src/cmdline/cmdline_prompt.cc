@@ -801,14 +801,9 @@ bool cmdline_show_preview(bool as_upgrade, pkgset &to_install,
     printf(_("After unpacking %sB will be freed.\n"),
 	   SizeToStr(-(*apt_cache_file)->UsrSize()).c_str());
 
-  // If I return directly below, g++ complains about control reaching the
-  // end of a non-void function!
-  bool rval;
 
-  rval=((as_upgrade && !lists[pkg_upgrade].empty()) ||
-	!(extra_install.empty() && extra_remove.empty()));
-
-  return rval;
+  return ((as_upgrade && !lists[pkg_upgrade].empty()) ||
+	  !(extra_install.empty() && extra_remove.empty()));
 }
 
 static void cmdline_parse_show(string response,
