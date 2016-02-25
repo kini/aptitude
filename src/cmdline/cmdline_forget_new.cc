@@ -1,6 +1,7 @@
 // cmdline_forget_new.cc
 //
 // Copyright (C) 2004, 2010 Daniel Burrows
+// Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -60,8 +61,8 @@ int cmdline_forget_new(int argc, char *argv[],
     }  
 
   std::shared_ptr<OpProgress> progress = make_text_progress(false, term, term, term);
-
-  apt_init(progress.get(), false, status_fname);
+  bool operation_needs_lock = true;
+  apt_init(progress.get(), false, operation_needs_lock, status_fname);
 
   if(_error->PendingError())
     {

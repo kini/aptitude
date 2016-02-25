@@ -1,6 +1,7 @@
 // cmdline_extract_cache_subset.cc
 //
 //   Copyright (C) 2008-2010 Daniel Burrows
+//   Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -65,7 +66,8 @@ namespace aptitude
 
       std::shared_ptr<OpProgress> progress = make_text_progress(false, term, term, term);
 
-      apt_init(progress.get(), true);
+      bool operation_needs_lock = true;
+      apt_init(progress.get(), true, operation_needs_lock, nullptr);
       if(_error->PendingError())
 	{
 	  _error->DumpErrors();

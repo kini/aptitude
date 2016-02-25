@@ -123,7 +123,8 @@ namespace aptitude
       {
 	// The progress should be displayed by status_widget
 	OpProgress p;
-	apt_init(&p, true, NULL);
+	bool operation_needs_lock = true;
+	apt_init(&p, true, operation_needs_lock, NULL);
       }
     }
   }

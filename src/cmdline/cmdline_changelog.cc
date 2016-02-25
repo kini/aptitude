@@ -409,7 +409,8 @@ int cmdline_changelog(int argc, char *argv[])
   _error->DumpErrors();
 
   OpProgress progress;
-  apt_init(&progress, false);
+  bool operation_needs_lock = false;
+  apt_init(&progress, false, operation_needs_lock, nullptr);
 
   if (_error->PendingError())
     {

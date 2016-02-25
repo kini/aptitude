@@ -1,6 +1,7 @@
 // ui_download_manager.cc
 //
 //   Copyright (C) 2005, 2007-2009 Daniel Burrows
+//   Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -72,7 +73,8 @@ void ui_download_manager::done(download_thread *t, pkgAcquire::RunResult res)
 
 void ui_download_manager::finish_done(download_manager::result run_res)
 {
-  apt_load_cache(done_progress.unsafe_get_ref(), true);
+  bool operation_needs_lock = true;
+  apt_load_cache(done_progress.unsafe_get_ref(), true, operation_needs_lock, nullptr);
 
   done_progress_destructor();
   done_progress = NULL;

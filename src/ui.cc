@@ -614,7 +614,8 @@ static void do_su_to_root(string args)
 	  // We have to clear these out or the cache won't reload properly (?)
 
 	  progress_ref p = gen_progress_bar();
-	  apt_reload_cache(p->get_progress().unsafe_get_ref(), true, statusname.get_name().c_str());
+	  bool operation_needs_lock = true;
+	  apt_reload_cache(p->get_progress().unsafe_get_ref(), true, operation_needs_lock, statusname.get_name().c_str());
 	  p->destroy();
 	}
       else
@@ -1985,7 +1986,8 @@ void do_forget_new()
 static void do_reload_cache()
 {
   progress_ref p = gen_progress_bar();
-  apt_reload_cache(p->get_progress().unsafe_get_ref(), true);
+  bool operation_needs_lock = true;
+  apt_reload_cache(p->get_progress().unsafe_get_ref(), true, operation_needs_lock, nullptr);
   p->destroy();
 }
 

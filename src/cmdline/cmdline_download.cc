@@ -1,6 +1,7 @@
 // cmdline_download.cc
 //
 //  Copyright 2004 Daniel Burrows
+//  Copyright 2015-2016 Manuel A. Fernandez Montecelo
 
 #include "cmdline_download.h"
 
@@ -49,7 +50,8 @@ int cmdline_download(int argc, char *argv[])
   _error->DumpErrors();
 
   std::shared_ptr<OpProgress> progress = make_text_progress(false, term, term, term);
-  apt_init(progress.get(), false);
+  bool operation_needs_lock = true;
+  apt_init(progress.get(), false, operation_needs_lock, nullptr);
 
   if(_error->PendingError())
     {

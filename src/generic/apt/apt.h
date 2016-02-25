@@ -1,7 +1,7 @@
 // apt.h  -*-c++-*-
 //
 //  Copyright 1999-2002, 2004-2005, 2007-2010 Daniel Burrows
-//  Copyright 2015 Manuel A. Fernandez Montecelo
+//  Copyright 2015-2016 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -68,7 +68,9 @@ void apt_preinit(const char *rootdir);
 // called (eg, pkgInitialize and setting up the undo structure)
 
 void apt_init(OpProgress *progess_bar,
-	      bool do_initselections, const char * status_fname=NULL);
+	      bool do_initselections,
+	      bool operation_needs_lock,
+	      const char * status_fname);
 //  It actually doesn't do what you expect!  This routine is a NOP if
 // it has already been called; the rationale is that it allows any apt-using
 // class to call this in its constructor (thus guaranteeing that the cache
@@ -107,10 +109,14 @@ bool get_apt_knows_about_rootdir();
  *                      of /var/lib/aptitude/pkgstates.
  */
 void apt_load_cache(OpProgress *progress_bar,
-		    bool do_initselections, const char *status_fname = NULL);
+		    bool do_initselections,
+		    bool operation_needs_lock,
+		    const char *status_fname);
 
 void apt_reload_cache(OpProgress *progress_bar,
-		      bool do_initselections, const char * status_fname=NULL);
+		      bool do_initselections,
+		      bool operation_needs_lock,
+		      const char * status_fname);
 //  Forces the cache to be reloaded.
 //
 //  NOTE: at the moment, the interface won't work too well while this

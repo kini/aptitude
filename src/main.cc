@@ -1270,14 +1270,16 @@ int main(int argc, char *argv[])
 	    {
 	      OpTextProgress p(aptcfg->FindI("Quiet", 0));
 	      _error->DumpErrors();
-	      apt_init(&p, true);
+	      bool operation_needs_lock = false;
+	      apt_init(&p, true, operation_needs_lock, nullptr);
 	      exit(0);
 	    }
 	  else if(!strcasecmp(argv[optind], "nop-noselections"))
 	    {
 	      OpTextProgress p(aptcfg->FindI("Quiet", 0));
 	      _error->DumpErrors();
-	      apt_init(&p, false);
+	      bool operation_needs_lock = false;
+	      apt_init(&p, false, operation_needs_lock, nullptr);
 	      exit(0);
 	    }
 	  else
@@ -1348,8 +1350,11 @@ int main(int argc, char *argv[])
           // reloaded anyway).  Obviously we still need them for installs,
           // since we have to get information about what to install from
           // somewhere...
-          if(!update_only)
-            apt_init(p->get_progress().unsafe_get_ref(), true, status_fname);
+          if (!update_only)
+	    {
+	      bool operation_needs_lock = true;
+	      apt_init(p->get_progress().unsafe_get_ref(), true, operation_needs_lock, status_fname);
+	    }
           if(status_fname)
             free(status_fname);
           check_apt_errors();

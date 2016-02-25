@@ -608,8 +608,8 @@ int cmdline_versions(int argc, char *argv[], const char *status_fname,
     }
 
   OpProgress progress;
-
-  apt_init(&progress, true, status_fname);
+  bool operation_needs_lock = false;
+  apt_init(&progress, true, operation_needs_lock, status_fname);
 
   if (_error->PendingError())
     {

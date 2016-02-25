@@ -638,7 +638,8 @@ int cmdline_show(int argc, char *argv[], int verbose)
   _error->DumpErrors();
 
   std::shared_ptr<OpProgress> progress = make_text_progress(true, term, term, term);
-  apt_init(progress.get(), false);
+  bool operation_needs_lock = false;
+  apt_init(progress.get(), false, operation_needs_lock, nullptr);
 
   if(_error->PendingError())
     {

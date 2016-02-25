@@ -35,6 +35,12 @@ Version 0.7.7 UNRELEASED
     aptitude often running as root and reportbug complaining, often triggered by
     mistake, and it is not a very useful feature in general.
 
+  * [cmdline] Operations like "show", "search", "versions", "why"/"why-not" or
+    "changelog" do not need to lock dpkg state directories (Closes: #498061)
+
+    Maybe some of the ones which still require it don't need it, but they are
+    not used very often and leaving locking enabled is the default, safe option.
+
 - Translation updates:
 
   * Dutch documentation translation by Frans Spiesschaert (Closes: #815183)

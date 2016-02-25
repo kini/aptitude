@@ -1,6 +1,7 @@
 // cmdline_util.cc
 //
 // Copyright (C) 2004, 2010 Daniel Burrows
+// Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -464,7 +465,8 @@ download_manager::result cmdline_do_download(download_manager *m,
       OpProgress tmpProgress;
       // Dump errors so we don't spuriously think we failed.
       _error->DumpErrors();
-      apt_load_cache(&tmpProgress, false, NULL);
+      bool operation_needs_lock = true;
+      apt_load_cache(&tmpProgress, false, operation_needs_lock, nullptr);
       initial_stats = compute_apt_stats();
     }
 
@@ -498,7 +500,8 @@ download_manager::result cmdline_do_download(download_manager *m,
   if(aptcfg->FindI("Quiet", 0) == 0)
     {
       OpProgress tmpProgress;
-      apt_load_cache(&tmpProgress, false, NULL);
+      bool operation_needs_lock = true;
+      apt_load_cache(&tmpProgress, false, operation_needs_lock, nullptr);
       final_stats = compute_apt_stats();
       show_stats_change(initial_stats, final_stats,
 			verbose >= 1, verbose >= 2,

@@ -1,6 +1,7 @@
 // cmdline_check_resolver.cc
 //
 //   Copyright (C) 2005, 2007-2008 Daniel Burrows
+//   Copyright (C) 2016 Manuel A. Fernandez Montecelo
 
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -161,7 +162,8 @@ int cmdline_check_resolver(int argc, char *argv[],
 
   OpProgress progress;
 
-  apt_init(&progress, true, status_fname);
+  bool operation_needs_lock = true;
+  apt_init(&progress, true, operation_needs_lock, status_fname);
 
   if(_error->PendingError())
     {

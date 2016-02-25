@@ -1,7 +1,7 @@
 // download_install_manager.cc
 //
 //   Copyright (C) 2005-2011 Daniel Burrows
-//   Copyright (C) 2015 Manuel A. Fernandez Montecelo
+//   Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -256,7 +256,10 @@ void download_install_manager::finish_post_dpkg(pkgPackageManager::OrderResult d
       //
       // This implicitly updates the package state file on disk.
       if(!download_only)
-	apt_load_cache(progress, true);
+	{
+	  bool operation_needs_lock = true;
+	  apt_load_cache(progress, true, operation_needs_lock, nullptr);
+	}
 
       if(aptcfg->FindB(PACKAGE "::Forget-New-On-Install", false)
 	 && !download_only)

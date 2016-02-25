@@ -1,6 +1,7 @@
 // download_update_manager.cc
 //
 //   Copyright (C) 2005, 2007-2009, 2011 Daniel Burrows
+//   Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -189,7 +190,10 @@ void download_update_manager::finish(pkgAcquire::RunResult res,
     aptcfg->FindB(PACKAGE "::AutoClean-After-Update", false);
 
   if (need_forget_new || need_autoclean)
-    apt_load_cache(progress, true);
+    {
+      bool operation_needs_lock = true;
+      apt_load_cache(progress, true, operation_needs_lock, nullptr);
+    }
 
   if (apt_cache_file)
     {

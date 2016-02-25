@@ -1,7 +1,7 @@
 // cmdline_do_action.cc
 //
 //  Copyright (C) 2004, 2010 Daniel Burrows
-//  Copyright (C) 2014-2015 Manuel A. Fernandez Montecelo
+//  Copyright (C) 2014-2016 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -180,9 +180,11 @@ int cmdline_do_action(int argc, char *argv[],
   //
   // This way, "aptitude install" will just perform any pending
   // installations.
+  bool operation_needs_lock = true;
   apt_init(progress.get(),
-           (argc==1 && default_action==cmdline_install &&
-            upgrade_mode == no_upgrade), status_fname);
+           (argc==1 && default_action==cmdline_install && upgrade_mode == no_upgrade),
+	   operation_needs_lock,
+	   status_fname);
 
   if(_error->PendingError())
     {

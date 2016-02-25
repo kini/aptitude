@@ -1742,7 +1742,8 @@ namespace gui
     {
       {
 	cwidget::util::ref_ptr<guiOpProgress> p(guiOpProgress::create());
-	apt_init(p.unsafe_get_ref(), true, NULL);
+	bool operation_needs_lock = true;
+	apt_init(p.unsafe_get_ref(), true, operation_needs_lock, NULL);
       }
 
       if(getuid() == 0 && aptcfg->FindB(PACKAGE "::Update-On-Startup", true))

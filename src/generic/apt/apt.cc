@@ -1,7 +1,7 @@
 // apt.cc
 //
 //  Copyright 1999-2010 Daniel Burrows
-//  Copyright 2015 Manuel A. Fernandez Montecelo
+//  Copyright 2015-2016 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -313,10 +313,11 @@ void apt_revertoptions()
 }
 
 void apt_init(OpProgress *progress_bar, bool do_initselections,
+	      bool operation_needs_lock,
 	      const char *status_fname)
 {
   if(!apt_cache_file)
-    apt_reload_cache(progress_bar, do_initselections, status_fname);
+    apt_reload_cache(progress_bar, do_initselections, operation_needs_lock, status_fname);
 }
 
 void apt_close_cache()
@@ -380,6 +381,7 @@ void apt_close_cache()
 }
 
 void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
+		    bool operation_needs_lock,
 		    const char * status_fname)
 {
   logging::LoggerPtr logger(Loggers::getAptitudeAptGlobals());
@@ -410,7 +412,7 @@ void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
   LOG_TRACE(logger, "Opening the apt cache.");
 
   bool open_failed=!new_file->Open(*progress_bar, do_initselections,
-				   (getuid() == 0) && !simulate,
+				   operation_needs_lock && ((getuid() == 0) && !simulate),
 				   status_fname)
     || _error->PendingError();
 
@@ -613,10 +615,11 @@ std::shared_ptr<aptitude::util::file_cache> get_download_cache()
 }
 
 void apt_reload_cache(OpProgress *progress_bar, bool do_initselections,
+		      bool operation_needs_lock,
 		      const char * status_fname)
 {
   apt_close_cache();
-  apt_load_cache(progress_bar, do_initselections, status_fname);
+  apt_load_cache(progress_bar, do_initselections, operation_needs_lock, status_fname);
 }
 
 void apt_shutdown()

@@ -250,7 +250,8 @@ int cmdline_search(int argc, char *argv[], const char *status_fname,
   std::shared_ptr<OpProgress> progress =
     make_text_progress(true, term, term, term);
 
-  apt_init(progress.get(), true, status_fname);
+  bool operation_needs_lock = false;
+  apt_init(progress.get(), true, operation_needs_lock, status_fname);
 
   if(_error->PendingError())
     {

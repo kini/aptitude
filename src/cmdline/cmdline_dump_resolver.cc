@@ -1,6 +1,7 @@
 // cmdline_dump_resolver.cc
 //
 //   Copyright (C) 2005 Daniel Burrows
+//   Copyright (C) 2016 Manuel A. Fernandez Montecelo
 
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -34,8 +35,8 @@ int cmdline_dump_resolver(int argc, char *argv[],
   _error->DumpErrors();
 
   OpProgress progress;
-
-  apt_init(&progress, true, status_fname);
+  bool operation_needs_lock = true;
+  apt_init(&progress, true, operation_needs_lock, status_fname);
 
   if(_error->PendingError())
     {

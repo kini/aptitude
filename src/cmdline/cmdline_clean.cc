@@ -1,7 +1,7 @@
 // cmdline_clean.cc
 //
 // Copyright (C) 2004, 2010 Daniel Burrows
-// Copyright (C) 2015 Manuel A. Fernandez Montecelo
+// Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -144,7 +144,8 @@ int cmdline_autoclean(int argc, char *argv[], bool simulate)
 
   std::shared_ptr<OpProgress> progress = make_text_progress(false, term, term, term);
 
-  apt_init(progress.get(), false);
+  bool operation_needs_lock = true;
+  apt_init(progress.get(), false, operation_needs_lock, nullptr);
 
   if(_error->PendingError())
     {

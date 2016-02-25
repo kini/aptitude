@@ -1,7 +1,7 @@
 // cmdline_user_tag.cc
 //
 //   Copyright (C) 2008-2010 Daniel Burrows
-//   Copyright (C) 2015 Manuel A. Fernandez Montecelo
+//   Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -128,7 +128,8 @@ namespace aptitude
 
       _error->DumpErrors();
       OpProgress progress;
-      apt_init(&progress, true);
+      bool operation_needs_lock = false;
+      apt_init(&progress, true, operation_needs_lock, nullptr);
       if(_error->PendingError())
 	{
 	  _error->DumpErrors();

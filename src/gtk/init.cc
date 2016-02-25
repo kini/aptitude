@@ -102,7 +102,8 @@ namespace gui
       // \todo Display progress somehow (maybe using the notification
       // framework?)
       OpProgress p;
-      apt_init(&p, true, NULL);
+      bool operation_needs_lock = true;
+      apt_init(&p, true, operation_needs_lock, NULL);
 
       // \todo Support update-on-startup once updating is plumbed
       // through.
