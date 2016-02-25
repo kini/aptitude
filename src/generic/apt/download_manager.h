@@ -1,6 +1,7 @@
 // download_manager.h                             -*-c++-*-
 //
 //   Copyright (C) 2005, 2008 Daniel Burrows
+//   Copyright (C) 2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -54,6 +55,10 @@ protected:
    *  value.
    */
   pkgAcquire *fetcher;
+
+  /** Whether download is actually needed
+   */
+  bool is_download_needed;
 
 public:
   download_manager();

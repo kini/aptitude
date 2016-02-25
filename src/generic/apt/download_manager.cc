@@ -1,6 +1,7 @@
 // download_manager.cc
 //
 //   Copyright (C) 2005 Daniel Burrows
+//   Copyright (C) 2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -20,7 +21,7 @@
 #include "download_manager.h"
 
 download_manager::download_manager()
-  : fetcher(NULL)
+  : fetcher { nullptr }, is_download_needed { true }
 {
 }
 
@@ -31,10 +32,16 @@ download_manager::~download_manager()
 
 pkgAcquire::RunResult download_manager::do_download()
 {
-  return fetcher->Run();
+  if (is_download_needed)
+    return fetcher->Run();
+  else
+    return pkgAcquire::RunResult::Continue;
 }
 
 pkgAcquire::RunResult download_manager::do_download(int PulseInterval)
 {
-  return fetcher->Run(PulseInterval);
+  if (is_download_needed)
+    return fetcher->Run(PulseInterval);
+  else
+    return pkgAcquire::RunResult::Continue;
 }

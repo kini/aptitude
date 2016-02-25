@@ -76,12 +76,6 @@ bool download_install_manager::prepare(OpProgress &progress,
 
   fetcher = new pkgAcquire;
   fetcher->SetLog(&acqlog);
-  if (fetcher->GetLock(aptcfg->FindDir("Dir::Cache::archives")) == false)
-    {
-      delete fetcher;
-      fetcher = NULL;
-      return false;
-    }
 
   if(!src_list.ReadMainList())
     {
@@ -103,6 +97,21 @@ bool download_install_manager::prepare(OpProgress &progress,
       delete fetcher;
       fetcher = NULL;
       return false;
+    }
+
+  // whether download is actually needed -- see #766122
+  if (fetcher->FetchNeeded() > 0)
+    {
+      if (fetcher->GetLock(aptcfg->FindDir("Dir::Cache::archives")) == false)
+	{
+	  delete fetcher;
+	  fetcher = NULL;
+	  return false;
+	}
+    }
+  else
+    {
+      download_manager::is_download_needed = false;
     }
 
   return true;
