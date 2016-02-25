@@ -114,7 +114,8 @@ enum show_package_names_option
  *  \param display_format   A string describing the columns to use in displaying
  *                          results.
  *
- *  \param width            The width to use in formatting results.
+ *  \param width_cfg        The width to use in formatting results (from config
+ *                          or command-line).
  *
  *  \param sort             A string describing how to sort results, using the
  *                          same syntax as the curses frontend.
@@ -131,7 +132,7 @@ enum show_package_names_option
  *                             show_package_names_option.
  */
 int cmdline_versions(int argc, char *argv[], const char *status_fname,
-                     std::string display_format, std::string width,
+                     std::string display_format, std::string width_cfg,
                      std::string sort, bool disable_columns, bool debug,
                      group_by_option group_by,
                      show_package_names_option show_package_names);

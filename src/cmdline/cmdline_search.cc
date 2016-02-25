@@ -90,8 +90,7 @@ namespace
   int do_search_packages(const std::vector<ref_ptr<pattern> > &patterns,
                          pkg_sortpolicy *sort_policy,
                          const column_definition_list &columns,
-                         int format_width,
-                         const unsigned int screen_width,
+                         int width,
                          bool disable_columns,
                          bool debug,
                          const std::shared_ptr<terminal_locale> &term_locale,
@@ -166,13 +165,11 @@ namespace
 						columns,
 						0);
 
-	    // do not truncate to 80 cols on redirections, pipes, etc -- see
-	    // #445206, #775671
 	    std::wstring line;
-	    if (disable_columns || !term_output->output_is_a_terminal())
+	    if (disable_columns)
 	      line = aptitude::cmdline::de_columnize(columns, columnizer, *p);
 	    else
-	      line = columnizer.layout_columns(format_width == -1 ? screen_width : format_width, *p);
+	      line = columnizer.layout_columns(width, *p);
 	    printf("%ls\n", line.c_str());
 
 	    // Note that this deletes the whole result, so we can't re-use
@@ -187,12 +184,10 @@ namespace
 
 // FIXME: apt-cache does lots of tricks to make this fast.  Should I?
 int cmdline_search(int argc, char *argv[], const char *status_fname,
-		   string display_format, string width, string sort,
+		   string display_format, string width_cfg, string sort,
 		   bool disable_columns, bool debug)
 {
   std::shared_ptr<terminal_io> term = create_terminal();
-
-  int real_width=-1;
 
   pkg_item::pkg_columnizer::setup_columns();
 
@@ -206,13 +201,19 @@ int cmdline_search(int argc, char *argv[], const char *status_fname,
 
   _error->DumpErrors();
 
-  const unsigned int screen_width = term->get_screen_width();
-  if(!width.empty())
+  // do not truncate to 80 cols on redirections, pipes, etc -- see #445206,
+  // #496728, #815690.  Either use explicit width set by the
+  // command-line/config, or disable columns.
+  int explicit_width = -1;
+  if (!width_cfg.empty())
     {
-      unsigned long tmp=screen_width;
-      StrToNum(width.c_str(), tmp, width.size());
-      real_width=tmp;
+      explicit_width = std::stoi(width_cfg);
     }
+  if (!term->output_is_a_terminal() && !(explicit_width > 0))
+    {
+      disable_columns = true;
+    }
+  int width = (explicit_width > 0) ? explicit_width : term->get_screen_width();
 
   if(!disable_columns && !pkg_item::pkg_columnizer::check_valid_display_format(display_format, PACKAGE "::CmdLine::Package-Display-Format" " (or -F)"))
     {
@@ -279,8 +280,7 @@ int cmdline_search(int argc, char *argv[], const char *status_fname,
   return do_search_packages(matchers,
                             s,
                             *columns,
-                            real_width,
-                            screen_width,
+                            width,
                             disable_columns,
                             debug,
                             term,

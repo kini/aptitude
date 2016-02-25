@@ -235,8 +235,7 @@ namespace
   // Print the matches against a group of versions.
   void show_version_match_list(const std::vector<std::pair<pkgCache::VerIterator, cw::util::ref_ptr<m::structural_match> > > &output,
                                const cw::config::column_definition_list &columns,
-                               int format_width,
-                               const unsigned int screen_width,
+                               int width,
                                bool disable_columns,
                                bool show_package_names,
 			       const std::shared_ptr<terminal_output> &term_output)
@@ -250,13 +249,11 @@ namespace
                                       columns,
                                       0);
 
-	// do not truncate to 80 cols on redirections, pipes, etc -- see
-	// #445206, #775671
 	std::wstring line;
-	if (disable_columns || !term_output->output_is_a_terminal())
+	if (disable_columns)
 	  line = aptitude::cmdline::de_columnize(columns, columnizer, *p);
 	else
-	  line = columnizer.layout_columns(format_width == -1 ? screen_width : format_width, *p);
+	  line = columnizer.layout_columns(width, *p);
 	printf("%ls\n", line.c_str());
       }
   }
@@ -264,8 +261,7 @@ namespace
   int do_search_versions(const std::vector<cw::util::ref_ptr<m::pattern> > &patterns,
                          pkg_sortpolicy *sort_policy,
                          const cw::config::column_definition_list &columns,
-                         int format_width,
-                         const unsigned int screen_width,
+                         int width,
                          bool disable_columns,
                          group_by_option group_by,
                          show_package_names_option show_package_names,
@@ -483,8 +479,7 @@ namespace
             // sorted them above.
             show_version_match_list(*it->second,
                                     columns,
-                                    format_width,
-                                    screen_width,
+                                    width,
                                     disable_columns,
                                     do_show_package_names,
 				    term_output);
@@ -493,8 +488,7 @@ namespace
     else
       show_version_match_list(output,
                               columns,
-                              format_width,
-                              screen_width,
+                              width,
                               disable_columns,
                               do_show_package_names,
 			      term_output);
@@ -545,14 +539,12 @@ group_by_option parse_group_by_option(const std::string &option)
 }
 
 int cmdline_versions(int argc, char *argv[], const char *status_fname,
-                     std::string display_format, std::string width,
+                     std::string display_format, std::string width_cfg,
                      std::string sort, bool disable_columns, bool debug,
                      group_by_option group_by,
                      show_package_names_option show_package_names)
 {
   std::shared_ptr<terminal_io> term = create_terminal();
-
-  int real_width=-1;
 
   pkg_item::pkg_columnizer::setup_columns();
 
@@ -566,13 +558,19 @@ int cmdline_versions(int argc, char *argv[], const char *status_fname,
 
   _error->DumpErrors();
 
-  const unsigned int screen_width = term->get_screen_width();
-  if(!width.empty())
+  // do not truncate to 80 cols on redirections, pipes, etc -- see #445206,
+  // #496728, #815690.  Either use explicit width set by the
+  // command-line/config, or disable columns.
+  int explicit_width = -1;
+  if (!width_cfg.empty())
     {
-      unsigned long tmp = screen_width;
-      StrToNum(width.c_str(), tmp, width.size());
-      real_width = tmp;
+      explicit_width = std::stoi(width_cfg);
     }
+  if (!term->output_is_a_terminal() && !(explicit_width > 0))
+    {
+      disable_columns = true;
+    }
+  int width = (explicit_width > 0) ? explicit_width : term->get_screen_width();
 
   if(!disable_columns && !pkg_item::pkg_columnizer::check_valid_display_format(display_format, PACKAGE "::CmdLine::Version-Display-Format" " (or -F)"))
     {
@@ -657,8 +655,7 @@ int cmdline_versions(int argc, char *argv[], const char *status_fname,
   return do_search_versions(matchers,
                             sort_policy,
                             *columns,
-                            real_width,
-                            screen_width,
+                            width,
                             disable_columns,
                             group_by,
                             show_package_names,

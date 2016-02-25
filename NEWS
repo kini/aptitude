@@ -17,6 +17,13 @@ Version 0.7.7 UNRELEASED
   * [curses] Fix crash when trying to view changelog.  Thanks Wei-Cheng Pan for
     the fix.  (Closes: #815635)
 
+  * [cmdline] In "search" and "versions", when width is set explicitly,
+    pipes/redirections do not act as --disable-columns (Closes: #815690)
+
+    Width can be set through config or command line.  The behaviour to act as
+    --disable-columns changed in the last version, 0.7.5; before it was using
+    80-width columns by default, or explicitly set width.
+
 - User visible changes:
 
   * [curses] Change "Will use/free %sB of disk space" for "Disk usage: %sB"
