@@ -29,6 +29,12 @@ Version 0.7.7 UNRELEASED
     --disable-columns changed in the last version, 0.7.5; before it was using
     80-width columns by default, or explicitly set width.
 
+  * [curses] "%r" (revdepcount) now includes virtual packages (Closes: #320089)
+
+    This was caused by the patch to address #270057, PkgIterator::ProvidesList()
+    doesn't include virtual packages provided by the visible version (should use
+    VerIterator::ProvidesList()).
+
 - User visible changes:
 
   * [curses] Change "Will use/free %sB of disk space" for "Disk usage: %sB"

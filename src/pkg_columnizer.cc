@@ -571,17 +571,18 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
 		 //  5 minutes ago. Maybe I should have my head examined :) )
 		 _system->VS->CheckDep(visible_ver.VerStr(), D->CompareOp, D.TargetVer()))
 		count++;
+
+	    for(pkgCache::PrvIterator i=visible_ver.ProvidesList(); !i.end(); i++)
+	      for(pkgCache::DepIterator D=i.ParentPkg().RevDependsList(); !D.end(); D++)
+		{
+		  if(D.IsCritical() &&
+		     !is_conflict(D->Type) &&
+		     D.ParentVer()==D.ParentPkg().CurrentVer() &&
+		     _system->VS->CheckDep(i.ProvideVersion(), D->CompareOp, D.TargetVer()))
+		    count++;
+		}
 	  }
 
-	for(pkgCache::PrvIterator i=pkg.ProvidesList(); !i.end(); i++)
-	  for(pkgCache::DepIterator D=i.ParentPkg().RevDependsList(); !D.end(); D++)
-	    {
-	      if(D.IsCritical() &&
-		 !is_conflict(D->Type) &&
-		 D.ParentVer()==D.ParentPkg().CurrentVer() &&
-		 _system->VS->CheckDep(i.ProvideVersion(), D->CompareOp, D.TargetVer()))
-		count++;
-	    }
 	snprintf(buf, 100, "%i", count);
 	return cw::column_disposition(buf, 0);
       }
