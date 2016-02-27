@@ -1,7 +1,7 @@
 // reason_fragment.h
 //
 //  Copyright 2004 Daniel Burrows
-//  Copyright 2015 Manuel A. Fernandez Montecelo
+//  Copyright 2015-2016 Manuel A. Fernandez Montecelo
 
 #ifndef REASON_FRAGMENT_H
 #define REASON_FRAGMENT_H

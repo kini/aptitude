@@ -1,7 +1,7 @@
 // reason_fragment.cc
 //
 //  Copyright 2004 Daniel Burrows
-//  Copyright 2015 Manuel A. Fernandez Montecelo
+//  Copyright 2015-2016 Manuel A. Fernandez Montecelo
 
 #include "reason_fragment.h"
 
@@ -422,7 +422,7 @@ cw::fragment *reason_fragment(const pkgCache::PkgIterator &pkg, bool &breakage)
   switch(actionstate)
     {
     case pkg_unused_remove:
-      fragments.push_back(wrapbox(cw::fragf(_("%B%s%b was installed automatically;  it is being removed because all of the packages which depend upon it are being removed:"),
+      fragments.push_back(wrapbox(cw::fragf(_("%B%s%b was installed automatically; it is being removed because all of the packages which depend upon it are being removed:"),
 					    pkg.FullName(true).c_str())));
       break;
     case pkg_auto_remove:
