@@ -1,6 +1,7 @@
 // infer_reason.cc
 //
 // Copyright 2004 Daniel Burrows
+// Copyright 2016 Manuel A. Fernandez Montecelo
 
 #include "infer_reason.h"
 
@@ -152,9 +153,11 @@ void infer_reason(pkgCache::PkgIterator pkg, set<reason> &reasons)
 	   ((*apt_cache_file)[d.ParentPkg()].Delete() ||
 	    (*apt_cache_file)[d.ParentPkg()].InstVerIter(*apt_cache_file)!=d.ParentVer()) &&
 	   (d->Type==pkgCache::Dep::Depends ||
-	    (aptcfg->FindB("APT::Install-Recommends", true) &&
-	     d->Type==pkgCache::Dep::Recommends)))
-	  reasons.insert(reason(d.ParentPkg(), d));
+	    d->Type==pkgCache::Dep::Recommends ||
+	    d->Type==pkgCache::Dep::Suggests))
+	  {
+	    reasons.insert(reason(d.ParentPkg(), d));
+	  }
     }
   else if(actionstate==pkg_auto_hold)
     {

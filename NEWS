@@ -35,6 +35,20 @@ Version 0.7.7 UNRELEASED
     doesn't include virtual packages provided by the visible version (should use
     VerIterator::ProvidesList()).
 
+  * [curses] infer_reason() for pkg_unused_removed now has recommends/suggests
+    into account in all cases (Closes: #476596)
+
+    It was not taking into account several cases when packages were being
+    removed (because of being marked as auto-install and not required anymore),
+    e.g. when the dependency was downgraded to Suggests, or only showing
+    Recommends if config option APT::Install-Recommends was enabled.
+
+    Even if APT::Install-Recommends is not enabled, if a package is installed it
+    is kept as long as it's recommended (the user has decided to install it,
+    despite being only recommended); and similar for Suggests; so the reason for
+    removal should include these cases as explanation for being removed at this
+    point.
+
 - User visible changes:
 
   * [curses] Change "Will use/free %sB of disk space" for "Disk usage: %sB"
