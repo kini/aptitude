@@ -2,7 +2,7 @@
 //
 //  Copyright (C) 2001 Daniel Burrows
 //  Copyright (C) 2012 Daniel Hartwig
-//  Copyright (C) 2015 Manuel A. Fernandez Montecelo
+//  Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -40,6 +40,7 @@
 #include <cerrno>
 #include <cctype>
 
+
 namespace cw = cwidget;
 
 using namespace std;
@@ -50,22 +51,39 @@ namespace apt {
 // Stores the various tasks.
 map<string, task> *task_list=new map<string, task>;
 
+// This is an array indexed by package ID, managed by load_tasks.
+// (as usual, it's initialized to NULL)
+set<string> *tasks_by_package = nullptr;
+
+// for lazy initialization
+void load_tasks_lazy()
+{
+  if (!tasks_by_package)
+    {
+      OpProgress dummy_progress;
+      load_tasks(dummy_progress);
+    }
+}
+
 task *find_task(const std::string &name)
 {
+  // for lazy initialization
+  load_tasks_lazy();
+
   if(task_list->find(name) == task_list->end())
     return NULL;
 
   return &((*task_list)[name]);
 }
 
-// This is an array indexed by package ID, managed by load_tasks.
-// (as usual, it's initialized to NULL)
-set<string> *tasks_by_package;
-
 // Now this is just a wrapper, as you can see..
 std::set<std::string> *get_tasks(const pkgCache::PkgIterator &pkg)
 {
-  if(!tasks_by_package)
+  // for lazy initialization
+  load_tasks_lazy();
+
+  // if still not ready...
+  if (!tasks_by_package)
     return NULL;
 
   return tasks_by_package+pkg->ID;
@@ -75,6 +93,9 @@ std::set<std::string> *get_tasks(const pkgCache::PkgIterator &pkg)
 bool get_task_packages(std::set<pkgCache::PkgIterator> * const pkgset,
                        const task &task, const string &arch)
 {
+  // for lazy initialization
+  load_tasks_lazy();
+
   // key packages are always included
   for(set<string>::const_iterator it = task.keys.begin();
       it != task.keys.end();
@@ -440,6 +461,7 @@ void load_tasks(OpProgress &progress)
   // bail if that fails.
 
   vector<loc_pair> versionfiles;
+  versionfiles.reserve((*apt_cache_file)->Head().PackageCount);
 
   for(pkgCache::PkgIterator pkg=(*apt_cache_file)->PkgBegin();
       !pkg.end(); ++pkg)

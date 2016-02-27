@@ -111,6 +111,13 @@ Version 0.7.7 UNRELEASED
     common operations which happen very often (e.g. more than 0.1s, when saving
     the file state).
 
+  * Lazy initialization of reading "tasks" information (optimization)
+
+    This functionality was called upon start, and taking more than 0.3s (in
+    modern computer with SSD disks), when many times in command line mode is not
+    needed.  Now the loading is delayed until it's needed (when other related
+    methods are called and expect this information to be present).
+
 - Translation updates:
 
   * Dutch documentation translation by Frans Spiesschaert (Closes: #815183)
