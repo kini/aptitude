@@ -373,12 +373,12 @@ typedef std::pair<pkgCache::VerIterator, pkgCache::VerFileIterator> loc_pair;
 /** Used to compare two version files based on their location. */
 struct location_compare
 {
-  bool operator()(loc_pair a, loc_pair b) const
+  inline bool operator()(const loc_pair& a, const loc_pair& b) const
   {
-    if(a.second->File == b.second->File)
-      return a.second->Offset<b.second->Offset;
+    if (a.second->File == b.second->File)
+      return (a.second->Offset < b.second->Offset);
     else
-      return a.second->File<b.second->File;
+      return (a.second->File < b.second->File);
   }
 };
 
