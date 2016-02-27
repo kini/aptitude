@@ -1,7 +1,7 @@
 // solution_screen.cc
 //
 //   Copyright (C) 2005, 2007-2009 Daniel Burrows
-//   Copyright (C) 2015 Manuel A. Fernandez Montecelo
+//   Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -148,8 +148,23 @@ public:
   {
     return my_label.c_str();
   }
-};
 
+  bool dispatch_key(const cw::config::key& k, cw::tree* owner) override
+  {
+    if (cw::config::global_bindings.key_matches(k, "SolutionActionReject") ||
+	cw::config::global_bindings.key_matches(k, "SolutionActionApprove"))
+      {
+	for (child_iterator i = get_children_begin(); i != get_children_end(); ++i)
+	  (*i)->dispatch_key(k, owner);
+
+	owner->line_down();
+
+	return true;
+      }
+    else
+      return cw::subtree_generic::dispatch_key(k, owner);
+  }
+};
 
 
 cw::subtree_generic *make_dep_solvers_tree(const aptitude_resolver_dep &d)
