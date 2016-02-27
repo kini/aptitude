@@ -397,7 +397,6 @@ void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
   aptitudeCacheFile *new_file=new aptitudeCacheFile;
 
   LOG_TRACE(logger, "Reading the sources list.");
-
   apt_source_list=new pkgSourceList;
   apt_source_list->ReadMainList();
 
@@ -464,8 +463,6 @@ void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
   // Um, good time to clear our undo info.
   apt_undos->clear_items();
 
-  LOG_TRACE(logger, "Loading task information.");
-  aptitude::apt::load_tasks(*progress_bar);
   LOG_TRACE(logger, "Loading tags.");
   aptitude::apt::load_tags(progress_bar);
 

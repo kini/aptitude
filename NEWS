@@ -113,10 +113,11 @@ Version 0.7.7 UNRELEASED
 
   * Lazy initialization of reading "tasks" information (optimization)
 
-    This functionality was called upon start, and taking more than 0.3s (in
-    modern computer with SSD disks), when many times in command line mode is not
-    needed.  Now the loading is delayed until it's needed (when other related
-    methods are called and expect this information to be present).
+    This functionality was called upon start from src/generic/apt/apt.cc, and
+    taking more than 0.3s (in modern computer with SSD disks), when many times
+    in command line mode is not needed.  Now the loading is delayed until it's
+    needed (when other related methods are called and expect this information to
+    be present).
 
 - Translation updates:
 
