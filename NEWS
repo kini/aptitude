@@ -119,6 +119,26 @@ Version 0.7.7 UNRELEASED
     needed (when other related methods are called and expect this information to
     be present).
 
+  * Optimizations when reading/writing files
+
+    These operations happen typically several times every time that the program
+    runs.  The changes save 0.2 to 0.3s (in modern computer with SSD disks),
+    with multi-arch enabled (2 architectures) and close to 90 thousand binary
+    packages, in a simple test where an inexisting package is requested to
+    install in the command line ("aptitude install does-not-exist").
+
+    The individual optimizations are:
+
+      - Not updating progress for every package when reading/writing files, only
+        ~10 times (every 10% increment) instead of ~90 thousand for the test
+        scenario above
+
+      - Declare some variables, specially strings, out of the loop executing for
+        every package -- in that way, initialization and reserving memory is
+        saved
+
+      - Writing aptitude state file only when complete
+
 - Translation updates:
 
   * Dutch documentation translation by Frans Spiesschaert (Closes: #815183)

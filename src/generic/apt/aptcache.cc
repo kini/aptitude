@@ -325,7 +325,11 @@ bool aptitudeDepCache::build_selection_list(OpProgress &Prog, bool WithLock,
 
       pkgTagFile tagfile(&state_file);
       pkgTagSection section;
+
+      // last percent shown in progress -- do not update on every cycle
+      int last_pct_shown = 0;
       int amt=0;
+
       bool do_dselect=aptcfg->FindB(PACKAGE "::Track-Dselect-State", true);
       while(tagfile.Step(section))
 	{
@@ -445,15 +449,23 @@ bool aptitudeDepCache::build_selection_list(OpProgress &Prog, bool WithLock,
 		  dirty = true;
 		}
 	    }
-	  amt+=section.size();
-	  Prog.OverallProgress(amt, file_size, 1, _("Reading extended state information"));
+
+	  // update progress, but not every time -- very expensive
+	  amt += section.size();
+	  int pct = (100*amt) / file_size;
+	  if ((pct % 10 == 1) && last_pct_shown != pct)
+	    {
+	      last_pct_shown = pct;
+	      Prog.OverallProgress(amt, file_size, 1, _("Reading extended state information"));
+	    }
 	}
       Prog.OverallProgress(file_size, file_size, 1, _("Reading extended state information"));
       Prog.Done();
     }
 
+  // only update if we're going to increase 10% or so
+  int update_progress_10pct = Head().PackageCount / 10;
   int num=0;
-
   Prog.OverallProgress(0, Head().PackageCount, 1, _("Initializing package states"));
 
   new_package_count=0;
@@ -537,8 +549,11 @@ bool aptitudeDepCache::build_selection_list(OpProgress &Prog, bool WithLock,
 	  dirty = true;
 	}
 
-      ++num;
-      Prog.OverallProgress(num, Head().PackageCount, 1, _("Initializing package states"));
+      // don't update on every cycle
+      if ((++num % update_progress_10pct) == 1)
+	{
+	  Prog.OverallProgress(num, Head().PackageCount, 1, _("Initializing package states"));
+	}
     }
 
   Prog.OverallProgress(Head().PackageCount, Head().PackageCount, 1, _("Initializing package states"));
@@ -711,36 +726,49 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
     }
   else
     {
+      // only update if we're going to increase 10% or so
+      int update_progress_10pct = Head().PackageCount / 10;
       int num=0;
       prog.OverallProgress(0, Head().PackageCount, 1, _("Writing extended state information"));
 
+      // save some allocations in the loop and other optimisations -- see #312920
+      std::stringstream newstate_tmpbuffer;
+      string line;
+      string forbidstr;
+      string upgradestr;
+      string autostr;
+      string tailstr;
+      string user_tags;
+      string select_arch;
+
       for(PkgIterator i=PkgBegin(); !i.end(); i++)
-	if(!i.VersionList().end())
+	if (i.VersionList().end())
+	  {
+	    ++num;
+	  }
+	else
 	  {
 	    StateCache &state=(*this)[i];
 	    aptitude_state &estate=get_ext_state(i);
 
-	    string forbidstr=!estate.forbidver.empty()
-	      ? "ForbidVer: "+estate.forbidver+"\n":"";
+	    forbidstr = (!estate.forbidver.empty()) ? ("ForbidVer: " + estate.forbidver + "\n") : "";
 
-	    bool upgrade=(!i.CurrentVer().end()) && state.Install();
-	    string upgradestr=upgrade ? "Upgrade: yes\n" : "";
+	    upgradestr = ((!i.CurrentVer().end()) && state.Install()) ? "Upgrade: yes\n" : "";
 
 	    bool auto_new_install = (i.CurrentVer().end() &&
 				     state.Install() &&
 				     ((state.Flags & Flag::Auto) != 0));
-	    string autostr = (auto_new_install || estate.previously_auto_package) ? "Auto-New-Install: yes\n" : "";
-
-	    string tailstr;
+	    autostr = (auto_new_install || estate.previously_auto_package) ? "Auto-New-Install: yes\n" : "";
 
 	    if(state.Install() &&
 	       !estate.candver.empty() &&
 	       (GetCandidateVersion(i).end() ||
 		GetCandidateVersion(i).VerStr() != estate.candver))
 	      tailstr = "Version: " + estate.candver + "\n";
+	    else
+	      tailstr = "";
 
 	    // Build the list of usertags for this package.
-	    std::string user_tags;
 	    if (!estate.user_tags.empty())
 	      {
 		user_tags = "User-Tags:";
@@ -757,9 +785,12 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
 
 		user_tags.push_back('\n');
 	      }
+	    else
+	      user_tags = "";
 
+	    // write section for this package
 	    using cw::util::ssprintf;
-	    std::string line(ssprintf("Package: %s\nArchitecture: %s\nUnseen: %s\nState: %i\nDselect-State: %i\nRemove-Reason: %i\n%s%s%s%s%s\n",
+	    line = ssprintf("Package: %s\nArchitecture: %s\nUnseen: %s\nState: %i\nDselect-State: %i\nRemove-Reason: %i\n%s%s%s%s%s\n",
 				      i.Name(),
                                       i.Arch(),
 				      estate.new_package?"yes":"no",
@@ -770,7 +801,8 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
 				      autostr.c_str(),
 				      forbidstr.c_str(),
 				      user_tags.c_str(),
-				      tailstr.c_str()));
+				      tailstr.c_str());
+	    newstate_tmpbuffer << line;
 
 	    // dpkg-dselect state
 	    if (estate.original_selection_state != estate.selection_state
@@ -778,7 +810,7 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
 	      {
 		// for internal reasons, apt's PkgIterator is always arch:any,
 		// not arch:all.  VerIterator can be arch:all, though.
-		std::string select_arch = i.Arch();
+		select_arch = i.Arch();
 
 		// all install, downgrade, upgrade, etc -- try to use candidate version
 		if (state.Install() && !GetCandidateVersion(i).end())
@@ -798,35 +830,29 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
 		estate.original_selection_state = estate.selection_state;
 	      }
 
-	    if(newstate.Failed() || !newstate.Write(line.c_str(), line.size()))
+	    // don't update on every cycle
+	    if ((++num % update_progress_10pct) == 1)
 	      {
-		_error->Error(_("Couldn't write state file"));
-		newstate.Close();
-
-		if(!status_fname)
-		  unlink((statefile+".new").c_str());
-		return false;
+		prog.OverallProgress(num, Head().PackageCount, 1, _("Writing extended state information"));
 	      }
-
-	    num++;
-	    prog.OverallProgress(num, Head().PackageCount, 1, _("Writing extended state information"));
 	  }
 
       prog.OverallProgress(Head().PackageCount, Head().PackageCount, 1, _("Writing extended state information"));
 
-      if(newstate.Failed())
-	// This is /probably/ redundant, but paranoia never hurts.
+      if (newstate.Failed() ||
+	  !newstate.Write(newstate_tmpbuffer.str().c_str(), newstate_tmpbuffer.str().size()))
 	{
-	  _error->Error(_("Error writing state file"));
+	  _error->Error(_("Couldn't write state file"));
 	  newstate.Close();
 
-	  if(!status_fname)
+	  if (!status_fname)
 	    unlink((statefile+".new").c_str());
 
 	  prog.Done();
 	  return false;
 	}
       newstate.Close();
+
       // FIXME!  This potentially breaks badly on NFS.. (?) -- actually, it
       //       wouldn't be harmful; you'd just get gratuitous errors..
       if(!status_fname)
