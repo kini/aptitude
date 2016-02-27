@@ -555,13 +555,13 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
 	int count=0;
 	char buf[100];
 
-        if(pkg.end())
+        if (pkg.end())
           return cw::column_disposition("", 0);
 
-	if(!visible_ver.end())
+	if (!visible_ver.end())
 	  {
-	    for(pkgCache::DepIterator D=pkg.RevDependsList(); !D.end(); D++)
-	      if(D.IsCritical() &&
+	    for (pkgCache::DepIterator D=pkg.RevDependsList(); !D.end(); ++D)
+	      if (D.IsCritical() &&
 		 !is_conflict(D->Type) &&
 		 D.ParentVer()==D.ParentPkg().CurrentVer() &&
 		 // That test is CORRECT; we want to see if the version
@@ -570,16 +570,20 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
 		 //  and couldn't remember what it did despite writing it
 		 //  5 minutes ago. Maybe I should have my head examined :) )
 		 _system->VS->CheckDep(visible_ver.VerStr(), D->CompareOp, D.TargetVer()))
-		count++;
-
-	    for(pkgCache::PrvIterator i=visible_ver.ProvidesList(); !i.end(); i++)
-	      for(pkgCache::DepIterator D=i.ParentPkg().RevDependsList(); !D.end(); D++)
 		{
-		  if(D.IsCritical() &&
+		  ++count;
+		}
+
+	    for (pkgCache::PrvIterator i=visible_ver.ProvidesList(); !i.end(); ++i)
+	      for (pkgCache::DepIterator D=i.ParentPkg().RevDependsList(); !D.end(); ++D)
+		{
+		  if (D.IsCritical() &&
 		     !is_conflict(D->Type) &&
 		     D.ParentVer()==D.ParentPkg().CurrentVer() &&
 		     _system->VS->CheckDep(i.ProvideVersion(), D->CompareOp, D.TargetVer()))
-		    count++;
+		    {
+		      ++count;
+		    }
 		}
 	  }
 
