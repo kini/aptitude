@@ -30,7 +30,6 @@
 #include <generic/apt/download_manager.h>
 #include <generic/apt/matching/pattern.h>
 #include <generic/apt/matching/match.h> // For structural_match.
-#include <generic/apt/tasks.h>
 
 // System includes:
 #include <apt-pkg/srcrecords.h>
@@ -47,6 +46,11 @@
 
 namespace aptitude
 {
+  namespace apt
+  {
+    class task;
+  }
+
   namespace cmdline
   {
     class terminal_input;
