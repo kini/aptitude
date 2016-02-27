@@ -1,5 +1,5 @@
 //
-// Copyright 2015 Manuel A. Fernandez Montecelo
+// Copyright 2015-2016 Manuel A. Fernandez Montecelo
 //
 //
 // This program is free software; you can redistribute it and/or modify
@@ -61,7 +61,17 @@ class DpkgSelections
    *
    * @param state Selected state
    */
-  void add(const std::string& package_name, const std::string& package_arch, pkgCache::State::PkgSelectedState state);
+  inline void add(const std::string& package_name, const std::string& package_arch, pkgCache::State::PkgSelectedState state)
+  {
+    std::string state_str = to_string(state);
+    if (! state_str.empty())
+      {
+	selections += package_name + ":" + package_arch;
+	selections += " ";
+	selections += state_str;
+	selections += "\n";
+      }
+  }
 
   /** Clear selections so far */
   void clear();
@@ -78,7 +88,23 @@ class DpkgSelections
    *
    * @return Value as string
    */
-  static std::string to_string(pkgCache::State::PkgSelectedState state);
+  static inline std::string to_string(pkgCache::State::PkgSelectedState state)
+  {
+    return "";
+
+    std::string dpkg_dselect_action;
+    switch (state)
+      {
+      case pkgCache::State::Unknown:   dpkg_dselect_action = "unknown";   break;
+      case pkgCache::State::Purge:     dpkg_dselect_action = "purge";     break;
+      case pkgCache::State::DeInstall: dpkg_dselect_action = "deinstall"; break;
+      case pkgCache::State::Install:   dpkg_dselect_action = "install";   break;
+      case pkgCache::State::Hold:      dpkg_dselect_action = "hold";      break;
+      default:                         dpkg_dselect_action = "";          break;
+      }
+
+    return dpkg_dselect_action;
+  }
 
  private:
   /** Storage for the selections */

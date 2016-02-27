@@ -104,6 +104,13 @@ Version 0.7.7 UNRELEASED
     mention and that are not covered by specific bugs is basically complete, up
     to 1.2.*.
 
+  * Move the definition methods of dpkg_selections to the headers (optimization)
+
+    These methods are called inside loops many times (based on the number of
+    packages, which are many tens of thousands), so it makes a difference in
+    common operations which happen very often (e.g. more than 0.1s, when saving
+    the file state).
+
 - Translation updates:
 
   * Dutch documentation translation by Frans Spiesschaert (Closes: #815183)
