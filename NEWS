@@ -154,6 +154,19 @@ Version 0.7.7 UNRELEASED
 
       - Writing aptitude state file only when complete
 
+  * Optimizations when reading debtags
+
+    This functionality was called upon start from src/generic/apt/apt.cc.  There
+    are two modes, with "debtags" package installed and from "verfiles".
+
+    Loading with "debtags" was improved from 0.13s to 0.05s, and "verfiles" from
+    0.4s to 0.27s, in modern computer with SSD disks, multi-arch with 2
+    architectures enabled.
+
+    The improvement consisted in doing some extra calculations to updates
+    progress only ~10 times (every 10% increment) instead of ~54 thousand
+    ("debtags") or ~121 thousand ("verfiles") for the test scenario above.
+
 - Translation updates:
 
   * Dutch documentation translation by Frans Spiesschaert (Closes: #815183)

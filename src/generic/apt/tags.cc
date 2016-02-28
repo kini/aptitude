@@ -2,6 +2,7 @@
 //
 //   Copyright (C) 2005, 2007-2008, 2010 Daniel Burrows
 //   Copyright (C) 2014 Daniel Hartwig
+//   Copyright (C) 2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -204,19 +205,28 @@ static bool load_tags_from_debtags(OpProgress *progress)
       return false;
     }
 
-  const unsigned long long m = F.Size();
+  const unsigned long long file_size = F.Size();
 
-  if(progress != NULL)
-    progress->OverallProgress(0, m, 1,
+  // last percent shown in progress -- do not update on every cycle
+  int last_pct_shown = 0;
+  if (progress)
+    progress->OverallProgress(0, file_size, 1,
                               _("Building tag database"));
 
   const unsigned long long buf_size = 4096;
   char buf[buf_size];
   while(F.ReadLine(buf, buf_size) != NULL)
     {
-      if(progress != NULL)
-        progress->OverallProgress(F.Tell(), m, 1,
-                                  _("Building tag database"));
+      if (progress)
+	{
+	  int pct = (100*F.Tell()) / file_size;
+	  if ((pct % 10 == 1) && last_pct_shown != pct)
+	    {
+	      last_pct_shown = pct;
+	      progress->OverallProgress(F.Tell(), file_size, 1,
+					_("Building tag database"));
+	    }
+	}
 
       const char *sep = strstr(buf, ": ");
       if(sep == NULL)
@@ -241,7 +251,7 @@ static bool load_tags_from_debtags(OpProgress *progress)
         tags->insert(*t);
     }
 
-  if(progress != NULL)
+  if (progress)
     progress->Done();
 
   return true;
@@ -256,20 +266,27 @@ static bool load_tags_from_verfiles(OpProgress *progress)
     for(pkgCache::VerIterator v = p.VersionList(); !v.end(); ++v)
       for(pkgCache::VerFileIterator vf = v.FileList();
 	  !vf.end(); ++vf)
-	verfiles.push_back(loc_pair(v, vf));
+	  verfiles.push_back(loc_pair(v, vf));
 
   sort(verfiles.begin(), verfiles.end(), location_compare());
 
+  // only update if we're going to increase 10% or so
+  int update_progress_10pct = verfiles.size() / 10;
+  size_t num = 0;
   progress->OverallProgress(0, verfiles.size(), 1,
                             _("Building tag database"));
-  size_t n=0;
+
   for(std::vector<loc_pair>::iterator i=verfiles.begin();
       i!=verfiles.end(); ++i)
     {
       insert_tags(i->first, i->second);
-      ++n;
-      progress->OverallProgress(n, verfiles.size(), 1,
-                                _("Building tag database"));
+
+      // don't update on every cycle
+      if ((++num % update_progress_10pct) == 1)
+	{
+	  progress->OverallProgress(num, verfiles.size(), 1,
+				    _("Building tag database"));
+	}
     }
 
   progress->Done();
