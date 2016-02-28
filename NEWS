@@ -67,6 +67,15 @@ Version 0.7.7 UNRELEASED
     removal should include these cases as explanation for being removed at this
     point.
 
+  * Fixed case of packages wrongly being marked with auto-flag upon start
+    (Closes: #816229)
+
+    This was due to variable of extended-state previously_auto_package not being
+    cleared when marking the package as manually installed, combined with using
+    this variable to decide whether to write "Auto-New-Install: yes" in
+    pkgstates in a recent change of 0.7.6, commit 7369d8f9 to address/fix
+    #563877, which is another problem caused by the handling of automatic flags.
+
 - User visible changes:
 
   * [curses] Change "Will use/free %sB of disk space" for "Disk usage: %sB"

@@ -1107,6 +1107,10 @@ void aptitudeDepCache::internal_mark_install(const PkgIterator &Pkg,
   // here and restore it afterwards:
   bool previously_auto = ((*this)[Pkg].Flags & Flag::Auto) != 0;
 
+  bool final_auto = previously_auto;
+  if (set_to_manual)
+    final_auto = false;
+
   if(!ReInstall)
     {
       pkgDepCache::MarkInstall(Pkg, AutoInst);
@@ -1116,14 +1120,12 @@ void aptitudeDepCache::internal_mark_install(const PkgIterator &Pkg,
 
   pkgDepCache::SetReInstall(Pkg, ReInstall);
 
-  MarkAuto(Pkg, previously_auto);
-
-  if(set_to_manual)
-    MarkAuto(Pkg, false);
+  MarkAuto(Pkg, final_auto);
 
   get_ext_state(Pkg).selection_state=pkgCache::State::Install;
   get_ext_state(Pkg).reinstall=ReInstall;
   get_ext_state(Pkg).forbidver="";
+  get_ext_state(Pkg).previously_auto_package = final_auto;
 }
 
 void aptitudeDepCache::mark_delete(const PkgIterator &Pkg,
