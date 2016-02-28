@@ -9,6 +9,21 @@ Version 0.7.7 UNRELEASED
   * [curses] Bindings for reject/approval of solutions in resolver can be
     applied to subtrees (Closes:#475595)
 
+  * Several optimizations that improve performance at startup and when
+    reading/writing files (Closes: #312920)
+
+    See "Internal Changes" for more details.
+
+    Basically, when using some basic command that shouldn't perform much
+    computation ("aptitude install does-not-exist"), the time was cut down from
+    around ~3s to ~1.5s in my system.
+
+    The system is a relatively modern computer with SSD disks (but nothing
+    bleeding edge), with multi-arch enabled (2 architectures) and close to 90
+    thousand binary packages, which is the double of systems without multi-arch
+    enabled and affects many operations significantly (like doubling the size of
+    the file "pkgstates").
+
 - Bug fixes:
 
   * [cmdline] Fix crash with "show" and not installed packages (Closes: #815581)
