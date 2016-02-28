@@ -1,6 +1,7 @@
 // pkg_tree.cc
 //
 //  Copyright 1999-2005, 2007-2008 Daniel Burrows
+//  Copyright 2016 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -191,8 +192,11 @@ bool pkg_tree::build_tree(OpProgress &progress)
 			   *apt_cache_file,
 			   *apt_package_records);
 
+
 	  int num = 0;
 	  int total = matches.size();
+	  // only update if we're going to increase 10% or so
+	  int update_progress_10pct = total / 10;
 
 	  for(std::vector<std::pair<pkgCache::PkgIterator, cwidget::util::ref_ptr<matching::structural_match> > >::const_iterator
 		it = matches.begin(); it != matches.end(); ++it)
@@ -201,8 +205,11 @@ bool pkg_tree::build_tree(OpProgress &progress)
 
 	      cache_empty = false;
 
-	      progress.OverallProgress(num, total, 1, _("Building view"));
-	      ++num;
+	      // don't update on every cycle
+	      if ((++num % update_progress_10pct) == 1)
+		{
+		  progress.OverallProgress(num, total, 1, _("Building view"));
+		}
 
 	      // Filter useless packages up-front.
 	      if(pkg.VersionList().end() && pkg.ProvidesList().end())
@@ -218,14 +225,18 @@ bool pkg_tree::build_tree(OpProgress &progress)
 	{
 	  int num = 0;
 	  int total = (*apt_cache_file)->Head().PackageCount;
+	  // only update if we're going to increase 10% or so
+	  int update_progress_10pct = total / 10;
 
 	  for(pkgCache::PkgIterator pkg = (*apt_cache_file)->PkgBegin(); !pkg.end(); ++pkg)
 	    {
 	      cache_empty = false;
 
-	      progress.OverallProgress(num, total, 1, _("Building view"));
-
-	      ++num;
+	      // don't update on every cycle
+	      if ((++num % update_progress_10pct) == 1)
+		{
+		  progress.OverallProgress(num, total, 1, _("Building view"));
+		}
 
 	      // Filter useless packages up-front.
 	      if(pkg.VersionList().end() && pkg.ProvidesList().end())

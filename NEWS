@@ -167,6 +167,27 @@ Version 0.7.7 UNRELEASED
     progress only ~10 times (every 10% increment) instead of ~54 thousand
     ("debtags") or ~121 thousand ("verfiles") for the test scenario above.
 
+  * Optimizations when building trees for package views
+
+    The tests were done in modern computer with SSD disks, multi-arch with 2
+    architectures enabled (close to 90 thousand packages to show).
+
+    This functionality is used in when building the views in curses mode.
+    Creating the tree for the initial default view takes ~0.42s, creating the
+    tree for a new default "Package view" ~0.22s, "Debtags browser" ~0.3s,
+    "Sources view" ~0.28s, "Flat" ~0.18s, "Package view" with limit "~slibs"
+    (section "libs") ~0.09s.
+
+    With optimizations enabled, the initial default view takes ~0.34s, creating
+    the tree for a new default "Package view" ~0.13s, "Debtags browser" ~0.21s,
+    "Sources view" ~0.23s, "Flat" ~0.12s, "Package view" with limit "~slibs"
+    (section "libs") ~0.08s.
+
+    The improvement consisted in doing some extra calculations to update
+    progress ("Building view") only ~10 times (every 10% increment) instead of
+    ~90 thousand for the test scenario above (~10 thousand with the limit
+    "~slibs").
+
 - Translation updates:
 
   * Dutch documentation translation by Frans Spiesschaert (Closes: #815183)
