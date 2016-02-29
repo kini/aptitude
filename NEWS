@@ -76,6 +76,22 @@ Version 0.7.7 UNRELEASED
     pkgstates in a recent change of 0.7.6, commit 7369d8f9 to address/fix
     #563877, which is another problem caused by the handling of automatic flags.
 
+  * Packages to "keep" when applying solutions of the resolver maintain current
+    manual/auto
+
+    In previous versions, first it was removing the auto flag unconditionally
+    (#508428), probably due to APT thinking that it was a decision to keep it
+    manually, and aptitude not marking it explicitly as auto.  The fix for
+    #508428 in recent versions changed this by setting the flag, but aptitude's
+    resolver considers "keep" as a more generic "install_version", with new
+    version being the same as current, and the auto-flag being always true in
+    those cases.
+
+    This is now refined to treat specially the "install" solutions when a
+    package is actually to be kept -- first it retrieves the auto-flag of the
+    current state of the package, then marks to keep, then sets the auto-flag
+    accordingly after asking APT to keep the current version.
+
 - User visible changes:
 
   * [curses] Change "Will use/free %sB of disk space" for "Disk usage: %sB"

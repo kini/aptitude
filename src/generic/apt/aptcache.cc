@@ -2309,7 +2309,10 @@ void aptitudeDepCache::apply_solution(const generic_solution<aptitude_universe> 
 	{
 	  aptitude_resolver_version ver(i->get_ver());
 	  LOG_TRACE(logger, "Adding version chosen by the resolver: " << ver);
-	  versions.push_back(std::make_pair(ver, true));
+	  // auto_installed true by default because "install_version" is very
+	  // broad, but might mean to "keep the same version"
+	  constexpr bool auto_installed = true;
+	  versions.push_back(std::make_pair(ver, auto_installed));
 	}
       else
 	LOG_TRACE(logger, "Skipping " << *i << ": it is not a version install.");
@@ -2344,7 +2347,11 @@ void aptitudeDepCache::apply_solution(const generic_solution<aptitude_universe> 
 		    << " at its current version ("
 		    << curver.VerStr() << ")");
 
-	  internal_mark_keep(pkg, is_auto, false);
+	  // auto_installed true because "install_version" is very broad, but
+	  // might mean to "keep the same version"
+	  bool was_auto = is_auto_installed(pkg);
+
+	  internal_mark_keep(pkg, was_auto, false);
 	}
       else
 	// install a particular version that's not the current one.
