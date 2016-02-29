@@ -753,12 +753,12 @@ bool cmdline_show_preview(bool as_upgrade, pkgset &to_install,
   std::unique_ptr<aptitude::apt::pkgAcquire_fetch_info> f = aptitude::apt::get_pkgAcquire_fetch_info();
   if (f)
     {
-      if(f->DebBytes != f->FetchBytes)
+      if (f->TotalNeeded != f->FetchNeeded)
 	printf(_("Need to get %sB/%sB of archives. "),
-	       SizeToStr(f->FetchBytes).c_str(), SizeToStr(f->DebBytes).c_str());
+	       SizeToStr(f->FetchNeeded).c_str(), SizeToStr(f->TotalNeeded).c_str());
       else
 	printf(_("Need to get %sB of archives. "),
-	       SizeToStr(f->DebBytes).c_str());
+	       SizeToStr(f->TotalNeeded).c_str());
     }
   else
     _error->DumpErrors();

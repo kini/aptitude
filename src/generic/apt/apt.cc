@@ -1628,9 +1628,9 @@ namespace aptitude
       pkgDPkgPM pm(*apt_cache_file);
       pm.GetArchives(&fetcher, &l, apt_package_records);
 
-      f->FetchBytes = fetcher.FetchNeeded();
-      f->FetchPBytes = fetcher.PartialPresent();
-      f->DebBytes = fetcher.TotalNeeded();
+      f->FetchNeeded = fetcher.FetchNeeded();
+      f->PartialPresent = fetcher.PartialPresent();
+      f->TotalNeeded = fetcher.TotalNeeded();
 
       return f;
     }

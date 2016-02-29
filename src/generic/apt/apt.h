@@ -568,7 +568,7 @@ namespace aptitude
     /** pkgAcquire fetch information
      */
     struct pkgAcquire_fetch_info {
-      unsigned long long FetchBytes = 0, FetchPBytes = 0, DebBytes = 0;
+      unsigned long long FetchNeeded = 0, PartialPresent = 0, TotalNeeded = 0;
     };
     /** Get pkgAcquire fetch information
      *
