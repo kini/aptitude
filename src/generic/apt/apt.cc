@@ -1615,6 +1615,9 @@ namespace aptitude
 
     std::unique_ptr<pkgAcquire_fetch_info> get_pkgAcquire_fetch_info()
     {
+      if (!apt_cache_file)
+	return {};
+
       std::unique_ptr<pkgAcquire_fetch_info> f = std::make_unique<pkgAcquire_fetch_info>();
 
       pkgAcquire fetcher;
