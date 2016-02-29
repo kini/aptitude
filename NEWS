@@ -24,6 +24,39 @@ Version 0.7.7 UNRELEASED
     enabled and affects many operations significantly (like doubling the size of
     the file "pkgstates").
 
+  * [curses] Download Size field shows remaining to be fetched (Closes: #446085)
+
+    Now it will show "DL: 368 kB/661 kB" instead of "DL Size: 368 kB" when part
+    of the files to download are already there, and the field is now aligned to
+    the right.  To make room for this in narrow terminals the field "Will use
+    43.0 kB of disk space" had been changed first to "Disk usage: +43.0 kB" due
+    to other needs, and now to "Disk: +43.0 kB".
+
+    The implementation was a bit tricky, though.  The total size of downloads is
+    pre-calculated in libapt and readily available; but to check for the actual
+    size needed one needs to instantiate and initialize pkgAcquire,
+    pkgSourceList and pkgDPkgPM, and then call a method to check for the files
+    that are already there on the disk.  The whole operation took only fractions
+    of a second (~0.03s in the development system, in the testing conditions),
+    but could be worse in other cases or when the disk is slow or busy.
+
+    In command-line mode this only happen once, so the overhead is negligible;
+    but on interactive systems this is bad because: a) it happens multiple
+    times; and b) because interactivity and screen freezes --even if small-- do
+    not mix well, and the program seems sluggish.
+
+    But specially, due to how aptitude implements redrawing the screen, this was
+    done in almost every key stroke, e.g. when moving to the next package/line
+    down, so the overhead was very significant.
+
+    So a mechanism was implemented (in previous commits) to only retrieve this
+    information when the state of any package changes (marked to install, to
+    delete, etc.), and to cache the result.  Afterwards, on typical redraws of
+    the screen without changes of packages involved (e.g. just scrolling), only
+    the cached information is needed, and filling this field takes only 30
+    microseconds (in the development system) instead of ~30ms when full check is
+    needed.
+
 - Bug fixes:
 
   * [cmdline] Fix crash with "show" and not installed packages (Closes: #815581)

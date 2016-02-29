@@ -73,8 +73,8 @@ cw::config::column_type_defaults pkg_item::pkg_columnizer::defaults[pkg_columniz
   {strlen(PACKAGE), false, false},  // progname
   {strlen(VERSION), false, false},  // progver
   {12, false, false},   // brokencount
-  {22, false, true},    // diskusage, example (max): "Disk usage: -2,587 kB "
-  {18, false, true},    // downloadsize, example (max): "DL Size: 2,587 kB "
+  {16, false, false},   // diskusage, example (max): "Disk: -2,587 kB "
+  {22, false, false},   // downloadsize, example (max): " DL: 2,586 kB/2,587 kB"
   {4, false, false},    // pin_priority
   {8, true, false},     // hostname
   {1, false, false}     // trust_state
@@ -86,7 +86,7 @@ cw::config::column_type_defaults pkg_item::pkg_columnizer::defaults[pkg_columniz
 // "progname" and "progver" are fixed (not affected by translation), and that
 // shortpriority, pin_priority and trust_state have also fixed sizes due to
 // being of numerical nature or size requirements that translators sould respect
-const char *default_widths = N_("30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 30 30 10 30 10 9 12 22 18 8");
+const char *default_widths = N_("30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 30 30 10 30 10 9 12 16 22 8");
 
 const char *pkg_item::pkg_columnizer::column_names[pkg_columnizer::numtypes]=
   {N_("Package"),
@@ -400,7 +400,7 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
 	if (apt_cache_file && ((*apt_cache_file)->UsrSize() != 0))
 	  {
 	    char sign = ((*apt_cache_file)->UsrSize() > 0) ? '+' : '-';
-	    snprintf(buf, bufsize, _("Disk usage: %c%sB"), sign, SizeToStr((*apt_cache_file)->UsrSize()).c_str());
+	    snprintf(buf, bufsize, _("Disk: %c%sB"), sign, SizeToStr((*apt_cache_file)->UsrSize()).c_str());
 	  }
 	return cw::column_disposition(buf, 0);
       }
@@ -410,10 +410,28 @@ cw::column_disposition pkg_item::pkg_columnizer::setup_column(const pkgCache::Pk
       {
 	if(apt_cache_file && (*apt_cache_file)->DebSize()!=0)
 	  {
+	    auto f = aptitude::apt::get_pkgAcquire_fetch_info();
 	    char buf[256];
-	    snprintf(buf, 256,
-		     _("DL Size: %sB"), SizeToStr((*apt_cache_file)->DebSize()).c_str());
-	    return cw::column_disposition(buf, 0);
+	    if (f && (f->FetchNeeded != f->TotalNeeded))
+	      {
+		snprintf(buf, 256, _("DL: %sB/%sB"),
+			 SizeToStr(f->FetchNeeded).c_str(),
+			 SizeToStr(f->TotalNeeded).c_str());
+	      }
+	    else
+	      {
+		snprintf(buf, 256, _("DL: %sB"),
+			 SizeToStr((*apt_cache_file)->DebSize()).c_str());
+	      }
+
+	    // align to the right
+	    string s(buf);
+	    size_t total_size = defaults[downloadsize].width;
+	    int fill_size = (total_size - s.size());
+	    if (fill_size > 0)
+	      s.insert(0, fill_size, ' ');
+
+	    return cw::column_disposition(s.c_str(), 0);
 	  }
 	else
 	  return cw::column_disposition("", 0);
