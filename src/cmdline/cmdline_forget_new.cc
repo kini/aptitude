@@ -88,7 +88,7 @@ int cmdline_forget_new(int argc, char *argv[],
     {
       (*apt_cache_file)->forget_new(NULL);
 
-      (*apt_cache_file)->save_selection_list(*progress);
+      (*apt_cache_file)->save_selection_list(progress.get());
 
       if(_error->PendingError())
 	{

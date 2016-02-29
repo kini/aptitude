@@ -731,7 +731,7 @@ namespace aptitude
       temp::name tmp_states(aptitude_states_filename);
       OpProgress progress;
 
-      if(!(*apt_cache_file)->save_selection_list(progress,
+      if(!(*apt_cache_file)->save_selection_list(&progress,
 						 tmp_states.get_name().c_str()))
 	return;
 

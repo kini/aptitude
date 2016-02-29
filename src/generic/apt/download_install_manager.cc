@@ -65,10 +65,8 @@ bool download_install_manager::prepare(OpProgress &progress,
       return false;
     }
 
-  if(!(*apt_cache_file)->save_selection_list(progress))
+  if(!(*apt_cache_file)->save_selection_list(&progress))
     return false;
-
-  progress.Done();
 
   // Abort here so we don't spew random messages below.
   if(_error->PendingError())
@@ -276,7 +274,7 @@ void download_install_manager::finish_post_dpkg(pkgPackageManager::OrderResult d
 	  if(apt_cache_file != NULL)
 	    {
 	      (*apt_cache_file)->forget_new(NULL);
-	      (*apt_cache_file)->save_selection_list(*progress);
+	      (*apt_cache_file)->save_selection_list(progress);
 	      post_forget_new_hook();
 	    }
 	}

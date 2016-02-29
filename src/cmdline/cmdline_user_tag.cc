@@ -210,8 +210,7 @@ namespace aptitude
 
       int exit_status = 0;
 
-      std::shared_ptr<OpProgress> text_progress = make_text_progress(false, term, term, term);
-      if (!(*apt_cache_file)->save_selection_list(*text_progress))
+      if (!(*apt_cache_file)->save_selection_list(&progress))
 	{
 	  exit_status = 1;
 	}

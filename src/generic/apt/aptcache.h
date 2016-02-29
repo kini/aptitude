@@ -326,9 +326,10 @@ public:
 
   // If do_initselections is "false", the "sticky states" will not be used
   // to initialize packages.  (important for the command-line mode)
-  bool build_selection_list(OpProgress &Prog, bool WithLock,
+  bool build_selection_list(OpProgress* Prog,
+			    bool WithLock,
 			    bool do_initselections,
-			    const char * status_fname=NULL);
+			    const char* status_fname = nullptr);
 
   void forget_new(undoable **undoer);
   // Clears all information about which packages are 'new'.  Overwrites undoer
@@ -346,7 +347,7 @@ public:
   inline aptitude_state &get_ext_state(const PkgIterator &Pkg)
   {return package_states[Pkg->ID];}
 
-  bool save_selection_list(OpProgress &prog, const char *status_fname=NULL);
+  bool save_selection_list(OpProgress* Prog, const char* status_fname = nullptr);
   // If the list isn't locked (or an fd isn't provided), is a NOP.
 
   void mark_install(const PkgIterator &Pkg, bool AutoInst, bool ReInstall, undo_group *undo);
@@ -578,8 +579,10 @@ public:
   inline aptitudeDepCache::StateCache &operator [](pkgCache::PkgIterator const &I) {return (*DCache)[I];};
   inline unsigned char &operator [](pkgCache::DepIterator const &I) {return (*DCache)[I];};
 
-  bool Open(OpProgress &Progress, bool do_initselections, bool WithLock=true,
-	    const char * status_fname=NULL);
+  bool Open(OpProgress* Progress,
+	    bool do_initselections,
+	    bool WithLock = true,
+	    const char* status_fname = NULL);
   bool is_locked() {return have_system_lock;} // EWW (also not quite right)
 
   void ReleaseLock();

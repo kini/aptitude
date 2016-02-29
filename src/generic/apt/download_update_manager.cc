@@ -59,12 +59,14 @@ bool download_update_manager::prepare(OpProgress &progress,
 {
   log = signallog;
 
-  if(apt_cache_file != NULL &&
-     !(*apt_cache_file)->save_selection_list(progress))
-    return false;
+  if(apt_cache_file == NULL)
+    {
+      _error->Error(_("The package cache is not available; unable to download and install packages."));
+      return false;
+    }
 
-  // FIXME: should save_selection_list do this?
-  progress.Done();
+  if(!(*apt_cache_file)->save_selection_list(&progress))
+    return false;
 
   if(src_list.ReadMainList() == false)
     {

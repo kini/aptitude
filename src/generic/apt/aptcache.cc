@@ -222,7 +222,7 @@ aptitudeDepCache::aptitudeDepCache(pkgCache *Cache, Policy *Plcy)
 
 bool aptitudeDepCache::Init(OpProgress *Prog, bool WithLock, bool do_initselections, const char *status_fname)
 {
-  return build_selection_list(*Prog, WithLock, do_initselections, status_fname);
+  return build_selection_list(Prog, WithLock, do_initselections, status_fname);
 }
 
 aptitudeDepCache::~aptitudeDepCache()
@@ -239,16 +239,17 @@ void aptitudeDepCache::set_read_only(bool new_read_only)
   read_only = new_read_only;
 }
 
-bool aptitudeDepCache::build_selection_list(OpProgress &Prog, bool WithLock,
+bool aptitudeDepCache::build_selection_list(OpProgress* Prog,
+					    bool WithLock,
 					    bool do_initselections,
-					    const char *status_fname)
+					    const char* status_fname)
 {
   action_group group(*this);
 
   bool initial_open=false;
   // This will be set to true if the state file does not exist.
 
-  if(!pkgDepCache::Init(&Prog))
+  if(!pkgDepCache::Init(Prog))
     return false;
 
   records = new pkgRecords(*this);
@@ -320,15 +321,17 @@ bool aptitudeDepCache::build_selection_list(OpProgress &Prog, bool WithLock,
     }
   else
     {
+      // last percent shown in progress -- do not update on every cycle
+      int last_pct_shown = 0;
+      int amt = 0;
       int file_size=state_file.Size();
-      Prog.OverallProgress(0, file_size, 1, _("Reading extended state information"));
+      if (Prog)
+	{
+	  Prog->OverallProgress(0, file_size, 1, _("Reading extended state information"));
+	}
 
       pkgTagFile tagfile(&state_file);
       pkgTagSection section;
-
-      // last percent shown in progress -- do not update on every cycle
-      int last_pct_shown = 0;
-      int amt=0;
 
       bool do_dselect=aptcfg->FindB(PACKAGE "::Track-Dselect-State", true);
       while(tagfile.Step(section))
@@ -450,23 +453,33 @@ bool aptitudeDepCache::build_selection_list(OpProgress &Prog, bool WithLock,
 		}
 	    }
 
-	  // update progress, but not every time -- very expensive
-	  amt += section.size();
-	  int pct = (100*amt) / file_size;
-	  if ((pct % 10 == 1) && last_pct_shown != pct)
+	  if (Prog)
 	    {
-	      last_pct_shown = pct;
-	      Prog.OverallProgress(amt, file_size, 1, _("Reading extended state information"));
+	      // update progress, but not every time -- very expensive
+	      amt += section.size();
+	      int pct = (100*amt) / file_size;
+	      if ((pct % 10 == 1) && last_pct_shown != pct)
+		{
+		  last_pct_shown = pct;
+		  Prog->OverallProgress(amt, file_size, 1, _("Reading extended state information"));
+		}
 	    }
 	}
-      Prog.OverallProgress(file_size, file_size, 1, _("Reading extended state information"));
-      Prog.Done();
+
+      if (Prog)
+	{
+	  Prog->OverallProgress(file_size, file_size, 1, _("Reading extended state information"));
+	  Prog->Done();
+	}
     }
 
   // only update if we're going to increase 10% or so
   int update_progress_10pct = Head().PackageCount / 10;
-  int num=0;
-  Prog.OverallProgress(0, Head().PackageCount, 1, _("Initializing package states"));
+  int num = 0;
+  if (Prog)
+    {
+      Prog->OverallProgress(0, Head().PackageCount, 1, _("Initializing package states"));
+    }
 
   new_package_count=0;
 
@@ -549,21 +562,27 @@ bool aptitudeDepCache::build_selection_list(OpProgress &Prog, bool WithLock,
 	  dirty = true;
 	}
 
-      // don't update on every cycle
-      if ((++num % update_progress_10pct) == 1)
+      if (Prog)
 	{
-	  Prog.OverallProgress(num, Head().PackageCount, 1, _("Initializing package states"));
+	  // don't update on every cycle
+	  if ((++num % update_progress_10pct) == 1)
+	    {
+	      Prog->OverallProgress(num, Head().PackageCount, 1, _("Initializing package states"));
+	    }
 	}
     }
 
-  Prog.OverallProgress(Head().PackageCount, Head().PackageCount, 1, _("Initializing package states"));
+  if (Prog)
+    Prog->OverallProgress(Head().PackageCount, Head().PackageCount, 1, _("Initializing package states"));
 
   duplicate_cache(&backup_state);
 
   if(aptcfg->FindB(PACKAGE "::Auto-Upgrade", false) && do_initselections)
     mark_all_upgradable(aptcfg->FindB(PACKAGE "::Auto-Install", true),
 			true, NULL);
-  Prog.Done();
+
+  if (Prog)
+    Prog->Done();
 
   read_only = (lock == -1);
 
@@ -682,8 +701,8 @@ void aptitudeDepCache::get_upgradable(bool ignore_removed,
 //  FIXME: clean up the logic by having an internal "write to this fd"
 // routine and an exported "ok, set up for the write and then clean up"
 // routine.
-bool aptitudeDepCache::save_selection_list(OpProgress &prog,
-					   const char *status_fname)
+bool aptitudeDepCache::save_selection_list(OpProgress* Prog,
+					   const char* status_fname)
 {
   // Refuse to write to disk if nothing changed and we aren't writing
   // to an unusual file
@@ -700,7 +719,7 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
   // Ow, that sucks.  The solution will be to write the apt states to
   // a separate file.
   if(status_fname == NULL)
-    writeStateFile(&prog, false);
+    writeStateFile(Prog, false);
 
   // helper class to save selection state of packages to dpkg database
   aptitude::apt::dpkg::DpkgSelections dpkg_selections;
@@ -721,15 +740,19 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
   if(!newstate.IsOpen())
     {
       _error->Error(_("Cannot open Aptitude state file"));
-      prog.Done();
+      if (Prog)
+	Prog->Done();
       return false;
     }
   else
     {
       // only update if we're going to increase 10% or so
       int update_progress_10pct = Head().PackageCount / 10;
-      int num=0;
-      prog.OverallProgress(0, Head().PackageCount, 1, _("Writing extended state information"));
+      int num = 0;
+      if (Prog)
+	{
+	  Prog->OverallProgress(0, Head().PackageCount, 1, _("Writing extended state information"));
+	}
 
       // save some allocations in the loop and other optimisations -- see #312920
       std::stringstream newstate_tmpbuffer;
@@ -830,14 +853,18 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
 		estate.original_selection_state = estate.selection_state;
 	      }
 
-	    // don't update on every cycle
-	    if ((++num % update_progress_10pct) == 1)
+	    if (Prog)
 	      {
-		prog.OverallProgress(num, Head().PackageCount, 1, _("Writing extended state information"));
+		// don't update on every cycle
+		if ((++num % update_progress_10pct) == 1)
+		  {
+		    Prog->OverallProgress(num, Head().PackageCount, 1, _("Writing extended state information"));
+		  }
 	      }
 	  }
 
-      prog.OverallProgress(Head().PackageCount, Head().PackageCount, 1, _("Writing extended state information"));
+      if (Prog)
+	Prog->OverallProgress(Head().PackageCount, Head().PackageCount, 1, _("Writing extended state information"));
 
       if (newstate.Failed() ||
 	  !newstate.Write(newstate_tmpbuffer.str().c_str(), newstate_tmpbuffer.str().size()))
@@ -848,7 +875,8 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
 	  if (!status_fname)
 	    unlink((statefile+".new").c_str());
 
-	  prog.Done();
+	  if (Prog)
+	    Prog->Done();
 	  return false;
 	}
       newstate.Close();
@@ -862,7 +890,8 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
 	  if(unlink(oldstr.c_str()) != 0 && errno != ENOENT)
 	    {
 	      _error->Errno("save_selection_list", _("failed to remove %s"), oldstr.c_str());
-	      prog.Done();
+	      if (Prog)
+		Prog->Done();
 	      return false;
 	    }
 
@@ -870,14 +899,16 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
 	    {
 	      _error->Errno("save_selection_list", _("failed to rename %s to %s"),
 			    statefile.c_str(), (statefile + ".old").c_str());
-	      prog.Done();
+	      if (Prog)
+		Prog->Done();
 	      return false;
 	    }
 
 	  if(rename(newstr.c_str(), statefile.c_str()) != 0)
 	    {
 	      _error->Errno("save_selection_list", _("couldn't replace %s with %s"), statefile.c_str(), newstr.c_str());
-	      prog.Done();
+	      if (Prog)
+		Prog->Done();
 	      return false;
 	    }
 	}
@@ -898,12 +929,15 @@ bool aptitudeDepCache::save_selection_list(OpProgress &prog,
       if (! dpkg_selections_saved)
 	{
 	  _error->Error(_("failed to save selections to dpkg database"));
-	  prog.Done();
+	  if (Prog)
+	    Prog->Done();
 	  return false;
 	}
     }
 
-  prog.Done();
+  if (Prog)
+    Prog->Done();
+
   return true;
 }
 
@@ -2387,8 +2421,10 @@ aptitudeCacheFile::~aptitudeCacheFile()
   delete Policy;
 }
 
-bool aptitudeCacheFile::Open(OpProgress &Progress, bool do_initselections,
-			     bool WithLock, const char *status_fname)
+bool aptitudeCacheFile::Open(OpProgress* Progress,
+			     bool do_initselections,
+			     bool WithLock,
+			     const char* status_fname)
 {
   if(WithLock)
     {
@@ -2406,8 +2442,9 @@ bool aptitudeCacheFile::Open(OpProgress &Progress, bool do_initselections,
     return _error->Error(_("The list of sources could not be read."));
 
   // Read the caches:
-  bool Res = pkgCacheGenerator::MakeStatusCache(List, &Progress, &Map, !WithLock);
-  Progress.Done();
+  bool Res = pkgCacheGenerator::MakeStatusCache(List, Progress, &Map, !WithLock);
+  if (Progress)
+    Progress->Done();
 
   if(!Res)
     return _error->Error(_("The package lists or status file could not be parsed or opened."));
@@ -2429,8 +2466,9 @@ bool aptitudeCacheFile::Open(OpProgress &Progress, bool do_initselections,
   if(_error->PendingError())
     return false;
 
-  DCache->Init(&Progress, WithLock, do_initselections, status_fname);
-  Progress.Done();
+  DCache->Init(Progress, WithLock, do_initselections, status_fname);
+  if (Progress)
+    Progress->Done();
 
   if(_error->PendingError())
     return false;

@@ -393,7 +393,7 @@ bool pkg_item::dispatch_key(const cw::config::key &k, cw::tree *owner)
       if ((*apt_cache_file)->is_dirty())
 	{
 	  progress_ref p = gen_progress_bar();
-	  bool saved_ok = (*apt_cache_file)->save_selection_list(*p->get_progress().unsafe_get_ref());
+	  bool saved_ok = (*apt_cache_file)->save_selection_list(p->get_progress().unsafe_get_ref());
 	  p->destroy();
 
 	  if (saved_ok)

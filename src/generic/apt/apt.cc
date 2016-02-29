@@ -411,7 +411,7 @@ void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
 
   LOG_TRACE(logger, "Opening the apt cache.");
 
-  bool open_failed=!new_file->Open(*progress_bar, do_initselections,
+  bool open_failed=!new_file->Open(progress_bar, do_initselections,
 				   operation_needs_lock && ((getuid() == 0) && !simulate),
 				   status_fname)
     || _error->PendingError();
@@ -425,7 +425,7 @@ void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
       // Don't discard errors, make sure they get displayed instead.
       consume_errors();
 
-      open_failed=!new_file->Open(*progress_bar, do_initselections,
+      open_failed=!new_file->Open(progress_bar, do_initselections,
 				  false, status_fname);
 
       if(open_failed)
@@ -455,7 +455,7 @@ void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
   if(!status_fname && apt_cache_file->is_locked())
     {
       LOG_TRACE(logger, "Trying to save the current selection list.");
-      (*apt_cache_file)->save_selection_list(*progress_bar);
+      (*apt_cache_file)->save_selection_list(progress_bar);
     }
 
   LOG_TRACE(logger, "Loading the apt package records.");

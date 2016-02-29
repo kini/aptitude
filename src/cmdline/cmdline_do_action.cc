@@ -382,7 +382,7 @@ int cmdline_do_action(int argc, char *argv[],
     {
       aptitude::cmdline::apply_user_tags(user_tags);
 
-      if(!(*apt_cache_file)->save_selection_list(*progress))
+      if(!(*apt_cache_file)->save_selection_list(progress.get()))
 	{
 	  _error->DumpErrors();
 	  return -1;
