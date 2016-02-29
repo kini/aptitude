@@ -46,9 +46,7 @@
 
 // System includes:
 #include <apt-pkg/algorithms.h>
-#include <apt-pkg/dpkgpm.h>
 #include <apt-pkg/error.h>
-#include <apt-pkg/sourcelist.h>
 #include <apt-pkg/strutl.h>
 
 #include <cwidget/fragment.h>
@@ -64,35 +62,6 @@ using aptitude::cmdline::terminal_metrics;
 using aptitude::why::make_cmdline_why_callbacks;
 using aptitude::why::why_callbacks;
 
-
-struct fetchinfo
-{
-  unsigned long long FetchBytes, FetchPBytes, DebBytes;
-
-  fetchinfo()
-    : FetchBytes(0), FetchPBytes(0), DebBytes(0)
-  {
-  }
-};
-
-static bool get_fetchinfo(fetchinfo &f)
-{
-  download_signal_log m;
-  pkgAcquire fetcher;
-  fetcher.SetLog(&m);
-  pkgSourceList l;
-  if(!l.ReadMainList())
-    return _error->Error(_("Couldn't read list of sources"));
-
-  pkgDPkgPM pm(*apt_cache_file);
-  pm.GetArchives(&fetcher, &l, apt_package_records);
-
-  f.FetchBytes=fetcher.FetchNeeded();
-  f.FetchPBytes=fetcher.PartialPresent();
-  f.DebBytes=fetcher.TotalNeeded();
-
-  return true;
-}
 
 static string reason_string_list(set<reason> &reasons)
 {
@@ -781,15 +750,15 @@ bool cmdline_show_preview(bool as_upgrade, pkgset &to_install,
   printf(_("%lu to remove and %lu not upgraded.\n"),
 	 (*apt_cache_file)->DelCount(),(*apt_cache_file)->KeepCount());
 
-  fetchinfo f;
-  if(get_fetchinfo(f))
+  std::unique_ptr<aptitude::apt::pkgAcquire_fetch_info> f = aptitude::apt::get_pkgAcquire_fetch_info();
+  if (f)
     {
-      if(f.DebBytes!=f.FetchBytes)
+      if(f->DebBytes != f->FetchBytes)
 	printf(_("Need to get %sB/%sB of archives. "),
-	       SizeToStr(f.FetchBytes).c_str(), SizeToStr(f.DebBytes).c_str());
+	       SizeToStr(f->FetchBytes).c_str(), SizeToStr(f->DebBytes).c_str());
       else
 	printf(_("Need to get %sB of archives. "),
-	       SizeToStr(f.DebBytes).c_str());
+	       SizeToStr(f->DebBytes).c_str());
     }
   else
     _error->DumpErrors();

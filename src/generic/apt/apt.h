@@ -563,6 +563,18 @@ namespace aptitude
      * @return Whether the operation was successful
      */
     bool clean_cache_dir();
+
+
+    /** pkgAcquire fetch information
+     */
+    struct pkgAcquire_fetch_info {
+      unsigned long long FetchBytes = 0, FetchPBytes = 0, DebBytes = 0;
+    };
+    /** Get pkgAcquire fetch information
+     *
+     * @return Information requested, that can be nullptr if error
+     */
+    std::unique_ptr<pkgAcquire_fetch_info> get_pkgAcquire_fetch_info();
   }
 }
 

@@ -47,6 +47,7 @@
 #include <apt-pkg/clean.h>
 #include <apt-pkg/configuration.h>
 #include <apt-pkg/depcache.h>
+#include <apt-pkg/dpkgpm.h>
 #include <apt-pkg/error.h>
 #include <apt-pkg/fileutl.h>
 #include <apt-pkg/init.h>
@@ -1610,6 +1611,28 @@ namespace aptitude
 	{
 	  return true;
 	}
+    }
+
+    std::unique_ptr<pkgAcquire_fetch_info> get_pkgAcquire_fetch_info()
+    {
+      std::unique_ptr<pkgAcquire_fetch_info> f = std::make_unique<pkgAcquire_fetch_info>();
+
+      pkgAcquire fetcher;
+      pkgSourceList l;
+      if (!l.ReadMainList())
+	{
+	  _error->Error(_("Couldn't read list of sources"));
+	  return {};
+	}
+
+      pkgDPkgPM pm(*apt_cache_file);
+      pm.GetArchives(&fetcher, &l, apt_package_records);
+
+      f->FetchBytes = fetcher.FetchNeeded();
+      f->FetchPBytes = fetcher.PartialPresent();
+      f->DebBytes = fetcher.TotalNeeded();
+
+      return f;
     }
 
   }
