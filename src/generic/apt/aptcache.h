@@ -318,9 +318,9 @@ public:
   bool Init(OpProgress *Prog, bool WithLock,
 	    bool do_initselections, const char * status_fname=NULL);
 
-  bool is_locked() {return lock!=-1;}
+  bool is_locked() const { return (lock != -1); }
 
-  bool is_dirty() {return dirty;}
+  bool is_dirty() const { return dirty; }
 
   pkgRecords &get_records() { return *records; }
 
