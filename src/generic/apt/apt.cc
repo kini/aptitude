@@ -1613,29 +1613,45 @@ namespace aptitude
 	}
     }
 
-    std::unique_ptr<pkgAcquire_fetch_info> get_pkgAcquire_fetch_info()
+
+    static std::unique_ptr<pkgAcquire_fetch_info> internal_fetchinfo {};
+
+    void update_pkgAcquire_fetch_info()
     {
       if (!apt_cache_file)
-	return {};
-
-      std::unique_ptr<pkgAcquire_fetch_info> f = std::make_unique<pkgAcquire_fetch_info>();
+	return;
 
       pkgAcquire fetcher;
       pkgSourceList l;
       if (!l.ReadMainList())
 	{
 	  _error->Error(_("Couldn't read list of sources"));
-	  return {};
+	  return;
 	}
 
       pkgDPkgPM pm(*apt_cache_file);
       pm.GetArchives(&fetcher, &l, apt_package_records);
+      if (_error->PendingError())
+	return;
 
-      f->FetchNeeded = fetcher.FetchNeeded();
-      f->PartialPresent = fetcher.PartialPresent();
-      f->TotalNeeded = fetcher.TotalNeeded();
+      pkgAcquire_fetch_info f { fetcher.FetchNeeded(), fetcher.PartialPresent(), fetcher.TotalNeeded() };
 
-      return f;
+      internal_fetchinfo = std::make_unique<pkgAcquire_fetch_info>(f);
+    }
+
+    std::unique_ptr<pkgAcquire_fetch_info> get_pkgAcquire_fetch_info()
+    {
+      // if invalid, update and register for next time
+      if (!internal_fetchinfo && apt_cache_file)
+	{
+	  update_pkgAcquire_fetch_info();
+	  (*apt_cache_file)->package_state_changed.connect(sigc::ptr_fun(update_pkgAcquire_fetch_info));
+	}
+
+      if (internal_fetchinfo)
+	return std::make_unique<pkgAcquire_fetch_info>(*internal_fetchinfo);
+      else
+	return {};
     }
 
   }

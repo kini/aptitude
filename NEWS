@@ -216,6 +216,11 @@ Version 0.7.7 UNRELEASED
   * src/generic/apt/apt.*: Create get_pkgAcquire_fetch_info() to reuse in the
     future
 
+    Update the information when the package installation states change, and
+    cache the information, so it can be used for example in the interactive mode
+    without the information being retrieved again and again when the screen is
+    redrawn (simply moving a line up or down, for example).
+
 - Translation updates:
 
   * Dutch documentation translation by Frans Spiesschaert (Closes: #815183)
