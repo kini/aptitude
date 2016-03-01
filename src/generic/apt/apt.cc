@@ -1618,7 +1618,7 @@ namespace aptitude
 
     void update_pkgAcquire_fetch_info()
     {
-      if (!apt_cache_file)
+      if (!apt_cache_file || !apt_package_records)
 	return;
 
       pkgAcquire fetcher;
