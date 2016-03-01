@@ -1,7 +1,7 @@
 // infer_reason.cc
 //
 // Copyright 2004 Daniel Burrows
-// Copyright 2016 Manuel A. Fernandez Montecelo
+// Copyright 2015-2016 Manuel A. Fernandez Montecelo
 
 #include "infer_reason.h"
 
@@ -139,6 +139,14 @@ void infer_reason(pkgCache::PkgIterator pkg, set<reason> &reasons)
 	      or_end->Type==pkgCache::Dep::Suggests) &&
 	     ((*apt_cache_file)[or_end]&pkgDepCache::DepGNow) &&
 	     !((*apt_cache_file)[or_end]&pkgDepCache::DepGInstall))
+	    reasons.insert(reason(d.TargetPkg(), d));
+	}
+
+      // depends on broken packages -- see #342835
+      for (pkgCache::DepIterator d = pkg.CurrentVer().DependsList(); !d.end(); ++d)
+	{
+	  auto state = (*apt_cache_file)[d.TargetPkg()];
+	  if (state.NowBroken() || state.NowPolicyBroken() || state.InstBroken() || state.InstPolicyBroken())
 	    reasons.insert(reason(d.TargetPkg(), d));
 	}
     }

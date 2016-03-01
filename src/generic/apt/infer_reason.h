@@ -1,7 +1,7 @@
 // infer_reason.h
 //
 //  Copyright 2004 Daniel Burrows
-//  Copyright 2016 Manuel A. Fernandez Montecelo
+//  Copyright 2015-2016 Manuel A. Fernandez Montecelo
 
 #ifndef INFER_DEPS_H
 #define INFER_DEPS_H
