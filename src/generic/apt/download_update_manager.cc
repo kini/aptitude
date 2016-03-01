@@ -59,13 +59,10 @@ bool download_update_manager::prepare(OpProgress &progress,
 {
   log = signallog;
 
-  if(apt_cache_file == NULL)
-    {
-      _error->Error(_("The package cache is not available; unable to download and install packages."));
-      return false;
-    }
-
-  if(!(*apt_cache_file)->save_selection_list(&progress))
+  // if apt_cache_file is available try to save, but it cannot be enforced
+  // because aptitude can be launched with "-u", and so this update can happen
+  // before apt_cache_file is available -- see #816385
+  if (apt_cache_file && !(*apt_cache_file)->save_selection_list(&progress))
     return false;
 
   if(src_list.ReadMainList() == false)

@@ -1,6 +1,17 @@
 [2016-03-xx]
 Version 0.7.8 UNRELEASED
 
+- Bug fixes:
+
+  * Allow update to happen at the start ("-u") (Closes: #816385)
+
+    While trying to make the code to behave the same in download_install_manager
+    and download_update_manager, a change was made to make the latter to save
+    the "package state" before proceeding.  However, when aptitude is launched
+    with "-u", download_update_manager runs before apt_cache_file is loaded for
+    the first time, so it's not possible to save the "package state".  So revert
+    the behaviour and act as before -- try to save the state, but don't enforce
+    it.
 
 [2016-03-01]
 Version 0.7.7
