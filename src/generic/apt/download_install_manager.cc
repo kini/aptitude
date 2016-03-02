@@ -194,8 +194,12 @@ pkgPackageManager::OrderResult download_install_manager::run_dpkg(int status_fd)
   sigfillset(&allsignals);
 
   pthread_sigmask(SIG_UNBLOCK, &allsignals, &oldsignals);
-  APT::Progress::PackageManagerProgressFd progress(status_fd);
-  pkgPackageManager::OrderResult pmres = pm->DoInstallPostFork(&progress);
+  std::unique_ptr<APT::Progress::PackageManager> progress;
+  if (status_fd > 0)
+    progress = std::make_unique<APT::Progress::PackageManagerProgressFd>(status_fd);
+  else
+    progress = std::unique_ptr<APT::Progress::PackageManager> { APT::Progress::PackageManagerProgressFactory() };
+  pkgPackageManager::OrderResult pmres = pm->DoInstallPostFork(progress.get());
 
   switch(pmres)
     {
