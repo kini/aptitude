@@ -270,11 +270,12 @@ static bool load_tags_from_verfiles(OpProgress *progress)
 
   sort(verfiles.begin(), verfiles.end(), location_compare());
 
-  // only update if we're going to increase 10% or so
-  int update_progress_10pct = verfiles.size() / 10;
-  size_t num = 0;
-  progress->OverallProgress(0, verfiles.size(), 1,
-                            _("Building tag database"));
+  size_t progress_num = 0;
+  int progress_total = verfiles.size();
+  // only update if we're going to increase 10% or so, minimum 1 (to avoid
+  // divide by zero)
+  int update_progress_10pct = std::max(progress_total / 10, 1);
+  progress->OverallProgress(0, progress_total, 1, _("Building tag database"));
 
   for(std::vector<loc_pair>::iterator i=verfiles.begin();
       i!=verfiles.end(); ++i)
@@ -282,9 +283,9 @@ static bool load_tags_from_verfiles(OpProgress *progress)
       insert_tags(i->first, i->second);
 
       // don't update on every cycle
-      if ((++num % update_progress_10pct) == 1)
+      if ((++progress_num % update_progress_10pct) == 1)
 	{
-	  progress->OverallProgress(num, verfiles.size(), 1,
+	  progress->OverallProgress(progress_num, progress_total, 1,
 				    _("Building tag database"));
 	}
     }

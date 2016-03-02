@@ -324,7 +324,7 @@ bool aptitudeDepCache::build_selection_list(OpProgress* Prog,
       // last percent shown in progress -- do not update on every cycle
       int last_pct_shown = 0;
       int amt = 0;
-      int file_size=state_file.Size();
+      int file_size = state_file.Size();
       if (Prog)
 	{
 	  Prog->OverallProgress(0, file_size, 1, _("Reading extended state information"));
@@ -457,7 +457,7 @@ bool aptitudeDepCache::build_selection_list(OpProgress* Prog,
 	    {
 	      // update progress, but not every time -- very expensive
 	      amt += section.size();
-	      int pct = (100*amt) / file_size;
+	      int pct = (file_size > 0) ? (100*amt) / file_size : 0;
 	      if ((pct % 10 == 1) && last_pct_shown != pct)
 		{
 		  last_pct_shown = pct;
@@ -473,12 +473,14 @@ bool aptitudeDepCache::build_selection_list(OpProgress* Prog,
 	}
     }
 
-  // only update if we're going to increase 10% or so
-  int update_progress_10pct = Head().PackageCount / 10;
-  int num = 0;
+  int progress_num = 0;
+  int progress_total = Head().PackageCount;
+  // only update if we're going to increase 10% or so, minimum 1 (to avoid
+  // divide by zero)
+  int update_progress_10pct = std::max(progress_total / 10, 1);
   if (Prog)
     {
-      Prog->OverallProgress(0, Head().PackageCount, 1, _("Initializing package states"));
+      Prog->OverallProgress(0, progress_total, 1, _("Initializing package states"));
     }
 
   new_package_count=0;
@@ -565,15 +567,15 @@ bool aptitudeDepCache::build_selection_list(OpProgress* Prog,
       if (Prog)
 	{
 	  // don't update on every cycle
-	  if ((++num % update_progress_10pct) == 1)
+	  if ((++progress_num % update_progress_10pct) == 1)
 	    {
-	      Prog->OverallProgress(num, Head().PackageCount, 1, _("Initializing package states"));
+	      Prog->OverallProgress(progress_num, progress_total, 1, _("Initializing package states"));
 	    }
 	}
     }
 
   if (Prog)
-    Prog->OverallProgress(Head().PackageCount, Head().PackageCount, 1, _("Initializing package states"));
+    Prog->OverallProgress(progress_total, progress_total, 1, _("Initializing package states"));
 
   duplicate_cache(&backup_state);
 
@@ -746,12 +748,14 @@ bool aptitudeDepCache::save_selection_list(OpProgress* Prog,
     }
   else
     {
-      // only update if we're going to increase 10% or so
-      int update_progress_10pct = Head().PackageCount / 10;
-      int num = 0;
+      int progress_num = 0;
+      int progress_total = Head().PackageCount;
+      // only update if we're going to increase 10% or so, minimum 1 (to avoid
+      // divide by zero)
+      int update_progress_10pct = std::max(progress_total / 10, 1);
       if (Prog)
 	{
-	  Prog->OverallProgress(0, Head().PackageCount, 1, _("Writing extended state information"));
+	  Prog->OverallProgress(0, progress_total, 1, _("Writing extended state information"));
 	}
 
       // save some allocations in the loop and other optimisations -- see #312920
@@ -767,7 +771,7 @@ bool aptitudeDepCache::save_selection_list(OpProgress* Prog,
       for(PkgIterator i=PkgBegin(); !i.end(); i++)
 	if (i.VersionList().end())
 	  {
-	    ++num;
+	    ++progress_num;
 	  }
 	else
 	  {
@@ -856,15 +860,15 @@ bool aptitudeDepCache::save_selection_list(OpProgress* Prog,
 	    if (Prog)
 	      {
 		// don't update on every cycle
-		if ((++num % update_progress_10pct) == 1)
+		if ((++progress_num % update_progress_10pct) == 1)
 		  {
-		    Prog->OverallProgress(num, Head().PackageCount, 1, _("Writing extended state information"));
+		    Prog->OverallProgress(progress_num, progress_total, 1, _("Writing extended state information"));
 		  }
 	      }
 	  }
 
       if (Prog)
-	Prog->OverallProgress(Head().PackageCount, Head().PackageCount, 1, _("Writing extended state information"));
+	Prog->OverallProgress(progress_total, progress_total, 1, _("Writing extended state information"));
 
       if (newstate.Failed() ||
 	  !newstate.Write(newstate_tmpbuffer.str().c_str(), newstate_tmpbuffer.str().size()))

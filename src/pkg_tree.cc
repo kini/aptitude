@@ -193,10 +193,11 @@ bool pkg_tree::build_tree(OpProgress &progress)
 			   *apt_package_records);
 
 
-	  int num = 0;
-	  int total = matches.size();
-	  // only update if we're going to increase 10% or so
-	  int update_progress_10pct = total / 10;
+	  int progress_num = 0;
+	  int progress_total = matches.size();
+	  // only update if we're going to increase 10% or so, minimum 1 (to
+	  // avoid divide by zero)
+	  int update_progress_10pct = std::max(progress_total / 10, 1);
 
 	  for(std::vector<std::pair<pkgCache::PkgIterator, cwidget::util::ref_ptr<matching::structural_match> > >::const_iterator
 		it = matches.begin(); it != matches.end(); ++it)
@@ -206,9 +207,9 @@ bool pkg_tree::build_tree(OpProgress &progress)
 	      cache_empty = false;
 
 	      // don't update on every cycle
-	      if ((++num % update_progress_10pct) == 1)
+	      if ((++progress_num % update_progress_10pct) == 1)
 		{
-		  progress.OverallProgress(num, total, 1, _("Building view"));
+		  progress.OverallProgress(progress_num, progress_total, 1, _("Building view"));
 		}
 
 	      // Filter useless packages up-front.
@@ -219,23 +220,24 @@ bool pkg_tree::build_tree(OpProgress &progress)
 	      grouper->add_package(pkg, mytree);
 	    }
 
-	  progress.OverallProgress(total, total, 1, _("Building view"));
+	  progress.OverallProgress(progress_total, progress_total, 1, _("Building view"));
 	}
       else
 	{
-	  int num = 0;
-	  int total = (*apt_cache_file)->Head().PackageCount;
-	  // only update if we're going to increase 10% or so
-	  int update_progress_10pct = total / 10;
+	  int progress_num = 0;
+	  int progress_total = (*apt_cache_file)->Head().PackageCount;
+	  // only update if we're going to increase 10% or so, minimum 1 (to
+	  // avoid divide by zero)
+	  int update_progress_10pct = std::max(progress_total / 10, 1);
 
 	  for(pkgCache::PkgIterator pkg = (*apt_cache_file)->PkgBegin(); !pkg.end(); ++pkg)
 	    {
 	      cache_empty = false;
 
 	      // don't update on every cycle
-	      if ((++num % update_progress_10pct) == 1)
+	      if ((++progress_num % update_progress_10pct) == 1)
 		{
-		  progress.OverallProgress(num, total, 1, _("Building view"));
+		  progress.OverallProgress(progress_num, progress_total, 1, _("Building view"));
 		}
 
 	      // Filter useless packages up-front.
@@ -246,7 +248,7 @@ bool pkg_tree::build_tree(OpProgress &progress)
 	      grouper->add_package(pkg, mytree);
 	    }
 
-	  progress.OverallProgress(total, total, 1, _("Building view"));
+	  progress.OverallProgress(progress_total, progress_total, 1, _("Building view"));
 	}
 
       pkg_sortpolicy_wrapper sorter(sorting);
