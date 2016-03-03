@@ -56,10 +56,6 @@ protected:
    */
   pkgAcquire *fetcher;
 
-  /** Whether download is actually needed
-   */
-  bool is_download_needed;
-
 public:
   download_manager();
   virtual ~download_manager();

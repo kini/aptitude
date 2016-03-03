@@ -20,8 +20,8 @@
 
 #include "download_manager.h"
 
-download_manager::download_manager()
-  : fetcher { nullptr }, is_download_needed { true }
+download_manager::download_manager() :
+  fetcher { nullptr }
 {
 }
 
@@ -32,16 +32,10 @@ download_manager::~download_manager()
 
 pkgAcquire::RunResult download_manager::do_download()
 {
-  if (is_download_needed)
-    return fetcher->Run();
-  else
-    return pkgAcquire::RunResult::Continue;
+  return fetcher->Run();
 }
 
 pkgAcquire::RunResult download_manager::do_download(int PulseInterval)
 {
-  if (is_download_needed)
-    return fetcher->Run(PulseInterval);
-  else
-    return pkgAcquire::RunResult::Continue;
+  return fetcher->Run(PulseInterval);
 }

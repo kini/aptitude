@@ -27,6 +27,13 @@ Version 0.7.8 UNRELEASED
   * Use factory from APT to support different progress bars for dpkg actions
     (Closes: #816520)
 
+  * Fix problem with recent change that prevented to work with local
+    repositories (Closes: #816537)
+
+    Even if we would like to not have to get locks and have to call
+    fetcher->Run() if no (remote) fetch is needed (see #766122), it is needed
+    anyway to work with local repositories (see #816537).
+
 
 [2016-03-01]
 Version 0.7.7
