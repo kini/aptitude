@@ -109,6 +109,10 @@ void ui_solution_screen()
 
   do_examine_solution();
   ui_main();
+
+  // copied from "struct close_cache_on_exit" in main.cc, to fix #816322
+  apt_shutdown();
+
   exit(0);
 }
 
