@@ -1,6 +1,7 @@
 // download_item.cc
 //
 //  Copyright 1999, 2004-2005, 2007 Daniel Burrows
+//  Copyright 2015-2016 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -88,7 +89,8 @@ void download_item::paint(cw::tree *win, int y, bool hierarchical,
 
 	  if(worker->TotalSize>0)
 	    {
-	      char intbuf[50]; // Waay more than enough.
+	      size_t bufsize = 256;
+	      char intbuf[bufsize];
 	      barsize=(width*worker->CurrentSize)/worker->TotalSize;
 	      win->apply_style(progress_style);
 
@@ -96,7 +98,7 @@ void download_item::paint(cw::tree *win, int y, bool hierarchical,
 		barsize=width;
 
 	      win->apply_style(get_normal_style());
-	      sprintf(intbuf,
+	      snprintf(intbuf, bufsize,
 		      "%sB/%sB",
 		      SizeToStr(worker->CurrentSize).c_str(),
 		      SizeToStr(worker->TotalSize).c_str());

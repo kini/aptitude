@@ -312,9 +312,10 @@ void download_list::update_workers(pkgAcquire *Owner)
 	    : item->Description + ": ";
 	  wstring output = cw::util::transcode(status);
 
-	  char intbuf[50]; // Waay more than enough.
+	  size_t bufsize = 256;
+	  char intbuf[bufsize];
 
-	  sprintf(intbuf,
+	  snprintf(intbuf, bufsize,
 		  " [ %sB/%sB ]",
 		  SizeToStr(serf->CurrentSize).c_str(),
 		  SizeToStr(serf->TotalSize).c_str());
