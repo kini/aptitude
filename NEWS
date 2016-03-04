@@ -42,6 +42,15 @@ Version 0.7.8 UNRELEASED
     sequence of shutting down data structures from apt and aptitude via
     apt_shutdown().
 
+  * Fix problem with auto-flag due to persistent Auto-New-Install in pkgstates
+    (Closes: #816497)
+
+    Auto-New-Install remained in pkgstates after the package was installed.  As
+    a consequence, (un)markauto (and maybe some other parts) were not working on
+    packages where this had been recorded, because the persistent
+    Auto-New-Install was read back upon start and was interfering with the logic
+    of the code handling auto-flags.
+
 
 [2016-03-01]
 Version 0.7.7

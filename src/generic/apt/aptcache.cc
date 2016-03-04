@@ -782,10 +782,24 @@ bool aptitudeDepCache::save_selection_list(OpProgress* Prog,
 
 	    upgradestr = ((!i.CurrentVer().end()) && state.Install()) ? "Upgrade: yes\n" : "";
 
+	    // packages that are auto and not yet installed are marked in this
+	    // way in aptitude's DB, to set the flag accordingly when installing
+	    // for the first time.  apt does not save auto state on uninstalled
+	    // packages.
+	    //
+	    // it comes originally from fix to #435079; and then to fix problem
+	    // when install-auto scheduled from previous sessions (but were not
+	    // installed at that point) were losing the auto flag (#563877).
+	    //
+	    // the flag is removed if the package is already installed, to fix
+	    // having this flag and preventing code handling auto in different
+	    // parts from working normally (#816497)
+	    bool is_or_was_auto = ((state.Flags & Flag::Auto) != 0) || estate.previously_auto_package;
 	    bool auto_new_install = (i.CurrentVer().end() &&
 				     state.Install() &&
-				     ((state.Flags & Flag::Auto) != 0));
-	    autostr = (auto_new_install || estate.previously_auto_package) ? "Auto-New-Install: yes\n" : "";
+				     is_or_was_auto);
+	    autostr = (auto_new_install) ? "Auto-New-Install: yes\n" : "";
+
 
 	    if(state.Install() &&
 	       !estate.candver.empty() &&
