@@ -1099,8 +1099,7 @@ namespace aptitude
 	    {
 	      pkgCache::PkgIterator pkg(target.get_package_iterator(cache));
 
-	      if(  ((pkg->Flags & pkgCache::Flag::Essential) == pkgCache::Flag::Essential) ||
-		   ((pkg->Flags & pkgCache::Flag::Important) == pkgCache::Flag::Important)  )
+	      if ((pkg->Flags & pkgCache::Flag::Essential) == pkgCache::Flag::Essential)
 		  return match::make_atomic(p);
 	      else
 		return NULL;
