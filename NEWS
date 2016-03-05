@@ -1,6 +1,18 @@
 [2016-03-xx]
 Version 0.7.9 UNRELEASED
 
+- Internal changes:
+
+  * configure.ac: Allow to disable check for Boost library headers individually
+
+    Note: Should be used only when developing, if at all.
+
+    The reason to implement this is that the check is expensive, 1~2 minutes at
+    ./configure time (more than 50% of the time that it takes to run the whole
+    script); and if it's known that the packages and versions of related Boost
+    libraries are there and working then it is unnecessary to check again and
+    again.
+
 
 [2016-03-05]
 Version 0.7.8
