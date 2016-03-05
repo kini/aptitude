@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude 0.4.11.9\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2016-02-29 22:33+0000\n"
+"POT-Creation-Date: 2016-03-05 17:52+0000\n"
 "PO-Revision-Date: 2014-11-29 19:57+0100\n"
 "Last-Translator: Orestes Mas <orestes@tsc.upc.edu>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -912,7 +912,7 @@ msgid "download: you must specify at least one package to download\n"
 msgstr "baixa: heu d'especificar un mínim d'un paquet a baixar\n"
 
 #: src/cmdline/cmdline_download.cc:65
-#: src/generic/apt/download_install_manager.cc:80
+#: src/generic/apt/download_install_manager.cc:89
 msgid "Couldn't read source list"
 msgstr "No s'ha pogut llegir la llista de fonts"
 
@@ -2288,77 +2288,77 @@ msgid ""
 "pattern\n"
 msgstr ""
 
-#: src/cmdline/cmdline_util.cc:167
+#: src/cmdline/cmdline_util.cc:171
 #, c-format
 msgid "No candidate version found for %s\n"
 msgstr "No s'ha trobat cap versió candidata per a %s\n"
 
-#: src/cmdline/cmdline_util.cc:169
+#: src/cmdline/cmdline_util.cc:173
 #, c-format
 msgid "No current or candidate version found for %s\n"
 msgstr "No s'ha trobat cap versió actual o candidata per a %s\n"
 
-#: src/cmdline/cmdline_util.cc:193
+#: src/cmdline/cmdline_util.cc:197
 #, c-format
 msgid "Unable to find an archive \"%s\" for the package \"%s\"\n"
 msgstr "No s'ha pogut trobar l'arxiu \"%s\" del paquet \"%s\"\n"
 
-#: src/cmdline/cmdline_util.cc:203
+#: src/cmdline/cmdline_util.cc:207
 #, c-format
 msgid "Unable to find a version \"%s\" for the package \"%s\"\n"
 msgstr "No s'ha pogut trobar la versió \"%s\" del paquet \"%s\"\n"
 
-#: src/cmdline/cmdline_util.cc:209
+#: src/cmdline/cmdline_util.cc:213
 #, c-format
 msgid "Internal error: invalid value %i passed to cmdline_find_ver!\n"
 msgstr ""
 "S'ha produït un error intern: s'ha passat un valor %i no vàlid a "
 "cmdline_find_ver\n"
 
-#: src/cmdline/cmdline_util.cc:239
+#: src/cmdline/cmdline_util.cc:243
 #, c-format
 msgid "You cannot specify both an archive and a version for a package\n"
 msgstr "No podeu especificar un arxiu i una versió per a un paquet\n"
 
-#: src/cmdline/cmdline_util.cc:273
+#: src/cmdline/cmdline_util.cc:277
 #, fuzzy, c-format
 msgid "Couldn't find task '%s'"
 msgstr "No s'ha pogut trobar un registre de modificacions de %s"
 
-#: src/cmdline/cmdline_util.cc:361
+#: src/cmdline/cmdline_util.cc:365
 #, fuzzy, c-format
 msgid "%d (%+d) broken"
 msgid_plural "%d (%+d) broken"
 msgstr[0] "%d trencat [%+d]"
 msgstr[1] "%d trencats [%+d]"
 
-#: src/cmdline/cmdline_util.cc:375
+#: src/cmdline/cmdline_util.cc:379
 #, fuzzy, c-format
 msgid "%d (%+d) upgradable"
 msgid_plural "%d (%+d) upgradable"
 msgstr[0] "%d actualitzat"
 msgstr[1] "%d actualitzats"
 
-#: src/cmdline/cmdline_util.cc:389
+#: src/cmdline/cmdline_util.cc:393
 #, c-format
 msgid "%d (%+d) new"
 msgid_plural "%d (%+d) new"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/cmdline/cmdline_util.cc:400
+#: src/cmdline/cmdline_util.cc:404
 #, c-format
 msgid "Current status: %F."
 msgstr "Estat actual: %F."
 
-#: src/cmdline/cmdline_util.cc:411
+#: src/cmdline/cmdline_util.cc:415
 #, c-format
 msgid "There is %d newly obsolete package."
 msgid_plural "There are %d newly obsolete packages."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/cmdline/cmdline_util.cc:423
+#: src/cmdline/cmdline_util.cc:427
 #, c-format
 msgid "There is %d newly obsolete package: "
 msgid_plural "There are %d newly obsolete packages: "
@@ -2599,15 +2599,15 @@ msgstr "Marcadors"
 msgid "User Tags"
 msgstr "Marcadors d'usuari"
 
-#: src/download_item.cc:80 src/download_item.cc:84 src/download_item.cc:106
+#: src/download_item.cc:81 src/download_item.cc:85 src/download_item.cc:108
 msgid " [Working]"
 msgstr " [S'està treballant]"
 
-#: src/download_item.cc:110 src/download_list.cc:364
+#: src/download_item.cc:112 src/download_list.cc:365
 msgid "[Hit]"
 msgstr " [Marcat]"
 
-#: src/download_item.cc:110 src/download_list.cc:384
+#: src/download_item.cc:112 src/download_list.cc:385
 msgid "[Downloaded]"
 msgstr " [Baixat]"
 
@@ -2621,7 +2621,7 @@ msgstr "Baixats %sB en %s (%sB/s)."
 msgid "%n%nSome files were not downloaded successfully."
 msgstr "%n%nAlguns fitxers no s'ha descarregat satisfactòriament."
 
-#: src/download_list.cc:99 src/download_list.cc:348 src/gtk/download.cc:444
+#: src/download_list.cc:99 src/download_list.cc:349 src/gtk/download.cc:444
 msgid "Continue"
 msgstr "Continua"
 
@@ -2652,20 +2652,20 @@ msgstr " [ %i%% ]"
 msgid "Downloading... "
 msgstr "S'està baixant... "
 
-#: src/download_list.cc:343 src/gtk/download.cc:441
+#: src/download_list.cc:344 src/gtk/download.cc:441
 #, c-format
 msgid "Please insert the disc labeled \"%s\" into the drive \"%s\""
 msgstr "Introduïu el disc etiquetat com a \"%s\" a la unitat \"%s\""
 
-#: src/download_list.cc:350 src/gtk/download.cc:445
+#: src/download_list.cc:351 src/gtk/download.cc:445
 msgid "Abort"
 msgstr "Avorta"
 
-#: src/download_list.cc:408
+#: src/download_list.cc:409
 msgid "[IGNORED]"
 msgstr "[Ignorat]"
 
-#: src/download_list.cc:418
+#: src/download_list.cc:419
 msgid "[ERROR]"
 msgstr "[Error]"
 
@@ -2687,92 +2687,92 @@ msgstr "S'està llegint la informació d'estat estesa"
 msgid "Cannot parse user-tags for package: %s: '%s'"
 msgstr ""
 
-#: src/generic/apt/aptcache.cc:481 src/generic/apt/aptcache.cc:570
-#: src/generic/apt/aptcache.cc:576
+#: src/generic/apt/aptcache.cc:483 src/generic/apt/aptcache.cc:572
+#: src/generic/apt/aptcache.cc:578
 msgid "Initializing package states"
 msgstr "S'estan inicialitzant els estats dels paquets"
 
-#: src/generic/apt/aptcache.cc:742
+#: src/generic/apt/aptcache.cc:744
 msgid "Cannot open Aptitude state file"
 msgstr "No s'ha pogut obrir el fitxer d'estat de l'Aptitude"
 
-#: src/generic/apt/aptcache.cc:754 src/generic/apt/aptcache.cc:861
-#: src/generic/apt/aptcache.cc:867
+#: src/generic/apt/aptcache.cc:758 src/generic/apt/aptcache.cc:879
+#: src/generic/apt/aptcache.cc:885
 msgid "Writing extended state information"
 msgstr "S'està escrivint la informació d'estat estesa"
 
-#: src/generic/apt/aptcache.cc:872
+#: src/generic/apt/aptcache.cc:890
 msgid "Couldn't write state file"
 msgstr "No s'ha pogut escriure el fitxer d'estat"
 
-#: src/generic/apt/aptcache.cc:892
+#: src/generic/apt/aptcache.cc:910
 #, c-format
 msgid "failed to remove %s"
 msgstr "s'ha produït un error en suprimir %s"
 
-#: src/generic/apt/aptcache.cc:900
+#: src/generic/apt/aptcache.cc:918
 #, c-format
 msgid "failed to rename %s to %s"
 msgstr "s'ha produït un error en renombrar %s a %s"
 
-#: src/generic/apt/aptcache.cc:909
+#: src/generic/apt/aptcache.cc:927
 #, c-format
 msgid "couldn't replace %s with %s"
 msgstr "no s'ha pogut reemplaçar %s per %s"
 
-#: src/generic/apt/aptcache.cc:928
-#: src/generic/apt/download_install_manager.cc:248
+#: src/generic/apt/aptcache.cc:946
+#: src/generic/apt/download_install_manager.cc:246
 msgid ""
 "Could not regain the system lock!  (Perhaps another apt or dpkg is running?)"
 msgstr ""
 "No s'ha pogut tornar a obtenir el candau del sistema (Potser hi ha algun "
 "altre apt o dpkg executant-se?)"
 
-#: src/generic/apt/aptcache.cc:931
+#: src/generic/apt/aptcache.cc:949
 msgid "failed to save selections to dpkg database"
 msgstr ""
 
-#: src/generic/apt/aptcache.cc:1173 src/generic/apt/aptcache.cc:1207
+#: src/generic/apt/aptcache.cc:1191 src/generic/apt/aptcache.cc:1225
 #, fuzzy
 msgid "Cannot remove aptitude within aptitude"
 msgstr "No s'ha pogut obrir el fitxer d'estat de l'Aptitude"
 
-#: src/generic/apt/aptcache.cc:1625
+#: src/generic/apt/aptcache.cc:1643
 #, c-format
 msgid "User-tag '%s' already present for %s"
 msgstr ""
 
-#: src/generic/apt/aptcache.cc:1641
+#: src/generic/apt/aptcache.cc:1659
 #, fuzzy, c-format
 msgid "Could not add user-tag '%s' to package %s"
 msgstr "S'està afegint l'etiqueta d'usuari «%s» al paquet «%s».\n"
 
-#: src/generic/apt/aptcache.cc:1667
+#: src/generic/apt/aptcache.cc:1685
 #, fuzzy, c-format
 msgid "Could not find valid user-tag '%s'"
 msgstr "No s'ha pogut trobar un registre de modificacions de %s"
 
-#: src/generic/apt/aptcache.cc:1683
+#: src/generic/apt/aptcache.cc:1701
 #, fuzzy, c-format
 msgid "Could not remove user-tag '%s' from package %s"
 msgstr "S'està suprimint l'etiqueta d'usuari «%s» del paquet «%s».\n"
 
-#: src/generic/apt/aptcache.cc:1761
+#: src/generic/apt/aptcache.cc:1779
 msgid "Unable to correct dependencies, some packages cannot be installed"
 msgstr ""
 "No s'han pogut resoldre les dependències, alguns paquets no es poden "
 "instal·lar"
 
-#: src/generic/apt/aptcache.cc:2442
+#: src/generic/apt/aptcache.cc:2460
 msgid "The list of sources could not be read."
 msgstr "No s'ha pogut llegir la llista de fonts."
 
-#: src/generic/apt/aptcache.cc:2450
+#: src/generic/apt/aptcache.cc:2468
 msgid "The package lists or status file could not be parsed or opened."
 msgstr ""
 "No s'han pogut analitzar o obrir les llistes de paquets o el fitxer d'estat."
 
-#: src/generic/apt/aptcache.cc:2453
+#: src/generic/apt/aptcache.cc:2471
 msgid "You may want to update the package lists to correct these missing files"
 msgstr ""
 "Probablement voldreu actualitzar la llista de paquets per resoldre els "
@@ -3018,66 +3018,61 @@ msgid "Error removing file: %s"
 msgstr "S'ha produït un error en escriure el fitxer d'estat"
 
 #: src/generic/apt/download_install_manager.cc:64
-#: src/generic/apt/download_update_manager.cc:64
 msgid ""
 "The package cache is not available; unable to download and install packages."
 msgstr ""
 "La memòria cau de paquets no està disponible; no es poden descarregar i "
 "instal·lar paquets."
 
-#: src/generic/apt/download_install_manager.cc:90
+#: src/generic/apt/download_install_manager.cc:99
 msgid "Internal error: couldn't generate list of packages to download"
 msgstr ""
 "S'ha produït un error intern, no s'ha pogut generar la llista de paquets a "
 "baixar"
 
-#: src/generic/apt/download_install_manager.cc:93
+#: src/generic/apt/download_install_manager.cc:102
 msgid ""
 "Perhaps the package lists are out of date, please try 'aptitude update' (or "
 "equivalent) first"
 msgstr ""
 
-#: src/generic/apt/download_install_manager.cc:135
-#: src/generic/apt/download_update_manager.cc:134
+#: src/generic/apt/download_install_manager.cc:129
+#: src/generic/apt/download_update_manager.cc:131
 #, c-format
 msgid "Failed to fetch %s: %s"
 msgstr "No s'ha pogut obtenir %s: %s"
 
-#: src/generic/apt/download_install_manager.cc:144
+#: src/generic/apt/download_install_manager.cc:138
 msgid "Some files failed to download"
 msgstr ""
 
-#: src/generic/apt/download_install_manager.cc:161
+#: src/generic/apt/download_install_manager.cc:155
 msgid "Unable to correct for unavailable packages"
 msgstr "No s'ha pogut solucionar els problemes amb els paquets no disponibles"
 
-#: src/generic/apt/download_install_manager.cc:167
+#: src/generic/apt/download_install_manager.cc:161
 #, c-format
 msgid ""
 "Unable to fetch some packages; try '-o %s=true' to continue with missing "
 "packages"
 msgstr ""
 
-#: src/generic/apt/download_install_manager.cc:204
-msgid "Failed to perform requested operation on package.  Trying to recover:"
-msgstr ""
-
-#: src/generic/apt/download_update_manager.cc:73
+#: src/generic/apt/download_update_manager.cc:70
 msgid "Couldn't read list of package sources"
 msgstr "No s'ha pogut llegir la llista de fonts de paquets"
 
-#: src/generic/apt/download_update_manager.cc:154
+#: src/generic/apt/download_update_manager.cc:151
 msgid "Couldn't clean out list directories"
 msgstr "No s'han pogut netejar els directoris de la llista"
 
-#: src/generic/apt/download_update_manager.cc:159
-#: src/generic/apt/download_update_manager.cc:161
+#: src/generic/apt/download_update_manager.cc:156
+#: src/generic/apt/download_update_manager.cc:158
 msgid ""
 "Some index files failed to download. They have been ignored, or old ones "
 "used instead."
 msgstr ""
 
-#: src/generic/apt/download_update_manager.cc:182
+#: src/generic/apt/download_update_manager.cc:179
 msgid "Couldn't rebuild package cache"
 msgstr "No s'ha pogut regenerar la memòria cau de paquets"
 
@@ -3413,11 +3408,11 @@ msgid "Failed to parse the cost settings string: %s"
 msgstr "No s'ha pogut analitzar el patró %s"
 
 #: src/generic/apt/tags.cc:214 src/generic/apt/tags.cc:227
-#: src/generic/apt/tags.cc:277 src/generic/apt/tags.cc:288
+#: src/generic/apt/tags.cc:279 src/generic/apt/tags.cc:292
 msgid "Building tag database"
 msgstr "S'està generant la base de dades de marcadors"
 
-#: src/generic/apt/tags.cc:418
+#: src/generic/apt/tags.cc:424
 msgid "legacy"
 msgstr ""
 
@@ -4703,8 +4698,8 @@ msgstr "Cerca"
 msgid "Finalizing view"
 msgstr "S'està construïnt la vista"
 
-#: src/gtk/pkgview.cc:716 src/pkg_tree.cc:211 src/pkg_tree.cc:222
-#: src/pkg_tree.cc:238 src/pkg_tree.cc:249
+#: src/gtk/pkgview.cc:716 src/pkg_tree.cc:212 src/pkg_tree.cc:223
+#: src/pkg_tree.cc:240 src/pkg_tree.cc:251
 msgid "Building view"
 msgstr "S'està construïnt la vista"
 
@@ -6581,22 +6576,22 @@ msgstr[1] "Aquest grup conté %d paquets."
 msgid "All Packages"
 msgstr "Tots els paquets"
 
-#: src/pkg_tree.cc:293
+#: src/pkg_tree.cc:295
 #, c-format
 msgid "No packages matched the pattern \"%ls\"."
 msgstr "No hi ha cap paquet que coincideixi amb el patró \"%ls\"."
 
-#: src/pkg_tree.cc:312
+#: src/pkg_tree.cc:314
 msgid "Enter the new package tree limit: "
 msgstr "Introduïu el nou límit de l'arbre de paquets: "
 
-#: src/pkg_tree.cc:345
+#: src/pkg_tree.cc:347
 msgid "Enter the new package grouping mechanism for this display: "
 msgstr ""
 "Introduïu el nou mecanisme d'agrupació de paquets per a aquesta "
 "visualització: "
 
-#: src/pkg_tree.cc:353
+#: src/pkg_tree.cc:355
 msgid "Enter the new package sorting mechanism for this display: "
 msgstr ""
 "Introduïu el nou mecanisme d'ordenació de paquets per a aquesta "
