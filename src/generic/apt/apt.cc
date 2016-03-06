@@ -59,6 +59,7 @@
 
 #include <exception>
 #include <fstream>
+#include <regex>
 #include <sstream>
 
 #include <signal.h>
@@ -1206,6 +1207,35 @@ static bool or_group_subsumes(const pkgCache::DepIterator &d1,
   return true;
 }
 
+
+/** Whether a particular version is security-related
+ *
+ * Useful e.g. to classify in menus as "Security Upgrade"
+ *
+ * @return \b true iff the given package version comes from security.d.o or
+ * known places
+ */
+bool is_security(const pkgCache::VerIterator &ver)
+{
+  static std::regex site_regex { "^security\\.(.+\\.)?debian.org$" };
+  std::smatch site_match;
+
+  for (pkgCache::VerFileIterator F = ver.FileList(); !F.end(); ++F)
+    {
+      pkgCache::PkgFileIterator fileit = F.File();
+      if (!fileit.end())
+	{
+	  string site  = fileit.Site()  ? fileit.Site()  : "";
+	  string label = fileit.Label() ? fileit.Label() : "";
+	  std::regex_search(site, site_match, site_regex);
+
+	  if (!site_match.empty() && label == "Debian-Security")
+	    return true;
+	}
+    }
+
+  return false;
+}
 
 // Interesting deps are:
 //

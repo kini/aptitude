@@ -382,6 +382,17 @@ struct location_compare
   }
 };
 
+
+/** Whether a particular version is security-related
+ *
+ * Useful e.g. to classify in menus as "Security Upgrade"
+ *
+ * @return \b true iff the given package version comes from security.d.o or
+ * known places
+ */
+bool is_security(const pkgCache::VerIterator &ver);
+
+
 /** \return \b true if the given dependency is "interesting":
  *          specifically, if it's either critical or a Recommends
  *          that's "new" or currently satisfied.
