@@ -1216,6 +1216,7 @@ bool cmdline_do_prompt(bool as_upgrade,
 		  break;
 		case 'E':
 		  ui_preview();
+		  break;
 		case '?':
 		  valid_response=false;
 		  prompt_help(cout, have_broken, term_metrics);
