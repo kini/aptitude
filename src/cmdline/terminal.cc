@@ -25,6 +25,8 @@
 
 #include "terminal.h"
 
+#include "generic/util/util.h"
+
 #include <aptitude.h>
 
 // System includes:
@@ -117,6 +119,16 @@ namespace aptitude
           return ws.ws_col;
         else
 	  {
+	    // special case for dumb terms when not piping/redirecting
+	    if (aptitude::util::is_dumb_terminal() && output_is_a_terminal())
+	      {
+		const char* env_COLUMNS = getenv("COLUMNS");
+		if ( ! strempty(env_COLUMNS))
+		  {
+		    return std::atoi(env_COLUMNS);
+		  }
+	      }
+
 	    // \todo Should we distinguish between "can't read a
 	    // terminal size" and "read a tiny terminal size"?
 

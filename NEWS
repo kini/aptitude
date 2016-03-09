@@ -28,6 +28,12 @@ Version 0.7.9 UNRELEASED
     added a few more checks to also forbid launching solution screens and
     previews from the command-line.
 
+- User visible changes:
+
+  * [cmdline] Output in dumb terminals, when there is no piping/redirection
+    involved and even if ioctl doesn't work to get window size (e.g. inside
+    emacs), will now use COLUMNS instead of the default very big default width
+
 - Internal changes:
 
   * configure.ac: Allow to disable check for Boost library headers individually
