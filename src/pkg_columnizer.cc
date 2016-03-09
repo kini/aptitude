@@ -668,9 +668,9 @@ int pkg_item::pkg_columnizer::parse_column_type(char id)
     case 't': // like apt-get -t
       return archive;
     case 'E':
-      return source;
-    case 'e':
       return architecture;
+    case 'e':
+      return source;
     case 'O':
       return origin;
 
