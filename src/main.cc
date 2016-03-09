@@ -94,6 +94,7 @@
 #endif
 
 #include <fstream>
+#include <locale>
 
 #include "loggers.h"
 #include "progress.h"
@@ -658,7 +659,16 @@ int main(int argc, char *argv[])
   //cw::util::transcode_mbtow_err=handle_mbtow_error;
   //cw::util::transcode_wtomb_err=handle_wtomb_error;
 
-  setlocale(LC_ALL, "");
+  // Use the C++ classes if possible, otherwise if ::global() is not called the
+  // internal state of std::locale is not initialized properly
+  //
+  // it can throw an exception if the locale defined in the environment is not
+  // valid
+  try {
+    std::locale::global(std::locale(""));
+  } catch (...) {
+    setlocale(LC_ALL, "");
+  }
   bindtextdomain(PACKAGE, LOCALEDIR);
   textdomain(PACKAGE);
 

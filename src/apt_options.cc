@@ -1,7 +1,7 @@
 // apt_options.cc
 //
 //   Copyright (C) 2000, 2007-2008 Daniel Burrows
-//   Copyright (C) 2015 Manuel A. Fernandez Montecelo
+//   Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -349,6 +349,13 @@ option_item misc_options[]={
 		 "receive the log on standard input."),
 	      PACKAGE "::Log",
 	      "/var/log/aptitude"),
+  option_item(N_("Use localized messages and dates in the log"),
+	      N_("If this option is enabled, aptitude will use the "
+		 "user's locale for messages and dates in the log "
+		 "file; otherwise the \"classic\" locale is used "
+		 "for this purpose."),
+	      PACKAGE "::Localize-Log",
+	      false),
   option_item()
 };
 

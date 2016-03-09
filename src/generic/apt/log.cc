@@ -1,7 +1,7 @@
 // log.cc
 //
 //   Copyright (C) 2005-2008, 2010 Daniel Burrows
-//   Copyright (C) 2015 Manuel A. Fernandez Montecelo
+//   Copyright (C) 2014-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -35,6 +35,7 @@
 #include <stdio.h>
 
 #include <algorithm>
+#include <locale>
 
 using namespace std;
 
@@ -42,7 +43,8 @@ typedef std::pair<pkgCache::PkgIterator, pkg_action_state> logitem;
 typedef std::vector<logitem> loglist;
 
 bool do_log(const string &log,
-	    const loglist &changed_packages)
+	    const loglist &changed_packages,
+	    bool localize)
 {
   FILE *f = NULL;
 
@@ -57,6 +59,19 @@ bool do_log(const string &log,
 
       return false;
     }
+
+  // see #357828, #596221 -- check if we should use the "classic" locale
+  //
+  // it can throw an exception if the locale defined in the environment is not
+  // valid
+  try {
+    if (!localize && (std::locale("") != std::locale::classic()))
+      {
+	std::locale::global(std::locale::classic());
+      }
+  } catch (...) {
+    // ignore
+  }
 
   time_t curtime = time(NULL);
   tm ltime;
@@ -182,6 +197,17 @@ bool do_log(const string &log,
   else
     fclose(f);
 
+  // try to restore locale -- it can throw an exception if the locale defined in
+  // the environment is not valid
+  try {
+    if (std::locale("") != std::locale())
+      {
+	std::locale::global(std::locale(""));
+      }
+  } catch (...) {
+    // ignore
+  }
+
   return true;
 }
 
@@ -219,6 +245,8 @@ void log_changes()
 	  logs.push_back(curr->Value);
       }
 
+  bool localize_log = aptcfg->FindB(PACKAGE "::Localize-Log", false);
+
   if(!logs.empty())
     {
       loglist changed_packages;
@@ -232,6 +260,6 @@ void log_changes()
       sort(changed_packages.begin(), changed_packages.end(), log_sorter());
 
       for(vector<string>::const_iterator i = logs.begin(); i != logs.end(); ++i)
-	do_log(*i, changed_packages);
+	do_log(*i, changed_packages, localize_log);
     }
 }
