@@ -1,6 +1,7 @@
 // parse.cc
 //
 //  Copyright 2000-2005, 2007-2009, 2011 Daniel Burrows
+//  Copyright 2014-2016 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -1348,6 +1349,8 @@ ref_ptr<pattern> parse_atom(string::const_iterator &start,
 		      }
 		    case 'd':
 		      return pattern::make_description(substr);
+		    case 'e':
+		      return pattern::make_source_package(substr);
 		    case 'G':
 		      return pattern::make_tag(substr);
 		    case 'm':
