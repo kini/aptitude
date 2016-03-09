@@ -1215,7 +1215,13 @@ bool cmdline_do_prompt(bool as_upgrade,
 		  }
 		  break;
 		case 'E':
-		  ui_preview();
+		  {
+		    // prevent curses if dumb term -- see #317928, #817276
+		    if (aptitude::util::is_dumb_terminal())
+		      aptitude::util::print_ncurses_dumb_terminal();
+		    else
+		      ui_preview();
+		  }
 		  break;
 		case '?':
 		  valid_response=false;

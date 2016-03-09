@@ -1234,7 +1234,8 @@ int main(int argc, char *argv[])
 		    }
 		}
 
-	      if (aptitude::util::is_dumb_terminal())
+	      // prevent visual preview if dumb term -- see #317928, #817276
+	      if (visual_preview && aptitude::util::is_dumb_terminal())
 		{
 		  aptitude::util::print_ncurses_dumb_terminal();
 		  exit(EXIT_FAILURE);

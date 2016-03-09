@@ -951,7 +951,13 @@ cmdline_resolve_deps(pkgset &to_install,
 		      break;
 		    }
 		  case 'E':
-		    ui_solution_screen();
+		    {
+		      // prevent curses if dumb term -- see #317928, #817276
+		      if (aptitude::util::is_dumb_terminal())
+			aptitude::util::print_ncurses_dumb_terminal();
+		      else
+			ui_solution_screen();
+		    }
 		    break;
 		  case 'R':
 		    reject_or_mandate_version(string(response, 1), ids, true);
