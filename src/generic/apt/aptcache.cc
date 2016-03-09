@@ -260,8 +260,6 @@ bool aptitudeDepCache::build_selection_list(OpProgress* Prog,
   // Garbage set up (they behave more the way they ought to then).
   MarkAndSweep();
 
-  string statedir=aptcfg->FindDir("Dir::Aptitude::state", STATEDIR);
-  // Should this not go under Dir:: ?  I'm not sure..
   delete package_states;
   package_states=new aptitude_state[Head().PackageCount];
   user_tags.clear();
@@ -293,13 +291,14 @@ bool aptitudeDepCache::build_selection_list(OpProgress* Prog,
   // manages to trigger a mark operation.
   duplicate_cache(&backup_state);
 
+  // Should this not go under Dir:: ?  I'm not sure..
+  string statedir = aptcfg->FindDir("Dir::Aptitude::state", STATEDIR);
+  string statefilepath = (status_fname) ? status_fname : (statedir + "/" + "pkgstates");
+
   FileFd state_file;
 
   // Read in the states that we saved
-  if(status_fname==NULL)
-    state_file.Open(statedir+"pkgstates", FileFd::ReadOnly);
-  else
-    state_file.Open(status_fname, FileFd::ReadOnly);
+  state_file.Open(statefilepath, FileFd::ReadOnly);
 
   // Have to make the file NOT read-only to set up the initial state.
   read_only = false;
@@ -466,6 +465,14 @@ bool aptitudeDepCache::build_selection_list(OpProgress* Prog,
 	    }
 	}
 
+      // if pkgTagFile.Step() throws errors, file likely corrupt -- see #405506
+      if (_error->PendingError())
+	{
+	  _error->Error(_("Problem parsing '%s', is it corrupt or malformed? You can try to recover from '%s.old'."),
+			statefilepath.c_str(), statefilepath.c_str());
+	  return false;
+	}
+
       if (Prog)
 	{
 	  Prog->OverallProgress(file_size, file_size, 1, _("Reading extended state information"));
@@ -588,7 +595,10 @@ bool aptitudeDepCache::build_selection_list(OpProgress* Prog,
 
   read_only = (lock == -1);
 
-  return true;
+  if (_error->PendingError())
+    return false;
+  else
+    return true;
 }
 
 void aptitudeDepCache::mark_all_upgradable(bool with_autoinst,
@@ -2480,16 +2490,24 @@ bool aptitudeCacheFile::Open(OpProgress* Progress,
   if(ReadPinFile(*Policy) == false || ReadPinDir(*Policy) == false)
     return false;
 
-  DCache=new aptitudeDepCache(Cache, Policy);
-  if(_error->PendingError())
-    return false;
+  {
+    DCache=new aptitudeDepCache(Cache, Policy);
+    if (_error->PendingError())
+      {
+	_error->Error(_("Could not create dependency cache"));
+	return false;
+      }
 
-  DCache->Init(Progress, WithLock, do_initselections, status_fname);
-  if (Progress)
-    Progress->Done();
+    bool init_result = DCache->Init(Progress, WithLock, do_initselections, status_fname);
+    if (Progress)
+      Progress->Done();
 
-  if(_error->PendingError())
-    return false;
+    if (!init_result || _error->PendingError())
+      {
+	_error->Error(_("Could not initialize dependency cache"));
+	return false;
+      }
+  }
 
   return true;
 }
