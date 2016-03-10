@@ -361,6 +361,10 @@ bool aptitudeDepCache::build_selection_list(OpProgress* Prog,
 	      section.FindFlag("Upgrade", tmp, 1);
 	      pkg_state.upgrade=(tmp==1);
 
+	      tmp=0;
+	      section.FindFlag("Reinstall", tmp, 1);
+	      pkg_state.reinstall = (tmp==1);
+
 	      unsigned long auto_new_install = 0;
 	      section.FindFlag("Auto-New-Install", auto_new_install, 1);
 	      if(auto_new_install)
@@ -773,6 +777,7 @@ bool aptitudeDepCache::save_selection_list(OpProgress* Prog,
       string line;
       string forbidstr;
       string upgradestr;
+      string reinstall_str;
       string autostr;
       string tailstr;
       string user_tags;
@@ -791,6 +796,8 @@ bool aptitudeDepCache::save_selection_list(OpProgress* Prog,
 	    forbidstr = (!estate.forbidver.empty()) ? ("ForbidVer: " + estate.forbidver + "\n") : "";
 
 	    upgradestr = ((!i.CurrentVer().end()) && state.Install()) ? "Upgrade: yes\n" : "";
+
+	    reinstall_str = (estate.reinstall) ? ("Reinstall: yes\n") : "";
 
 	    // packages that are auto and not yet installed are marked in this
 	    // way in aptitude's DB, to set the flag accordingly when installing
@@ -841,7 +848,7 @@ bool aptitudeDepCache::save_selection_list(OpProgress* Prog,
 
 	    // write section for this package
 	    using cw::util::ssprintf;
-	    line = ssprintf("Package: %s\nArchitecture: %s\nUnseen: %s\nState: %i\nDselect-State: %i\nRemove-Reason: %i\n%s%s%s%s%s\n",
+	    line = ssprintf("Package: %s\nArchitecture: %s\nUnseen: %s\nState: %i\nDselect-State: %i\nRemove-Reason: %i\n%s%s%s%s%s%s\n",
 				      i.Name(),
                                       i.Arch(),
 				      estate.new_package?"yes":"no",
@@ -849,6 +856,7 @@ bool aptitudeDepCache::save_selection_list(OpProgress* Prog,
 				      i->SelectedState,
 				      estate.remove_reason,
 				      upgradestr.c_str(),
+				      reinstall_str.c_str(),
 				      autostr.c_str(),
 				      forbidstr.c_str(),
 				      user_tags.c_str(),
