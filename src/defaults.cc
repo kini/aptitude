@@ -60,8 +60,6 @@ static void init_keybindings()
   cw::config::global_bindings.set("DescriptionDown", cw::config::key(L'z', false));
   cw::config::global_bindings.set("DescriptionCycle", cw::config::key(L'i', false));
 
-  cw::config::global_bindings.set("DpkgReconfigure", cw::config::key(L'R', false));
-
   cw::config::global_bindings.set("SearchBroken", cw::config::key(L'b', false));
 
   cw::config::global_bindings.set("NextSolution", cw::config::key(L'.', false));

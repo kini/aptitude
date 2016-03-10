@@ -49,6 +49,31 @@ Version 0.7.9 UNRELEASED
 
   * New short form "~e" for search term "?source-package" (Closes: #743769)
 
+  * [curses] Remove option to run "dpkg-reconfigure" on a given package
+    (Closes: #680334, #686626, #738350)
+
+    Similar to "reportbug" recently removed, it was mostly an annoyance with
+    several related bugs open, with others fixed in the recent past (#474876),
+    was not integrated with the rest of actions -- no menu entry, would trigger
+    an immediate without confirmation (sometimes by mistake) instead of a
+    planned action, since it was immediate could not be saved as most/all
+    actions are...
+
+    In addition, this is a relatively dangerous operation that should seldom be
+    needed, and it's better if people run it run by hand rather than if they
+    trigger it by mistake.
+
+    Lastly, as a curiosity and as telling of the typical evolution of the
+    sofware features, the history of it is: Added in the version 0.2.3 released
+    on 2001-07-11, with this comment: "You can now run dpkg-reconfigure from
+    within aptitude (it's a silly feature, but it's also about 10 lines of
+    code..)".  The original 10 lines of code are now 67 in pkg_item.cc, 1
+    keybinding in defaults.cc, mentions in the documentation and all of the
+    translations; needs to use different mechanisms for "su-to-root" permissions
+    that it needs, there were at least 4 bugs involving the feature, and
+    spending a few hours tracking all of this to finally remove it... so much
+    for an innocent silly feature with only 10 lines of code :-)
+
 - Internal changes:
 
   * configure.ac: Allow to disable check for Boost library headers individually

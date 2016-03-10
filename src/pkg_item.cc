@@ -384,69 +384,6 @@ bool pkg_item::dispatch_key(const cw::config::key &k, cw::tree *owner)
       else
 	delete grp;
     }
-  else if(bindings->key_matches(k, "DpkgReconfigure"))
-    // Don't bother with my internal su-to-root stuff here, since I don't
-    // need to touch the package lists in the subprocess.
-    {
-      // see #474876 -- aptitude: selections lost by package reconfiguration
-      bool pending_actions = false;
-      if ((*apt_cache_file)->is_dirty())
-	{
-	  progress_ref p = gen_progress_bar();
-	  bool saved_ok = (*apt_cache_file)->save_selection_list(p->get_progress().unsafe_get_ref());
-	  p->destroy();
-
-	  if (saved_ok)
-	    {
-	      pending_actions = false;
-	    }
-	  else
-	    {
-	      pending_actions = true;
-	      popup_widget(cw::dialogs::ok(cw::text_fragment(_("Pending actions could not be saved and would be lost, reconfiguring packages is not allowed at this point."))));
-	    }
-	}
-
-      // Try to do *something*.
-      const char *sucmd=NULL;
-
-      if(getuid()==0)
-	sucmd="dpkg-reconfigure '%s'";
-      else if(access("/usr/sbin/su-to-root", X_OK)==0)
-	sucmd="/usr/sbin/su-to-root -c \"/usr/sbin/dpkg-reconfigure '%s'\"";
-      else if(access("/bin/su", X_OK)==0)
-	sucmd="/bin/su -c \"/usr/sbin/dpkg-reconfigure '%s'\"";
-      else
-	popup_widget(cw::dialogs::ok(cw::text_fragment(_("You are not root and I cannot find any way to become root.  To reconfigure this package, install the menu package, the login package, or run aptitude as root."))));
-
-      if (sucmd && !pending_actions)
-	{
-	  cw::toplevel::suspend();
-
-	  apt_cache_file->ReleaseLock();
-
-	  printf(_("Reconfiguring %s\n"), package.FullName(true).c_str());
-
-	  char buf[512];
-	  if(sucmd)
-	    {
-              const string name(aptitude::apt::dpkg_package_name(package));
-              snprintf(buf, 512, sucmd, name.c_str());
-
-	      if(system(buf) != 0) { /* FIXME: ignore? */ }
-
-	      cout << _("Press Return to continue.") << endl;
-	      getchar();
-
-	      cw::toplevel::resume();
-	    }
-
-	  progress_ref p = gen_progress_bar();
-	  bool operation_needs_lock = true;
-	  apt_reload_cache(p->get_progress().unsafe_get_ref(), true, operation_needs_lock, nullptr);
-	  p->destroy();
-	}
-    }
   else
     return pkg_tree_node::dispatch_key(k, owner);
 
