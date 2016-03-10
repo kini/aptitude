@@ -36,6 +36,21 @@ Version 0.7.9 UNRELEASED
     This fix is analog to the one for #816322, and previously to that the
     problems involving boost::flyweights.
 
+  * Update internal state for upgrades without target version after the action
+    is performed (Closes: #721426)
+
+    This extends "Update internal state for upgrades/downgrades with target
+    version after the action is performed (Closes: #787658, #714429)", by also
+    trying to remove the "Upgrade: yes" line in pkgstates when the package has
+    been upgraded to the candidate version (when a explicit version is not
+    requested).
+
+    Otherwise the lines linger in "pkgstates" for longer than necessary, until
+    it is updated due to other packages needing changes; with the side effect
+    that if an "aptitude update" happens before the lines are removed, the
+    packages are automatically marked for upgrade in subsequent aptitude
+    sessions.
+
 - User visible changes:
 
   * [cmdline] Output in dumb terminals, when there is no piping/redirection

@@ -447,12 +447,21 @@ bool aptitudeDepCache::build_selection_list(OpProgress* Prog,
 	      // "downgrade") again down in this function, and while for
 	      // "upgrades" it is not a problem, with "downgrades" it will not
 	      // show as upgradable in the current interactive session.
+	      //
+	      //
+	      // also unmark as upgrade as soon as already upgraded, even if no
+	      // candidate version required in pkgstates -- see #721426
 	      std::string installed_ver = pkg.CurVersion() ? pkg.CurVersion() : "";
-	      if (pkg_state.upgrade && installed_ver == candver)
+	      if (pkg_state.upgrade)
 		{
-		  pkg_state.upgrade = false;
-		  pkg_state.candver = "";
-		  dirty = true;
+		  bool version_as_in_pkgstates = (!pkg_state.candver.empty() && (installed_ver == pkg_state.candver));
+		  bool version_as_candidate = (!GetCandidateVersion(pkg).end() && !pkg.CurrentVer().end() && (GetCandidateVersion(pkg) == pkg.CurrentVer()));
+		  if (version_as_in_pkgstates || (pkg_state.candver.empty() && version_as_candidate))
+		    {
+		      pkg_state.upgrade = false;
+		      pkg_state.candver = "";
+		      dirty = true;
+		    }
 		}
 	    }
 
