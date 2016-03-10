@@ -96,6 +96,11 @@ void ui_preview()
 				      &result));
   do_package_run_or_show_preview();
   ui_main();
+
+  // copied from "struct close_cache_on_exit" in main.cc, to fix #817776 and
+  // #816322 before that in ui_solution_screen()
+  apt_shutdown();
+
   exit(result);
 }
 
@@ -110,7 +115,8 @@ void ui_solution_screen()
   do_examine_solution();
   ui_main();
 
-  // copied from "struct close_cache_on_exit" in main.cc, to fix #816322
+  // copied from "struct close_cache_on_exit" in main.cc, to fix #816322 and
+  // #817776 after that in ui_preview()
   apt_shutdown();
 
   exit(0);
