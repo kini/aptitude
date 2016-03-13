@@ -384,7 +384,8 @@ void apt_close_cache()
 
 void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
 		    bool operation_needs_lock,
-		    const char * status_fname)
+		    const char * status_fname,
+		    bool reset_reinstall)
 {
   logging::LoggerPtr logger(Loggers::getAptitudeAptGlobals());
 
@@ -414,7 +415,8 @@ void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
 
   bool open_failed=!new_file->Open(progress_bar, do_initselections,
 				   operation_needs_lock && ((getuid() == 0) && !simulate),
-				   status_fname)
+				   status_fname,
+				   reset_reinstall)
     || _error->PendingError();
 
   if(open_failed && getuid() == 0)
@@ -427,7 +429,8 @@ void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
       consume_errors();
 
       open_failed=!new_file->Open(progress_bar, do_initselections,
-				  false, status_fname);
+				  false, status_fname,
+				  reset_reinstall);
 
       if(open_failed)
 	LOG_ERROR(logger, "Unable to load the apt cache at all; giving up.");
@@ -618,7 +621,7 @@ void apt_reload_cache(OpProgress *progress_bar, bool do_initselections,
 		      const char * status_fname)
 {
   apt_close_cache();
-  apt_load_cache(progress_bar, do_initselections, operation_needs_lock, status_fname);
+  apt_load_cache(progress_bar, do_initselections, operation_needs_lock, status_fname, false);
 }
 
 void apt_shutdown()

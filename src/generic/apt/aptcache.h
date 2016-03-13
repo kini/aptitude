@@ -316,7 +316,9 @@ public:
   aptitudeDepCache(pkgCache *cache, Policy *Plcy=0);
 
   bool Init(OpProgress *Prog, bool WithLock,
-	    bool do_initselections, const char * status_fname=NULL);
+	    bool do_initselections,
+	    const char * status_fname,
+	    bool reset_reinstall);
 
   bool is_locked() const { return (lock != -1); }
 
@@ -329,7 +331,8 @@ public:
   bool build_selection_list(OpProgress* Prog,
 			    bool WithLock,
 			    bool do_initselections,
-			    const char* status_fname = nullptr);
+			    const char* status_fname,
+			    bool reset_reinstall);
 
   void forget_new(undoable **undoer);
   // Clears all information about which packages are 'new'.  Overwrites undoer
@@ -581,8 +584,9 @@ public:
 
   bool Open(OpProgress* Progress,
 	    bool do_initselections,
-	    bool WithLock = true,
-	    const char* status_fname = NULL);
+	    bool WithLock,
+	    const char* status_fname,
+	    bool reset_reinstall);
   bool is_locked() {return have_system_lock;} // EWW (also not quite right)
 
   void ReleaseLock();

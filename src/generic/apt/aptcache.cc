@@ -220,9 +220,9 @@ aptitudeDepCache::aptitudeDepCache(pkgCache *Cache, Policy *Plcy)
 #endif
 }
 
-bool aptitudeDepCache::Init(OpProgress *Prog, bool WithLock, bool do_initselections, const char *status_fname)
+bool aptitudeDepCache::Init(OpProgress *Prog, bool WithLock, bool do_initselections, const char *status_fname, bool reset_reinstall)
 {
-  return build_selection_list(Prog, WithLock, do_initselections, status_fname);
+  return build_selection_list(Prog, WithLock, do_initselections, status_fname, reset_reinstall);
 }
 
 aptitudeDepCache::~aptitudeDepCache()
@@ -242,7 +242,8 @@ void aptitudeDepCache::set_read_only(bool new_read_only)
 bool aptitudeDepCache::build_selection_list(OpProgress* Prog,
 					    bool WithLock,
 					    bool do_initselections,
-					    const char* status_fname)
+					    const char* status_fname,
+					    bool reset_reinstall)
 {
   action_group group(*this);
 
@@ -364,6 +365,20 @@ bool aptitudeDepCache::build_selection_list(OpProgress* Prog,
 	      tmp=0;
 	      section.FindFlag("Reinstall", tmp, 1);
 	      pkg_state.reinstall = (tmp==1);
+
+	      // if the last installation was successful reset_reinstall==true,
+	      // to unmark .reinstall property of the package, otherwise there
+	      // is no way to control that this is not repeated forever.
+	      //
+	      // doing the more expensive test "(reset_reinstall &&
+	      // pkg_state.reinstall)" rather than blindly marking as false,
+	      // because of "dirty" (so we only mark as dirty and pending to
+	      // save when we really changed the state.
+	      if (reset_reinstall && pkg_state.reinstall)
+		{
+		  pkg_state.reinstall = false;
+		  dirty = true;
+		}
 
 	      unsigned long auto_new_install = 0;
 	      section.FindFlag("Auto-New-Install", auto_new_install, 1);
@@ -2469,7 +2484,8 @@ aptitudeCacheFile::~aptitudeCacheFile()
 bool aptitudeCacheFile::Open(OpProgress* Progress,
 			     bool do_initselections,
 			     bool WithLock,
-			     const char* status_fname)
+			     const char* status_fname,
+			     bool reset_reinstall)
 {
   if(WithLock)
     {
@@ -2515,7 +2531,7 @@ bool aptitudeCacheFile::Open(OpProgress* Progress,
 	return false;
       }
 
-    bool init_result = DCache->Init(Progress, WithLock, do_initselections, status_fname);
+    bool init_result = DCache->Init(Progress, WithLock, do_initselections, status_fname, reset_reinstall);
     if (Progress)
       Progress->Done();
 

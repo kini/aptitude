@@ -107,11 +107,13 @@ bool get_apt_knows_about_rootdir();
  *                           sticky database.
  *  \param status_fname if not \b NULL, a filename to use in lieu
  *                      of /var/lib/aptitude/pkgstates.
+ *  \param reset_reinstall Reset packages set for reinstall (do this after successful installation only).
  */
 void apt_load_cache(OpProgress *progress_bar,
 		    bool do_initselections,
 		    bool operation_needs_lock,
-		    const char *status_fname);
+		    const char *status_fname,
+		    bool reset_reinstall);
 
 void apt_reload_cache(OpProgress *progress_bar,
 		      bool do_initselections,

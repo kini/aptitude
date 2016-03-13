@@ -47,6 +47,22 @@ Version 0.7.9 UNRELEASED
   * "reinstall" planned action is now preserved across sessions, when becoming
     root or in the command line with --schedule-only (Closes: #255587, #785641)
 
+    After the successful reinstallation of this package (and probably other
+    installations/upgrades/deletions/... in the same action), the package is
+    unmarked for reinstallation.  There's no way to detect individually whether
+    a package was reinstalled successfully, so if there is a failure in the
+    whole set of actions, the package will still be marked for reinstallation
+    even if the reinstallation itself has actually succeeded.  This is the best
+    that we can do without significant complications (e.g. handling
+    reinstallations in a package-per-package basis and separate from other
+    actions, but this would be somewhat similar to going back to the current
+    situation -- not treating it just as other actions).
+
+    It is unlikely that this is a big problem in the real world, though.
+    Probably reinstallations are performed very frequently, and when they are,
+    it's unlikely that they are bundled in conjunction with package actions such
+    as big upgrades.
+
   * Fix crash when invoking curses resolver from command line (Closes: #817776)
 
     This fix is analog to the one for #816322, and previously to that the

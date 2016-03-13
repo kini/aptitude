@@ -254,6 +254,11 @@ void download_install_manager::finish_post_dpkg(pkgPackageManager::OrderResult d
       if(log != NULL)
 	log->Complete();
 
+      // after the fix for '"reinstall" planned action is now preserved (Closes:
+      // #255587, #785641)', we need to clear the state of the package,
+      // otherwise it remains forever wanting to be reinstalled
+      bool reset_reinstall = (dpkg_result == pkgPackageManager::Completed) ? true : false;
+
       // We absolutely need to do this here.  Yes, it slows things
       // down, but without this we get stuff like #429388 due to
       // inconsistencies between aptitude's state file and the real
@@ -263,7 +268,7 @@ void download_install_manager::finish_post_dpkg(pkgPackageManager::OrderResult d
       if(!download_only)
 	{
 	  bool operation_needs_lock = true;
-	  apt_load_cache(progress, true, operation_needs_lock, nullptr);
+	  apt_load_cache(progress, true, operation_needs_lock, nullptr, reset_reinstall);
 	}
 
       if(aptcfg->FindB(PACKAGE "::Forget-New-On-Install", false)

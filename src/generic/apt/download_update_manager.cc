@@ -190,8 +190,9 @@ void download_update_manager::finish(pkgAcquire::RunResult res,
 
   if (need_forget_new || need_autoclean)
     {
+      bool reset_reinstall = false;
       bool operation_needs_lock = true;
-      apt_load_cache(progress, true, operation_needs_lock, nullptr);
+      apt_load_cache(progress, true, operation_needs_lock, nullptr, reset_reinstall);
     }
 
   if (apt_cache_file)

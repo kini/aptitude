@@ -476,7 +476,8 @@ download_manager::result cmdline_do_download(download_manager *m,
       // Dump errors so we don't spuriously think we failed.
       _error->DumpErrors();
       bool operation_needs_lock = true;
-      apt_load_cache(&tmpProgress, false, operation_needs_lock, nullptr);
+      bool reset_reinstall = false;
+      apt_load_cache(&tmpProgress, false, operation_needs_lock, nullptr, reset_reinstall);
       initial_stats = compute_apt_stats();
     }
 
@@ -511,7 +512,8 @@ download_manager::result cmdline_do_download(download_manager *m,
     {
       OpProgress tmpProgress;
       bool operation_needs_lock = true;
-      apt_load_cache(&tmpProgress, false, operation_needs_lock, nullptr);
+      bool reset_reinstall = (finish_res == download_manager::success) ? true : false;
+      apt_load_cache(&tmpProgress, false, operation_needs_lock, nullptr, reset_reinstall);
       final_stats = compute_apt_stats();
       show_stats_change(initial_stats, final_stats,
 			verbose >= 1, verbose >= 2,
