@@ -8,6 +8,22 @@ Version 0.7.9 UNRELEASED
   * Allow to choose between localized logs or not (default is not) with the
     option ::Localized-Log (Closes: #357828, #596221)
 
+  * [curses] Left/Right arrow keys collapse/expand one level of the subtree, and
+    when in a package item (row) Left jumps to "parent"
+    (Closes: #157984, #241945, #415449)
+
+    The solution is a bit "hacky", because for example for the left arrow in the
+    package item to jump to its parent, the pkg_item objects have to capture
+    events of some keybinding ("collapse") and re-inject the event as "parent".
+    The direct route, which would be to add "left" as an alias of "Parent",
+    doesn't work in this case, because some elements using "left" for other
+    purposes would be confused and would interpret it as "Parent".
+
+    Maybe there is another way to achieve this more cleanly if it's possible to
+    assign bindings like "Parent" specific to e.g. tree items (pkg_items derive
+    from that), but even if cwidget allows for this, it seems to be quite
+    complicated to achieve it.
+
 - Bug fixes:
 
   * ~E pattern now returns packages with Essential only (Closes: #548505)

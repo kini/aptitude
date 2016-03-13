@@ -384,6 +384,22 @@ bool pkg_item::dispatch_key(const cw::config::key &k, cw::tree *owner)
       else
 	delete grp;
     }
+  else if (bindings->key_matches(k, "CollapseTree"))
+    {
+      // hack to convert a Left key stroke to moving to the parent (several
+      // requests for this, like #241945 and #415449; with suggestions that it
+      // could be done by moving to Parent --doing this at the moment-- or
+      // folding the Parent subtree directly).
+      //
+      // unfortunately this cannot be done in a cleaner way than injecting from
+      // this tree item to the owner, setting "Left" as a keybinding for
+      // "Parent" is interpreted in other elements as well, thus disrupting
+      // unrelated things, because it's not specific to tree items.
+      //
+      // NOTE: get("") needs to be passed as uppercase, see #818046
+      cw::config::keybinding keybindings_Parent = cw::config::global_bindings.get("PARENT");
+      return ((keybindings_Parent.size() > 0) && owner && owner->dispatch_key(keybindings_Parent[0]));
+    }
   else
     return pkg_tree_node::dispatch_key(k, owner);
 

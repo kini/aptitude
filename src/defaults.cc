@@ -73,6 +73,33 @@ static void init_keybindings()
   cw::config::global_bindings.set("SolutionActionReject", cw::config::key(L'r', false));
   cw::config::global_bindings.set("SolutionActionApprove", cw::config::key(L'a', false));
 
+  // hack to convert Left and Right keystrokes to folding/unfolding subtrees,
+  // which is more intuitive than '[' and ']'.  there are several related
+  // requests asking for this -- #157984 and its merged #168427, and #241945 and
+  // #415449 about tree items (implemented elsewhere, piggy-backing on the
+  // keystroke for "CollapseTree" defined here).
+  //
+  // for the time being the choice is to use Collapse/Expand Tree instead of
+  // Collapse/Expand All ('[' and ']' -- collapsing/expanding all subitems
+  // recursively).  they were unused from cwidget and so the binding could be
+  // set directly; but if using the "All" version, it is necessary to retrieve
+  // the existing keystrokes for the keybinding and adding the new stroke to the
+  // set.  so leaving this code in the case that it needs to be changed in the
+  // future.
+  //
+  // NOTE: get("") needs to be passed as uppercase, see #818046
+  {
+    cw::config::keybinding bindings = cw::config::global_bindings.get("COLLAPSETREE");
+    bindings.push_back(cw::config::key(KEY_LEFT, true));
+    cw::config::global_bindings.set("CollapseTree", bindings);
+  }
+  {
+    cw::config::keybinding bindings = cw::config::global_bindings.get("EXPANDTREE");
+    bindings.push_back(cw::config::key(KEY_RIGHT, true));
+    cw::config::global_bindings.set("ExpandTree", bindings);
+  }
+
+
   pkg_tree::init_bindings();
   pkg_tree_node::init_bindings();
   cmine::init_bindings();
