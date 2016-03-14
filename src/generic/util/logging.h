@@ -1,6 +1,7 @@
 /** \file logging.h */    // -*-c++-*-
 
 // Copyright (C) 2010 Daniel Burrows
+// Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -198,8 +199,12 @@ namespace aptitude
           if(__aptitude_util_logging_logger->isEnabledFor(__aptitude_util_logging_level)) \
             {                                                           \
               std::ostringstream __aptitude_util_logging_stream;        \
+              std::string file = std::string(__FILE__);			\
+              auto file_slash_pos = file.find_last_of("/");		\
+	      if (file_slash_pos != std::string::npos)			\
+		file = file.substr(file_slash_pos + 1);			\
               __aptitude_util_logging_stream << msg;                    \
-              (__aptitude_util_logging_logger)->log(__FILE__,           \
+              (__aptitude_util_logging_logger)->log(file.c_str(),	\
                                                     __LINE__,           \
                                                     __aptitude_util_logging_level, \
                                                     __aptitude_util_logging_stream.str()); \
