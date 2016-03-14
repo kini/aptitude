@@ -1649,6 +1649,11 @@ namespace aptitude
 
     static std::unique_ptr<pkgAcquire_fetch_info> internal_fetchinfo {};
 
+    void reset_pkgAcquire_fetch_info()
+    {
+      internal_fetchinfo.reset();
+    }
+
     void update_pkgAcquire_fetch_info()
     {
       if (!apt_cache_file || !apt_package_records)
@@ -1679,6 +1684,7 @@ namespace aptitude
 	{
 	  update_pkgAcquire_fetch_info();
 	  (*apt_cache_file)->package_state_changed.connect(sigc::ptr_fun(update_pkgAcquire_fetch_info));
+	  cache_closed.connect(sigc::ptr_fun(reset_pkgAcquire_fetch_info));
 	}
 
       if (internal_fetchinfo)

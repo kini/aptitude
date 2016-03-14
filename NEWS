@@ -110,6 +110,11 @@ Version 0.7.9 UNRELEASED
     packages are automatically marked for upgrade in subsequent aptitude
     sessions.
 
+  * [curses] Fix for miscalculated Download Size field (Closes: #817547)
+
+    After running dpkg run or under some other conditions (cache closed), the
+    object storing fetch information did not get reset and updated correctly.
+
 - User visible changes:
 
   * [cmdline] Output in dumb terminals, when there is no piping/redirection
