@@ -252,7 +252,11 @@ static bool load_tags_from_debtags(OpProgress *progress)
     }
 
   if (progress)
-    progress->Done();
+    {
+      progress->OverallProgress(file_size, file_size, 1,
+				_("Building tag database"));
+      progress->Done();
+    }
 
   return true;
 }
@@ -295,7 +299,11 @@ static bool load_tags_from_verfiles(OpProgress *progress)
     }
 
   if (progress)
-    progress->Done();
+    {
+      progress->OverallProgress(progress_total, progress_total, 1,
+				_("Building tag database"));
+      progress->Done();
+    }
 
   return true;
 }
