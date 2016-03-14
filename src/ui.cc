@@ -1272,23 +1272,39 @@ namespace
 
     pkgPackageManager::OrderResult rval = f(-1);
 
+    bool quit_after_dpkg_run = false;
     if(rval != pkgPackageManager::Incomplete)
       {
-	cout << _("Press Return to continue.") << endl;
-	int c = getchar();
+	cout << _("Press Return to continue, 'q' followed by Return to quit.") << endl;
 
-	while(c != '\n'  && c != EOF)
-	  c = getchar();
+	int c = getchar();
+	while (c != '\n' && c != EOF)
+	  {
+	    if (c == 'q' || c == 'Q')
+	      {
+		quit_after_dpkg_run = true;
+		break; // will still read the Return
+	      }
+
+	    c = getchar();
+	  }
       }
 
-    // libapt-pkg likes to stomp on SIGINT and SIGQUIT.  Restore them
-    // here in the simplest possible way.
-    cw::toplevel::install_sighandlers();
+    if (!quit_after_dpkg_run)
+      {
+	// libapt-pkg likes to stomp on SIGINT and SIGQUIT.  Restore them
+	// here in the simplest possible way.
+	cw::toplevel::install_sighandlers();
 
-    cw::toplevel::resume();
+	cw::toplevel::resume();
+      }
 
     k(rval);
-    return;
+
+    if (quit_after_dpkg_run)
+      {
+	file_quit();
+      }
   }
 }
 

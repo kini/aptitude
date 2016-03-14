@@ -24,6 +24,33 @@ Version 0.7.9 UNRELEASED
     from that), but even if cwidget allows for this, it seems to be quite
     complicated to achieve it.
 
+  * [curses] Be able to Quit after dpkg run (Closes: #246672)
+
+    The current implementation seems to work, but the handling of these issues
+    is a bit brittle and with lots of circular dependencies, with signals and
+    events happening everywhere.  E.g view (cwidget objects) being reloaded
+    automatically when cache is reloaded, while cwidget is supended for dpkg
+    run.  The initial events trigger further updates and triggers using cwidget
+    objects and other structures, sometimes depending on different options being
+    enabled or how the curses mode was launched (e.g. "visual preview", or
+    "solution screen").
+
+    In any case, the cache needs to be reloaded (and with it, state saved to
+    disk) to perform some updates/cleanup after dpkg runs, like resetting
+    "reinstall" state when done (the "save pending reinstall" was implemented in
+    this version), or unmarking upgraded packages as needing upgrade after the
+    version has been upgraded to the desired one (bug fixed in this version,
+    when aptitude was not acknowledging the "upgrade" as having taken place, and
+    still marking it as update in the next runs).
+
+    Presumably all of these complications are why this hand't been implemented
+    before, in all the intervening years.
+
+    Still I thought that it was worth to implement it now because it will now at
+    least save the user/system from spending time in some of the curses actions,
+    save a few extra keystrokes, and with it a few seconds (specially in slower
+    systems) having to keep an eye just for quitting.
+
 - Bug fixes:
 
   * ~E pattern now returns packages with Essential only (Closes: #548505)
