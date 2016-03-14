@@ -188,12 +188,9 @@ void download_update_manager::finish(pkgAcquire::RunResult res,
   bool need_autoclean =
     aptcfg->FindB(PACKAGE "::AutoClean-After-Update", false);
 
-  if (need_forget_new || need_autoclean)
-    {
-      bool reset_reinstall = false;
-      bool operation_needs_lock = true;
-      apt_load_cache(progress, true, operation_needs_lock, nullptr, reset_reinstall);
-    }
+  bool reset_reinstall = false;
+  bool operation_needs_lock = true;
+  apt_load_cache(progress, true, operation_needs_lock, nullptr, reset_reinstall);
 
   if (apt_cache_file)
     {
