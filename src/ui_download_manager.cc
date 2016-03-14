@@ -73,13 +73,6 @@ void ui_download_manager::done(download_thread *t, pkgAcquire::RunResult res)
 
 void ui_download_manager::finish_done(download_manager::result run_res)
 {
-  bool operation_needs_lock = true;
-  bool reset_reinstall = (run_res == download_manager::success) ? true : false;
-  apt_load_cache(done_progress.unsafe_get_ref(), true, operation_needs_lock, nullptr, reset_reinstall);
-
-  done_progress_destructor();
-  done_progress = NULL;
-
   if(run_res == download_manager::do_again && !abort_state.get_aborted())
     {
       sigc::slot2<void, download_thread *, pkgAcquire::RunResult>

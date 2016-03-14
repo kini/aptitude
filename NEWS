@@ -133,6 +133,20 @@ Version 0.7.9 UNRELEASED
     libraries are there and working then it is unnecessary to check again and
     again.
 
+  * Avoid extra code calling apt_load_cache() when already loaded
+
+    src/cmdline/cmdline_util.cc
+    src/ui_download_manager.cc
+
+    The cache just (re)loaded in last steps of download_manager (either
+    download_install_manager or download_update_manager).
+
+    Loading again is mostly harmless because the function when called detects
+    that it has already been loaded and quits, but duplicated code is not good
+    in general, and the call was modified several times lately, so it is always
+    a maintenance burden (not knowing / noticing that it was actually duplicated
+    code, otherwise would have removed it then).
+
 - Translation updates:
 
   * da.po: Danish translation by Morten Bo Johansen (Closes: #817065)

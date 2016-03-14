@@ -510,10 +510,7 @@ download_manager::result cmdline_do_download(download_manager *m,
   stats final_stats(0, 0, 0, std::set<std::string>());
   if(aptcfg->FindI("Quiet", 0) == 0)
     {
-      OpProgress tmpProgress;
-      bool operation_needs_lock = true;
-      bool reset_reinstall = (finish_res == download_manager::success) ? true : false;
-      apt_load_cache(&tmpProgress, false, operation_needs_lock, nullptr, reset_reinstall);
+      // cache just (re)loaded in last steps of download_manager
       final_stats = compute_apt_stats();
       show_stats_change(initial_stats, final_stats,
 			verbose >= 1, verbose >= 2,
