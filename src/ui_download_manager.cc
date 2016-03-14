@@ -73,6 +73,10 @@ void ui_download_manager::done(download_thread *t, pkgAcquire::RunResult res)
 
 void ui_download_manager::finish_done(download_manager::result run_res)
 {
+  // created in done(), has to be destructed
+  done_progress_destructor();
+  done_progress = NULL;
+
   if(run_res == download_manager::do_again && !abort_state.get_aborted())
     {
       sigc::slot2<void, download_thread *, pkgAcquire::RunResult>
