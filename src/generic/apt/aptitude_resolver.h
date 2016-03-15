@@ -478,6 +478,10 @@ public:
    * \param remove_score the score to assign to removing a package
    * against the user's wishes.
    *
+   * \param remove_obsolete_score the score to assign to removing an obsolete
+   * package against the user's wishes.  It should at least counter
+   * remove_score, because it will still be applied.
+   *
    * \param keep_score the score to assign to cancelling actions on a
    * package against the user's wishes.
    *
@@ -522,7 +526,7 @@ public:
    * "true" if they do not have a mapping in this collection.
    */
   void add_action_scores(int preserve_score, int auto_score,
-			 int remove_score, int keep_score,
+			 int remove_score, int remove_obsolete_score, int keep_score,
 			 int install_score, int upgrade_score,
 			 int non_default_score, int essential_remove,
 			 int full_replacement_score,

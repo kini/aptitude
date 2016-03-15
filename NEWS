@@ -166,6 +166,13 @@ Version 0.7.9 UNRELEASED
       ::ProblemResolver::OptionalScore  = 1
       ::ProblemResolver::ExtraScore     = 0  (was: -1)
 
+  * Add new score for removal of obsolete package and corresponding config
+    variable ::ProblemResolver::RemoveObsoleteScore
+
+    Removal of obsolete packages is treated as positive (600) to allow for
+    easier upgrades.  It has to counter at least the penalty to remove packages
+    (currently -300).
+
 - Internal changes:
 
   * configure.ac: Allow to disable check for Boost library headers individually

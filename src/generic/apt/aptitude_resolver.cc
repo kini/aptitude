@@ -1160,7 +1160,7 @@ void aptitude_resolver::add_default_resolution_score(const pkgCache::DepIterator
 }
 
 void aptitude_resolver::add_action_scores(int preserve_score, int auto_score,
-					  int remove_score, int keep_score,
+					  int remove_score, int remove_obsolete_score, int keep_score,
 					  int install_score, int upgrade_score,
 					  int non_default_score, int essential_remove,
 					  int full_replacement_score,
@@ -1180,6 +1180,7 @@ void aptitude_resolver::add_action_scores(int preserve_score, int auto_score,
 
   LOG_TRACE(loggerScores, "Setting up action scores; score parameters: preserver_score = " << preserve_score
 	    << ", auto_score = " << auto_score << ", remove_score = " << remove_score
+	    << ", remove_obsolete_score = " << remove_obsolete_score
 	    << ", keep_score = " << keep_score << ", install_score = " << install_score
 	    << ", upgrade_score = " << upgrade_score << ", non_default_score = "
 	    << non_default_score << ", essential_remove = " << essential_remove
@@ -1203,6 +1204,7 @@ void aptitude_resolver::add_action_scores(int preserve_score, int auto_score,
     safety_component(cost_settings.get_or_create_component("safety", aptitude_resolver_cost_settings::maximized)),
     priority_component(cost_settings.get_or_create_component("priority", aptitude_resolver_cost_settings::maximized)),
     removals_component = cost_settings.get_or_create_component("removals", aptitude_resolver_cost_settings::additive),
+    removals_of_obsolete_component = cost_settings.get_or_create_component("removals-of-obsolete", aptitude_resolver_cost_settings::additive),
     removals_of_manual_component = cost_settings.get_or_create_component("removals-of-manual", aptitude_resolver_cost_settings::additive),
     installs_component = cost_settings.get_or_create_component("installs", aptitude_resolver_cost_settings::additive),
     upgrades_component = cost_settings.get_or_create_component("upgrades", aptitude_resolver_cost_settings::additive),
@@ -1439,7 +1441,17 @@ void aptitude_resolver::add_action_scores(int preserve_score, int auto_score,
 	    }
 	  else if(apt_ver.end())
 	    {
-	      if(manual)
+	      if (pkg_obsolete(p.get_pkg()))
+		{
+		  LOG_DEBUG(loggerScores,
+			    "** Score: " << std::showpos << remove_obsolete_score
+			    << std::noshowpos << " for " << v
+			    << " because it represents the removal of an obsolete package  (" PACKAGE "::ProblemResolver::RemoveObsoleteScore).");
+		  add_version_score(v, remove_obsolete_score);
+                  modify_version_cost(v,
+                                      cost_settings.add_to_cost(removals_of_obsolete_component, 1));
+		}
+	      else if (manual)
 		{
 		  LOG_DEBUG(loggerScores,
 			    "** Score: " << std::showpos << remove_score
