@@ -1,6 +1,7 @@
 // aptitude_resolver.cc
 //
 //   Copyright (C) 2005, 2008-2011 Daniel Burrows
+//   Copyright (C) 2014-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -1454,7 +1455,7 @@ void aptitude_resolver::add_action_scores(int preserve_score, int auto_score,
                                   + cost_settings.add_to_cost(removals_component, 1));
 	      LOG_DEBUG(loggerCosts,
 			"** Safety level raised to at least " << remove_level << " for " << v
-			<< " because it represents the removal of a package (" PACKAGE "::ProblemResolver::Removal-Level)");
+			<< " because it represents the removal of a package (" PACKAGE "::ProblemResolver::Remove-Level)");
 	    }
 	  else if(apt_ver == (*cache)[p.get_pkg()].CandidateVerIter(*cache))
 	    {
