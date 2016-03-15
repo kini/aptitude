@@ -185,6 +185,19 @@ Version 0.7.9 UNRELEASED
     equivalent at the moment (generates one by one), but not if/when several
     solutions are generated at once (which might happen in future changes).
 
+  * Modify several resolver scores config variables
+
+    ::ProblemResolver::RequiredScore was lower (4) than ImportantScore (5), even
+    if it's in fact higher in the rank; while ExtraScore was -1, even if many
+    regular package in current systems are priority "extra" -- they should not
+    be penalised as "could we do without".  The new scores are:
+
+      ::ProblemResolver::RequiredScore  = 8  (was: 4)
+      ::ProblemResolver::ImportantScore = 4  (was: 5)
+      ::ProblemResolver::StandardScore  = 2  (was: 3)
+      ::ProblemResolver::OptionalScore  = 1
+      ::ProblemResolver::ExtraScore     = 0  (was: -1)
+
 - Translation updates:
 
   * da.po: Danish translation by Morten Bo Johansen (Closes: #817065)

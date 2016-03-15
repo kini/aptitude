@@ -996,11 +996,11 @@ void resolver_manager::create_resolver()
 			      manual_flags,
 			      hints);
 
-  resolver->add_priority_scores(aptcfg->FindI(PACKAGE "::ProblemResolver::ImportantScore", 5),
-				aptcfg->FindI(PACKAGE "::ProblemResolver::RequiredScore", 4),
-				aptcfg->FindI(PACKAGE "::ProblemResolver::StandardScore", 3),
+  resolver->add_priority_scores(aptcfg->FindI(PACKAGE "::ProblemResolver::RequiredScore", 8),
+				aptcfg->FindI(PACKAGE "::ProblemResolver::ImportantScore", 4),
+				aptcfg->FindI(PACKAGE "::ProblemResolver::StandardScore", 2),
 				aptcfg->FindI(PACKAGE "::ProblemResolver::OptionalScore", 1),
-				aptcfg->FindI(PACKAGE "::ProblemResolver::ExtraScore", -1));
+				aptcfg->FindI(PACKAGE "::ProblemResolver::ExtraScore", 0));
 
   {
     cwidget::threads::mutex::lock l2(background_control_mutex);
