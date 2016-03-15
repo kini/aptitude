@@ -2,6 +2,7 @@
 //
 //
 //   Copyright (C) 2005, 2007, 2009-2010 Daniel Burrows
+//   Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -411,7 +412,10 @@ cw::fragment *solution_fragment_with_ids(const aptitude_solution &sol,
 	  i!=remove_packages.end(); ++i)
 	{
 	  ids_column.append_id(i->second);
-	  fragments.push_back(cw::fragf("  %s%n", i->first.FullName(true).c_str()));
+	  fragments.push_back(cw::fragf("  %s [%s (%s)]%n",
+					i->first.FullName(true).c_str(),
+					i->first.CurrentVer().VerStr(),
+					archives_text(i->first.CurrentVer()).c_str()));
 	}
 
       ids_column.append_newline();

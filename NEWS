@@ -173,6 +173,23 @@ Version 0.7.9 UNRELEASED
     easier upgrades.  It has to counter at least the penalty to remove packages
     (currently -300).
 
+  * [cmdline] Solution screen for "Remove the following packages" shows version
+    and suite
+
+    This is to make it more similar to the other cases shown, which include a
+    version, as well as being able to deduce when a package is local / obsolete
+    ("now") instead of being part of other suites.
+
+    E.g. it will show:
+
+           Remove the following packages:
+      1)     libsdl1.2-dbg [1.2.15+dfsg1-2 (now)]
+
+    instead of the previous:
+
+           Remove the following packages:
+      1)     libsdl1.2-dbg
+
 - Internal changes:
 
   * configure.ac: Allow to disable check for Boost library headers individually
