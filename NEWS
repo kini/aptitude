@@ -179,6 +179,12 @@ Version 0.7.9 UNRELEASED
     a maintenance burden (not knowing / noticing that it was actually duplicated
     code, otherwise would have removed it then).
 
+  * [cmdline] Rejecting a solution advances to the next one only
+
+    Previously it was advancing to the last generated solution, which is
+    equivalent at the moment (generates one by one), but not if/when several
+    solutions are generated at once (which might happen in future changes).
+
 - Translation updates:
 
   * da.po: Danish translation by Morten Bo Johansen (Closes: #817065)

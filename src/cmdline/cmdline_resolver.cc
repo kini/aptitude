@@ -923,13 +923,8 @@ cmdline_resolve_deps(pkgset &to_install,
 		    modified_pkgs=true;
 		    break;
 		  case 'N':
-		    {
-		      unsigned int curr_count = resman->generated_solution_count();
-
-		      if(curr_count>0)
-			while(resman->get_selected_solution() < curr_count)
-			  resman->select_next_solution();
-		    }
+		    // same as "next" ('.')
+		    resman->select_next_solution();
 		    break;
 		  case 'Q':
 		    cout << _("Abandoning all efforts to resolve these dependencies.") << endl;
