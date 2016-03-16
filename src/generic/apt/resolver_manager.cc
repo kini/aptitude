@@ -936,7 +936,7 @@ void resolver_manager::create_resolver()
     ignored_recommends_cost = cost_settings.add_to_cost(ignored_recommends_component, 1);
   }
 
-  resolver=new aptitude_resolver(aptcfg->FindI(PACKAGE "::ProblemResolver::StepScore", 70),
+  resolver=new aptitude_resolver(aptcfg->FindI(PACKAGE "::ProblemResolver::StepScore", -10),
 				 aptcfg->FindI(PACKAGE "::ProblemResolver::BrokenScore", -100),
 				 aptcfg->FindI(PACKAGE "::ProblemResolver::UnfixedSoftScore", -200),
 				 aptcfg->FindI(PACKAGE "::ProblemResolver::Infinity", 1000000),
@@ -981,13 +981,13 @@ void resolver_manager::create_resolver()
 	}
     }
 
-  resolver->add_action_scores(aptcfg->FindI(PACKAGE "::ProblemResolver::PreserveManualScore", 60),
+  resolver->add_action_scores(aptcfg->FindI(PACKAGE "::ProblemResolver::PreserveManualScore", 20),
 			      aptcfg->FindI(PACKAGE "::ProblemResolver::PreserveAutoScore", 0),
 			      aptcfg->FindI(PACKAGE "::ProblemResolver::RemoveScore", -300),
 			      aptcfg->FindI(PACKAGE "::ProblemResolver::RemoveObsoleteScore", 310),
 			      aptcfg->FindI(PACKAGE "::ProblemResolver::KeepScore", 0),
 			      aptcfg->FindI(PACKAGE "::ProblemResolver::InstallScore", -20),
-			      aptcfg->FindI(PACKAGE "::ProblemResolver::UpgradeScore", 0),
+			      aptcfg->FindI(PACKAGE "::ProblemResolver::UpgradeScore", 30),
 			      aptcfg->FindI(PACKAGE "::ProblemResolver::NonDefaultScore", -40),
 			      aptcfg->FindI(PACKAGE "::ProblemResolver::EssentialRemoveScore", -100000),
 			      aptcfg->FindI(PACKAGE "::ProblemResolver::FullReplacementScore", 500),

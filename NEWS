@@ -197,6 +197,76 @@ Version 0.7.9 UNRELEASED
     So this is now only applied to installed packages, to avoid these undesired
     effects.
 
+  * Change the default score of several ::ProblemResolver config variables
+
+    These are:
+
+      ::StepScore to -10 (was +70)
+      ::PreserveManualScore to +20 (was +60)
+      ::UpgradeScore to +30 (was 0)
+
+    Long explanations:
+
+    1) ::StepScore to -10 (was +70)
+
+    Due to #418385 (back in 2007) it was raised from +10 to +70.  There were
+    already complaints after the change about "removing way too much stuff on
+    upgrades".
+
+    With positive numbers it gives extra score for exploring more and more steps
+    in the problem space (more inclined to search "depth-first" in the graph),
+    and the comparatively large score meant that this was offsetting the
+    negative score of some generally undesired actions (e.g. removing packages
+    which are otherwise fine), so the overall balance of taking more actions on
+    packages was positive even if it meant removing many packages removed rather
+    than upgrading only one.
+
+    (On a related note, RemoveObsoleteScore was added to consider removal of
+    local/obsolete packages as positive, when e.g. doing dist-upgrades and
+    leaving packages behind).
+
+    This played a big role in the problem (that appeared or became worse at some
+    point a few years ago) of the first suggestions offered by the full resolver
+    to be those removing many packages, rather than upgrading a single one or a
+    few, or at least suggesting the one(s) causing the conflict (selected to be
+    upgraded by the user) to be kept.
+
+    This has been tested in several bread-and-butter scenarios with
+    a better outcome than the previous solutions (dist-upgrade, and upgrading
+    packages that breaks others if not upgrading them --transitions,
+    dependencies on same versions of the same source package, etc--).
+
+    It will of course have some side effects, and perhaps has to be reverted or
+    further tweaked, but at least is an attempt to improve the general
+    situation.
+
+    2) ::PreserveManualScore to +20 (was +60)
+
+    As explained in another point of this version in the changelog, this
+    variable caused that the score for installing a new version was -20 plus +60
+    bonus to keep the "manual" uninstalled version uninstalled.  This was
+    changed to only have into account cases where packages are installed, but it
+    affects still other cases in similar ways.
+
+    It also interacts badly with UpgradeScore, because if the score assigned to
+    this variable is higher than the one in ::UpgradeScore, the package is
+    preferred to be kept in the current versions than upgraded, and this used to
+    cause big penalties for situations packages that need to be upgraded to the
+    same versions.  Upgrading packages coming from the same source in lock-step
+    is a typical case where packages have these strict dependencies with exact
+    versions.
+
+    So it seems sensible to lower this score to something that might be more
+    easily overcome by other package actions that are needed very often.
+
+    3) ::UpgradeScore to +30 (was 0)
+
+    Apart from the explanation in 2) (that this score should be higher than
+    ::PreserveManualScore to have better suggestions in many common cases), it
+    seems natural that upgrades are prefered to actions at 0 like Keep, since
+    very often the purpose of launching package management tools like aptitude
+    is to upgrade -- if there are upgrades available.
+
   * [cmdline] Solution screen for "Remove the following packages" shows version
     and suite
 
