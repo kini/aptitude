@@ -1402,7 +1402,7 @@ void aptitude_resolver::add_action_scores(int preserve_score, int auto_score,
 	    {
 	      // only add Preserve{Auto,Manual}Score if the packages are
 	      // actually installed.
-	      if (is_installed(p.get_pkg())
+	      if (is_installed(p.get_pkg()))
 		{
 		  if(manual)
 		    {
