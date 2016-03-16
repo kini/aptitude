@@ -1,4 +1,7 @@
 // aptitude_resolver_universe.cc                       -*-c++-*-
+//
+//   Copyright (C) 2005, 2007, 2009-2010 Daniel Burrows
+//   Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 
 #include "aptitude_resolver_universe.h"
 
@@ -870,7 +873,7 @@ cfg_level aptitude_universe::get_keep_all_level()
 {
   return parse_levels(aptcfg->Find(PACKAGE "::ProblemResolver::Keep-All-Level", ""),
                       aptcfg->Find(PACKAGE "::ProblemResolver::Keep-All-Tier", ""),
-                      cfg_level::make_level(20000));
+                      cfg_level::make_level(10000));
 }
 
 cfg_level aptitude_universe::get_remove_level()

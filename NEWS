@@ -267,6 +267,56 @@ Version 0.7.9 UNRELEASED
     very often the purpose of launching package management tools like aptitude
     is to upgrade -- if there are upgrades available.
 
+  * Change the default value of ::ProblemResolver::Keep-All-Level config
+    variable
+
+      ::Keep-All-Level to 10000 (was 20000)
+
+    This cost level is assigned to solutions that cancel all the user's actions
+    ("keep all").  A cost level that is lower is preferable in the "safety"
+    mode, which is the default.  More information about Costs in the User's
+    Manual documentation, section "Resolving package dependencies".
+
+    There are two levels which were lower (at 10000 both) than this one,
+    Safe-Level and Remove-Level.  The first is for safe actions, the other one
+    (also with 10000 in the last few years) is presumably to allow for packages
+    to be removed when they become obsolete, chiefly in dist-upgrade situations.
+
+    Since several years ago, in cases where the full resolver had to kick in,
+    the first suggestion for conflicts or unfulfilled dependencies was often to
+    remove a lot of packages.  Part of the reason why this was preferred to
+    upgrades or installations of new packages had to do with other causes (see
+    other changes in the same version of the changelog).
+
+    But the reason why all of those were preferred to the "keep packages
+    uninstalled" (again, in the default settings with "safety" mode) is because
+    this class of solution is ranked in the ::Keep-All-Level, which is higher
+    than the others and thus left as the last resort.  It was assumed that "keep
+    packages uninstalled" was undesirable because of cancelling all of the
+    user's requested actions of packages.
+
+    At the same time, the solution where "the package that you requested should
+    be removed rather than upgraded, and along this one this dozen too" was at
+    ::Remove-Level, in consequence, always offered before ::Keep-All-Level.
+
+    It seems natural to have "keeps" being offered at the same "safety" level
+    than removal of many packages, and in fact it should be offered before
+    removing many packages, including ones that are installed and requested to
+    upgrade and trigger the conflict that is being resolved.
+
+    This change makes that almost all day-to-day solutions are classified at the
+    same level now, excluding exceptional cases like removing essential packages
+    or installing non-default versions.  When at the same level, solutions are
+    classified by an extra score depending on the actions taken, which is a
+    cause of further tweaks in this version, so different solutions at the same
+    safety level are not offered randomly in any case.
+
+    But perhaps this change doesn't leave the "safety" levels mechanism in a
+    very good position, if almost all solutions are always in a single level.
+    In any case, I think that it's better to fix the oddity described above
+    rather than overhaul a very complex system, and potentially causing many
+    more unintended consequences than the one that this change might cause.
+
   * [cmdline] Solution screen for "Remove the following packages" shows version
     and suite
 

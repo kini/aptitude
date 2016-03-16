@@ -4869,9 +4869,13 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
                 </row>
 
                 <row>
-                  <entry>20,000</entry>
+                  <entry>10,000</entry>
                   <entry>
-                    The solution that cancels all the user's actions.
+                    The solution that cancels all the user's actions.  It used
+                    to be higher than <literal><link
+                    linkend='configProblemResolver-Remove-Level'>Aptitude::ProblemResolver::Remove-Level</link></literal>,
+                    but removing packages was ranked higher than keeping the
+                    same packages, even if the package was to be upgraded.
                   </entry>
                   <entry><literal><link linkend='configProblemResolver-Keep-All-Level'>Aptitude::ProblemResolver::Keep-All-Level</link></literal></entry>
                 </row>
@@ -11883,7 +11887,7 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 
 	    <seglistitem id='configProblemResolver-Keep-All-Level'>
 	      <seg><literal>Aptitude::ProblemResolver::Keep-All-Level</literal></seg>
-	      <seg><literal>20000</literal></seg>
+	      <seg><literal>10000</literal></seg>
 	      <seg>
 		The safety cost assigned to the single solution that
 		cancels all of the actions selected by the user.  See
