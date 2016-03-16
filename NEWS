@@ -173,6 +173,30 @@ Version 0.7.9 UNRELEASED
     easier upgrades.  It has to counter at least the penalty to remove packages
     (currently -300).
 
+  * Only add Preserve{Auto,Manual}Score if the packages are actually installed
+
+    Without this, the algorithm was assigning extra score +60 (default
+    PreserveManualScore) for packages which remained uninstalled (were not to be
+    installed) and when the user actually didn't select them manually -- even if
+    the justification was "because it is the to-be-installed version of a
+    manually installed package".
+
+    This caused for example that in amd64 with multi-arch 386 "Score: +60 for
+    uno-libs3:i386 [UNINST] because it is the to-be-installed version of a
+    manually installed package (..::PreserveManualScore)", and "Score: -20 for
+    uno-libs3:i386 5.1.1-1 because it is a new install (..::InstallScore)", so
+    installing the version rather than keep it uninstalled had comparatively a
+    -80 disadvantage, 4 times worse than the penalty of installing the new
+    package itself (which is already quite big).
+
+    At the same time, since PreserveAutoScore is 0, the package which was
+    actually installed had "Score: +0 for uno-libs3:amd64 5.1.1-1 because it is
+    the to-be-installed version of an automatically installed package
+    (..::PreserveAutoScore)".
+
+    So this is now only applied to installed packages, to avoid these undesired
+    effects.
+
   * [cmdline] Solution screen for "Remove the following packages" shows version
     and suite
 

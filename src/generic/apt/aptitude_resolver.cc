@@ -1398,24 +1398,28 @@ void aptitude_resolver::add_action_scores(int preserve_score, int auto_score,
                                                      v, policy,
                                                      priority_component));
 
-	  // Remember, the initial version is the InstVer.
-	  if(v == initial_state.version_of(p))
+	  if (v == initial_state.version_of(p))
 	    {
-	      if(manual)
+	      // only add Preserve{Auto,Manual}Score if the packages are
+	      // actually installed.
+	      if (is_installed(p.get_pkg())
 		{
-		  LOG_DEBUG(loggerScores,
-			    "** Score: " << std::showpos << preserve_score
-			    << std::noshowpos << " for " << v
-			    << " because it is the to-be-installed version of a manually installed package (" PACKAGE "::ProblemResolver::PreserveManualScore).");
-		  add_version_score(v, preserve_score);
-		}
-	      else
-		{
-		  LOG_DEBUG(loggerScores,
-			    "** Score: " << std::showpos << auto_score
-			    << std::noshowpos << " for " << v
-			    << " because it is the to-be-installed version of an automatically installed package (" PACKAGE "::ProblemResolver::PreserveAutoScore).");
-		  add_version_score(v, auto_score);
+		  if(manual)
+		    {
+		      LOG_DEBUG(loggerScores,
+				"** Score: " << std::showpos << preserve_score
+				<< std::noshowpos << " for " << v
+				<< " because it is the to-be-installed version of a manually installed package (" PACKAGE "::ProblemResolver::PreserveManualScore).");
+		      add_version_score(v, preserve_score);
+		    }
+		  else
+		    {
+		      LOG_DEBUG(loggerScores,
+				"** Score: " << std::showpos << auto_score
+				<< std::noshowpos << " for " << v
+				<< " because it is the to-be-installed version of an automatically installed package (" PACKAGE "::ProblemResolver::PreserveAutoScore).");
+		      add_version_score(v, auto_score);
+		    }
 		}
 
 	      // No change to the cost in this case.
