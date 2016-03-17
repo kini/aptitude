@@ -1,6 +1,7 @@
 /** \file cost.h */  // -*-c++-*-
 
 // Copyright (C) 2010 Daniel Burrows
+// Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -393,6 +394,19 @@ class cost
     {
       return !actions.empty();
     }
+
+    /** Get an overall level number for the combined actions.
+     *
+     * level::combine() suggests that "lower_bounded" and "additive" levels
+     * should not be mixed, but then there's no way to differentiate between
+     * solutions when other parts of the code mix levels, like "safe level" and
+     * "priority".
+     *
+     * This combines levels such as the higher lower bound (for lower_bounded
+     * levels) is preserved, and "additive" levels accumulated and added on top
+     * of the lower bound for the final number.
+     */
+    int get_combined_actions_level() const;
 
     /** \brief Test two costs for equality.
      *

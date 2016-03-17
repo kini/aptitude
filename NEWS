@@ -317,6 +317,39 @@ Version 0.7.9 UNRELEASED
     rather than overhaul a very complex system, and potentially causing many
     more unintended consequences than the one that this change might cause.
 
+  * Change how the costs are compared
+
+    Costs defer comparisons to "cost implementations" (cost_impl), and these
+    were compared based on "structural_level", and when it was equal, on
+    "actions".
+
+    "actions" is a vector of pairs with "level indices" and "levels".  For
+    "levels" only the value is calculated.  But before reaching that point,
+    vectors and pairs were compared in a more generic way, so if the vector had
+    a smaller number of elements and was equal up to that point, the shorter one
+    was chosen as smaller (similar to lexicographical comparisons of strings),
+    ignoring the effect of some modifiers in "actions".
+
+    This was extremely convoluted to follow and reason about, so a more explicit
+    comparison calculation is beneficial.
+
+    Additionally, the overall result with the previous comparison is that it
+    still produced undesired solutions in many cases, due to the levels of the
+    solutions being the same ("safe", "remove", the newly changed "keep-all")
+    when the resulting package changes (simple upgrades, removal of packages
+    requested to be upgraded, keep current state) are perceived as very
+    different in importance / desirability by the users.
+
+    The modifiers in the "actions" change the level values a bit, but these were
+    not taken into account in many cases in the previous comparison to give
+    preference to some solutions over the others.
+
+    Maybe these modifiers are not accurate or don't produce good results in all
+    cases (they are untested for a number of years due to the behavior of
+    comparisons until now, if nothing else), but the new sorting (with the
+    combination of the other changes in this release, modifying scores and
+    levels) seems to produce much better results overall.
+
   * [cmdline] Solution screen for "Remove the following packages" shows version
     and suite
 

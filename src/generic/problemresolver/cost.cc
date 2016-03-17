@@ -2,6 +2,7 @@
 
 
 // Copyright (C) 2010 Daniel Burrows
+// Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -117,7 +118,7 @@ int cost::cost_impl::compare(const cost_impl &other) const
   if(structural_level_cmp != 0)
     return structural_level_cmp;
   else
-    return aptitude::util::compare3(actions, other.actions);
+    return aptitude::util::compare3(get_combined_actions_level(), other.get_combined_actions_level());
 }
 
 void cost::cost_impl::dump(std::ostream &out) const
@@ -246,6 +247,35 @@ level cost::cost_impl::get_user_level(level_index idx) const
       return it->second;
 
   return level();
+}
+
+int cost::cost_impl::get_combined_actions_level() const
+{
+  int lower_bound = 0;
+  int added = 0;
+  for (const auto& it: actions)
+    {
+      const level& l = it.second;
+      switch (l.get_state())
+	{
+	case level::added:
+	  // this accumulates the different "additions" / "modifiers"
+	  added += l.get_value();
+	  break;
+	case level::lower_bounded:
+	  // overall lower_bound is always the highest of such levels
+	  lower_bound = std::max(lower_bound, l.get_value());
+	  break;
+	case level::unmodified:
+	  // nothing
+	  break;
+	}
+    }
+
+  // finally, add the highest lower_bound with the "additions" / "modifiers"
+  int combined_level = lower_bound + added;
+
+  return combined_level;
 }
 
 cost cost::least_upper_bound(const cost &cost1,
