@@ -1475,27 +1475,24 @@ void aptitude_resolver::add_action_scores(int preserve_score, int auto_score,
 	    }
 	  else if(apt_ver == (*cache)[p.get_pkg()].CandidateVerIter(*cache))
 	    {
-	      if(manual)
+	      // Could try harder not to break holds.
+	      if(p.get_pkg().CurrentVer().end())
 		{
-		  // Could try harder not to break holds.
-		  if(p.get_pkg().CurrentVer().end())
-		    {
-		      LOG_DEBUG(loggerScores,
-				"** Score: " << std::showpos << install_score
-				<< std::noshowpos << " for " << v
-				<< " because it is a new install (" PACKAGE "::ProblemResolver::InstallScore).");
-		      add_version_score(v, install_score);
-                      modify_version_cost(v, cost_settings.add_to_cost(installs_component, 1));
-		    }
-		  else
-		    {
-		      LOG_DEBUG(loggerScores,
-				"** Score: " << std::showpos << upgrade_score
-				<< std::noshowpos << " for " << v
-				<< " because it is an upgrade (" PACKAGE "::ProblemResolver::UpgradeScore).");
-		      add_version_score(v, upgrade_score);
-                      modify_version_cost(v, cost_settings.add_to_cost(upgrades_component, 1));
-		    }
+		  LOG_DEBUG(loggerScores,
+			    "** Score: " << std::showpos << install_score
+			    << std::noshowpos << " for " << v
+			    << " because it is a new install (" PACKAGE "::ProblemResolver::InstallScore).");
+		  add_version_score(v, install_score);
+		  modify_version_cost(v, cost_settings.add_to_cost(installs_component, 1));
+		}
+	      else
+		{
+		  LOG_DEBUG(loggerScores,
+			    "** Score: " << std::showpos << upgrade_score
+			    << std::noshowpos << " for " << v
+			    << " because it is an upgrade (" PACKAGE "::ProblemResolver::UpgradeScore).");
+		  add_version_score(v, upgrade_score);
+		  modify_version_cost(v, cost_settings.add_to_cost(upgrades_component, 1));
 		}
 
               modify_version_cost(v,
