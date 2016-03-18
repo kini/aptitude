@@ -153,6 +153,89 @@ Version 0.7.9 UNRELEASED
     spending a few hours tracking all of this to finally remove it... so much
     for an innocent silly feature with only 10 lines of code :-)
 
+  * [cmdline] Solution screen for "Remove the following packages" shows version
+    and suite
+
+    This is to make it more similar to the other cases shown, which include a
+    version, as well as being able to deduce when a package is local / obsolete
+    ("now") instead of being part of other suites.
+
+    E.g. it will show:
+
+           Remove the following packages:
+      1)     libsdl1.2-dbg [1.2.15+dfsg1-2 (now)]
+
+    instead of the previous:
+
+           Remove the following packages:
+      1)     libsdl1.2-dbg
+
+- User visible changes (Resolver):
+
+  This subsection is to separate the (many) changes of the Resolver in this
+  version from other changes.
+
+  When dealing with conflicts or when called when special options
+  (--full-resolver in the command line), aptitude fires an internal resolver to
+  try to address the resolution of conflicts caused by the requested action(s).
+  This was created at a time when apt was not resolving very well the
+  dist-upgrades and other actions, and long before Multi-Arch was implemented in
+  Debian, so with time the gap between aptitude and others was smaller, often
+  apt does a better job than aptitude, then unfavorable comparisons started to
+  be made, and other problems started to appear in the implementation.
+
+  This is a very complicated piece of software, and it's very difficult to fully
+  understand and reason about the consequences of deep changes.  As a heuristic
+  system, the solutions that it gives are quite open (so it's better if it's
+  guided towards desired solutions), and tweaks to the process can have
+  unpredictable and undesired effects somewhere else.
+
+  That said, since in the last few years there were many complaints about the
+  first solution offered being very often undesirable (removal of many
+  packages), and (from most user's point of view) preferable solutions like
+  upgrades being offered only after many removals, and keeps only offered as
+  last resort; some changes were made to try to address these problems.
+
+  The main change that seems to have started this in the past was with #565867
+  in 0.6.1.5 back in 2010 (but there are bugs open much older than that, so it's
+  been a recurring problem):
+
+    + [all] Changed the default resolver configuration so that removals
+            and "safe" actions are grouped together.  Without this
+            change, aptitude was being too conservative and failing to
+            solve simple upgrades. (Closes: #565867)
+
+            The safe-upgrade resolver is unaffected by this change,
+            since it uses explicit constraints to prevent removals from
+            being installed.
+
+  In the comment of the bug report, the original developer says:
+
+    "In the 0.6 series, the aptitude resolver is a lot more conservative
+     than it used to be, due to repeated complaints by users that it was
+     removing too many packages in the first solution that was presented.
+     It looks like maybe I overcompensated, though (this is not the first
+     report along these lines).
+
+     The main difficulty in cases like this is getting the algorithm to
+     properly balance removals with upgrades.  However, it looks like the
+     old scoring system works just fine here."
+
+  This is still true now.  Hopefully after the changes in this version the
+  balance is acceptable for most common actions when using aptitude, including
+  day-to-day upgrades as well as occasional big upgrades between Debian
+  releases.
+
+  Now onto the changes.  Executive summary:
+
+  * Changes to the order in which solutions are offered in conflict resolutions,
+    so upgrades or keeps are preferred over removal of many packages
+
+    (Closes: #341963, #359171, #365644, #453935, #569315, #574132, #570377,
+    #588202, #610845, #651410, #653284, #722211, #798240)
+
+  A more detailed description of individual changes follows:
+
   * Modify several resolver scores config variables
 
     ::ProblemResolver::RequiredScore was lower (4) than ImportantScore (5), even
@@ -355,23 +438,6 @@ Version 0.7.9 UNRELEASED
     For some reason this was only enabled for "manual" packages, even if there
     was nothing in the documentation mentioning this.  This is another step to
     promote Upgrades over other solutions.
-
-  * [cmdline] Solution screen for "Remove the following packages" shows version
-    and suite
-
-    This is to make it more similar to the other cases shown, which include a
-    version, as well as being able to deduce when a package is local / obsolete
-    ("now") instead of being part of other suites.
-
-    E.g. it will show:
-
-           Remove the following packages:
-      1)     libsdl1.2-dbg [1.2.15+dfsg1-2 (now)]
-
-    instead of the previous:
-
-           Remove the following packages:
-      1)     libsdl1.2-dbg
 
 - Internal changes:
 
