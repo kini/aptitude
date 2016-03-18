@@ -1451,6 +1451,7 @@ void aptitudeDepCache::internal_mark_keep(const PkgIterator &Pkg, bool Automatic
   pkgDepCache::MarkKeep(Pkg, false, !Automatic);
   pkgDepCache::SetReInstall(Pkg, false);
   get_ext_state(Pkg).reinstall=false;
+  get_ext_state(Pkg).forbidver="";
 
   // explicitly mark auto-installed, sometimes apt does not apply it properly in
   // some cases -- see #508428
