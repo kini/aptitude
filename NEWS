@@ -260,6 +260,16 @@ Version 0.7.9 UNRELEASED
     easier upgrades.  It has to counter at least the penalty to remove packages
     (currently -300).
 
+  * Add new score for partial solutions cancelling the removal of a package and
+    corresponding config variable ::ProblemResolver::CancelRemovalScore
+
+    Resolver actions cancelling the removal (or purge) of a package requested to
+    be removed/purged were not being penalised, now they are (default -300).
+
+    This was missing compared to penalisations for other actions like
+    RemoveScore, when removing packages not marked for removal.  Now, solutions
+    of the resolver cancelling explicitly requested removals are also penalised.
+
   * Only add Preserve{Auto,Manual}Score if the packages are actually installed
 
     Without this, the algorithm was assigning extra score +60 (default

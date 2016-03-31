@@ -985,6 +985,7 @@ void resolver_manager::create_resolver()
 			      aptcfg->FindI(PACKAGE "::ProblemResolver::PreserveAutoScore", 0),
 			      aptcfg->FindI(PACKAGE "::ProblemResolver::RemoveScore", -300),
 			      aptcfg->FindI(PACKAGE "::ProblemResolver::RemoveObsoleteScore", 310),
+			      aptcfg->FindI(PACKAGE "::ProblemResolver::CancelRemovalScore", -300),
 			      aptcfg->FindI(PACKAGE "::ProblemResolver::KeepScore", 0),
 			      aptcfg->FindI(PACKAGE "::ProblemResolver::InstallScore", -20),
 			      aptcfg->FindI(PACKAGE "::ProblemResolver::UpgradeScore", 30),
