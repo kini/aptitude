@@ -805,7 +805,7 @@ aptitude_solution calculate_current_solution(bool suppress_message,
   const int step_limit = aptcfg->FindI(PACKAGE "::ProblemResolver::StepLimit", 5000);
   if(step_limit <= 0)
     {
-      const std::string msg = ssprintf(_("Would resolve dependencies, but dependency resolution is disabled.\n   (%s::ProblemResolver::StepLimit = 0)\n"), PACKAGE);
+      const std::string msg = ssprintf(_("Would resolve dependencies, but dependency resolution is disabled.\n   (%s::ProblemResolver::StepLimit <= 0)\n"), PACKAGE);
 
       // It's important that the code path leading to here doesn't
       // access resman: the resolver won't exist in this case.
@@ -818,8 +818,6 @@ aptitude_solution calculate_current_solution(bool suppress_message,
 
       throw CmdlineSearchAbortedException(msg);
     }
-
-
 
   if(resman->get_selected_solution() < resman->generated_solution_count())
     return resman->get_solution(resman->get_selected_solution(), 0);
