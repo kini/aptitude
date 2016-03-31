@@ -1,4 +1,4 @@
-SUBDIRS = images
+#SUBDIRS = images
 #EXTRA_DIST = 
 
 # Language code.  Example: ja
@@ -23,7 +23,7 @@ README_encoding = utf-8
 # Most of these are screenshots which you will have to generate
 # yourself.  Some are diagrams translated using po4a and
 # contained in the list PO4A_IMAGES (set by po4a.mk).
-IMAGES := $(wildcard $(srcdir)/images/*.png) $(PO4A_IMAGES)
+#IMAGES := $(wildcard $(srcdir)/images/*.png) $(PO4A_IMAGES)
 
 # Uncomment this to provide your own stylesheet for producing the html
 # output.  Such a stylesheet could, for example, change the output
