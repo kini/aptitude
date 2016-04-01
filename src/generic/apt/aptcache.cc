@@ -1334,8 +1334,13 @@ void aptitudeDepCache::internal_mark_delete(const PkgIterator &Pkg,
   // not to purge unused lightly, can cause data loss -- see comments in #661188
   Purge = aptcfg->FindB(PACKAGE "::Purge-Unused", false);
 
-  bool follow_recommends = aptcfg->FindB("APT::Install-Recommends", true) || aptcfg->FindB(PACKAGE "::Keep-Recommends", false);
-  bool follow_suggests   = aptcfg->FindB(PACKAGE "::Keep-Suggests", false) || aptcfg->FindB(PACKAGE "::Suggests-Important", false);
+  bool keep_recommends_installed =
+    aptcfg->FindB("APT::Install-Recommends", true)
+    || aptcfg->FindB("APT::AutoRemove::RecommendsImportant", true)
+    || aptcfg->FindB(PACKAGE "::Keep-Recommends", false);
+  bool keep_suggests_installed   =
+    aptcfg->FindB("APT::AutoRemove::SuggestsImportant", true)
+    || aptcfg->FindB(PACKAGE "::Keep-Suggests", false);
 
   for (pkgCache::DepIterator dep = Pkg.CurrentVer().DependsList(); !dep.end(); ++dep)
     {
@@ -1349,8 +1354,8 @@ void aptitudeDepCache::internal_mark_delete(const PkgIterator &Pkg,
       // consider only these type of dependencies
       if (! ((dep->Type == pkgCache::Dep::Depends) ||
 	     (dep->Type == pkgCache::Dep::PreDepends) ||
-	     (dep->Type == pkgCache::Dep::Recommends && follow_recommends) ||
-	     (dep->Type == pkgCache::Dep::Suggests   && follow_suggests)))
+	     (dep->Type == pkgCache::Dep::Recommends && keep_recommends_installed) ||
+	     (dep->Type == pkgCache::Dep::Suggests   && keep_suggests_installed)))
 	{
 	  continue;
 	}
@@ -1366,13 +1371,13 @@ void aptitudeDepCache::internal_mark_delete(const PkgIterator &Pkg,
 	  for (pkgCache::PrvIterator dep_prv = dep_pkg.ProvidesList(); !dep_prv.end(); ++dep_prv)
 	    {
 	      // virtual package itself
-	      if (! can_remove_autoinstalled(dep_pkg, (*this), follow_recommends, follow_suggests)) {
+	      if (! can_remove_autoinstalled(dep_pkg, (*this), keep_recommends_installed, keep_suggests_installed)) {
 		continue;
 	      }
 
 	      // real package
 	      if (! is_auto_installed((*this)[dep_prv.OwnerPkg()]) ||
-		  ! can_remove_autoinstalled(dep_prv.OwnerPkg(), (*this), follow_recommends, follow_suggests)) {
+		  ! can_remove_autoinstalled(dep_prv.OwnerPkg(), (*this), keep_recommends_installed, keep_suggests_installed)) {
 		continue;
 	      }
 
@@ -1404,7 +1409,7 @@ void aptitudeDepCache::internal_mark_delete(const PkgIterator &Pkg,
 
       if (is_installed(dep_pkg) && is_auto && is_not_required)
 	{
-	  if (! can_remove_autoinstalled(dep_pkg, (*this), follow_recommends, follow_suggests)) {
+	  if (! can_remove_autoinstalled(dep_pkg, (*this), keep_recommends_installed, keep_suggests_installed)) {
 	    continue;
 	  }
 
