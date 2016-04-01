@@ -84,7 +84,7 @@ class broken_indicator : public cw::text_layout
 
   void handle_cache_reload()
   {
-    if(resman != NULL)
+    if (resman)
       resman->state_changed.connect(sigc::mem_fun(*this, &broken_indicator::post_update));
 
     update();
@@ -94,7 +94,7 @@ protected:
   broken_indicator()
     :spin_count(0)
   {
-    if(resman != NULL)
+    if (resman)
       resman->state_changed.connect(sigc::mem_fun(*this, &broken_indicator::post_update));
 
     cache_closed.connect(sigc::mem_fun(*this, &broken_indicator::update));
@@ -164,7 +164,7 @@ private:
   {
     cw::widget_ref tmpref(this);
 
-    if(resman != NULL && resman->background_thread_active())
+    if (resman && resman->background_thread_active())
       {
  	++spin_count;
 	update();
@@ -232,7 +232,7 @@ public:
   {
     cw::widget_ref tmpref(this);
 
-    if(resman == NULL || !resman->resolver_exists())
+    if (!resman || !resman->resolver_exists())
       {
 	set_fragment(cw::fragf(""));
 	last_sol.nullify();
