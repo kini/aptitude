@@ -159,7 +159,8 @@ void infer_reason(pkgCache::PkgIterator pkg, set<reason> &reasons)
       for(pkgCache::DepIterator d=pkg.RevDependsList(); !d.end(); ++d)
 	if(d.ParentVer()==d.ParentPkg().CurrentVer() &&
 	   ((*apt_cache_file)[d.ParentPkg()].Delete() ||
-	    (*apt_cache_file)[d.ParentPkg()].InstVerIter(*apt_cache_file)!=d.ParentVer()) &&
+	    (*apt_cache_file)[d.ParentPkg()].InstVerIter(*apt_cache_file)!=d.ParentVer() ||
+	    !d.IsSatisfied((*apt_cache_file)[d.TargetPkg()].CandidateVerIter(*apt_cache_file)) ) &&
 	   (d->Type==pkgCache::Dep::Depends ||
 	    d->Type==pkgCache::Dep::Recommends ||
 	    d->Type==pkgCache::Dep::Suggests))

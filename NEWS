@@ -136,6 +136,16 @@ Version 0.7.9 UNRELEASED
     PolicyBrokenCount is not zero, before it was only taken BrokenCount into
     account (it was the only count available when the code was set up).
 
+  * Enhance infer_reason() to explain more cases of pkg_unused_remove
+
+    Enhance infer_reason() to explain more cases where package is removed
+    because of automatically installed and unused (related to #819636).
+
+    When the version of the package changes because e.g. it is upgraded, maybe
+    it doesn't fulfill the original dependency (for example because the package
+    depending on it it depends on an exact or less-than version, as in the bug
+    report).
+
 - User visible changes:
 
   * [cmdline] Output in dumb terminals, when there is no piping/redirection
