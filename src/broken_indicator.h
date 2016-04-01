@@ -1,6 +1,7 @@
 // broken_indicator.h                        -*-c++-*-
 //
 //   Copyright (C) 2005 Daniel Burrows
+//   Copyright (C) 2014-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
