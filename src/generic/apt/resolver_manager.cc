@@ -794,7 +794,8 @@ void resolver_manager::maybe_create_resolver()
 {
   cwidget::threads::mutex::lock l(mutex);
 
-  if(resolver == NULL && ((*cache_file)->BrokenCount() > 0 || !initial_installations.empty()))
+  if (resolver == nullptr &&
+      ((*cache_file)->BrokenCount() > 0 || (*cache_file)->PolicyBrokenCount() > 0 || !initial_installations.empty()))
     {
       {
 	cwidget::threads::mutex::lock l(background_control_mutex);

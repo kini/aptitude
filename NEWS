@@ -124,6 +124,18 @@ Version 0.7.9 UNRELEASED
     This was caused by misuse of locks before the operation of saving the state
     file (pkgstates).
 
+  * Actions involving unfulfilled Recommends invoke the resolver
+    (Closes: #819636)
+
+    With APT::Install-Recommends="true" (the default), actions resulting in
+    unavailable Recommends (e.g., the recommended package is upgraded instead of
+    remaining in the required version) invoke the resolver, for the user to take
+    decision.
+
+    This is because now the resolver monitors situation when the
+    PolicyBrokenCount is not zero, before it was only taken BrokenCount into
+    account (it was the only count available when the code was set up).
+
 - User visible changes:
 
   * [cmdline] Output in dumb terminals, when there is no piping/redirection
