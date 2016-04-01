@@ -1031,8 +1031,8 @@ pkgCache::DepIterator is_conflicted(const pkgCache::VerIterator &ver,
 
 bool can_remove_autoinstalled(const pkgCache::PkgIterator& pkg,
 			      aptitudeDepCache& cache,
-			      bool follow_recommends,
-			      bool follow_suggests)
+			      bool keep_recommends_installed,
+			      bool keep_suggests_installed)
 {
   // if not valid, consider not-OK -- cannot decide if it's safe
   if (pkg.end())
@@ -1063,8 +1063,8 @@ bool can_remove_autoinstalled(const pkgCache::PkgIterator& pkg,
       // consider only these type of dependencies
       if (! ((rev_dep->Type == pkgCache::Dep::Depends) ||
 	     (rev_dep->Type == pkgCache::Dep::PreDepends) ||
-	     (rev_dep->Type == pkgCache::Dep::Recommends && follow_recommends) ||
-	     (rev_dep->Type == pkgCache::Dep::Suggests   && follow_suggests)))
+	     (rev_dep->Type == pkgCache::Dep::Recommends && keep_recommends_installed) ||
+	     (rev_dep->Type == pkgCache::Dep::Suggests   && keep_suggests_installed)))
 	continue;
 
       // consider only to be/remain installed rdeps

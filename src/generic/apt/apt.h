@@ -309,16 +309,16 @@ pkgCache::DepIterator is_conflicted(const pkgCache::VerIterator &ver,
  *
  * @cache Dependency cache
  *
- * @param follow_recommends Whether to follow recommends
+ * @param keep_recommends_installed Whether to keep recommends
  *
- * @param follow_suggests Whether to follow suggests
+ * @param keep_suggests_installed Whether to keep suggests
  *
  * @return Whether the action is allowed or not.
  */
 bool can_remove_autoinstalled(const pkgCache::PkgIterator& pkg,
 			      aptitudeDepCache& cache,
-			      bool follow_recommends,
-			      bool follow_suggests);
+			      bool keep_recommends_installed,
+			      bool keep_suggests_installed);
 
 /** Check if package is virtual
  *
