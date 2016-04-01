@@ -119,6 +119,11 @@ Version 0.7.9 UNRELEASED
 
     Uncovered investigating #615481.
 
+  * Fix cases where user tags operations did not apply (Closes: #819002)
+
+    This was caused by misuse of locks before the operation of saving the state
+    file (pkgstates).
+
 - User visible changes:
 
   * [cmdline] Output in dumb terminals, when there is no piping/redirection
