@@ -137,14 +137,20 @@ Version 0.7.9 UNRELEASED
     account (it was the only count available when the code was set up).
 
   * Enhance infer_reason() to explain more cases of pkg_unused_remove
+    (Closes: #266061)
 
     Enhance infer_reason() to explain more cases where package is removed
-    because of automatically installed and unused (related to #819636).
+    because of automatically installed and unused (one case related to #819636).
 
-    When the version of the package changes because e.g. it is upgraded, maybe
-    it doesn't fulfill the original dependency (for example because the package
-    depending on it it depends on an exact or less-than version, as in the bug
-    report).
+    The case related with #819636 is when the version of the depended package
+    (the one for which we look the reason of removal) changes because e.g. it is
+    upgraded, so maybe it doesn't fulfill the original dependency (for example
+    because the package depending on it it depends on an exact or less-than
+    version, as in the bug report).
+
+    The second case (#266061) was missing the explanation because it didn't take
+    into account reverse-depends of virtual packages provided by the package
+    being inspected.
 
 - User visible changes:
 

@@ -156,17 +156,34 @@ void infer_reason(pkgCache::PkgIterator pkg, set<reason> &reasons)
       //
       // FIXME: should I walk backwards up the dependency chain until
       //       finding something manually installed?
-      for(pkgCache::DepIterator d=pkg.RevDependsList(); !d.end(); ++d)
-	if(d.ParentVer()==d.ParentPkg().CurrentVer() &&
-	   ((*apt_cache_file)[d.ParentPkg()].Delete() ||
-	    (*apt_cache_file)[d.ParentPkg()].InstVerIter(*apt_cache_file)!=d.ParentVer() ||
-	    !d.IsSatisfied((*apt_cache_file)[d.TargetPkg()].CandidateVerIter(*apt_cache_file)) ) &&
-	   (d->Type==pkgCache::Dep::Depends ||
-	    d->Type==pkgCache::Dep::Recommends ||
-	    d->Type==pkgCache::Dep::Suggests))
-	  {
-	    reasons.insert(reason(d.ParentPkg(), d));
-	  }
+
+
+      // include the package itself as well as virtual packages provided by this
+      // package
+      std::vector<pkgCache::PkgIterator> all_pkgs;
+      all_pkgs.push_back(pkg);
+      for (pkgCache::PrvIterator prv = candver.ProvidesList(); !prv.end(); ++prv)
+	{
+	  pkgCache::PkgIterator prv_pkg = prv.ParentPkg();
+	  all_pkgs.push_back(prv_pkg);
+	}
+
+      for (const pkgCache::PkgIterator& pkg_considered : all_pkgs)
+	{
+	  for(pkgCache::DepIterator d = pkg_considered.RevDependsList(); !d.end(); ++d)
+	    {
+	      if (d.ParentVer() == d.ParentPkg().CurrentVer() &&
+		 ((*apt_cache_file)[d.ParentPkg()].Delete() ||
+		  (*apt_cache_file)[d.ParentPkg()].InstVerIter(*apt_cache_file)!=d.ParentVer() ||
+		  !d.IsSatisfied((*apt_cache_file)[d.TargetPkg()].CandidateVerIter(*apt_cache_file)) ) &&
+		 (d->Type==pkgCache::Dep::Depends ||
+		  d->Type==pkgCache::Dep::Recommends ||
+		  d->Type==pkgCache::Dep::Suggests))
+		{
+		  reasons.insert(reason(d.ParentPkg(), d));
+		}
+	    }
+	}
     }
   else if(actionstate==pkg_auto_hold)
     {
