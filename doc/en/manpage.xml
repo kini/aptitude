@@ -367,10 +367,13 @@
 	      modify &aptitude;'s stored information about what
 	      actions to perform.  Therefore, if you issue (e.g.) the
 	      command <quote><literal>aptitude install foo
-	      bar</literal></quote> and then abort the installation
-	      once &aptitude; has started downloading and installing
-	      packages, you will need to run <quote><literal>aptitude
-	      remove foo bar</literal></quote> to cancel that order.
+	      bar</literal></quote> on packages previously uninstalled,
+	      and then the installation fails once &aptitude; has started
+	      downloading and installing packages, you will need to run
+	      <quote><literal>aptitude remove foo bar</literal></quote> to go
+	      back to the previous state (and possibly undo installations or
+	      upgrades to other packages that were affected by the
+	      <quote><literal>install</literal></quote> action).
 	    </para>
 	  </note>
 	</listitem>
