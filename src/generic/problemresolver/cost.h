@@ -599,6 +599,16 @@ public:
     return get_impl().get_structural_level();
   }
 
+    /** Get an overall level number for the combined actions.
+     *
+     * See level cost_impl::get_combined_actions_level() description for more
+     * explanations.
+     */
+  int get_combined_actions_level() const
+  {
+    return get_impl().get_combined_actions_level();
+  }
+
   /** \brief Get the value of this cost at a user level. */
   level get_user_level(int idx) const
   {
