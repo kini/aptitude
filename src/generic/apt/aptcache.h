@@ -246,17 +246,6 @@ private:
 
   pkgRecords *records;
 
-  /** Call whenever the cache state is modified; discards the
-   *  state of the active resolver.
-   *
-   *  \param undo the undo group with which this discarding should be
-   *  associated.
-   */
-  void discard_resolver(undo_group *undo);
-
-  /** Call whenever a new resolver should be instantiated. */
-  void create_resolver();
-
   undoable *state_restorer(PkgIterator pkg, StateCache &state, aptitude_state &ext_state);
   // Returns an 'undoable' object which will restore the given package to the
   // given state via {Mark,Set}* routines
