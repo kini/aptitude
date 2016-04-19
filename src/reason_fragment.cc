@@ -366,8 +366,8 @@ cw::fragment *dep_or_frag(pkgCache::PkgIterator pkg,
   // * cpp (upgraded, 4:5.2.1-6 -> 4:5.2.1-8) depends on cpp-5 (>= 5.2.1-13~)
   // * gcc-5 (held/unchanged, 5.2.1-26) depends on cpp-5 (= 5.2.1-26)
   auto rdep_pkg = dep.ParentPkg();
-  pkgCache::VerIterator rdep_instver = pkg.CurrentVer();
-  pkgCache::VerIterator rdep_candver = get_candidate_version(pkg);
+  pkgCache::VerIterator rdep_instver = rdep_pkg.CurrentVer();
+  pkgCache::VerIterator rdep_candver = get_candidate_version(rdep_pkg);
   bool ignore_broken = true;
   pkg_action_state rdep_actionstate = find_pkg_state(rdep_pkg, *apt_cache_file, ignore_broken);
   std::string rdep_action_explanation_str = get_action_explanation_str(rdep_pkg,
