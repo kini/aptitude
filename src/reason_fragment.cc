@@ -94,7 +94,21 @@ std::string get_action_explanation_str(pkgCache::PkgIterator pkg,
       targetver_str = "internal-error";
     }
 
-  return ssprintf("(%s, %s)", actionstate_str.c_str(), targetver_str.c_str());
+  std::string s;
+  if (!actionstate_str.empty() && !targetver_str.empty())
+    {
+      s = ssprintf("(%s, %s)", actionstate_str.c_str(), targetver_str.c_str());
+    }
+  else if (!actionstate_str.empty())
+    {
+      s = ssprintf("(%s)", actionstate_str.c_str());
+    }
+  else if (!targetver_str.empty())
+    {
+      s = ssprintf("(%s)", targetver_str.c_str());
+    }
+
+  return s;
 }
 
 /** Returns a cw::fragment describing a dependency (as in "depends
@@ -438,30 +452,42 @@ cw::fragment *reason_fragment(const pkgCache::PkgIterator &pkg, bool &breakage)
   aptitudeDepCache::StateCache &state=(*apt_cache_file)[pkg];
   aptitudeDepCache::aptitude_state &estate=(*apt_cache_file)->get_ext_state(pkg);
   pkgCache::VerIterator candver=state.CandidateVerIter(*apt_cache_file);
-  pkgCache::VerIterator instver=state.InstVerIter(*apt_cache_file);	
+  pkgCache::VerIterator instver=state.InstVerIter(*apt_cache_file);
+
+  // current version != state.InstVerIter(*apt_cache_file) in planned actions
+  std::string action_explanation_str = get_action_explanation_str(pkg,
+								  pkg.CurrentVer(),
+								  candver,
+								  actionstate);
 
   switch(actionstate)
     {
     case pkg_unused_remove:
-      fragments.push_back(wrapbox(cw::fragf(_("%B%s%b was installed automatically; it is being removed because all of the packages which depend upon it are being removed:"),
-					    pkg.FullName(true).c_str())));
+      fragments.push_back(wrapbox(cw::fragf(_("%B%s %s%b was installed automatically; it is being removed because all of the packages which depend upon it are being removed:"),
+					    pkg.FullName(true).c_str(),
+					    action_explanation_str.c_str())));
       break;
     case pkg_auto_remove:
-      fragments.push_back(wrapbox(cw::fragf(_("%B%s%b will be automatically removed because of dependency errors:"),
-					    pkg.FullName(true).c_str())));
+      fragments.push_back(wrapbox(cw::fragf(_("%B%s %s%b will be automatically removed because of dependency errors:"),
+					    pkg.FullName(true).c_str(),
+					    action_explanation_str.c_str())));
       break;
     case pkg_auto_install:
-      fragments.push_back(wrapbox(cw::fragf(_("%B%s%b will be automatically installed to satisfy the following dependencies:"),
-					    pkg.FullName(true).c_str())));
+      fragments.push_back(wrapbox(cw::fragf(_("%B%s %s%b will be automatically installed to satisfy the following dependencies:"),
+					    pkg.FullName(true).c_str(),
+					    action_explanation_str.c_str())));
       break;
     case pkg_auto_hold:
       {
 	if(candver.end() || candver==pkg.CurrentVer())
-	  fragments.push_back(wrapbox(cw::fragf(_("%B%s%b cannot be upgraded now, but if it could be, it would still be held at version %B%s%b."),
-						pkg.FullName(true).c_str(), pkg.CurrentVer().VerStr())));
-	else
-	  fragments.push_back(wrapbox(cw::fragf(_("%B%s%b will not be upgraded to version %B%s%b, to avoid breaking the following dependencies:"),
+	  fragments.push_back(wrapbox(cw::fragf(_("%B%s %s%b cannot be upgraded now, but if it could be, it would still be held at version %B%s%b."),
 						pkg.FullName(true).c_str(),
+						action_explanation_str.c_str(),
+						pkg.CurrentVer().VerStr())));
+	else
+	  fragments.push_back(wrapbox(cw::fragf(_("%B%s %s%b will not be upgraded to version %B%s%b, to avoid breaking the following dependencies:"),
+						pkg.FullName(true).c_str(),
+						action_explanation_str.c_str(),
 						candver.VerStr())));
 	break;
       }
@@ -469,66 +495,80 @@ cw::fragment *reason_fragment(const pkgCache::PkgIterator &pkg, bool &breakage)
       if(!pkg.CurrentVer().end())
 	{
 	  if((*apt_cache_file)->is_held(pkg))
-	    fragments.push_back(wrapbox(cw::fragf(_("%B%s%b cannot be upgraded now, but if it could be, it would still be held at version %B%s%b."),
-						  pkg.FullName(true).c_str(), pkg.CurrentVer().VerStr())));
+	    fragments.push_back(wrapbox(cw::fragf(_("%B%s %s%b cannot be upgraded now, but if it could be, it would still be held at version %B%s%b."),
+						  pkg.FullName(true).c_str(),
+						  action_explanation_str.c_str(),
+						  pkg.CurrentVer().VerStr())));
 	  else
-	    fragments.push_back(wrapbox(cw::fragf(_("%B%s%b is currently installed."),
-						  pkg.FullName(true).c_str())));
+	    fragments.push_back(wrapbox(cw::fragf(_("%B%s %s%b is currently installed."),
+						  pkg.FullName(true).c_str(),
+						  action_explanation_str.c_str())));
 	  break;
 	}
       else
 	{
-	  fragments.push_back(wrapbox(cw::fragf(_("%B%s%b is not currently installed."),
-						pkg.FullName(true).c_str())));
+	  fragments.push_back(wrapbox(cw::fragf(_("%B%s %s%b is not currently installed."),
+						pkg.FullName(true).c_str(),
+						action_explanation_str.c_str())));
 
 	  break;
 	}
     case pkg_broken:
       breakage=true;
 
-      fragments.push_back(wrapbox(cw::fragf(_("Some dependencies of %B%s%b are not satisfied:"),
-					    pkg.FullName(true).c_str())));
+      fragments.push_back(wrapbox(cw::fragf(_("Some dependencies of %B%s %s%b are not satisfied:"),
+					    pkg.FullName(true).c_str(),
+					    action_explanation_str.c_str())));
       break;
     case pkg_downgrade:
-      fragments.push_back(wrapbox(cw::fragf(_("%B%s%b will be downgraded."),
-					    pkg.FullName(true).c_str())));
+      fragments.push_back(wrapbox(cw::fragf(_("%B%s %s%b will be downgraded."),
+					    pkg.FullName(true).c_str(),
+					    action_explanation_str.c_str())));
       break;
     case pkg_hold:
       {
 	if(estate.selection_state != pkgCache::State::Hold &&
 	   !candver.end() && candver.VerStr() == estate.forbidver)
-	  fragments.push_back(wrapbox(cw::fragf(_("%B%s%b will not be upgraded to the forbidden version %B%s%b."),
+	  fragments.push_back(wrapbox(cw::fragf(_("%B%s %s%b will not be upgraded to the forbidden version %B%s%b."),
 						pkg.FullName(true).c_str(),
+						action_explanation_str.c_str(),
 						candver.VerStr())));
 	else
-	  fragments.push_back(wrapbox(cw::fragf(_("%B%s%b could be upgraded to version %B%s%b, but it is being held at version %B%s%b."),
+	  fragments.push_back(wrapbox(cw::fragf(_("%B%s %s%b could be upgraded to version %B%s%b, but it is being held at version %B%s%b."),
 						pkg.FullName(true).c_str(),
+						action_explanation_str.c_str(),
 						candver.VerStr(),
 						pkg.CurrentVer().VerStr())));
       }
       break;
     case pkg_reinstall:
-      fragments.push_back(wrapbox(cw::fragf(_("%B%s%b will be re-installed."),
-					    pkg.FullName(true).c_str())));
+      fragments.push_back(wrapbox(cw::fragf(_("%B%s %s%b will be re-installed."),
+					    pkg.FullName(true).c_str(),
+					    action_explanation_str.c_str())));
       break;
     case pkg_install:
-      fragments.push_back(wrapbox(cw::fragf(_("%B%s%b will be installed."),
-					    pkg.FullName(true).c_str())));
+      fragments.push_back(wrapbox(cw::fragf(_("%B%s %s%b will be installed."),
+					    pkg.FullName(true).c_str(),
+					    action_explanation_str.c_str())));
       break;
     case pkg_remove:
-      fragments.push_back(wrapbox(cw::fragf(_("%B%s%b will be removed."),
-					    pkg.FullName(true).c_str())));
+      fragments.push_back(wrapbox(cw::fragf(_("%B%s %s%b will be removed."),
+					    pkg.FullName(true).c_str(),
+					    action_explanation_str.c_str())));
       break;
     case pkg_upgrade:
       {
-	fragments.push_back(wrapbox(cw::fragf(_("%B%s%b will be upgraded from version %B%s%b to version %B%s%b."),
+	fragments.push_back(wrapbox(cw::fragf(_("%B%s %s%b will be upgraded from version %B%s%b to version %B%s%b."),
 					      pkg.FullName(true).c_str(),
+					      action_explanation_str.c_str(),
 					      pkg.CurrentVer().VerStr(),
 					      candver.VerStr(), A_BOLD)));
       }
       break;
     case pkg_unconfigured:
-      fragments.push_back(wrapbox(cw::fragf(_("%B%s%b is only partly installed; its installation will be completed."), pkg.FullName(true).c_str())));
+      fragments.push_back(wrapbox(cw::fragf(_("%B%s %s%b is only partly installed; its installation will be completed."),
+					    pkg.FullName(true).c_str(),
+					    action_explanation_str.c_str())));
       break;
     default:
       // Another non-translatable internal error.
@@ -559,18 +599,21 @@ cw::fragment *reason_fragment(const pkgCache::PkgIterator &pkg, bool &breakage)
       if(instver.end())
 	{
 	  if(state.Delete())
-	    fragments.push_back(wrapbox(cw::fragf(_("The following packages depend on %B%s%b and will be broken by its removal:"),
-						  pkg.FullName(true).c_str())));
+	    fragments.push_back(wrapbox(cw::fragf(_("The following packages depend on %B%s %s%b and will be broken by its removal:"),
+						  pkg.FullName(true).c_str(),
+						  action_explanation_str.c_str())));
 	  else
-	    fragments.push_back(wrapbox(cw::fragf(_("The following packages depend on %B%s%b and are broken:"),
-						  pkg.FullName(true).c_str())));
+	    fragments.push_back(wrapbox(cw::fragf(_("The following packages depend on %B%s %s%b and are broken:"),
+						  pkg.FullName(true).c_str(),
+						  action_explanation_str.c_str())));
 	}
       // It will end up installed.
       else
 	{
 	  if(pkg.CurrentVer().end())
-	    fragments.push_back(wrapbox(cw::fragf(_("The following packages conflict with %B%s%b and will be broken by its installation:"),
-						  pkg.FullName(true).c_str())));
+	    fragments.push_back(wrapbox(cw::fragf(_("The following packages conflict with %B%s %s%b and will be broken by its installation:"),
+						  pkg.FullName(true).c_str(),
+						  action_explanation_str.c_str())));
 	  else
 	    // up/downgrade; could be either Depends or Conflicts/Breaks
 	    {
@@ -602,25 +645,30 @@ cw::fragment *reason_fragment(const pkgCache::PkgIterator &pkg, bool &breakage)
 		  if(has_conflicts && has_depends)
 		    {
 		      if(state.Keep())
-			fragments.push_back(wrapbox(cw::fragf(_("The following packages depend on a version of %B%s%b other than the currently installed version of %B%s%b, or conflict with the currently installed version:"),
+			fragments.push_back(wrapbox(cw::fragf(_("The following packages depend on a version of %B%s %s%b other than the currently installed version of %B%s%b, or conflict with the currently installed version:"),
 							      pkg.FullName(true).c_str(),
+							      action_explanation_str.c_str(),
 							      pkg.CurrentVer().VerStr())));
 		      else
-			fragments.push_back(wrapbox(cw::fragf(_("The following packages conflict with %B%s%b, or depend on a version of it which is not going to be installed."),
-							      pkg.FullName(true).c_str())));
+			fragments.push_back(wrapbox(cw::fragf(_("The following packages conflict with %B%s %s%b, or depend on a version of it which is not going to be installed."),
+							      pkg.FullName(true).c_str(),
+							      action_explanation_str.c_str())));
 		    }
 		  else if(has_conflicts)
-		    fragments.push_back(wrapbox(cw::fragf(_("The following packages conflict with %B%s%b:"),
-							  pkg.FullName(true).c_str())));
+		    fragments.push_back(wrapbox(cw::fragf(_("The following packages conflict with %B%s %s%b:"),
+							  pkg.FullName(true).c_str(),
+							  action_explanation_str.c_str())));
 		  else if(has_depends)
 		    {
 		      if(state.Keep())
-			fragments.push_back(wrapbox(cw::fragf(_("The following packages depend on a version of %B%s%b other than the currently installed version of %B%s%b:"),
+			fragments.push_back(wrapbox(cw::fragf(_("The following packages depend on a version of %B%s %s%b other than the currently installed version of %B%s%b:"),
 							      pkg.FullName(true).c_str(),
+							      action_explanation_str.c_str(),
 							      pkg.CurrentVer().VerStr())));
 		      else
-			fragments.push_back(wrapbox(cw::fragf(_("The following packages depend on a version of %B%s%b which is not going to be installed."),
-							      pkg.FullName(true).c_str())));
+			fragments.push_back(wrapbox(cw::fragf(_("The following packages depend on a version of %B%s %s%b which is not going to be installed."),
+							      pkg.FullName(true).c_str(),
+							      action_explanation_str.c_str())));
 		    }
 		}
 	      else
