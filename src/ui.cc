@@ -2250,8 +2250,9 @@ void do_apply_solution()
       undo_group *undo=new apt_undo_group;
       try
 	{
-	  (*apt_cache_file)->apply_solution(resman->get_solution(state.selected_solution, aptcfg->FindI(PACKAGE "::ProblemResolver::StepLimit", 5000)),
-					    undo);
+	  const generic_solution<aptitude_universe>& sol = resman->get_solution(state.selected_solution,
+										aptcfg->FindI(PACKAGE "::ProblemResolver::StepLimit", 5000));
+	  (*apt_cache_file)->apply_solution(sol, undo);
 	}
       catch(NoMoreSolutions)
 	{
