@@ -23,6 +23,7 @@
 #include "terminal.h"
 
 using testing::AnyNumber;
+using testing::Invoke;
 using testing::NiceMock;
 using testing::StrictMock;
 using testing::_;
