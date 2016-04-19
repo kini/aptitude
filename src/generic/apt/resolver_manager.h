@@ -300,6 +300,12 @@ private:
   /** The index of the currently selected solution. */
   unsigned int selected_solution;
 
+  /** Save approved broken [soft] deps like Recommends from previous solutions
+   * of the resolver, so we can break out of the loop when the resolver is
+   * discarded and e-reated as part of applying a solution.
+   */
+  std::vector<aptitude_resolver_dep> previously_approved_broken_deps;
+
   /** The pending job requests for the background thread.
    */
   std::priority_queue<job_request, std::vector<job_request>,
@@ -454,8 +460,18 @@ private:
    */
   void unsuspend_background_thread();
 
-  /** Create a resolver if necessary. */
-  void maybe_create_resolver();
+  /** Create a resolver if necessary.
+   *
+   * @param consider_policybroken Whether to consider PolicyBroken (unfulfilled
+   * recommends, at the moment)
+   */
+  void maybe_create_resolver(bool consider_policybroken);
+
+  /** Create a resolver if necessary.
+   *
+   * Preserves old behaviour, to not have to change signals and slots, etc.
+   */
+  void maybe_create_resolver() { maybe_create_resolver(true); }
 
   /** Collects common code for the resolver manipulations such as
    *  reject_version, unreject_version, etc: locks this class,
@@ -476,8 +492,10 @@ public:
 
   /** \brief Discard all past interactions and return the resolver to
    *  its initial state.
+   *
+   * @param consider_policybroken For maybe_create_broken()
    */
-  void reset_resolver();
+  void reset_resolver(bool consider_policybroken = false);
 
   /** If \b true, then a resolver has been created, indicating that
    *  problems may exist in the cache.
@@ -663,6 +681,11 @@ public:
    */
   bool is_approved_broken(const aptitude_resolver_dep &dep);
 
+  /** Require the resolver to leave all soft dependencies broken (e.g. if the
+   * user accepts a solution leaving Recommends unsatisfied)
+   *
+   */
+  void approve_all_broken_deps();
 
 
   /** \return \b true if undo items exist in this resolver manager. */
