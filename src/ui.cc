@@ -1505,12 +1505,24 @@ static void auto_fix_broken()
 
   try
     {
+      // transient message
+      cw::widget_ref w = cw::frame::create(cw::label::create(_("Trying to fix broken packages...")));
+      auto transient_message = cw::center::create(w);
+      transient_message->show_all();
+      popup_widget(transient_message);
+      cw::toplevel::tryupdate();
+
       eassert(resman != NULL);
       eassert(resman->resolver_exists());
 
       aptitude_solution sol = resman->get_solution(resman->get_selected_solution(), 0);
 
       (*apt_cache_file)->apply_solution(sol, undo);
+
+      // remove transient message
+      transient_message->destroy();
+      transient_message = nullptr;
+      cw::toplevel::tryupdate();
 
       cw::widget_ref d = cw::dialogs::ok(cw::fragf("%s%n%n%F",
 					   _("Some packages were broken and have been fixed:"),
