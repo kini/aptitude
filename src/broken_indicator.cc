@@ -372,7 +372,7 @@ public:
 
 
     if(last_sol_is_keep_all)
-      fragments.push_back(cw::text_fragment(_("Suggest keeping all packages at their current version.")));
+      fragments.push_back(cw::text_fragment(_("Keep all packages at their current version")));
     else
       {
 	vector<cw::fragment *> suggestions;
@@ -431,7 +431,12 @@ public:
 	/* TRANSLATORS: %F is replaced with a comma separated list such as
 	   "n1 installs, n2 removals", ...
 	*/
-	fragments.push_back(cw::fragf(_("Suggest %F"), cw::join_fragments(suggestions, L", ")));
+	cw::fragment* actions_frag = nullptr;
+	if (suggestions.empty())
+	  actions_frag = cw::text_fragment(_("no changes"));
+	else
+	  actions_frag = cw::join_fragments(suggestions, L", ");
+	fragments.push_back(cw::fragf(_("Actions: %F"), actions_frag));
       }
 
     if(state.background_thread_active)
