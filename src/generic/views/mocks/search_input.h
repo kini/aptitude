@@ -63,7 +63,7 @@ namespace aptitude
 	     libsigc++-2.0/2.8.0-1/sigc++/signal.h , so the compiler cannot
 	     decide which version to use.
 
-	     These classed seem to be a WIP related with the GTK implementation,
+	     These classes seem to be a WIP related with the GTK implementation,
 	     and it seems difficult to get it to work when juggling so many
 	     blades (Google-Mock not updated for 2 years in Debian, libsigc++,
 	     C++11 support still incomplete in many places....) so comment out
