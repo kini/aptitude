@@ -33,19 +33,13 @@ dnl Disable check for Boost library headers individually (it's expensive, 1~2
 dnl minutes at ./configure time, and not always needed when developing)
 DISABLE_BOOST_LIB_CHECKS=no
 AC_ARG_ENABLE(boost-lib-checks,
-	AS_HELP_STRING(--disable-boost-lib-checks, [Disable Boost library checks in "configure" (for development only)]),
-	[if test "x$enable_aptitude" = xyes
-	then
-	        if test x$enableval=xno
-		then
-		          DISABLE_BOOST_LIB_CHECKS=no
-		else
-			  DISABLE_BOOST_LIB_CHECKS=yes
-		fi
-	else
-		DISABLE_BOOST_LIB_CHECKS=yes
-	fi])
-
+	AS_HELP_STRING(--disable-boost-lib-checks, [Disable Boost library checks (for development only)]),
+	[if test x$enableval=xno
+	 then
+		  DISABLE_BOOST_LIB_CHECKS=yes
+	 else
+	          DISABLE_BOOST_LIB_CHECKS=no
+	 fi])
 
 dnl Check for libraries only if compiling the program.
 AS_IF([test "x$enable_aptitude" != xno],
