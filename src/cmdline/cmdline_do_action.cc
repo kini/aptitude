@@ -219,16 +219,6 @@ int cmdline_do_action(int argc, char *argv[],
       bool use_autoinst = (resolver_mode != resolver_mode_safe);
       (*apt_cache_file)->mark_all_upgradable(use_autoinst, ignore_removed, NULL);
     }
-  /*else if(argc==1 && default_action==cmdline_install)
-    {
-      // FIXME: Build to_install to avoid a big printout
-      for(pkgCache::PkgIterator i=(*apt_cache_file)->PkgBegin(); !i.end(); ++i)
-	{
-
-	}
-	}*/
-
-  // TODO: look for filenames and call dpkg directly if that's the case.
 
   bool apply_ok = true;
 
