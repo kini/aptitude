@@ -1981,6 +1981,25 @@ static void do_mark_upgradable()
 
       (*apt_cache_file)->mark_all_upgradable(true, true, undo);
 
+      // same implementation in CmdLine full-upgrade and UI MarkUpgradable
+      //
+      // install Essential/Required packages -- #555896 and #757028
+      for (pkgCache::GrpIterator grp = (*apt_cache_file)->GrpBegin(); !grp.end(); ++grp)
+	{
+	  for (pkgCache::PkgIterator pkg = grp.PackageList(); !pkg.end(); pkg = grp.NextPkg(pkg))
+	    {
+	      bool is_essential = (pkg->Flags & pkgCache::Flag::Essential) == pkgCache::Flag::Essential;
+	      if (!is_essential || is_installed(pkg))
+		continue;
+
+	      pkgCache::PkgIterator preferred_pkg = grp.FindPreferredPkg();
+	      if (is_installed(preferred_pkg) || (*apt_cache_file)[preferred_pkg].Install())
+		continue;
+
+	      (*apt_cache_file)->mark_install(preferred_pkg, false, false, nullptr);
+	    }
+	}
+
       if(!undo->empty())
 	apt_undos->add_item(undo);
       else

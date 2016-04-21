@@ -220,6 +220,28 @@ int cmdline_do_action(int argc, char *argv[],
       (*apt_cache_file)->mark_all_upgradable(use_autoinst, ignore_removed, NULL);
     }
 
+  // same implementation in CmdLine full-upgrade and UI MarkUpgradable
+  //
+  // install Essential/Required packages -- #555896 and #757028
+  if (upgrade_mode == full_upgrade)
+    {
+      for (pkgCache::GrpIterator grp = (*apt_cache_file)->GrpBegin(); !grp.end(); ++grp)
+	{
+	  for (pkgCache::PkgIterator pkg = grp.PackageList(); !pkg.end(); pkg = grp.NextPkg(pkg))
+	    {
+	      bool is_essential = (pkg->Flags & pkgCache::Flag::Essential) == pkgCache::Flag::Essential;
+	      if (!is_essential || is_installed(pkg))
+		continue;
+
+	      pkgCache::PkgIterator preferred_pkg = grp.FindPreferredPkg();
+	      if (is_installed(preferred_pkg) || (*apt_cache_file)[preferred_pkg].Install())
+		continue;
+
+	      (*apt_cache_file)->mark_install(preferred_pkg, false, false, nullptr);
+	    }
+	}
+    }
+
   bool apply_ok = true;
 
   {
