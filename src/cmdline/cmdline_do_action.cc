@@ -208,7 +208,7 @@ int cmdline_do_action(int argc, char *argv[],
   ReadPinFile(policy);
   ReadPinDir(policy);
 
-  pkgset to_upgrade, to_install, to_hold, to_remove, to_purge;
+  pkgset to_install, to_hold, to_remove, to_purge;
 
   if(upgrade_mode == full_upgrade || upgrade_mode == safe_upgrade)
     {
