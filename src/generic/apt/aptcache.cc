@@ -1228,7 +1228,9 @@ void aptitudeDepCache::mark_delete(const PkgIterator &Pkg,
 				   undo_group *undo)
 {
   // refuse to remove itself -- see #319782, #568548
-  if (!Pkg.end() && string("aptitude") == Pkg.Name())
+  //
+  // but allow purge if already removed (#822331)
+  if (!Pkg.end() && is_installed(Pkg) && string("aptitude") == Pkg.Name())
     {
       _error->Error(_("Cannot remove aptitude within aptitude"));
       return;
@@ -1262,7 +1264,9 @@ void aptitudeDepCache::internal_mark_delete(const PkgIterator &Pkg,
 					    std::vector<unsigned int>& unused_already_visited)
 {
   // refuse to remove itself -- see #319782, #568548
-  if (!Pkg.end() && string("aptitude") == Pkg.Name())
+  //
+  // but allow purge if already removed (#822331)
+  if (!Pkg.end() && is_installed(Pkg) && string("aptitude") == Pkg.Name())
     {
       _error->Error(_("Cannot remove aptitude within aptitude"));
       return;
