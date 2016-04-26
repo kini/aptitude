@@ -97,6 +97,9 @@ class pkg_grouppolicy_section:public pkg_grouppolicy
 
   // The descriptions are in the cw::style used by package descriptions.
   static std::map<string, wstring> section_descriptions;
+  // Width for section names -- will be calculated to fill name width and indent
+  // descriptions as if they were columns -- #103416
+  static size_t section_name_width;
   // The available top sections (i.e. main, contrib, non-free) in order.
   static std::vector<string> top_sections;
   static void init_section_data();
@@ -131,6 +134,7 @@ pkg_grouppolicy *pkg_grouppolicy_section_factory::instantiate(pkg_signal *_sig,
 
 std::map<string, wstring> pkg_grouppolicy_section::section_descriptions;
 std::vector<string> pkg_grouppolicy_section::top_sections;
+size_t pkg_grouppolicy_section::section_name_width = 0;
 
 namespace
 {
@@ -215,6 +219,15 @@ void pkg_grouppolicy_section::init_section_data()
 	  section_descriptions[Curr->Tag] = cw::util::transcode(final_desc, "UTF-8");
 	}
     }
+
+  // width of section names -- for indenting descriptions
+  for (const auto& it : section_descriptions)
+    {
+      if (it.first.size() > section_name_width)
+	section_name_width = it.first.size();
+    }
+  // extra indentation
+  section_name_width += 4;
 
   // Read in the list of Top-Sections; do not use a cached value.
   top_sections = aptitude::apt::get_top_sections(false);
@@ -353,12 +366,22 @@ void pkg_grouppolicy_section::add_package(const pkgCache::PkgIterator &pkg,
 	      wstring desc;
 	      if(section_descriptions.find(section_tail) != section_descriptions.end())
 		{
+		  size_t current_section_name_length = cw::util::transcode(section).length();
+		  size_t current_section_name_fill = 0;
+		  if (section_name_width > current_section_name_length)
+		    current_section_name_fill = section_name_width - current_section_name_length;
+		  else
+		    current_section_name_fill = 1;
+		  wstring fill(current_section_name_fill, L' ');
+
 		  desc = section_descriptions[section_tail];
 		  if(desc.find(L'\n') != desc.npos)
-		    shortdesc = cw::util::transcode(section) + L" - " + wstring(desc, 0, desc.find('\n'));
+		    {
+		      shortdesc = cw::util::transcode(section) + fill + wstring(desc, 0, desc.find('\n'));
+		    }
 		  else
 		    {
-		      shortdesc = cw::util::transcode(section) + desc;
+		      shortdesc = cw::util::transcode(section) + fill + desc;
 		      desc = L"";
 		    }
 		}
