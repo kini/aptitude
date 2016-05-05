@@ -1,6 +1,7 @@
 /** \file globals.cc */
 
 // Copyright (C) 2010 Daniel Burrows
+// Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -27,13 +28,6 @@ class resolver_manager;
 class signalling_config;
 class undo_list;
 
-namespace aptitude
-{
-  namespace util
-  {
-    class file_cache;
-  }
-}
 
 // Definitions of global pointers exposed in apt.h.  They are defined
 // here so that test code can get away with just linking in globals.o
