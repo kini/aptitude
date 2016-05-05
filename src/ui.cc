@@ -1290,17 +1290,47 @@ namespace
 	  }
       }
 
-    if (!quit_after_dpkg_run)
+    // preparation for quitting
+    if (quit_after_dpkg_run)
       {
-	// libapt-pkg likes to stomp on SIGINT and SIGQUIT.  Restore them
-	// here in the simplest possible way.
-	cw::toplevel::install_sighandlers();
+	// global variable to signal shutdown in progress, so when
+	// apt_load_cache() is called later will skip some actions like loading
+	// tags.
+	//
+	// this is not very elegant, but:
+	//
+	// a) we cannot quit directly (we need to save the state after package
+	//    actions were taken, for example), and
+	//
+	// b) untangling the rest of the shutdown process is very difficult,
+	//    with the state of the code growing organically for years without
+	//    taking this into account, and duplicating code for the cases when
+	//    we quit and we continue is not very good either
+	shutdown_in_progress = true;
 
-	cw::toplevel::resume();
+	// emit and disable future events for cache_closed
+	cache_closed();
+	cache_closed.clear();
+	do_hide_reload_message();
+	// disable future cache_reloaded events (e.g. rebuilding views)
+	cache_reloaded.clear();
+
+	// transient message
+	cw::widget_ref w = cw::frame::create(cw::label::create(_("Updating state and shutting down...")));
+	auto transient_message = cw::center::create(w);
+	transient_message->show_all();
+	popup_widget(transient_message);
+	cw::toplevel::update();
       }
+
+    // libapt-pkg likes to stomp on SIGINT and SIGQUIT.  Restore them here in
+    // the simplest possible way.
+    cw::toplevel::install_sighandlers();
+    cw::toplevel::resume();
 
     k(rval);
 
+    // do quit after normal sequence of updating state for packages that changed
     if (quit_after_dpkg_run)
       {
 	file_quit();

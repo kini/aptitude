@@ -462,6 +462,12 @@ void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
       (*apt_cache_file)->save_selection_list(progress_bar);
     }
 
+  // stop here if shutdown is in progress
+  if (shutdown_in_progress)
+    {
+      return;
+    }
+
   LOG_TRACE(logger, "Loading the apt package records.");
   apt_package_records=new pkgRecords(*apt_cache_file);
 
@@ -476,7 +482,6 @@ void apt_load_cache(OpProgress *progress_bar, bool do_initselections,
 
   LOG_DEBUG(logger, "Emitting cache_reloaded().");
   cache_reloaded();
-
   LOG_TRACE(logger, "Done emitting cache_reloaded().");
 }
 

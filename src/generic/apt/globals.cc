@@ -38,3 +38,5 @@ pkgRecords *apt_package_records=NULL;
 pkgSourceList *apt_source_list=NULL;
 undo_list *apt_undos=NULL;
 resolver_manager *resman = NULL;
+
+bool shutdown_in_progress = false;

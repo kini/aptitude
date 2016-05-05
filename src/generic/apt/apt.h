@@ -62,6 +62,7 @@ extern aptitudeCacheFile *apt_cache_file;
 extern resolver_manager *resman;
 extern pkgSourceList *apt_source_list;
 extern pkgRecords *apt_package_records;
+extern bool shutdown_in_progress;
 
 void apt_preinit(const char *rootdir);
 // Performs initialization of stuff that has to happen before apt_init is

@@ -23,6 +23,26 @@ Version 0.8.1 UNRELEASED
     too slow for some people/systems, so this is now only invoked will full
     check of dependencies (Recommends / "soft deps") before the final action.
 
+  * [curses] Be more verbose when quitting after dpkg actions (Closes: #822560)
+
+    This is related to the fix in the previous version for #246672.
+
+    Make curses windows visible when restoring (instead of staying blank) to
+    show message of "Updating state and shutting down", and make some
+    improvements to speed up shut down.
+
+    The optimisation is achieved through a global variable shutdown_in_progress
+    that apt_load_cache() pays attention to, to e.g. avoid re-loading tags.
+    This mechanism is not very elegant, but:
+
+    a) we cannot quit directly (we need to save the state after package
+       actions were taken, for example), and
+
+    b) untangling the rest of the shutdown process is very difficult, with the
+       state of the code having grown organically for years without taking this
+       into account (it would need significant rewrites); and duplicating code
+       for the cases when we quit and we continue is not very good either
+
 - Translation updates:
 
   * ja.po: Japanese translation by Takuma Yamada (Closes: #822208)
