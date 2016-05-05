@@ -16,6 +16,13 @@ Version 0.8.1 UNRELEASED
 
     Not the same as creating a column, but same effect.
 
+  * Invoke the resolver for unfulfilled Recommends only once (Closes: #822329)
+
+    After the fix for #819636, the resolver was invoked after every action taken
+    (in curses mode) to see if there were any unfulfilled dependencies.  This is
+    too slow for some people/systems, so this is now only invoked will full
+    check of dependencies (Recommends / "soft deps") before the final action.
+
 - Translation updates:
 
   * ja.po: Japanese translation by Takuma Yamada (Closes: #822208)

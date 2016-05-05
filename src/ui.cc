@@ -1769,7 +1769,33 @@ void do_package_run()
 	    install_fixer_dialog();
 	}
       else
-	do_package_run_or_show_preview();
+	{
+	  // check (only here, not every time) if recommended packages are not
+	  // fulfilled
+	  if ((*apt_cache_file)->PolicyBrokenCount() > 0)
+	    {
+	      // show message for the delay
+	      cw::widget_ref w = cw::frame::create(cw::label::create(_("Checking dependencies")));
+	      cw::widget_ref transient_message = cw::center::create(w);
+	      transient_message->show_all();
+	      popup_widget(transient_message);
+	      cw::toplevel::tryupdate();
+
+	      // do reload resolver with checks for policy broken
+	      resman->reset_resolver(true);
+
+	      // hide message for the delay
+	      transient_message->destroy();
+	      transient_message = nullptr;
+	      cw::toplevel::tryupdate();
+
+	      // if resolver was destroyed, policy breakages have been accepted
+	      if (resman->resolver_exists())
+		return;
+	    }
+
+	  do_package_run_or_show_preview();
+	}
     }
 }
 

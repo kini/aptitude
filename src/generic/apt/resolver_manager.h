@@ -471,7 +471,7 @@ private:
    *
    * Preserves old behaviour, to not have to change signals and slots, etc.
    */
-  void maybe_create_resolver() { maybe_create_resolver(true); }
+  void maybe_create_resolver() { maybe_create_resolver(false); }
 
   /** Collects common code for the resolver manipulations such as
    *  reject_version, unreject_version, etc: locks this class,
