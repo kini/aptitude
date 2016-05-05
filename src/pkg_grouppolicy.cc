@@ -227,7 +227,7 @@ void pkg_grouppolicy_section::init_section_data()
 	section_name_width = it.first.size();
     }
   // extra indentation
-  section_name_width += 4;
+  section_name_width += 2;
 
   // Read in the list of Top-Sections; do not use a cached value.
   top_sections = aptitude::apt::get_top_sections(false);
