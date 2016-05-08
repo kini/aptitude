@@ -2325,12 +2325,6 @@ void do_apply_solution()
   if(!apt_cache_file)
     return;
 
-  // unsatisfied recommends -- see #819636
-  //
-  // approves all broken [soft] deps, like recommends, because the user
-  // acknowledged them
-  resman->approve_all_broken_deps();
-
   resolver_manager::state state = resman->state_snapshot();
 
   if(!do_apply_solution_enabled_from_state(state))
@@ -2340,6 +2334,12 @@ void do_apply_solution()
     }
   else
     {
+      // unsatisfied recommends -- see #819636
+      //
+      // approves all broken [soft] deps, like recommends, because the user
+      // acknowledged them
+      resman->approve_all_broken_deps();
+
       undo_group *undo=new apt_undo_group;
       try
 	{
