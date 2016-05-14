@@ -1,6 +1,7 @@
 // serialize.h      -*-c++-*-
 //
 //   Copyright (C) 2008-2009 Daniel Burrows
+//   Copyright (C) 2014-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -24,7 +25,7 @@
 
 #include <cwidget/generic/util/ref_ptr.h>
 
-#include <iostream>
+#include <iosfwd>
 #include <string>
 
 namespace aptitude
