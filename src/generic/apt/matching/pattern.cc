@@ -1,6 +1,7 @@
 // pattern.cc
 //
 //   Copyright (C) 2008-2009 Daniel Burrows
+//   Copyright (C) 2014-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -48,13 +49,12 @@ namespace aptitude
 	{
 	  size_t needed = regerror(err, &r, NULL, 0);
 
-	  char *buf = new char[needed+1];
+	  size_t bufsize = std::min(needed, size_t(4095)) + 1;
+	  char buf[bufsize];
 
-	  regerror(err, &r, buf, needed+1);
+	  regerror(err, &r, buf, bufsize);
 
 	  std::string msg(ssprintf("Regex compilation error: %s", buf));
-
-	  delete[] buf;
 
 	  throw MatchingException(msg);
 	}
