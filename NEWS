@@ -6,6 +6,23 @@ Version 0.8.2 UNRELEASED
   * [curses] Apply solution ('!') guarded against crash when there are no
     solutions (Closes: #823734)
 
+- Documentation:
+
+  * Guide/User's Manual:
+
+    * Enhance the documentation of the use of "architecture specification" for
+      ?architecture search pattern arguments, instead of simple string matches
+      (Closes: #823927)
+
+      The commit d78de1ea in 0.6.8.2-1 had the side effect that the strings for
+      the arch search pattern are no longer treated as simple "string patterns"
+      as it happened before, when architectures were matched with partial
+      strings (as it does with package names, etc.).
+
+      In the case of TUI with interactive search enabled, it means that packages
+      do not match until the arch-specification is complete/valid, triggering
+      "beeps" meaning that no packaged match.
+
 
 [2016-05-05]
 Version 0.8.1

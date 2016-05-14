@@ -6360,18 +6360,24 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 	</varlistentry>
 
 	<varlistentry id='searchArchitecture'>
-	  <term><literal>?architecture(<replaceable>architecture</replaceable>)</literal>, <literal>~r<replaceable>architecture</replaceable></literal></term>
+	  <term><literal>?architecture(<replaceable>architecture-spec</replaceable>)</literal>, <literal>~r<replaceable>architecture-spec</replaceable></literal></term>
 
 	  <listitem>
 	    <para>
 	      Matches package versions for the given
-	      <replaceable>architecture</replaceable>.  For instance,
-	      <quote><literal>?architecture(amd64)</literal></quote>
-	      matches <literal>amd64</literal> packages, while
-	      <quote><literal>?architecture(all)</literal></quote>
-	      matches arch-independent packages.  Also accepts the
-	      special values <literal>native</literal> and
-	      <literal>foreign</literal>.
+	      <replaceable>architecture-spec</replaceable>.  For instance,
+	      <quote><literal>?architecture(amd64)</literal></quote> matches
+	      <literal>amd64</literal> packages, while
+	      <quote><literal>?architecture(all)</literal></quote> matches
+	      arch-independent packages.
+	    </para>
+
+	    <para>
+	      It also accepts the special values <literal>native</literal> and
+	      <literal>foreign</literal>, and architecture wildcards
+	      (e.g. <literal>linux-any</literal> or
+	      <literal>any-amd64</literal>), as specified in Policy (<quote>11.1
+	      Architecture specification strings</quote>).
 	    </para>
 	  </listitem>
 	</varlistentry>
