@@ -6356,6 +6356,18 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 		<replaceable>pattern2</replaceable>)</literal>.
 	      </para>
 	    </note>
+
+	    <note>
+	      <para>
+		To be precise, as with any other pattern, it is not packages but
+		versions of the packages which are matched.  For
+		<quote><literal>aptitude search</literal></quote> and other uses
+		it does not make much difference, but <quote><literal>aptitude
+		versions</literal></quote> will only show the versions that
+		match, not all versions of the package for which any version
+		matches.  For that, use an enclosing &Swiden;.
+	      </para>
+	    </note>
 	  </listitem>
 	</varlistentry>
 
