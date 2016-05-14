@@ -1316,7 +1316,7 @@ namespace
 	cache_reloaded.clear();
 
 	// transient message
-	cw::widget_ref w = cw::frame::create(cw::label::create(_("Updating state and shutting down...")));
+	cw::widget_ref w = cw::frame::create(cw::label::create(_("Updating state and quitting...")));
 	auto transient_message = cw::center::create(w);
 	transient_message->show_all();
 	popup_widget(transient_message);
