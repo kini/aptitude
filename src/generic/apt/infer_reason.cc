@@ -170,7 +170,7 @@ void infer_reason(pkgCache::PkgIterator pkg, set<reason> &reasons)
 
       for (const pkgCache::PkgIterator& pkg_considered : all_pkgs)
 	{
-	  for(pkgCache::DepIterator d = pkg_considered.RevDependsList(); !d.end(); ++d)
+	  for (pkgCache::DepIterator d = pkg_considered.RevDependsList(); !d.end(); ++d)
 	    {
 	      pkgDepCache::StateCache parent_state = (*apt_cache_file)[d.ParentPkg()];
 	      const pkgCache::VerIterator& parent_candver = parent_state.CandidateVerIter(*apt_cache_file);
@@ -179,9 +179,9 @@ void infer_reason(pkgCache::PkgIterator pkg, set<reason> &reasons)
 		  (parent_state.Delete() ||
 		   (parent_state.InstVerIter(*apt_cache_file) != d.ParentVer()) ||
 		   (!parent_candver.end() && !d.IsSatisfied(parent_candver)) ) &&
-		 (d->Type==pkgCache::Dep::Depends ||
-		  d->Type==pkgCache::Dep::Recommends ||
-		  d->Type==pkgCache::Dep::Suggests))
+		  (d->Type==pkgCache::Dep::Depends ||
+		   d->Type==pkgCache::Dep::Recommends ||
+		   d->Type==pkgCache::Dep::Suggests))
 		{
 		  reasons.insert(reason(d.ParentPkg(), d));
 		}
