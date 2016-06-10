@@ -957,7 +957,7 @@ void do_new_flat_view(OpProgress &progress)
 {
   pkg_grouppolicy_factory *grp = new pkg_grouppolicy_end_factory;
   pkg_tree_ref tree = pkg_tree::create("", grp);
-  tree->set_limit(cw::util::transcode("!~v"));
+  tree->set_limit(cw::util::transcode(std::string(aptcfg->Find(PACKAGE "::Pkg-Display-Limit", "")) + "!~v"));
 
   add_main_widget(make_default_view(tree,
                                     &tree->selected_signal,
