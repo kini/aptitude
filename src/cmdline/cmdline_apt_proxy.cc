@@ -18,6 +18,9 @@
 #include "cmdline_apt_proxy.h"
 
 #include "aptitude.h"
+#include "generic/apt/matching/match.h"
+#include "generic/apt/matching/parse.h"
+#include "generic/apt/matching/pattern.h"
 
 #include <apt-pkg/error.h>
 
@@ -183,6 +186,14 @@ int cmdline_apt_proxy(int argc, char* argv[])
 	  // add the arguments
 	  for (int argi = 2; argi < argc; ++argi)
 	    {
+	      std::string arg = argv[argi];
+
+	      if (aptitude::matching::is_pattern(arg))
+		{
+		  fprintf(stdout, _("Error: pattern not supported by this subcommand: '%s'\n"), arg.c_str());
+		  return EXIT_FAILURE;
+		}
+
 	      exec_cmdline_args.push_back(argv[argi]);
 	    }
 	}

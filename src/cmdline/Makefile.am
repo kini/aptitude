@@ -18,8 +18,6 @@ libcmdline_a_SOURCES=\
 	cmdline_common.h \
 	cmdline_do_action.cc \
 	cmdline_do_action.h \
-	cmdline_download.cc \
-	cmdline_download.h \
 	cmdline_download_progress_display.cc \
 	cmdline_download_progress_display.h \
 	cmdline_dump_resolver.cc \

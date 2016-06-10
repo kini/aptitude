@@ -64,7 +64,6 @@
 #include <cmdline/cmdline_clean.h>
 #include <cmdline/cmdline_common.h>
 #include <cmdline/cmdline_do_action.h>
-#include <cmdline/cmdline_download.h>
 #include <cmdline/cmdline_dump_resolver.h>
 #include <cmdline/cmdline_extract_cache_subset.h>
 #include <cmdline/cmdline_forget_new.h>
@@ -1260,8 +1259,6 @@ int main(int argc, char *argv[])
 	  else if(!strcasecmp(argv[optind], "extract-cache-subset"))
 	    return aptitude::cmdline::extract_cache_subset(argc - optind,
 							   argv + optind);
-	  else if(!strcasecmp(argv[optind], "download"))
-	    return cmdline_download(argc-optind, argv+optind);
 	  else if(!strcasecmp(argv[optind], "changelog"))
 	    return cmdline_changelog(argc-optind, argv+optind);
 	  else if(!strcasecmp(argv[optind], "moo"))
