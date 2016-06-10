@@ -7,6 +7,8 @@ noinst_LIBRARIES=libcmdline.a
 libcmdline_a_SOURCES=\
 	cmdline_action.cc \
 	cmdline_action.h \
+	cmdline_apt_proxy.h \
+	cmdline_apt_proxy.cc \
 	cmdline_changelog.cc \
 	cmdline_changelog.h \
 	cmdline_check_resolver.cc \

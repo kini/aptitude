@@ -58,6 +58,7 @@
 #include <cwidget/toplevel.h>
 #include <cwidget/dialogs.h>
 
+#include <cmdline/cmdline_apt_proxy.h>
 #include <cmdline/cmdline_changelog.h>
 #include <cmdline/cmdline_check_resolver.h>
 #include <cmdline/cmdline_clean.h>
@@ -1292,6 +1293,11 @@ int main(int argc, char *argv[])
 	      bool operation_needs_lock = false;
 	      apt_init(&p, false, operation_needs_lock, nullptr);
 	      exit(0);
+	    }
+	  else if (!strcasecmp(argv[optind], "showsrc") ||
+		   !strcasecmp(argv[optind], "source"))
+	    {
+	      return cmdline_apt_proxy(argc, argv);
 	    }
 	  else
 	    {
