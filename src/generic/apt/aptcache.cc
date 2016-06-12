@@ -1001,27 +1001,27 @@ bool aptitudeDepCache::save_selection_list(OpProgress* Prog,
   return true;
 }
 
-void aptitudeDepCache::set_new_flag(const pkgCache::PkgIterator &pkg,
+void aptitudeDepCache::set_new_flag(const pkgCache::PkgIterator& pkg,
 				    bool is_new)
 {
-  if(read_only && !read_only_permission())
+  if (read_only && !read_only_permission())
     {
-      if(group_level == 0)
+      if (group_level == 0)
 	read_only_fail();
       return;
     }
 
-  aptitude_state &estate=get_ext_state(pkg);
+  aptitude_state& estate = get_ext_state(pkg);
 
-  if(estate.new_package && !is_new)
+  if (estate.new_package && !is_new)
     {
       --new_package_count;
-      estate.new_package=is_new;
+      estate.new_package = is_new;
     }
-  else if(!estate.new_package && is_new)
+  else if (!estate.new_package && is_new)
     {
       ++new_package_count;
-      estate.new_package=is_new;
+      estate.new_package = is_new;
     }
 }
 
