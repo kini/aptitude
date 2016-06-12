@@ -419,6 +419,14 @@ namespace aptitude
         return std::wstring();
       }
     };
+
+
+    /** Get package iterators from string (possibly a pattern)
+     *
+     * If the string is a pattern, "resolve" the names; otherwise verify that
+     * the packages exist.
+     */
+    std::vector<pkgCache::PkgIterator> get_packages_from_string(const std::string& str);
   }
 }
 

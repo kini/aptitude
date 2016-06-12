@@ -830,5 +830,46 @@ namespace aptitude
 
       return output;
     }
+
+
+    std::vector<pkgCache::PkgIterator> get_packages_from_string(const std::string& str)
+    {
+      std::vector<pkgCache::PkgIterator> pkgs;
+
+      if (!aptitude::matching::is_pattern(str))
+	{
+	  pkgCache::PkgIterator pkg = (*apt_cache_file)->FindPkg(str);
+	  if (!pkg.end())
+	    {
+	      pkgs.push_back(pkg);
+	    }
+	}
+      else
+	{
+	  using namespace aptitude::matching;
+	  using cwidget::util::ref_ptr;
+
+	  ref_ptr<pattern> p(parse(str));
+
+	  if (p.valid())
+	    {
+	      std::vector<std::pair<pkgCache::PkgIterator, ref_ptr<structural_match> > > matches;
+	      ref_ptr<search_cache> search_info(search_cache::create());
+	      search(p, search_info,
+		     matches,
+		     *apt_cache_file,
+		     *apt_package_records);
+
+	      for (std::vector<std::pair<pkgCache::PkgIterator, ref_ptr<structural_match>>>::const_iterator
+		     it = matches.begin(); it != matches.end(); ++it)
+		{
+		  const pkgCache::PkgIterator& pkg = it->first;
+		  pkgs.push_back(pkg);
+		}
+	    }
+	}
+
+      return pkgs;
+    }
   }
 }
