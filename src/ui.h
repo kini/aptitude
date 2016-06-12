@@ -381,8 +381,13 @@ void do_autoclean();
 /** \brief Clean the package cache. */
 void do_clean();
 
-void do_forget_new();
-// Forgets which packages are "new".
+/** Forgets which packages are "new"
+ */
+void do_forget_new(const std::wstring& str);
+
+/** Create dialog related with "forget new packages"
+ */
+void do_forget_new_dialog();
 
 /** Advances to the next solution, if one exists. */
 void do_next_solution();
