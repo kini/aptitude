@@ -27,8 +27,11 @@
 
 #include <aptitude.h>
 
+#include "cmdline_util.h"
 #include <generic/apt/apt.h>
 #include <generic/apt/config_signal.h>
+#include <generic/apt/matching/pattern.h>
+#include <generic/util/util.h>
 
 
 // System includes:
@@ -52,14 +55,6 @@ int cmdline_forget_new(int argc, char *argv[],
 
   _error->DumpErrors();
 
-  // NB: perhaps we should allow forgetting the new state of just
-  // a few packages?
-  if(argc != 1)
-    {
-      fprintf(stderr, _("E: The forget-new command takes no arguments\n"));
-      return -1;
-    }  
-
   std::shared_ptr<OpProgress> progress = make_text_progress(false, term, term, term);
   bool operation_needs_lock = true;
   apt_init(progress.get(), false, operation_needs_lock, status_fname);
@@ -82,11 +77,54 @@ int cmdline_forget_new(int argc, char *argv[],
       return -1;
     }
 
+  bool all_ok = true;
+
   if(simulate)
     printf(_("Would forget what packages are new\n"));
   else
     {
-      (*apt_cache_file)->forget_new(NULL);
+      std::vector<pkgCache::PkgIterator> pkg_its;
+
+      int argc_start = 1;
+
+      for (int i = argc_start; i < argc; ++i)
+	{
+	  std::vector<pkgCache::PkgIterator> pkgs_from_args = aptitude::cmdline::get_packages_from_string(argv[i]);
+
+	  if (pkgs_from_args.empty())
+	    {
+	      // problem parsing command line or finding packages
+
+	      all_ok = false;
+
+	      int quiet = aptcfg->FindI("quiet", 0);
+	      if (quiet == 0)
+		{
+		  if (aptitude::matching::is_pattern(argv[i]))
+		    std::cerr << ssprintf(_("No packages match pattern \"%s\""), argv[i]) << std::endl;
+		  else
+		    std::cerr << ssprintf(_("No such package \"%s\""), argv[i]) << std::endl;
+		}
+	    }
+	  else
+	    {
+	      // append packages
+	      for (const auto& it : pkgs_from_args)
+		{
+		  pkg_its.push_back(it);
+		}
+	    }
+	}
+
+      // if the was some problem, stop here
+      if (!all_ok)
+	return -1;
+
+      // whether packages/patterns were given, or if it should forget all new
+      if (argc == 1)
+	(*apt_cache_file)->forget_new(NULL);
+      else
+	(*apt_cache_file)->forget_new(NULL, pkg_its);
 
       (*apt_cache_file)->save_selection_list(progress.get());
 
@@ -98,5 +136,5 @@ int cmdline_forget_new(int argc, char *argv[],
 	}
     }
 
-  return 0;
+  return (all_ok ? 0 : -1);
 }
