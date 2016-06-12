@@ -1027,6 +1027,17 @@ void aptitudeDepCache::set_new_flag(const pkgCache::PkgIterator& pkg,
 
 void aptitudeDepCache::forget_new(undoable **undoer)
 {
+  std::vector<pkgCache::PkgIterator> pkg_its;
+  for (pkgCache::PkgIterator it = PkgBegin(); !it.end(); ++it)
+    {
+      pkg_its.push_back(it);
+    }
+
+  forget_new(undoer, pkg_its);
+}
+
+void aptitudeDepCache::forget_new(undoable **undoer, const std::vector<pkgCache::PkgIterator>& pkg_its)
+{
   if (read_only && !read_only_permission())
     {
       if (group_level == 0)
@@ -1036,18 +1047,19 @@ void aptitudeDepCache::forget_new(undoable **undoer)
 
   forget_undoer* undo = undoer ? new forget_undoer(this) : NULL;
 
-  for (pkgCache::PkgIterator i = PkgBegin(); !i.end(); i++)
+  for (pkgCache::PkgIterator i : pkg_its)
     {
       if (package_states[i->ID].new_package)
 	{
+	  if (package_states[i->ID].new_package && (new_package_count > 0))
+	    --new_package_count;
+
 	  dirty = true;
 	  package_states[i->ID].new_package = false;
 	  if (undo)
 	    undo->add_item(i);
 	}
     }
-
-  new_package_count = 0;
 
   if (undoer && undo && !undo->empty())
     *undoer = undo;

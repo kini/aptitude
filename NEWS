@@ -32,6 +32,11 @@ Version 0.8.2 UNRELEASED
   * [curses] Change TUI message after "pressing 'q' and then 'Enter'"
     to no more mention "shutting down". Use "quitting" instead.
 
+- Internal changes:
+
+  * aptcache.{h,cc}: Split aptitudeDepCache::forget_new() in two parts, one to
+    unmark as 'new' a given set of PkgIterators, another unmarking all.
+
 - Documentation:
 
   * Guide/User's Manual:

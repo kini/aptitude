@@ -323,9 +323,14 @@ public:
 			    const char* status_fname,
 			    bool reset_reinstall);
 
+  /** Clears all information about which packages are 'new'.  Overwrites undoer
+   * if it is not NULL
+   */
   void forget_new(undoable **undoer);
-  // Clears all information about which packages are 'new'.  Overwrites undoer
-  // if it is not NULL
+  /** Clears all information about which packages are 'new'.  Overwrites undoer
+   * if it is not NULL
+   */
+  void forget_new(undoable **undoer, const std::vector<pkgCache::PkgIterator>& pkg_its);
 
   /** Sets the "new" flag for the given package; use this instead of
    *  directly manipulating the cache so the count of new packages is
