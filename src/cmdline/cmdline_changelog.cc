@@ -352,11 +352,11 @@ void do_cmdline_changelog(const vector<string> &packages,
 	  // use an explicit version.
 	  if(p.valid())
 	    {
-	      get_changelog_from_source(p.get_package(),
-					p.get_version(),
-					p.get_section(),
-					p.get_package(),
-                                        term_metrics);
+	      filename = get_changelog_from_source(p.get_package(),
+                                                   p.get_version(),
+                                                   p.get_section(),
+                                                   p.get_package(),
+                                                   term_metrics);
 	    }
 	  else
 	    {
