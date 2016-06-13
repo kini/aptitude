@@ -1291,7 +1291,8 @@ int main(int argc, char *argv[])
 	      apt_init(&p, false, operation_needs_lock, nullptr);
 	      exit(0);
 	    }
-	  else if (!strcasecmp(argv[optind], "showsrc") ||
+	  else if (!strcasecmp(argv[optind], "download") ||
+		   !strcasecmp(argv[optind], "showsrc") ||
 		   !strcasecmp(argv[optind], "source"))
 	    {
 	      return cmdline_apt_proxy(argc, argv);
