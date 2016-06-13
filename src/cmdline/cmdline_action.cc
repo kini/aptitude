@@ -501,8 +501,8 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 				      allow_auto,
                                       term_metrics);
     default:
-      fprintf(stderr, "Internal error: impossible pkgaction type\n");
-      abort();
+      fprintf(stderr, "Internal error: impossible/unhandled pkgaction type\n");
+      return false;
     }
 
   return true;
