@@ -18,25 +18,10 @@
 #ifndef CMDLINE_APT_PROXY_H
 #define CMDLINE_APT_PROXY_H
 
-#include "cmdline_common.h"
-
-#include <memory>
-#include <string>
-
-
 /** \file cmdline_apt_proxy.h
  */
 
-namespace aptitude
-{
-  namespace cmdline
-  {
-    enum class apt_proxy_command : int {
-      source = 1
-    };
-  }
-}
-
+#include "cmdline_common.h"
 
 /** Execute apt/apt-get/apt-cache command directly
  *
