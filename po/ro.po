@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aptitude\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
-"POT-Creation-Date: 2016-05-05 18:28+0100\n"
+"POT-Creation-Date: 2016-07-23 22:44+0100\n"
 "PO-Revision-Date: 2012-05-23 10:14+0800\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -869,19 +869,19 @@ msgstr "Pachetul %s nu este instalat, astfel încât nu va fi șters\n"
 msgid "Package %s is not installed, so it will not be purged\n"
 msgstr "Pachetul %s nu este instalat, astfel încât nu va fi șters\n"
 
-#: src/cmdline/cmdline_action.cc:383
+#: src/cmdline/cmdline_action.cc:383 src/cmdline/cmdline_mark.cc:263
 #, fuzzy, c-format
 msgid ""
 "Package %s is not installed, cannot be marked/unmarked as automatically "
 "installed\n"
 msgstr "Pachetul %s nu este instalat, nu se poate interzice o înnoire\n"
 
-#: src/cmdline/cmdline_action.cc:390
+#: src/cmdline/cmdline_action.cc:390 src/cmdline/cmdline_mark.cc:182
 #, c-format
 msgid "Package %s is not installed, cannot forbid an upgrade\n"
 msgstr "Pachetul %s nu este instalat, nu se poate interzice o înnoire\n"
 
-#: src/cmdline/cmdline_action.cc:393
+#: src/cmdline/cmdline_action.cc:393 src/cmdline/cmdline_mark.cc:185
 #, c-format
 msgid "Package %s is not upgradable, cannot forbid an upgrade\n"
 msgstr "Pachetul %s nu poate fi înnoit, nu se poate interzice o înnoire\n"
@@ -922,6 +922,7 @@ msgid "Unmarking package %s as automatically installed\n"
 msgstr "'&M' pentru a marca pachetele ca fiind automat instalate"
 
 #: src/cmdline/cmdline_action.cc:474 src/cmdline/cmdline_action.cc:485
+#: src/cmdline/cmdline_mark.cc:166 src/cmdline/cmdline_mark.cc:177
 #, fuzzy, c-format
 #| msgid "Check for new versions of packages"
 msgid "Marking version %s of package %s as forbidden\n"
@@ -985,6 +986,72 @@ msgstr ""
 msgid "Bad action character '%c'\n"
 msgstr "Caracter de acțiune necorespunzător „%c”\n"
 
+#: src/cmdline/cmdline_apt_proxy.cc:64
+#, fuzzy
+msgid "Failed to fork process."
+msgstr "Nu se poate deschide %ls"
+
+#: src/cmdline/cmdline_apt_proxy.cc:86
+#, fuzzy, c-format
+msgid "Failed to copy string (strndup): %d: '%s'"
+msgstr "Nu se poate analiza modelul %s"
+
+#: src/cmdline/cmdline_apt_proxy.cc:122 src/cmdline/cmdline_apt_proxy.cc:137
+#, fuzzy, c-format
+#| msgid "Failed to fetch %s: %s"
+msgid ""
+"Failed to execute:\n"
+"  '%s'"
+msgstr "Eșec la preluarea lui %s: %s"
+
+#: src/cmdline/cmdline_apt_proxy.cc:125
+#, fuzzy, c-format
+#| msgid "waitpid() failed: %s"
+msgid "waitpid error: %d: '%s'"
+msgstr "waitpid() a eșuat: %s"
+
+#: src/cmdline/cmdline_apt_proxy.cc:142
+#, c-format
+msgid "The process or trying to execute it exited with status/errno: %d"
+msgstr ""
+
+#: src/cmdline/cmdline_apt_proxy.cc:147
+#, c-format
+msgid "Killed by signal: %d"
+msgstr ""
+
+#: src/cmdline/cmdline_apt_proxy.cc:152
+msgid "Exited with unknown problem"
+msgstr ""
+
+#: src/cmdline/cmdline_apt_proxy.cc:165
+#, c-format
+msgid "Error: not enough arguments: %d\n"
+msgstr ""
+
+#: src/cmdline/cmdline_apt_proxy.cc:172
+#, c-format
+msgid "Error: too many arguments: %d\n"
+msgstr ""
+
+#: src/cmdline/cmdline_apt_proxy.cc:193
+#, c-format
+msgid "Error: pattern not supported by this subcommand: '%s'\n"
+msgstr ""
+
+#: src/cmdline/cmdline_apt_proxy.cc:202
+#, c-format
+msgid "Subcommand not supported: %s\n"
+msgstr ""
+
+#: src/cmdline/cmdline_apt_proxy.cc:210
+#, fuzzy, c-format
+#| msgid "Reconfiguring %s\n"
+msgid ""
+"Executing '%s'\n"
+"\n"
+msgstr "Reconfigurare %s\n"
+
 #: src/cmdline/cmdline_changelog.cc:135
 #: src/cmdline/cmdline_download_progress_display.cc:138
 msgid "Get:"
@@ -1044,7 +1111,7 @@ msgstr "Ștergere %s %s [%sB]\n"
 msgid "E: The autoclean command takes no arguments\n"
 msgstr "E: Comanda „autoclean” nu are argumente\n"
 
-#: src/cmdline/cmdline_clean.cc:139 src/generic/apt/apt.cc:1633 src/ui.cc:1981
+#: src/cmdline/cmdline_clean.cc:139 src/generic/apt/apt.cc:1633 src/ui.cc:1983
 #, fuzzy
 msgid "Unable to lock the download directory"
 msgstr ""
@@ -1061,34 +1128,39 @@ msgstr "Încă %sB eliberați pe disc\n"
 msgid "Freed %sB of disk space\n"
 msgstr "Eliberați %sB din spațiul de pe disc\n"
 
-#: src/cmdline/cmdline_do_action.cc:60 src/ui.cc:234 src/ui.cc:1894
+#: src/cmdline/cmdline_do_action.cc:60 src/ui.cc:236 src/ui.cc:1896
 msgid "Deleting downloaded files"
 msgstr "Se șterg fișierele descărcate"
 
-#: src/cmdline/cmdline_do_action.cc:166
+#: src/cmdline/cmdline_do_action.cc:160
+#, c-format
+msgid "Internal error, operation %s should be handled elsewhere"
+msgstr ""
+
+#: src/cmdline/cmdline_do_action.cc:167
 #, c-format
 msgid "Invalid operation %s"
 msgstr "Operațiune necorespunzătoare %s"
 
-#: src/cmdline/cmdline_do_action.cc:256
+#: src/cmdline/cmdline_do_action.cc:257
 msgid "Unexpected pattern argument following \"keep-all\""
 msgstr "Argument șablon neașteptat după „keep-all”"
 
-#: src/cmdline/cmdline_do_action.cc:362
+#: src/cmdline/cmdline_do_action.cc:363
 #, fuzzy, c-format
 #| msgid "Unable to open %s to log actions"
 msgid "Unable to apply some actions, aborting\n"
 msgstr "Nu s-a putut deschide %s pentru înregistrarea acțiunilor"
 
-#: src/cmdline/cmdline_do_action.cc:374
+#: src/cmdline/cmdline_do_action.cc:375
 #, c-format
 msgid ""
 "Unable to safely resolve dependencies, try running with --full-resolver.\n"
 msgstr ""
 "Nu se pot rezolva dependențele, încercați să rulați cu --full-resolver.\n"
 
-#: src/cmdline/cmdline_do_action.cc:414 src/cmdline/cmdline_simulate.cc:62
-#: src/main.cc:1305
+#: src/cmdline/cmdline_do_action.cc:415 src/cmdline/cmdline_simulate.cc:62
+#: src/main.cc:1332
 #, c-format
 msgid "Abort.\n"
 msgstr "Abandonează.\n"
@@ -1157,8 +1229,10 @@ msgstr ""
 " care să se scrie fișierele).\n"
 
 #: src/cmdline/cmdline_extract_cache_subset.cc:96
-#: src/cmdline/cmdline_resolver.cc:355 src/cmdline/cmdline_user_tag.cc:151
-#: src/cmdline/cmdline_versions.cc:313
+#: src/cmdline/cmdline_forget_new.cc:106 src/cmdline/cmdline_mark.cc:129
+#: src/cmdline/cmdline_mark.cc:218 src/cmdline/cmdline_resolver.cc:355
+#: src/cmdline/cmdline_user_tag.cc:151 src/cmdline/cmdline_versions.cc:313
+#: src/ui.cc:2097
 #, c-format
 msgid "No such package \"%s\""
 msgstr "Nu există pachetul „%s”"
@@ -1170,15 +1244,61 @@ msgstr ""
 "Cu șablonul de căutare dat nu s-a selectat nici un pachet; nu este nimic de "
 "făcut.\n"
 
-#: src/cmdline/cmdline_forget_new.cc:59
-#, c-format
-msgid "E: The forget-new command takes no arguments\n"
-msgstr "E: Comanda „forget-new” nu are argumente\n"
-
-#: src/cmdline/cmdline_forget_new.cc:86
+#: src/cmdline/cmdline_forget_new.cc:83
 #, c-format
 msgid "Would forget what packages are new\n"
 msgstr "Ați vrea să uit ce pachetele sunt noi\n"
+
+#: src/cmdline/cmdline_forget_new.cc:104 src/cmdline/cmdline_mark.cc:127
+#: src/cmdline/cmdline_mark.cc:216 src/ui.cc:2095
+#, fuzzy, c-format
+#| msgid "No packages matched the pattern \"%ls\"."
+msgid "No packages match pattern \"%s\""
+msgstr "Nici un pachet nu îndeplinește modelul \"%ls\"."
+
+#: src/cmdline/cmdline_mark.cc:75
+#, fuzzy, c-format
+msgid "Would mark packages (%s)\n"
+msgstr "Pachetul sursă: "
+
+#: src/cmdline/cmdline_mark.cc:83
+#, fuzzy
+#| msgid "Unexpected pattern argument following \"keep-all\""
+msgid "Unexpected argument following \"keep-all\""
+msgstr "Argument șablon neașteptat după „keep-all”"
+
+#: src/cmdline/cmdline_mark.cc:88
+#, fuzzy, c-format
+#| msgid "Updating package lists"
+msgid "Marking all packages as keep (%s)\n"
+msgstr "Se actualizează listele de pachete"
+
+#: src/cmdline/cmdline_mark.cc:97 src/cmdline/cmdline_mark.cc:194
+#, fuzzy
+#| msgid "E: The %s command takes no arguments\n"
+msgid "Subcommand needs arguments: "
+msgstr "E: Comanda „%s” nu are argumente\n"
+
+#: src/cmdline/cmdline_mark.cc:150
+#, fuzzy, c-format
+#| msgid "Couldn't parse column definition"
+msgid "Could not parse version for %s: %s\n"
+msgstr "Nu s-a putut analiza definiția coloanei"
+
+#: src/cmdline/cmdline_mark.cc:157
+#, c-format
+msgid "Package not found: %s, from %s\n"
+msgstr ""
+
+#: src/cmdline/cmdline_mark.cc:245 src/cmdline/cmdline_mark.cc:282
+msgid "Subcommand unknown/unhandled: "
+msgstr ""
+
+#: src/cmdline/cmdline_mark.cc:253
+#, fuzzy, c-format
+#| msgid "Updating package lists"
+msgid "Marking package %s (%s)\n"
+msgstr "Se actualizează listele de pachete"
 
 #: src/cmdline/cmdline_moo.cc:16
 #, c-format
@@ -1279,18 +1399,18 @@ msgstr "Următoarele pachete vor fi înnoite:"
 msgid "The following partially installed packages will be configured:"
 msgstr "Următoarele pachete instalate parțial vor fi configurate:"
 
-#: src/cmdline/cmdline_prompt.cc:434 src/ui.cc:1676
+#: src/cmdline/cmdline_prompt.cc:434 src/ui.cc:1678
 #, c-format
 msgid "The following ESSENTIAL packages will be REMOVED!\n"
 msgstr "Următoarele pachete ESENȚIALE vor fi ȘTERSE!\n"
 
-#: src/cmdline/cmdline_prompt.cc:443 src/ui.cc:1691
+#: src/cmdline/cmdline_prompt.cc:443 src/ui.cc:1693
 #, c-format
 msgid "The following ESSENTIAL packages will be BROKEN by this action:\n"
 msgstr ""
 "Următoarele pachete ESENȚIALE se vor DETERIORA în urma aceastei acțiuni:\n"
 
-#: src/cmdline/cmdline_prompt.cc:453 src/ui.cc:1704
+#: src/cmdline/cmdline_prompt.cc:453 src/ui.cc:1706
 #, c-format
 msgid ""
 "WARNING: Performing this action will probably cause your system to break!\n"
@@ -1317,7 +1437,7 @@ msgstr "Apasați Enter pentru a continua\n"
 msgid "I am aware that this is a very bad idea"
 msgstr "Sunt conștient că asta este o idee proastă"
 
-#: src/cmdline/cmdline_prompt.cc:471 src/ui.cc:1705
+#: src/cmdline/cmdline_prompt.cc:471 src/ui.cc:1707
 #, c-format
 msgid "To continue, type the phrase \"%s\":\n"
 msgstr "Pentru a continua, tastați fraza „%s”:\n"
@@ -2105,7 +2225,7 @@ msgstr ""
 msgid "The following commands are available:"
 msgstr "Următoarele comenzi sunt disponibile:"
 
-#: src/cmdline/cmdline_resolver.cc:992 src/ui.cc:2447
+#: src/cmdline/cmdline_resolver.cc:992 src/ui.cc:2496
 msgid "File to write resolver state to: "
 msgstr "Fișierul de scris starea resolver: "
 
@@ -2488,7 +2608,7 @@ msgstr "Se dorește descărcarea/instalarea/ștergerea pachetelor.\n"
 msgid "Internal Error, Ordering didn't finish"
 msgstr "Eroare internă, cerința n-a fost îndeplinită"
 
-#: src/cmdline/cmdline_update.cc:43 src/ui.cc:219 src/ui.cc:1986
+#: src/cmdline/cmdline_update.cc:43 src/ui.cc:221 src/ui.cc:1988
 msgid "Deleting obsolete downloaded files"
 msgstr "Se șterg fișierele învechite descărcate"
 
@@ -2986,60 +3106,60 @@ msgstr ""
 msgid "failed to save selections to dpkg database"
 msgstr ""
 
-#: src/generic/apt/aptcache.cc:1235 src/generic/apt/aptcache.cc:1271
+#: src/generic/apt/aptcache.cc:1249 src/generic/apt/aptcache.cc:1285
 #, fuzzy
 #| msgid "Cannot open Aptitude state file"
 msgid "Cannot remove aptitude within aptitude"
 msgstr "Nu se poate deschide fișierul de stare al lui Aptitude"
 
-#: src/generic/apt/aptcache.cc:1695
+#: src/generic/apt/aptcache.cc:1709
 #, c-format
 msgid "User-tag '%s' already present for %s"
 msgstr ""
 
-#: src/generic/apt/aptcache.cc:1711
+#: src/generic/apt/aptcache.cc:1725
 #, fuzzy, c-format
 #| msgid "Adding user tag \"%s\" to the package \"%s\".\n"
 msgid "Could not add user-tag '%s' to package %s"
 msgstr "Se adaugă eticheta de utilizator „%s” pachetului „%s”.\n"
 
-#: src/generic/apt/aptcache.cc:1737
+#: src/generic/apt/aptcache.cc:1751
 #, fuzzy, c-format
 msgid "Could not find valid user-tag '%s'"
 msgstr "Nu s-a putut găsi un jurnal de modificări pentru %s"
 
-#: src/generic/apt/aptcache.cc:1753
+#: src/generic/apt/aptcache.cc:1767
 #, fuzzy, c-format
 #| msgid "Removing user tag \"%s\" from the package \"%s\".\n"
 msgid "Could not remove user-tag '%s' from package %s"
 msgstr "Se șterge eticheta de utilizator „%s” pachetului „%s”.\n"
 
-#: src/generic/apt/aptcache.cc:1831
+#: src/generic/apt/aptcache.cc:1845
 msgid "Unable to correct dependencies, some packages cannot be installed"
 msgstr "Nu se pot corecta dependențele, unele pachete nu pot fi instalate"
 
-#: src/generic/apt/aptcache.cc:2513
+#: src/generic/apt/aptcache.cc:2527
 msgid "The list of sources could not be read."
 msgstr "Lista cu surse nu poate fi citită."
 
-#: src/generic/apt/aptcache.cc:2521
+#: src/generic/apt/aptcache.cc:2535
 msgid "The package lists or status file could not be parsed or opened."
 msgstr ""
 "Listele cu pachete sau fișierul de stări nu au putut fi analizate sau "
 "deschise."
 
-#: src/generic/apt/aptcache.cc:2524
+#: src/generic/apt/aptcache.cc:2538
 msgid "You may want to update the package lists to correct these missing files"
 msgstr ""
 "Ați putea încerca să actualizați listele cu pachete pentru a corecta aceste "
 "fișiere lipsă"
 
-#: src/generic/apt/aptcache.cc:2540
+#: src/generic/apt/aptcache.cc:2554
 #, fuzzy
 msgid "Could not create dependency cache"
 msgstr "Nu s-a putut găsi un jurnal de modificări pentru %s"
 
-#: src/generic/apt/aptcache.cc:2550
+#: src/generic/apt/aptcache.cc:2564
 msgid "Could not initialize dependency cache"
 msgstr ""
 
@@ -3859,21 +3979,21 @@ msgstr ""
 msgid "_File"
 msgstr "Fals"
 
-#: src/gtk/aptitude.glade:28 src/gtk/aptitude.glade:2274 src/ui.cc:2478
+#: src/gtk/aptitude.glade:28 src/gtk/aptitude.glade:2274 src/ui.cc:2527
 msgid "Perform all pending installs and removals"
 msgstr "Execută toate instalările și ștergerile nerezolvate"
 
-#: src/gtk/aptitude.glade:38 src/gtk/aptitude.glade:2285 src/ui.cc:2481
+#: src/gtk/aptitude.glade:38 src/gtk/aptitude.glade:2285 src/ui.cc:2530
 msgid "Check for new versions of packages"
 msgstr "Verifică existența a noi versiuni de pachete"
 
-#: src/gtk/aptitude.glade:53 src/gtk/aptitude.glade:2301 src/ui.cc:2486
+#: src/gtk/aptitude.glade:53 src/gtk/aptitude.glade:2301 src/ui.cc:2535
 msgid "Mark all upgradable packages which are not held for upgrade"
 msgstr ""
 "Marchează toate pachetele ce ar putea fi înnoite care nu sunt ținute la "
 "înnoire"
 
-#: src/gtk/aptitude.glade:63 src/gtk/aptitude.glade:2312 src/ui.cc:2491
+#: src/gtk/aptitude.glade:63 src/gtk/aptitude.glade:2312 src/ui.cc:2540
 msgid "Forget which packages are \"new\""
 msgstr "Uită de pachetele care sunt \"noi\""
 
@@ -3882,26 +4002,26 @@ msgid "Cancel all pending installations, removals, holds, and upgrades."
 msgstr ""
 "Anulează toate instalările, ștergerile, păstrările și înoirile în curs."
 
-#: src/gtk/aptitude.glade:81 src/gtk/aptitude.glade:2332 src/ui.cc:2499
+#: src/gtk/aptitude.glade:81 src/gtk/aptitude.glade:2332 src/ui.cc:2548
 msgid "Delete package files which were previously downloaded"
 msgstr "Șterge fișierele pachetelor care-au fost anterior descărcate"
 
-#: src/gtk/aptitude.glade:90 src/gtk/aptitude.glade:2342 src/ui.cc:2503
+#: src/gtk/aptitude.glade:90 src/gtk/aptitude.glade:2342 src/ui.cc:2552
 msgid "Delete package files which can no longer be downloaded"
 msgstr "Șterge fișierele pachetelor ce nu mai pot fi descărcate"
 
-#: src/gtk/aptitude.glade:104 src/gtk/aptitude.glade:2357 src/ui.cc:2510
+#: src/gtk/aptitude.glade:104 src/gtk/aptitude.glade:2357 src/ui.cc:2559
 msgid "Reload the package cache"
 msgstr "Reîncărcare a cache-ului de pachete"
 
-#: src/gtk/aptitude.glade:118 src/gtk/aptitude.glade:2372 src/ui.cc:2520
+#: src/gtk/aptitude.glade:118 src/gtk/aptitude.glade:2372 src/ui.cc:2569
 #, fuzzy
 msgid "Restart the program as root; your settings will be preserved"
 msgstr ""
 "Execută 'su' pentru a deveni root; asta va reporni programul, dar setările "
 "dumneavoastră vor fi păstrate"
 
-#: src/gtk/aptitude.glade:127 src/gtk/aptitude.glade:2382 src/ui.cc:2523
+#: src/gtk/aptitude.glade:127 src/gtk/aptitude.glade:2382 src/ui.cc:2572
 msgid "Exit the program"
 msgstr "Ieșire din program"
 
@@ -3909,7 +4029,7 @@ msgstr "Ieșire din program"
 msgid "E_dit"
 msgstr ""
 
-#: src/gtk/aptitude.glade:148 src/gtk/aptitude.glade:2404 src/ui.cc:2530
+#: src/gtk/aptitude.glade:148 src/gtk/aptitude.glade:2404 src/ui.cc:2579
 msgid "Undo the last package operation or group of operations"
 msgstr "Renunță la ultima operațiune de pachet sau grup de operațiuni"
 
@@ -3953,17 +4073,17 @@ msgid "Update"
 msgstr "Actualizează Listă"
 
 #: src/gtk/aptitude.glade:347 src/gtk/aptitude.glade:2606 src/gtk/gui.cc:1323
-#: src/qt/tabs_manager.cc:241 src/ui.cc:918 src/ui.cc:920
+#: src/qt/tabs_manager.cc:241 src/ui.cc:920 src/ui.cc:922
 msgid "Packages"
 msgstr "Pachete"
 
 #: src/gtk/aptitude.glade:358 src/gtk/aptitude.glade:2617 src/gtk/gui.cc:1033
-#: src/gtk/previewtab.cc:118 src/qt/tabs_manager.cc:220 src/ui.cc:1504
+#: src/gtk/previewtab.cc:118 src/qt/tabs_manager.cc:220 src/ui.cc:1506
 msgid "Preview"
 msgstr "Previzualizare"
 
 #: src/gtk/aptitude.glade:369 src/gtk/aptitude.glade:2628 src/gtk/gui.cc:1028
-#: src/qt/tabs_manager.cc:263 src/ui.cc:2920
+#: src/qt/tabs_manager.cc:263 src/ui.cc:2969
 msgid "Resolver"
 msgstr "Rezolvator"
 
@@ -4210,7 +4330,7 @@ msgstr "Luat "
 msgid "Finalize and apply your changes to the system."
 msgstr ""
 
-#: src/gtk/areas.cc:79 src/ui.cc:746 src/ui.cc:748
+#: src/gtk/areas.cc:79 src/ui.cc:748 src/ui.cc:750
 msgid "Preferences"
 msgstr "Preferințe"
 
@@ -4720,7 +4840,7 @@ msgstr "Aplică un filtru listei de pachete"
 msgid "Download already running."
 msgstr "Se descarcă... "
 
-#: src/gtk/gui.cc:300 src/gtk/gui.cc:948 src/ui.cc:1628 src/ui.cc:1878
+#: src/gtk/gui.cc:300 src/gtk/gui.cc:948 src/ui.cc:1630 src/ui.cc:1880
 msgid "A package-list update or install run is already taking place."
 msgstr "Deja are loc o actualizare de listă de pachete sau o instalare."
 
@@ -4781,7 +4901,7 @@ msgstr "Nici un pachet deteriorat."
 msgid "Asking whether to replace the configuration file %s"
 msgstr "Nu se poate înlocui %s cu noul fișier de configurare"
 
-#: src/gtk/gui.cc:962 src/ui.cc:1373
+#: src/gtk/gui.cc:962 src/ui.cc:1375
 msgid "Downloading packages"
 msgstr "Se descarcă pachetele"
 
@@ -5728,78 +5848,78 @@ msgstr "'(' fără pereche în descrierea politicii de sortare"
 msgid "Invalid sorting policy type '%s'"
 msgstr "Tip de politică de sortare incorect „%s”"
 
-#: src/main.cc:135
+#: src/main.cc:136
 #, c-format
 msgid "Can't decode multibyte string after \"%ls\""
 msgstr "Nu se poate decoda șirul multioctet după \"%ls\""
 
 # XXX: știu că se referă la tipul de date wchar, dar nu am nici o idee mai bună
 # orice sugestie e binevenită
-#: src/main.cc:144
+#: src/main.cc:145
 #, c-format
 msgid "Can't decode wide-character string after \"%s\""
 msgstr "Nu se poate decoda șirul caractere extinse după „%s”"
 
-#: src/main.cc:156
+#: src/main.cc:157
 #, c-format
 msgid "Compiler: g++ %s\n"
 msgstr "Compilator: g++ %s\n"
 
-#: src/main.cc:158
+#: src/main.cc:159
 msgid "Compiled against:\n"
 msgstr "Compilat cu:\n"
 
-#: src/main.cc:159
+#: src/main.cc:160
 #, c-format
 msgid "  apt version %d.%d.%d\n"
 msgstr "  apt, versiunea %d.%d.%d\n"
 
-#: src/main.cc:162
+#: src/main.cc:163
 #, c-format
 msgid "  NCurses version: Unknown\n"
 msgstr "  NCurses, versiunea: necunoscută\n"
 
-#: src/main.cc:164
+#: src/main.cc:165
 #, c-format
 msgid "  NCurses version %s\n"
 msgstr "  NCurses, versiunea: %s\n"
 
-#: src/main.cc:166
+#: src/main.cc:167
 #, c-format
 msgid "  libsigc++ version: %s\n"
 msgstr "  libsigc++, versiunea: %s\n"
 
-#: src/main.cc:168
+#: src/main.cc:169
 #, fuzzy, c-format
 msgid "  Gtk+ version %d.%d.%d\n"
 msgstr "  apt, versiunea %d.%d.%d\n"
 
-#: src/main.cc:170
+#: src/main.cc:171
 #, fuzzy, c-format
 msgid "  Gtk-- version %d.%d.%d\n"
 msgstr "  apt, versiunea %d.%d.%d\n"
 
-#: src/main.cc:173
+#: src/main.cc:174
 #, fuzzy, c-format
 msgid "  Gtk+ support disabled.\n"
 msgstr "  Suportul pentru ept este dezactivat.\n"
 
-#: src/main.cc:176
+#: src/main.cc:177
 #, fuzzy, c-format
 msgid "  Compiled with Qt %s\n"
 msgstr "%s %s compilat la %s %s\n"
 
-#: src/main.cc:177
+#: src/main.cc:178
 #, c-format
 msgid "  Running on Qt %s\n"
 msgstr ""
 
-#: src/main.cc:179
+#: src/main.cc:180
 #, fuzzy, c-format
 msgid "  Qt support disabled.\n"
 msgstr "  Suportul pentru ept este dezactivat.\n"
 
-#: src/main.cc:181
+#: src/main.cc:182
 msgid ""
 "\n"
 "Current library versions:\n"
@@ -5807,32 +5927,32 @@ msgstr ""
 "\n"
 "Versiunile curente ale bibliotecilor:\n"
 
-#: src/main.cc:182
+#: src/main.cc:183
 #, c-format
 msgid "  NCurses version: %s\n"
 msgstr "  NCurses, versiunea: %s\n"
 
-#: src/main.cc:183
+#: src/main.cc:184
 #, c-format
 msgid "  cwidget version: %s\n"
 msgstr "  cwidget, versiunea: %s\n"
 
-#: src/main.cc:184
+#: src/main.cc:185
 #, c-format
 msgid "  Apt version: %s\n"
 msgstr "  Apt, versiunea: %s\n"
 
-#: src/main.cc:190
+#: src/main.cc:191
 #, c-format
 msgid "Usage: aptitude [-S fname] [-u|-i]"
 msgstr "Utilizare: aptitude [-S fnume] [-u|-i]"
 
-#: src/main.cc:192
+#: src/main.cc:193
 #, c-format
 msgid "       aptitude [options] <action> ..."
 msgstr "        aptitude [opțiuni] <acțiune> ..."
 
-#: src/main.cc:195
+#: src/main.cc:196
 #, fuzzy, c-format
 #| msgid ""
 #| "  Actions (if none is specified, aptitude will enter interactive mode):\n"
@@ -5845,37 +5965,37 @@ msgstr ""
 "interactiv):\n"
 "\n"
 
-#: src/main.cc:196
+#: src/main.cc:197
 #, fuzzy, c-format
 #| msgid " install      - Install/upgrade packages.\n"
 msgid " install         Install/upgrade packages.\n"
 msgstr " install      - Instalează/înnoiește pachetele.\n"
 
-#: src/main.cc:197
+#: src/main.cc:198
 #, fuzzy, c-format
 #| msgid " remove       - Remove packages.\n"
 msgid " remove          Remove packages.\n"
 msgstr " remove       - Șterge pachetele.\n"
 
-#: src/main.cc:198
+#: src/main.cc:199
 #, fuzzy, c-format
 #| msgid " purge        - Remove packages and their configuration files.\n"
 msgid " purge           Remove packages and their configuration files.\n"
 msgstr " purge        - Curăță pachetele și fișierele lor de configurare.\n"
 
-#: src/main.cc:199
+#: src/main.cc:200
 #, fuzzy, c-format
 #| msgid " hold         - Place packages on hold.\n"
 msgid " hold            Place packages on hold.\n"
 msgstr " hold         - Pune pachetele în starea „păstrează”.\n"
 
-#: src/main.cc:200
+#: src/main.cc:201
 #, fuzzy, c-format
 #| msgid " unhold       - Cancel a hold command for a package.\n"
 msgid " unhold          Cancel a hold command for a package.\n"
 msgstr " unhold       - Anulează comanda de păstrare pentru un pachet.\n"
 
-#: src/main.cc:201
+#: src/main.cc:202
 #, fuzzy, c-format
 #| msgid ""
 #| " markauto     - Mark packages as having been automatically installed.\n"
@@ -5883,13 +6003,13 @@ msgid ""
 " markauto        Mark packages as having been automatically installed.\n"
 msgstr " markauto     - Marchează pachetele ca fiind automat instalate.\n"
 
-#: src/main.cc:202
+#: src/main.cc:203
 #, fuzzy, c-format
 #| msgid " unmarkauto   - Mark packages as having been manually installed.\n"
 msgid " unmarkauto      Mark packages as having been manually installed.\n"
 msgstr " unmarkauto   - Marchează pachetele ca fiind instalate manual.\n"
 
-#: src/main.cc:203
+#: src/main.cc:204
 #, fuzzy, c-format
 #| msgid ""
 #| " forbid-version - Forbid aptitude from upgrading to a specific package "
@@ -5901,19 +6021,19 @@ msgstr ""
 " forbid-version - Interzice lui aptitude să înnoiască către o anumită "
 "versiune de pachet.\n"
 
-#: src/main.cc:204
+#: src/main.cc:205
 #, fuzzy, c-format
 #| msgid " update       - Download lists of new/upgradable packages.\n"
 msgid " update          Download lists of new/upgradable packages.\n"
 msgstr " update       - Descarcă listele de pachete noi/posibil de înnoit.\n"
 
-#: src/main.cc:205
+#: src/main.cc:206
 #, fuzzy, c-format
 #| msgid " safe-upgrade - Perform a safe upgrade.\n"
 msgid " safe-upgrade    Perform a safe upgrade.\n"
 msgstr " safe-upgrade - Execută o înnoire sigură.\n"
 
-#: src/main.cc:206
+#: src/main.cc:207
 #, fuzzy, c-format
 #| msgid ""
 #| " full-upgrade - Perform an upgrade, possibly installing and removing "
@@ -5924,59 +6044,59 @@ msgid ""
 msgstr ""
 " full-upgrade - Execută o înnoire, posibil instalând și ștergând pachete.\n"
 
-#: src/main.cc:207
+#: src/main.cc:208
 #, fuzzy, c-format
 msgid " build-dep       Install the build-dependencies of packages.\n"
 msgstr "'&BD' pentru instalarea dependențelor de compilare ale unui pachet."
 
-#: src/main.cc:208
+#: src/main.cc:209
 #, fuzzy, c-format
 #| msgid " forget-new   - Forget what packages are \"new\".\n"
 msgid " forget-new      Forget what packages are \"new\".\n"
 msgstr " forget-new   - Uită de pachetele ce sunt \"noi\".\n"
 
-#: src/main.cc:209
+#: src/main.cc:210
 #, fuzzy, c-format
 #| msgid " search       - Search for a package by name and/or expression.\n"
 msgid " search          Search for a package by name and/or expression.\n"
 msgstr " search       - Caută un pachet după nume și/sau expresie.\n"
 
-#: src/main.cc:210
+#: src/main.cc:211
 #, fuzzy, c-format
 #| msgid " show         - Display detailed information about a package.\n"
 msgid " show            Display detailed information about a package.\n"
 msgstr " show         - Afișează informații detaliate despre un pachet.\n"
 
-#: src/main.cc:211
+#: src/main.cc:212
 #, fuzzy, c-format
 msgid " versions        Displays the versions of specified packages.\n"
 msgstr " show         - Afișează informații detaliate despre un pachet\n"
 
-#: src/main.cc:212
+#: src/main.cc:213
 #, fuzzy, c-format
 #| msgid " clean        - Erase downloaded package files.\n"
 msgid " clean           Erase downloaded package files.\n"
 msgstr " clean        - Șterge fișierele pachetelor descărcate.\n"
 
-#: src/main.cc:213
+#: src/main.cc:214
 #, fuzzy, c-format
 #| msgid " autoclean    - Erase old downloaded package files.\n"
 msgid " autoclean       Erase old downloaded package files.\n"
 msgstr " autoclean    - Șterge vechile fișiere ale pachetelor descărcate.\n"
 
-#: src/main.cc:214
+#: src/main.cc:215
 #, fuzzy, c-format
 #| msgid " changelog    - View a package's changelog.\n"
 msgid " changelog       View a package's changelog.\n"
 msgstr " changelog    - Afișează jurnalul de modificări al unui pachet.\n"
 
-#: src/main.cc:215
+#: src/main.cc:216
 #, fuzzy, c-format
 #| msgid " download     - Download the .deb file for a package.\n"
 msgid " download        Download the .deb file for a package.\n"
 msgstr " download     - Descarcă fișierul .deb pentru un pachet.\n"
 
-#: src/main.cc:216
+#: src/main.cc:217
 #, fuzzy, c-format
 #| msgid ""
 #| " reinstall    - Download and (possibly) reinstall a currently installed "
@@ -5987,7 +6107,7 @@ msgstr ""
 "instalat\n"
 "                curent.\n"
 
-#: src/main.cc:217
+#: src/main.cc:218
 #, fuzzy, c-format
 #| msgid ""
 #| " -V             Show which versions of packages are to be installed.\n"
@@ -5995,7 +6115,7 @@ msgid ""
 " why             Explain why a particular package should be installed.\n"
 msgstr " -V             Arată ce versiuni de pachete sunt instalate.\n"
 
-#: src/main.cc:218
+#: src/main.cc:219
 #, fuzzy, c-format
 #| msgid ""
 #| " -V             Show which versions of packages are to be installed.\n"
@@ -6003,59 +6123,59 @@ msgid ""
 " why-not         Explain why a particular package cannot be installed.\n"
 msgstr " -V             Arată ce versiuni de pachete sunt instalate.\n"
 
-#: src/main.cc:220
+#: src/main.cc:221
 #, c-format
 msgid " add-user-tag    Add user tag to packages/patterns.\n"
 msgstr ""
 
-#: src/main.cc:221
+#: src/main.cc:222
 #, c-format
 msgid " remove-user-tag Remove user tag from packages/patterns.\n"
 msgstr ""
 
-#: src/main.cc:223
+#: src/main.cc:224
 #, fuzzy, c-format
 #| msgid "  Options:\n"
 msgid "Options:\n"
 msgstr "  Opțiuni:\n"
 
-#: src/main.cc:224
+#: src/main.cc:225
 #, fuzzy, c-format
 #| msgid " -h             This help text.\n"
 msgid " -h              This help text.\n"
 msgstr " -h             Acest text de ajutor.\n"
 
-#: src/main.cc:226
+#: src/main.cc:227
 #, c-format
 msgid ""
 " --gui           Use the GTK GUI even if disabled in the configuration.\n"
 msgstr ""
 
-#: src/main.cc:228
+#: src/main.cc:229
 #, c-format
 msgid " --no-gui        Do not use the GTK GUI even if available.\n"
 msgstr ""
 
-#: src/main.cc:230
+#: src/main.cc:231
 #, fuzzy, c-format
 msgid " --qt            Use the Qt GUI.\n"
 msgstr " -h             Acest text de ajutor\n"
 
-#: src/main.cc:231
+#: src/main.cc:232
 #, c-format
 msgid ""
 " --no-qt         Do not use the Qt GUI even if enabled in the "
 "configuration.\n"
 msgstr ""
 
-#: src/main.cc:233
+#: src/main.cc:234
 #, fuzzy, c-format
 #| msgid ""
 #| " -s             Simulate actions, but do not actually perform them.\n"
 msgid " -s              Simulate actions, but do not actually perform them.\n"
 msgstr " -s             Simulează acțiunea, dar n-o executa în realitate.\n"
 
-#: src/main.cc:234
+#: src/main.cc:235
 #, fuzzy, c-format
 #| msgid ""
 #| " -d             Only download packages, do not install or remove "
@@ -6065,13 +6185,13 @@ msgid ""
 msgstr ""
 " -d             Doar descarcă pachetele, nu instala sau șterge nimic.\n"
 
-#: src/main.cc:235
+#: src/main.cc:236
 #, fuzzy, c-format
 #| msgid " -P             Always prompt for confirmation of actions.\n"
 msgid " -P              Always prompt for confirmation of actions.\n"
 msgstr " -P             Întodeauna cere confirmare pentru acțiuni.\n"
 
-#: src/main.cc:236
+#: src/main.cc:237
 #, fuzzy, c-format
 #| msgid ""
 #| " -y             Assume that the answer to simple yes/no questions is "
@@ -6083,7 +6203,7 @@ msgstr ""
 " -y             Presupune că răspunsul la întrebările simple da/nu este "
 "'da'.\n"
 
-#: src/main.cc:237
+#: src/main.cc:238
 #, fuzzy, c-format
 #| msgid ""
 #| " -F format      Specify a format for displaying search results; see the "
@@ -6095,7 +6215,7 @@ msgstr ""
 " -F format      Specifică un format pentru afișarea rezultatelor căutării;\n"
 "                vezi manualul.\n"
 
-#: src/main.cc:238
+#: src/main.cc:239
 #, fuzzy, c-format
 #| msgid ""
 #| " -O order       Specify how search results should be sorted; see the "
@@ -6108,7 +6228,7 @@ msgstr ""
 "sortate;\n"
 "                vezi manual.\n"
 
-#: src/main.cc:239
+#: src/main.cc:240
 #, fuzzy, c-format
 #| msgid ""
 #| " -w width       Specify the display width for formatting search results.\n"
@@ -6118,21 +6238,21 @@ msgstr ""
 " -w lățime      Specifică lățimea afișării pentru formatarea rezultatului\n"
 "                de căutare.\n"
 
-#: src/main.cc:240
+#: src/main.cc:241
 #, fuzzy, c-format
 #| msgid " -f             Aggressively try to fix broken packages.\n"
 msgid " -f              Aggressively try to fix broken packages.\n"
 msgstr ""
 " -f             Încerc în mod agresiv să repar pachetele deteriorate.\n"
 
-#: src/main.cc:241
+#: src/main.cc:242
 #, fuzzy, c-format
 #| msgid ""
 #| " -V             Show which versions of packages are to be installed.\n"
 msgid " -V              Show which versions of packages are to be installed.\n"
 msgstr " -V             Arată ce versiuni de pachete sunt instalate.\n"
 
-#: src/main.cc:242
+#: src/main.cc:243
 #, fuzzy, c-format
 #| msgid ""
 #| " -D             Show the dependencies of automatically changed packages.\n"
@@ -6140,13 +6260,13 @@ msgid ""
 " -D              Show the dependencies of automatically changed packages.\n"
 msgstr " -D             Arată dependențele pachetelor schimbate automat.\n"
 
-#: src/main.cc:243
+#: src/main.cc:244
 #, fuzzy, c-format
 #| msgid " -Z             Show the change in installed size of each package.\n"
 msgid " -Z              Show the change in installed size of each package.\n"
 msgstr " -Z\t\tArată modificarea în dimensiune a fiecărui pachet instalat.\n"
 
-#: src/main.cc:244
+#: src/main.cc:245
 #, fuzzy, c-format
 #| msgid ""
 #| " -v             Display extra information. (may be supplied multiple "
@@ -6158,7 +6278,7 @@ msgstr ""
 " -v             Afișează informații suplimentare (poate fi folosită de mai\n"
 "                multe ori).\n"
 
-#: src/main.cc:245
+#: src/main.cc:246
 #, fuzzy, c-format
 #| msgid ""
 #| " -t [release]   Set the release from which packages should be installed.\n"
@@ -6167,7 +6287,7 @@ msgid ""
 msgstr ""
 " -t [producție] Impune producția din care pachetele ar trebui instalate.\n"
 
-#: src/main.cc:246
+#: src/main.cc:247
 #, fuzzy, c-format
 #| msgid ""
 #| " -q             In command-line mode, suppress the incremental progress\n"
@@ -6179,14 +6299,14 @@ msgstr ""
 " -q             În modul linie de comandă, inhibă indicatoarele de progres\n"
 "                incrementale.\n"
 
-#: src/main.cc:248
+#: src/main.cc:249
 #, fuzzy, c-format
 #| msgid " -o key=val     Directly set the configuration option named 'key'.\n"
 msgid " -o key=val      Directly set the configuration option named 'key'.\n"
 msgstr ""
 " -o key=val     Ajustează direct opțiunea de configurare numită 'key'.\n"
 
-#: src/main.cc:249
+#: src/main.cc:250
 #, fuzzy, c-format
 #| msgid ""
 #| " --with(out)-recommends\tSpecify whether or not to treat recommends as\n"
@@ -6199,7 +6319,7 @@ msgstr ""
 "dependențe\n"
 "                puternice sau nu.\n"
 
-#: src/main.cc:251
+#: src/main.cc:252
 #, fuzzy, c-format
 #| msgid " -S fname       Read the aptitude extended status info from fname.\n"
 msgid " -S fname        Read the aptitude extended status info from fname.\n"
@@ -6207,37 +6327,37 @@ msgstr ""
 " -S fnume       Citește informațiile de stare extinsă aptitude din fișierul "
 "fnume.\n"
 
-#: src/main.cc:252
+#: src/main.cc:253
 #, fuzzy, c-format
 #| msgid " -u             Download new package lists on startup.\n"
 msgid " -u              Download new package lists on startup.\n"
 msgstr " -u             Descarcă listele cu pachetele noi la pornire.\n"
 
-#: src/main.cc:253 src/main.cc:255
+#: src/main.cc:254 src/main.cc:256
 #, fuzzy, c-format
 msgid "                  (terminal interface only)\n"
 msgstr " -h             Acest text de ajutor\n"
 
-#: src/main.cc:254
+#: src/main.cc:255
 #, fuzzy, c-format
 #| msgid " -i             Perform an install run on startup.\n"
 msgid " -i              Perform an install run on startup.\n"
 msgstr " -i             Execută comanda de instalare la pornire\n"
 
-#: src/main.cc:257
+#: src/main.cc:258
 #, c-format
 msgid ""
 "See the manual page for a complete list and description of all the options.\n"
 msgstr ""
 
-#: src/main.cc:259
+#: src/main.cc:260
 #, fuzzy, c-format
 #| msgid "                  This aptitude does not have Super Cow Powers.\n"
 msgid "This aptitude does not have Super Cow Powers.\n"
 msgstr "                   Acest aptitude nu are puterile unei Super Vaci.\n"
 
 #. TRANSLATORS: levels are not translatable anymore
-#: src/main.cc:457
+#: src/main.cc:458
 #, c-format
 msgid ""
 "Unknown log level name \"%s\" (expected \"trace\", \"debug\", \"info\", "
@@ -6258,55 +6378,55 @@ msgstr ""
 #. * levels for different categories (e.g. level 'warn' for
 #. * 'aptitude.changelog', debug for 'aptitude.why'), etc.
 #.
-#: src/main.cc:480
+#: src/main.cc:481
 #, fuzzy, c-format
 msgid "Invalid logger name \"%s\"."
 msgstr "Operațiune necorespunzătoare %s"
 
-#: src/main.cc:810
+#: src/main.cc:811
 #, c-format
 msgid "Expected a number after -q=\n"
 msgstr "Se așteaptă un număr după -q=\n"
 
-#: src/main.cc:819
+#: src/main.cc:820
 #, c-format
 msgid "Expected a number after -q=, got %s\n"
 msgstr "Așteptat un număr după -q=, primit %s\n"
 
-#: src/main.cc:843
+#: src/main.cc:844
 #, c-format
 msgid "-o requires an argument of the form key=value, got %s\n"
 msgstr "-o necesită un argument de forma cheie=valoare, s-a primit %s\n"
 
-#: src/main.cc:920
+#: src/main.cc:921
 #, c-format
 msgid ""
 "Invalid option \"%s\" (only \"--purge-unused\" is valid).  Perhaps you want "
 "the \"purge\" action?\n"
 msgstr ""
 
-#: src/main.cc:941
+#: src/main.cc:942
 #, c-format
 msgid "No comma following tag name \"%s\".\n"
 msgstr "Nici o virgulă după numele de etichetă „%s”.\n"
 
-#: src/main.cc:1033 src/main.cc:1043
+#: src/main.cc:1034 src/main.cc:1044
 msgid "WEIRDNESS: unknown option code received\n"
 msgstr "CIUDĂȚENIE: primit cod opțiune necunoscut\n"
 
-#: src/main.cc:1061
+#: src/main.cc:1062
 msgid "--show-package-names|never"
 msgstr ""
 
-#: src/main.cc:1064
+#: src/main.cc:1065
 msgid "--show-package-names|auto"
 msgstr ""
 
-#: src/main.cc:1067
+#: src/main.cc:1068
 msgid "--show-package-names|always"
 msgstr ""
 
-#: src/main.cc:1072
+#: src/main.cc:1073
 #, c-format
 msgid ""
 "Invalid package names display mode \"%s\" (should be \"never\", \"auto\", or "
@@ -6315,7 +6435,7 @@ msgstr ""
 
 #. TRANSLATORS: "why" and "modes" here are the aptitude command name and
 #. parameters, and should not be translated.
-#: src/main.cc:1092
+#: src/main.cc:1093
 #, c-format
 msgid ""
 "Invalid \"why\" summary mode \"%s\": expected \"no-summary\", \"first-package"
@@ -6323,14 +6443,14 @@ msgid ""
 "versions\"."
 msgstr ""
 
-#: src/main.cc:1133
+#: src/main.cc:1134
 #, fuzzy
 msgid ""
 "Only one of --auto-clean-on-startup, --clean-on-startup, -i, and -u may be "
 "specified\n"
 msgstr "Doar unul din -u și -i poate fi specificat\n"
 
-#: src/main.cc:1142
+#: src/main.cc:1143
 #, fuzzy
 msgid ""
 "-u, -i, and --clean-on-startup may not be specified in command-line mode "
@@ -6338,28 +6458,34 @@ msgid ""
 msgstr ""
 "-u și -i nu pot fi folosiți în modul „linie de comandă” (ex., cu „install”)"
 
-#: src/main.cc:1159
+#: src/main.cc:1160
 #, fuzzy
 msgid "-u, -i, and --clean-on-startup may not be specified with a command"
 msgstr "-u și -i nu pot fi folosiți cu o comandă"
 
-#: src/main.cc:1231
+#: src/main.cc:1221 src/main.cc:1254
 #, fuzzy, c-format
 #| msgid "E: The %s command takes no arguments\n"
 msgid "Command \"%s\" needs arguments\n"
 msgstr "E: Comanda „%s” nu are argumente\n"
 
-#: src/main.cc:1298
+#: src/main.cc:1229
+#, fuzzy, c-format
+#| msgid "E: The %s command takes no arguments\n"
+msgid "Command \"%s\" does not accept arguments\n"
+msgstr "E: Comanda „%s” nu are argumente\n"
+
+#: src/main.cc:1325
 #, c-format
 msgid "Unknown command \"%s\"\n"
 msgstr "Comandă necunoscută „%s”\n"
 
-#: src/main.cc:1310 src/main.cc:1404
+#: src/main.cc:1337 src/main.cc:1431
 #, c-format
 msgid "Uncaught exception: %s\n"
 msgstr "Excepție nedetectată: %s\n"
 
-#: src/main.cc:1314 src/main.cc:1408
+#: src/main.cc:1341 src/main.cc:1435
 #, c-format
 msgid ""
 "Backtrace:\n"
@@ -6368,7 +6494,7 @@ msgstr ""
 "Stiva de apeluri:\n"
 "%s\n"
 
-#: src/menu_text_layout.cc:43 src/menu_tree.cc:232 src/ui.cc:288
+#: src/menu_text_layout.cc:43 src/menu_tree.cc:232 src/ui.cc:290
 #: src/view_changelog.cc:172
 msgid "Search for: "
 msgstr "Căutare pentru: "
@@ -6377,7 +6503,7 @@ msgstr "Căutare pentru: "
 msgid "Search backwards for: "
 msgstr "Căutare înapoi pentru: "
 
-#: src/mine/cmine.cc:115 src/mine/cmine.cc:154 src/ui.cc:1883
+#: src/mine/cmine.cc:115 src/mine/cmine.cc:154 src/ui.cc:1885
 msgid "Minesweeper"
 msgstr "Detector de mine"
 
@@ -6445,7 +6571,7 @@ msgstr "Lățimea tablei: "
 msgid "Number of mines: "
 msgstr "Numărul de mine: "
 
-#: src/mine/cmine.cc:295 src/mine/cmine.cc:360 src/ui.cc:321 src/ui.cc:393
+#: src/mine/cmine.cc:295 src/mine/cmine.cc:360 src/ui.cc:323 src/ui.cc:395
 msgid "Ok"
 msgstr "Ok"
 
@@ -6499,7 +6625,7 @@ msgstr "Codarea lui mine-help.txt|UTF-8"
 msgid "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 30 30 10 30 10 9 12 16 22 8"
 msgstr "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 1 10 9 16 30 17 15"
 
-#: src/pkg_columnizer.cc:92 src/ui.cc:2919
+#: src/pkg_columnizer.cc:92 src/ui.cc:2968
 msgid "Package"
 msgstr "Pachet"
 
@@ -7541,23 +7667,23 @@ msgstr ""
 #. TRANSLATORS: This string is a confirmation message, which users
 #. (especially CJK users) should be able to input without input
 #. methods.  Please include nothing but ASCII characters.
-#: src/ui.cc:209
+#: src/ui.cc:211
 msgid "Yes, I am aware this is a very bad idea"
 msgstr "Da, am luat la cunoștință că este o idee foarte rea"
 
-#: src/ui.cc:266
+#: src/ui.cc:268
 msgid "Er, there aren't any errors, this shouldn't have happened.."
 msgstr "Ăă, nu sunt deloc erori, asta n-ar fi trebuit sa se întâmple..."
 
-#: src/ui.cc:272
+#: src/ui.cc:274
 msgid "E:"
 msgstr "E:"
 
-#: src/ui.cc:274
+#: src/ui.cc:276
 msgid "W:"
 msgstr "A:"
 
-#: src/ui.cc:370
+#: src/ui.cc:372
 msgid ""
 "WARNING: the package cache is opened in read-only mode!  This change and all "
 "subsequent changes will not be saved unless you stop all other running apt-"
@@ -7568,39 +7694,39 @@ msgstr ""
 "dacă opriți toate celelalte programe bazate pe apt și selectați "
 "\"Autentificare root\" din meniul Acțiuni."
 
-#: src/ui.cc:376
+#: src/ui.cc:378
 msgid "Never display this message again."
 msgstr "Nu mai afișa niciodată acest mesaj."
 
-#: src/ui.cc:422
+#: src/ui.cc:424
 msgid ""
 "You may not modify the state of any package while a download is underway."
 msgstr ""
 "Nu puteți modifica starea niciunui pachet în timp ce se efectuează o "
 "descărcare."
 
-#: src/ui.cc:453
+#: src/ui.cc:455
 msgid "You already are root!"
 msgstr "Sunteți deja root!"
 
-#: src/ui.cc:468
+#: src/ui.cc:470
 msgid "Invalid Get-Root-Command; it should start with su: or sudo:"
 msgstr ""
 "Comandă Get-Root-Command nevalidă; ar trebui să înceapă cu su: sau sudo:"
 
-#: src/ui.cc:475
+#: src/ui.cc:477
 #, c-format
 msgid "Invalid Get-Root-Command; it should start with su: or sudo:, not %s:"
 msgstr ""
 "Comandă Get-Root-Command nevalidă; ar trebui să înceapă cu su: sau sudo:, nu "
 "cu %s:"
 
-#: src/ui.cc:504
+#: src/ui.cc:506
 #, fuzzy, c-format
 msgid "Unable to fork: %s"
 msgstr "Nu se poate deschide %ls"
 
-#: src/ui.cc:608
+#: src/ui.cc:610
 msgid ""
 "Subprocess exited with an error, probably due to one of these reasons:\n"
 " - incorrect password,\n"
@@ -7608,117 +7734,117 @@ msgid ""
 " - root login disabled"
 msgstr ""
 
-#: src/ui.cc:651
+#: src/ui.cc:653
 msgid "Loading cache"
 msgstr "Se încarcă cache-ul"
 
-#: src/ui.cc:693
+#: src/ui.cc:695
 msgid "Really quit Aptitude?"
 msgstr "Chiar părăsiți Aptitude?"
 
-#: src/ui.cc:747 src/ui.cc:2680
+#: src/ui.cc:749 src/ui.cc:2729
 msgid "Change the behavior of aptitude"
 msgstr "Schimbă comportamentul lui aptitude"
 
-#: src/ui.cc:783
+#: src/ui.cc:785
 msgid "Really discard your personal settings and reload the defaults?"
 msgstr ""
 "Chiar renunțați la setările personale și le reîncărcați cele implicite?"
 
-#: src/ui.cc:828
+#: src/ui.cc:830
 #, c-format
 msgid "Using default value for %s string: '%s'"
 msgstr ""
 
-#: src/ui.cc:919
+#: src/ui.cc:921
 msgid "View available packages and choose actions to perform"
 msgstr "Vizualizați pachetele disponibile și alegeți acțiunile de executat"
 
-#: src/ui.cc:948
+#: src/ui.cc:950
 msgid "Recommended Packages"
 msgstr "Pachete Recomandate"
 
-#: src/ui.cc:949
+#: src/ui.cc:951
 msgid "View packages that it is recommended that you install"
 msgstr "Vizualizați pachetele recomandate să le instalați"
 
-#: src/ui.cc:950
+#: src/ui.cc:952
 msgid "Recommendations"
 msgstr "Recomandări"
 
-#: src/ui.cc:965 src/ui.cc:967
+#: src/ui.cc:967 src/ui.cc:969
 #, fuzzy
 msgid "Packages (flat)"
 msgstr "Pachet: "
 
-#: src/ui.cc:966
+#: src/ui.cc:968
 #, fuzzy
 msgid ""
 "View available packages (flat, no grouping) and choose actions to perform"
 msgstr "Vizualizați pachetele disponibile și alegeți acțiunile de executat"
 
-#: src/ui.cc:993 src/ui.cc:995
+#: src/ui.cc:995 src/ui.cc:997
 #, fuzzy
 msgid "Packages (debtags)"
 msgstr "Pachet: "
 
-#: src/ui.cc:994
+#: src/ui.cc:996
 #, fuzzy
 msgid ""
 "View available packages (debtags grouping) and choose actions to perform"
 msgstr "Vizualizați pachetele disponibile și alegeți acțiunile de executat"
 
-#: src/ui.cc:1013 src/ui.cc:1015
+#: src/ui.cc:1015 src/ui.cc:1017
 #, fuzzy
 msgid "Packages (source)"
 msgstr "Pachet: "
 
-#: src/ui.cc:1014
+#: src/ui.cc:1016
 #, fuzzy
 msgid "View available packages (source grouping) and choose actions to perform"
 msgstr "Vizualizați pachetele disponibile și alegeți acțiunile de executat"
 
-#: src/ui.cc:1036
+#: src/ui.cc:1038
 #, c-format
 msgid "Information about %s"
 msgstr "Informații despre %s"
 
-#: src/ui.cc:1038
+#: src/ui.cc:1040
 #, c-format
 msgid "%s info"
 msgstr "%s info"
 
-#: src/ui.cc:1059
+#: src/ui.cc:1061
 #, c-format
 msgid "Packages depending on %s"
 msgstr "Pachete ce depind de %s"
 
-#: src/ui.cc:1060
+#: src/ui.cc:1062
 #, c-format
 msgid "Dependencies of %s"
 msgstr "Dependențele %s"
 
-#: src/ui.cc:1063
+#: src/ui.cc:1065
 #, c-format
 msgid "%s reverse deps"
 msgstr "%s depend. inverse"
 
-#: src/ui.cc:1064
+#: src/ui.cc:1066
 #, c-format
 msgid "%s deps"
 msgstr "%s depend"
 
-#: src/ui.cc:1082
+#: src/ui.cc:1084
 #, c-format
 msgid "Available versions of %s"
 msgstr "Versiuni disponibile ale %s"
 
-#: src/ui.cc:1084
+#: src/ui.cc:1086
 #, c-format
 msgid "%s versions"
 msgstr "%s versiuni"
 
-#: src/ui.cc:1090
+#: src/ui.cc:1092
 msgid ""
 "Aptitude %s%n%nCopyright 2000-2008 Daniel Burrows.%n%naptitude comes with "
 "%BABSOLUTELY NO WARRANTY%b; for details see 'license' in the Help menu.  "
@@ -7734,54 +7860,54 @@ msgstr ""
 # XXX: one is in the menu and one the "title"(?); the menu one
 #         can have a shortcut key (remember "^");
 # XXX: maybe use context i.e. preceede the original string by "context|"
-#: src/ui.cc:1140 src/ui.cc:1142
+#: src/ui.cc:1142 src/ui.cc:1144
 msgid "License"
 msgstr "Licență"
 
-#: src/ui.cc:1141 src/ui.cc:2772
+#: src/ui.cc:1143 src/ui.cc:2821
 msgid "View the terms under which you may copy and distribute aptitude"
 msgstr ""
 "Afișează condițiile și termenii în care puteți copia și distribui aptitude"
 
 #. TRANSLATORS: You can translate help.txt and set the filename here.
-#: src/ui.cc:1156
+#: src/ui.cc:1158
 msgid "Localized file|help.txt"
 msgstr "help.txt"
 
-#: src/ui.cc:1158
+#: src/ui.cc:1160
 msgid "Encoding of help.txt|UTF-8"
 msgstr "Codarea lui help.txt|UTF-8"
 
-#: src/ui.cc:1169
+#: src/ui.cc:1171
 msgid "Online Help"
 msgstr "Ajutor imediat"
 
-#: src/ui.cc:1170
+#: src/ui.cc:1172
 msgid "View a brief introduction to aptitude"
 msgstr "O introducere scurtă despre aptitude"
 
-#: src/ui.cc:1171 src/ui.cc:2924
+#: src/ui.cc:1173 src/ui.cc:2973
 msgid "Help"
 msgstr "Ajutor"
 
 #. TRANSLATORS: You can translate README and set the filename here.
-#: src/ui.cc:1180
+#: src/ui.cc:1182
 msgid "Localized file|README"
 msgstr ""
 
-#: src/ui.cc:1181
+#: src/ui.cc:1183
 msgid "Encoding of README|ISO_8859-1"
 msgstr ""
 
-#: src/ui.cc:1192
+#: src/ui.cc:1194
 msgid "User's Manual"
 msgstr "Manual de Utilizare"
 
-#: src/ui.cc:1193
+#: src/ui.cc:1195
 msgid "Read the full user's manual of aptitude"
 msgstr "Citiți manualul complet de utilizare al lui aptitude"
 
-#: src/ui.cc:1194
+#: src/ui.cc:1196
 msgid "Manual"
 msgstr "Manual"
 
@@ -7789,11 +7915,11 @@ msgstr "Manual"
 # XXX: one is in the menu and one the "title"(?); the menu one
 #         can have a shortcut key (remember "^");
 # XXX: maybe use context i.e. preceede the original string by "context|"
-#: src/ui.cc:1201 src/ui.cc:1203
+#: src/ui.cc:1203 src/ui.cc:1205
 msgid "FAQ"
 msgstr "Întrebări frecvente"
 
-#: src/ui.cc:1202 src/ui.cc:2764
+#: src/ui.cc:1204 src/ui.cc:2813
 msgid "View a list of frequently asked questions"
 msgstr "Afișează o listă de întrebări frecvente"
 
@@ -7801,16 +7927,16 @@ msgstr "Afișează o listă de întrebări frecvente"
 # XXX: one is in the menu and one the "title"(?); the menu one
 #         can have a shortcut key (remember "^");
 # XXX: maybe use context i.e. preceede the original string by "context|"
-#: src/ui.cc:1211 src/ui.cc:1213
+#: src/ui.cc:1213 src/ui.cc:1215
 msgid "News"
 msgstr "Noutăți"
 
-#: src/ui.cc:1212
+#: src/ui.cc:1214
 #, c-format
 msgid "View the important changes made in each version of %s"
 msgstr "Afișează schimbările importante făcute în fiecare versiune a lui %s"
 
-#: src/ui.cc:1219
+#: src/ui.cc:1221
 #, c-format
 msgid ""
 "Unable to remove the old temporary directory; you should remove %s by hand."
@@ -7818,7 +7944,7 @@ msgstr ""
 "Nu se poate șterge vechiul director temporar; ar trebui să ștergeți manual "
 "%s."
 
-#: src/ui.cc:1224
+#: src/ui.cc:1226
 #, c-format
 msgid ""
 "Will not remove %s; you should examine the files in it and remove them by "
@@ -7827,7 +7953,7 @@ msgstr ""
 "Nu se va șterge %s; ar trebui să examinați fișierele din el și să-l ștergeți "
 "manual."
 
-#: src/ui.cc:1250
+#: src/ui.cc:1252
 #, c-format
 msgid ""
 "It appears that a previous version of aptitude left files behind in %s.  "
@@ -7840,29 +7966,29 @@ msgstr ""
 "%nVreți să ștergeți acest director și tot conținutul său?  Dacă alegeți \"Nu"
 "\", nu veți mai vedea acest mesaj."
 
-#: src/ui.cc:1271
+#: src/ui.cc:1273
 msgid "Performing actions..."
 msgstr ""
 
-#: src/ui.cc:1278
+#: src/ui.cc:1280
 #, fuzzy
 #| msgid "Press Return to continue."
 msgid "Press Return to continue, 'q' followed by Return to quit."
 msgstr "Apăsați Enter pentru a continua."
 
-#: src/ui.cc:1319
+#: src/ui.cc:1321
 msgid "Updating state and quitting..."
 msgstr ""
 
-#: src/ui.cc:1374
+#: src/ui.cc:1376
 msgid "View the progress of the package download"
 msgstr "Vizualizarea progresului descărcării pachetelor"
 
-#: src/ui.cc:1375
+#: src/ui.cc:1377
 msgid "Package Download"
 msgstr "Descărcare Pachet"
 
-#: src/ui.cc:1422
+#: src/ui.cc:1424
 msgid ""
 "%BWARNING%b: untrusted versions of the following packages will be installed!"
 "%n%nUntrusted packages could %Bcompromise your system's security%b.  You "
@@ -7874,43 +8000,43 @@ msgstr ""
 "sistemului dumneavoastră%b.  Ar trebui să continuați cu instalarea numai "
 "dacă sigur așa vreți să faceți.%n%n"
 
-#: src/ui.cc:1428
+#: src/ui.cc:1430
 #, fuzzy
 #| msgid "  %S*%N %s [version %s]%n"
 msgid "  %S*%N %s [version %s] %s%n"
 msgstr "  %S*%N %s [versiune %s]%n"
 
-#: src/ui.cc:1436
+#: src/ui.cc:1438
 msgid "Really Continue"
 msgstr "Continuă întradevăr"
 
-#: src/ui.cc:1438
+#: src/ui.cc:1440
 msgid "Abort Installation"
 msgstr "Renunță la instalare"
 
-#: src/ui.cc:1502
+#: src/ui.cc:1504
 msgid "Preview of package installation"
 msgstr "Previzualizare a instalării de pachete"
 
-#: src/ui.cc:1503
+#: src/ui.cc:1505
 msgid "View and/or adjust the actions that will be performed"
 msgstr "Afișează și/sau ajustează acțiunile ce vor fi executate"
 
-#: src/ui.cc:1539
+#: src/ui.cc:1541
 #, fuzzy
 #| msgid "No broken packages."
 msgid "Trying to fix broken packages..."
 msgstr "Nici un pachet deteriorat."
 
-#: src/ui.cc:1558
+#: src/ui.cc:1560
 msgid "Some packages were broken and have been fixed:"
 msgstr "Unele pachete au fost deteriorate și au fost reparate:"
 
-#: src/ui.cc:1566
+#: src/ui.cc:1568
 msgid "No solution to these dependency problems exists!"
 msgstr "Nu există nici o soluție la aceste probleme de dependențe!"
 
-#: src/ui.cc:1572
+#: src/ui.cc:1574
 #, c-format
 msgid ""
 "Ran out of time while trying to resolve dependencies (press \"%s\" to try "
@@ -7919,7 +8045,7 @@ msgstr ""
 "A expirat timpul la încercarea de a rezolva dependențele (apăsați „%s” "
 "pentru a încerca mai mult)"
 
-#: src/ui.cc:1618
+#: src/ui.cc:1620
 msgid ""
 "Installing/removing packages requires administrative privileges, which you "
 "currently do not have.  Would you like to change to the root account?"
@@ -7927,19 +8053,19 @@ msgstr ""
 "Instalarea/ștergerea pachetelor necesită privilegii administrative, care "
 "acum nu le aveți. Vreți să schimbați către contul de root?"
 
-#: src/ui.cc:1621 src/ui.cc:1871 src/ui.cc:1925 src/ui.cc:2020
+#: src/ui.cc:1623 src/ui.cc:1873 src/ui.cc:1927 src/ui.cc:2022
 msgid "Become root"
 msgstr "Devin root"
 
-#: src/ui.cc:1623 src/ui.cc:1873 src/ui.cc:1927 src/ui.cc:2022
+#: src/ui.cc:1625 src/ui.cc:1875 src/ui.cc:1929 src/ui.cc:2024
 msgid "Don't become root"
 msgstr "Nu devin root"
 
-#: src/ui.cc:1744
+#: src/ui.cc:1746
 msgid "No packages are scheduled to be installed, removed, or upgraded."
 msgstr "Nici un pachet nu este programat sa fie instalat, șters sau înnoit."
 
-#: src/ui.cc:1750
+#: src/ui.cc:1752
 msgid ""
 "No packages will be installed, removed or upgraded.  Some packages could be "
 "upgraded, but you have not chosen to upgrade them.  Type \"U\" to prepare an "
@@ -7948,25 +8074,25 @@ msgstr ""
 "Nici un pachet nu va fi instalat, șters sau înnoit.  Unele pachete ar putea "
 "fi înnoite, dar n-ați ales asta.  Apăsați \"U\" pentru a pregăti o înnoire."
 
-#: src/ui.cc:1808
+#: src/ui.cc:1810
 #, fuzzy
 #| msgid "Resolving dependencies..."
 msgid "Checking dependencies"
 msgstr "Se rezolvă dependențele..."
 
-#: src/ui.cc:1841
+#: src/ui.cc:1843
 msgid "Updating package lists"
 msgstr "Se actualizează listele de pachete"
 
-#: src/ui.cc:1842
+#: src/ui.cc:1844
 msgid "View the progress of the package list update"
 msgstr "Afișează progresul actualizării listelor de pachete"
 
-#: src/ui.cc:1843
+#: src/ui.cc:1845
 msgid "List Update"
 msgstr "Actualizează Listă"
 
-#: src/ui.cc:1868
+#: src/ui.cc:1870
 msgid ""
 "Updating the package lists requires administrative privileges, which you "
 "currently do not have.  Would you like to change to the root account?"
@@ -7974,19 +8100,19 @@ msgstr ""
 "Actualizarea listelor de pachete necesită privilegii administrative, pe care "
 "acum nu le aveți.  Vreți să schimbați către contul de root?"
 
-#: src/ui.cc:1883 src/ui.cc:2515
+#: src/ui.cc:1885 src/ui.cc:2564
 msgid "Waste time trying to find mines"
 msgstr "Pierdeți timpul încercând să găsiți mine"
 
-#: src/ui.cc:1890 src/ui.cc:1971
+#: src/ui.cc:1892 src/ui.cc:1973
 msgid "Cleaning while a download is in progress is not allowed"
 msgstr "Curățarea în timp ce descărcarea este în desfășurare nu este permisă"
 
-#: src/ui.cc:1907
+#: src/ui.cc:1909
 msgid "Downloaded package files have been deleted"
 msgstr "Fișierele pachetelor descărcate au fost șterse"
 
-#: src/ui.cc:1922
+#: src/ui.cc:1924
 #, fuzzy
 msgid ""
 "Cleaning the package cache requires administrative privileges, which you "
@@ -7995,12 +8121,12 @@ msgstr ""
 "Actualizarea listelor de pachete necesită privilegii administrative, pe care "
 "acum nu le aveți.  Vreți să schimbați către contul de root?"
 
-#: src/ui.cc:1968
+#: src/ui.cc:1970
 msgid "The apt cache file is not available; cannot auto-clean."
 msgstr ""
 "Fișierul cache apt nu este disponibil; nu se poate face auto-curățarea."
 
-#: src/ui.cc:2006
+#: src/ui.cc:2008
 #, c-format
 msgid ""
 "Obsolete downloaded package files have been deleted, freeing %sB of disk "
@@ -8009,7 +8135,7 @@ msgstr ""
 "Fișierele pachetelor învechite și descărcate au fost șterse, eliberându-se "
 "%sB din spațiul pe disc."
 
-#: src/ui.cc:2017
+#: src/ui.cc:2019
 #, fuzzy
 msgid ""
 "Deleting obsolete files requires administrative privileges, which you "
@@ -8018,138 +8144,149 @@ msgstr ""
 "Actualizarea listelor de pachete necesită privilegii administrative, pe care "
 "acum nu le aveți.  Vreți să schimbați către contul de root?"
 
-#: src/ui.cc:2137
+#: src/ui.cc:2124
+msgid ""
+"Package name or pattern for \"forget new\"\n"
+"\n"
+"Hints:\n"
+" * empty, to mark all packages as not new\n"
+" * 'aptitude' to unmark a single package\n"
+" * '~sdoc' to unmark all packages from section \"doc\"\n"
+"\n"
+msgstr ""
+
+#: src/ui.cc:2186
 msgid "No more solutions."
 msgstr "Nu mai sunt soluții."
 
-#: src/ui.cc:2352
+#: src/ui.cc:2401
 msgid "Unable to find a solution to apply."
 msgstr "Nu se poate găsi o soluție de aplicat."
 
-#: src/ui.cc:2358
+#: src/ui.cc:2407
 msgid "Ran out of time while trying to find a solution."
 msgstr "A expirat timpul în încercarea de a se găsi o soluție."
 
-#: src/ui.cc:2418 src/ui.cc:2420
+#: src/ui.cc:2467 src/ui.cc:2469
 msgid "Resolve Dependencies"
 msgstr "Rezolvă Dependențe"
 
-#: src/ui.cc:2419
+#: src/ui.cc:2468
 msgid "Search for solutions to unsatisfied dependencies"
 msgstr "Caută soluții pentru dependențele nesatisfăcute"
 
-#: src/ui.cc:2431
+#: src/ui.cc:2480
 #, c-format
 msgid "Unable to open %ls"
 msgstr "Nu se poate deschide %ls"
 
-#: src/ui.cc:2437
+#: src/ui.cc:2486
 msgid "Error while dumping resolver state"
 msgstr "Eroare în timpul scrierii stării rezolvatorului"
 
-#: src/ui.cc:2477
+#: src/ui.cc:2526
 msgid "^Install/remove packages"
 msgstr "^Instalează/șterge pachete"
 
-#: src/ui.cc:2480
+#: src/ui.cc:2529
 msgid "^Update package list"
 msgstr "^Actualizează lista de pachete"
 
-#: src/ui.cc:2485
+#: src/ui.cc:2534
 msgid "Mark Up^gradable"
 msgstr "^Marchează ce se poate înnoi"
 
-#: src/ui.cc:2490
+#: src/ui.cc:2539
 msgid "^Forget new packages"
 msgstr "Uită de ^pachetele noi"
 
-#: src/ui.cc:2494
+#: src/ui.cc:2543
 msgid "Canc^el pending actions"
 msgstr "A^nularea acțiunilor în desfășurare"
 
-#: src/ui.cc:2495
+#: src/ui.cc:2544
 #, fuzzy
 #| msgid "Canc^el pending actions"
 msgid "Cancel all pending actions from this session"
 msgstr "A^nularea acțiunilor în desfășurare"
 
-#: src/ui.cc:2498
+#: src/ui.cc:2547
 msgid "^Clean package cache"
 msgstr "^Curăță cache-ul de pachete"
 
-#: src/ui.cc:2502
+#: src/ui.cc:2551
 msgid "Clean ^obsolete files"
 msgstr "Curăță ^fișierele învechite"
 
-#: src/ui.cc:2509
+#: src/ui.cc:2558
 msgid "^Reload package cache"
 msgstr "^Reîncarcă cache-ul de pachete"
 
-#: src/ui.cc:2514
+#: src/ui.cc:2563
 msgid "^Play Minesweeper"
 msgstr "^Joacă Detectorul de mine"
 
-#: src/ui.cc:2519
+#: src/ui.cc:2568
 msgid "^Become root"
 msgstr "Autentificare ^root"
 
-#: src/ui.cc:2522
+#: src/ui.cc:2571
 msgid "^Quit"
 msgstr "I^eșire"
 
-#: src/ui.cc:2529 src/ui.cc:2918
+#: src/ui.cc:2578 src/ui.cc:2967
 msgid "Undo"
 msgstr "Renunță"
 
-#: src/ui.cc:2538
+#: src/ui.cc:2587
 msgid "^Install"
 msgstr "^Instalează"
 
-#: src/ui.cc:2539
+#: src/ui.cc:2588
 msgid "Flag the currently selected package for installation or upgrade"
 msgstr "Marchează pachetul selectat pentru instalare sau înnoire"
 
-#: src/ui.cc:2542
+#: src/ui.cc:2591
 #, fuzzy
 msgid "R^einstall"
 msgstr "Reinstalare"
 
-#: src/ui.cc:2543
+#: src/ui.cc:2592
 #, fuzzy
 msgid "Flag the currently selected package for reinstallation"
 msgstr "Marchează pachetul selectat pentru instalare sau înnoire"
 
-#: src/ui.cc:2546
+#: src/ui.cc:2595
 msgid "^Remove"
 msgstr "Ș^terge"
 
-#: src/ui.cc:2547
+#: src/ui.cc:2596
 msgid "Flag the currently selected package for removal"
 msgstr "Marchează pachetul selectat pentru ștergere"
 
-#: src/ui.cc:2550
+#: src/ui.cc:2599
 msgid "^Purge"
 msgstr "^Curăță"
 
-#: src/ui.cc:2551
+#: src/ui.cc:2600
 msgid ""
 "Flag the currently selected package and its configuration files for removal"
 msgstr ""
 "Marchează pachetul selectat și fișierele sale de configurare pentru ștergere"
 
-#: src/ui.cc:2554
+#: src/ui.cc:2603
 msgid "^Keep"
 msgstr "Țin^e"
 
-#: src/ui.cc:2555
+#: src/ui.cc:2604
 msgid "Cancel any action on the selected package"
 msgstr "Anulează orice acțiune pentru pachetul selectat"
 
-#: src/ui.cc:2558
+#: src/ui.cc:2607
 msgid "^Hold"
 msgstr "^Păstrează"
 
-#: src/ui.cc:2559
+#: src/ui.cc:2608
 msgid ""
 "Cancel any action on the selected package, and protect it from future "
 "upgrades"
@@ -8157,11 +8294,11 @@ msgstr ""
 "Anulează orice acțiune pentru pachetul selectat, și protejează-l de înnoiri "
 "viitoare"
 
-#: src/ui.cc:2562
+#: src/ui.cc:2611
 msgid "Mark ^Auto"
 msgstr "Marchează ^automat"
 
-#: src/ui.cc:2563
+#: src/ui.cc:2612
 msgid ""
 "Mark the selected package as having been automatically installed; it will "
 "automatically be removed if no other packages depend on it"
@@ -8169,11 +8306,11 @@ msgstr ""
 "Marchează pachetul selectat ca fiind instalat automat; va fi șters automat "
 "dacă nici un alt pachet nu depinde de el"
 
-#: src/ui.cc:2566
+#: src/ui.cc:2615
 msgid "Mark ^Manual"
 msgstr "Marchează ^manual"
 
-#: src/ui.cc:2567
+#: src/ui.cc:2616
 msgid ""
 "Mark the selected package as having been manually installed; it will not be "
 "removed unless you manually remove it"
@@ -8181,11 +8318,11 @@ msgstr ""
 "Marchează pachetul selectat ca fiind instalat manual; nu va fi șters decât "
 "dacă îl veți șterge manual"
 
-#: src/ui.cc:2570
+#: src/ui.cc:2619
 msgid "^Forbid Version"
 msgstr "Interzice ^versiunea"
 
-#: src/ui.cc:2571
+#: src/ui.cc:2620
 msgid ""
 "Forbid the candidate version of the selected package from being installed; "
 "newer versions of the package will be installed as usual"
@@ -8193,19 +8330,19 @@ msgstr ""
 "Interzice instalarea versiunii candidat pentru pachetul selectat; versiunile "
 "mai noi ale pachetului vor fi instalate ca de obicei"
 
-#: src/ui.cc:2575
+#: src/ui.cc:2624
 msgid "I^nformation"
 msgstr "I^nformații"
 
-#: src/ui.cc:2576
+#: src/ui.cc:2625
 msgid "Display more information about the selected package"
 msgstr "Afișează mai multe informații despre pachetul selectat"
 
-#: src/ui.cc:2579
+#: src/ui.cc:2628
 msgid "C^ycle Package Information"
 msgstr "C^omută informațiile despre pachet"
 
-#: src/ui.cc:2580
+#: src/ui.cc:2629
 msgid ""
 "Cycle through the modes of the package information area: it can show the "
 "package's long description, a summary of its dependency status, or an "
@@ -8215,94 +8352,94 @@ msgstr ""
 "pachetului, un sumar a stării dependențelor lui sau o analiză a motivului "
 "pentru care pachetul e cerut."
 
-#: src/ui.cc:2583
+#: src/ui.cc:2632
 msgid "^Changelog"
 msgstr "Jurnal de modifi^cări"
 
-#: src/ui.cc:2584
+#: src/ui.cc:2633
 msgid "Display the Debian changelog of the selected package"
 msgstr "Afișează jurnalul de modificări Debian pentru pachetul selectat"
 
-#: src/ui.cc:2591
+#: src/ui.cc:2640
 msgid "^Examine Solution"
 msgstr "^Examinează soluția"
 
-#: src/ui.cc:2592
+#: src/ui.cc:2641
 msgid "Examine the currently selected solution to the dependency problems."
 msgstr "Examinarea soluției selectate pentru probleme de dependențe."
 
-#: src/ui.cc:2595
+#: src/ui.cc:2644
 msgid "Apply ^Solution"
 msgstr "Aplică ^soluția"
 
-#: src/ui.cc:2596
+#: src/ui.cc:2645
 msgid "Perform the actions contained in the currently selected solution."
 msgstr "Executarea acțiunilor conținute de soluția selectată."
 
-#: src/ui.cc:2599
+#: src/ui.cc:2648
 msgid "^Next Solution"
 msgstr "Soluția ^următoare"
 
-#: src/ui.cc:2600
+#: src/ui.cc:2649
 msgid "Select the next solution to the dependency problems."
 msgstr "Selectați următoarea soluție pentru problemele de dependențe."
 
-#: src/ui.cc:2603
+#: src/ui.cc:2652
 msgid "^Previous Solution"
 msgstr "Soluția ^precedentă"
 
-#: src/ui.cc:2604
+#: src/ui.cc:2653
 msgid "Select the previous solution to the dependency problems."
 msgstr "Selectați soluția precedentă pentru problemele de dependențe."
 
-#: src/ui.cc:2607
+#: src/ui.cc:2656
 msgid "^First Solution"
 msgstr "P^rima soluție"
 
-#: src/ui.cc:2608
+#: src/ui.cc:2657
 msgid "Select the first solution to the dependency problems."
 msgstr "Selectați prima soluție pentru problemele de dependențe."
 
-#: src/ui.cc:2611
+#: src/ui.cc:2660
 msgid "^Last Solution"
 msgstr "U^ltima soluție"
 
-#: src/ui.cc:2612
+#: src/ui.cc:2661
 msgid ""
 "Select the last solution to the dependency problems that has been generated "
 "so far."
 msgstr ""
 "Selectați ultima soluție pentru problemele de dependențe generate până acum."
 
-#: src/ui.cc:2618
+#: src/ui.cc:2667
 msgid "Toggle ^Rejected"
 msgstr "Comută „acțiune ^respinsă”"
 
-#: src/ui.cc:2619
+#: src/ui.cc:2668
 msgid "Toggle whether the currently selected action is rejected."
 msgstr "Comutare dacă acțiunea selectată este respinsă."
 
-#: src/ui.cc:2623
+#: src/ui.cc:2672
 msgid "Toggle ^Approved"
 msgstr "Comută „acțiune ^aprobată”"
 
-#: src/ui.cc:2624
+#: src/ui.cc:2673
 msgid "Toggle whether the currently selected action is approved."
 msgstr "Comutare dacă acțiunea selectată este aprobată."
 
-#: src/ui.cc:2628
+#: src/ui.cc:2677
 msgid "^View Target"
 msgstr "^Afișează ținta"
 
-#: src/ui.cc:2629
+#: src/ui.cc:2678
 msgid "View the package which will be affected by the selected action"
 msgstr "Afișează pachetul care va fi afectat de acțiunea selectată"
 
-#: src/ui.cc:2635
+#: src/ui.cc:2684
 msgid "Reject Breaking ^Holds"
 msgstr "Refuză ^ignorarea păstrărilor"
 
-#: src/ui.cc:2637
+#: src/ui.cc:2686
 msgid ""
 "Reject all actions that would change the state of held packages or install "
 "forbidden versions"
@@ -8310,136 +8447,136 @@ msgstr ""
 "Refuză toate acțiunile care ar schimba starea pachetelor păstrate sau care "
 "ar instala versiuni interzise"
 
-#: src/ui.cc:2645
+#: src/ui.cc:2694
 msgid "^Find"
 msgstr "^Caută"
 
-#: src/ui.cc:2646
+#: src/ui.cc:2695
 msgid "Search forwards"
 msgstr "Caută înainte"
 
-#: src/ui.cc:2649
+#: src/ui.cc:2698
 msgid "^Find Backwards"
 msgstr "Ca^ută înapoi"
 
-#: src/ui.cc:2650
+#: src/ui.cc:2699
 msgid "Search backwards"
 msgstr "Căutare în direcție opusă"
 
-#: src/ui.cc:2653
+#: src/ui.cc:2702
 msgid "Find ^Again"
 msgstr "^Mai caută o dată"
 
-#: src/ui.cc:2654
+#: src/ui.cc:2703
 msgid "Repeat the last search"
 msgstr "Repetă ultima căutare"
 
-#: src/ui.cc:2657
+#: src/ui.cc:2706
 msgid "Find Again ^Backwards"
 msgstr "Ca^ută din nou înapoi"
 
-#: src/ui.cc:2658
+#: src/ui.cc:2707
 msgid "Repeat the last search in the opposite direction"
 msgstr "Repetă ultima căutare în direcția opusă"
 
-#: src/ui.cc:2662
+#: src/ui.cc:2711
 msgid "^Limit Display"
 msgstr "^Limitează afișajul"
 
-#: src/ui.cc:2663
+#: src/ui.cc:2712
 msgid "Apply a filter to the package list"
 msgstr "Aplică un filtru listei de pachete"
 
-#: src/ui.cc:2666
+#: src/ui.cc:2715
 msgid "^Un-Limit Display"
 msgstr "^Nu limita afișajul"
 
-#: src/ui.cc:2667
+#: src/ui.cc:2716
 msgid "Remove the filter from the package list"
 msgstr "Șterge filtrul listei de pachete"
 
-#: src/ui.cc:2671
+#: src/ui.cc:2720
 msgid "Find ^Broken"
 msgstr "Caută ^deteriorat"
 
-#: src/ui.cc:2672
+#: src/ui.cc:2721
 msgid "Find the next package with unsatisfied dependencies"
 msgstr "Caută următorul pachet cu dependențe nesatisfăcute"
 
-#: src/ui.cc:2679
+#: src/ui.cc:2728
 msgid "^Preferences"
 msgstr "^Preferințe"
 
-#: src/ui.cc:2684
+#: src/ui.cc:2733
 msgid "^UI options"
 msgstr "^Opțiuni interfață utilizator"
 
-#: src/ui.cc:2685
+#: src/ui.cc:2734
 msgid "Change the settings which affect the user interface"
 msgstr "Schimbă parametrii care afectează interfața utilizatorului"
 
-#: src/ui.cc:2688
+#: src/ui.cc:2737
 msgid "^Dependency handling"
 msgstr "Soluționarea ^dependențelor"
 
-#: src/ui.cc:2689
+#: src/ui.cc:2738
 msgid "Change the settings which affect how package dependencies are handled"
 msgstr ""
 "Schimbă parametrii care afectează modul în care sunt soluționate dependențele"
 
-#: src/ui.cc:2692
+#: src/ui.cc:2741
 msgid "^Miscellaneous"
 msgstr "Di^verse"
 
-#: src/ui.cc:2693
+#: src/ui.cc:2742
 msgid "Change miscellaneous program settings"
 msgstr "Schimbă diverși parametri ai programului"
 
-#: src/ui.cc:2699
+#: src/ui.cc:2748
 msgid "^Revert options"
 msgstr "^Restaurează opțiunile"
 
-#: src/ui.cc:2700
+#: src/ui.cc:2749
 msgid "Reset all settings to the system defaults"
 msgstr "Restaurează toți parametrii la valorile implicite ale sistemului"
 
-#: src/ui.cc:2711
+#: src/ui.cc:2760
 msgid "^Next"
 msgstr "^Următorul"
 
-#: src/ui.cc:2712
+#: src/ui.cc:2761
 msgid "View next display"
 msgstr "Arată următorul afișaj"
 
-#: src/ui.cc:2715
+#: src/ui.cc:2764
 msgid "^Prev"
 msgstr "^Precedent"
 
-#: src/ui.cc:2716
+#: src/ui.cc:2765
 msgid "View previous display"
 msgstr "Arată afișajul precedent"
 
-#: src/ui.cc:2719
+#: src/ui.cc:2768
 msgid "^Close"
 msgstr "Î^nchide"
 
-#: src/ui.cc:2720
+#: src/ui.cc:2769
 msgid "Close this display"
 msgstr "Închide acest afișaj"
 
-#: src/ui.cc:2725
+#: src/ui.cc:2774
 msgid "New Package ^View"
 msgstr "^Vizualizare nouă de pachete"
 
-#: src/ui.cc:2726
+#: src/ui.cc:2775
 msgid "Create a new default package view"
 msgstr "Crearea unei noi vizualizări implicite de pachete"
 
-#: src/ui.cc:2729
+#: src/ui.cc:2778
 msgid "Audit ^Recommendations"
 msgstr "^Revizuiește recomandările"
 
-#: src/ui.cc:2730
+#: src/ui.cc:2779
 msgid ""
 "View packages which it is recommended that you install, but which are not "
 "currently installed."
@@ -8447,89 +8584,89 @@ msgstr ""
 "Vizualizați pachetele recomandate pentru instalare, dar care nu sunt "
 "instalate."
 
-#: src/ui.cc:2733
+#: src/ui.cc:2782
 msgid "New ^Flat Package List"
 msgstr "^Listă nouă simplă de pachete"
 
-#: src/ui.cc:2734
+#: src/ui.cc:2783
 msgid "View all the packages on the system in a single uncategorized list"
 msgstr ""
 "Vizualizați toate pachetele din sistem într-o singură listă, necategorisită"
 
-#: src/ui.cc:2737
+#: src/ui.cc:2786
 msgid "New ^Debtags Browser"
 msgstr "Navigator nou de ^etichete deb"
 
-#: src/ui.cc:2739
+#: src/ui.cc:2788
 msgid "Browse packages using Debtags data"
 msgstr "Navighează pachetele utilizând datele etichetelor deb"
 
-#: src/ui.cc:2742
+#: src/ui.cc:2791
 #, fuzzy
 msgid "New ^Source Package View"
 msgstr "^Vizualizare nouă de pachete"
 
-#: src/ui.cc:2744
+#: src/ui.cc:2793
 msgid "Create a new package view, grouped by source package"
 msgstr ""
 
-#: src/ui.cc:2752
+#: src/ui.cc:2801
 msgid "^About"
 msgstr "^Despre"
 
-#: src/ui.cc:2753
+#: src/ui.cc:2802
 msgid "View information about this program"
 msgstr "Afișează informații despre acest program"
 
-#: src/ui.cc:2756
+#: src/ui.cc:2805
 msgid "^Help"
 msgstr "^Ajutor"
 
-#: src/ui.cc:2757
+#: src/ui.cc:2806
 msgid "View the on-line help"
 msgstr "Afișează ajutorul integrat"
 
-#: src/ui.cc:2759
+#: src/ui.cc:2808
 msgid "User's ^Manual"
 msgstr "^Manualul utilizatorului"
 
-#: src/ui.cc:2760
+#: src/ui.cc:2809
 msgid "View the detailed program manual"
 msgstr "Afișează manualul detaliat al programului"
 
-#: src/ui.cc:2763
+#: src/ui.cc:2812
 msgid "^FAQ"
 msgstr "Întrebări ^frecvente"
 
-#: src/ui.cc:2767
+#: src/ui.cc:2816
 msgid "^News"
 msgstr "^Noutăți"
 
-#: src/ui.cc:2768
+#: src/ui.cc:2817
 msgid "View the important changes made in each version of "
 msgstr "Afișează schimbările importante făcute în fiecare versiune a lui "
 
-#: src/ui.cc:2771
+#: src/ui.cc:2820
 msgid "^License"
 msgstr "^Licență"
 
-#: src/ui.cc:2917
+#: src/ui.cc:2966
 msgid "Actions"
 msgstr "Acțiuni"
 
-#: src/ui.cc:2921
+#: src/ui.cc:2970
 msgid "Search"
 msgstr "Căutare"
 
-#: src/ui.cc:2922
+#: src/ui.cc:2971
 msgid "Options"
 msgstr "Opțiuni"
 
-#: src/ui.cc:2923
+#: src/ui.cc:2972
 msgid "Views"
 msgstr "Vizualizări"
 
-#: src/ui.cc:2989
+#: src/ui.cc:3038
 #, fuzzy, c-format
 msgid ""
 "%ls: Menu  %ls: Help  %ls: Quit  %ls: Update  %ls: Preview/Download/Install/"
@@ -8538,11 +8675,11 @@ msgstr ""
 "%ls: Meniu  %ls: Ajutor  %ls: Ieșire  %ls: Actualizare  %ls: Desc/Inst/"
 "Ștergere pachete"
 
-#: src/ui.cc:3359
+#: src/ui.cc:3408
 msgid "yes_key"
 msgstr "da_key"
 
-#: src/ui.cc:3360
+#: src/ui.cc:3409
 msgid "no_key"
 msgstr "nu_key"
 
@@ -8570,6 +8707,9 @@ msgstr "URL de folosit la descărcarea jurnalelor de modificări"
 msgid "Downloading the changelog of %s"
 msgstr "Se descarcă jurnalul de modificări"
 
+#~ msgid "E: The forget-new command takes no arguments\n"
+#~ msgstr "E: Comanda „forget-new” nu are argumente\n"
+
 #~ msgid "Suggest keeping all packages at their current version."
 #~ msgstr "Sugerează ținerea tuturor pachetelor la versiunile lor curente."
 
@@ -8584,9 +8724,6 @@ msgstr "Se descarcă jurnalul de modificări"
 #~ "Nu sunteți root și nu găsesc nici o cale să deveniți root.  Pentru a "
 #~ "reconfigura acest pachet, instalați pachetul menu, pachetul login, sau "
 #~ "rulați aptitude ca root."
-
-#~ msgid "Reconfiguring %s\n"
-#~ msgstr "Reconfigurare %s\n"
 
 #~ msgid ""
 #~ "Couldn't find package \"%s\".  However, the following\n"
@@ -8914,9 +9051,6 @@ msgstr "Se descarcă jurnalul de modificări"
 
 #~ msgid "fork() failed: %s"
 #~ msgstr "fork() a eșuat: %s"
-
-#~ msgid "waitpid() failed: %s"
-#~ msgstr "waitpid() a eșuat: %s"
 
 #~ msgid "The debtags command must not be an empty string."
 #~ msgstr "Comanda debtags nu trebuie să fie șirul vid."
