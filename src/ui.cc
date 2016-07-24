@@ -2119,15 +2119,25 @@ void do_forget_new_dialog()
 {
   static cw::editline::history_list forget_new_history;
 
+  std::wstring prompt_str;
+  if (aptcfg->FindB(PACKAGE "::UI::Minibuf-Prompts"))
+    {
+      prompt_str = W_("Package name or pattern for \"forget new\" (empty for all packages): ");
+    }
+  else
+    {
+      prompt_str = W_("Package name or pattern for \"forget new\"\n"
+		      "\n"
+		      "Hints:\n"
+		      " * empty, to mark all packages as not new\n"
+		      " * 'aptitude' to unmark a single package\n"
+		      " * '~sdoc' to unmark all packages from section \"doc\"\n"
+		      "\n");
+    }
+
   std::wstring forget_new_str;
 
-  prompt_string(W_("Package name or pattern for \"forget new\"\n"
-		   "\n"
-		   "Hints:\n"
-		   " * empty, to mark all packages as not new\n"
-		   " * 'aptitude' to unmark a single package\n"
-		   " * '~sdoc' to unmark all packages from section \"doc\"\n"
-		   "\n"),
+  prompt_string(prompt_str,
 		forget_new_str,
 		cw::util::arg(sigc::ptr_fun(do_forget_new)),
 		NULL,
