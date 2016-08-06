@@ -145,21 +145,22 @@ int cmdline_do_action(int argc, char *argv[],
     default_action=cmdline_remove;
   else if(!strcasecmp(argv[0], "purge"))
     default_action=cmdline_purge;
-  else if(!strcasecmp(argv[0], "hold"))
-    default_action=cmdline_hold;
-  else if(!strcasecmp(argv[0], "keep") || !strcasecmp(argv[0], "keep-all"))
-    default_action=cmdline_keep;
-  else if(!strcasecmp(argv[0], "unhold"))
-    default_action=cmdline_unhold;
-  else if(!strcasecmp(argv[0], "markauto"))
-    default_action=cmdline_markauto;
-  else if(!strcasecmp(argv[0], "unmarkauto"))
-    default_action=cmdline_unmarkauto;
-  else if(!strcasecmp(argv[0], "forbid-version"))
-    default_action=cmdline_forbid_version;
   else if(!strcasecmp(argv[0], "build-depends") ||
 	  !strcasecmp(argv[0], "build-dep"))
     default_action = cmdline_build_depends;
+  else if (!strcasecmp(argv[0], "hold") ||
+	   !strcasecmp(argv[0], "keep") ||
+	   !strcasecmp(argv[0], "keep-all") ||
+	   !strcasecmp(argv[0], "unhold") ||
+	   !strcasecmp(argv[0], "markauto") ||
+	   !strcasecmp(argv[0], "unmarkauto") ||
+	   !strcasecmp(argv[0], "forbid-version"))
+    {
+      // should happen elsewhere
+      _error->Error(_("Internal error, operation %s should be handled elsewhere"), argv[0]);
+      _error->DumpErrors();
+      return -1;
+    }
   else
     {
       // Should never happen.

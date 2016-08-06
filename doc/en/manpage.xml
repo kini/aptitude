@@ -385,7 +385,7 @@
       </varlistentry>
 
       <varlistentry>
-	<term><literal>remove</literal>, <literal>purge</literal>, <literal>hold</literal>, <literal>unhold</literal>, <literal>keep</literal>, <literal>reinstall</literal></term>
+	<term><literal>remove</literal>, <literal>purge</literal>, <literal>reinstall</literal></term>
 
 	<listitem>
 	  <para>
@@ -393,26 +393,38 @@
 	    <quote><literal>install</literal></quote>, but apply the
 	    named action to all packages given on the command line for
 	    which it is not <link
-	    linkend='parOverrideSpecifiers'>overridden</link>.  The
-	    difference between <literal>hold</literal> and
-	    <literal>keep</literal> is that <literal>hold</literal>
-	    will cause a package to be ignored by future <link
-	    linkend='manpageSafeUpgrade'><literal>safe-upgrade</literal></link>
-	    or <link
-	    linkend='manpageFullUpgrade'><literal>full-upgrade</literal></link>
-	    commands, while <literal>keep</literal> merely cancels any
-	    scheduled actions on the package.
-	    <literal>unhold</literal> will allow a package to be
-	    upgraded by future <literal>safe-upgrade</literal> or
-	    <link
-	    linkend='manpageFullUpgrade'><literal>full-upgrade</literal></link>
-	    commands, without otherwise altering its state.
+	    linkend='parOverrideSpecifiers'>overridden</link>.
 	  </para>
 
 	  <para>
 	    For instance, <quote><literal>aptitude remove
 	    '~ndeity'</literal></quote> will remove all packages
 	    whose name contains <quote><literal>deity</literal></quote>.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><literal>build-depends</literal>, <literal>build-dep</literal></term>
+
+	<listitem>
+	  <para>
+	    Satisfy the build-dependencies of a package.  Each package
+	    name may be a source package, in which case the build
+	    dependencies of that source package are installed;
+	    otherwise, binary packages are found in the same way as
+	    for the <quote><literal>install</literal></quote> command,
+	    and the build-dependencies of the source packages that
+	    build those binary packages are satisfied.
+	  </para>
+
+	  <para>
+	    If the command-line parameter
+	    <literal>--arch-only</literal> is present, only
+	    architecture-dependent build dependencies (i.e., not
+	    <literal>Build-Depends-Indep</literal> or
+	    <literal>Build-Conflicts-Indep</literal>) will be
+	    obeyed.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -442,26 +454,66 @@
       </varlistentry>
 
       <varlistentry>
-	<term><literal>build-depends</literal>, <literal>build-dep</literal></term>
+	<term><literal>hold</literal>, <literal>unhold</literal>, <literal>keep</literal></term>
 
 	<listitem>
 	  <para>
-	    Satisfy the build-dependencies of a package.  Each package
-	    name may be a source package, in which case the build
-	    dependencies of that source package are installed;
-	    otherwise, binary packages are found in the same way as
-	    for the <quote><literal>install</literal></quote> command,
-	    and the build-dependencies of the source packages that
-	    build those binary packages are satisfied.
+	    Mark packages to be on hold, remove this property, or set to keep in
+	    the current state.  Packages are specified in exactly the same way
+	    as for the <quote><literal>install</literal></quote> command.  For
+	    instance, <quote><literal>aptitude hold '~e^dpkg$'</literal></quote>
+	    will mark all packages coming from the source package
+	    <quote><literal>dpkg</literal></quote> to be on hold.
 	  </para>
 
 	  <para>
-	    If the command-line parameter
-	    <literal>--arch-only</literal> is present, only
-	    architecture-dependent build dependencies (i.e., not
-	    <literal>Build-Depends-Indep</literal> or
-	    <literal>Build-Conflicts-Indep</literal>) will be
-	    obeyed.
+	    The difference between <literal>hold</literal> and
+	    <literal>keep</literal> is that <literal>hold</literal> will cause a
+	    package to be ignored by future <link
+	    linkend='manpageSafeUpgrade'><literal>safe-upgrade</literal></link>
+	    or <link
+	    linkend='manpageFullUpgrade'><literal>full-upgrade</literal></link>
+	    commands, while <literal>keep</literal> merely cancels any scheduled
+	    actions on the package.  <literal>unhold</literal> will allow a
+	    package to be upgraded by future <literal>safe-upgrade</literal> or
+	    <link
+	    linkend='manpageFullUpgrade'><literal>full-upgrade</literal></link>
+	    commands, without otherwise altering its state.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry id='manpageKeepAll'>
+	<term><literal>keep-all</literal></term>
+
+	<listitem>
+	  <para>
+	    Cancels all scheduled actions on all packages; any
+	    packages whose sticky state indicates an installation,
+	    removal, or upgrade will have this sticky state cleared.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry id='cmdlineForgetNew'>
+	<term><literal>forget-new</literal></term>
+
+	<listitem>
+	  <para>
+	    Forgets all internal information about what packages are
+	    <quote>new</quote> (equivalent to pressing
+	    <quote><keycap>f</keycap></quote> when in visual mode).
+	  </para>
+
+	  <para>
+	    This command accepts package names or patterns as arguments.  If the
+	    string contains a tilde character
+	    (<quote><literal>~</literal></quote>) or a question mark
+	    (<quote><literal>?</literal></quote>), it will be treated as a
+	    search pattern and every package matching the pattern will be
+	    considered (see the section <link
+	    linkend='secSearchPatterns'><quote>Search Patterns</quote></link> in
+	    the &aptitude; reference manual).
 	  </para>
 	</listitem>
       </varlistentry>
@@ -592,41 +644,6 @@
 	      <literal>full-upgrade</literal>.
 	    </para>
 	  </note>
-	</listitem>
-      </varlistentry>
-
-      <varlistentry id='manpageKeepAll'>
-	<term><literal>keep-all</literal></term>
-
-	<listitem>
-	  <para>
-	    Cancels all scheduled actions on all packages; any
-	    packages whose sticky state indicates an installation,
-	    removal, or upgrade will have this sticky state cleared.
-	  </para>
-	</listitem>
-      </varlistentry>
-
-      <varlistentry id='cmdlineForgetNew'>
-	<term><literal>forget-new</literal></term>
-
-	<listitem>
-	  <para>
-	    Forgets all internal information about what packages are
-	    <quote>new</quote> (equivalent to pressing
-	    <quote><keycap>f</keycap></quote> when in visual mode).
-	  </para>
-
-	  <para>
-	    This command accepts package names or patterns as arguments.  If the
-	    string contains a tilde character
-	    (<quote><literal>~</literal></quote>) or a question mark
-	    (<quote><literal>?</literal></quote>), it will be treated as a
-	    search pattern and every package matching the pattern will be
-	    considered (see the section <link
-	    linkend='secSearchPatterns'><quote>Search Patterns</quote></link> in
-	    the &aptitude; reference manual).
-	  </para>
 	</listitem>
       </varlistentry>
 
