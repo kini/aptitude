@@ -207,12 +207,14 @@ static void usage()
   printf(_(" build-dep       Install the build-dependencies of packages.\n"));
   printf(_(" forget-new      Forget what packages are \"new\".\n"));
   printf(_(" search          Search for a package by name and/or expression.\n"));
-  printf(_(" show            Display detailed information about a package.\n"));
+  printf(_(" show            Display detailed info about a package.\n"));
+  printf(_(" showsrc         Display detailed info about a source package (apt wrapper).\n"));
   printf(_(" versions        Displays the versions of specified packages.\n"));
   printf(_(" clean           Erase downloaded package files.\n"));
   printf(_(" autoclean       Erase old downloaded package files.\n"));
   printf(_(" changelog       View a package's changelog.\n"));
-  printf(_(" download        Download the .deb file for a package.\n"));
+  printf(_(" download        Download the .deb file for a package (apt wrapper).\n"));
+  printf(_(" source          Download source package (apt wrapper).\n"));
   printf(_(" reinstall       Reinstall a currently installed package.\n"));
   printf(_(" why             Explain why a particular package should be installed.\n"));
   printf(_(" why-not         Explain why a particular package cannot be installed.\n"));
