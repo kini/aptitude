@@ -22,6 +22,8 @@
 // Local includes:
 #include "cmdline_clean.h"
 
+#include "cmdline_util.h"
+
 #include "text_progress.h"
 #include "terminal.h"
 
@@ -56,7 +58,7 @@ int cmdline_clean(int argc, char *argv[], bool simulate)
 {
   const string archivedir = aptcfg->FindDir("Dir::Cache::archives");
 
-  _error->DumpErrors();
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   if(argc != 1)
     {
@@ -120,7 +122,7 @@ int cmdline_autoclean(int argc, char *argv[], bool simulate)
   const string archivedir = aptcfg->FindDir("Dir::Cache::archives");
   const std::shared_ptr<terminal_io> term = create_terminal();
 
-  _error->DumpErrors();
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   if(argc != 1)
     {
@@ -134,11 +136,11 @@ int cmdline_autoclean(int argc, char *argv[], bool simulate)
       _config->FindB("Debug::NoLocking",false) == false)
     {
       lock.Fd(GetLock(archivedir + "lock"));
-      if (_error->PendingError() == true)
+      if (_error->PendingError())
         {
           _error->Error(_("Unable to lock the download directory"));
-          _error->DumpErrors();
-          return -1;
+
+	  aptitude::cmdline::on_apt_errors_print_and_die();
         }
     }
 
@@ -147,11 +149,7 @@ int cmdline_autoclean(int argc, char *argv[], bool simulate)
   bool operation_needs_lock = true;
   apt_init(progress.get(), false, operation_needs_lock, nullptr);
 
-  if(_error->PendingError())
-    {
-      _error->DumpErrors();
-      return -1;
-    }
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   LogCleaner cleaner(simulate);
   int rval=0;
@@ -160,7 +158,7 @@ int cmdline_autoclean(int argc, char *argv[], bool simulate)
      _error->PendingError())
     rval=-1;
 
-  _error->DumpErrors();
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   if(simulate)
     printf(_("Would free %sB of disk space\n"),

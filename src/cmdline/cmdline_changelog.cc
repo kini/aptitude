@@ -406,17 +406,13 @@ int cmdline_changelog(int argc, char *argv[])
 {
   std::shared_ptr<terminal_io> term = create_terminal();
 
-  _error->DumpErrors();
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   OpProgress progress;
   bool operation_needs_lock = false;
   apt_init(&progress, false, operation_needs_lock, nullptr);
 
-  if (_error->PendingError())
-    {
-      _error->DumpErrors();
-      return -1;
-    }
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   vector<string> packages;
   for(int i=1; i<argc; ++i)
@@ -424,11 +420,7 @@ int cmdline_changelog(int argc, char *argv[])
 
   do_cmdline_changelog(packages, term);
 
-  if (_error->PendingError())
-    {
-      _error->DumpErrors();
-      return -1;
-    }
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   return 0;
 }

@@ -22,6 +22,8 @@
 
 #include "cmdline_check_resolver.h"
 
+#include "cmdline_util.h"
+
 #include <generic/apt/aptitude_resolver_universe.h>
 #include <generic/problemresolver/sanity_check_universe.h>
 
@@ -158,18 +160,14 @@ namespace
 int cmdline_check_resolver(int argc, char *argv[],
 			  const char *status_fname)
 {
-  _error->DumpErrors();
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   OpProgress progress;
 
   bool operation_needs_lock = true;
   apt_init(&progress, true, operation_needs_lock, status_fname);
 
-  if(_error->PendingError())
-    {
-      _error->DumpErrors();
-      return -1;
-    }
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   aptitude_universe u(*apt_cache_file);
 
