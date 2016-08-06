@@ -609,11 +609,7 @@ int cmdline_versions(int argc, char *argv[], const char *status_fname,
   bool operation_needs_lock = false;
   apt_init(&progress, true, operation_needs_lock, status_fname);
 
-  if (_error->PendingError())
-    {
-      _error->DumpErrors();
-      return -1;
-    }
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   std::vector<cw::util::ref_ptr<m::pattern> > matchers;
 
@@ -646,11 +642,7 @@ int cmdline_versions(int argc, char *argv[], const char *status_fname,
     }
 
   // check for errors after parsing arguments
-  if (_error->PendingError())
-    {
-      _error->DumpErrors();
-      return -1;
-    }
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   return do_search_versions(matchers,
                             sort_policy,

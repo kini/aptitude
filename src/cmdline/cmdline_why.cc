@@ -1400,7 +1400,7 @@ int cmdline_why(int argc, char *argv[],
 {
   const std::shared_ptr<terminal_io> term = create_terminal();
 
-  _error->DumpErrors();
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   if(argc < 2)
     {
@@ -1413,11 +1413,7 @@ int cmdline_why(int argc, char *argv[],
   bool operation_needs_lock = false;
   apt_init(&progress, true, operation_needs_lock, status_fname);
 
-  if(_error->PendingError())
-    {
-      _error->DumpErrors();
-      return -1;
-    }
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   // Keep track of whether any argument couldn't be parsed, but
   // don't bail until we finish parsing, so we can display all

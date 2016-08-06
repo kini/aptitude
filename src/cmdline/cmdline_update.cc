@@ -1,6 +1,7 @@
 // cmdline_update.cc
 //
 //   Copyright (C) 2004-2008, 2010 Daniel Burrows
+//   Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -18,6 +19,8 @@
 //   Boston, MA 02110-1301, USA.
 
 // Local includes:
+#include "cmdline_update.h"
+
 #include "cmdline_util.h"
 
 #include "terminal.h"
@@ -47,8 +50,6 @@ int cmdline_update(int argc, char *argv[], int verbose)
 {
   std::shared_ptr<terminal_io> term = create_terminal();
 
-  _error->DumpErrors();
-
   if(argc!=1)
     {
       fprintf(stderr, _("E: The update command takes no arguments\n"));
@@ -66,10 +67,7 @@ int cmdline_update(int argc, char *argv[], int verbose)
     (cmdline_do_download(&m, verbose, term, term, term, term)
      == download_manager::success ? 0 : -1);
 
-  if(_error->PendingError())
-    rval = -1;
-
-  _error->DumpErrors();
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   return rval;
 }
