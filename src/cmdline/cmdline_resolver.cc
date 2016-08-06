@@ -236,7 +236,7 @@ static void resolver_help(ostream &out,
 			      flowindentbox(0, 3,
 					    cw::fragf(_("accept the proposed changes"))),
 			      flowindentbox(0, 3,
-					    cw::fragf(_("reject the proposed changes and search for another solution"))),
+					    cw::fragf(_("jump to the end of all the generated solutions and search for another"))),
 			      flowindentbox(0, 3,
 					    cw::fragf(_("give up and quit the program"))),
 			      flowindentbox(0, 3,
@@ -922,8 +922,14 @@ cmdline_resolve_deps(pkgset &to_install,
 		    modified_pkgs=true;
 		    break;
 		  case 'N':
-		    // same as "next" ('.')
-		    resman->select_next_solution();
+		    // jump to the end of the solutions and generate new ones
+		    {
+		      unsigned int curr_count = resman->generated_solution_count();
+
+		      if (curr_count > 0)
+			while (resman->get_selected_solution() < curr_count)
+			  resman->select_next_solution();
+		    }
 		    break;
 		  case 'Q':
 		    cout << _("Abandoning all efforts to resolve these dependencies.") << endl;
