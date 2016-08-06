@@ -429,6 +429,14 @@ namespace aptitude
     std::vector<pkgCache::PkgIterator> get_packages_from_string(const std::string& str);
 
 
+    /** Get package iterators from a set of strings (possibly patterns)
+     *
+     * If the string is a pattern, "resolve" the names; otherwise verify that
+     * the packages exist.
+     */
+    std::vector<pkgCache::PkgIterator> get_packages_from_set_of_strings(const std::vector<std::string>& args, bool& all_ok);
+
+
     /** Check for errors, dump them to the screen and exit
      */
     inline void on_apt_errors_print_and_die()

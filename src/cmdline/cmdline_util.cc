@@ -871,5 +871,41 @@ namespace aptitude
 
       return pkgs;
     }
+
+    std::vector<pkgCache::PkgIterator> get_packages_from_set_of_strings(const std::vector<std::string>& args, bool& all_ok)
+    {
+      std::vector<pkgCache::PkgIterator> pkgs;
+
+      for (const std::string& arg : args)
+	{
+	  std::vector<pkgCache::PkgIterator> pkgs_from_args = aptitude::cmdline::get_packages_from_string(arg);
+
+	  if (pkgs_from_args.empty())
+	    {
+	      // problem parsing command line or finding packages
+
+	      all_ok = false;
+
+	      int quiet = aptcfg->FindI("quiet", 0);
+	      if (quiet == 0)
+		{
+		  if (aptitude::matching::is_pattern(arg.c_str()))
+		    std::cerr << cw::util::ssprintf(_("No packages match pattern \"%s\""), arg.c_str()) << std::endl;
+		  else
+		    std::cerr << cw::util::ssprintf(_("No such package \"%s\""), arg.c_str()) << std::endl;
+		}
+	    }
+	  else
+	    {
+	      // append packages
+	      for (const auto& it : pkgs_from_args)
+		{
+		  pkgs.push_back(it);
+		}
+	    }
+	}
+
+      return pkgs;
+    }
   }
 }
