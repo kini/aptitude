@@ -635,17 +635,13 @@ int cmdline_show(int argc, char *argv[], int verbose)
 {
   std::shared_ptr<terminal_io> term = create_terminal();
 
-  _error->DumpErrors();
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   std::shared_ptr<OpProgress> progress = make_text_progress(true, term, term, term);
   bool operation_needs_lock = false;
   apt_init(progress.get(), false, operation_needs_lock, nullptr);
 
-  if(_error->PendingError())
-    {
-      _error->DumpErrors();
-      return -1;
-    }
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   for(int i=1; i<argc; ++i)
     if(!do_cmdline_show(argv[i], verbose, term))
@@ -654,11 +650,7 @@ int cmdline_show(int argc, char *argv[], int verbose)
 	return -1;
       }
 
-  if(_error->PendingError())
-    {
-      _error->DumpErrors();
-      return -1;
-    }
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   return 0;
 }

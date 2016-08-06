@@ -126,15 +126,13 @@ namespace aptitude
 	  return -1;
 	}
 
-      _error->DumpErrors();
+      aptitude::cmdline::on_apt_errors_print_and_die();
+
       OpProgress progress;
       bool operation_needs_lock = true;
       apt_init(&progress, true, operation_needs_lock, nullptr);
-      if(_error->PendingError())
-	{
-	  _error->DumpErrors();
-	  return -1;
-	}
+
+      aptitude::cmdline::on_apt_errors_print_and_die();
 
       std::string tag = argv[1];
       int argc_start = 2;

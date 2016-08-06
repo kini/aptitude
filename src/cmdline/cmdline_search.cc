@@ -129,11 +129,8 @@ namespace
     search_progress_display->done();
 
     int exit_status = 0;
-    if (_error->PendingError())
-      {
-	_error->DumpErrors();
-	exit_status = -1;
-      }
+
+    aptitude::cmdline::on_apt_errors_print_and_die();
 
     if (output.empty())
       {
@@ -254,11 +251,7 @@ int cmdline_search(int argc, char *argv[], const char *status_fname,
   bool operation_needs_lock = false;
   apt_init(progress.get(), true, operation_needs_lock, status_fname);
 
-  if(_error->PendingError())
-    {
-      _error->DumpErrors();
-      return -1;
-    }
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   vector<ref_ptr<pattern> > matchers;
 

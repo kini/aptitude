@@ -68,11 +68,8 @@ namespace aptitude
 
       bool operation_needs_lock = true;
       apt_init(progress.get(), true, operation_needs_lock, nullptr);
-      if(_error->PendingError())
-	{
-	  _error->DumpErrors();
-	  return -1;
-	}
+
+      aptitude::cmdline::on_apt_errors_print_and_die();
 
       bool ok = true;
       std::set<pkgCache::PkgIterator> packages;
@@ -141,7 +138,7 @@ namespace aptitude
 
       bool copy_ok = !_error->PendingError();
 
-      _error->DumpErrors();
+      aptitude::cmdline::on_apt_errors_print_and_die();
 
       return copy_ok ? 0 : 1;
     }
