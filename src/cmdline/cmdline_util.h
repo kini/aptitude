@@ -427,6 +427,19 @@ namespace aptitude
      * the packages exist.
      */
     std::vector<pkgCache::PkgIterator> get_packages_from_string(const std::string& str);
+
+
+    /** Check for errors, dump them to the screen and exit
+     */
+    inline void on_apt_errors_print_and_die()
+    {
+      if (_error->PendingError())
+	{
+	  _error->DumpErrors();
+	  int exit_status = -1;
+	  exit(exit_status);
+	}
+    }
   }
 }
 
