@@ -210,38 +210,14 @@ int cmdline_mark(int argc, char *argv[], const char* status_fname, bool simulate
 	  return -1;
 	}
 
-      std::vector<pkgCache::PkgIterator> pkg_its;
-
+      std::vector<std::string> args;
       int argc_start = 1;
-
       for (int i = argc_start; i < argc; ++i)
 	{
-	  std::vector<pkgCache::PkgIterator> pkgs_from_args = aptitude::cmdline::get_packages_from_string(argv[i]);
-
-	  if (pkgs_from_args.empty())
-	    {
-	      // problem parsing command line or finding packages
-
-	      all_ok = false;
-
-	      int quiet = aptcfg->FindI("quiet", 0);
-	      if (quiet == 0)
-		{
-		  if (aptitude::matching::is_pattern(argv[i]))
-		    std::cerr << ssprintf(_("No packages match pattern \"%s\""), argv[i]) << std::endl;
-		  else
-		    std::cerr << ssprintf(_("No such package \"%s\""), argv[i]) << std::endl;
-		}
-	    }
-	  else
-	    {
-	      // append packages
-	      for (const auto& it : pkgs_from_args)
-		{
-		  pkg_its.push_back(it);
-		}
-	    }
+	  args.push_back(argv[i]);
 	}
+
+      std::vector<pkgCache::PkgIterator> pkg_its = aptitude::cmdline::get_packages_from_set_of_strings(args, all_ok);
 
       // convert action
       cmdline_pkgaction_type subcommand;
