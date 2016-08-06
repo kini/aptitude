@@ -175,31 +175,47 @@ int cmdline_apt_proxy(int argc, char* argv[])
   else
     {
       std::vector<std::string> exec_cmdline_args;
-      std::string argv_1 = argv[1];
-      if (argv_1 == "source" ||
-	  argv_1 == "showsrc" ||
-	  argv_1 == "download")
-	{
-	  exec_cmdline_args.push_back("apt"); // argv[0] is command
-	  exec_cmdline_args.push_back(argv_1);
 
-	  // add the arguments
-	  for (int argi = 2; argi < argc; ++argi)
+      exec_cmdline_args.push_back("apt"); // argv[0] is command
+
+      // check for subcommands supported: source, download, ...
+      bool is_subcommand_supported = false;
+      std::vector<std::string> subcommands_supported = { "download", "showsrc", "source" };
+
+      // add the arguments
+      for (int argi = 1; argi < argc; ++argi)
+	{
+	  std::string arg = argv[argi];
+
+	  if (aptitude::matching::is_pattern(arg))
 	    {
-	      std::string arg = argv[argi];
-
-	      if (aptitude::matching::is_pattern(arg))
-		{
-		  fprintf(stdout, _("Error: pattern not supported by this subcommand: '%s'\n"), arg.c_str());
-		  return EXIT_FAILURE;
-		}
-
-	      exec_cmdline_args.push_back(argv[argi]);
+	      fprintf(stdout, _("Error: pattern not supported by this subcommand: '%s'\n"), arg.c_str());
+	      return EXIT_FAILURE;
 	    }
+
+	  if (!is_subcommand_supported)
+	    {
+	      for (const auto& subcommand_supported : subcommands_supported)
+		{
+		  if (arg == subcommand_supported)
+		    {
+		      is_subcommand_supported = true;
+		      break;
+		    }
+		}
+	    }
+
+	  exec_cmdline_args.push_back(arg);
 	}
-      else
+
+      if (!is_subcommand_supported)
 	{
-	  fprintf(stdout, _("Subcommand not supported: %s\n"), argv_1.c_str());
+	  fprintf(stdout, _("Supported subcommand not found, needs one of: "));
+	  for (const auto& subcommand_supported : subcommands_supported)
+	    {
+	      fprintf(stdout, "%s ", subcommand_supported.c_str());
+	    }
+	  fprintf(stdout, "\n");
 	  return EXIT_FAILURE;
 	}
 
