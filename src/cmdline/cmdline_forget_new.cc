@@ -53,17 +53,13 @@ int cmdline_forget_new(int argc, char *argv[],
 {
   const std::shared_ptr<terminal_io> term = create_terminal();
 
-  _error->DumpErrors();
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   std::shared_ptr<OpProgress> progress = make_text_progress(false, term, term, term);
   bool operation_needs_lock = true;
   apt_init(progress.get(), false, operation_needs_lock, status_fname);
 
-  if(_error->PendingError())
-    {
-      _error->DumpErrors();
-      return -1;
-    }
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   // In case we aren't root.
   if(!simulate)
@@ -71,11 +67,7 @@ int cmdline_forget_new(int argc, char *argv[],
   else
     apt_cache_file->ReleaseLock();
 
-  if(_error->PendingError())
-    {
-      _error->DumpErrors();
-      return -1;
-    }
+  aptitude::cmdline::on_apt_errors_print_and_die();
 
   bool all_ok = true;
 
@@ -128,12 +120,7 @@ int cmdline_forget_new(int argc, char *argv[],
 
       (*apt_cache_file)->save_selection_list(progress.get());
 
-      if(_error->PendingError())
-	{
-	  _error->DumpErrors();
-
-	  return -1;
-	}
+      aptitude::cmdline::on_apt_errors_print_and_die();
     }
 
   return (all_ok ? 0 : -1);
