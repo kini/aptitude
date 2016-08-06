@@ -90,8 +90,6 @@ class DpkgSelections
    */
   static inline std::string to_string(pkgCache::State::PkgSelectedState state)
   {
-    return "";
-
     std::string dpkg_dselect_action;
     switch (state)
       {
