@@ -44,6 +44,8 @@
 
 #include <apt-pkg/configuration.h>
 #include <apt-pkg/error.h>
+#include <apt-pkg/version.h>
+#include <apt-pkg/pkgsystem.h>
 
 #include <sigc++/adaptors/bind.h>
 #include <sigc++/functors/mem_fun.h>
@@ -330,8 +332,13 @@ cw::style pkg_item::pkg_style(pkgCache::PkgIterator package, bool highlighted)
 	return cw::get_style(MAYBE_HIGHLIGHTED("PkgToRemove"));
       else if(state.InstBroken())
 	return cw::get_style(MAYBE_HIGHLIGHTED("PkgBroken"));
-      else if(state.Upgrade())
-	return cw::get_style(MAYBE_HIGHLIGHTED("PkgToUpgrade"));
+      else if(state.Upgrade()) {
+        if (_system->VS->UpstreamVersion(state.CurVersion) ==
+            _system->VS->UpstreamVersion(state.CandVersion))
+          return cw::get_style(MAYBE_HIGHLIGHTED("PkgToUpgradeDebian"));
+        else
+          return cw::get_style(MAYBE_HIGHLIGHTED("PkgToUpgradeUpstream"));
+      }
       else if(state.Downgrade())
 	return cw::get_style(MAYBE_HIGHLIGHTED("PkgToDowngrade"));
       else if(package.CurrentVer().end())
