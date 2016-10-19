@@ -36,10 +36,10 @@ všech kláves naleznete v souboru README.
   „C“:          Zobrazí seznam změn balíku (changelog).
   „+“:          Instaluje nebo aktualizuje balík, také zruší podržení.
   „-“:          Odstraní balík.
+  „_“:          Odstraní balík i s jeho konfiguračními soubory.
   „=“:          Podrží balík v aktuální verzi (zabrání aktualizaci).
   „:“:          Ponechá balík v aktuální verzi. Na rozdíl od podržení
                 nezabrání budoucím aktualizacím.
-  „_“:          Odstraní balík i s jeho konfiguračními soubory.
   „L“:          Vyžádá, aby byl balík přeinstalován.
   „M“:          Označí balík jako instalovaný automaticky.
                 Pokud je jiný balík nevyžaduje, jsou automaticky
@@ -54,11 +54,15 @@ všech kláves naleznete v souboru README.
   „g“:          Provede všechny naplánované (od)instalace a aktualizace.
 
   Control-u:    Vrátí zpět poslední akci (nebo množinu akcí).
-  „/“:          Spustí hledání. (Standardně podle jmen balíků. Více
-                informací naleznete v README/uživatelském manuálu).
+  „/“:          Spustí hledání. Standardně se hledá ve jménech balíků,
+                ale je možno použít vzory a kombinovat je do složitějších
+                dotazů (sekce, správce, …). Více informací naleznete
+                v manuálové stránce a v uživatelské příručce v části
+                „Vyhledávací vzory“.
   „\“:          Spustí hledání směrem vzad.
   „n“:          Zopakuje poslední hledání.
   „N“:          Zopakuje poslední hledání, ovšem v opačném směru.
+  „l“:          Omezí pohled na balíky odpovídající vyhledávacímu vzoru.
   „b“:          Hledá další porušený balík.
 
   „v“:          Zobrazí dostupné verze balíku
@@ -101,7 +105,10 @@ vlevo pak aktuální a dostupná verze balíku.
    u - rozbalený
    C - napůl zkonfigurovaný
    H - napůl instalovaný
+   W - čeká na aktualizace vyvolané v jiných balících
+   T - nevyřízené aktualizace vyvolané jinými balíky
    c - odstraněný, ale konfigurační soubory jsou stále přítomny
+   p - vyčištěný, tj. odstraněný i s konfiguračními soubory
    i - instalovaný
    E - interní chyba (nemělo by se stávat)
 
@@ -114,6 +121,7 @@ vlevo pak aktuální a dostupná verze balíku.
    i - instalovat
    r - reinstalovat
    u - aktualizovat
+   w - degradovat
    F - možná aktualizace byla zakázána klávesou „F“
 
   „Automatický“ příznak balíku může nabývat dvou hodnot. Pokud se nic

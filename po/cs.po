@@ -1,21 +1,20 @@
 # Czech translation of Aptitude.
 # This file is distributed under the same license as the Aptitude package.
-# Miroslav Kure <kurem@debian.cz>, 2004-2014.
+# Miroslav Kure <kurem@debian.cz>, 2004-2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: aptitude\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
 "POT-Creation-Date: 2016-08-07 11:38+0100\n"
-"PO-Revision-Date: 2014-08-15 16:37+0200\n"
+"PO-Revision-Date: 2016-09-24 22:35+0200\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #. TRANSLATORS: These strings describing config items
 #. should be the same width.
@@ -351,34 +350,30 @@ msgstr ""
 
 #: src/apt_options.cc:288
 msgid "Remove obsolete package files after downloading new package lists"
-msgstr "Po stažení nových seznamů balíků odstranit staré soubory balíků"
+msgstr "Po stažení nových seznamů balíků smazat staré soubory balíků"
 
 #: src/apt_options.cc:289
-#, fuzzy
 msgid ""
 "If this option is enabled, then after package lists are updated aptitude "
 "will delete from the package cache any package files that can no longer be "
 "downloaded from any archive in sources.list."
 msgstr ""
-"Je-li tato volba povolena, pak aptitude po každé instalaci balíků odstraní "
-"ze své cache balíků ty soubory, které se již nedají stáhnout z žádného "
-"archivu zadaného v sources.list."
+"Je-li tato volba povolena, pak aptitude po každé aktualizaci seznamu "
+"balíků smaže ze své cache balíků ty soubory, které se již nedají stáhnout "
+"z žádného archivu zadaného v sources.list."
 
 #: src/apt_options.cc:294
-#, fuzzy
 msgid "Remove all package files after successful operations (e.g. install)"
-msgstr "Po stažení nových seznamů balíků odstranit staré soubory balíků"
+msgstr "Po úspěšném dokončení operací smazat všechny soubory balíků"
 
 #: src/apt_options.cc:295
-#, fuzzy
 msgid ""
 "If this option is enabled, then after packages are installed successfully "
 "(or similar operations) all the package files in the download area will be "
 "deleted."
 msgstr ""
-"Je-li tato volba povolena, pak aptitude po každé instalaci balíků odstraní "
-"ze své cache balíků ty soubory, které se již nedají stáhnout z žádného "
-"archivu zadaného v sources.list."
+"Je-li tato volba povolena, pak aptitude po úspěšné instalaci balíků "
+"(nebo podobné operaci) smaže ze své cache balíků všechny soubory balíků."
 
 #: src/apt_options.cc:299
 msgid "URL to use to download changelogs"
@@ -482,20 +477,16 @@ msgstr ""
 
 #: src/apt_options.cc:352
 msgid "Use localized messages and dates in the log"
-msgstr ""
+msgstr "Použít v logu lokalizované hlášky a formát data"
 
 #: src/apt_options.cc:353
-#, fuzzy
-#| msgid ""
-#| "If this option is enabled, aptitude will display the status of ongoing "
-#| "downloads at the bottom of the screen, rather than opening a new view."
 msgid ""
 "If this option is enabled, aptitude will use the user's locale for messages "
 "and dates in the log file; otherwise the \"classic\" locale is used for this "
 "purpose."
 msgstr ""
-"Je-li tato volba povolena, aptitude nezobrazí stav probíhajících stahování "
-"na samostatné obrazovce, ale ve spodní části obrazovky."
+"Je-li tato volba povolena, bude aptitude ukládat do logu hlášení a data "
+"ve formátu dle místního nastavení, jinak se použije výchozí angličtina."
 
 #: src/apt_options.cc:363
 msgid "Automatically resolve dependencies of a package when it is selected"
@@ -669,10 +660,8 @@ msgid "Internal error: unexpected null solution."
 msgstr "Vnitřní chyba: neočekávané prázdné řešení."
 
 #: src/broken_indicator.cc:375
-#, fuzzy
-#| msgid "Keep the following packages at their current version:"
 msgid "Keep all packages at their current version"
-msgstr "Ponechat následující balíky v jejich aktuální verzi:"
+msgstr "Ponechat všechny balíky v jejich aktuální verzi"
 
 #: src/broken_indicator.cc:383
 #, c-format
@@ -715,52 +704,47 @@ msgstr[1] "%d degradace"
 msgstr[2] "%d degradací"
 
 #: src/broken_indicator.cc:436
-#, fuzzy
-#| msgid "%s changes"
 msgid "no changes"
-msgstr "Změny v %s"
+msgstr "žádné změny"
 
 #: src/broken_indicator.cc:439
-#, fuzzy, c-format
-#| msgid "Actions"
+#, c-format
 msgid "Actions: %F"
-msgstr "Akce"
+msgstr "Akce: %F"
 
 #: src/cmdline/cmdline_action.cc:55
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to find the source package for \"%s\"\n"
-msgstr "Nelze najít zdrojový balík pro „%s“.\n"
+msgstr "Nelze najít zdrojový balík pro „%s“\n"
 
 #: src/cmdline/cmdline_action.cc:212
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to satisfy the build-depends: %s\n"
-msgstr "Nelze uspokojit závislosti pro sestavení: %s.\n"
+msgstr "Nelze uspokojit závislosti pro sestavení: %s\n"
 
 #: src/cmdline/cmdline_action.cc:249
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Note: \"%s\", providing the virtual package \"%s\", is already installed\n"
 msgstr ""
-"Pozn: „%s“, poskytující virtuální balík\n"
-"      „%s“, je již nainstalován.\n"
+"Pozn: „%s“, poskytující virtuální balík „%s“, je již nainstalován\n"
 
 #: src/cmdline/cmdline_action.cc:257
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Note: \"%s\", providing the virtual package \"%s\", is already going to be "
 "installed\n"
 msgstr ""
-"Pozn: „%s“, poskytující virtuální balík\n"
-"      „%s“, se již bude instalovat.\n"
+"Pozn: „%s“, poskytující virtuální balík „%s“, se již bude instalovat\n"
 
 #: src/cmdline/cmdline_action.cc:280 src/pkg_item.cc:144
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\"%s\" exists in the package database, but it is not a real package and no "
 "package provides it\n"
 msgstr ""
-"„%s“ existuje v databázi balíků, ale není reálný a\n"
-"žádný balík jej neposkytuje.\n"
+"„%s“ existuje v databázi balíků, ale není reálný a žádný balík jej "
+"neposkytuje\n"
 
 #: src/cmdline/cmdline_action.cc:288
 #, c-format
@@ -773,11 +757,9 @@ msgid "You must choose one to install.\n"
 msgstr "Pro instalaci musíte vybrat jeden z nich.\n"
 
 #: src/cmdline/cmdline_action.cc:299
-#, fuzzy, c-format
+#, c-format
 msgid "Note: selecting \"%s\" instead of the virtual package \"%s\"\n"
-msgstr ""
-"Pozn: vybírám „%s“ místo\n"
-"      virtuálního balíku „%s“\n"
+msgstr "Pozn: vybírám „%s“ místo virtuálního balíku „%s“\n"
 
 #: src/cmdline/cmdline_action.cc:327
 #, c-format
@@ -785,22 +767,22 @@ msgid "%s is already installed at the requested version (%s)\n"
 msgstr "%s je již nainstalován v požadované verzi (%s)\n"
 
 #: src/cmdline/cmdline_action.cc:339
-#, fuzzy, c-format
+#, c-format
 msgid "%s is not currently installed, so it will not be upgraded\n"
-msgstr "%s není nainstalován, tudíž nebude aktualizován.\n"
+msgstr "%s není nainstalován, tudíž nebude aktualizován\n"
 
 #: src/cmdline/cmdline_action.cc:343
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is already installed at the latest version (%s), so it will not be "
 "upgraded\n"
 msgstr ""
-"%s je již nainstalován v nejnovější verzi, tudíž nebude aktualizován.\n"
+"%s je již nainstalován v nejnovější verzi (%s), tudíž nebude aktualizován\n"
 
 #: src/cmdline/cmdline_action.cc:350
-#, fuzzy, c-format
+#, c-format
 msgid "%s is not currently installed, so it will not be reinstalled\n"
-msgstr "%s není nainstalován, tudíž nebude reinstalován.\n"
+msgstr "%s není nainstalován, tudíž nebude přeinstalován\n"
 
 #: src/cmdline/cmdline_action.cc:358
 #, c-format
@@ -808,16 +790,18 @@ msgid "Package %s is not installed, so it will not be removed\n"
 msgstr "Balík %s není nainstalován, nebude tedy odstraněn\n"
 
 #: src/cmdline/cmdline_action.cc:365
-#, fuzzy, c-format
+#, c-format
 msgid "Package %s is not installed, so it will not be purged\n"
-msgstr "Balík %s není nainstalován, nebude tedy odstraněn\n"
+msgstr "Balík %s není nainstalován, nebude tedy vyčištěn\n"
 
 #: src/cmdline/cmdline_action.cc:383 src/cmdline/cmdline_mark.cc:252
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Package %s is not installed, cannot be marked/unmarked as automatically "
 "installed\n"
-msgstr "Balík %s není nainstalován, nelze tedy zakázat aktualizaci\n"
+msgstr ""
+"Balík %s není nainstalován, nelze ho tedy označit jako instalovaný "
+"automaticky nebo ručně\n"
 
 #: src/cmdline/cmdline_action.cc:390 src/cmdline/cmdline_mark.cc:197
 #, c-format
@@ -830,40 +814,40 @@ msgid "Package %s is not upgradable, cannot forbid an upgrade\n"
 msgstr "Balík %s není aktualizovatelný, nelze tedy zakázat aktualizaci\n"
 
 #: src/cmdline/cmdline_action.cc:428
-#, fuzzy, c-format
+#, c-format
 msgid "Setting package %s on hold\n"
-msgstr "„=“ pro podržení balíků v aktuální verzi"
+msgstr "Ponechávám balík %s v aktuální verzi\n"
 
 #: src/cmdline/cmdline_action.cc:436
-#, fuzzy, c-format
+#, c-format
 msgid "Marking package %s as keep\n"
-msgstr "Aktualizují se seznamy balíků"
+msgstr "Ruším na balíku %s veškeré akce\n"
 
 #: src/cmdline/cmdline_action.cc:445
 #, c-format
 msgid "Setting package %s as not on hold\n"
-msgstr ""
+msgstr "Ruším na balíku %s podržení v aktuální verzi\n"
 
 #: src/cmdline/cmdline_action.cc:451
-#, fuzzy, c-format
+#, c-format
 msgid "Package %s is not on hold\n"
-msgstr "Balíky, které závisí na %s"
+msgstr "Balík %s není podržen v aktuální verzi\n"
 
 #: src/cmdline/cmdline_action.cc:457
-#, fuzzy, c-format
+#, c-format
 msgid "Marking package %s as automatically installed\n"
-msgstr "„&M“ pro označení balíků jako instalované automaticky"
+msgstr "Označuji balík %s jako instalovaný automaticky\n"
 
 #: src/cmdline/cmdline_action.cc:465
-#, fuzzy, c-format
+#, c-format
 msgid "Unmarking package %s as automatically installed\n"
-msgstr "„&M“ pro označení balíků jako instalované automaticky"
+msgstr "Označuji balík %s jako instalovaný ručně\n"
 
 #: src/cmdline/cmdline_action.cc:474 src/cmdline/cmdline_action.cc:485
 #: src/cmdline/cmdline_mark.cc:167 src/cmdline/cmdline_mark.cc:185
-#, fuzzy, c-format
+#, c-format
 msgid "Marking version %s of package %s as forbidden\n"
-msgstr "Zjistí, zda nejsou k dispozici novější verze balíků"
+msgstr "Označuji verzi %s balíku %s jako zakázanou\n"
 
 #: src/cmdline/cmdline_action.cc:537
 #, c-format
@@ -871,45 +855,45 @@ msgid "Note: selecting the task \"%s: %s\" for installation\n"
 msgstr "Pozn: vybírám pro instalaci úlohu „%s: %s“\n"
 
 #: src/cmdline/cmdline_action.cc:567
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can only specify a package version with an 'install' command or a "
 "'forbid-version' command\n"
 msgstr ""
-"Verzi balíku můžete zadat jen s příkazem „install“ nebo „forbid-version“.\n"
+"Verzi balíku můžete zadat jen s příkazem „install“ nebo „forbid-version“\n"
 
 #: src/cmdline/cmdline_action.cc:576
-#, fuzzy, c-format
+#, c-format
 msgid "You can only specify a package archive with an 'install' command\n"
-msgstr "Archiv balíku můžete zadat jen s příkazem „install“.\n"
+msgstr "Archiv balíku můžete zadat jen s příkazem „install“\n"
 
 #: src/cmdline/cmdline_action.cc:614
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Couldn't find any package whose name is \"%s\", but there are %zu packages "
 "which contain \"%s\" in their name:\n"
 msgstr ""
-"Nemohl jsem najít balík „%s“ a více než 40\n"
-"balíků obsahuje „%s“ ve svém názvu.\n"
+"Nepodařilo se najít balík nazvaný „%s“, ale existuje %zu balíků, "
+"které „%s“ ve svém názvu obsahují:\n"
 
 #: src/cmdline/cmdline_action.cc:619 src/cmdline/cmdline_action.cc:651
 #, c-format
 msgid "  (too many to show, the limit is %zu)\n"
-msgstr ""
+msgstr "  (příliš mnoho k zobrazení, limit je %zu)\n"
 
 #: src/cmdline/cmdline_action.cc:643
 #, c-format
 msgid "Couldn't find any package whose name or description matched \"%s\"\n"
-msgstr "Nemohl jsem najít balík, jehož název nebo popis se shoduje s „%s“\n"
+msgstr "Nepodařilo se najít balík, jehož název nebo popis odpovídá „%s“\n"
 
 #: src/cmdline/cmdline_action.cc:646
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Couldn't find any package matching \"%s\", but there are %zu packages which "
 "contain \"%s\" in their description:\n"
 msgstr ""
-"Nemohl jsem najít balík vyhovující „%s“ a více než 40\n"
-"balíků obsahuje „%s“ ve svém popisu.\n"
+"Nepodařilo se najít balík odpovídající „%s“, ale existuje %zu balíků, "
+"které mají „%s“ ve svém popisu:\n"
 
 #: src/cmdline/cmdline_action.cc:794
 #, c-format
@@ -917,72 +901,70 @@ msgid "Bad action character '%c'\n"
 msgstr "Chybná akce „%c“\n"
 
 #: src/cmdline/cmdline_apt_proxy.cc:64
-#, fuzzy
-#| msgid "Unable to fork: %s"
 msgid "Failed to fork process."
-msgstr "Nelze se rozdvojit: %s"
+msgstr "Rozdvojení procesu se nezdařilo."
 
 #: src/cmdline/cmdline_apt_proxy.cc:86
-#, fuzzy, c-format
-#| msgid "Failed to parse the cost settings string: %s"
+#, c-format
 msgid "Failed to copy string (strndup): %d: '%s'"
-msgstr "Nelze zpracovat nastavení penalizace: %s"
+msgstr "Kopírování řetězce (strndup) se nezdařilo: %d: „%s“"
 
 #: src/cmdline/cmdline_apt_proxy.cc:122 src/cmdline/cmdline_apt_proxy.cc:137
-#, fuzzy, c-format
-#| msgid "Failed to fetch %s: %s"
+#, c-format
 msgid ""
 "Failed to execute:\n"
 "  '%s'"
-msgstr "Selhalo stažení %s: %s"
+msgstr ""
+"Selhalo spuštění:\n"
+"  „%s“"
 
 #: src/cmdline/cmdline_apt_proxy.cc:125
-#, fuzzy, c-format
-#| msgid "waitpid() failed: %s"
+#, c-format
 msgid "waitpid error: %d: '%s'"
-msgstr "volání waitpid() selhalo: %s"
+msgstr "chyba waitpid: %d: „%s“"
 
 #: src/cmdline/cmdline_apt_proxy.cc:142
 #, c-format
 msgid "The process or trying to execute it exited with status/errno: %d"
-msgstr ""
+msgstr "Proces nebo pokus o jeho spuštění skončil návratovým kódem: %d"
 
 #: src/cmdline/cmdline_apt_proxy.cc:147
 #, c-format
 msgid "Killed by signal: %d"
-msgstr ""
+msgstr "Zabit signálem: %d"
 
 #: src/cmdline/cmdline_apt_proxy.cc:152
 msgid "Exited with unknown problem"
-msgstr ""
+msgstr "Ukončen neznámou chybou"
 
 #: src/cmdline/cmdline_apt_proxy.cc:165
 #, c-format
 msgid "Error: not enough arguments: %d\n"
-msgstr ""
+msgstr "Chyba: nedostatečný počet argumentů: %d\n"
 
 #: src/cmdline/cmdline_apt_proxy.cc:172
 #, c-format
 msgid "Error: too many arguments: %d\n"
-msgstr ""
+msgstr "Chyba: příliš mnoho argumentů: %d\n"
 
 #: src/cmdline/cmdline_apt_proxy.cc:192
 #, c-format
 msgid "Error: pattern not supported by this subcommand: '%s'\n"
-msgstr ""
+msgstr "Chyba: tento příkaz nepodporuje vzory: „%s“\n"
 
 #: src/cmdline/cmdline_apt_proxy.cc:213
 #, c-format
 msgid "Supported subcommand not found, needs one of: "
-msgstr ""
+msgstr "Příkaz nenalezen, měl by to být jeden z:"
 
 #: src/cmdline/cmdline_apt_proxy.cc:226
-#, fuzzy, c-format
-#| msgid "Reconfiguring %s\n"
+#, c-format
 msgid ""
 "Executing '%s'\n"
 "\n"
-msgstr "Překonfigurovává se %s\n"
+msgstr ""
+"Spouští se „%s“\n"
+"\n"
 
 #: src/cmdline/cmdline_changelog.cc:135
 #: src/cmdline/cmdline_download_progress_display.cc:138
@@ -1062,7 +1044,7 @@ msgstr "Mažu stažené soubory"
 #: src/cmdline/cmdline_do_action.cc:160
 #, c-format
 msgid "Internal error, operation %s should be handled elsewhere"
-msgstr ""
+msgstr "Vnitřní chyba, operace %s by měla být zpracována jinde"
 
 #: src/cmdline/cmdline_do_action.cc:167
 #, c-format
@@ -1074,9 +1056,9 @@ msgid "Unexpected pattern argument following \"keep-all\""
 msgstr "Neočekávaný vzor následující za „keep-all“"
 
 #: src/cmdline/cmdline_do_action.cc:363
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to apply some actions, aborting\n"
-msgstr "Nelze otevřít %s pro záznam akcí"
+msgstr "Nelze provést některé akce, přerušuji\n"
 
 #: src/cmdline/cmdline_do_action.cc:375
 #, c-format
@@ -1145,74 +1127,67 @@ msgid "Would forget what packages are new\n"
 msgstr "Teoreticky by zapomněl, které balíky jsou nové\n"
 
 #: src/cmdline/cmdline_mark.cc:77
-#, fuzzy
-#| msgid "Unexpected pattern argument following \"keep-all\""
 msgid "Unexpected argument following \"keep-all\""
-msgstr "Neočekávaný vzor následující za „keep-all“"
+msgstr "Neočekávaný argument následující za „keep-all“"
 
 #: src/cmdline/cmdline_mark.cc:82
-#, fuzzy, c-format
+#, c-format
 msgid "Marking all packages as keep (%s)\n"
-msgstr "Aktualizují se seznamy balíků"
+msgstr "Ruším na všech balících veškeré akce (%s)\n"
 
 #: src/cmdline/cmdline_mark.cc:86
-#, fuzzy, c-format
-#| msgid "Source package %s:"
+#, c-format
 msgid "Would mark all packages as keep\n"
-msgstr "Zdrojový balík %s:"
+msgstr "Teoreticky by na všech balících zrušil veškeré akce\n"
 
 #: src/cmdline/cmdline_mark.cc:98 src/cmdline/cmdline_mark.cc:209
-#, fuzzy
 msgid "Subcommand needs arguments: "
-msgstr "E: Příkaz %s neakceptuje žádné argumenty\n"
+msgstr "Příkaz vyžaduje argumenty: "
 
 #: src/cmdline/cmdline_mark.cc:128 src/cmdline/cmdline_util.cc:893
 #: src/ui.cc:2095
-#, fuzzy, c-format
-#| msgid "No packages matched the pattern \"%ls\"."
+#, c-format
 msgid "No packages match pattern \"%s\""
-msgstr "Žádné balíky nevyhovují vzoru „%ls“."
+msgstr "Žádné balíky nevyhovují vzoru „%s“"
 
 #: src/cmdline/cmdline_mark.cc:151
-#, fuzzy, c-format
+#, c-format
 msgid "Could not parse version for %s: %s\n"
-msgstr "Nelze zpracovat definici sloupce"
+msgstr "Nelze zpracovat verzi pro %s: %s\n"
 
 #: src/cmdline/cmdline_mark.cc:158
 #, c-format
 msgid "Package not found: %s, from %s\n"
-msgstr ""
+msgstr "Balík nenalezen: %s, z %s\n"
 
 #: src/cmdline/cmdline_mark.cc:171 src/cmdline/cmdline_mark.cc:189
 #, c-format
 msgid "Would mark package %s as forbid to upgrade to version %s\n"
-msgstr ""
+msgstr "Teoreticky by balíku %s zakázal aktualizaci na verzi %s\n"
 
 #: src/cmdline/cmdline_mark.cc:236 src/cmdline/cmdline_mark.cc:292
 msgid "Subcommand unknown/unhandled: "
-msgstr ""
+msgstr "Neznámý/nezpracovaný příkaz: "
 
 #: src/cmdline/cmdline_mark.cc:244
-#, fuzzy, c-format
+#, c-format
 msgid "Marking package %s (%s)\n"
-msgstr "Aktualizují se seznamy balíků"
+msgstr "Označuji balík %s (%s)\n"
 
 #: src/cmdline/cmdline_mark.cc:258
-#, fuzzy, c-format
+#, c-format
 msgid "Would mark package %s as auto-installed=%d\n"
-msgstr "„&M“ pro označení balíků jako instalované automaticky"
+msgstr "Teoreticky by označil balík %s jako auto-installed=%d\n"
 
 #: src/cmdline/cmdline_mark.cc:270
-#, fuzzy, c-format
-#| msgid "Source package %s:"
+#, c-format
 msgid "Would mark package %s as hold\n"
-msgstr "Zdrojový balík %s:"
+msgstr "Teoreticky by ponechal balík %s v aktuální verzi\n"
 
 #: src/cmdline/cmdline_mark.cc:283
-#, fuzzy, c-format
-#| msgid "Source package %s:"
+#, c-format
 msgid "Would mark package %s as keep (or unhold)\n"
-msgstr "Zdrojový balík %s:"
+msgstr "Teoreticky by na balíku %s zrušil veškeré akce\n"
 
 #: src/cmdline/cmdline_moo.cc:16
 #, c-format
@@ -1295,7 +1270,7 @@ msgstr "Následující balíky jsou podrženy v aktuálním stavu:"
 
 #: src/cmdline/cmdline_prompt.cc:375
 msgid "The following packages will be REINSTALLED:"
-msgstr "Následující balíky budou reinstalovány:"
+msgstr "Následující balíky budou PŘEINSTALOVÁNY:"
 
 #: src/cmdline/cmdline_prompt.cc:376
 msgid "The following NEW packages will be installed:"
@@ -1338,11 +1313,12 @@ msgid ""
 "Ignoring confirmation in Simulation mode (subsequent actions will not have "
 "effects)\n"
 msgstr ""
+"Ignoruji potvrzení v režimu simulace (následující akce nic nezpůsobí)\n"
 
 #: src/cmdline/cmdline_prompt.cc:459
-#, fuzzy, c-format
+#, c-format
 msgid "Press any key to continue...\n"
-msgstr "Pro pokračování stiskněte enter.\n"
+msgstr "Pro pokračování stiskněte libovolnou klávesu…\n"
 
 #: src/cmdline/cmdline_prompt.cc:465
 msgid "I am aware that this is a very bad idea"
@@ -1353,10 +1329,10 @@ msgstr "Jsem si vědom, že to je špatný nápad"
 msgid "To continue, type the phrase \"%s\":\n"
 msgstr "Pro pokračování napište frázi „%s“:\n"
 
-#: src/cmdline/cmdline_prompt.cc:475
-#, fuzzy, c-format
+#: src/cmdline/cmd(or: \"%s\"):line_prompt.cc:475
+#, c-format
 msgid "To continue, type the phrase \"%s\" (or: \"%s\"):\n"
-msgstr "Pro pokračování napište frázi „%s“:\n"
+msgstr "Pro pokračování napište frázi „%s“ (nebo „%s“):\n"
 
 #: src/cmdline/cmdline_prompt.cc:521
 #, c-format
@@ -1392,7 +1368,7 @@ msgid ""
 msgstr ""
 "*** VAROVÁNÍ ***  Ignoruji tato porušení důvěry, protože volba\n"
 "                  APT::Get::AllowUnauthenticated\n"
-"                  je nastavena na hodnotu 'true'!\n"
+"                  je nastavena na hodnotu „true“!\n"
 
 #. TRANSLATORS: This string is a confirmation message, which
 #. users (especially CJK users) should be able to input without
@@ -1400,9 +1376,8 @@ msgstr ""
 #. The text preceding the pipe character (|) will be ignored and
 #. can be removed from your translation.
 #: src/cmdline/cmdline_prompt.cc:558
-#, fuzzy
 msgid "Go ahead and ignore the warning|yes"
-msgstr "Ano"
+msgstr "ano"
 
 #. TRANSLATORS: This string is a confirmation message, which
 #. users (especially CJK users) should be able to input without
@@ -1410,9 +1385,8 @@ msgstr "Ano"
 #. The text preceding the pipe character (|) will be ignored and
 #. can be removed from your translation.
 #: src/cmdline/cmdline_prompt.cc:564
-#, fuzzy
 msgid "Abort instead of overriding the warning|no"
-msgstr "Ne"
+msgstr "ne"
 
 #: src/cmdline/cmdline_prompt.cc:575
 #, c-format
@@ -1425,15 +1399,16 @@ msgid "To continue, enter \"%s\"; to abort, enter \"%s\": "
 msgstr "Pro pokračování zadejte „%s“, pro přerušení „%s“: "
 
 #: src/cmdline/cmdline_prompt.cc:582
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To continue, enter \"%s\" (or \"%s\"); to abort, enter \"%s\" (or \"%s\"): "
-msgstr "Pro pokračování zadejte „%s“, pro přerušení „%s“: "
+msgstr ""
+"Pro pokračování zadejte „%s“ (nebo „%s“), pro přerušení „%s“ (nebo „%s“): "
 
 #: src/cmdline/cmdline_prompt.cc:605
-#, fuzzy, c-format
+#, c-format
 msgid "Unrecognized input\n"
-msgstr "Nezařazené úlohy"
+msgstr "Nerozpoznaný vstup\n"
 
 #: src/cmdline/cmdline_prompt.cc:722
 #, c-format
@@ -1446,9 +1421,9 @@ msgid "The following packages are SUGGESTED but will NOT be installed:\n"
 msgstr "Následující balíky jsou NAVRHOVANÉ, ale NEBUDOU instalovány:\n"
 
 #: src/cmdline/cmdline_prompt.cc:734
-#, fuzzy, c-format
+#, c-format
 msgid "The following packages will NOT be UPGRADED:\n"
-msgstr "Následující balíky budou DEGRADOVÁNY:"
+msgstr "Následující balíky budou NEBUDOU AKTUALIZOVÁNY:\n"
 
 #: src/cmdline/cmdline_prompt.cc:740
 #, c-format
@@ -1463,7 +1438,7 @@ msgstr "%lu balíků aktualizováno, %lu nově instalováno, "
 #: src/cmdline/cmdline_prompt.cc:746
 #, c-format
 msgid "%lu reinstalled, "
-msgstr "%lu reinstalováno, "
+msgstr "%lu přeinstalováno, "
 
 #: src/cmdline/cmdline_prompt.cc:748
 #, c-format
@@ -1711,12 +1686,12 @@ msgstr ""
 #: src/cmdline/cmdline_prompt.cc:1090
 #, c-format
 msgid "Note: Using 'Download Only' mode, no other actions will be performed.\n"
-msgstr ""
+msgstr "Pozn: Je použit režim „Pouze stáhnout“, ostatní akce se neprovedou.\n"
 
 #: src/cmdline/cmdline_prompt.cc:1101
 #, c-format
 msgid "Note: Using 'Simulate' mode.\n"
-msgstr ""
+msgstr "Pozn: Používá se režim simulace.\n"
 
 #: src/cmdline/cmdline_prompt.cc:1106
 msgid "Do you want to continue? [Y/n/?] "
@@ -1727,9 +1702,9 @@ msgid "Resolve these dependencies by hand? [N/+/-/_/:/?] "
 msgstr "Vyřešit tyto závislosti ručně? [N/+/-/_/:/?] "
 
 #: src/cmdline/cmdline_prompt.cc:1117
-#, fuzzy, c-format
+#, c-format
 msgid "%s (stdin unavailable)\n"
-msgstr "Není dostupný"
+msgstr "%s (standardní vstup není dostupný)\n"
 
 #: src/cmdline/cmdline_prompt.cc:1133
 msgid "Invalid response.  Please enter a valid command or '?' for help.\n"
@@ -1830,7 +1805,7 @@ msgid ""
 "ver) ...: %F%n<ID>: %F%n<ACTION> pkg... : %F%n%F%F%F%F%F%F%F%F"
 msgstr ""
 "y: %Fn: %Fq: %F.: %F,: %Fo: %Fe: %Fx: %Fr (ID|balík verze) …: %F%na (ID|"
-"balík verze) …: %F%n<ID>: %F%n<AKCE> pkg… : %F%n%F%F%F%F%F%F%F%F"
+"balík verze) …: %F%n<ID>: %F%n<AKCE> balík…: %F%n%F%F%F%F%F%F%F%F"
 
 #: src/cmdline/cmdline_resolver.cc:237
 msgid "accept the proposed changes"
@@ -1838,7 +1813,7 @@ msgstr "přijme navrhované změny"
 
 #: src/cmdline/cmdline_resolver.cc:239
 msgid "jump to the end of all the generated solutions and search for another"
-msgstr ""
+msgstr "skočí na konec nalezených řešení a bude hledat další"
 
 #: src/cmdline/cmdline_resolver.cc:241
 msgid "give up and quit the program"
@@ -2071,16 +2046,13 @@ msgid "open: %zd; closed: %zd; defer: %zd; conflict: %zd"
 msgstr "otevřené: %zd; zavřené: %zd; odložené: %zd; konfliktní: %zd"
 
 #: src/cmdline/cmdline_resolver.cc:808
-#, fuzzy, c-format
-#| msgid ""
-#| "Would resolve dependencies, but dependency resolution is disabled.\n"
-#| "   (%s::ProblemResolver::StepLimit = 0)\n"
+#, c-format
 msgid ""
 "Would resolve dependencies, but dependency resolution is disabled.\n"
 "   (%s::ProblemResolver::StepLimit <= 0)\n"
 msgstr ""
 "Teoreticky by vyřešil závislosti, ale řešení závislostí je zakázáno.\n"
-"   (%s::ProblemResolver::StepLimit = 0)\n"
+"   (%s::ProblemResolver::StepLimit <= 0)\n"
 
 #: src/cmdline/cmdline_resolver.cc:817
 msgid "I want to resolve dependencies, but no dependency resolver was created."
@@ -2174,9 +2146,9 @@ msgid "iconv of %s failed.\n"
 msgstr "iconv selhal na %s.\n"
 
 #: src/cmdline/cmdline_search.cc:237 src/cmdline/cmdline_versions.cc:597
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Could not parse column definitions: '%ls'\n"
-msgstr "Nelze zpracovat definici sloupce"
+msgstr "%s: Nelze zpracovat definice sloupců: „%ls“\n"
 
 #: src/cmdline/cmdline_search.cc:244
 #, c-format
@@ -2184,19 +2156,19 @@ msgid "search: You must provide at least one search term\n"
 msgstr "search: Musíte zadat alespoň jeden hledaný term\n"
 
 #: src/cmdline/cmdline_show_broken.cc:38
-#, fuzzy, c-format
+#, c-format
 msgid "but %s is to be installed"
-msgstr "ale %s se bude instalovat."
+msgstr "ale %s se bude instalovat"
 
 #: src/cmdline/cmdline_show_broken.cc:41
-#, fuzzy, c-format
+#, c-format
 msgid "but %s is installed and it is kept back"
-msgstr "ale %s je nainstalován a je podržen v aktuálním stavu."
+msgstr "ale %s je nainstalován a je podržen v aktuálním stavu"
 
 #: src/cmdline/cmdline_show_broken.cc:44
-#, fuzzy, c-format
+#, c-format
 msgid "but %s is installed"
-msgstr "ale %s je nainstalovaný."
+msgstr "ale %s je nainstalovaný"
 
 #: src/cmdline/cmdline_show_broken.cc:51
 #, c-format
@@ -2204,25 +2176,26 @@ msgid "but it is not installable"
 msgstr "ale ten nelze nainstalovat"
 
 #: src/cmdline/cmdline_show_broken.cc:53
-#, fuzzy, c-format
+#, c-format
 msgid "but it is not going to be installed"
-msgstr "ale ten se nebude instalovat."
+msgstr "ale ten se nebude instalovat"
 
 #: src/cmdline/cmdline_show_broken.cc:119
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " which is a virtual package and is not provided by any available package\n"
-msgstr "%s je virtuální balík poskytovaný:\n"
+msgstr ""
+" což je virtuální balík, který není poskytovaný žádným dostupným balíkem\n"
 
 #: src/cmdline/cmdline_show_broken.cc:123
-#, fuzzy, c-format
+#, c-format
 msgid " which is a virtual package, provided by:\n"
-msgstr "%s je virtuální balík poskytovaný:\n"
+msgstr " což je virtuální balík poskytovaný:\n"
 
 #: src/cmdline/cmdline_show_broken.cc:143
-#, fuzzy, c-format
+#, c-format
 msgid " provides %s=%s"
-msgstr "Poskytuje"
+msgstr " poskytuje %s=%s"
 
 #: src/cmdline/cmdline_show_broken.cc:157
 #, c-format
@@ -2241,9 +2214,9 @@ msgid "<NULL>"
 msgstr "<NULL>"
 
 #: src/cmdline/cmdline_show.cc:213
-#, fuzzy, c-format
+#, c-format
 msgid "%s (%s), upgrade available (%s)"
-msgstr "%d aktualizace"
+msgstr "%s (%s), dostupná aktualizace (%s)"
 
 #: src/cmdline/cmdline_show.cc:222 src/qt/widgets/packages_tab.cc:73
 msgid "not installed"
@@ -2480,7 +2453,7 @@ msgstr "Nemohu nalézt balík %s"
 #: src/cmdline/cmdline_show.cc:602
 #, c-format
 msgid "Unable to parse pattern %s"
-msgstr "Nemohu zpracovat vzor %s"
+msgstr "Nelze zpracovat vzor %s"
 
 #: src/cmdline/cmdline_simulate.cc:68
 #, c-format
@@ -2502,29 +2475,30 @@ msgstr "E: Příkaz update neakceptuje žádné argumenty\n"
 
 #: src/cmdline/cmdline_user_tag.cc:63
 msgid "add"
-msgstr ""
+msgstr "přidat"
 
 #: src/cmdline/cmdline_user_tag.cc:63 src/reason_fragment.cc:58
-#, fuzzy
 msgid "remove"
-msgstr "Odstranit"
+msgstr "odstranit"
 
 #: src/cmdline/cmdline_user_tag.cc:66
 #, c-format
 msgid "Applied user-tag operation '%s' '%s' to: %s\n"
-msgstr ""
+msgstr "Provedena operace %s uživatelský štítek „%s“ balíku %s\n"
 
 #: src/cmdline/cmdline_user_tag.cc:71
 #, c-format
 msgid "Failed to apply user-tag operation '%s' '%s' to: %s\n"
-msgstr ""
+msgstr "Nepodařilo se %s uživatelský štítek „%s“ balíku %s\n"
 
 #: src/cmdline/cmdline_user_tag.cc:124
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s: too few arguments; expected at least a tag name and a package or "
 "pattern\n"
-msgstr "%s: příliš málo argumentů; očekáváno alespoň jméno štítku a balík.\n"
+msgstr ""
+"%s: příliš málo argumentů; očekáváno alespoň jméno štítku a balík nebo "
+"vzor\n"
 
 #: src/cmdline/cmdline_util.cc:177
 #, c-format
@@ -2562,28 +2536,28 @@ msgid "Couldn't find task '%s'"
 msgstr "Nelze najít úlohu „%s“"
 
 #: src/cmdline/cmdline_util.cc:371
-#, fuzzy, c-format
+#, c-format
 msgid "%d (%+d) broken"
 msgid_plural "%d (%+d) broken"
-msgstr[0] "%d porušený [%+d]"
-msgstr[1] "%d porušené [%+d]"
-msgstr[2] "%d porušených [%+d]"
+msgstr[0] "%d porušený (%+d)"
+msgstr[1] "%d porušené (%+d)"
+msgstr[2] "%d porušených (%+d)"
 
 #: src/cmdline/cmdline_util.cc:385
-#, fuzzy, c-format
+#, c-format
 msgid "%d (%+d) upgradable"
 msgid_plural "%d (%+d) upgradable"
-msgstr[0] "%d aktualizace"
-msgstr[1] "%d aktualizace"
-msgstr[2] "%d aktualizací"
+msgstr[0] "%d aktualizovatelný (%+d)"
+msgstr[1] "%d aktualizovatelné (%+d)"
+msgstr[2] "%d aktualizovatelných (%+d)"
 
 #: src/cmdline/cmdline_util.cc:399
 #, c-format
 msgid "%d (%+d) new"
 msgid_plural "%d (%+d) new"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d nový (%+d)"
+msgstr[1] "%d nové (%+d)"
+msgstr[2] "%d nových (%+d)"
 
 #: src/cmdline/cmdline_util.cc:410
 #, c-format
@@ -2622,13 +2596,13 @@ msgid "Archive %s:"
 msgstr "Archiv %s:"
 
 #: src/cmdline/cmdline_versions.cc:537
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Invalid package grouping mode \"%s\" (should be \"auto\", \"none\", \"package"
 "\", \"source-package\" or \"source-version\")"
 msgstr ""
-"Neplatný seskupovací režim „%s“ (měl by být „auto“, „none“, „package“ nebo "
-"„source-package“)"
+"Neplatný seskupovací režim „%s“ (měl by být „auto“, „none“, „package“, "
+"„source-package“ nebo „source-version“)"
 
 #: src/cmdline/cmdline_versions.cc:604
 #, c-format
@@ -2638,7 +2612,7 @@ msgstr "versions: Musíte zadat alespoň jeden balík\n"
 #: src/cmdline/cmdline_versions.cc:640
 #, c-format
 msgid "Argument is neither a package name nor a pattern: '%s'"
-msgstr ""
+msgstr "Argument není ani název balíku ani vzor: „%s“"
 
 #: src/cmdline/cmdline_why.cc:282
 msgid "dep_level"
@@ -2756,32 +2730,31 @@ msgstr "Balík nazvaný „%s“ neexistuje."
 #: src/cmdline/cmdline_why.cc:1224
 #, c-format
 msgid "Automatically installed, current version %s, priority %s\n"
-msgstr ""
+msgstr "Automaticky nainstalovaný, aktuální verze %s, priorita %s\n"
 
 #: src/cmdline/cmdline_why.cc:1226
 #, c-format
 msgid "Manually installed, current version %s, priority %s\n"
-msgstr ""
+msgstr "Ručně nainstalovaný, aktuální verze %s, priorita %s\n"
 
 #: src/cmdline/cmdline_why.cc:1234
-#, fuzzy
 msgid "Not currently installed\n"
-msgstr "%B%s%b není nainstalovaný."
+msgstr "Není momentálně nainstalovaný\n"
 
 #: src/cmdline/cmdline_why.cc:1239
-#, fuzzy, c-format
+#, c-format
 msgid "The candidate version %s has priority %s\n"
-msgstr "K balíku %s nebyla nalezena kandidátská verze\n"
+msgstr "Kandidátská verze %s má prioritu %s\n"
 
 #: src/cmdline/cmdline_why.cc:1244
-#, fuzzy, c-format
+#, c-format
 msgid "No dependencies require to remove %s\n"
-msgstr "Již nevyžaduji odstranění balíku %s"
+msgstr "Žádné závislosti nevyžadují odstranění balíku %s\n"
 
 #: src/cmdline/cmdline_why.cc:1246
 #, c-format
 msgid "No dependencies require to install %s\n"
-msgstr ""
+msgstr "Žádné závislosti nevyžadují instalaci balíku %s\n"
 
 #: src/cmdline/cmdline_why.cc:1289
 #, c-format
@@ -2793,9 +2766,8 @@ msgid "Unable to parse some match patterns."
 msgstr "Nelze zpracovat některé vzory."
 
 #: src/cmdline/cmdline_why.cc:1371
-#, fuzzy
 msgid "Unable to parse the default match patterns."
-msgstr "Nelze zpracovat některé vzory."
+msgstr "Nelze zpracovat výchozí vzory."
 
 #: src/cmdline/cmdline_why.cc:1407
 #, c-format
@@ -2828,9 +2800,9 @@ msgid "UNAVAILABLE"
 msgstr "NEDOSTUPNÝ"
 
 #: src/dep_item.cc:364
-#, fuzzy, c-format
+#, c-format
 msgid "%s on provided %s"
-msgstr "Poskytuje"
+msgstr "%s na poskytovaném %s"
 
 #: src/desc_render.cc:124 src/gtk/aptitude.glade:1051
 msgid "Tags"
@@ -2877,7 +2849,7 @@ msgstr "Celkový postup: "
 #: src/download_list.cc:245
 #, c-format
 msgid " [ %i%% ] (%sB/s, %s remaining)"
-msgstr " [ %i%% ] (%sB/s, %s zbývá)"
+msgstr " [ %i%% ] (%sB/s, zbývá %s)"
 
 #: src/download_list.cc:247
 #, c-format
@@ -2921,12 +2893,12 @@ msgstr "Nelze otevřít rozšířený stavový soubor programu Aptitude"
 #: src/generic/apt/aptcache.cc:330 src/generic/apt/aptcache.cc:491
 #: src/generic/apt/aptcache.cc:506
 msgid "Reading extended state information"
-msgstr "Čtou se rozšířené stavové informace"
+msgstr "Načítají se rozšířené stavové informace"
 
 #: src/generic/apt/aptcache.cc:419
 #, c-format
 msgid "Cannot parse user-tags for package: %s: '%s'"
-msgstr ""
+msgstr "Nelze zpracovat uživatelské štítky pro balík %s: „%s“"
 
 #: src/generic/apt/aptcache.cc:499
 #, c-format
@@ -2934,6 +2906,8 @@ msgid ""
 "Problem parsing '%s', is it corrupt or malformed? You can try to recover "
 "from '%s.old'."
 msgstr ""
+"Problém při zpracování „%s“, je porušený nabo špatně zadaný? Můžete se "
+"pokusit o obnovu z „%s.old“."
 
 #: src/generic/apt/aptcache.cc:518 src/generic/apt/aptcache.cc:607
 #: src/generic/apt/aptcache.cc:613
@@ -2976,32 +2950,31 @@ msgstr "Nelze získat systémový zámek! (Možná běží další apt nebo dpkg
 
 #: src/generic/apt/aptcache.cc:991
 msgid "failed to save selections to dpkg database"
-msgstr ""
+msgstr "nepodařilo se uložit výběr do databáze dpkg"
 
 #: src/generic/apt/aptcache.cc:1249 src/generic/apt/aptcache.cc:1285
-#, fuzzy
 msgid "Cannot remove aptitude within aptitude"
-msgstr "Nelze otevřít stavový soubor programu Aptitude"
+msgstr "Aptitude nelze odstranit z aptitude"
 
 #: src/generic/apt/aptcache.cc:1709
 #, c-format
 msgid "User-tag '%s' already present for %s"
-msgstr ""
+msgstr "Uživatelský štítek „%s“ je již v balíku „%s“ přítomen"
 
 #: src/generic/apt/aptcache.cc:1725
-#, fuzzy, c-format
+#, c-format
 msgid "Could not add user-tag '%s' to package %s"
-msgstr "Přidávám uživatelský štítek „%s“ k balíku „%s“.\n"
+msgstr "Nelze přidat uživatelský štítek „%s“ k balíku „%s“"
 
 #: src/generic/apt/aptcache.cc:1751
-#, fuzzy, c-format
+#, c-format
 msgid "Could not find valid user-tag '%s'"
-msgstr "Nelze najít úlohu „%s“"
+msgstr "Nelze najít platný uživatelský štítek „%s“"
 
 #: src/generic/apt/aptcache.cc:1767
-#, fuzzy, c-format
+#, c-format
 msgid "Could not remove user-tag '%s' from package %s"
-msgstr "Odebírám uživatelský štítek „%s“ z balíku „%s“.\n"
+msgstr "Nelze odebrat uživatelský štítek „%s“ z balíku „%s“"
 
 #: src/generic/apt/aptcache.cc:1845
 msgid "Unable to correct dependencies, some packages cannot be installed"
@@ -3020,18 +2993,17 @@ msgid "You may want to update the package lists to correct these missing files"
 msgstr "Pro opravení chybějících souborů zkuste aktualizovat seznamy balíků"
 
 #: src/generic/apt/aptcache.cc:2554
-#, fuzzy
 msgid "Could not create dependency cache"
-msgstr "Nelze změnit root na %s pro příkaz %s"
+msgstr "Nelze vytvořit cache závislostí"
 
 #: src/generic/apt/aptcache.cc:2564
 msgid "Could not initialize dependency cache"
-msgstr ""
+msgstr "Nelze inicializovat cache závislostí"
 
 #: src/generic/apt/apt.cc:138
-#, fuzzy, c-format
+#, c-format
 msgid "Configuration file '%s' is not correct, please fix it"
-msgstr "Ponechány konfigurační soubory a data"
+msgstr "Konfigurační soubor „%s“ není v pořádku, opravte jej prosím"
 
 #. TRANSLATORS: Set this string to the name of a configuration
 #. file in $pkgdatadir/aptitude that overrides defaults for your
@@ -3048,11 +3020,8 @@ msgid "Localized defaults|"
 msgstr "aptitude-defaults.cs"
 
 #: src/generic/apt/apt.cc:286
-#, fuzzy
 msgid "Error saving configuration file"
-msgstr ""
-"Nahradit konfigurační soubor\n"
-"„%s“?"
+msgstr "Chyba při ukládání konfiguračního souboru"
 
 #: src/generic/apt/apt.cc:441
 msgid ""
@@ -3065,29 +3034,28 @@ msgstr ""
 "stavem balíků, NEBUDOU uloženy!"
 
 #: src/generic/apt/apt.cc:532
-#, fuzzy, c-format
+#, c-format
 msgid "Could not establish home directory (username: '%s')"
-msgstr "Nelze změnit root na %s pro příkaz %s"
+msgstr "Nelze určit domovský adresář (uživatel: „%s“)"
 
 #: src/generic/apt/apt.cc:536
 #, c-format
 msgid "Home directory does not exist or is not a directory: '%s')"
-msgstr ""
+msgstr "Domovský adresář neexistuje, nebo není adresářem: „%s“"
 
 #: src/generic/apt/apt.cc:562
-#, fuzzy, c-format
+#, c-format
 msgid "Could not create directory: %s: %s"
-msgstr "Nelze změnit root na %s pro příkaz %s"
+msgstr "Nelze vytvořit adresář: %s: %s"
 
 #: src/generic/apt/apt.cc:587
-#, fuzzy, c-format
+#, c-format
 msgid "Could not create directories: %s: %s"
-msgstr "Nelze vyčistit adresáře seznamů"
+msgstr "Nelze vytvořit adresáře: %s: %s"
 
 #: src/generic/apt/apt.cc:1400
-#, fuzzy
 msgid "(installed locally)"
-msgstr "nainstalované lokálně"
+msgstr "(instalovaný lokálně)"
 
 #: src/generic/apt/apt.cc:1462
 msgid "foreign"
@@ -3224,54 +3192,54 @@ msgstr ""
 "celé číslo)."
 
 #: src/generic/apt/config_file.cc:59
-#, fuzzy, c-format
+#, c-format
 msgid "Could not remove old configuration file: %s"
-msgstr "Nelze otevřít soubor „%s“"
+msgstr "Nelze odstranit starý konfigurační soubor: %s"
 
 #: src/generic/apt/config_file.cc:91
-#, fuzzy, c-format
+#, c-format
 msgid "Could not get the content of the old configuration file: %s"
-msgstr "Dotazuji se, zda nahradit konfigurační soubor %s"
+msgstr "Nelze získat obsah starého konfiguračního souboru: %s"
 
 #: src/generic/apt/config_file.cc:111
-#, fuzzy, c-format
+#, c-format
 msgid "Old configuration file is not a regular file: %s"
-msgstr "Ponechány konfigurační soubory a data"
+msgstr "Starý konfigurační soubor není běžným souborem: %s"
 
 #: src/generic/apt/config_file.cc:122
 #, c-format
 msgid "Directory does not exist and could not create it: %s"
-msgstr ""
+msgstr "Adresár neexistuje a nebylo možné jej vytvořit: %s"
 
 #: src/generic/apt/config_file.cc:181
 #, c-format
 msgid "File is unexpectedly large (> %zu bytes): %s"
-msgstr ""
+msgstr "Soubor je neočekávaně velký (> %zu bajtů): %s"
 
 #: src/generic/apt/config_file.cc:195
-#, fuzzy, c-format
+#, c-format
 msgid "Error reading from old configuration file: %s"
-msgstr "Dotazuji se, zda nahradit konfigurační soubor %s"
+msgstr "Chyba při čtení starého konfiguračního souboru: %s"
 
 #: src/generic/apt/config_file.cc:226
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing to file: %s"
-msgstr "Chyba při zápisu stavového souboru"
+msgstr "Chyba při zápisu do souboru: %s"
 
 #: src/generic/apt/config_file.cc:251
-#, fuzzy, c-format
+#, c-format
 msgid "Could not remove file: %s"
-msgstr "Nelze otevřít soubor „%s“"
+msgstr "Nelze odstranit soubor: %s"
 
 #: src/generic/apt/config_file.cc:257
 #, c-format
 msgid "Will not remove file, it is not a regular file: %s"
-msgstr ""
+msgstr "Neodstraním soubor, jelikož není běžným souborem: %s"
 
 #: src/generic/apt/config_file.cc:264
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing file: %s"
-msgstr "Chyba při zápisu stavového souboru"
+msgstr "Chyba při odstraňování souboru: %s"
 
 #: src/generic/apt/download_install_manager.cc:64
 msgid ""
@@ -3293,6 +3261,8 @@ msgid ""
 "Perhaps the package lists are out of date, please try 'aptitude update' (or "
 "equivalent) first"
 msgstr ""
+"Možná, že je seznam balíků zastaralý, nejprve prosím zkuste "
+"„aptitude update“ (nebo ekvivalent)"
 
 #: src/generic/apt/download_install_manager.cc:129
 #: src/generic/apt/download_update_manager.cc:131
@@ -3314,6 +3284,8 @@ msgid ""
 "Unable to fetch some packages; try '-o %s=true' to continue with missing "
 "packages"
 msgstr ""
+"Nepodařilo se stáhnout některé balíky; pro pokračování bez chybějících "
+"balíků zkuste použít „-o %s=true“"
 
 #: src/generic/apt/download_update_manager.cc:70
 msgid "Couldn't read list of package sources"
@@ -3339,7 +3311,7 @@ msgstr "Nelze vytvořit vyrovnávací paměť pro balíky"
 #: src/generic/apt/dpkg.cc:102
 #, c-format
 msgid "Couldn't chroot into %s for %s"
-msgstr "Nelze změnit root na %s pro příkaz %s"
+msgstr "Nelze změnit kořenový adresář na %s pro příkaz %s"
 
 #: src/generic/apt/dpkg.cc:124
 #, c-format
@@ -3348,17 +3320,19 @@ msgstr "Čekali jsme na %s, který tam nebyl"
 
 #: src/generic/apt/dpkg_selections.cc:76
 msgid "Failed to create pipe for dpkg selections."
-msgstr ""
+msgstr "Nepodařilo se vytvořit rouru pro dpkg selections."
 
 #: src/generic/apt/dpkg_selections.cc:84
 msgid "Failed to fork process for dpkg selections."
-msgstr ""
+msgstr "Nepodařilo se rozdvojit proces pro dpkg selections."
 
 #: src/generic/apt/dpkg_selections.cc:161
 #, c-format
 msgid ""
 "Failed to execute process to save dpkg selections, waitpid error: %d: '%s'"
 msgstr ""
+"Nepodařilo se spustit proces pro uložení dpkg selections, chyba waitpid: "
+"%d: „%s“"
 
 #: src/generic/apt/dpkg_selections.cc:175
 #, c-format
@@ -3366,18 +3340,24 @@ msgid ""
 "Failed to execute process to save dpkg selections, dpkg or trying to execute "
 "it exited with status/errno: %d"
 msgstr ""
+"Nepodařilo se spustit proces pro uložení dpkg selections, dpkg nebo pokus "
+"o jeho spuštění skončil stavem/chybou %d"
 
 #: src/generic/apt/dpkg_selections.cc:180
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Failed to execute process to save dpkg selections, dpkg killed by signal: %d"
-msgstr "Nelze vytvořit výstupní soubor: potomek zabit signálem %d."
+msgstr ""
+"Nepodařilo se spustit proces pro uložení dpkg selections, dpkg zabit "
+"signálem %d"
 
 #: src/generic/apt/dpkg_selections.cc:185
 msgid ""
 "Failed to execute process to save dpkg selections, dpkg exited with unknown "
 "problem"
 msgstr ""
+"Nepodařilo se spustit proces pro uložení dpkg selections, dpkg skončil "
+"neznámou chybou"
 
 #: src/generic/apt/dump_packages.cc:540 src/generic/apt/dump_packages.cc:644
 #, c-format
@@ -3409,14 +3389,14 @@ msgid "log report"
 msgstr "záznam hlášení"
 
 #: src/generic/apt/log.cc:89
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "  IMPORTANT: this log only lists intended actions; actions which fail\n"
 "  due to dpkg problems may not be completed.\n"
 "\n"
 msgstr ""
-"DŮLEŽITÉ: tento záznam obsahuje pouze plánované akce. Akce, které selžou \n"
-"kvůli problémům v dpkg nemusí být dokončeny.\n"
+"  DŮLEŽITÉ: tento záznam obsahuje pouze plánované akce. Akce, které\n"
+"  selžou kvůli problémům v dpkg nemusí být dokončeny.\n"
 "\n"
 
 #: src/generic/apt/log.cc:90
@@ -3444,15 +3424,15 @@ msgstr "ODSTRANIT"
 
 #: src/generic/apt/log.cc:110
 msgid "UPGRADE"
-msgstr ""
+msgstr "AKTUALIZOVAT"
 
 #: src/generic/apt/log.cc:111
 msgid "DOWNGRADE"
-msgstr ""
+msgstr "DEGRADOVAT"
 
 #: src/generic/apt/log.cc:112
 msgid "REINSTALL"
-msgstr "REINSTALOVAT"
+msgstr "PŘEINSTALOVAT"
 
 #: src/generic/apt/log.cc:113
 msgid "HOLD"
@@ -3488,22 +3468,21 @@ msgstr "????????"
 
 #: src/generic/apt/log.cc:135
 msgid " (PURGE)"
-msgstr ""
+msgstr " (VYČISTIT)"
 
 #: src/generic/apt/log.cc:138 src/generic/apt/log.cc:139
-#, fuzzy
 msgid "(no version found)"
-msgstr "Žádné řešení nebylo nalezeno."
+msgstr "(žádná verze nalezena)"
 
 #: src/generic/apt/log.cc:155 src/generic/apt/log.cc:168
-#, fuzzy, c-format
+#, c-format
 msgid "[%s] %s %s\n"
-msgstr "[%s] %s\n"
+msgstr "[%s] %s %s\n"
 
 #: src/generic/apt/log.cc:176
-#, fuzzy, c-format
+#, c-format
 msgid "[%s] %s %s -> %s\n"
-msgstr "[AKTUALIZACE] %s %s -> %s\n"
+msgstr "[%s] %s %s -> %s\n"
 
 #: src/generic/apt/log.cc:185
 #, c-format
@@ -3511,9 +3490,8 @@ msgid "[%s] %s\n"
 msgstr "[%s] %s\n"
 
 #: src/generic/apt/log.cc:192
-#, fuzzy
 msgid "Log complete."
-msgstr "Dokončeno"
+msgstr "Konec zápisu."
 
 #: src/generic/apt/matching/match.cc:3083
 #: src/generic/apt/matching/match.cc:3200
@@ -3633,7 +3611,7 @@ msgstr ""
 
 #: src/generic/apt/pkg_changelog.cc:247
 msgid "No URIs for this download"
-msgstr ""
+msgstr "Žádné URI pro toto stahování"
 
 #: src/generic/apt/pkg_changelog.cc:611 src/generic/apt/pkg_changelog.cc:616
 #, c-format
@@ -3641,7 +3619,6 @@ msgid "Failed to download changelogs: %s"
 msgstr "Nepodařilo se stáhnout seznamy změn: %s"
 
 #: src/generic/apt/pkg_changelog.cc:621
-#, fuzzy
 msgid "Failed to download changelogs: unexpected exception"
 msgstr "Nepodařilo se stáhnout seznamy změn: neočekávaná výjimka"
 
@@ -3651,6 +3628,9 @@ msgid ""
 "Cannot display changelog: Origin of %s version %s is unknown (maybe not an "
 "official Debian package; if it is, try to \"update\" package lists)"
 msgstr ""
+"Nelze zobrazit seznam změn: Původ balíku %s verze %s není známý (možná "
+"to není o oficiální balík Debianu; pokud je, zkuste nejprve aktualizovat "
+"seznam balíků)"
 
 #: src/generic/apt/resolver_manager.cc:489
 #, c-format
@@ -3672,7 +3652,7 @@ msgstr "Nelze zpracovat nastavení penalizace: %s"
 #: src/generic/apt/tags.cc:257 src/generic/apt/tags.cc:283
 #: src/generic/apt/tags.cc:296 src/generic/apt/tags.cc:304
 msgid "Building tag database"
-msgstr "Vytvářím databázi štítků"
+msgstr "Vytváří se databáze štítků"
 
 #: src/generic/apt/tags.cc:432
 msgid "legacy"
@@ -3689,7 +3669,7 @@ msgstr "Načítají se popisy úloh"
 
 #: src/generic/apt/usertags.cc:67
 msgid "Invalid empty user-tag"
-msgstr ""
+msgstr "Neplatný prázdný štítek"
 
 #: src/generic/apt/usertags.cc:76
 #, c-format
@@ -3697,6 +3677,8 @@ msgid ""
 "Invalid character in user-tag at position %zu (use only printable characters "
 "and no spaces or comma)"
 msgstr ""
+"Neplatný znak u uživatelském štítku na pozici %zu (používejte pouze "
+"tisknutelné znaky bez mezery a čárky)"
 
 #: src/generic/controllers/search_input.cc:109 src/gtk/packagestab.cc:60
 msgid "Parse error"
@@ -3793,9 +3775,9 @@ msgid "Unable to create temporary filename from prefix \"%s\""
 msgstr "Nelze vytvořit dočasné jméno souboru z prefixu „%s“"
 
 #: src/generic/util/util.cc:387
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to remove \"%s\": %s"
-msgstr "Nelze odebrat „%s“"
+msgstr "Nelze odstranit „%s“: %s"
 
 #: src/generic/util/util.cc:404
 #, c-format
@@ -3825,7 +3807,7 @@ msgstr "Nelze odstranit adresář „%s“"
 #: src/generic/util/util.cc:490
 #, c-format
 msgid "%s cannot run in ncurses mode with terminal type \"dumb\"\n"
-msgstr ""
+msgstr "%s nemůže běžet v rozhraní ncurses s typem terminálu „dumb“\n"
 
 #: src/gtk/aptitude.glade:6 src/gtk/aptitude.glade:2251
 #: src/qt/windows/main_window.cc:44
@@ -5007,7 +4989,7 @@ msgid ""
 "Packages to be reinstalled\n"
 " These packages will be reinstalled."
 msgstr ""
-"Balíky k reinstalaci\n"
+"Balíky k přeinstalaci\n"
 " Tyto balíky budou přeinstalovány."
 
 #: src/gtk/previewtab.cc:105 src/pkg_grouppolicy.cc:698
@@ -5579,10 +5561,9 @@ msgid "Exactly one filter must be provided as an argument to a 'filter' policy"
 msgstr "Seskupování podle „filter“ vyžaduje právě jeden název filtru."
 
 #: src/load_grouppolicy.cc:552
-#, fuzzy, c-format
+#, c-format
 msgid "Bad mode name '%s' (use 'binary' or 'source')"
-msgstr ""
-"Chybný název sekce „%s“ (použijte „none“, „topdir“, „subdir“ nebo „subdirs“)"
+msgstr "Chybný název režimu „%s“ (použijte „binary“ nebo „source“)"
 
 #: src/load_grouppolicy.cc:650
 #, c-format
@@ -5595,7 +5576,7 @@ msgid "Unable to parse pattern after \"%s\""
 msgstr "Nelze zpracovat vzor za „%s“"
 
 #: src/load_grouppolicy.cc:711
-#, fuzzy, c-format
+#, c-format
 msgid "Unexpected empty tree title after \"%s\""
 msgstr "Neočekávaný prázdný název stromu po „%s“"
 
@@ -5618,9 +5599,8 @@ msgid "Couldn't parse layout: encoding error in column descriptor"
 msgstr "Nelze zpracovat rozložení: chyba kódování v popisu sloupce"
 
 #: src/load_pkgview.cc:106
-#, fuzzy
 msgid "Couldn't parse layout: error parsing column definitions"
-msgstr "Nelze zpracovat rozložení: chyba kódování v popisu sloupce"
+msgstr "Nelze zpracovat rozložení: chyba zpracování definice sloupce"
 
 #: src/load_pkgview.cc:119
 #, c-format
@@ -5764,311 +5744,320 @@ msgstr "Použití: aptitude [-S názsoub] [-u|-i]"
 #: src/main.cc:193
 #, c-format
 msgid "       aptitude [options] <action> ..."
-msgstr "       aptitude [volby] <akce> …"
+msgstr "         aptitude [volby] <akce> …"
 
 #: src/main.cc:196
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Actions (if none is specified, aptitude will enter interactive mode):\n"
 "\n"
 msgstr ""
-"  Akce (pokud nejsou zadány, aptitude spustí interaktivní režim):\n"
+"Akce (pokud nejsou zadány, aptitude spustí interaktivní režim):\n"
 "\n"
 
 #: src/main.cc:197
-#, fuzzy, c-format
+#, c-format
 msgid " install         Install/upgrade packages.\n"
-msgstr " install      - Instaluje/aktualizuje balíky.\n"
+msgstr " install         Instaluje/aktualizuje balíky.\n"
 
 #: src/main.cc:198
-#, fuzzy, c-format
+#, c-format
 msgid " remove          Remove packages.\n"
-msgstr " remove       - Odstraní balíky.\n"
+msgstr " remove          Odstraní balíky.\n"
 
 #: src/main.cc:199
-#, fuzzy, c-format
+#, c-format
 msgid " purge           Remove packages and their configuration files.\n"
-msgstr " purge        - Odstraní balíky a jejich konfigurační soubory.\n"
+msgstr " purge           Odstraní balíky a jejich konfigurační soubory.\n"
 
 #: src/main.cc:200
-#, fuzzy, c-format
+#, c-format
 msgid " hold            Place packages on hold.\n"
-msgstr " hold         - Ochrání balíky před aktualizací.\n"
+msgstr " hold            Ochrání balíky před aktualizací.\n"
 
 #: src/main.cc:201
-#, fuzzy, c-format
+#, c-format
 msgid " unhold          Cancel a hold command for a package.\n"
-msgstr " unhold       - Zruší ochranu balíku před aktualizací.\n"
+msgstr " unhold          Zruší ochranu balíku před aktualizací.\n"
 
 #: src/main.cc:202
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " markauto        Mark packages as having been automatically installed.\n"
-msgstr " markauto     - Označí balíky, jako že byly instalovány automaticky.\n"
+msgstr ""
+" markauto        Označí balíky, jako že byly instalovány automaticky.\n"
 
 #: src/main.cc:203
-#, fuzzy, c-format
+#, c-format
 msgid " unmarkauto      Mark packages as having been manually installed.\n"
-msgstr " unmarkauto   - Označí balíky, jako že byly instalovány ručně.\n"
+msgstr " unmarkauto      Označí balíky, jako že byly instalovány ručně.\n"
 
 #: src/main.cc:204
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " forbid-version  Forbid aptitude from upgrading to a specific package "
 "version.\n"
 msgstr ""
-" forbid-version - Zakáže aptitude aktualizaci na konkrétní verzi balíku.\n"
+" forbid-version  Zakáže aptitude aktualizaci na konkrétní verzi balíku.\n"
 
 #: src/main.cc:205
-#, fuzzy, c-format
+#, c-format
 msgid " update          Download lists of new/upgradable packages.\n"
-msgstr " update       - Stáhne seznamy nových/aktualizovatelných balíků.\n"
+msgstr " update          Stáhne seznamy nových/aktualizovatelných balíků.\n"
 
 #: src/main.cc:206
-#, fuzzy, c-format
+#, c-format
 msgid " safe-upgrade    Perform a safe upgrade.\n"
-msgstr " safe-upgrade - Provede bezpečnou aktualizaci.\n"
+msgstr " safe-upgrade    Provede bezpečnou aktualizaci.\n"
 
 #: src/main.cc:207
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " full-upgrade    Perform an upgrade, possibly installing and removing "
 "packages.\n"
 msgstr ""
-" full-upgrade - Provede aktualizaci, při které možná (na|od)instaluje "
+" full-upgrade    Provede aktualizaci, při které možná (na|od)instaluje "
 "balíky.\n"
 
 #: src/main.cc:208
-#, fuzzy, c-format
+#, c-format
 msgid " build-dep       Install the build-dependencies of packages.\n"
-msgstr " build-dep    - Instaluje závislosti pro sestavení balíků.\n"
+msgstr " build-dep       Instaluje závislosti pro sestavení balíků.\n"
 
 #: src/main.cc:209
-#, fuzzy, c-format
+#, c-format
 msgid " forget-new      Forget what packages are \"new\".\n"
-msgstr " forget-new   - Zapomene, které balíky jsou „nové“.\n"
+msgstr " forget-new      Zapomene, které balíky jsou „nové“.\n"
 
 #: src/main.cc:210
-#, fuzzy, c-format
+#, c-format
 msgid " search          Search for a package by name and/or expression.\n"
-msgstr " search       - Hledá balíky podle jména a/nebo výrazu.\n"
+msgstr " search          Hledá balíky podle jména a/nebo výrazu.\n"
 
 #: src/main.cc:211
-#, fuzzy, c-format
+#, c-format
 msgid " show            Display detailed info about a package.\n"
-msgstr " show         - Zobrazí podrobné informace o balíku.\n"
+msgstr " show            Zobrazí podrobné informace o balíku.\n"
 
 #: src/main.cc:212
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " showsrc         Display detailed info about a source package (apt "
 "wrapper).\n"
-msgstr " show         - Zobrazí podrobné informace o balíku.\n"
+msgstr ""
+" showsrc         Zobrazí podrobné informace o zdrojovém balíku.\n"
 
 #: src/main.cc:213
-#, fuzzy, c-format
+#, c-format
 msgid " versions        Displays the versions of specified packages.\n"
-msgstr " versions     - Zobrazí verze zadaných balíků\n"
+msgstr " versions        Zobrazí verze zadaných balíků.\n"
 
 #: src/main.cc:214
-#, fuzzy, c-format
+#, c-format
 msgid " clean           Erase downloaded package files.\n"
-msgstr " clean        - Smaže stažené .deb soubory balíků.\n"
+msgstr " clean           Smaže stažené .deb soubory balíků.\n"
 
 #: src/main.cc:215
-#, fuzzy, c-format
+#, c-format
 msgid " autoclean       Erase old downloaded package files.\n"
-msgstr " autoclean    - Smaže staré stažené .deb soubory balíků.\n"
+msgstr " autoclean       Smaže staré stažené .deb soubory balíků.\n"
 
 #: src/main.cc:216
-#, fuzzy, c-format
+#, c-format
 msgid " changelog       View a package's changelog.\n"
-msgstr " changelog    - Zobrazí seznam změn balíku.\n"
+msgstr " changelog       Zobrazí seznam změn balíku.\n"
 
 #: src/main.cc:217
-#, fuzzy, c-format
+#, c-format
 msgid " download        Download the .deb file for a package (apt wrapper).\n"
-msgstr " download     - Stáhne .deb soubor balíku.\n"
+msgstr " download        Stáhne .deb soubor balíku.\n"
 
 #: src/main.cc:218
-#, fuzzy, c-format
+#, c-format
 msgid " source          Download source package (apt wrapper).\n"
-msgstr " -u             Při startu stáhne nové seznamy balíků.\n"
+msgstr " source          Stáhne zdrojový balík.\n"
 
 #: src/main.cc:219
-#, fuzzy, c-format
+#, c-format
 msgid " reinstall       Reinstall a currently installed package.\n"
-msgstr " reinstall    - Stáhne a (možná) přeinstaluje již instalovaný balík.\n"
+msgstr " reinstall       Přeinstaluje již instalovaný balík.\n"
 
 #: src/main.cc:220
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " why             Explain why a particular package should be installed.\n"
-msgstr " -V             Zobrazí verze balíků, které se mají instalovat.\n"
+msgstr ""
+" why             Vysvětlí, proč by měl být daný balík instalován.\n"
 
 #: src/main.cc:221
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " why-not         Explain why a particular package cannot be installed.\n"
-msgstr " -V             Zobrazí verze balíků, které se mají instalovat.\n"
+msgstr ""
+" why-not         Vysvětlí, proč daný balík nemůže být instalován.\n"
 
 #: src/main.cc:223
 #, c-format
 msgid " add-user-tag    Add user tag to packages/patterns.\n"
-msgstr ""
+msgstr " add-user-tag    Přidá balíkům/vzorům uživatelský štítek.\n"
 
 #: src/main.cc:224
 #, c-format
 msgid " remove-user-tag Remove user tag from packages/patterns.\n"
-msgstr ""
+msgstr " remove-user-tag Odebere balíkům/vzorům uživatelský štítek.\n"
 
 #: src/main.cc:226
-#, fuzzy, c-format
+#, c-format
 msgid "Options:\n"
-msgstr "  Volby:\n"
+msgstr "Volby:\n"
 
 #: src/main.cc:227
-#, fuzzy, c-format
+#, c-format
 msgid " -h              This help text.\n"
-msgstr " -h             Tato nápověda.\n"
+msgstr " -h              Tato nápověda.\n"
 
 #: src/main.cc:229
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " --gui           Use the GTK GUI even if disabled in the configuration.\n"
-msgstr " --gui          Použije GTK GUI, i když je v konfiguraci zakázáno.\n"
+msgstr ""
+" --gui           Použije GTK GUI, i když je v konfiguraci zakázáno.\n"
 
 #: src/main.cc:231
-#, fuzzy, c-format
+#, c-format
 msgid " --no-gui        Do not use the GTK GUI even if available.\n"
-msgstr " --no-gui       Nepoužije GTK GUI, i když je dostupné.\n"
+msgstr " --no-gui        Nepoužije GTK GUI, i když je dostupné.\n"
 
 #: src/main.cc:233
-#, fuzzy, c-format
+#, c-format
 msgid " --qt            Use the Qt GUI.\n"
-msgstr " --qt           Použije Qt GUI\n"
+msgstr " --qt            Použije Qt GUI\n"
 
 #: src/main.cc:234
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " --no-qt         Do not use the Qt GUI even if enabled in the "
 "configuration.\n"
-msgstr " --no-qt        Nepoužije Qt GUI, i když je v konfiguraci povoleno.\n"
+msgstr ""
+" --no-qt         Nepoužije Qt GUI, i když je v konfiguraci povoleno.\n"
 
 #: src/main.cc:236
-#, fuzzy, c-format
+#, c-format
 msgid " -s              Simulate actions, but do not actually perform them.\n"
-msgstr " -s             Pouze simuluje, nic reálně neprovádí.\n"
+msgstr " -s              Pouze simuluje, nic reálně neprovádí.\n"
 
 #: src/main.cc:237
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " -d              Only download packages, do not install or remove anything.\n"
 msgstr ""
-" -d             Stáhne balíky, ale nic neinstaluje nebo neodstraňuje.\n"
+" -d              Stáhne balíky, ale nic neinstaluje nebo neodstraňuje.\n"
 
 #: src/main.cc:238
-#, fuzzy, c-format
+#, c-format
 msgid " -P              Always prompt for confirmation of actions.\n"
-msgstr " -P             Vždy vyžaduje potvrzení akcí.\n"
+msgstr " -P              Vždy vyžaduje potvrzení akcí.\n"
 
 #: src/main.cc:239
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " -y              Assume that the answer to simple yes/no questions is "
 "'yes'.\n"
 msgstr ""
-" -y             Na jednoduché ano/ne otázky odpoví automaticky „ano“.\n"
+" -y              Na jednoduché ano/ne otázky odpoví automaticky „ano“.\n"
 
 #: src/main.cc:240
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " -F format       Specify a format for displaying search results; see the "
 "manual.\n"
 msgstr ""
-" -F formát      Určí formát pro zobrazení výsledků hledání; viz manuál.\n"
+" -F formát       Určí formát pro zobrazení výsledků hledání; viz manuál.\n"
 
 #: src/main.cc:241
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " -O order        Specify how search results should be sorted; see the "
 "manual.\n"
 msgstr ""
-" -O řazení      Určí, jak se mají výsledky hledání seřadit; viz manuál.\n"
+" -O řazení       Určí, jak se mají výsledky hledání seřadit; viz manuál.\n"
 
 #: src/main.cc:242
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " -w width        Specify the display width for formatting search results.\n"
-msgstr " -w šířka       Určí šířku zobrazení výsledků hledání.\n"
+msgstr ""
+" -w šířka        Určí šířku zobrazení výsledků hledání.\n"
 
 #: src/main.cc:243
-#, fuzzy, c-format
+#, c-format
 msgid " -f              Aggressively try to fix broken packages.\n"
-msgstr " -f             Agresivně zkusí opravit porušené balíky.\n"
+msgstr " -f              Agresivně zkusí opravit porušené balíky.\n"
 
 #: src/main.cc:244
-#, fuzzy, c-format
+#, c-format
 msgid " -V              Show which versions of packages are to be installed.\n"
-msgstr " -V             Zobrazí verze balíků, které se mají instalovat.\n"
+msgstr " -V              Zobrazí verze balíků, které se mají instalovat.\n"
 
 #: src/main.cc:245
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " -D              Show the dependencies of automatically changed packages.\n"
-msgstr " -D             Zobrazí závislosti automaticky změněných balíků.\n"
+msgstr ""
+" -D              Zobrazí závislosti automaticky změněných balíků.\n"
 
 #: src/main.cc:246
-#, fuzzy, c-format
+#, c-format
 msgid " -Z              Show the change in installed size of each package.\n"
 msgstr ""
-" -Z             Zobrazí změnu v instalované velikosti každého balíku.\n"
+" -Z              Zobrazí změnu v instalované velikosti každého balíku.\n"
 
 #: src/main.cc:247
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " -v              Display extra information. (may be supplied multiple "
 "times).\n"
 msgstr ""
-" -v             Zobrazí dodatečné informace. (Můžete zadat několikrát.)\n"
+" -v              Zobrazí dodatečné informace (lze zadat několikrát).\n"
 
 #: src/main.cc:248
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " -t [release]    Set the release from which packages should be installed.\n"
 msgstr ""
-" -t [verze]     Vybere verzi Debianu, ze které se mají balíky instalovat.\n"
+" -t [vydání]     Určí vydání, ze kterého se mají balíky instalovat.\n"
 
 #: src/main.cc:249
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " -q              In command-line mode, suppress the incremental progress\n"
 "                  indicators.\n"
-msgstr " -q             V příkazovém režimu potlačí indikátory postupu.\n"
+msgstr ""
+" -q              V příkazovém režimu potlačí indikátory postupu.\n"
 
 #: src/main.cc:251
-#, fuzzy, c-format
+#, c-format
 msgid " -o key=val      Directly set the configuration option named 'key'.\n"
-msgstr " -o klíč=hodn   Nastaví konfigurační volbu nazvanou „klíč“.\n"
+msgstr " -o klíč=hodn    Nastaví konfigurační volbu nazvanou „klíč“.\n"
 
 #: src/main.cc:252
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " --with(out)-recommends     Specify whether or not to treat recommends as\n"
 "                            strong dependencies.\n"
 msgstr ""
-" --with(out)-recommends\tNastaví, zda se mají doporučené závislosti\n"
-"                brát jako silné závislosti.\n"
+" --with(out)-recommends     Určí, zda se mají doporučené závislosti brát\n"
+"                            jako silné závislosti, nebo ne.\n"
 
 #: src/main.cc:254
-#, fuzzy, c-format
+#, c-format
 msgid " -S fname        Read the aptitude extended status info from fname.\n"
-msgstr " -S jmsou       Načte rozšířené stavové informace ze souboru jmsou.\n"
+msgstr " -S jmsou        Načte rozšířené stavové informace ze souboru jmsou.\n"
 
 #: src/main.cc:255
-#, fuzzy, c-format
+#, c-format
 msgid " -u              Download new package lists on startup.\n"
-msgstr " -u             Při startu stáhne nové seznamy balíků.\n"
+msgstr " -u              Při startu stáhne nové seznamy balíků.\n"
 
 #: src/main.cc:256 src/main.cc:258
 #, c-format
@@ -6076,20 +6065,21 @@ msgid "                  (terminal interface only)\n"
 msgstr "                  (pouze v terminálovém rozhraní)\n"
 
 #: src/main.cc:257
-#, fuzzy, c-format
+#, c-format
 msgid " -i              Perform an install run on startup.\n"
-msgstr " -i             Při startu spustí instalaci.\n"
+msgstr " -i              Při startu spustí instalaci.\n"
 
 #: src/main.cc:260
 #, c-format
 msgid ""
 "See the manual page for a complete list and description of all the options.\n"
 msgstr ""
+"Kompletní seznam všech voleb a jejich popis naleznete v manuálové stránce.\n"
 
 #: src/main.cc:262
-#, fuzzy, c-format
+#, c-format
 msgid "This aptitude does not have Super Cow Powers.\n"
-msgstr "                  Tato aptitude nemá schopnosti svaté krávy.\n"
+msgstr "Tato aptitude nemá schopnosti svaté krávy.\n"
 
 #. TRANSLATORS: levels are not translatable anymore
 #: src/main.cc:460
@@ -6141,6 +6131,8 @@ msgid ""
 "Invalid option \"%s\" (only \"--purge-unused\" is valid).  Perhaps you want "
 "the \"purge\" action?\n"
 msgstr ""
+"Neplatná volba „%s“ (platné je jen „--purge-unused“). Možná hledáte akci "
+"„purge“?\n"
 
 #: src/main.cc:944
 #, c-format
@@ -6206,14 +6198,14 @@ msgid "-u, -i, and --clean-on-startup may not be specified with a command"
 msgstr "-u, -i a --clean-on-startup nemohou být použity společně s příkazem"
 
 #: src/main.cc:1223 src/main.cc:1256
-#, fuzzy, c-format
+#, c-format
 msgid "Command \"%s\" needs arguments\n"
-msgstr "E: Příkaz %s neakceptuje žádné argumenty\n"
+msgstr "Příkaz „%s“ vyžaduje argumenty\n"
 
 #: src/main.cc:1231
-#, fuzzy, c-format
+#, c-format
 msgid "Command \"%s\" does not accept arguments\n"
-msgstr "E: Příkaz %s neakceptuje žádné argumenty\n"
+msgstr "Příkaz „%s“ neakceptuje žádné argumenty\n"
 
 #: src/main.cc:1327
 #, c-format
@@ -6360,9 +6352,8 @@ msgid "Encoding of mine-help.txt|UTF-8"
 msgstr "Encoding of mine-help.txt|UTF-8"
 
 #: src/pkg_columnizer.cc:89
-#, fuzzy
 msgid "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 30 30 10 30 10 9 12 16 22 8"
-msgstr "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 1 10 9 13 30 17 15"
+msgstr "30 8 8 1 1 40 14 14 11 10 35 9 10 2 1 30 30 10 30 10 9 12 16 22 8"
 
 #: src/pkg_columnizer.cc:92 src/ui.cc:2978
 msgid "Package"
@@ -6414,21 +6405,19 @@ msgstr "RP"
 
 #: src/pkg_columnizer.cc:107
 msgid "Tag/user-tags"
-msgstr ""
+msgstr "Štítek"
 
 #: src/pkg_columnizer.cc:108
-#, fuzzy
 msgid "Source"
-msgstr "Zdrojový balík: "
+msgstr "Zdroj"
 
 #: src/pkg_columnizer.cc:109
-#, fuzzy
 msgid "Architecture"
-msgstr "Architektura: "
+msgstr "Architektura"
 
 #: src/pkg_columnizer.cc:110
 msgid "Origin"
-msgstr ""
+msgstr "Původ"
 
 #: src/pkg_columnizer.cc:113
 msgid "ProgName"
@@ -6517,7 +6506,7 @@ msgstr "instalovat"
 
 #: src/pkg_columnizer.cc:328 src/reason_fragment.cc:81
 msgid "reinstall"
-msgstr "reinstalovat"
+msgstr "přeinstalovat"
 
 #: src/pkg_columnizer.cc:330 src/reason_fragment.cc:85
 msgid "upgrade"
@@ -6536,17 +6525,17 @@ msgstr "Porušené: %ld"
 #: src/pkg_columnizer.cc:403
 #, c-format
 msgid "Disk: %c%sB"
-msgstr ""
+msgstr "Disk: %c%sB"
 
 #: src/pkg_columnizer.cc:417
-#, fuzzy, c-format
+#, c-format
 msgid "DL: %sB/%sB"
-msgstr "%s: %sB/s"
+msgstr "Stáhne se: %sB/%sB"
 
 #: src/pkg_columnizer.cc:423
-#, fuzzy, c-format
+#, c-format
 msgid "DL: %sB"
-msgstr "Stáhnu: %sB"
+msgstr "Stáhne se: %sB"
 
 #. TRANSLATORS: Hostname
 #: src/pkg_columnizer.cc:565
@@ -6556,7 +6545,7 @@ msgstr "Příliš dlouhé jméno"
 #: src/pkg_columnizer.cc:758
 #, c-format
 msgid "Using default for %s string: '%s'"
-msgstr ""
+msgstr "Pro volbu %s se používá výchozí hodnota „%s“"
 
 #: src/pkg_columnizer.cc:763 src/pkg_columnizer.cc:775
 #, c-format
@@ -6570,18 +6559,13 @@ msgstr "Vnitřní chyba: Výchozí řetězec sloupce je nezpracovatelný"
 #: src/pkg_columnizer.cc:809
 #, c-format
 msgid "Forbidden character in position %zu of %s string: '%s'"
-msgstr ""
+msgstr "Zakázaný znak na pozici %zu ve volbě %s: „%s“"
 
 #: src/pkg_grouppolicy.cc:259 src/pkg_grouppolicy.cc:1016
 msgid "Tasks"
 msgstr "Úlohy"
 
 #: src/pkg_grouppolicy.cc:462
-#, fuzzy
-#| msgid ""
-#| "Security Updates\n"
-#| " Security updates for these packages are available from security.debian."
-#| "org."
 msgid ""
 "Security Updates\n"
 " Security updates for these packages are available from security.debian.org "
@@ -6589,7 +6573,7 @@ msgid ""
 msgstr ""
 "Bezpečnostní aktualizace\n"
 " Bezpečnostní aktualizace těchto balíků jsou k dispozici na security.debian."
-"org."
+"org (nebo zrcadlech)."
 
 #: src/pkg_grouppolicy.cc:463
 msgid ""
@@ -6749,11 +6733,11 @@ msgstr "Zdrojový balík: "
 
 #: src/pkg_info_screen.cc:154
 msgid "Origin: "
-msgstr ""
+msgstr "Původ: "
 
 #: src/pkg_info_screen.cc:161
 msgid "Origin URI: "
-msgstr ""
+msgstr "URI: "
 
 #: src/pkg_info_screen.cc:172
 #, c-format
@@ -6780,13 +6764,17 @@ msgstr ""
 "napište „%s“."
 
 #: src/pkg_item.cc:154
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\"%s\" is a virtual package provided by:\n"
 "\n"
 "%s\n"
 "You must choose one to install.\n"
-msgstr "„%s“ je virtuální balík poskytovaný:\n"
+msgstr ""
+"„%s“ je virtuální balík poskytovaný:\n"
+"\n"
+"%s\n"
+"Pro instalaci musíte zvolit jeden z nich.\n"
 
 #: src/pkg_subtree.cc:163
 #, c-format
@@ -6834,19 +6822,16 @@ msgstr ""
 "odstraněn."
 
 #: src/pkg_view.cc:271
-#, fuzzy
 msgid "provides"
-msgstr "Poskytuje"
+msgstr "poskytuje"
 
 #: src/pkg_view.cc:284
-#, fuzzy
 msgid "Virtual package not provided by any package."
-msgstr "%s je virtuální balík poskytovaný:\n"
+msgstr "Virtuální balík není poskytovaný žádným balíkem."
 
 #: src/pkg_view.cc:289
-#, fuzzy
 msgid "Virtual package provided by:"
-msgstr "%s je virtuální balík poskytovaný:\n"
+msgstr "Virtuální balík poskytovaný:"
 
 #: src/pkg_view.cc:619
 msgid "make_package_view: error in arguments -- two main widgets??"
@@ -6922,19 +6907,16 @@ msgid "&Help"
 msgstr "&Nápověda"
 
 #: src/reason_fragment.cc:69
-#, fuzzy
 msgid "held/unchanged"
-msgstr "Nezměněný"
+msgstr "podržen/nezměněn"
 
 #: src/reason_fragment.cc:77
-#, fuzzy
 msgid "downgrade"
-msgstr "degradován"
+msgstr "degradovat"
 
 #: src/reason_fragment.cc:89
-#, fuzzy
 msgid "unconfigured"
-msgstr "Napůl zkonfigurovaný"
+msgstr "nezkonfigurovaný"
 
 #: src/reason_fragment.cc:121
 msgid "depends on"
@@ -6978,9 +6960,9 @@ msgid " (provided by %F)"
 msgstr " (poskytován %F)"
 
 #: src/reason_fragment.cc:378
-#, fuzzy, c-format
+#, c-format
 msgid "%F%s %s %F %F"
-msgstr "%F%s %F %F"
+msgstr "%F%s %s %F %F"
 
 #: src/reason_fragment.cc:428
 msgid ""
@@ -6989,206 +6971,141 @@ msgid ""
 msgstr "Pokud vyberete balík, objeví se zde popis jeho aktuálního stavu."
 
 #: src/reason_fragment.cc:466
-#, fuzzy
 msgid ""
 "%B%s %s%b was installed automatically; it is being removed because all of "
 "the packages which depend upon it are being removed:"
 msgstr ""
-"%B%s%b byl instalován automaticky;  nyní bude odstraněn, protože všechny "
+"%B%s %s%b byl instalován automaticky; nyní bude odstraněn, protože všechny "
 "balíky, které na něm závisely, budou odstraněny:"
 
 #: src/reason_fragment.cc:471
-#, fuzzy
-#| msgid "%B%s%b will be automatically removed because of dependency errors:"
 msgid "%B%s %s%b will be automatically removed because of dependency errors:"
-msgstr "%B%s%b bude automaticky odstraněn kvůli chybám v závislostech:"
+msgstr "%B%s %s%b bude automaticky odstraněn kvůli chybám v závislostech:"
 
 #: src/reason_fragment.cc:476
-#, fuzzy
-#| msgid ""
-#| "%B%s%b will be automatically installed to satisfy the following "
-#| "dependencies:"
 msgid ""
 "%B%s %s%b will be automatically installed to satisfy the following "
 "dependencies:"
 msgstr ""
-"%B%s%b bude instalován automaticky pro splnění následujících závislostí:"
+"%B%s %s%b bude instalován automaticky pro splnění následujících závislostí:"
 
 #: src/reason_fragment.cc:483 src/reason_fragment.cc:498
-#, fuzzy
-#| msgid ""
-#| "%B%s%b cannot be upgraded now, but if it could be, it would still be held "
-#| "at version %B%s%b."
 msgid ""
 "%B%s %s%b cannot be upgraded now, but if it could be, it would still be held "
 "at version %B%s%b."
 msgstr ""
-"%B%s%b nemůže být aktualizován, a i kdyby mohl, stejně by byl podržen ve "
+"%B%s %s%b nemůže být aktualizován, a i kdyby mohl, stejně by byl podržen ve "
 "verzi %B%s%b."
 
 #: src/reason_fragment.cc:488
-#, fuzzy
-#| msgid ""
-#| "%B%s%b will not be upgraded to version %B%s%b, to avoid breaking the "
-#| "following dependencies:"
 msgid ""
 "%B%s %s%b will not be upgraded to version %B%s%b, to avoid breaking the "
 "following dependencies:"
 msgstr ""
-"%B%s%b nebude aktualizován na verzi %B%s%b, aby neporušil následující "
+"%B%s %s%b nebude aktualizován na verzi %B%s%b, aby neporušil následující "
 "závislosti:"
 
 #: src/reason_fragment.cc:503
-#, fuzzy
-#| msgid "%B%s%b is currently installed."
 msgid "%B%s %s%b is currently installed."
-msgstr "%B%s%b je nainstalovaný.%n%n"
+msgstr "%B%s %s%b je nainstalovaný."
 
 #: src/reason_fragment.cc:510
-#, fuzzy
-#| msgid "%B%s%b is not currently installed."
 msgid "%B%s %s%b is not currently installed."
-msgstr "%B%s%b není nainstalovaný."
+msgstr "%B%s %s%b není nainstalovaný."
 
 #: src/reason_fragment.cc:519
-#, fuzzy
-#| msgid "Some dependencies of %B%s%b are not satisfied:"
 msgid "Some dependencies of %B%s %s%b are not satisfied:"
-msgstr "Některé závislosti %B%s%b nejsou splněny:"
+msgstr "Některé závislosti %B%s %s%b nejsou splněny:"
 
 #: src/reason_fragment.cc:524
-#, fuzzy
-#| msgid "%B%s%b will be downgraded."
 msgid "%B%s %s%b will be downgraded."
-msgstr "%B%s%b bude degradován."
+msgstr "%B%s %s%b bude degradován."
 
 #: src/reason_fragment.cc:532
-#, fuzzy
-#| msgid "%B%s%b will not be upgraded to the forbidden version %B%s%b."
 msgid "%B%s %s%b will not be upgraded to the forbidden version %B%s%b."
-msgstr "%B%s%b nebude aktualizován na zakázanou verzi %B%s%b."
+msgstr "%B%s %s%b nebude aktualizován na zakázanou verzi %B%s%b."
 
 #: src/reason_fragment.cc:537
-#, fuzzy
-#| msgid ""
-#| "%B%s%b could be upgraded to version %B%s%b, but it is being held at "
-#| "version %B%s%b."
 msgid ""
 "%B%s %s%b could be upgraded to version %B%s%b, but it is being held at "
 "version %B%s%b."
 msgstr ""
-"%B%s%b by mohl být aktualizován na verzi %B%s%b, ale je podržen ve verzi %B%s"
-"%b."
+"%B%s %s%b by mohl být aktualizován na verzi %B%s%b, ale je podržen ve "
+"verzi %B%s%b."
 
 #: src/reason_fragment.cc:545
-#, fuzzy
-#| msgid "%B%s%b will be re-installed."
 msgid "%B%s %s%b will be re-installed."
-msgstr "%B%s%b bude reinstalován."
+msgstr "%B%s %s%b bude přeinstalován."
 
 #: src/reason_fragment.cc:550
-#, fuzzy
-#| msgid "%B%s%b will be installed."
 msgid "%B%s %s%b will be installed."
-msgstr "%B%s%b bude instalován."
+msgstr "%B%s %s%b bude instalován."
 
 #: src/reason_fragment.cc:555
-#, fuzzy
-#| msgid "%B%s%b will be removed."
 msgid "%B%s %s%b will be removed."
-msgstr "%B%s%b bude odstraněn."
+msgstr "%B%s %s%b bude odstraněn."
 
 #: src/reason_fragment.cc:561
-#, fuzzy
-#| msgid "%B%s%b will be upgraded from version %B%s%b to version %B%s%b."
 msgid "%B%s %s%b will be upgraded from version %B%s%b to version %B%s%b."
-msgstr "%B%s%b bude aktualizován z verze %B%s%b na verzi %B%s%b."
+msgstr "%B%s %s%b bude aktualizován z verze %B%s%b na verzi %B%s%b."
 
 #: src/reason_fragment.cc:569
-#, fuzzy
-#| msgid "%B%s%b is only partly installed; its installation will be completed."
 msgid "%B%s %s%b is only partly installed; its installation will be completed."
-msgstr "%B%s%b je nainstalován jen částečně, jeho instalace bude dokončena."
+msgstr "%B%s %s%b je nainstalován jen částečně, jeho instalace bude dokončena."
 
 #: src/reason_fragment.cc:602
-#, fuzzy
-#| msgid ""
-#| "The following packages depend on %B%s%b and will be broken by its removal:"
 msgid ""
 "The following packages depend on %B%s %s%b and will be broken by its removal:"
-msgstr "Následující balíky závisí na %B%s%b a budou jeho odstraněním porušeny:"
+msgstr ""
+"Následující balíky závisí na %B%s %s%b a budou jeho odstraněním porušeny:"
 
 #: src/reason_fragment.cc:606
-#, fuzzy
-#| msgid "The following packages depend on %B%s%b and are broken:"
 msgid "The following packages depend on %B%s %s%b and are broken:"
-msgstr "Následující balíky závisí na %B%s%b a jsou porušeny:"
+msgstr "Následující balíky závisí na %B%s %s%b a jsou porušeny:"
 
 #: src/reason_fragment.cc:614
-#, fuzzy
-#| msgid ""
-#| "The following packages conflict with %B%s%b and will be broken by its "
-#| "installation:"
 msgid ""
 "The following packages conflict with %B%s %s%b and will be broken by its "
 "installation:"
 msgstr ""
-"Následující balíky jsou v konfliktu s %B%s%b a budou jeho instalací porušeny:"
+"Následující balíky jsou v konfliktu s %B%s %s%b a budou jeho instalací porušeny:"
 
 #: src/reason_fragment.cc:648
-#, fuzzy
-#| msgid ""
-#| "The following packages depend on a version of %B%s%b other than the "
-#| "currently installed version of %B%s%b, or conflict with the currently "
-#| "installed version:"
 msgid ""
 "The following packages depend on a version of %B%s %s%b other than the "
 "currently installed version of %B%s%b, or conflict with the currently "
 "installed version:"
 msgstr ""
-"Následující balíky závisí na balíku %B%s%b v jiné verzi, než je aktuálně "
+"Následující balíky závisí na balíku %B%s %s%b v jiné verzi, než je aktuálně "
 "instalovaná %B%s%b, nebo jsou s ní v konfliktu:"
 
 #: src/reason_fragment.cc:653
-#, fuzzy
-#| msgid ""
-#| "The following packages conflict with %B%s%b, or depend on a version of it "
-#| "which is not going to be installed."
 msgid ""
 "The following packages conflict with %B%s %s%b, or depend on a version of it "
 "which is not going to be installed."
 msgstr ""
-"Následující balíky jsou v konfliktu s %B%s%b, nebo závisí na jeho verzi, "
+"Následující balíky jsou v konfliktu s %B%s %s%b, nebo závisí na jeho verzi, "
 "která nebude instalována."
 
 #: src/reason_fragment.cc:658
-#, fuzzy
-#| msgid "The following packages conflict with %B%s%b:"
 msgid "The following packages conflict with %B%s %s%b:"
-msgstr "Následující balíky jsou v konfliktu s %B%s%b:"
+msgstr "Následující balíky jsou v konfliktu s %B%s %s%b:"
 
 #: src/reason_fragment.cc:664
-#, fuzzy
-#| msgid ""
-#| "The following packages depend on a version of %B%s%b other than the "
-#| "currently installed version of %B%s%b:"
 msgid ""
 "The following packages depend on a version of %B%s %s%b other than the "
 "currently installed version of %B%s%b:"
 msgstr ""
-"Následující balíky závisí na balíku %B%s%b v jiné verzi, než je aktuálně "
+"Následující balíky závisí na balíku %B%s %s%b v jiné verzi, než je aktuálně "
 "instalovaná %B%s%b:"
 
 #: src/reason_fragment.cc:669
-#, fuzzy
-#| msgid ""
-#| "The following packages depend on a version of %B%s%b which is not going "
-#| "to be installed."
 msgid ""
 "The following packages depend on a version of %B%s %s%b which is not going "
 "to be installed."
 msgstr ""
-"Následující balíky závisí na verzi balíku %B%s%b, která se nebude instalovat."
+"Následující balíky závisí na verzi balíku %B%s %s%b, která se nebude "
+"instalovat."
 
 #: src/reason_fragment.cc:676
 msgid "upgraded"
@@ -7293,10 +7210,8 @@ msgid "%BDowngrade%b the following packages:%n"
 msgstr "%BDegradovat%b následující balíky:%n"
 
 #: src/solution_fragment.cc:511
-#, fuzzy
-#| msgid "Leave the following dependencies unresolved:%n"
 msgid "%BLeave%b the following dependencies %Bunresolved%b:%n"
-msgstr "Ponechat následující závislosti nevyřešené:%n"
+msgstr "%BPonechat%b následující závislosti %Bnevyřešené%b:%n"
 
 #: src/solution_item.cc:98
 #, c-format
@@ -7378,7 +7293,7 @@ msgstr ""
 #. methods.  Please include nothing but ASCII characters.
 #: src/ui.cc:211
 msgid "Yes, I am aware this is a very bad idea"
-msgstr "Ano, vím, že to je špatný nápad"
+msgstr "Ano, vedu v patrnosti nevhodnost volby"
 
 #: src/ui.cc:268
 msgid "Er, there aren't any errors, this shouldn't have happened.."
@@ -7436,6 +7351,10 @@ msgid ""
 " - insufficient permissions to become root, or\n"
 " - root login disabled"
 msgstr ""
+"Podproces skončil chybou, pravděpodobně kvůli jednomu z těcho důvodů:\n"
+" - chybné heslo,\n"
+" - nedostatečná oprávnění pro změnu na uživatele root, nebo\n"
+" - přihlášení uživatele root je zakázáno"
 
 #: src/ui.cc:653
 msgid "Loading cache"
@@ -7451,12 +7370,12 @@ msgstr "Mění chování aptitude"
 
 #: src/ui.cc:785
 msgid "Really discard your personal settings and reload the defaults?"
-msgstr "Opravdu zahodit osobní nastavení a načíst standardní hodnoty?"
+msgstr "Opravdu zahodit vaše nastavení a načíst výchozí hodnoty?"
 
 #: src/ui.cc:830
 #, c-format
 msgid "Using default value for %s string: '%s'"
-msgstr ""
+msgstr "Pro volbu %s se používá výchozí hodnota: „%s“"
 
 #: src/ui.cc:921
 msgid "View available packages and choose actions to perform"
@@ -7475,36 +7394,36 @@ msgid "Recommendations"
 msgstr "Doporučení"
 
 #: src/ui.cc:967 src/ui.cc:969
-#, fuzzy
 msgid "Packages (flat)"
-msgstr "Balíky: "
+msgstr "Balíky (plochý)"
 
 #: src/ui.cc:968
-#, fuzzy
 msgid ""
 "View available packages (flat, no grouping) and choose actions to perform"
-msgstr "Zobrazí dostupné balíky a akce, které s nimi můžete provádět"
+msgstr ""
+"Zobrazí dostupné balíky (bez seskupování) a akce, které s nimi můžete "
+"provádět"
 
 #: src/ui.cc:995 src/ui.cc:997
-#, fuzzy
 msgid "Packages (debtags)"
-msgstr "Balíky: "
+msgstr "Balíky (debtags)"
 
 #: src/ui.cc:996
-#, fuzzy
 msgid ""
 "View available packages (debtags grouping) and choose actions to perform"
-msgstr "Zobrazí dostupné balíky a akce, které s nimi můžete provádět"
+msgstr ""
+"Zobrazí dostupné balíky (seskupené dle debtags) a akce, které s nimi "
+"můžete provádět"
 
 #: src/ui.cc:1015 src/ui.cc:1017
-#, fuzzy
 msgid "Packages (source)"
-msgstr "Balíky: "
+msgstr "Balíky (zdroj)"
 
 #: src/ui.cc:1016
-#, fuzzy
 msgid "View available packages (source grouping) and choose actions to perform"
-msgstr "Zobrazí dostupné balíky a akce, které s nimi můžete provádět"
+msgstr ""
+"Zobrazí dostupné balíky (seskupené dle zdrojového balíku) a akce, které "
+"s nimi můžete provádět"
 
 #: src/ui.cc:1038
 #, c-format
@@ -7654,19 +7573,16 @@ msgstr ""
 "hlášku neuvidíte."
 
 #: src/ui.cc:1273
-#, fuzzy
 msgid "Performing actions..."
-msgstr "Provést změny"
+msgstr "Provádí se naplánované akce…"
 
 #: src/ui.cc:1280
-#, fuzzy
-#| msgid "Press Return to continue."
 msgid "Press Return to continue, 'q' followed by Return to quit."
-msgstr "Pro pokračování stiskněte Enter."
+msgstr "Pro pokračování stiskněte Enter, pro ukončení „q“ a Enter."
 
 #: src/ui.cc:1321
 msgid "Updating state and quitting..."
-msgstr ""
+msgstr "Aktualizuje se stav a aptitude končí…"
 
 #: src/ui.cc:1376
 msgid "View the progress of the package download"
@@ -7689,9 +7605,8 @@ msgstr ""
 "že to je to, co opravdu chcete udělat.%n%n"
 
 #: src/ui.cc:1430
-#, fuzzy
 msgid "  %S*%N %s [version %s] %s%n"
-msgstr "  %S*%N %s [verze %s]%n"
+msgstr "  %S*%N %s [verze %s] %s%n"
 
 #: src/ui.cc:1438
 msgid "Really Continue"
@@ -7710,10 +7625,8 @@ msgid "View and/or adjust the actions that will be performed"
 msgstr "Zobrazí a/nebo upraví akce, které se mají vykonat"
 
 #: src/ui.cc:1541
-#, fuzzy
-#| msgid "No broken packages."
 msgid "Trying to fix broken packages..."
-msgstr "Žádné porušené balíky."
+msgstr "Pokouším se opravit porušené balíky…"
 
 #: src/ui.cc:1560
 msgid "Some packages were broken and have been fixed:"
@@ -7763,10 +7676,8 @@ msgstr ""
 "aktualizovat. Aktualizaci můžete připravit klávesou „U“."
 
 #: src/ui.cc:1810
-#, fuzzy
-#| msgid "Resolving dependencies..."
 msgid "Checking dependencies"
-msgstr "Řeší se závislosti…"
+msgstr "Kontrolují se závislosti"
 
 #: src/ui.cc:1843
 msgid "Updating package lists"
@@ -7830,6 +7741,8 @@ msgstr ""
 #: src/ui.cc:2125
 msgid "Package name or pattern for \"forget new\" (empty for all packages): "
 msgstr ""
+"Název balíku nebo vzor pro zapomenutí nových balíků (prázdné pro "
+"všechny balíky): "
 
 #: src/ui.cc:2129
 msgid ""
@@ -7841,6 +7754,13 @@ msgid ""
 " * '~sdoc' to unmark all packages from section \"doc\"\n"
 "\n"
 msgstr ""
+"Název balíku nebo vzor pro zapomenutí nových balíků\n"
+"\n"
+"Tipy:\n"
+" * prázdné pro odznačení všech balíků jako nových\n"
+" * „aptitude“ pro odznačení jednoho balíku\n"
+" * „~sdoc“ pro odznačení všech balíků ze sekce „doc“\n"
+"\n"
 
 #: src/ui.cc:2196
 msgid "No more solutions."
@@ -7892,9 +7812,8 @@ msgid "Canc^el pending actions"
 msgstr "Zrušit naplánované akc^e"
 
 #: src/ui.cc:2554
-#, fuzzy
 msgid "Cancel all pending actions from this session"
-msgstr "Zrušit naplánované akc^e"
+msgstr "Zruší všechny akce naplánované v tomto sezení"
 
 #: src/ui.cc:2557
 msgid "^Clean package cache"
@@ -8282,13 +8201,12 @@ msgid "Browse packages using Debtags data"
 msgstr "Prohlíží balíky podle dat klasifikačního systému Debtags"
 
 #: src/ui.cc:2801
-#, fuzzy
 msgid "New ^Source Package View"
-msgstr "No^vý pohled na balíky"
+msgstr "Nový pohled dle zdrojového balíku"
 
 #: src/ui.cc:2803
 msgid "Create a new package view, grouped by source package"
-msgstr ""
+msgstr "Vytvoří nový pohled na balíky seskupený dle zdrojového balíku"
 
 #: src/ui.cc:2811
 msgid "^About"
@@ -8347,12 +8265,12 @@ msgid "Views"
 msgstr "Pohledy"
 
 #: src/ui.cc:3048
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%ls: Menu  %ls: Help  %ls: Quit  %ls: Update  %ls: Preview/Download/Install/"
 "Remove Pkgs"
 msgstr ""
-"%ls: Menu  %ls: Nápověda  %ls: Konec  %ls: Aktualizace  %ls: Stažení/"
+"%ls: Menu  %ls: Nápověda  %ls: Konec  %ls: Aktualizace  %ls: Náhled/Stažení/"
 "Instalace"
 
 #: src/ui.cc:3418
@@ -8474,11 +8392,10 @@ msgstr "Stahuje se seznam změn balíku %s"
 #~ msgid "Error writing state file"
 #~ msgstr "Chyba při zápisu stavového souboru"
 
-#, fuzzy
 #~ msgid ""
 #~ "%s version %s is not an official Debian package, cannot display its "
 #~ "changelog."
-#~ msgstr "%s není oficiální debianí balík, nemohu zobrazit jeho seznam změn."
+#~ msgstr "%s verze %s není oficiální debianí balík, nelze zobrazit jeho seznam změn."
 
 #~ msgid "trace"
 #~ msgstr "trace"
@@ -8525,13 +8442,11 @@ msgstr "Stahuje se seznam změn balíku %s"
 #~ msgid "Reporting a bug in %s:\n"
 #~ msgstr "Hlásím chybu v %s:\n"
 
-#, fuzzy
 #~ msgid "removed"
-#~ msgstr "Odstranit"
+#~ msgstr "odstraněný"
 
-#, fuzzy
 #~ msgid "reinstalled"
-#~ msgstr "nainstalovaný"
+#~ msgstr "přeinstalovaný"
 
 #~ msgid ""
 #~ "Error parsing a user-tag for the package %s: unexpected end-of-line "
@@ -8778,7 +8693,7 @@ msgstr "Stahuje se seznam změn balíku %s"
 #~ msgstr "Příkaz debtags (%s) se nepodařilo spustit: %s"
 
 #~ msgid "Updating debtags database"
-#~ msgstr "Vytvářím databázi štítků"
+#~ msgstr "Aktualizuje se databáze štítků"
 
 #~ msgid "(core dumped)"
 #~ msgstr "(jádro odhozeno)"
