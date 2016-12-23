@@ -21,6 +21,7 @@
 #include <apt-pkg/pkgsystem.h>
 #include <apt-pkg/policy.h>
 #include <apt-pkg/version.h>
+#include <apt-pkg/macros.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -71,6 +72,9 @@ namespace
 	it != sourcepkg.get_build_deps().end(); ++it)
       {
 	bool is_conflict = (it->Type == pkgSrcRecords::Parser::BuildConflictIndep ||
+#if APT_PKG_ABI > 500 || (APT_PKG_ABI == 500 && APT_PKG_RELEASE >= 1)
+			    it->Type == pkgSrcRecords::Parser::BuildConflictArch ||
+#endif
 			    it->Type == pkgSrcRecords::Parser::BuildConflict);
 
 	if(arch_only && (it->Type == pkgSrcRecords::Parser::BuildDependIndep ||
