@@ -289,8 +289,8 @@ AC_SUBST(BOOST_UNIT_TEST_LIBS)
 
 ##### Copy gmock inside source #####
 dnl Needed after automake was set to 'subdir-objects' after 1.14
-AC_CONFIG_COMMANDS([copy-gtest],[cp -uv /usr/src/gtest/src/gtest-all.cc tests/gtest-all.cc])
-AC_CONFIG_COMMANDS([copy-gmock],[cp -uv /usr/src/gmock/src/gmock-all.cc tests/gmock-all.cc])
+AC_CONFIG_COMMANDS([copy-gtest],[cp -uv /usr/src/googletest/googletest/src/gtest-all.cc tests/gtest-all.cc])
+AC_CONFIG_COMMANDS([copy-gmock],[cp -uv /usr/src/googletest/googlmock/src/gmock-all.cc tests/gmock-all.cc])
 
 
 ##### Check for Google Mock #####
