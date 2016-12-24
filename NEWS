@@ -9,6 +9,20 @@ Version 0.8.4 UNRELEASED
   * Support for Build-Depends/Conflicts-Arch, by David Kalnischkies
     (Closes: #843789)
 
+- Bug fixes:
+
+  * [curses] Do not fail immediately and attempt to continue when some package
+    lists cannot be updated (Closes: #834790)
+
+    The bug, in which the update of package lists stopped and the interface was
+    left at the "Loading cache" stage indefinitely, seems to be due to changes
+    in behaviour of apt or some strange interaction, because the relevant
+    sections of aptitude have not changed in a long time.
+
+    This is fixed now by not being strict with this kind of errors (to cope with
+    what seems to be a new behaviour from libapt -- to not report that the
+    update can proceed)... Hopefully this change will not create other problems.
+
 - Internal changes:
 
   * Support recent versions of googletest and google-mock, change of paths:

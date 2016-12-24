@@ -102,8 +102,13 @@ void download_update_manager::finish(pkgAcquire::RunResult res,
 
   if(res != pkgAcquire::Continue)
     {
-      k(failure);
-      return;
+      _error->Error(_("Failed to download some files"));
+
+      // do not "fail" here, the problematic files are ignored and stopping is
+      // problematic (see #834790)
+      //
+      //k(failure);
+      //return;
     }
 
   bool failed = false;
