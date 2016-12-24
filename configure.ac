@@ -290,7 +290,7 @@ AC_SUBST(BOOST_UNIT_TEST_LIBS)
 ##### Copy gmock inside source #####
 dnl Needed after automake was set to 'subdir-objects' after 1.14
 AC_CONFIG_COMMANDS([copy-gtest],[cp -uv /usr/src/googletest/googletest/src/gtest-all.cc tests/gtest-all.cc])
-AC_CONFIG_COMMANDS([copy-gmock],[cp -uv /usr/src/googletest/googlmock/src/gmock-all.cc tests/gmock-all.cc])
+AC_CONFIG_COMMANDS([copy-gmock],[cp -uv /usr/src/googletest/googlemock/src/gmock-all.cc tests/gmock-all.cc])
 
 
 ##### Check for Google Mock #####
@@ -323,7 +323,7 @@ int main(int argc, char **argv)
         dnl gtest; no way around that.
         [LIBS="$OLD_LIBS -lpthread"
          OLD_CPPFLAGS="$CPPFLAGS"
-         CPPFLAGS="$CPPFLAGS -I/usr/src/gtest -I/usr/src/gmock"
+         CPPFLAGS="$CPPFLAGS -I/usr/src/googletest/googletest -I/usr/src/googletest/googlemock"
          AC_LINK_IFELSE([AC_LANG_SOURCE([
 #include <src/gtest-all.cc>
 #include <src/gmock-all.cc>
@@ -332,7 +332,7 @@ int main(int argc, char **argv)
 {
   return 0;
 }])],
-           [AC_MSG_RESULT([source is in /usr/src/gmock])
+           [AC_MSG_RESULT([source is in /usr/src/googletest/googlemock])
             BUILD_LOCAL_GMOCK=1],
            [AC_MSG_ERROR([Can't figure out where Google Mock lives; either install the google-mock package or place the library in the link path])])
          CPPFLAGS="$OLD_CPPFLAGS"

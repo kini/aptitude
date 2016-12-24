@@ -45,7 +45,7 @@ GMOCK_LDFLAGS = $(builddir)/libgmock.a
 # subdir-objects option recently added) tried to build in /usr/src/gtest/ and
 # /gmock/, and then failed to link
 nodist_libgmock_a_SOURCES = gtest-all.cc gmock-all.cc
-libgmock_a_CPPFLAGS = -I/usr/src/gtest -I/usr/src/gmock
+libgmock_a_CPPFLAGS = -I/usr/src/googletest/googletest -I/usr/src/googletest/googlemock
 else
 GMOCK_LDFLAGS = -lgmock -lgtest
 endif
