@@ -1141,8 +1141,11 @@ static bool subsumes(const pkgCache::DepIterator &d1,
       if(!d2.TargetVer())
 	return false;
 
-      pkgCache::Dep::DepCompareOp t1 = (pkgCache::Dep::DepCompareOp) (d1->CompareOp &~ pkgCache::Dep::Or);
-      pkgCache::Dep::DepCompareOp t2 = (pkgCache::Dep::DepCompareOp) (d2->CompareOp &~ pkgCache::Dep::Or);
+      // the lower 4 bits are the actual operator (from documentation of the
+      // data type)
+      int comp_mask = 0xf;
+      pkgCache::Dep::DepCompareOp t1 = (pkgCache::Dep::DepCompareOp) (d1->CompareOp & comp_mask);
+      pkgCache::Dep::DepCompareOp t2 = (pkgCache::Dep::DepCompareOp) (d2->CompareOp & comp_mask);
 
       int cmpresult = _system->VS->DoCmpVersion(d1.TargetVer(), d1.TargetVer()+strlen(d1.TargetVer()),
 						d2.TargetVer(), d2.TargetVer()+strlen(d2.TargetVer()));
