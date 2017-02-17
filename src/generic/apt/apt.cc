@@ -1143,7 +1143,7 @@ static bool subsumes(const pkgCache::DepIterator &d1,
 
       // the lower 4 bits are the actual operator (from documentation of the
       // data type)
-      int comp_mask = 0xf;
+      static const int comp_mask = 0xf;
       pkgCache::Dep::DepCompareOp t1 = (pkgCache::Dep::DepCompareOp) (d1->CompareOp & comp_mask);
       pkgCache::Dep::DepCompareOp t2 = (pkgCache::Dep::DepCompareOp) (d2->CompareOp & comp_mask);
 
