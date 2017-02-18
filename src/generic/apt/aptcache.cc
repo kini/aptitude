@@ -1,7 +1,7 @@
 // aptcache.cc
 //
 //  Copyright 1999-2009, 2011 Daniel Burrows
-//  Copyright 2015-2016 Manuel A. Fernandez Montecelo
+//  Copyright 2015-2017 Manuel A. Fernandez Montecelo
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -397,6 +397,13 @@ bool aptitudeDepCache::build_selection_list(OpProgress* Prog,
 
 	      pkg_state.remove_reason=(changed_reason)
 		section.FindI("Remove-Reason", manual);
+
+	      // marked as auto-installed from apt? -- bug #841347
+	      //
+	      // using PkgState[pkg->ID] because passing "pkg" needs
+	      // apt_cache_file initialised
+	      if (is_auto_installed(PkgState[pkg->ID]))
+		pkg_state.previously_auto_package = true;
 
 	      candver=section.FindS("Version");
 
