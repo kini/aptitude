@@ -1,7 +1,7 @@
 // cmdline_action.cc
 //
 //  Copyright 2004 Daniel Burrows
-//  Copyright 2015-2016 Manuel A. Fernandez Montecelo
+//  Copyright 2015-2017 Manuel A. Fernandez Montecelo
 
 #include "cmdline_action.h"
 #include "cmdline_util.h"
@@ -46,6 +46,13 @@ namespace
 				bool allow_auto,
                                 const std::shared_ptr<terminal_metrics> &term_metrics)
   {
+    // check for deb-src in sources.list or die -- needs to instantiate
+    {
+      pkgSrcRecords records(*apt_source_list);
+      aptitude::cmdline::on_apt_errors_print_and_die();
+    }
+
+
     aptitude::cmdline::source_package sourcepkg =
       aptitude::cmdline::find_source_package(pkg,
 					     version_source,
