@@ -2,7 +2,7 @@
 //
 //   Copyright (C) 2005, 2007-2008, 2010 Daniel Burrows
 //   Copyright (C) 2014 Daniel Hartwig
-//   Copyright (C) 2016 Manuel A. Fernandez Montecelo
+//   Copyright (C) 2016-2017 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -243,6 +243,10 @@ static bool load_tags_from_debtags(OpProgress *progress)
       const char *tagend = tagstart;
       while((*tagend) != '\0')
         ++tagend;
+      // remove last position, which is a newline (\n), and was later used as
+      // part of the tag string causing different problems -- see bug #853037
+      if (tagend > tagstart)
+	--tagend;
 
       tag_list ts(tagstart, tagend);
       for(tag_list::const_iterator t = ts.begin();

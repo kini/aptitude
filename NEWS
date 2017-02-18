@@ -13,6 +13,12 @@ Version 0.8.6 UNRELEASED
     Using a stricter mask to capture only the operators, as per the
     documentation of the enum (lower 4 bits).
 
+  * Fix reading tag and their classification in subtrees (Closes: #853037)
+
+    Newline characters were added to the last tag (or the only one), and it
+    caused extra problems like classifying the tag in their own subtree due to
+    the new-line mismatch in the tag name.
+
 - Translation updates:
 
   * ru.po: Russian translation by Lev Lamberov (Closes: #855329)
