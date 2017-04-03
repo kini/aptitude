@@ -1,13 +1,13 @@
 # Italian translation of aptitude-doc
 # Copyright (C) 2012 Free Software Foundation, Inc.
 # This file is distributed under the same license as the aptitude-doc package.
-# Beatrice Torracca <beatricet@libero.it>, 2012, 2014, 2015.
+# Beatrice Torracca <beatricet@libero.it>, 2012, 2014, 2015, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: aptitude-doc\n"
 "Report-Msgid-Bugs-To: aptitude-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2017-03-05 21:18+0100\n"
-"PO-Revision-Date: 2015-12-25 17:41+0200\n"
+"PO-Revision-Date: 2017-03-26 13:30+0200\n"
 "Last-Translator: Beatrice Torracca <beatricet@libero.it>\n"
 "Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
 "Language: it\n"
@@ -45,7 +45,7 @@ msgstr "<systemitem class=\"username\">root</systemitem>"
 #. type: Content of the VERSION entity
 #: en/aptitude.xml:10
 msgid "0.8.6"
-msgstr ""
+msgstr "0.8.6"
 
 #. type: Content of the actions-install entity
 #: en/aptitude.xml:14
@@ -72,8 +72,8 @@ msgid ""
 "<menuchoice><guimenu>Actions</guimenu><guimenuitem>Cancel pending actions</"
 "guimenuitem></menuchoice>"
 msgstr ""
-"<menuchoice><guimenu>Azioni</guimenu><guimenuitem>Annulla azioni in attesa</"
-"guimenuitem></menuchoice>"
+"<menuchoice><guimenu>Azioni</guimenu><guimenuitem>Annulla azioni in "
+"attesa</guimenuitem></menuchoice>"
 
 #. type: Content of the actions-forget entity
 #: en/aptitude.xml:17
@@ -380,8 +380,8 @@ msgid ""
 "<menuchoice><shortcut><keycap>N</keycap></shortcut><guimenu>Search</"
 "guimenu><guimenuitem>Find Again Backwards</guimenuitem></menuchoice>"
 msgstr ""
-"<menuchoice><shortcut><keycap>N</keycap></shortcut><guimenu>Cerca</"
-"guimenu><guimenuitem>Trova successivo all'indietro</guimenuitem></menuchoice>"
+"<menuchoice><shortcut><keycap>N</keycap></shortcut><guimenu>Cerca</guimenu><g"
+"uimenuitem>Trova successivo all'indietro</guimenuitem></menuchoice>"
 
 #. type: Content of the search-limit entity
 #: en/aptitude.xml:55
@@ -915,18 +915,16 @@ msgstr "mafm@debian.org"
 
 #. type: Content of: <book><bookinfo><authorgroup><author><contrib>
 #: en/aptitude.xml:156
-#, fuzzy
 #| msgid "Added documentation about new features, corrections and formatting."
 msgid ""
 "Main maintainer after Daniel Burrows, documentation about new features, "
 "corrections and formatting."
 msgstr ""
-"Aggiunta di documentazione sulle nuove funzionalità, correzioni e "
-"formattazione."
+"Manutentore principale dopo Daniel Burrows, documentazione sulle nuove "
+"funzionalità, correzioni e formattazione."
 
 #. type: Content of: <book><bookinfo>
 #: en/aptitude.xml:160
-#, fuzzy
 #| msgid ""
 #| "<copyright> <year>2004-2011</year> <holder>Daniel Burrows</holder> "
 #| "<year>2012-2015</year> <holder>Manuel A. Fernandez Montecelo</holder> </"
@@ -937,8 +935,8 @@ msgid ""
 "copyright>"
 msgstr ""
 "<copyright> <year>2004-2011</year> <holder>Daniel Burrows</holder> "
-"<year>2012-2015</year> <holder>Manuel A. Fernandez Montecelo</holder> </"
-"copyright>"
+"<year>2012-2016</year> <holder>Manuel A. Fernandez Montecelo</holder> "
+"</copyright>"
 
 #. type: Content of: <book><bookinfo><legalnotice><para>
 #: en/aptitude.xml:169
@@ -4197,6 +4195,10 @@ msgid ""
 "removals, upgrades, holds, marking as automatically installed...).  This is "
 "roughly equivalent to restart the program."
 msgstr ""
+"Cancella tutte le azioni in attesa da questa sessione (inclusi "
+"installazioni, rimozioni, aggiornamenti, blocchi, contrassegni come "
+"automaticamente installati...). È all'incirca equivalente a riavviare il "
+"programma."
 
 #. type: Content of: <book><chapter><section><section><section><figure><informaltable><tgroup><tbody><row><entry>
 #: en/aptitude.xml:2247
@@ -7064,12 +7066,12 @@ msgstr ""
 "possibile sovrascrivere questi rifiuti, permettendo perciò che il blocco o "
 "la proibizione vengano automaticamente ignorati, nello stesso modo in cui si "
 "ignora ogni altro rifiuto. Impostando l'opzione di configurazione <link "
-"linkend='configProblemResolver-Allow-Break-Holds'><literal>Aptitude::"
-"ProblemResolver::Allow-Break-Holds</literal></link> a <literal>true</"
-"literal> si disabilita questo comportamento, il che significa che il "
-"risolutore infrange sempre i blocchi (anche se con una penalità: vedere "
-"<link linkend='configProblemResolver-BreakHoldScore'><literal>Aptitude::"
-"ProblemResolver::BreakHoldScore</literal></link>)."
+"linkend='configProblemResolver-Allow-Break-"
+"Holds'><literal>Aptitude::ProblemResolver::Allow-Break-Holds</literal></link>"
+" a <literal>true</literal> si disabilita questo comportamento, il che "
+"significa che il risolutore infrange sempre i blocchi (anche se con una "
+"penalità: vedere <link linkend='configProblemResolver-BreakHoldScore'><litera"
+"l>Aptitude::ProblemResolver::BreakHoldScore</literal></link>)."
 
 #. type: Content of: <book><chapter><section><section><para>
 #: en/aptitude.xml:4405
@@ -7832,6 +7834,12 @@ msgid ""
 "ranked higher than keeping the same packages, even if the package was to be "
 "upgraded."
 msgstr ""
+"La soluzione che annulla tutte le azioni dell'utente. Una volta era più alta "
+"di <literal><link linkend='configProblemResolver-Remove-"
+"Level'>Aptitude::ProblemResolver::Remove-Level</link></literal>, ma alla "
+"rimozione dei pacchetti veniva assegnata una posizione più alta del "
+"mantenere gli stessi pacchetti, anche se il pacchetto doveva essere "
+"aggiornato."
 
 #. type: Content of: <book><chapter><section><section><section><table><tgroup><tbody><row><entry>
 #: en/aptitude.xml:4880
@@ -8802,8 +8810,8 @@ msgid ""
 msgstr ""
 "I lettori attenti avranno notato che questo è essenzialmente un modo per "
 "indicare esplicitamente la variabile nei &lambda;-termini corrispondenti al "
-"termine. Un termine tipico ha la forma <quote>&lambda; <replaceable>x</"
-"replaceable> . name-equals(<replaceable>x</replaceable>, "
+"termine. Un termine tipico ha la forma <quote>&lambda; "
+"<replaceable>x</replaceable> . name-equals(<replaceable>x</replaceable>, "
 "<replaceable>modello</replaceable>)</quote>; fornirgli un bersaglio "
 "esplicito rende <replaceable>x</replaceable> visibile nel linguaggio di "
 "ricerca."
@@ -9351,8 +9359,8 @@ msgid ""
 "Select essential packages, those with <literal>Essential: yes</literal> in "
 "their control files."
 msgstr ""
-"Seleziona i pacchetti essenziali, quelli con <literal>Essential: yes</"
-"literal> nei loro file di controllo."
+"Seleziona i pacchetti essenziali, quelli con <literal>Essential: "
+"yes</literal> nei loro file di controllo."
 
 #. type: Content of: <book><chapter><section><section><table><tgroup><tbody><row><entry>
 #: en/aptitude.xml:5854
@@ -9692,10 +9700,9 @@ msgstr "<literal>&Ssource-package;(<replaceable>nome</replaceable>)</literal>"
 
 #. type: Content of: <book><chapter><section><section><table><tgroup><tbody><row><entry>
 #: en/aptitude.xml:6021
-#, fuzzy
 #| msgid "<literal>~G<replaceable>tag</replaceable></literal>"
 msgid "<literal>~e<replaceable>name</replaceable></literal>"
-msgstr "<literal>~G<replaceable>etichetta</replaceable></literal>"
+msgstr "<literal>~e<replaceable>nome</replaceable></literal>"
 
 #. type: Content of: <book><chapter><section><section><table><tgroup><tbody><row><entry>
 #: en/aptitude.xml:6023
@@ -10197,10 +10204,16 @@ msgid ""
 "versions that match, not all versions of the package for which any version "
 "matches.  For that, use an enclosing &Swiden;."
 msgstr ""
+"Per essere precisi, come con ogni altro modello, non vengono trovate "
+"corrispondenze con i pacchetti, ma con versioni dei pacchetti. Per "
+"<quote><literal>aptitude search</literal></quote> e altri usi ciò non fa "
+"molta differenza, ma <quote><literal>aptitude versions</literal></quote> "
+"mostrerà solo le versioni che corrispondono, non tutte le versioni di un "
+"pacchetto per cui una qualsiasi versione corrisponde. Per quello usare "
+"l'inclusione in &Swiden;."
 
 #. type: Content of: <book><chapter><section><section><variablelist><varlistentry><term>
 #: en/aptitude.xml:6375
-#, fuzzy
 #| msgid ""
 #| "<literal>?architecture(<replaceable>architecture</replaceable>)</"
 #| "literal>, <literal>~r<replaceable>architecture</replaceable></literal>"
@@ -10213,7 +10226,6 @@ msgstr ""
 
 #. type: Content of: <book><chapter><section><section><variablelist><varlistentry><listitem><para>
 #: en/aptitude.xml:6379
-#, fuzzy
 #| msgid ""
 #| "Matches package versions for the given <replaceable>architecture</"
 #| "replaceable>.  For instance, <quote><literal>?architecture(amd64)</"
@@ -10227,13 +10239,12 @@ msgid ""
 "quote> matches <literal>amd64</literal> packages, while <quote><literal>?"
 "architecture(all)</literal></quote> matches arch-independent packages."
 msgstr ""
-"Trova corrispondenza con le versioni di pacchetto per "
-"l<replaceable>architettura</replaceable> specificata. Per esempio, "
+"Trova corrispondenza con le versioni per "
+"l'<replaceable>architettura</replaceable> specificata. Per esempio, "
 "<quote><literal>?architecture(amd64)</literal></quote> trova corrispondenza "
-"con i pacchetti per <literal>amd64</literal>, mentre <quote><literal>?"
-"architecture(all)</literal></quote> trova corrispondenza con i pacchetti "
-"indipendenti dall'architettura. Accetta anche i valori speciali "
-"<literal>native</literal> e <literal>foreign</literal>."
+"con i pacchetti per <literal>amd64</literal>, mentre "
+"<quote><literal>?architecture(all)</literal></quote> trova corrispondenza "
+"con i pacchetti indipendenti dall'architettura."
 
 #. type: Content of: <book><chapter><section><section><variablelist><varlistentry><listitem><para>
 #: en/aptitude.xml:6388
@@ -10243,6 +10254,11 @@ msgid ""
 "any</literal> or <literal>any-amd64</literal>), as specified in Policy "
 "(<quote>11.1 Architecture specification strings</quote>)."
 msgstr ""
+"Accetta anche i valori speciali <literal>native</literal> e "
+"<literal>foreign</literal> e le espressioni jolly per l'architettura (es. "
+"<literal>linux-any</literal> o <literal>any-amd64</literal>), come "
+"specificato nella Policy (<quote>11.1 Architecture specification "
+"strings</quote>)."
 
 #. type: Content of: <book><chapter><section><section><variablelist><varlistentry><term>
 #: en/aptitude.xml:6398
@@ -10966,7 +10982,6 @@ msgstr ""
 
 #. type: Content of: <book><chapter><section><section><variablelist><varlistentry><term>
 #: en/aptitude.xml:6905
-#, fuzzy
 #| msgid ""
 #| "<literal>?name(<replaceable>name</replaceable>)</literal>, "
 #| "<literal>~n<replaceable>name</replaceable></literal>"
@@ -10974,8 +10989,8 @@ msgid ""
 "<literal>?source-package(<replaceable>name</replaceable>)</literal>, "
 "<literal>~e<replaceable>name</replaceable></literal>"
 msgstr ""
-"<literal>?name(<replaceable>nome</replaceable>)</literal>, "
-"<literal>~n<replaceable>nome</replaceable></literal>"
+"<literal>?source-package(<replaceable>nome</replaceable>)</literal>, "
+"<literal>~e<replaceable>nome</replaceable></literal>"
 
 #. type: Content of: <book><chapter><section><section><variablelist><varlistentry><listitem><para>
 #: en/aptitude.xml:6910
@@ -11156,6 +11171,10 @@ msgid ""
 "(with actions such as <literal>safe-upgrade</literal> or <literal>full-"
 "upgrade</literal>)."
 msgstr ""
+"Notare che questo controlla solamente se ci sono aggiornamenti disponibili "
+"per un pacchetto, non se un aggiornamento <emphasis>può</emphasis> essere "
+"effettuato (con azioni come <literal>safe-upgrade</literal> o <literal>full-"
+"upgrade</literal>)."
 
 #. type: Content of: <book><chapter><section><section><variablelist><varlistentry><listitem><note><para>
 #: en/aptitude.xml:7052
@@ -11164,6 +11183,10 @@ msgid ""
 "maybe the upgraded versions of a subset conflict with each other, so they "
 "cannot be co-installed or not all of them upgraded at the same time."
 msgstr ""
+"Per esempio potrebbero esserci aggiornamenti disponibili per diversi "
+"pacchetti, ma forse le versioni aggiornate di un sottoinsieme vanno in "
+"conflitto l'una con l'altra perciò non possono essere installate insieme o "
+"non tutte aggiornate contemporaneamente."
 
 #. type: Content of: <book><chapter><section><section><variablelist><varlistentry><term>
 #: en/aptitude.xml:7063
@@ -11379,15 +11402,15 @@ msgid ""
 "that the resulting columns might not line up vertically!"
 msgstr ""
 "Tutti i codici <literal>%</literal> vengono forniti con una dimensione "
-"predefinita o con espandibilità. La dimensione di un codice <literal>%</"
-"literal> può essere modificata scrivendola tra il carattere <literal>%</"
-"literal> e il carattere che identifica il codice; per esempio, <literal>"
-"%20V</literal> genera la <link linkend='formatCandVer'>versione candidata</"
-"link> del pacchetto con una larghezza di 20 caratteri. Se si mette un punto "
-"interrogativo (<literal>?</literal>) tra il <literal>%</literal> e il "
-"carattere che identifica il codice, la larghezza <quote>base</quote> della "
-"colonna varia a seconda del suo contenuto. Notare che le colonne risultanti "
-"potrebbero non essere allineate verticalmente!"
+"predefinita o con espandibilità. La dimensione di un codice "
+"<literal>%</literal> può essere modificata scrivendola tra il carattere "
+"<literal>%</literal> e il carattere che identifica il codice; per esempio, "
+"<literal>%20V</literal> genera la <link linkend='formatCandVer'>versione "
+"candidata</link> del pacchetto con una larghezza di 20 caratteri. Se si "
+"mette un punto interrogativo (<literal>?</literal>) tra il "
+"<literal>%</literal> e il carattere che identifica il codice, la larghezza "
+"<quote>base</quote> della colonna varia a seconda del suo contenuto. Notare "
+"che le colonne risultanti potrebbero non essere allineate verticalmente!"
 
 #. type: Content of: <book><chapter><section><section><section><para>
 #: en/aptitude.xml:7227
@@ -13263,7 +13286,7 @@ msgstr "<literal>CollapseTree</literal>"
 #. type: Content of: <book><chapter><section><section><informaltable><tgroup><tbody><row><entry>
 #: en/aptitude.xml:8432
 msgid "left"
-msgstr ""
+msgstr "sinistra"
 
 #. type: Content of: <book><chapter><section><section><informaltable><tgroup><tbody><row><entry>
 #: en/aptitude.xml:8434
@@ -13615,7 +13638,7 @@ msgstr "<literal>ExpandTree</literal>"
 #. type: Content of: <book><chapter><section><section><informaltable><tgroup><tbody><row><entry>
 #: en/aptitude.xml:8618
 msgid "right"
-msgstr ""
+msgstr "destra"
 
 #. type: Content of: <book><chapter><section><section><informaltable><tgroup><tbody><row><entry>
 #: en/aptitude.xml:8620
@@ -13874,7 +13897,6 @@ msgstr "<literal>U</literal>"
 
 #. type: Content of: <book><chapter><section><section><informaltable><tgroup><tbody><row><entry>
 #: en/aptitude.xml:8759
-#, fuzzy
 #| msgid ""
 #| "Attempts to upgrade all packages which are not held back or forbidden "
 #| "from upgrading."
@@ -13883,7 +13905,8 @@ msgid ""
 "upgrading.  It also installs new Essential or Required packages."
 msgstr ""
 "Cerca di aggiornare tutti i pacchetti che non sono bloccati o per i quali "
-"non è proibito l'aggiornamento."
+"non è proibito l'aggiornamento. Installa anche i nuovi pacchetti essenziali "
+"o richiesti (Essential e Required)."
 
 #. type: Content of: <book><chapter><section><section><informaltable><tgroup><tbody><row><entry>
 #: en/aptitude.xml:8766
@@ -14028,10 +14051,9 @@ msgstr "<literal>Parent</literal>"
 
 #. type: Content of: <book><chapter><section><section><informaltable><tgroup><tbody><row><entry>
 #: en/aptitude.xml:8848
-#, fuzzy
 #| msgid "<literal>ForgetNewPackages</literal>"
 msgid "<literal>^, left (in package items)</literal>"
-msgstr "<literal>ForgetNewPackages</literal>"
+msgstr "<literal>^, sinistra (in voci di pacchetto)</literal>"
 
 #. type: Content of: <book><chapter><section><section><informaltable><tgroup><tbody><row><entry>
 #: en/aptitude.xml:8850
@@ -14040,6 +14062,9 @@ msgid ""
 "<literal>left</literal> is used only in package items (rows) when showing "
 "trees of packages."
 msgstr ""
+"Seleziona il genitore di una voce selezionata in un elenco gerarchico. Il "
+"tasto <literal>sinistra</literal> viene usato solo in voci di pacchetto "
+"(righe) quando sono mostrati alberi di pacchetti."
 
 #. type: Content of: <book><chapter><section><section><informaltable><tgroup><tbody><row><entry>
 #: en/aptitude.xml:8857
@@ -17370,7 +17395,6 @@ msgstr "<literal>Aptitude::Autoclean-After-Update</literal>"
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:10965
-#, fuzzy
 #| msgid ""
 #| "If this option is <literal>true</literal>, &aptitude; will clean up "
 #| "obsolete files (see <link linkend='menuCleanObs'>&actions-clean-obs;</"
@@ -17384,7 +17408,9 @@ msgid ""
 msgstr ""
 "Se questa opzione è <literal>true</literal>, &aptitude; ripulisce i file "
 "obsoleti (vedere <link linkend='menuCleanObs'>&actions-clean-obs;</link>) "
-"ogni volta che si aggiorna l'elenco dei pacchetti)."
+"ogni volta che si aggiorna l'elenco dei pacchetti. Questa opzione è simile a "
+"<literal><link linkend='configClean-After-Install'>Aptitude::Clean-After-"
+"Install</link></literal>."
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:10976
@@ -17453,10 +17479,9 @@ msgstr ""
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:11021
-#, fuzzy
 #| msgid "<literal>Aptitude::Auto-Install</literal>"
 msgid "<literal>Aptitude::Clean-After-Install</literal>"
-msgstr "<literal>Aptitude::Auto-Install</literal>"
+msgstr "<literal>Aptitude::Clean-After-Install</literal>"
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:11024
@@ -17468,6 +17493,12 @@ msgid ""
 "linkend='configAutoclean-After-Update'>Aptitude::Autoclean-After-Update</"
 "link></literal>."
 msgstr ""
+"Se questa opzione è <literal>true</literal>, &aptitude; ripulisce tutti i "
+"file nella directory della cache dei pacchetti (vedere <link "
+"linkend='menuClean'>&actions-clean;</link>) dopo l'installazione con "
+"successo di pacchetto (o operazioni simili). Questa opzione è simile a "
+"<literal><link linkend='configAutoclean-After-Update'>Aptitude::Autoclean-"
+"After-Update</link></literal>."
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:11035
@@ -18295,10 +18326,9 @@ msgstr "<literal>Aptitude::LockFile</literal>"
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:11592
-#, fuzzy
 #| msgid "<filename>/var/log/aptitude</filename>"
 msgid "<filename>/var/lock/aptitude</filename>"
-msgstr "<filename>/var/log/aptitude</filename>"
+msgstr "<filename>/var/lock/aptitude</filename>"
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:11595
@@ -18324,10 +18354,9 @@ msgstr ""
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:11610
-#, fuzzy
 #| msgid "<literal>Aptitude::Log</literal>"
 msgid "<literal>Aptitude::Localize-Log</literal>"
-msgstr "<literal>Aptitude::Log</literal>"
+msgstr "<literal>Aptitude::Localize-Log</literal>"
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:11615
@@ -18337,6 +18366,11 @@ msgid ""
 "\" locale, to avoid having the log file written in different languages "
 "(depending on the locales of the users running the program)."
 msgstr ""
+"Se questa opzione viene abilitata, &aptitude; usa la localizzazione "
+"dell'utente per i messaggi e le date nel file di log; altrimenti vengono "
+"scritti nella localizzazione «classica» per evitare che il file di log venga "
+"scritto in diverse lingue (a seconda delle localizzazioni degli utenti che "
+"eseguono il programma)."
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:11624
@@ -18510,8 +18544,8 @@ msgstr ""
 "problemi prende in considerazione l'infrazione dei blocchi sui pacchetti o "
 "l'installazione di versioni proibite per poter risolvere una dipendenza. Se "
 "è impostata a <literal>false</literal>, queste azioni saranno rifiutate in "
-"modo predefinito, sebbene le si possa sempre abilitare manualmente (vedere "
-"<xref linkend='secResolver'/>)."
+"modo predefinito, sebbene le si possa sempre abilitare manualmente (vedere <"
+"xref linkend='secResolver'/>)."
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:11739
@@ -18536,8 +18570,8 @@ msgstr ""
 "Quanto premiare o penalizzare le soluzioni che modificano lo stato di un "
 "pacchetto bloccato o installano una versione proibita. Notare che, a meno "
 "che <link linkend='configProblemResolver-Allow-Break-"
-"Holds'><literal>Aptitude::ProblemResolver::Allow-Break-Holds</literal></"
-"link> non sia impostato a true, il risolutore non infrange mai un blocco o "
+"Holds'><literal>Aptitude::ProblemResolver::Allow-Break-Holds</literal></link>"
+" non sia impostato a true, il risolutore non infrange mai un blocco o "
 "installa una versione proibita se non ha il permesso esplicito dell'utente."
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
@@ -18588,14 +18622,12 @@ msgstr ""
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:11777
-#, fuzzy
 #| msgid "<literal>Aptitude::ProblemResolver::RemoveScore</literal>"
 msgid "<literal>Aptitude::ProblemResolver::CancelRemovalScore</literal>"
-msgstr "<literal>Aptitude::ProblemResolver::RemoveScore</literal>"
+msgstr "<literal>Aptitude::ProblemResolver::CancelRemovalScore</literal>"
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:11780
-#, fuzzy
 #| msgid ""
 #| "How much weight the problem resolver should give to removing a package "
 #| "(if it is not already marked for removal)."
@@ -18603,8 +18635,9 @@ msgid ""
 "How much weight the problem resolver should give to not remove or purge a "
 "package requested to be removed or purged."
 msgstr ""
-"Quanto peso debba dare il risolutore di problemi alla rimozione di un "
-"pacchetto, se il pacchetto non è già segnato per la rimozione."
+"Quanto peso debba dare il risolutore di problemi alla non rimozione o non "
+"eliminazione completa di un pacchetto per il quale è richiesta la rimozione "
+"o l'eliminazione completa."
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:11786
@@ -18948,10 +18981,9 @@ msgstr "<literal>Aptitude::ProblemResolver::PreserveManualScore</literal>"
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:11986
-#, fuzzy
 #| msgid "<literal>-20</literal>"
 msgid "<literal>20</literal>"
-msgstr "<literal>-20</literal>"
+msgstr "<literal>20</literal>"
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:11988
@@ -18964,21 +18996,18 @@ msgstr ""
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:11994
-#, fuzzy
 #| msgid "<literal>Aptitude::ProblemResolver::RemoveScore</literal>"
 msgid "<literal>Aptitude::ProblemResolver::RemoveObsoleteScore</literal>"
-msgstr "<literal>Aptitude::ProblemResolver::RemoveScore</literal>"
+msgstr "<literal>Aptitude::ProblemResolver::RemoveObsoleteScore</literal>"
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:11995
-#, fuzzy
 #| msgid "<literal>0</literal>"
 msgid "<literal>310</literal>"
-msgstr "<literal>0</literal>"
+msgstr "<literal>310</literal>"
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:11997
-#, fuzzy
 #| msgid ""
 #| "How much weight the problem resolver should give to removing a package "
 #| "(if it is not already marked for removal)."
@@ -18988,7 +19017,9 @@ msgid ""
 "counter RemoveScore, because it will still be applied."
 msgstr ""
 "Quanto peso debba dare il risolutore di problemi alla rimozione di un "
-"pacchetto, se il pacchetto non è già segnato per la rimozione."
+"pacchetto obsoleto, se il pacchetto non è già segnato per la rimozione. "
+"Dovrebbe come minimo controbilanciare RemoveScore perché verrà comunque "
+"applicato."
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:12005
@@ -19027,10 +19058,9 @@ msgstr "<literal>Aptitude::ProblemResolver::RequiredScore</literal>"
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:12027
-#, fuzzy
 #| msgid "<literal>!</literal>"
 msgid "<literal>8</literal>"
-msgstr "<literal>!</literal>"
+msgstr "<literal>8</literal>"
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:12030
@@ -19110,10 +19140,9 @@ msgstr "<literal>Aptitude::ProblemResolver::StandardScore</literal>"
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:12079
-#, fuzzy
 #| msgid "<literal>b2</literal>"
 msgid "<literal>2</literal>"
-msgstr "<literal>b2</literal>"
+msgstr "<literal>2</literal>"
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:12082
@@ -19169,14 +19198,12 @@ msgstr "<literal>Aptitude::ProblemResolver::StepScore</literal>"
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:12112
-#, fuzzy
 #| msgid "<literal>-100</literal>"
 msgid "<literal>-10</literal>"
-msgstr "<literal>-100</literal>"
+msgstr "<literal>-10</literal>"
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:12115
-#, fuzzy
 #| msgid ""
 #| "How much to reward or penalize prospective solutions based on their "
 #| "length.  For each action performed by a solution, this many points are "
@@ -19301,10 +19328,9 @@ msgstr "<literal>Aptitude::ProblemResolver::UpgradeScore</literal>"
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:12184
-#, fuzzy
 #| msgid "<literal>0</literal>"
 msgid "<literal>30</literal>"
-msgstr "<literal>0</literal>"
+msgstr "<literal>30</literal>"
 
 #. type: Content of: <book><chapter><section><section><section><segmentedlist><seglistitem><seg>
 #: en/aptitude.xml:12186
@@ -20950,8 +20976,8 @@ msgid ""
 msgstr ""
 "Questa sezione è per il momento piuttosto incompleta e verrà probabilmente "
 "aggiornata ed espansa con il tempo (in particolare mancano i ringraziamenti "
-"a molti traduttori a causa del grande numero di fonti delle traduzioni "
-"(<placeholder type=\"footnote\" id=\"0\"/>). Se si pensa che il proprio nome "
+"a molti traduttori a causa del grande numero di fonti delle traduzioni (<"
+"placeholder type=\"footnote\" id=\"0\"/>). Se si pensa che il proprio nome "
 "dovrebbe essere presente in questo elenco, mandare un messaggio di posta "
 "elettronica a <email>dburrows@debian.org</email> con una spiegazione del "
 "perché."
@@ -21202,7 +21228,7 @@ msgstr "Copyright 2004-2011 Daniel Burrows."
 #. type: Content of: <refentry><refentryinfo><legalnotice><para>
 #: en/manpage.xml:28
 msgid "Copyright 2014-2016 Manuel A. Fernandez Montecelo"
-msgstr ""
+msgstr "Copyright 2014-2016 Manuel A. Fernandez Montecelo"
 
 #. type: Content of: <refentry><refentryinfo><legalnotice><para>
 #: en/manpage.xml:32 en/manpage.xml:2538 en/manpage.xml:2748
@@ -21279,7 +21305,6 @@ msgstr ""
 
 #. type: Content of: <refentry><refsynopsisdiv><cmdsynopsis>
 #: en/manpage.xml:95
-#, fuzzy
 #| msgid ""
 #| "<command>aptitude</command> <arg choice='opt' "
 #| "rep='repeat'><replaceable>options</replaceable></arg> <group "
@@ -21308,13 +21333,14 @@ msgid ""
 "rep='repeat'><replaceable>packages</replaceable></arg>"
 msgstr ""
 "<command>aptitude</command> <arg choice='opt' "
-"rep='repeat'><replaceable>opzioni</replaceable></arg> <group choice='req'> "
-"<arg choice='plain'>build-dep</arg> <arg choice='plain'>build-depends</arg> "
-"<arg choice='plain'>changelog</arg> <arg choice='plain'>download</arg> <arg "
+"rep='repeat'><replaceable>opzioni</replaceable></arg> <group choice='req'> <"
+"arg choice='plain'>build-dep</arg> <arg choice='plain'>build-depends</arg> <"
+"arg choice='plain'>changelog</arg> <arg choice='plain'>download</arg> <arg "
 "choice='plain'>forbid-version</arg> <arg choice='plain'>hold</arg> <arg "
 "choice='plain'>install</arg> <arg choice='plain'>markauto</arg> <arg "
 "choice='plain'>purge</arg> <arg choice='plain'>reinstall</arg> <arg "
 "choice='plain'>remove</arg> <arg choice='plain'>show</arg> <arg "
+"choice='plain'>showsrc</arg> <arg choice='plain'>source</arg> <arg "
 "choice='plain'>unhold</arg> <arg choice='plain'>unmarkauto</arg> <arg "
 "choice='plain'>versions</arg> </group> <arg choice='plain' "
 "rep='repeat'><replaceable>pacchetti</replaceable></arg>"
@@ -21515,6 +21541,12 @@ msgid ""
 "preserved.  See the <link linkend='secAutoInstall'>section about automatic "
 "installations</link> in the documentation for more information."
 msgstr ""
+"Se il pacchetto non era installato viene contrassegnato come manualmente "
+"installato e alle nuove dipendenze installate viene impostato il "
+"contrassegno di automatiche. Se il pacchetto o le dipendenze erano già "
+"installate, viene preservato il contrassegno per i pacchetti automatici. Per "
+"maggiori informazioni vedere la <link linkend='secAutoInstall'>sezione sulle "
+"installazioni automatiche</link> nella documentazione."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><variablelist><varlistentry><term>
 #: en/manpage.xml:275
@@ -21642,7 +21674,6 @@ msgstr ""
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><note><para>
 #: en/manpage.xml:369
-#, fuzzy
 #| msgid ""
 #| "Once you enter <userinput>Y</userinput> at the final confirmation prompt, "
 #| "the <quote><literal>install</literal></quote> command will modify "
@@ -21668,14 +21699,16 @@ msgstr ""
 "comando <quote><literal>install</literal></quote> modifica le informazioni "
 "memorizzate da &aptitude; sulle azioni da effettuare. Perciò, se si "
 "inserisce (ad esempio) il comando <quote><literal>aptitude install pippo "
-"pluto</literal></quote> e poi si interrompe l'installazione una volta che "
-"&aptitude; ha già avviato lo scaricamento e l'installazione dei pacchetti, è "
-"necessario eseguire <quote><literal>aptitude remove pippo pluto</literal></"
-"quote> per annullare quell'ordine."
+"pluto</literal></quote> su pacchetti precedentemente non installati e poi "
+"l'installazione fallisce dopo che &aptitude; ha già avviato lo scaricamento "
+"e l'installazione dei pacchetti, è necessario eseguire <quote><literal>"
+"aptitude remove pippo pluto</literal></quote> per tornare allo stato "
+"precedente (ed eventualmente annullare installazioni o aggiornamenti di "
+"altri pacchetti che erano stato influenzati dall'azione "
+"<quote><literal>install</literal></quote>)."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: en/manpage.xml:388
-#, fuzzy
 #| msgid ""
 #| "<literal>ColExpand</literal> <literal>true</literal>|<literal>false;</"
 #| "literal>"
@@ -21683,8 +21716,8 @@ msgid ""
 "<literal>remove</literal>, <literal>purge</literal>, <literal>reinstall</"
 "literal>"
 msgstr ""
-"<literal>ColExpand</literal> <literal>true</literal>|<literal>false;</"
-"literal>"
+"<literal>remove</literal>, <literal>purge</literal>, "
+"<literal>reinstall</literal>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:392
@@ -21693,6 +21726,10 @@ msgid ""
 "but apply the named action to all packages given on the command line for "
 "which it is not <link linkend='parOverrideSpecifiers'>overridden</link>."
 msgstr ""
+"Questi comandi sono lo stesso di <quote><literal>install</literal></quote>, "
+"ma applicano l'azione specificata a tutti i pacchetti specificati nella riga "
+"di comando per i quali l'azione non è <link "
+"linkend='parOverrideSpecifiers'>scavalcata</link>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:400
@@ -21777,17 +21814,15 @@ msgstr ""
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: en/manpage.xml:457
-#, fuzzy
 #| msgid ""
 #| "<literal>f1</literal>, <literal>f2</literal>, ..., <literal>f10</literal>"
 msgid ""
 "<literal>hold</literal>, <literal>unhold</literal>, <literal>keep</literal>"
 msgstr ""
-"<literal>f1</literal>, <literal>f2</literal>, ..., <literal>f10</literal>"
+"<literal>hold</literal>, <literal>unhold</literal>, <literal>keep</literal>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:461
-#, fuzzy
 #| msgid ""
 #| "Mark packages as automatically installed or manually installed, "
 #| "respectively.  Packages are specified in exactly the same way as for the "
@@ -21803,16 +21838,15 @@ msgid ""
 "packages coming from the source package <quote><literal>dpkg</literal></"
 "quote> to be on hold."
 msgstr ""
-"Segna i pacchetti come installati automaticamente o manualmente, "
-"rispettivamente. I pacchetti devono essere specificati esattamente nello "
+"Segna i pacchetti come bloccati, rimuove questo contrassegno o li mantiene "
+"allo stato attuale. I pacchetti devono essere specificati esattamente nello "
 "stesso modo usato con il comando <quote><literal>install</literal></quote>. "
-"Per esempio, <quote><literal>aptitude markauto '~slibs'</literal></quote> "
-"segna tutti i pacchetti nella sezione <quote><literal>libs</literal></quote> "
-"come installati automaticamente."
+"Per esempio, <quote><literal>aptitude hold '~e^dpkg$'</literal></quote> "
+"segna tutti i pacchetti provenienti dal pacchetto sorgente "
+"<quote><literal>dpkg</literal></quote> come bloccati."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:470
-#, fuzzy
 #| msgid ""
 #| "These commands are the same as <quote><literal>install</literal></quote>, "
 #| "but apply the named action to all packages given on the command line for "
@@ -21838,19 +21872,15 @@ msgid ""
 "linkend='manpageFullUpgrade'><literal>full-upgrade</literal></link> "
 "commands, without otherwise altering its state."
 msgstr ""
-"Questi comandi sono simili a <quote><literal>install</literal></quote>, ma "
-"applicano l'azione indicata a tutti i pacchetti elencati nella riga di "
-"comando per i quali non è presente un altro <link "
-"linkend='parOverrideSpecifiers'>indicatore d'azione</link>. La differenza "
-"tra <literal>hold</literal> e <literal>keep</literal> è che <literal>hold</"
-"literal> fa sì che un pacchetto venga ignorato dai comandi <link "
-"linkend='manpageSafeUpgrade'><literal>safe-upgrade</literal></link> o <link "
-"linkend='manpageFullUpgrade'><literal>full-upgrade</literal></link> futuri, "
-"mentre <literal>keep</literal> annulla semplicemente qualsiasi azione "
-"pianificata sul pacchetto. <literal>unhold</literal> permette "
-"l'aggiornamento del pacchetto da parte dei comandi <literal>safe-upgrade</"
-"literal> o <link linkend='manpageFullUpgrade'><literal>full-upgrade</"
-"literal></link> futuri, senza alterarne in alcun modo lo stato."
+"La differenza tra <literal>hold</literal> e <literal>keep</literal> è che "
+"<literal>hold</literal> fa sì che un pacchetto venga ignorato dai comandi <"
+"link linkend='manpageSafeUpgrade'><literal>safe-upgrade</literal></link> o <"
+"link linkend='manpageFullUpgrade'><literal>full-upgrade</literal></link> "
+"futuri, mentre <literal>keep</literal> annulla semplicemente qualsiasi "
+"azione pianificata sul pacchetto. <literal>unhold</literal> permette "
+"l'aggiornamento del pacchetto da parte dei comandi <literal>safe-"
+"upgrade</literal> o <link linkend='manpageFullUpgrade'><literal>full-"
+"upgrade</literal></link> futuri, senza alterarne in alcun modo lo stato."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: en/manpage.xml:487
@@ -21886,7 +21916,6 @@ msgstr ""
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:509
-#, fuzzy
 #| msgid ""
 #| "Install one or more packages.  The packages should be listed after the "
 #| "<quote>install</quote> command; if a package name contains a tilde "
@@ -21903,12 +21932,11 @@ msgid ""
 "(see the section <link linkend='secSearchPatterns'><quote>Search Patterns</"
 "quote></link> in the &aptitude; reference manual)."
 msgstr ""
-"Installa uno o più pacchetti. I pacchetti devono essere elencati dopo il "
-"comando <quote>install</quote>; se un nome di pacchetto contiene un "
-"carattere tilde (<quote><literal>~</literal></quote>) o un punto "
-"interrogativo (<quote><literal>?</literal></quote>) viene interpretato come "
-"un modello di ricerca e viene quindi installato ogni pacchetto che "
-"corrisponde al modello (vedere la sezione <link "
+"Questo comando accetta come argomenti nomi di pacchetto o modelli. Se la "
+"stringa contiene un carattere tilde (<quote><literal>~</literal></quote>) o "
+"un punto interrogativo (<quote><literal>?</literal></quote>) viene "
+"interpretata come un modello di ricerca e viene quindi considerato ogni "
+"pacchetto che corrisponde al modello (vedere la sezione <link "
 "linkend='secSearchPatterns'><quote>Modelli di ricerca</quote></link> nel "
 "manuale di riferimento di &aptitude;)."
 
@@ -21925,10 +21953,13 @@ msgid ""
 "a known broken version of a package, without having to set and clear manual "
 "holds."
 msgstr ""
+"Proibisce che un pacchetto venga aggiornato ad una particolare versione, "
+"permettendo comunque gli aggiornamenti automatici a versioni future. È "
+"utile, ad esempio, per evitare una versione notoriamente difettosa di un "
+"pacchetto, senza dovere impostare e rimuovere manualmente blocchi."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:533
-#, fuzzy
 #| msgid ""
 #| "Forbid a package from being upgraded to a particular version.  This will "
 #| "prevent &aptitude; from automatically upgrading to this version, but will "
@@ -21945,14 +21976,12 @@ msgid ""
 "literal></quote> to the package name: for instance, <quote><literal>aptitude "
 "forbid-version vim=1.2.3.broken-4</literal></quote>."
 msgstr ""
-"Impedisce che un pacchetto venga aggiornato ad una specifica versione; ciò "
-"fa sì che &aptitude; non aggiorni automaticamente a questa versione, ma "
-"permette gli aggiornamenti automatici alle versioni future. In modo "
-"predefinito &aptitude; seleziona la versione alla quale il pacchetto "
-"verrebbe normalmente aggiornato; si può specificare una selezione diversa "
-"aggiungendo <quote><literal>=<replaceable>versione</replaceable></literal></"
-"quote> dopo il nome di pacchetto: per esempio, <quote><literal>aptitude "
-"forbid-version vim=1.2.3.broken-4</literal></quote>."
+"In modo predefinito &aptitude; seleziona come versione proibita quella alla "
+"quale il pacchetto verrebbe normalmente aggiornato (la versione candidata). "
+"Ciò si può modificare aggiungendo "
+"<quote><literal>=<replaceable>versione</replaceable></literal></quote> dopo "
+"il nome di pacchetto: per esempio, <quote><literal>aptitude forbid-version "
+"vim=1.2.3.broken-4</literal></quote>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:542
@@ -21963,6 +21992,12 @@ msgid ""
 "be appended: <quote>install <replaceable>package</"
 "replaceable><literal>=<replaceable>version</replaceable></literal></quote>."
 msgstr ""
+"Per invertire l'azione, <quote><literal>aptitude install "
+"<replaceable>pacchetto</replaceable></literal></quote> rimuove la "
+"proibizione. Per rimuovere il bando sulla versione senza installare la "
+"versione candidata si deve aggiungere la versione attuale: <quote>install <re"
+"placeable>pacchetto</replaceable><literal>=<replaceable>versione</replaceable"
+"></literal></quote>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: en/manpage.xml:553
@@ -22048,7 +22083,6 @@ msgstr "<literal>full-upgrade</literal>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:611
-#, fuzzy
 #| msgid ""
 #| "Upgrades installed packages to their most recent version, removing or "
 #| "installing packages as necessary.  This command is less conservative than "
@@ -22067,12 +22101,12 @@ msgid ""
 "upgrade</literal></link> cannot upgrade."
 msgstr ""
 "Aggiorna i pacchetti installati alla loro versione più recente, se "
-"necessario rimuovendo o installando pacchetti. Questo comando è meno "
-"conservativo di <link linkend='manpageSafeUpgrade'><literal>safe-upgrade</"
-"literal></link> e perciò è più probabile che effettui azioni non desiderate. "
-"Tuttavia è in grado di aggiornare pacchetti che <link "
-"linkend='manpageSafeUpgrade'><literal>safe-upgrade</literal></link> non può "
-"aggiornare."
+"necessario rimuovendo o installando pacchetti. Installa anche i nuovi "
+"pacchetti essenziali o richiesti Questo comando è meno conservativo di <link "
+"linkend='manpageSafeUpgrade'><literal>safe-upgrade</literal></link> e perciò "
+"è più probabile che effettui azioni non desiderate. Tuttavia è in grado di "
+"aggiornare pacchetti che <link linkend='manpageSafeUpgrade'><literal>safe-"
+"upgrade</literal></link> non può aggiornare."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:623
@@ -22288,11 +22322,11 @@ msgstr ""
 "Si possono visualizzare informazioni su una versione diversa del pacchetto "
 "aggiungendo <literal>=<replaceable>versione</replaceable></literal> al nome "
 "del pacchetto; si può visualizzare la versione da uno specifico archivio o "
-"rilascio aggiungendo in fondo al nome del pacchetto <literal>/"
-"<replaceable>archivio</replaceable></literal> o <literal>/"
-"<replaceable>rilascio</replaceable></literal>: per esempio, <literal>/"
-"unstable</literal> o <literal>/sid</literal>. Se è presente una di queste "
-"due aggiunte, allora viene mostrata solo la versione richiesta "
+"rilascio aggiungendo in fondo al nome del pacchetto "
+"<literal>/<replaceable>archivio</replaceable></literal> o "
+"<literal>/<replaceable>rilascio</replaceable></literal>: per esempio, "
+"<literal>/unstable</literal> o <literal>/sid</literal>. Se è presente una di "
+"queste due aggiunte, allora viene mostrata solo la versione richiesta "
 "indipendentemente dal livello di prolissità."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
@@ -22311,22 +22345,18 @@ msgstr ""
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: en/manpage.xml:783
-#, fuzzy
 #| msgid "<literal>show</literal>"
 msgid "<literal>showsrc</literal>"
-msgstr "<literal>show</literal>"
+msgstr "<literal>showsrc</literal>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:787
-#, fuzzy
 #| msgid "Displays the available versions of the currently selected package."
 msgid "Displays detailed information about one or more source packages."
-msgstr ""
-"Visualizza le versioni disponibili del pacchetto attualmente selezionato."
+msgstr "Visualizza informazioni dettagliate su uno o più pacchetti sorgente."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:791 en/manpage.xml:806 en/manpage.xml:1095
-#, fuzzy
 #| msgid ""
 #| "For more information on the format of the configuration file, see the "
 #| "manual page <citerefentry><refentrytitle>apt.conf</"
@@ -22335,16 +22365,14 @@ msgid ""
 "This is a thin wrapper over <citerefentry><refentrytitle>apt</"
 "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
 msgstr ""
-"Per maggiori informazioni sul formato del file di configurazione, vedere la "
-"pagina di manuale <citerefentry><refentrytitle>apt.conf</"
-"refentrytitle><manvolnum>5</manvolnum></citerefentry>."
+"Questo è un wrapper sottile intorno a <citerefentry><refentrytitle>apt</refen"
+"trytitle><manvolnum>8</manvolnum></citerefentry>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:802
-#, fuzzy
 #| msgid "Group based on the source package name."
 msgid "Downloads one or more source packages."
-msgstr "Raggruppa in base al nome del pacchetto sorgente."
+msgstr "Scarica uno o più pacchetti sorgente."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: en/manpage.xml:813
@@ -22635,7 +22663,6 @@ msgstr ""
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:974
-#, fuzzy
 #| msgid ""
 #| "If one or more <replaceable>pattern</replaceable>s are present, then "
 #| "&aptitude; will begin its search at these patterns; that is, the first "
@@ -22659,13 +22686,16 @@ msgid ""
 "the section <quote><link linkend='secSearchPatterns'>Search Patterns</link></"
 "quote> in the &aptitude; reference manual)."
 msgstr ""
-"Se sono presenti uno o più <replaceable>modelli</replaceable>, allora "
-"&aptitude; inizia la sua ricerca da questi modelli; cioè il primo pacchetto "
-"nella catena visualizzata è un pacchetto che corrisponde al modello in "
-"questione. I modelli vengono trattati come nomi di pacchetti a meno che non "
-"contengano un carattere tilde (<quote><literal>~</literal></quote>) o un "
-"punto interrogativo (<quote><literal>?</literal></quote>), nel qual caso "
-"vengono trattati come modelli di ricerca (vedere la sezione <quote><link "
+"Se sono presenti uno o più <replaceable>modelli</replaceable> (oltre "
+"all'ultimo argomento obbligatorio che deve essere un nome valido di "
+"<replaceable>pacchetto</replaceable>), allora &aptitude; inizia la sua "
+"ricerca da questi modelli; cioè il primo pacchetto nella catena visualizzata "
+"per spiegare perché <replaceable>pacchetto</replaceable> è installato o "
+"meno, è un pacchetto che corrisponde al modello in questione. I modelli "
+"vengono trattati come nomi di pacchetti a meno che non contengano un "
+"carattere tilde (<quote><literal>~</literal></quote>) o un punto "
+"interrogativo (<quote><literal>?</literal></quote>), nel qual caso vengono "
+"trattati come modelli di ricerca (vedere la sezione <quote><link "
 "linkend='secSearchPatterns'>Modelli di ricerca</link></quote> nel manuale di "
 "riferimento di &aptitude;)."
 
@@ -22804,8 +22834,8 @@ msgstr ""
 "pacchetto; si può selezionare la versione da uno specifico archivio o "
 "rilascio aggiungendo <literal>/<replaceable>archivio</replaceable></literal> "
 "o <literal>/<replaceable>rilascio</replaceable></literal> dopo il nome di "
-"pacchetto (ad esempio, <literal>/unstable</literal> o <literal>/sid</"
-"literal>)."
+"pacchetto (ad esempio, <literal>/unstable</literal> o "
+"<literal>/sid</literal>)."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: en/manpage.xml:1086
@@ -22818,6 +22848,8 @@ msgid ""
 "Downloads the <literal>.deb</literal> file for the given package to the "
 "current directory."
 msgstr ""
+"Scarica nella directory corrente il file <literal>.deb</literal> per il "
+"pacchetto specificato."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: en/manpage.xml:1102
@@ -22906,14 +22938,15 @@ msgid ""
 msgstr ""
 "Per <literal>full-upgrade</literal>, <literal>safe-upgrade</literal>, "
 "<literal>forbid-version</literal>, <literal>hold</literal>, "
-"<literal>install</literal>, <literal>keep-all</literal>, <literal>markauto</"
-"literal>, <literal>unmarkauto</literal>, <literal>purge</literal>, "
-"<literal>reinstall</literal>, <literal>remove</literal>, <literal>unhold</"
-"literal> e <literal>unmarkauto</literal>: aggiunge l'etichetta utente "
+"<literal>install</literal>, <literal>keep-all</literal>, "
+"<literal>markauto</literal>, <literal>unmarkauto</literal>, "
+"<literal>purge</literal>, <literal>reinstall</literal>, "
+"<literal>remove</literal>, <literal>unhold</literal> e "
+"<literal>unmarkauto</literal>: aggiunge l'etichetta utente "
 "<replaceable>etichetta</replaceable> a tutti i pacchetti che vengono "
 "installati, rimossi o aggiornati dal comando, come se si fosse usato il "
-"comando <link linkend='cmdlineAddOrRemoveUserTags'><literal>add-user-tag</"
-"literal></link>."
+"comando <link linkend='cmdlineAddOrRemoveUserTags'><literal>add-user-"
+"tag</literal></link>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: en/manpage.xml:1174
@@ -22940,18 +22973,19 @@ msgid ""
 "<quote><link linkend='secSearchPatterns'>Search Patterns</link></quote> in "
 "the &aptitude; reference manual."
 msgstr ""
-"Per <literal>full-upgrade</literal>, <literal>safe-upgrade</literal> "
-"<literal>forbid-version</literal>, <literal>hold</literal>, "
-"<literal>install</literal>, <literal>keep-all</literal>, <literal>markauto</"
-"literal>, <literal>unmarkauto</literal>, <literal>purge</literal>, "
-"<literal>reinstall</literal>, <literal>remove</literal>, <literal>unhold</"
-"literal> e <literal>unmarkauto</literal>: aggiunge l'etichetta utente "
+"Per <literal>full-upgrade</literal>, <literal>safe-upgrade</literal> <literal"
+">forbid-version</literal>, <literal>hold</literal>, "
+"<literal>install</literal>, <literal>keep-all</literal>, "
+"<literal>markauto</literal>, <literal>unmarkauto</literal>, "
+"<literal>purge</literal>, <literal>reinstall</literal>, "
+"<literal>remove</literal>, <literal>unhold</literal> e "
+"<literal>unmarkauto</literal>: aggiunge l'etichetta utente "
 "<replaceable>etichetta</replaceable> a tutti i pacchetti che corrispondono "
-"al <replaceable>modello</replaceable> come se si fosse usato il comando "
-"<link linkend='cmdlineAddOrRemoveUserTags'><literal>add-user-tag</literal></"
-"link>. Il modello è un modello di ricerca, così come descritto nella sezione "
-"<quote><link linkend='secSearchPatterns'>Modelli di ricerca</link></quote> "
-"nel manuale di riferimento di &aptitude;."
+"al <replaceable>modello</replaceable> come se si fosse usato il comando <"
+"link linkend='cmdlineAddOrRemoveUserTags'><literal>add-user-"
+"tag</literal></link>. Il modello è un modello di ricerca, così come "
+"descritto nella sezione <quote><link linkend='secSearchPatterns'>Modelli di "
+"ricerca</link></quote> nel manuale di riferimento di &aptitude;."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:1194
@@ -23883,16 +23917,17 @@ msgid ""
 "linkend='cmdlineAddOrRemoveUserTags'><literal>add-user-tag</literal></link> "
 "command."
 msgstr ""
-"Per <literal>full-upgrade</literal>, <literal>safe-upgrade</literal> "
-"<literal>forbid-version</literal>, <literal>hold</literal>, "
-"<literal>install</literal>, <literal>keep-all</literal>, <literal>markauto</"
-"literal>, <literal>unmarkauto</literal>, <literal>purge</literal>, "
-"<literal>reinstall</literal>, <literal>remove</literal>, <literal>unhold</"
-"literal> e <literal>unmarkauto</literal>: rimuove l'etichetta utente "
+"Per <literal>full-upgrade</literal>, <literal>safe-upgrade</literal> <literal"
+">forbid-version</literal>, <literal>hold</literal>, "
+"<literal>install</literal>, <literal>keep-all</literal>, "
+"<literal>markauto</literal>, <literal>unmarkauto</literal>, "
+"<literal>purge</literal>, <literal>reinstall</literal>, "
+"<literal>remove</literal>, <literal>unhold</literal> e "
+"<literal>unmarkauto</literal>: rimuove l'etichetta utente "
 "<replaceable>etichetta</replaceable> da tutti i pacchetti che sono "
 "installati, rimossi o aggiornati da questo comando, come se si fosse usato "
-"il comando <link linkend='cmdlineAddOrRemoveUserTags'><literal>add-user-tag</"
-"literal></link>."
+"il comando <link linkend='cmdlineAddOrRemoveUserTags'><literal>add-user-"
+"tag</literal></link>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: en/manpage.xml:1817
@@ -24373,10 +24408,13 @@ msgid ""
 "<quote><literal>aptitude -t experimental ...</literal></quote> will install "
 "packages from the experimental distribution unless you specify otherwise."
 msgstr ""
+"Imposta il rilascio dal quale devono essere installati i pacchetti. Per "
+"esempio, <quote><literal>aptitude -t experimental ...</literal></quote> "
+"installa pacchetti dalla distribuzione experimental a meno di non "
+"specificare altrimenti."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:2144
-#, fuzzy
 #| msgid ""
 #| "For more information on the format of the configuration file, see the "
 #| "manual page <citerefentry><refentrytitle>apt.conf</"
@@ -24386,9 +24424,9 @@ msgid ""
 "rules described in <citerefentry><refentrytitle>apt_preferences</"
 "refentrytitle><manvolnum>5</manvolnum></citerefentry>."
 msgstr ""
-"Per maggiori informazioni sul formato del file di configurazione, vedere la "
-"pagina di manuale <citerefentry><refentrytitle>apt.conf</"
-"refentrytitle><manvolnum>5</manvolnum></citerefentry>."
+"Questo ha effetto sulla versione candidata in modo predefinito  per i "
+"pacchetti secondo le regole descritte in <citerefentry><refentrytitle>apt_pre"
+"ferences</refentrytitle><manvolnum>5</manvolnum></citerefentry>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:2150
@@ -24573,7 +24611,6 @@ msgstr ""
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:2262
-#, fuzzy
 #| msgid ""
 #| "Specify the display width which should be used for output from the "
 #| "<literal>search</literal> command (by default, the terminal width is "
@@ -24583,9 +24620,9 @@ msgid ""
 "<literal>search</literal> and <literal>versions</literal> commands (in the "
 "command line)."
 msgstr ""
-"Specifica la larghezza da usare per visualizzare l'output del comando "
-"<literal>search</literal> (la larghezza del terminale viene usata come "
-"valore predefinito)."
+"Specifica la larghezza da usare per visualizzare l'output dei comandi "
+"<literal>search</literal> e <literal>versions</literal> (nella riga di "
+"comando)."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:2268
@@ -24594,6 +24631,10 @@ msgid ""
 "width is used.  When the output is redirected or piped, a very large "
 "\"unlimited\" line width is used, and this option is ignored."
 msgstr ""
+"In modo predefinito e quando l'output viene visualizzato direttamente in un "
+"terminale viene utilizzata la larghezza del terminale. Quando l'output viene "
+"ridiretto o inviato ad una pipe, viene utilizzata una larghezza di riga "
+"molto grande \"illimitata\" e questa opzione viene ignorata."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:2275
@@ -24623,9 +24664,10 @@ msgstr ""
 "Ogni volta che dovrebbe essere mostrata una domanda \"sì/no\", suppone che "
 "la risposta inserita dall'utente sia \"<quote>sì</quote>. In particolare "
 "elimina la domanda di conferma che appare quando si installano, rimuovono o "
-"aggiornano pacchetti. Le domande di conferma per azioni <quote>pericolose</"
-"quote>, come la rimozione di pacchetti essenziali, vengono mostrate "
-"comunque. Questa opzione ha la precedenza su <literal>-P</literal>."
+"aggiornano pacchetti. Le domande di conferma per azioni "
+"<quote>pericolose</quote>, come la rimozione di pacchetti essenziali, "
+"vengono mostrate comunque. Questa opzione ha la precedenza su "
+"<literal>-P</literal>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:2294
@@ -24680,7 +24722,6 @@ msgstr "<literal>--autoclean-on-startup</literal>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: en/manpage.xml:2328
-#, fuzzy
 #| msgid ""
 #| "Deletes old downloaded files when the program starts (equivalent to "
 #| "starting the program and immediately selecting "
@@ -24699,10 +24740,10 @@ msgid ""
 msgstr ""
 "Cancella i vecchi pacchetti scaricati all'avvio del programma (equivalente "
 "all'avviare il programma e selezionare immediatamente "
-"<menuchoice><guimenu>Azioni</guimenu><guimenuitem>Cancella i file vecchi</"
-"guimenuitem></menuchoice>). Non è permesso usare questa opzione insieme a "
-"<quote><literal>--autoclean-on-startup</literal></quote>, <quote><literal>-"
-"i</literal></quote> o <quote><literal>-u</literal></quote>."
+"<menuchoice><guimenu>Azioni</guimenu><guimenuitem>Cancella i file "
+"vecchi</guimenuitem></menuchoice>). Non è permesso usare questa opzione "
+"insieme a <quote><literal>--clean-on-startup</literal></quote>, "
+"<quote><literal>-i</literal></quote> o <quote><literal>-u</literal></quote>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: en/manpage.xml:2342
@@ -24958,6 +24999,8 @@ msgid ""
 "This command is mostly for internal use and bug reporting in exceptional "
 "cases, it is not intended for end-users under normal circumstances."
 msgstr ""
+"Questo comando è per lo più ad uso interno e per le segnalazioni di bug in "
+"casi eccezionali; non è pensato per gli utenti finali in circostanze normali."
 
 #. type: Content of: <refentry><refsect1><para>
 #: en/manpage.xml:2593
