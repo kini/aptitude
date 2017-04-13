@@ -669,7 +669,10 @@ int main(int argc, char *argv[])
   // valid
   try {
     std::locale::global(std::locale(""));
-  } catch (...) {
+  } catch (const std::exception& e) {
+    fprintf(stderr,
+	    _("Warning: Invalid locale (please review locale settings, this might lead to problems later):\n  %s\n"),
+	    e.what());
     setlocale(LC_ALL, "");
   }
   bindtextdomain(PACKAGE, LOCALEDIR);

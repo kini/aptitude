@@ -508,7 +508,14 @@ namespace aptitude
     {
       namespace fs = boost::filesystem;
 
-      fs::path dest_dir = fs::temp_directory_path() / fs::unique_path("aptitude-download-%%%%-%%%%-%%%%-%%%%");
+      fs::path dest_dir;
+      try {
+	dest_dir = fs::temp_directory_path() / fs::unique_path("aptitude-download-%%%%-%%%%-%%%%-%%%%");
+      } catch (const std::exception& e) {
+	fprintf(stderr, _("Problem creating temporary dir: %s\n"), e.what());
+	return {};
+      }
+
       try {
 
 	// create and set permissions
