@@ -260,7 +260,7 @@ int cmdline_do_action(int argc, char *argv[],
 
       for(pkgCache::PkgIterator i=(*apt_cache_file)->PkgBegin();
 	  !i.end(); ++i)
-	(*apt_cache_file)->mark_keep(i, false, false, NULL);
+	(*apt_cache_file)->mark_keep(i, is_auto_installed(i), false, NULL);
     }
   else
     {

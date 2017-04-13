@@ -172,7 +172,7 @@ void pkg_item::select(undo_group *undo)
 void pkg_item::do_hold(undo_group *undo)
   // Sets an explicit hold state.
 {
-  (*apt_cache_file)->mark_keep(package, false, true, undo);
+  (*apt_cache_file)->mark_keep(package, is_auto_installed(package), true, undo);
 }
 
 void pkg_item::hold(undo_group *undo)
@@ -185,7 +185,7 @@ void pkg_item::hold(undo_group *undo)
   else
     // Toggle the held state.
     (*apt_cache_file)->mark_keep(package,
-				 false,
+				 is_auto_installed(package),
 				 (*apt_cache_file)->get_ext_state(package).selection_state!=pkgCache::State::Hold,
 				 undo);
 }

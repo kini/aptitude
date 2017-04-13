@@ -598,9 +598,11 @@ void pkg_ver_item::remove(undo_group *undo)
 
 void pkg_ver_item::hold(undo_group *undo)
 {
+  auto package = version.ParentPkg();
+
   if(version==version.ParentPkg().CurrentVer())
     (*apt_cache_file)->mark_keep(version.ParentPkg(),
-				 false,
+				 is_auto_installed(package),
 				 (*apt_cache_file)->get_ext_state(version.ParentPkg()).selection_state!=pkgCache::State::Hold,
 				 undo);
 }
