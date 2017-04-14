@@ -10,6 +10,13 @@ Version 0.8.7 UNRELEASED
   * Preserve auto-installed flag with hold/unhold/keep operations
     (Closes: #843536)
 
+  * [cmdline] Fix extreme slowness of keep-all (Closes: #842707)
+
+    Every change of marking the package to "keep" was triggering a reevaluation
+    in aptitudeDepCache::end_action_group() of what had changed ("mark and sweep",
+    duplicate of cache, triggers of packages state changes... etc), for every
+    package.
+
 - Translation updates:
 
   * Italian documentation translation by Beatrice Torracca (Closes: #858784)
