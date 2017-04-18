@@ -24,6 +24,15 @@ Version 0.8.7 UNRELEASED
     reinstalling or acting on scheduled reinstall actions, due to the versions
     disappearing from the repositories.
 
+  * [cmdline] Failing to apply actions are not fatal with -f /
+    Aptitude::CmdLine::Fix-Broken (Closes: #835372)
+
+    The behaviour of refusing to continue when there are errors happens since
+    the change "[cmdline] Abort with Failure when actions cannot be taken
+    (Closes: #121313, #430392, #445034, #498239, #576212, #639789, #798320)",
+    but it's not an optimal solution for automatic installers like FAI, so this
+    is a way to revert to the old behaviour.
+
 - Internal changes:
 
   * new method is_version_available(), to check if the given version of a

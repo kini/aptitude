@@ -1,7 +1,7 @@
 // cmdline_do_action.cc
 //
 //  Copyright (C) 2004, 2010 Daniel Burrows
-//  Copyright (C) 2014-2016 Manuel A. Fernandez Montecelo
+//  Copyright (C) 2014-2017 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -358,7 +358,11 @@ int cmdline_do_action(int argc, char *argv[],
     }
   }
 
-  if (!apply_ok)
+  if (!apply_ok && fix_broken)
+    {
+      fprintf(stderr, _("Unable to apply some actions but Aptitude::CmdLine::Fix-Broken (-f) is enabled, continuing...\n"));
+    }
+  else if (!apply_ok)
     {
       fprintf(stderr, _("Unable to apply some actions, aborting\n"));
       return -1;
