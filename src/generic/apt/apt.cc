@@ -1087,6 +1087,31 @@ bool can_remove_autoinstalled(const pkgCache::PkgIterator& pkg,
   return !rdeps_prevent_removal;
 }
 
+bool is_version_available(const pkgCache::PkgIterator& pkg, const std::string& version)
+{
+  if (!pkg.end())
+    {
+      for (pkgCache::VerIterator vi = pkg.VersionList(); !vi.end(); ++vi)
+	{
+	  if (version == vi.VerStr())
+	    {
+	      // we have a match, but is it downloadable?  We could check if
+	      // it's already downloaded and ready, but apt (1.4) refuses to
+	      // install it if the file is available but the version is not in
+	      // the current Packages lists
+	      //
+	      // the extra check would be something like:
+	      // (!vi.FileList().end() && !vi.FileList().File().end() && vi.FileList().File().IsOk())
+	      if (vi.Downloadable())
+		{
+		  return true;
+		}
+	    }
+	}
+    }
+
+  return false;
+}
 
 /** \return \b true if d1 subsumes d2; that is, if one of the
  *  following holds:
