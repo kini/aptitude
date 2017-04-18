@@ -1,7 +1,7 @@
 // download_install_manager.cc
 //
 //   Copyright (C) 2005-2011 Daniel Burrows
-//   Copyright (C) 2015-2016 Manuel A. Fernandez Montecelo
+//   Copyright (C) 2015-2017 Manuel A. Fernandez Montecelo
 //
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of the GNU General Public License as
@@ -99,7 +99,7 @@ bool download_install_manager::prepare(OpProgress &progress,
       _error->Error(_("Internal error: couldn't generate list of packages to download"));
       // has to be an Error (not e.g. Notice), otherwise "DumpError" (which
       // later phases rely on) doesn't include the following message
-      _error->Error(_("Perhaps the package lists are out of date, please try 'aptitude update' (or equivalent) first"));
+      _error->Error(_("Perhaps the package lists are out of date, please try 'aptitude update' (or equivalent); otherwise some packages or versions are not available from the current repository sources"));
 
       delete fetcher;
       fetcher = NULL;

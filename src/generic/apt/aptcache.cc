@@ -364,7 +364,20 @@ bool aptitudeDepCache::build_selection_list(OpProgress* Prog,
 
 	      tmp=0;
 	      section.FindFlag("Reinstall", tmp, 1);
-	      pkg_state.reinstall = (tmp==1);
+	      if (tmp == 1)
+		{
+		  if (!pkg.CurrentVer().end() && is_version_available(pkg, pkg.CurrentVer().VerStr()))
+		    {
+		      pkg_state.reinstall = true;
+		    }
+		  else
+		    {
+		      // warning, not an error, it's not that severe and also
+		      // otherwise the algorithm to read from saved state stops
+		      _error->Warning(_("Package %s had been marked to reinstall, but the file for the current installed version %s is not available"),
+				      pkg.FullName(true).c_str(), pkg.CurrentVer().VerStr());
+		    }
+		}
 
 	      // if the last installation was successful reset_reinstall==true,
 	      // to unmark .reinstall property of the package, otherwise there

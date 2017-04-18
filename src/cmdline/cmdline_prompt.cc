@@ -1,7 +1,7 @@
 // cmdline_prompt.cc
 //
 // Copyright (C) 2010-2011 Daniel Burrows
-// Copyright (C) 2014-2016 Manuel A. Fernandez Montecelo
+// Copyright (C) 2014-2017 Manuel A. Fernandez Montecelo
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -978,6 +978,9 @@ bool cmdline_do_prompt(bool as_upgrade,
 		       bool simulate_only,
                        const std::shared_ptr<terminal_metrics> &term_metrics)
 {
+  // do print errors on the screen if there have been any
+  _error->DumpErrors();
+
   bool exit=false;
   bool rval=true;
   bool first=true;
