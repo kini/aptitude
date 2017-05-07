@@ -1,13 +1,13 @@
 # Czech translation of Aptitude.
 # This file is distributed under the same license as the Aptitude package.
-# Miroslav Kure <kurem@debian.cz>, 2004-2016.
+# Miroslav Kure <kurem@debian.cz>, 2004-2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: aptitude\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
 "POT-Creation-Date: 2017-04-19 00:01+0200\n"
-"PO-Revision-Date: 2016-09-24 22:35+0200\n"
+"PO-Revision-Date: 2017-05-06 09:06+0200\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
 "Language: cs\n"
@@ -1059,6 +1059,8 @@ msgid ""
 "Unable to apply some actions but Aptitude::CmdLine::Fix-Broken (-f) is "
 "enabled, continuing...\n"
 msgstr ""
+"Nelze provést některé akce, ale Aptitude::CmdLine::Fix-Broken (-f) je "
+"povoleno, takže pokračuji…\n"
 
 #: src/cmdline/cmdline_do_action.cc:367
 #, c-format
@@ -2905,6 +2907,8 @@ msgid ""
 "Package %s had been marked to reinstall, but the file for the current "
 "installed version %s is not available"
 msgstr ""
+"Balík %s byl označen pro přeinstalaci, avšak soubor nainstalované verze %s "
+"není dostupný"
 
 #: src/generic/apt/aptcache.cc:439
 #, c-format
@@ -3268,17 +3272,14 @@ msgid "Internal error: couldn't generate list of packages to download"
 msgstr "Vnitřní chyba: nelze vytvořit seznam balíků ke stažení"
 
 #: src/generic/apt/download_install_manager.cc:102
-#, fuzzy
-#| msgid ""
-#| "Perhaps the package lists are out of date, please try 'aptitude "
-#| "update' (or equivalent) first"
 msgid ""
 "Perhaps the package lists are out of date, please try 'aptitude update' (or "
 "equivalent); otherwise some packages or versions are not available from the "
 "current repository sources"
 msgstr ""
-"Možná, že je seznam balíků zastaralý, nejprve prosím zkuste „aptitude "
-"update“ (nebo ekvivalent)"
+"Možná, že je seznam balíků zastaralý. Nejprve prosím zkuste „aptitude "
+"update“ (nebo ekvivalent), protože jinak nemusí být některé balíky nebo "
+"verze dostupné."
 
 #: src/generic/apt/download_install_manager.cc:129
 #: src/generic/apt/download_update_manager.cc:136
@@ -3308,10 +3309,8 @@ msgid "Couldn't read list of package sources"
 msgstr "Nelze číst seznam se zdroji balíků"
 
 #: src/generic/apt/download_update_manager.cc:105
-#, fuzzy
-#| msgid "Failed to download changelogs: %s"
 msgid "Failed to download some files"
-msgstr "Nepodařilo se stáhnout seznamy změn: %s"
+msgstr "Nepodařilo se stáhnout některé soubory"
 
 #: src/generic/apt/download_update_manager.cc:156
 msgid "Couldn't clean out list directories"
@@ -3832,10 +3831,9 @@ msgid "%s cannot run in ncurses mode with terminal type \"dumb\"\n"
 msgstr "%s nemůže běžet v rozhraní ncurses s typem terminálu „dumb“\n"
 
 #: src/generic/util/util.cc:515
-#, fuzzy, c-format
-#| msgid "Can't create a temporary file: %s"
+#, c-format
 msgid "Problem creating temporary dir: %s\n"
-msgstr "Nelze vytvořit dočasný soubor: %s"
+msgstr "Problém při vytváření dočasného adresáře: %s\n"
 
 #: src/gtk/aptitude.glade:6 src/gtk/aptitude.glade:2251
 #: src/qt/windows/main_window.cc:44
@@ -6135,6 +6133,9 @@ msgid ""
 "problems later):\n"
 "  %s\n"
 msgstr ""
+"Varování: Neplatné místní nastavení (zkontrolujte prosím nastavení locale, "
+"později to může způsobit problémy):\n"
+"  %s\n"
 
 #: src/main.cc:816
 #, c-format
