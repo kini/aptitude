@@ -5178,9 +5178,10 @@ e: Examine  !: Apply  .: Next  ,: Previous</screen>
 		<replaceable>target</replaceable>, the hint affects
 		the decision to remove
 		<replaceable>target</replaceable>.  For instance,
-		<quote><literal>reject aptitude
-		:UNINST</literal></quote> will prevent the resolver
-		from attempting to remove &aptitude;.
+		<quote><literal>Aptitude::ProblemResolver::Hints {
+                "reject aptitude :UNINST"; };</literal></quote> will
+                prevent the resolver from attempting to remove
+                &aptitude;.
 	      </para>
 	    </listitem>
 
