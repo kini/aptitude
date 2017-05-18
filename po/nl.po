@@ -3,14 +3,14 @@
 #
 # Luk Claes <luk@debian.org>, 2005, 2006.
 # Frans Pop <elendil@planet.nl>, 2006, 2007, 2008.
-# Frans Spiesschaert <Frans.Spiesschaert@yucom.be>, 2014, 2015, 2016.
+# Frans Spiesschaert <Frans.Spiesschaert@yucom.be>, 2014, 2015, 2016, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: aptitude_0.8.4-1\n"
 "Report-Msgid-Bugs-To: aptitude@packages.debian.org\n"
 "POT-Creation-Date: 2017-04-19 00:01+0200\n"
-"PO-Revision-Date: 2016-12-31 17:38+0100\n"
+"PO-Revision-Date: 2017-04-30 20:56+0200\n"
 "Last-Translator: Frans Spiesschaert <Frans.Spiesschaert@yucom.be>\n"
 "Language-Team: Debian Dutch l10n Team <debian-l10n-dutch@lists.debian.org>\n"
 "Language: nl\n"
@@ -1120,6 +1120,8 @@ msgid ""
 "Unable to apply some actions but Aptitude::CmdLine::Fix-Broken (-f) is "
 "enabled, continuing...\n"
 msgstr ""
+"Kon sommige acties niet aanwenden, maar Aptitude::CmdLine::Fix-Broken (-f) "
+"werd gebruikt, er wordt verdergegaan...\n"
 
 #: src/cmdline/cmdline_do_action.cc:367
 #, c-format
@@ -3021,6 +3023,8 @@ msgid ""
 "Package %s had been marked to reinstall, but the file for the current "
 "installed version %s is not available"
 msgstr ""
+"Pakket %s werd gemarkeerd voor een herinstallatie, maar het bestand voor de "
+"momenteel geïnstalleerde versie %s is niet beschikbaar"
 
 #: src/generic/apt/aptcache.cc:439
 #, c-format
@@ -3397,7 +3401,6 @@ msgid "Internal error: couldn't generate list of packages to download"
 msgstr "Interne fout: kon lijst van op te halen pakketten niet genereren"
 
 #: src/generic/apt/download_install_manager.cc:102
-#, fuzzy
 #| msgid ""
 #| "Perhaps the package lists are out of date, please try 'aptitude "
 #| "update' (or equivalent) first"
@@ -3406,8 +3409,9 @@ msgid ""
 "equivalent); otherwise some packages or versions are not available from the "
 "current repository sources"
 msgstr ""
-"Misschien zijn de pakketlijsten verouderd; gelieve eerst 'aptitude "
-"update' (of een equivalent ervan) te proberen"
+"Misschien zijn de pakketlijsten verouderd; gelieve 'aptitude update' (of een "
+"equivalent ervan) te proberen; anders zijn sommige pakketten of versies "
+"ervan niet beschikbaar op de huidige pakketbronnen"
 
 #: src/generic/apt/download_install_manager.cc:129
 #: src/generic/apt/download_update_manager.cc:136
@@ -3683,7 +3687,8 @@ msgstr "Onverwacht einde van vergelijkingspatroon (verwachtte '%c')."
 msgid "Expected '%c', got '%c'."
 msgstr "Verwachtte '%c', kreeg '%c'."
 
-#: src/generic/apt/matching/parse.cc:862 src/generic/apt/matching/parse.cc:1307
+#: src/generic/apt/matching/parse.cc:862
+#: src/generic/apt/matching/parse.cc:1307
 #: src/generic/apt/matching/parse.cc:1347
 #, c-format
 msgid "Unknown dependency type: %s"
@@ -3965,10 +3970,10 @@ msgstr ""
 "\"\n"
 
 #: src/generic/util/util.cc:515
-#, fuzzy, c-format
+#, c-format
 #| msgid "Cannot open package hierarchy file %s"
 msgid "Problem creating temporary dir: %s\n"
-msgstr "Kan pakkethiërarchiebestand %s niet openen"
+msgstr "Probleem met het aanmaken van de tijdelijke map: %s\n"
 
 #: src/gtk/aptitude.glade:6 src/gtk/aptitude.glade:2251
 #: src/qt/windows/main_window.cc:44
@@ -5418,11 +5423,13 @@ msgstr "%s veroudert %s"
 msgid "%s enhances %s"
 msgstr "%s verbetert %s"
 
-#: src/gtk/resolver.cc:1376 src/gtk/resolver.cc:1841 src/solution_screen.cc:288
+#: src/gtk/resolver.cc:1376 src/gtk/resolver.cc:1841
+#: src/solution_screen.cc:288
 msgid "Remove the following packages:"
 msgstr "Verwijder de volgende pakketten:"
 
-#: src/gtk/resolver.cc:1390 src/gtk/resolver.cc:1853 src/solution_screen.cc:312
+#: src/gtk/resolver.cc:1390 src/gtk/resolver.cc:1853
+#: src/solution_screen.cc:312
 msgid "Install the following packages:"
 msgstr "Installeer de volgende pakketten:"
 
@@ -5430,11 +5437,13 @@ msgstr "Installeer de volgende pakketten:"
 msgid "Keep the following packages:"
 msgstr "Houd de volgende pakketten vast:"
 
-#: src/gtk/resolver.cc:1416 src/gtk/resolver.cc:1877 src/solution_screen.cc:324
+#: src/gtk/resolver.cc:1416 src/gtk/resolver.cc:1877
+#: src/solution_screen.cc:324
 msgid "Upgrade the following packages:"
 msgstr "Waardeer volgende pakketten op:"
 
-#: src/gtk/resolver.cc:1429 src/gtk/resolver.cc:1890 src/solution_screen.cc:336
+#: src/gtk/resolver.cc:1429 src/gtk/resolver.cc:1890
+#: src/solution_screen.cc:336
 msgid "Downgrade the following packages:"
 msgstr " Degradeer de volgende pakketten:"
 
@@ -6320,6 +6329,9 @@ msgid ""
 "problems later):\n"
 "  %s\n"
 msgstr ""
+"Waarschuwing: ongeldige taaldefinitie (locale) (kijk de taaldefinitie-"
+"instellingen na, dit kan later problemen geven):\n"
+"  %s\n"
 
 #: src/main.cc:816
 #, c-format
