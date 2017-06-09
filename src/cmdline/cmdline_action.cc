@@ -438,7 +438,8 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 	if (verbose > 0)
 	  printf(_("Setting package %s on hold\n"), pkg.FullName(true).c_str());
 
-	fprintf(stderr, "This code path should not be reached (now implemented in cmdline_mark)\n");
+	// this code path is implemented in cmdline_mark, but can be reached
+	// with commands like "aptitude install pkg1 pkg2= pkg3:"
 	(*apt_cache_file)->mark_keep(pkg, is_auto_installed(pkg), true, NULL);
       }
       break;
@@ -447,7 +448,8 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 	if (verbose > 0)
 	  printf(_("Marking package %s as keep\n"), pkg.FullName(true).c_str());
 
-	fprintf(stderr, "This code path should not be reached (now implemented in cmdline_mark)\n");
+	// this code path is implemented in cmdline_mark, but can be reached
+	// with commands like "aptitude install pkg1 pkg2= pkg3:"
 	(*apt_cache_file)->mark_keep(pkg, is_auto_installed(pkg), false, NULL);
       }
       break;
@@ -457,7 +459,8 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 	  if (verbose > 0)
 	    printf(_("Setting package %s as not on hold\n"), pkg.FullName(true).c_str());
 
-	  fprintf(stderr, "This code path should not be reached (now implemented in cmdline_mark)\n");
+	  // this code path is implemented in cmdline_mark, but can be reached
+	  // with commands like "aptitude install pkg1 pkg2= pkg3:"
 	  (*apt_cache_file)->mark_keep(pkg, is_auto_installed(pkg), false, NULL);
 	}
       else
@@ -470,7 +473,8 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 	if (verbose > 0)
 	  printf(_("Marking package %s as automatically installed\n"), pkg.FullName(true).c_str());
 
-	fprintf(stderr, "This code path should not be reached (now implemented in cmdline_mark)\n");
+	// this code path is implemented in cmdline_mark, but can be reached
+	// with commands like "aptitude install pkg1 pkg2= pkg3:"
 	(*apt_cache_file)->mark_auto_installed(pkg, true, NULL);
       }
       break;
@@ -479,7 +483,8 @@ bool cmdline_applyaction(cmdline_pkgaction_type action,
 	if (verbose > 0)
 	  printf(_("Unmarking package %s as automatically installed\n"), pkg.FullName(true).c_str());
 
-	fprintf(stderr, "This code path should not be reached (now implemented in cmdline_mark)\n");
+	// this code path is implemented in cmdline_mark, but can be reached
+	// with commands like "aptitude install pkg1 pkg2= pkg3:"
 	(*apt_cache_file)->mark_auto_installed(pkg, false, NULL);
       }
       break;
