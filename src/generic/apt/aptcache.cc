@@ -375,7 +375,7 @@ bool aptitudeDepCache::build_selection_list(OpProgress* Prog,
 		      // warning, not an error, it's not that severe and also
 		      // otherwise the algorithm to read from saved state stops
 		      _error->Warning(_("Package %s had been marked to reinstall, but the file for the current installed version %s is not available"),
-				      pkg.FullName(true).c_str(), pkg.CurrentVer().VerStr());
+				      pkg.FullName(true).c_str(), (pkg.CurVersion() ? pkg.CurVersion() : "<none>"));
 		    }
 		}
 
