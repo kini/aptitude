@@ -129,10 +129,7 @@ void download_update_manager::finish(pkgAcquire::RunResult res,
 
       (*it)->Finished();
 
-      ::URI uri((*it)->DescURI());
-      uri.User.clear();
-      uri.Password.clear();
-      const std::string descUri = string(uri);
+      const std::string descUri = URI::NoUserPassword((*it)->DescURI());
       _error->Warning(_("Failed to fetch %s: %s"), descUri.c_str(), (*it)->ErrorText.c_str());
 
       if((*it)->Status == pkgAcquire::Item::StatTransientNetworkError)

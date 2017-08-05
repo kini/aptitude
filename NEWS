@@ -5,6 +5,17 @@ Version 0.8.9 UNRELEASED
 
   * Fix crash due to wrong string pointer being printed (Closes: #865346)
 
+  * Fix compilation error with GCC 7 (Closes: #853316)
+
+    In a conversion involving an "operator string()", it seems that the code
+    gets confused with the available ABI of std::string, similarly to what had
+    happened with the ABI change of GCC-5 (but this is not supposed to happen in
+    this new release).  The error was:
+
+      .../generic/apt/download_update_manager.cc:133:
+        undefined reference to `URI::operator std::__cxx11::basic_string<char,
+        std::char_traits<char>, std::allocator<char> >()'
+
 
 [2017-06-11]
 Version 0.8.8
